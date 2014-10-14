@@ -1,0 +1,4 @@
+PropellerIDE-*
+build/
+*.o
+loader/p1load

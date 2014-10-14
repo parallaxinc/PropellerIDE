@@ -1,0 +1,11 @@
+Package: propelleride
+Version:  0.19
+Architecture: amd64
+Depends: libqtgui4, libqtcore4, zlib1g, libftdi1
+Pre-Depends:
+Recommends:
+Maintainer: parallax.com
+Conflicts:
+Replaces:
+Description: Parallax Propeller Programming IDE
+ The PropellerIDE is used for programming the Parallax Propeller P8x32a multi-core MicroController.
