@@ -1,5 +1,6 @@
 EzIDE.pro.user
 PropellerIDE-*
 build/
+build-*
 *.o
 loader/p1load
