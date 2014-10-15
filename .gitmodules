@@ -1,0 +1,3 @@
+[submodule "openspin"]
+	path = openspin
+	url = git://github.com/reltham/OpenSpin.git
