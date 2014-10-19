@@ -71,5 +71,5 @@ copy_libs:
 build_debian:
 	mv $(DIR_STAGING) ${PACKAGE}/
 	tar -cvzf ${PACKAGE}.tar ${PACKAGE}/
-	gzip ${PACKAGE}.tar
+	gzip -f ${PACKAGE}.tar
 	@echo ${PACKAGE}
