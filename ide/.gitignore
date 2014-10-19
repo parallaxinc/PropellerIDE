@@ -1,0 +1,5 @@
+moc_*.cpp
+*.o
+qrc_resources.cpp
+ui_*.h
+*.pro.user

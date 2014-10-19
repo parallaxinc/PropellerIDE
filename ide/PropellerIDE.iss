@@ -8,10 +8,10 @@
 #define MyAppURL "www.MicroCSource.com"
 #define MyAppExeName "PropellerIDE.exe"
 #define MyAppBin "{app}"
-#define MyOutputDir "..\EzIDE_Qt_5_3_0"
+#define MyOutputDir "..\PropellerIDE_Qt_5_3_0"
 #define MyOpenSpin "..\openspin"
 #define MyLoader "..\loader\p1load.exe"
-#define MyLoader2 "..\EzIDE-Qt_5_2_1-Desktop\propeller-load.exe"
+#define MyLoader2 "..\PropellerIDE-Qt_5_2_1-Desktop\propeller-load.exe"
 #define MySpinLib "..\spin"
 #define FtdiChipApp "CDM v2.10.00 WHQL Certified.exe"
 
