@@ -18,14 +18,16 @@ git submodule update
 sudo apt-get install qtcreator qt5-default devscripts zlib1g-dev 
 ```
 
-### Running
+### Building
 
+Type `make` to build the project.
 
 ```
-./plinrelease.sh
+make
 ```
 
-Then, to create a Debian package:
+Type `make clean` to remove old build files.
+
 
 ```
 cd linux
