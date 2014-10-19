@@ -1,7 +1,7 @@
 PropellerIDE
 ============
 
-Fork of the open source PropellerIDE
+The new home of the Propeller IDE.
 
 ### Checkout
 
