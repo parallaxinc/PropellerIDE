@@ -26,8 +26,13 @@ Type `make` to build the project.
 make
 ```
 
-Type `make clean` to remove old build files.
+Type `make clean` to remove old build files. Open the makefile to view other targets available.
 
+```
+make clean
+```
+
+Debian packaging is available but needs to be cleaned up.
 
 ```
 cd linux

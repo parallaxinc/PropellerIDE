@@ -32,7 +32,11 @@ else
 	endif
 endif
 
-all: build_ide build_openspin build_loader copy_all build_debian
+all: build_all copy_all package_tar 
+
+build_all: build_ide build_openspin build_loader
+
+copy_all: clean_staging copy_root copy_bin copy_libs
 
 clean: clean_staging
 	make -C $(DIR_LOADER) clean
@@ -41,6 +45,8 @@ clean: clean_staging
 
 clean_staging:
 	rm -rf $(DIR_STAGING)
+
+
 
 build_ide:
 	cd $(DIR_IDE); qmake $(NAME).pro; make $(JOBS)
@@ -54,7 +60,6 @@ build_loader:
 get_version:
 
 
-copy_all: clean_staging copy_root copy_bin copy_libs
 
 copy_bin:
 	mkdir -p $(DIR_BIN)
@@ -68,8 +73,8 @@ copy_root:
 copy_libs:
 	cp `ldd $(DIR_IDE)/$(NAME) | grep 'libQt\|libz' | awk '{print $$3}'` $(DIR_BIN)
 
-build_debian:
-	mv $(DIR_STAGING) ${PACKAGE}/
-	tar -cvzf ${PACKAGE}.tar ${PACKAGE}/
-	gzip -f ${PACKAGE}.tar
+package_tar:
+	rm -rf ${PACKAGE}
+	mv -f $(DIR_STAGING) ${PACKAGE}/
+	tar -cvzf ${PACKAGE}.tgz ${PACKAGE}/
 	@echo ${PACKAGE}
