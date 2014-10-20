@@ -1,0 +1,7 @@
+?package(propelleride):\
+  needs="X11"\
+  section="Applications/Programming" \
+  title="PropellerIDE" command="/usr/bin/propelleride" \
+  longtitle="Cross-platform IDE for the Parallax Propeller" \
+  icon="/usr/share/pixmaps/propelleride.xpm"
+

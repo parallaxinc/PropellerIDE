@@ -1,4 +1,4 @@
-NAME			:=	PropellerIDE
+NAME			:=	propelleride
 
 DIR				:=	$(shell pwd)
 DIR_OPENSPIN	:=	$(DIR)/openspin
@@ -8,7 +8,7 @@ DIR_LOADER		:=	$(DIR)/loader
 
 DIR_ROOT		:=	$(DIR)/root
 DIR_STAGING		:=	$(DIR)/staging
-DIR_BIN			:=	$(DIR_STAGING)/bin
+DIR_BIN			:=	$(DIR_STAGING)/usr/bin
 
 
 VERSION			:=	$(shell echo `grep -r VERSION= $(DIR_IDE)/PropellerIDE.pro \
@@ -36,7 +36,7 @@ all: build_all copy_all package_tar
 
 build_all: build_ide build_openspin build_loader
 
-copy_all: clean_staging copy_root copy_bin copy_libs
+copy_all: clean_staging copy_root copy_bin
 
 clean: clean_staging
 	make -C $(DIR_LOADER) clean
@@ -45,8 +45,6 @@ clean: clean_staging
 
 clean_staging:
 	rm -rf $(DIR_STAGING)
-
-
 
 build_ide:
 	cd $(DIR_IDE); qmake $(NAME).pro; make $(JOBS)
@@ -57,10 +55,6 @@ build_openspin:
 build_loader:
 	cd $(DIR_LOADER); make
 
-get_version:
-
-
-
 copy_bin:
 	mkdir -p $(DIR_BIN)
 	cp $(DIR_IDE)/$(NAME) $(DIR_BIN)
@@ -70,11 +64,14 @@ copy_bin:
 copy_root:
 	rsync -ru $(DIR_ROOT)/* $(DIR_STAGING)
 
-copy_libs:
-	cp `ldd $(DIR_IDE)/$(NAME) | grep 'libQt\|libz' | awk '{print $$3}'` $(DIR_BIN)
+#copy_libs:
+#	cp `ldd $(DIR_IDE)/$(NAME) | grep 'libQt\|libz' | awk '{print $$3}'` $(DIR_BIN)
 
 package_tar:
 	rm -rf ${PACKAGE}
 	mv -f $(DIR_STAGING) ${PACKAGE}/
 	tar -cvzf ${PACKAGE}.tgz ${PACKAGE}/
 	@echo ${PACKAGE}
+
+package_debian:
+	

@@ -22,7 +22,7 @@ greaterThan(QT_MAJOR_VERSION, 4): {
     DEFINES += QT5
 }
 
-TARGET = PropellerIDE
+TARGET = propelleride
 TEMPLATE = app
 
 CONFIG  += exceptions

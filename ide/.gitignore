@@ -4,4 +4,4 @@ qrc_resources.cpp
 ui_*.h
 *.pro.user
 Makefile
-PropellerIDE
+propelleride
