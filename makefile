@@ -9,6 +9,7 @@ DIR_LOADER		:=	$(DIR)/loader
 DIR_ROOT		:=	$(DIR)/root
 DIR_STAGING		:=	$(DIR)/staging
 DIR_BIN			:=	$(DIR_STAGING)/usr/bin
+DIR_DEB			:=	$(DIR_STAGING)/DEBIAN
 
 
 VERSION			:=	$(shell echo `grep -r VERSION= $(DIR_IDE)/PropellerIDE.pro \
@@ -22,17 +23,39 @@ OS				:=	$(shell uname -s)
 
 PACKAGE			:=  ${NAME}-${VERSION}-${ARCH}-${OS}
 
-ifeq ($(shell uname -s),msys)		# if Windows
+ifeq ($(shell uname -s),msys)				# if Windows
 	JOBS :=
 else
-	ifneq ($(filter arm%,$(ARCH)),) # if ARM
+	ifneq ($(filter arm%,$(ARCH)),) 		# if ARM
 		JOBS := -j2
-	else							# not ARM
+	else									# not ARM
 		JOBS := -j6
 	endif
 endif
 
-all: build_all copy_all package_tar 
+
+# if CPU (uname -m) equals...
+ifeq ($(shell uname -n),raspberrypi)		# if Raspberry Pi
+	CPU := armhf
+else
+	ifeq ($(shell uname -m),i686)			# if i686
+		CPU := i386
+	else ifeq ($(shell uname -m),x86_64)	# if x64
+		CPU := amd64
+	else
+		CPU := $(shell uname -m)
+	endif
+endif
+
+all:
+	@echo "Usage:    make [TYPE]"
+	@echo
+	@echo "Enter package type to build. Options:"
+	@echo
+	@echo "   deb    debian package"
+	@echo "   win    windows installer (not yet available)"
+	@echo "   mac    mac bundle        (not yet available)"
+
 
 build_all: build_ide build_openspin build_loader
 
@@ -67,11 +90,10 @@ copy_root:
 #copy_libs:
 #	cp `ldd $(DIR_IDE)/$(NAME) | grep 'libQt\|libz' | awk '{print $$3}'` $(DIR_BIN)
 
-package_tar:
-	rm -rf ${PACKAGE}
-	mv -f $(DIR_STAGING) ${PACKAGE}/
-	tar -cvzf ${PACKAGE}.tgz ${PACKAGE}/
-	@echo ${PACKAGE}
 
-package_debian:
-	
+deb: build_all copy_all
+	sed -e "s/VERSION/$(VERSION)/" \
+		-e "s/CPU/$(CPU)/" \
+		-i $(DIR_DEB)/control
+	dpkg-deb -b $(DIR_STAGING) propelleride-$(VERSION)-$(CPU).deb
+

@@ -8,5 +8,5 @@ Maintainer: lamestation.com
 Conflicts:
 Replaces:
 Provides: propelleride
-Description: Parallax Propeller Programming IDE
- The PropellerIDE is used for programming the Parallax Propeller P8x32a multi-core MicroController.
+Description: Cross-Platform Spin IDE
+ An easy-to-use cross-platform development tool for the Parallax Propeller microcontroller.
