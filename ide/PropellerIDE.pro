@@ -52,10 +52,8 @@ SOURCES += main.cpp\
     highlighter.cpp \
     treemodel.cpp \
     treeitem.cpp \
-    XBasicModel.cpp \
     EzBuilder.cpp \
     SpinBuilder.cpp \
-    XBasicBuilder.cpp \
     qextserialport.cpp \
     PortListener.cpp \
     terminal.cpp \
@@ -82,10 +80,8 @@ HEADERS  += mainwindow.h \
     highlighter.h \
     treemodel.h \
     treeitem.h \
-    XBasicModel.h \
     EzBuilder.h \
     SpinBuilder.h \
-    XBasicBuilder.h \
     qextserialport.h \
     qextserialenumerator.h \
     PortListener.h \

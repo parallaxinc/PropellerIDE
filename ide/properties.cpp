@@ -151,13 +151,10 @@ void Properties::setupFolders()
 
     int minledit = 300;
 
-    //QGroupBox *gbCompiler = new QGroupBox(tr("Compilers"), this);
-    //QGroupBox *gbIncludes = new QGroupBox(tr("Paths"), this);
-
+    // Compiler Path Selector
     QLabel *spinCmpLabel = new QLabel("Compiler");
-    QLabel *spinIncLabel = new QLabel("Library");
     spinCmpLabel->setMinimumWidth(70);
-    spinIncLabel->setMinimumWidth(70);
+
     QHBoxLayout *spincLayout = new QHBoxLayout();
     spinLeditCompiler = new QLineEdit(this);
     spinLeditCompiler->setMinimumWidth(minledit);
@@ -167,19 +164,13 @@ void Properties::setupFolders()
     QPushButton *spinBtnCompilerBrowse = new QPushButton(tr("Browse"), this);
     spincLayout->addWidget(spinBtnCompilerBrowse);
 
-    QHBoxLayout *spiniLayout = new QHBoxLayout();
-    spinLeditIncludes = new QLineEdit(this);
-    spinLeditIncludes->setMinimumWidth(minledit);
-    spinLeditIncludes->setToolTip("Add Spin library folder here.");
-    //QHBoxLayout *ilayout = new QHBoxLayout();
-    spiniLayout->addWidget(spinIncLabel);
-    spiniLayout->addWidget(spinLeditIncludes);
-    QPushButton *spinBtnIncludesBrowse = new QPushButton(tr("Browse"), this);
-    spiniLayout->addWidget(spinBtnIncludesBrowse);
+    layout->addLayout(spincLayout);
 
-#ifdef EXTERNAL_SPIN_LOADER
+
+    // Loader Path Selector
     QLabel *spinLoadLabel = new QLabel("Loader");
     spinLoadLabel->setMinimumWidth(70);
+
     QHBoxLayout *spinLoadLayout = new QHBoxLayout();
     spinLoadLedit = new QLineEdit(this);
     spinLoadLedit->setMinimumWidth(minledit);
@@ -188,45 +179,24 @@ void Properties::setupFolders()
     spinLoadLayout->addWidget(spinLoadLedit);
     QPushButton *spinLoaderBtnBrowse = new QPushButton(tr("Browse"), this);
     spinLoadLayout->addWidget(spinLoaderBtnBrowse);
+
     layout->addLayout(spinLoadLayout);
-#endif
 
-    layout->addLayout(spincLayout);
+
+    // Library Path Selector
+    QLabel *spinIncLabel = new QLabel("Library");
+    spinIncLabel->setMinimumWidth(70);
+
+    QHBoxLayout *spiniLayout = new QHBoxLayout();
+    spinLeditIncludes = new QLineEdit(this);
+    spinLeditIncludes->setMinimumWidth(minledit);
+    spinLeditIncludes->setToolTip("Add Spin library folder here.");
+    spiniLayout->addWidget(spinIncLabel);
+    spiniLayout->addWidget(spinLeditIncludes);
+    QPushButton *spinBtnIncludesBrowse = new QPushButton(tr("Browse"), this);
+    spiniLayout->addWidget(spinBtnIncludesBrowse);
+
     layout->addLayout(spiniLayout);
-
-#ifdef USE_XBASIC
-    QLabel *xBasicCmpLabel = new QLabel("Compiler");
-    QLabel *xBasicIncLabel = new QLabel("Library");
-    xBasicCmpLabel->setMinimumWidth(40);
-    xBasicIncLabel->setMinimumWidth(40);
-
-    QHBoxLayout *xBasiccLayout = new QHBoxLayout();
-    xBasicLeditCompiler = new QLineEdit(this);
-    xBasicLeditCompiler->setMinimumWidth(minledit);
-    xBasiccLayout->addWidget(xBasicCmpLabel);
-    xBasiccLayout->addWidget(xBasicLeditCompiler);
-    QPushButton *xBasicBtnCompilerBrowse = new QPushButton(tr("Browse"), this);
-    xBasiccLayout->addWidget(xBasicBtnCompilerBrowse);
-
-    QHBoxLayout *xBasiciLayout = new QHBoxLayout();
-    xBasicLeditIncludes = new QLineEdit(this);
-    xBasicLeditIncludes->setMinimumWidth(minledit);//QHBoxLayout *xilayout = new QHBoxLayout();
-    xBasiciLayout->addWidget(xBasicIncLabel);
-    xBasiciLayout->addWidget(xBasicLeditIncludes);
-    QPushButton *xBasicBtnIncludesBrowse = new QPushButton(tr("Browse"), this);
-    xBasiciLayout->addWidget(xBasicBtnIncludesBrowse);
-
-    QVBoxLayout *xBasicLayout = new QVBoxLayout();
-    xBasicLayout->addLayout(xBasiccLayout);
-    xBasicLayout->addLayout(xBasiciLayout);
-
-    QGroupBox *gbXBasic = new QGroupBox(tr("xBasic"), this);
-    gbXBasic->setLayout(xBasicLayout);
-    layout->addWidget(gbXBasic);
-
-    connect(xBasicBtnCompilerBrowse, SIGNAL(clicked()), this, SLOT(xBasicBrowseCompiler()));
-    connect(xBasicBtnIncludesBrowse, SIGNAL(clicked()), this, SLOT(xBasicBrowseIncludes()));
-#endif
 
     connect(spinBtnCompilerBrowse, SIGNAL(clicked()), this, SLOT(spinBrowseCompiler()));
     connect(spinBtnIncludesBrowse, SIGNAL(clicked()), this, SLOT(spinBrowseIncludes()));
@@ -307,22 +277,6 @@ void Properties::setupFolders()
     settings.setValue(spinLoaderKey,spinLoadLedit->text());
 #endif
 
-#ifdef USE_XBASIC
-    compv = settings.value(xBasicCompilerKey);
-    incv = settings.value(xBasicIncludesKey);
-
-    if(compv.canConvert(QVariant::String)) {
-        QString s = compv.toString();
-        s = QDir::fromNativeSeparators(s);
-        xBasicLeditCompiler->setText(s);
-    }
-
-    if(incv.canConvert(QVariant::String)) {
-        QString s = incv.toString();
-        s = QDir::fromNativeSeparators(s);
-        xBasicLeditIncludes->setText(s);
-    }
-#endif
 }
 
 void Properties::addHighlights(QComboBox *box, QVector<PColor*> pcolor)
@@ -705,33 +659,10 @@ void Properties::spinBrowseLoader()
 
 void Properties::xBasicBrowseCompiler()
 {
-#ifdef USE_XBASIC
-    QString fileName = QFileDialog::getOpenFileName(this,
-            tr("Select xBasic Compiler"), lastFolder, "xBasic Compiler (xbcom.exe xbcom xbcom-qt.exe xbcom-qt)");
-    QString s = QDir::fromNativeSeparators(fileName);
-    lastFolder = s.mid(0,s.lastIndexOf("/")+1);
-    xBasicCompilerStr = xBasicLeditCompiler->text();
-    if(s.length() > 0)
-        xBasicLeditCompiler->setText(s);
-    qDebug() << "browseXBasicCompiler" << s;
-#endif
 }
 
 void Properties::xBasicBrowseIncludes()
 {
-#ifdef USE_XBASIC
-    QString pathName = QFileDialog::getExistingDirectory(this,
-            tr("Select xBasic Library Include Path"), lastFolder, false);
-    QString s = QDir::fromNativeSeparators(pathName);
-    lastFolder = s.mid(0,s.lastIndexOf("/")+1);
-    if(s.length() == 0)
-        return;
-    if(!s.endsWith("/")) {
-        s += "/";
-    }
-    xBasicLeditIncludes->setText(s);
-    qDebug() << "xBasicBrowseIncludes" << s;
-#endif
 }
 
 
@@ -742,10 +673,6 @@ void Properties::accept()
     settings.setValue(spinIncludesKey,spinLeditIncludes->text());
 #ifdef EXTERNAL_SPIN_LOADER
     settings.setValue(spinLoaderKey,spinLoadLedit->text());
-#endif
-#ifdef USE_XBASIC
-    settings.setValue(xBasicCompilerKey,xBasicLeditCompiler->text());
-    settings.setValue(xBasicIncludesKey,xBasicLeditIncludes->text());
 #endif
 
     settings.setValue(tabSpacesKey,tabspaceLedit.text());
@@ -785,10 +712,6 @@ void Properties::reject()
 #ifdef EXTERNAL_SPIN_LOADER
     spinLoadLedit->setText(spinLoaderStr);
 #endif
-#ifdef USE_XBASIC
-    xBasicLeditCompiler->setText(xBasicCompilerStr);
-    xBasicLeditIncludes->setText(xBasicIncludesStr);
-#endif
 
     tabspaceLedit.setText(tabSpacesStr);
     hlNumStyle.setChecked(hlNumStyleBool);
@@ -826,10 +749,6 @@ void Properties::showProperties(QString lastDir)
     spinIncludesStr = spinLeditIncludes->text();
 #ifdef EXTERNAL_SPIN_LOADER
     spinLoaderStr = spinLoadLedit->text();
-#endif
-#ifdef USE_XBASIC
-    xBasicCompilerStr = xBasicLeditCompiler->text();
-    xBasicIncludesStr = xBasicLeditIncludes->text();
 #endif
     this->setWindowTitle(QString(PropellerIdeGuiKey) +" Properties");
 

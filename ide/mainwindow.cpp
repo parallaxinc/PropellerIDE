@@ -74,14 +74,10 @@ void MainWindow::init()
     connect(propDialog,SIGNAL(openFontDialog()),this,SLOT(fontDialog()));
     connect(propDialog->getTabSpaceLedit(),SIGNAL(textChanged(QString)), this, SLOT(tabSpacesChanged()));
 
-    /* new xBasicConfig class */
-    //xBasicConfig = new XBasicConfig();
-
     projectModel = NULL;
     referenceModel = NULL;
 
     spinBuilder = new SpinBuilder();
-    xBasicBuilder = new XBasicBuilder();
 
     connect(spinBuilder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
 
@@ -366,16 +362,6 @@ void MainWindow::getApplicationSettings(bool complain)
     if(complain && !file.exists(spinCompiler)) {
         propDialog->showProperties(this->lastDirectory);
     }
-#ifdef USE_XBASIC
-    compv = settings->value(xBasicCompilerKey);
-    if(compv.canConvert(QVariant::String)) {
-        xBasicCompiler = compv.toString();
-        xBasicCompiler = dir.fromNativeSeparators(xBasicCompiler);
-    }
-    if(complain && !file.exists(xBasicCompiler)) {
-        propDialog->showProperties(this->lastDirectory);
-    }
-#endif
     compv = settings->value(spinLoaderKey);
     if(compv.canConvert(QVariant::String)) {
         spinLoader = compv.toString();
@@ -394,14 +380,6 @@ void MainWindow::getApplicationSettings(bool complain)
         spinIncludes = incv.toString();
         spinIncludes = dir.fromNativeSeparators(spinIncludes);
     }
-#ifdef USE_XBASIC
-    xBasicCompilerPath = filePathName(xBasicCompiler);
-    incv = settings->value(xBasicIncludesKey);
-    if(incv.canConvert(QVariant::String)) {
-        xBasicIncludes = incv.toString();
-        xBasicIncludes = dir.fromNativeSeparators(xBasicIncludes);
-    }
-#endif
 }
 
 /**
@@ -1159,25 +1137,6 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
         rc = spinBuilder->runCompiler(copts);
         goto endRunCompiler;
     }
-#ifdef USE_XBASIC
-    else if(fileName.contains(".bas")) {
-        xBasicBuilder->setParameters(xBasicCompiler, xBasicIncludes, xBasicCompilerPath, projectFile, compileResult);
-        xBasicBuilder->setObjects(msgLabel, sizeLabel, progress, cbPort);
-        switch (type) {
-            case COMPILE_ONLY:
-                copts = "-v";
-            break;
-            case COMPILE_RUN:
-                copts = "-r";
-            break;
-            case COMPILE_BURN:
-                copts = "-e";
-            break;
-        }
-        rc = xBasicBuilder->runCompiler(copts);
-        goto endRunCompiler;
-    }
-#endif
     else {
         QMessageBox::critical(this,tr("Can't compile unknown file type"), tr("Files must be of type '.spin'"));
     }
@@ -1549,9 +1508,6 @@ void MainWindow::openTreeFile(QString fileName)
     else if(file.exists(spinIncludes+fileName)) {
         fileToOpen = spinIncludes+fileName;
     }
-    else if(file.exists(xBasicIncludes+fileName)) {
-        fileToOpen = xBasicIncludes+fileName;
-    }
     int index = isFileOpen(fileToOpen);
     if(index < 0)
         openFileName(fileToOpen);
@@ -1694,8 +1650,6 @@ void MainWindow::zipFiles()
 #endif
 }
 
-#include "XBasicModel.h"
-
 void MainWindow::updateProjectTree(QString fileName, QString text)
 {
     projectFile = fileName;
@@ -1705,13 +1659,7 @@ void MainWindow::updateProjectTree(QString fileName, QString text)
     if(projectModel != NULL) {
         delete projectModel;
     }
-    if(fileName.endsWith(".bas",Qt::CaseInsensitive)) {
-        projectModel = new XBasicModel(s, this);
-        if(text.length() > 0) {
-            projectModel->includes(fileName, this->xBasicIncludes, text, true);
-        }
-    }
-    else if(fileName.endsWith(".spin",Qt::CaseInsensitive)) {
+    if(fileName.endsWith(".spin",Qt::CaseInsensitive)) {
         projectModel = new TreeModel(s, this);
         updateSpinProjectTree(fileName);
     }
@@ -1745,13 +1693,7 @@ void MainWindow::updateReferenceTree(QString fileName, QString text)
     if(referenceModel != NULL) {
         delete referenceModel;
     }
-    if(fileName.endsWith(".bas",Qt::CaseInsensitive)) {
-        referenceModel = new XBasicModel(s, this);
-        if(text.length() > 0) {
-            referenceModel->addFileReferences(fileName, xBasicIncludes, text, 0);
-        }
-    }
-    else if(fileName.endsWith(".spin",Qt::CaseInsensitive)) {
+    if(fileName.endsWith(".spin",Qt::CaseInsensitive)) {
         referenceModel = new TreeModel(s, this);
         if(text.length() > 0) {
             updateSpinReferenceTree(fileName, spinIncludes, "", 0); // start at top object

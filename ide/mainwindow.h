@@ -50,10 +50,8 @@
 #include "stdio.h"
 #include "highlighter.h"
 #include "SpinBuilder.h"
-#include "XBasicBuilder.h"
 #include "treemodel.h"
 #include "SpinModel.h"
-#include "XBasicModel.h"
 #include "PortListener.h"
 #include "qextserialport.h"
 #include "terminal.h"
@@ -270,11 +268,8 @@ private:
     TreeModel   *referenceModel;
     SpinModel   *spinProjectModel;
     SpinModel   *spinReferenceModel;
-    XBasicModel *xBasicProjectModel;
-    XBasicModel *xBasicReferenceModel;
 
     SpinBuilder     *spinBuilder;
-    XBasicBuilder   *xBasicBuilder;
 
     QString     basicPath;
     QString     includePath;
