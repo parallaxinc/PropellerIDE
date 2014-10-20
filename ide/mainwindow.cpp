@@ -2073,11 +2073,20 @@ void MainWindow::setupFileMenu()
     QMenu *fileMenu = new QMenu(tr("&File"), this);
     menuBar()->addMenu(fileMenu);
 
-    fileMenu->addAction(QIcon(":/images/blks.png"), tr("&Browser"), this, SLOT(showBrowser()), Qt::CTRL+Qt::Key_B);
     fileMenu->addAction(QIcon(":/images/newfile.png"), tr("&New"), this, SLOT(newFileAction()), QKeySequence::New);
     fileMenu->addAction(QIcon(":/images/openfile.png"), tr("&Open"), this, SLOT(openFile()), QKeySequence::Open);
     fileMenu->addAction(QIcon(":/images/savefile.png"), tr("&Save"), this, SLOT(saveFile()), QKeySequence::Save);
     fileMenu->addAction(QIcon(":/images/saveasfile.png"), tr("Save &As"), this, SLOT(saveAsFile()), QKeySequence::SaveAs);
+    fileMenu->addSeparator();
+
+    // fileMenu->addAction(QIcon(":/images/print.png"), tr("Print"), this, SLOT(printFile()), QKeySequence::Print);
+
+
+    // Enable zipFiles after zipper works.
+#ifdef ENABLE_ZIP
+    fileMenu->addAction(QIcon(":/images/zip.png"), tr("Zip"), this, SLOT(zipFiles()), 0);
+#endif
+    fileMenu->addAction(QIcon(":/images/properties.png"), tr("Properties"), this, SLOT(properties()), Qt::Key_F5);
 
     // recent file actions
     separatorFileAct = fileMenu->addSeparator();
@@ -2093,19 +2102,14 @@ void MainWindow::setupFileMenu()
 
     updateRecentFileActions();
 
+
+
+
     fileMenu->addSeparator();
-
-    // fileMenu->addAction(QIcon(":/images/print.png"), tr("Print"), this, SLOT(printFile()), QKeySequence::Print);
-
-    // Enable zipFiles after zipper works.
-#ifdef ENABLE_ZIP
-    fileMenu->addAction(QIcon(":/images/zip.png"), tr("Zip"), this, SLOT(zipFiles()), 0);
-#endif
-    fileMenu->addAction(QIcon(":/images/properties.png"), tr("Properties"), this, SLOT(properties()), Qt::Key_F5);
 
     fileMenu->addAction(QIcon(":/images/exit.png"), tr("E&xit"), this, SLOT(quitProgram()), QKeySequence::Quit);
 
-    editMenu = new QMenu(tr("&Edit"), this);
+    QMenu * editMenu = new QMenu(tr("&Edit"), this);
     menuBar()->addMenu(editMenu);
     editMenu->addAction(QIcon(":/images/find.png"), tr("Find"), this, SLOT(showFindFrame()), QKeySequence::Find);
     editMenu->addAction(QIcon(":/images/findNextIcon.png"), tr("Find Next"), this, SLOT(findNextClicked()), QKeySequence::FindNext);
@@ -2131,6 +2135,13 @@ void MainWindow::setupFileMenu()
     QList<QAction*> alist = editMenu->actions();
     QAction *last = alist.last();
     editMenu->insertAction(last,bigger);
+
+
+    QMenu * viewMenu = new QMenu(tr("&View"), this);
+    menuBar()->addMenu(viewMenu);
+
+    viewMenu->addAction(QIcon(":/images/blks.png"), tr("&Show Browser"), this, SLOT(showBrowser()), Qt::CTRL+Qt::Key_B);
+
 
     QMenu *debugMenu = new QMenu(tr("&Debug"), this);
     menuBar()->addMenu(debugMenu);
@@ -2166,7 +2177,6 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     leftSplit->setOrientation(Qt::Vertical);
     leftSplit->setChildrenCollapsible(false);
     leftSplit->setHandleWidth(handlewidth);
-    leftSplit->hide();
     vsplit->addWidget(leftSplit);
 
     /* project tree */
@@ -2769,26 +2779,26 @@ bool MainWindow::showEndMessage(QString type)
 void MainWindow::setupToolBars()
 {
     fileToolBar = addToolBar(tr("File"));
-    QToolButton *btnBrowser = new QToolButton(this);
+//    QToolButton *btnBrowser = new QToolButton(this);
     QToolButton *btnFileNew = new QToolButton(this);
     QToolButton *btnFileOpen = new QToolButton(this);
     QToolButton *btnFileSave = new QToolButton(this);
     QToolButton *btnFileSaveAs = new QToolButton(this);
 
-    btnBrowser->setCheckable(true);
-    addToolButton(fileToolBar, btnBrowser, QString(":/images/blks.png"));
+//    btnBrowser->setCheckable(true);
+//    addToolButton(fileToolBar, btnBrowser, QString(":/images/blks.png"));
     addToolButton(fileToolBar, btnFileNew, QString(":/images/newfile.png"));
     addToolButton(fileToolBar, btnFileOpen, QString(":/images/openfile.png"));
     addToolButton(fileToolBar, btnFileSave, QString(":/images/savefile.png"));
     addToolButton(fileToolBar, btnFileSaveAs, QString(":/images/saveasfile.png"));
 
-    connect(btnBrowser,SIGNAL(clicked()),this,SLOT(showBrowser()));
+//    connect(btnBrowser,SIGNAL(clicked()),this,SLOT(showBrowser()));
     connect(btnFileNew,SIGNAL(clicked()),this,SLOT(newFileAction()));
     connect(btnFileOpen,SIGNAL(clicked()),this,SLOT(openFile()));
     connect(btnFileSave,SIGNAL(clicked()),this,SLOT(saveFile()));
     connect(btnFileSaveAs,SIGNAL(clicked()),this,SLOT(saveAsFile()));
 
-    btnBrowser->setToolTip(tr("Browser"));
+//    btnBrowser->setToolTip(tr("Show Browser"));
     btnFileNew->setToolTip(tr("New"));
     btnFileOpen->setToolTip(tr("Open"));
     btnFileSave->setToolTip(tr("Save"));
@@ -2837,18 +2847,18 @@ void MainWindow::setupToolBars()
     btnDebugBurnEEP->setToolTip(tr("Burn EEPROM"));
     btnDebugDebugTerm->setToolTip(tr("Debug"));
     btnDebugRun->setToolTip(tr("Run"));
-    btnDebugIdHw->setToolTip(tr("Find Propeller Chips"));
+    btnDebugIdHw->setToolTip(tr("Detect Attached Propellers"));
 
     ctrlToolBar = addToolBar(tr("Control"));
     ctrlToolBar->setLayoutDirection(Qt::RightToLeft);
     cbPort = new QComboBox(this);
     cbPort->setLayoutDirection(Qt::LeftToRight);
-    cbPort->setToolTip(tr("Serial Port Select"));
+    cbPort->setToolTip(tr("Select Serial Port"));
     cbPort->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     connect(cbPort,SIGNAL(currentIndexChanged(int)),this,SLOT(setCurrentPort(int)));
 
     btnConnected = new QToolButton(this);
-    btnConnected->setToolTip(tr("Port Status"));
+    btnConnected->setToolTip(tr("View Serial Terminal"));
     btnConnected->setCheckable(true);
     connect(btnConnected,SIGNAL(clicked()),this,SLOT(connectButton()));
 

@@ -78,7 +78,7 @@ void Properties::setupOptions()
     edlayout->addRow(new QLabel(tr("Enable AutoComplete")), &autoCompleteEnable);
 
     spinSuggestEnable.setChecked(enss.toBool());
-    edlayout->addRow(new QLabel(tr("Enable SpinSuggest")), &spinSuggestEnable);
+    edlayout->addRow(new QLabel(tr("Enable Code Suggestion")), &spinSuggestEnable);
 
 #if ENABLE_PORT_BOARD_NAMES
     portBoardNameEnable.setChecked(false);
@@ -86,12 +86,12 @@ void Properties::setupOptions()
     otlayout->addRow(new QLabel(tr("Enable Port Board Names")), &portBoardNameEnable);
 #endif
 
-    QVariant tabsv = settings.value(tabSpacesKey,"2");
+    QVariant tabsv = settings.value(tabSpacesKey,"4");
     if(tabsv.canConvert(QVariant::String)) {
         tabspaceLedit.setText(tabsv.toString());
     }
     else {
-        tabspaceLedit.setText("2");
+        tabspaceLedit.setText("4");
     }
     edlayout->addRow(new QLabel(tr("Editor Tab Space Count")), &tabspaceLedit);
 
@@ -147,7 +147,7 @@ void Properties::setupFolders()
     QVBoxLayout *layout = new QVBoxLayout(this);
     QFrame *box = new QFrame();
     box->setLayout(layout);
-    tabWidget.addTab(box,"SPIN");
+    tabWidget.addTab(box,"System");
 
     int minledit = 300;
 

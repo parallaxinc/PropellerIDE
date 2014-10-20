@@ -219,7 +219,6 @@ private:
 
     Highlighter *highlighter;
 
-    QMenu       *editMenu;
     QToolBar    *fileToolBar;
     QToolBar    *propToolBar;
     QToolBar    *debugToolBar;
