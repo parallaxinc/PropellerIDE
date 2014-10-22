@@ -70,7 +70,7 @@ clean_staging:
 	rm -rf $(DIR_STAGING)
 
 build_ide:
-	cd $(DIR_IDE); qmake $(NAME).pro; make $(JOBS)
+	cd $(DIR_IDE); qmake PropellerIDE.pro; make $(JOBS)
 
 build_openspin:
 	cd $(DIR_OPENSPIN); make
