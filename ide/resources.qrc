@@ -8,6 +8,8 @@
         <file>images/connected2.png</file>
         <file>images/helphint.png</file>
         <file>images/obj.png</file>
+        <file>images/const.png</file>
+        <file>images/dat.png</file>
         <file>images/pri.png</file>
         <file>images/pub.png</file>
         <file>images/var.png</file>
@@ -31,6 +33,8 @@
         <file>images/var2.png</file>
         <file>images/pub2.png</file>
         <file>images/pri2.png</file>
+        <file>images/dat2.png</file>
+        <file>images/con2.png</file>
         <file>images/pfavicon2.png</file>
         <file>images/findNextPressed.png</file>
         <file>images/findPrevious.png</file>
@@ -42,6 +46,7 @@
         <file>images/findPreviousIcon.png</file>
         <file>images/findNextIcon.png</file>
         <file>images/debug2.png</file>
+        <file>images/Eye.png</file>
         <file>images/blks.png</file>
         <file>images/icon.png</file>
         <file>images/greenled.png</file>

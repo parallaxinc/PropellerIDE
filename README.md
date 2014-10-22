@@ -15,19 +15,26 @@ git submodule update
 ### Setting Up The Build Environment
 
 ```
-sudo apt-get install qtcreator qt5-default devscripts zlib1g-dev nsis
+sudo apt-get install qtcreator qt5-default devscripts zlib1g-dev 
 ```
 
 ### Building
 
-Type `make deb` to build a Debian package.
+Type `make` to build the project.
 
 ```
-$ make deb
+make
 ```
 
 Type `make clean` to remove old build files. Open the makefile to view other targets available.
 
 ```
 make clean
+```
+
+Debian packaging is available but needs to be cleaned up.
+
+```
+cd linux
+./pack.sh ../propelleride-[whatever version you're on]
 ```
