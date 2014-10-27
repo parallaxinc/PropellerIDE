@@ -14,7 +14,7 @@ DIR_DEB			:=	$(DIR_STAGING)/DEBIAN
 
 VERSION			:=	$(shell echo `grep -r VERSION= $(DIR_IDE)/PropellerIDE.pro \
 					| cut -d'=' -f3 \
-					| cut -d' ' -f 1` \
+					| sed -e 's/[\r]//g'` \
 					| sed -e 's/ /./g')
 
 ARCH			:=	$(shell arch)
