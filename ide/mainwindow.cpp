@@ -472,7 +472,7 @@ void MainWindow::closeEvent(QCloseEvent *e)
 void MainWindow::newFileAction()
 {
     newFile();
-    int tab = editors->count()-1;
+    int tab = editorTabs->count()-1;
     setEditorCodeType(getEditor(tab), QString("UTF-16"));
 }
 
@@ -480,9 +480,8 @@ void MainWindow::newFile()
 {
     changeTabDisable = true;
     fileChangeDisable = true;
-    setupEditor();
-    int tab = editors->count()-1;
-    editorTabs->addTab(getEditor(tab),(const QString&)untitledstr);
+    editorTabs->addTab(createEditor(),(const QString&)untitledstr);
+	int tab = editorTabs->count()-1;
     editorTabs->setCurrentIndex(tab);
     editorTabs->setTabToolTip(tab, QString(""));
     delete projectModel;
@@ -841,7 +840,7 @@ void MainWindow::fontDialog()
     qDebug() << "New Editor Font" << font.family();
 
     if(ok) {
-        for(int n = editors->count()-1; n >= 0; n--) {
+        for(int n = editorTabs->count()-1; n >= 0; n--) {
             Editor *ed = getEditor(n);
             ed->setFont(font);
             QString fs = QString("font: %1pt \"%2\";").arg(font.pointSize()).arg(font.family());
@@ -877,7 +876,7 @@ void MainWindow::fontBigger()
             if(size < 90)
                 font.setPointSize(size);
         }
-        for(int n = editors->count()-1; n >= 0; n--) {
+        for(int n = editorTabs->count()-1; n >= 0; n--) {
             Editor *ed = getEditor(n);
             ed->setFont(font);
             QString fs = QString("font: %1pt \"%2\";").arg(font.pointSize()).arg(font.family());
@@ -914,7 +913,7 @@ void MainWindow::fontSmaller()
             if(size > 3)
                 font.setPointSize(size);
         }
-        for(int n = editors->count()-1; n >= 0; n--) {
+        for(int n = editorTabs->count()-1; n >= 0; n--) {
             Editor *ed = getEditor(n);
             ed->setFont(font);
             QString fs = QString("font: %1pt \"%2\";").arg(font.pointSize()).arg(font.family());
@@ -1607,7 +1606,6 @@ void MainWindow::closeTab(int index)
 {
     fileChangeDisable = true;
     getEditor(index)->setPlainText("");
-    editors->remove(index);
     if(editorTabs->count() == 1)
         newFile();
     editorTabs->removeTab(index);
@@ -1799,7 +1797,7 @@ void MainWindow::setEditor(int num, QString shortName, QString fileName, QString
 
 Editor *MainWindow::getEditor(int num)
 {
-    return editors->at(num);
+    return (Editor *)editorTabs->widget(num);
 }
 
 void MainWindow::setEditorCodeType(Editor *ed, QString name)
@@ -1814,7 +1812,6 @@ void MainWindow::setEditorCodeType(Editor *ed, QString name)
 
 void MainWindow::clearTabHighlight()
 {
-    //qDebug() << "clearTabHighlight" << "Total Tabs" << editorTabs->count() << "Total Editors" << editors->count() << "Current" << editorTabs->currentIndex();
     emit highlightCurrentLine(QColor());
 }
 
@@ -1977,7 +1974,7 @@ void MainWindow::initBoardTypes()
 {
 }
 
-void MainWindow::setupEditor()
+Editor *MainWindow::createEditor()
 {
     Editor *editor = new Editor(this);
     editor->initSpin(&spinParser);
@@ -1996,13 +1993,14 @@ void MainWindow::setupEditor()
     connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
     connect(editor,SIGNAL(cursorPositionChanged()),editor,SLOT(updateBackgroundColors()));
     highlighter = new Highlighter(editor->document(), propDialog);
-    editors->append(editor);
+
+	return editor;
 }
 
 void MainWindow::tabSpacesChanged()
 {
-    for(int n = 0; n < editors->count(); n++) {
-        Editor *ed = editors->at(n);
+    for(int n = 0; n < editorTabs->count(); n++) {
+        Editor *ed = getEditor(n);
         QFontMetrics fm(editorFont);
         int spaces = propDialog->getTabSpaces();
         int width = fm.width(QLatin1Char('9'));
@@ -2158,9 +2156,6 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     rightSplit = new QSplitter(this);
     rightSplit->setOrientation(Qt::Vertical);
     vsplit->addWidget(rightSplit);
-
-    /* project editors */
-    editors = new QVector<Editor*>();
 
     /* project editor tabs */
     editorTabs = new QTabWidget(this);
@@ -2378,7 +2373,7 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
 
 void MainWindow::showFindFrame()
 {
-    Editor *editor = editors->at(editorTabs->currentIndex());
+    Editor *editor = getEditor(editorTabs->currentIndex());
     if(editor->textCursor().selectedText().length() > 0) {
         setFindText(editor->textCursor().selectedText());
     }
@@ -2416,7 +2411,7 @@ QTextDocument::FindFlag MainWindow::getFlags(int prev)
 
 void MainWindow::findChanged(QString text)
 {
-    Editor *editor = editors->at(editorTabs->currentIndex());
+    Editor *editor = getEditor(editorTabs->currentIndex());
 
     if(editor == NULL)
         return;
@@ -2463,7 +2458,7 @@ void MainWindow::findClicked()
 void MainWindow::findNextClicked()
 {
 
-    Editor *editor = editors->at(editorTabs->currentIndex());
+    Editor *editor = getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -2513,7 +2508,7 @@ void MainWindow::findNextClicked()
 }
 void MainWindow::findPrevClicked()
 {
-    Editor *editor = editors->at(editorTabs->currentIndex());
+    Editor *editor = getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -2599,7 +2594,7 @@ void MainWindow::replaceClicked()
  */
 void MainWindow::replaceNextClicked()
 {
-    Editor *editor = editors->at(editorTabs->currentIndex());
+    Editor *editor = getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -2619,7 +2614,7 @@ void MainWindow::replaceNextClicked()
  */
 void MainWindow::replacePrevClicked()
 {
-    Editor *editor = editors->at(editorTabs->currentIndex());
+    Editor *editor = getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -2641,7 +2636,7 @@ void MainWindow::replaceAllClicked()
 {
     int count = 0;
     QString text = findEdit->text();
-    Editor *editor = editors->at(editorTabs->currentIndex());
+    Editor *editor = getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -2692,7 +2687,7 @@ bool MainWindow::showBeginMessage(QString type)
     if(ret == QMessageBox::Cancel) {
         return false;
     }
-    Editor *editor = editors->at(editorTabs->currentIndex());
+    Editor *editor = getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return false;
     QTextCursor cur = editor->textCursor();
@@ -2709,7 +2704,7 @@ bool MainWindow::showEndMessage(QString type)
     if(ret == QMessageBox::Cancel) {
         return false;
     }
-    Editor *editor = editors->at(editorTabs->currentIndex());
+    Editor *editor = getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return false;
     QTextCursor cur = editor->textCursor();

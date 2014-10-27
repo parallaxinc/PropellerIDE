@@ -176,7 +176,7 @@ private:
     bool isFileUTF16(QFile *file);
     void openFileName(QString fileName);
     void checkAndSaveFiles();
-    void setupEditor();
+    Editor *createEditor();
     void clearTabHighlight();
     void setupFileMenu();
     void setupHelpMenu();
@@ -254,7 +254,6 @@ private:
     int         wasClicked;
 
     QTabWidget  *editorTabs;
-    QVector<Editor*> *editors;
     QFont       editorFont;
     bool        fileChangeDisable;
     bool        changeTabDisable;
