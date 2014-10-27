@@ -70,13 +70,6 @@ QT_BEGIN_NAMESPACE
 class QTextEdit;
 QT_END_NAMESPACE
 
-class pIDE_QTabWidget : public QTabWidget
-{
-public:
-	pIDE_QTabWidget(QWidget *parent = 0) : QTabWidget(parent) {}
-	QTabBar *pIDE_tabBar() { return tabBar(); /* protected */ }
-};
-
 //! [0]
 class MainWindow : public QMainWindow
 {
@@ -138,7 +131,6 @@ public slots:
     void referenceTreeClicked(QModelIndex index);
     void closeTab(int index = 0);
     void changeTab(int index);
-    void movedTab(int from, int to);
     void setCurrentPort(int index);
     void connectButton(bool show = true);
     void terminalClosed();
@@ -261,7 +253,7 @@ private:
     int         findPosition;
     int         wasClicked;
 
-    pIDE_QTabWidget  *editorTabs;
+    QTabWidget  *editorTabs;
     QVector<Editor*> *editors;
     QFont       editorFont;
     bool        fileChangeDisable;

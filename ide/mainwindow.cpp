@@ -1624,13 +1624,6 @@ void MainWindow::changeTab(int index)
         setProject();
 }
 
-void MainWindow::movedTab(int from, int to)
-{
-	Editor *E = editors->at(from);
-	editors->remove(from);
-	editors->insert(to, E);
-}
-
 void MainWindow::addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile)
 {
     const QSize buttonSize(24, 24);
@@ -2170,12 +2163,11 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     editors = new QVector<Editor*>();
 
     /* project editor tabs */
-    editorTabs = new pIDE_QTabWidget(this);
+    editorTabs = new QTabWidget(this);
     editorTabs->setTabsClosable(true);
     editorTabs->setMovable(true);
     connect(editorTabs,SIGNAL(tabCloseRequested(int)),this,SLOT(closeTab(int)));
     connect(editorTabs,SIGNAL(currentChanged(int)),this,SLOT(changeTab(int)));
-    connect(editorTabs->pIDE_tabBar(),SIGNAL(tabMoved(int,int)),this,SLOT(movedTab(int,int)));
     rightSplit->addWidget(editorTabs);
 
     QList<int> rsizes;
