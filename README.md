@@ -3,7 +3,7 @@ PropellerIDE
 
 The new home of the Propeller IDE.
 
-### Checkout
+## Checkout
 
 ```
 git clone https://github.com/lamestation/PropellerIDE.git PropellerIDE
@@ -12,29 +12,72 @@ git submodule init
 git submodule update
 ```
 
-### Setting Up The Build Environment
+## The Build Environment
+
+### Linux
+
+#### Debian Packages
+```
+sudo apt-get install qtcreator qt5-default devscripts zlib1g-dev 
+```
+
+Type `make deb` in the project root to build a Debian package.
 
 ```
-sudo apt-get install qtcreator qt5-default devscripts zlib1g-dev nsis
+make deb
 ```
 
-### Building
+#### Fedora Packages
 
-Type `make deb` to build a Debian package.
+*Not yet available.*
+
+#### Linux Tarball
+
+*Not yet available.*
+
+#### Build for 32-bit on a 64-bit platform
 
 ```
-$ make deb
+sudo apt-get install gcc-multilib libc6-i386 libc6-dev-i386
 ```
+
+### Windows
+
+#### Cross-Compiling From Linux
+
+*Not yet available.*
+
+The following dependencies are needed if you are planning to cross-compile to Windows.
+
+```
+sudo apt-get install mingw32 nsis
+```
+
+Type `make win` to execute the build.
+
+```
+make win
+```
+
+#### With Cygwin
+
+*Not yet available.*
+
+### Mac OS X
+
+*Not yet available.*
+
+#### Cross-Compiling From Linux
+
+*Not yet available.*
+
+#### Building On 
+
+
+## Clean Up
 
 Type `make clean` to remove old build files.
 
-<<<<<<< HEAD
 ```
 make clean
-=======
-
-```
-cd linux
-./pack.sh ../propelleride-[whatever version you're on]
->>>>>>> parent of 7a59612... Small README updates, added Provides entry to debian_control, add build_all target for makefile
 ```
