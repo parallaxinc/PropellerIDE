@@ -47,7 +47,9 @@ else
 	endif
 endif
 
-all:
+all: build_all
+
+help:
 	@echo "Usage:    make [TYPE]"
 	@echo
 	@echo "Enter package type to build. Options:"
@@ -55,6 +57,8 @@ all:
 	@echo "   deb    debian package"
 	@echo "   win    windows installer (not yet available)"
 	@echo "   mac    mac bundle        (not yet available)"
+	@echo
+	@echo "   no parameter builds only the binaries"
 
 
 build_all: build_ide build_openspin build_loader
