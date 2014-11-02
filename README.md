@@ -8,8 +8,7 @@ The new home of the Propeller IDE.
 ```
 git clone https://github.com/lamestation/PropellerIDE.git PropellerIDE
 cd PropellerIDE
-git submodule init
-git submodule update
+make checkout
 ```
 
 ## The Build Environment

@@ -97,3 +97,6 @@ deb: build_all copy_all
 		-i $(DIR_DEB)/control
 	dpkg-deb -b $(DIR_STAGING) propelleride-$(VERSION)-$(CPU).deb
 
+checkout:
+	git submodule init
+	git submodule update
