@@ -1,4 +1,4 @@
-PropellerIDE
+![the hat](gfx/propellerhat.png) PropellerIDE
 ============
 
 ![the interface](gfx/interface.png "The PropellerIDE interface")
@@ -6,6 +6,8 @@ PropellerIDE
 PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.
 
 Write Spin code, download programs to your Propeller board, and debug your applications with the built-in serial terminal.
+
+- [Download PropellerIDE](https://lamestation.atlassian.net/wiki/display/PI/Downloads)
 
 ### Features
 
