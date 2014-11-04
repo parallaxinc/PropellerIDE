@@ -1,7 +1,27 @@
 PropellerIDE
 ============
 
-The new home of the Propeller IDE.
+![the interface](gfx/interface.png "The PropellerIDE interface")
+
+PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.
+
+Write Spin code, download programs to your Propeller board, and debug your applications with the built-in serial terminal.
+
+### Features
+
+- Spin syntax highlighting, auto-complete, code suggestion, and auto-indent
+- Unicode editing support
+- Auto-detection of connected Propeller hardware
+- Collapsible sidebar with function and program views
+- Integrated serial terminal
+
+### Planned Features
+
+- Unified tree view showing hierarchy of objects and functinos
+- Integrated Spin and Assembly help manual
+- Plugin interface for extending the application
+
+PropellerIDE was created using C++ and Qt.
 
 ## Checkout
 
@@ -80,3 +100,9 @@ Type `make clean` to remove old build files.
 ```
 make clean
 ```
+
+## Credits
+
+Originally developed by Steve Denson, Dennis Gately, and Roy Eltham.
+
+**Related Projects**: [OpenSpin](https://github.com/parallaxinc/OpenSpin)
