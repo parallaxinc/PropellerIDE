@@ -560,8 +560,9 @@ void MainWindow::openFileName(QString fileName)
                 return;
             }
             newFile();
-            setEditor(editorTabs->count()-1, sname, fileName, data);
-            setEditorCodeType(getEditor(0), QString(in.codec()->name()));
+			int tab = editorTabs->count()-1;
+            setEditor(tab, sname, fileName, data);
+            setEditorCodeType(getEditor(tab), QString(in.codec()->name()));
             setProject();
         }
     }
@@ -591,7 +592,7 @@ bool MainWindow::saveAsCodec(QString fileName, Editor *ed)
         }
         else {
             os.setCodec("UTF-8");
-            os << data.toUtf8();
+            os << data;
         }
         file.close();
         QString tab = editorTabs->tabText(editorTabs->currentIndex());
