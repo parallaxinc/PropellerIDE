@@ -593,11 +593,10 @@ bool MainWindow::saveAsCodec(QString fileName, Editor *ed)
             os.setCodec("UTF-8");
             os << data.toUtf8();
         }
-\
         file.close();
         QString tab = editorTabs->tabText(editorTabs->currentIndex());
-        if(tab.endsWith("*")) {
-            tab = tab.mid(0,tab.length());
+        if(tab.endsWith('*')) {
+            tab = tab.mid(0, tab.length()-1);
             tab = tab.trimmed();
             editorTabs->setTabText(editorTabs->currentIndex(),tab);
         }
@@ -703,7 +702,7 @@ void MainWindow::fileChanged()
             return;
         }
     }
-    if(name.at(name.length()-1) != '*') {
+    if(!name.endsWith('*')) {
         name += tr(" *");
         editorTabs->setTabText(index, name);
     }
