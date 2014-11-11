@@ -1,4 +1,23 @@
-GNU GENERAL PUBLIC LICENSE
+PropellerIDE
+Copyright (c) 2014 Parallax, Inc.
+
+Developers:
+
+  Steve Denson
+  Roy Eltham
+  Dennis Gately
+
+Tested by the many good folks on forums.parallax.com .
+
+LICENSE and other information for works included in this package:
+
++---------------------------------------------------------------------
+
+PropellerIDE is licensed according to the GNU GENERAL PUBLIC LICENSE V3 (see license below).
+
++---------------------------------------------------------------------
+
+                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
@@ -631,8 +650,8 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    {one line to give the program's name and a brief idea of what it does.}
-    Copyright (C) {year}  {name of author}
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -652,7 +671,7 @@ Also add information on how to contact you by electronic and paper mail.
   If the program does terminal interaction, make it output a short
 notice like this when it starts in an interactive mode:
 
-    {project}  Copyright (C) {year}  {fullname}
+    <program>  Copyright (C) <year>  <name of author>
     This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
     This is free software, and you are welcome to redistribute it
     under certain conditions; type `show c' for details.
@@ -672,4 +691,46 @@ may consider it more useful to permit linking proprietary applications with
 the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.
+
++---------------------------------------------------------------------
+
+
++---------------------------------------------------------------------
+All PropellerIDE demo programs are MIT licensed unless otherwise stated.
+
++---------------------------------------------------------------------
+| Demos MIT License
++---------------------------------------------------------------------
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++---------------------------------------------------------------------
+| End of Demos MIT License Agreement.
++---------------------------------------------------------------------
+
++---------------------------------------------------------------------
+PropellerIDE repository: www.easyside.googlecode.com
+Repository includes PropellerIDE, icons, and spin sources.
+
+Propeller openspin repository: https://github.com/reltham/OpenSpin
+OpenSpin is MIT licensed.
+A single license file is not available, but the license can be seen in:
+  https://github.com/reltham/OpenSpin/blob/master/SpinSource/openspin.cpp
++---------------------------------------------------------------------
+
+PropellerIDE is built with qmake/make or Qt Creator under LGPL license 2.1 (file LGPL_2_1.txt).
+
+Qt libraries (Qt4 or Qt5) are used according to the LGPL license 2.1 and License Exception (file LGPL_EXCEPTION.txt).
++---------------------------------------------------------------------
+
+Many Toolbar Icons are from the www.aha-soft.com 24x24-freeapplication-icons pack.
+Icons are used according to the Creative Commons 3.0 license (file aha-soft-license.txt)
+Some Toolbar Icons were created by the very talented Jen Jacobs at Parallax.
+The PropellerIDE Icon was created by Steve Denson (me)
++---------------------------------------------------------------------
+
+Program "ctags" unmodified binary is used according to GPLv2 (file ctags-license.txt) Program information for ctags is in file ctags-readme.txt.
++---------------------------------------------------------------------
 
