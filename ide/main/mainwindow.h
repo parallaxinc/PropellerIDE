@@ -53,7 +53,7 @@
 #include "treemodel.h"
 #include "SpinModel.h"
 #include "PortListener.h"
-#include "qextserialport.h"
+#include "qext/qextserialport.h"
 #include "terminal.h"
 #include "properties.h"
 #include "console.h"
@@ -61,7 +61,7 @@
 #include "spinparser.h"
 #include "PortConnectionMonitor.h"
 #include "StatusDialog.h"
-#include "zipper.h"
+#include "spinzip/zipper.h"
 
 #define untitledstr "Untitled"
 
@@ -210,10 +210,6 @@ private:
     QString     spinCompilerPath;
     QString     spinIncludes;
     QString     spinLoader;
-    QString     xBasicCompiler;
-    QString     xBasicCompilerPath;
-    QString     xBasicIncludes;
-
     Highlighter *highlighter;
 
     QToolBar    *fileToolBar;

@@ -1,7 +1,6 @@
 #include "terminal.h"
 #include "console.h"
 #include "Sleeper.h"
-#include "graphwidget.h"
 
 // It's Spinning Windows world.
 #define SPIN_RETURN     0xA

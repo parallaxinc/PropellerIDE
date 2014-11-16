@@ -1,7 +1,6 @@
 
 #include "PortListener.h"
 #include <QtDebug>
-#include "graphwidget.h"
 
 #undef  PORTDEBUG
 //#define PORTDEBUG

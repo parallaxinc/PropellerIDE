@@ -3,7 +3,7 @@
 
 #include "qtversion.h"
 
-#include "qextserialport.h"
+#include "qext/qextserialport.h"
 
 class Console : public QPlainTextEdit
 {

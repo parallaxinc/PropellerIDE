@@ -7,7 +7,7 @@ class TermPrefs;
 #include "terminal.h"
 #include "console.h"
 #include "properties.h"
-#include "propertycolor.h"
+#include "colors.h"
 
 
 namespace Ui {
