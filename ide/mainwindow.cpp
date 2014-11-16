@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "StatusDialog.h"
 #include "qextserialenumerator.h"
-#include "Sleeper.h"
-#include "p1loader.h"
 
 #ifndef QT5
 #define QStringLiteral QLatin1String

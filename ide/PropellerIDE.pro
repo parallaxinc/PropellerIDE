@@ -64,13 +64,10 @@ SOURCES += main.cpp\
     editor.cpp \
     highlightSpin.cpp \
     spinparser.cpp \
-    highlightC.cpp \
     terminal2.cpp \
     termprefs.cpp \
     zipper.cpp \
     zip.cpp \
-    p1loader.cpp \
-    p1load.c \
     graphline.cpp \
     clock.cpp \
     graphwidget.cpp
@@ -93,7 +90,6 @@ HEADERS  += mainwindow.h \
     editor.h \
     highlightSpin.h \
     spinparser.h \
-    highlightC.h \
     propertycolor.h \
     Sleeper.h \
     terminal2.h \
@@ -104,9 +100,7 @@ HEADERS  += mainwindow.h \
     zipreader.h \
     zipwriter.h \
     qextserialport_p.h \
-    p1loader.h \
     osint.h \
-    p1load.h \
     graphline.h \
     clock.h \
     graphwidget.h \
