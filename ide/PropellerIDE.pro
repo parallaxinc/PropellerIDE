@@ -1,17 +1,3 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2011-07-31T06:21:35
-#
-#-------------------------------------------------
-
-#-------------------------------------------------
-#
-# TODO list
-#
-# - clean up mainwindow class ;-)
-#
-#-------------------------------------------------
-
 QT += core
 QT += gui
 
@@ -47,6 +33,7 @@ DEFINES += EXTERNAL_SPIN_LOADER
 
 SOURCES += main.cpp\
     mainwindow.cpp \
+    mainwindow/*.cpp \
     StatusDialog.cpp \
     highlighter.cpp \
     treemodel.cpp \
@@ -83,7 +70,7 @@ HEADERS  += mainwindow.h \
     editor.h \
     highlightSpin.h \
     spinparser.h \
-    propertycolor.h \
+    colors.h \
     Sleeper.h \
     terminal.h \
     console.h \
