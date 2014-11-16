@@ -4,7 +4,7 @@
 class TermPrefs;
 
 #include <QtGui>
-#include "terminal2.h"
+#include "terminal.h"
 #include "console.h"
 #include "properties.h"
 #include "propertycolor.h"
@@ -18,7 +18,7 @@ class TermPrefs : public QDialog
 {
     Q_OBJECT
 public:
-    TermPrefs(Terminal2 *term);
+    TermPrefs(Terminal *term);
     virtual ~TermPrefs();
     void addColors(QComboBox *box, QVector<PColor*> pcolor);
     void saveSettings();
@@ -41,7 +41,7 @@ public slots:
 
 private:
     Ui::TermPrefs  *ui;
-    Terminal2      *terminal;
+    Terminal       *terminal;
     Console        *serialConsole;
     QSettings      *settings;
     QStringList     settingNames;

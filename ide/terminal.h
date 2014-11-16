@@ -1,47 +1,63 @@
-#ifndef TERMINAL_H
-#define TERMINAL_H
+#ifndef TERMINAL2_H
+#define TERMINAL2_H
+
+class Terminal;
 
 #include "qtversion.h"
 
 #include "console.h"
 #include "PortListener.h"
+#include "termprefs.h"
 
 class Terminal : public QDialog
 {
     Q_OBJECT
 public:
     explicit Terminal(QWidget *parent);
-    Console *getEditor();
     void setPortListener(PortListener *listener);
     QString getPortName();
     void setPortName(QString name);
     void setPosition(int x, int y);
-    void print(QByteArray str);
     void accept();
     void reject();
 
-public slots:
-    void clearScreen();
-    void echoClicked();
+    BaudRateType getBaud();
+    int  getBaudRate();
+    bool setBaudRate(int baud);
+    void setEchoOn(bool echoOn);
+    void setPortLabelEnable(bool enable);
 
-#if 0
+signals:
+    void enablePortCombo();
+    void disablePortCombo();
+
+private:
+    void init();
+
+public slots:
     void baudRateChange(int index);
     void echoOnChange(bool value);
     void toggleEnable();
     void setPortEnabled(bool value);
     void clearScreen();
-    void showOptions();
-#endif
     void copyFromFile();
     void cutFromFile();
     void pasteToFile();
+    void showOptions();
+
+public:
+    Console *getEditor();
+private:
+    Console     *termEditor;
+    TermPrefs   *options;
+    QComboBox   *comboBoxBaud;
+    QCheckBox   *cbEchoOn;
+    QLabel      portLabel;
+    QTabWidget  *termTabs;
 
 private:
-    PortListener *portListener;
-
-    Console    *termEditor;
-    QLabel      portLabel;
-    QCheckBox   echoOnBox;
+    QPushButton     *buttonEnable;
+    PortListener    *portListener;
 };
 
-#endif // TERMINAL_H
+#endif // TERMINAL2_H

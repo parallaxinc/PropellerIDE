@@ -182,7 +182,7 @@ void MainWindow::init()
     initBoardTypes();
 
     /* setup the terminal dialog box */
-    term = new Terminal2(this);
+    term = new Terminal(this);
 
     QVariant gv = settings->value(termGeometryKey);
     if(gv.canConvert(QVariant::ByteArray)) {
