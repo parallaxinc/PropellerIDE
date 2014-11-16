@@ -10,7 +10,7 @@
 #include <QTimer>
 #include "console.h"
 #include "StatusDialog.h"
-#include "qextserialport.h"
+#include "qext/qextserialport.h"
 
 class PortListener : public QThread
 {

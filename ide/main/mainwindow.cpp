@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "StatusDialog.h"
-#include "qextserialenumerator.h"
+#include "qext/qextserialenumerator.h"
 
 #define AUTOPORT "AUTO"
 

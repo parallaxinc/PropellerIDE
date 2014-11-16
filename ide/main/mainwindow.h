@@ -53,7 +53,7 @@
 #include "treemodel.h"
 #include "SpinModel.h"
 #include "PortListener.h"
-#include "qextserialport.h"
+#include "qext/qextserialport.h"
 #include "terminal.h"
 #include "properties.h"
 #include "console.h"

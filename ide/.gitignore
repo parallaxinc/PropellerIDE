@@ -1,5 +1,6 @@
 moc_*.cpp
 *.o
+*.a
 qrc_resources.cpp
 ui_*.h
 *.pro.user
