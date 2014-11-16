@@ -13,8 +13,6 @@
 #define spinCompilerKey     PropellerIdeGuiKey "_SpinCompiler"
 #define spinIncludesKey     PropellerIdeGuiKey "_SpinIncludes"
 #define spinLoaderKey       PropellerIdeGuiKey "_SpinLoader"
-#define xBasicCompilerKey   PropellerIdeGuiKey "_xBasicCompiler"
-#define xBasicIncludesKey   PropellerIdeGuiKey "_xBasicIncludes"
 //#define separatorKey      PropellerIdeGuiKey "_PathSeparator"
 //#define configFileKey     PropellerIdeGuiKey "_ConfigFile"
 #define editorFontKey       PropellerIdeGuiKey "_EditorFont"
@@ -120,8 +118,6 @@ public slots:
     void showFontDialog();
     void spinBrowseCompiler();
     void spinBrowseIncludes();
-    void xBasicBrowseCompiler();
-    void xBasicBrowseIncludes();
     void spinBrowseLoader();
     void accept();
     void reject();
@@ -145,11 +141,6 @@ private:
     QLineEdit   *spinLeditIncludes;
     QString     spinCompilerStr;
     QString     spinIncludesStr;
-
-    QLineEdit   *xBasicLeditCompiler;
-    QLineEdit   *xBasicLeditIncludes;
-    QString     xBasicCompilerStr;
-    QString     xBasicIncludesStr;
 
     QLineEdit   *spinLoadLedit;
     QString     spinLoaderStr;

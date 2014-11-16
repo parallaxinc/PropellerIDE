@@ -657,15 +657,6 @@ void Properties::spinBrowseLoader()
 #endif
 }
 
-void Properties::xBasicBrowseCompiler()
-{
-}
-
-void Properties::xBasicBrowseIncludes()
-{
-}
-
-
 void Properties::accept()
 {
     QSettings settings(publisherKey, PropellerIdeGuiKey,this);

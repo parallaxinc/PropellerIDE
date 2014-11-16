@@ -210,10 +210,6 @@ private:
     QString     spinCompilerPath;
     QString     spinIncludes;
     QString     spinLoader;
-    QString     xBasicCompiler;
-    QString     xBasicCompilerPath;
-    QString     xBasicIncludes;
-
     Highlighter *highlighter;
 
     QToolBar    *fileToolBar;
