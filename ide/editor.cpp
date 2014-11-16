@@ -3,7 +3,6 @@
 
 /* C and Spin highlighters prove more languages can be added easily.
  */
-#include "highlightC.h"
 #include "highlightSpin.h"
 
 #include "mainwindow.h"
@@ -68,14 +67,8 @@ void Editor::setHighlights(QString filename)
         highlighter = 0;
     }
     if(filename.isEmpty() == false) {
-        if(filename.contains(".spin",Qt::CaseInsensitive)) {
-            highlighter = new SpinHighlighter(this->document(), propDialog);
-            isSpin = true;
-        }
-        else {
-            highlighter = new HighlightC(this->document(), propDialog);
-            isSpin = false;
-        }
+        highlighter = new SpinHighlighter(this->document(), propDialog);
+        isSpin = true;
     }
 }
 

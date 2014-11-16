@@ -25,21 +25,32 @@ Write Spin code, download programs to your Propeller board, and debug your appli
 
 PropellerIDE was created using C++ and Qt.
 
-## Checkout
+## Building
+
+Current PropellerIDE builds are manual, but the target is to build the application using an Amazon EC2 instance to make cross-platform support as easy as possible.
+
+The following instructions have been prepared using clean EC2 Ubuntu and Windows Server instances.
+
+### Building On Ubuntu
+
+Run an update to ensure your apt repositories are up-to-date.
+
+```
+sudo apt-get update
+```
+
+Install the required dependencies.
+
+```
+sudo apt-get install git make g++ qt4-default zlib1g-dev
+```
+
+Checkout the project.
 
 ```
 git clone https://github.com/lamestation/PropellerIDE.git PropellerIDE
 cd PropellerIDE
 make checkout
-```
-
-## The Build Environment
-
-### Linux
-
-#### Debian Packages
-```
-sudo apt-get install qtcreator qt5-default devscripts zlib1g-dev 
 ```
 
 Type `make deb` in the project root to build a Debian package.
@@ -48,21 +59,7 @@ Type `make deb` in the project root to build a Debian package.
 make deb
 ```
 
-#### Fedora Packages
-
-*Not yet available.*
-
-#### Linux Tarball
-
-*Not yet available.*
-
-#### Build for 32-bit on a 64-bit platform
-
-```
-sudo apt-get install gcc-multilib libc6-i386 libc6-dev-i386
-```
-
-### Windows
+### Building On Windows
 
 #### Cross-Compiling From Linux
 

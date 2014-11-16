@@ -3,7 +3,7 @@
 #include "ui_TermPrefs.h"
 #include "console.h"
 
-TermPrefs::TermPrefs(Terminal2 *term) : ui(new Ui::TermPrefs)
+TermPrefs::TermPrefs(Terminal *term) : ui(new Ui::TermPrefs)
 {
     ui->setupUi(this);
     serialConsole = term->getEditor();

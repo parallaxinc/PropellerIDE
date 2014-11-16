@@ -55,7 +55,6 @@
 #include "PortListener.h"
 #include "qextserialport.h"
 #include "terminal.h"
-#include "terminal2.h"
 #include "properties.h"
 #include "console.h"
 #include "editor.h"
@@ -279,7 +278,7 @@ private:
     QToolButton *btnConnected;
     Console     *termEditor;
     PortListener *portListener;
-    Terminal2   *term;
+    Terminal    *term;
     int         termXpos;
     int         termYpos;
 

@@ -27,7 +27,6 @@ TEMPLATE = app
 
 CONFIG  += exceptions
 
-DEFINES += QEXTSERIALPORT_LIB
 DEFINES += IDEVERSION=0
 DEFINES += MINVERSION=20
 
@@ -56,21 +55,17 @@ SOURCES += main.cpp\
     SpinBuilder.cpp \
     qextserialport.cpp \
     PortListener.cpp \
-    terminal.cpp \
     properties.cpp \
-    console.cpp \
     qextserialenumerator.cpp \
     PortConnectionMonitor.cpp \
     editor.cpp \
     highlightSpin.cpp \
     spinparser.cpp \
-    highlightC.cpp \
-    terminal2.cpp \
+    terminal.cpp \
+    console.cpp \
     termprefs.cpp \
     zipper.cpp \
     zip.cpp \
-    p1loader.cpp \
-    p1load.c \
     graphline.cpp \
     clock.cpp \
     graphwidget.cpp
@@ -85,18 +80,16 @@ HEADERS  += mainwindow.h \
     qextserialport.h \
     qextserialenumerator.h \
     PortListener.h \
-    terminal.h \
     properties.h \
-    console.h \
     PortConnectionMonitor.h \
     qextserialenumerator_p.h \
     editor.h \
     highlightSpin.h \
     spinparser.h \
-    highlightC.h \
     propertycolor.h \
     Sleeper.h \
-    terminal2.h \
+    terminal.h \
+    console.h \
     termprefs.h \
     zipper.h \
     zconf.h \
@@ -104,9 +97,6 @@ HEADERS  += mainwindow.h \
     zipreader.h \
     zipwriter.h \
     qextserialport_p.h \
-    p1loader.h \
-    osint.h \
-    p1load.h \
     graphline.h \
     clock.h \
     graphwidget.h \
@@ -121,7 +111,6 @@ RESOURCES += \
     resources.qrc
 
 unix {
-    SOURCES        += osint_linux.c
     SOURCES        += qextserialport_unix.cpp
     LIBS           += -lz
 }
@@ -135,7 +124,6 @@ win32 {
 
   HEADERS          += ioapi.h iowin32.h
   SOURCES          += enumcom.c
-  SOURCES          += osint_mingw.c
   SOURCES          += qextserialport_win.cpp
   SOURCES          += qextserialenumerator_win.cpp
   LIBS             += -lsetupapi

@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "StatusDialog.h"
 #include "qextserialenumerator.h"
-#include "Sleeper.h"
-#include "p1loader.h"
 
 #ifndef QT5
 #define QStringLiteral QLatin1String
@@ -184,7 +182,7 @@ void MainWindow::init()
     initBoardTypes();
 
     /* setup the terminal dialog box */
-    term = new Terminal2(this);
+    term = new Terminal(this);
 
     QVariant gv = settings->value(termGeometryKey);
     if(gv.canConvert(QVariant::ByteArray)) {
