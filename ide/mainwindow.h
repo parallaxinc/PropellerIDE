@@ -61,7 +61,7 @@
 #include "spinparser.h"
 #include "PortConnectionMonitor.h"
 #include "StatusDialog.h"
-#include "zipper.h"
+#include "spinzip/zipper.h"
 
 #define untitledstr "Untitled"
 

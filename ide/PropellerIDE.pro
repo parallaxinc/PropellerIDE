@@ -51,8 +51,7 @@ SOURCES += main.cpp\
     terminal.cpp \
     console.cpp \
     termprefs.cpp \
-    zipper.cpp \
-    zip.cpp \
+    spinzip/*.cpp 
 
 HEADERS  += mainwindow.h \
     StatusDialog.h \
@@ -75,13 +74,9 @@ HEADERS  += mainwindow.h \
     terminal.h \
     console.h \
     termprefs.h \
-    zipper.h \
-    zconf.h \
-    zlib.h \
-    zipreader.h \
-    zipwriter.h \
     qextserialport_p.h \
-    qtversion.h
+    qtversion.h \
+    spinzip/*.h
 
 OTHER_FILES +=
 
