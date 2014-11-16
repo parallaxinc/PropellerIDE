@@ -3,7 +3,7 @@
 
 #include "qtversion.h"
 
-#include "propertycolor.h"
+#include "colors.h"
 
 #define publisherKey        "MicroCSource"
 #define publisherComKey     "MicroCSource.com"
