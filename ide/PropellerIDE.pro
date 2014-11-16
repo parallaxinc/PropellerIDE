@@ -66,9 +66,6 @@ SOURCES += main.cpp\
     termprefs.cpp \
     zipper.cpp \
     zip.cpp \
-    graphline.cpp \
-    clock.cpp \
-    graphwidget.cpp
 
 HEADERS  += mainwindow.h \
     StatusDialog.h \
@@ -97,9 +94,6 @@ HEADERS  += mainwindow.h \
     zipreader.h \
     zipwriter.h \
     qextserialport_p.h \
-    graphline.h \
-    clock.h \
-    graphwidget.h \
     qtversion.h
 
 OTHER_FILES +=
@@ -120,10 +114,6 @@ macx {
   LIBS             += -framework IOKit -framework CoreFoundation
 }
 win32 {
-  RC_FILE          = myapp.rc
-
-  HEADERS          += ioapi.h iowin32.h
-  SOURCES          += enumcom.c
   SOURCES          += qextserialport_win.cpp
   SOURCES          += qextserialenumerator_win.cpp
   LIBS             += -lsetupapi

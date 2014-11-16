@@ -1,7 +1,4 @@
 #include "terminal.h"
-#include "clock.h"
-#include "graphwidget.h"
-#include "graphline.h"
 
 //#if defined(Q_WS_WIN32)
 #define TERM_ENABLE_BUTTON
@@ -30,26 +27,7 @@ void Terminal::init()
     termEditor->setFont(QFont("Parallax", 14, QFont::Bold));
     termEditor->setMaxRows(options->getMaxRows());
 
-#ifdef ENABLE_TERM_TABS
-    GraphLine *graphLine = new GraphLine(this);
-    connect(termEditor, SIGNAL(queueGraph(QString)), graphLine, SLOT(queueGraph(QString)));
-
-    Clock     *termClock = new Clock(this);
-
-    termTabs = new QTabWidget(this);
-    //termTabs->setStyleSheet("QWidget { background-color: #f0e0c0; }"); // better without it.
-    termTabs->setMovable(true);
-    termTabs->setTabsClosable(false);
-    termTabs->addTab(termEditor,tr(TabConsole));
-    termTabs->addTab(new GraphWidget(graphLine, graphLine->getTools(), this),tr(TabLineGraph));
-    termTabs->addTab(new GraphWidget(termClock, termClock->getTools(), this),tr(TabClock));
-    termEditor->setTabWidget(termTabs);
-    termLayout->addWidget(termTabs);
-
-    termTabs->setCurrentIndex(1);
-#else
     termLayout->addWidget(termEditor);
-#endif
 
     QPushButton *buttonClear = new QPushButton(tr("Clear"),this);
     connect(buttonClear,SIGNAL(clicked()), this, SLOT(clearScreen()));
