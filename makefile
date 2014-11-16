@@ -12,7 +12,7 @@ DIR_BIN			:=	$(DIR_STAGING)/usr/bin
 DIR_DEB			:=	$(DIR_STAGING)/DEBIAN
 
 
-VERSION			:=	$(shell echo `grep -r VERSION= $(DIR_IDE)/PropellerIDE.pro \
+VERSION			:=	$(shell echo `grep -r VERSION= $(DIR_IDE)/common.pri \
 					| cut -d'=' -f3 \
 					| sed -e 's/[\r]//g'` \
 					| sed -e 's/ /./g')
