@@ -82,7 +82,24 @@ public slots:
     QString saveAsFile(const QString &path = QString());
     void printFile();    // not implemented
     void zipFiles();
+
+
+    // edit
+    void undo();
+    void redo();
+
+
+    // view
+    void fontDialog();
+    void fontBigger();
+    void fontSmaller();
+
+    // help
+    void propellerManual();
+    void propellerDatasheet();
     void about();
+    void aboutQt();
+
     void findMultilineComment(QPoint point);
     void findMultilineComment(QTextCursor cur);
     void projectTreeClicked(QModelIndex index);
@@ -93,9 +110,6 @@ public slots:
     void connectButton(bool show = true);
     void terminalClosed();
     void setProject();
-    void fontDialog();
-    void fontBigger();
-    void fontSmaller();
     void hardware();
     void preferences();
     void preferencesAccepted();
@@ -135,8 +149,13 @@ private:
     void checkAndSaveFiles();
     Editor *createEditor();
     void clearTabHighlight();
+
     void setupFileMenu();
+    void setupEditMenu();
+    void setupViewMenu();
+    void setupProjectMenu();
     void setupHelpMenu();
+
     void setupToolBars();
     void setupProjectTools(QSplitter *vsplit);
     void addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile);

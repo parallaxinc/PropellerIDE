@@ -2,7 +2,6 @@
 
 #include <QMessageBox> 
 #include <QStatusBar> 
-#include <QMenuBar> 
 #include <QToolBar> 
 #include <QFileDialog> 
 #include <QMenu> 
@@ -123,7 +122,11 @@ void MainWindow::init()
 
     /* setup gui components */
     setupFileMenu();
+    setupEditMenu();
+    setupViewMenu();
+    setupProjectMenu();
     setupHelpMenu();
+
     setupToolBars();
 
     /* main container */
@@ -1354,26 +1357,6 @@ void MainWindow::terminalClosed()
     connectButton(false);
 }
 
-void MainWindow::setupHelpMenu()
-{
-    QMenu *helpMenu = new QMenu(tr("&Help"), this);
-    menuBar()->addMenu(helpMenu);
-
-    helpMenu->addAction(QIcon(":/icons/helphint.png"), tr("&About"), this, SLOT(about()));
-}
-
-void MainWindow::about()
-{
-    QString version = QString(programName + " Version %1.%2")
-            .arg(IDEVERSION).arg(MINVERSION);
-    QMessageBox::about(this, tr("About") + " " +
-            programName, version + "<br/>" +
-            "Copyright (c) 2014 by Parallax, Inc.<br/><br/>"
-            "Written for Parallax out of kindness<br/>"
-            "by Steve Denson, Dennis Gately, and Roy Eltham.<br/><br/>"
-            "Repository: https://code.google.com/p/easyside/<br/>"
-            "OpenSpin repository: https://github.com/reltham/OpenSpin<br/>");
-}
 
 void MainWindow::findMultilineComment(QPoint point)
 {
@@ -1925,94 +1908,6 @@ void MainWindow::tabSpacesChanged()
         ed->setTabStopWidth(spaces*width);
     }
 }
-
-void MainWindow::setupFileMenu()
-{
-    QMenu *fileMenu = new QMenu(tr("&File"), this);
-    menuBar()->addMenu(fileMenu);
-
-    fileMenu->addAction(QIcon(":/icons/newfile.png"), tr("&New"), this, SLOT(newFileAction()), QKeySequence::New);
-    fileMenu->addAction(QIcon(":/icons/openfile.png"), tr("&Open"), this, SLOT(openFile()), QKeySequence::Open);
-    fileMenu->addAction(QIcon(":/icons/savefile.png"), tr("&Save"), this, SLOT(saveFile()), QKeySequence::Save);
-    fileMenu->addAction(QIcon(":/icons/saveasfile.png"), tr("Save &As"), this, SLOT(saveAsFile()), QKeySequence::SaveAs);
-    fileMenu->addSeparator();
-
-    // fileMenu->addAction(QIcon(":/icons/print.png"), tr("Print"), this, SLOT(printFile()), QKeySequence::Print);
-
-
-    // Enable zipFiles after zipper works.
-    fileMenu->addAction(QIcon(":/icons/zip.png"), tr("Zip Project"), this, SLOT(zipFiles()), 0);
-
-    fileMenu->addAction(QIcon(":/icons/preferences.png"), tr("Preferences"), this, SLOT(preferences()), Qt::Key_F5);
-
-    // recent file actions
-    separatorFileAct = fileMenu->addSeparator();
-
-    for (int i = 0; i < MaxRecentFiles; ++i) {
-        recentFileActs[i] = new QAction(this);
-        recentFileActs[i]->setVisible(false);
-        connect(recentFileActs[i], SIGNAL(triggered()),this, SLOT(openRecentFile()));
-    }
-
-    for (int i = 0; i < MaxRecentFiles; ++i)
-        fileMenu->addAction(recentFileActs[i]);
-
-    updateRecentFileActions();
-
-
-
-
-    fileMenu->addSeparator();
-
-    fileMenu->addAction(QIcon(":/icons/exit.png"), tr("E&xit"), this, SLOT(quitProgram()), QKeySequence::Quit);
-
-    QMenu * editMenu = new QMenu(tr("&Edit"), this);
-    menuBar()->addMenu(editMenu);
-    editMenu->addAction(QIcon(":/icons/find.png"), tr("Find"), this, SLOT(showFindFrame()), QKeySequence::Find);
-    editMenu->addAction(QIcon(":/icons/findNextIcon.png"), tr("Find Next"), this, SLOT(findNextClicked()), QKeySequence::FindNext);
-    editMenu->addAction(QIcon(":/icons/findPreviousIcon.png"), tr("Find Previous"), this, SLOT(findPrevClicked()), QKeySequence::FindPrevious);
-
-#ifdef Q_OS_MAC
-    editMenu->addAction(QIcon(":/icons/FontTT.png"), tr("Font"), this, SLOT(fontDialog()), QKeySequence(tr("Ctrl+T")));
-#else
-    editMenu->addAction(QIcon(":/icons/FontTT.png"), tr("Font"), this, SLOT(fontDialog()));
-#endif
-
-    editMenu->addAction(QIcon(":/icons/fontsmaller.png"), tr("Smaller Font"), this, SLOT(fontSmaller()), QKeySequence::ZoomOut);
-
-    /* special provision for bigger fonts to use default ZoomIn or Ctrl+= */
-    QAction *bigger = new QAction(QIcon(":/icons/fontbigger.png"), tr("Bigger Font"), this);
-    QList<QKeySequence> biggerKeys;
-    biggerKeys.append(QKeySequence::ZoomIn);
-    biggerKeys.append(QKeySequence(Qt::CTRL+Qt::Key_Equal));
-    bigger->setShortcuts(biggerKeys);
-    connect(bigger,SIGNAL(triggered()),this,SLOT(fontBigger()));
-
-    /* insert action before smaller font action */
-    QList<QAction*> alist = editMenu->actions();
-    QAction *last = alist.last();
-    editMenu->insertAction(last,bigger);
-
-
-    QMenu * viewMenu = new QMenu(tr("&View"), this);
-    menuBar()->addMenu(viewMenu);
-
-    viewMenu->addAction(QIcon(":/icons/blks.png"), tr("&Show Browser"), this, SLOT(showBrowser()), Qt::CTRL+Qt::Key_B);
-
-
-    QMenu *debugMenu = new QMenu(tr("&Debug"), this);
-    menuBar()->addMenu(debugMenu);
-
-    debugMenu->addAction(QIcon(":/icons/PropHatAlpha.png"), tr("Identify Hardware"), this, SLOT(findHardware()), Qt::Key_F7);
-    debugMenu->addAction(QIcon(":/icons/debug2.png"), tr("Debug"), this, SLOT(programDebug()), Qt::Key_F8);
-    debugMenu->addAction(QIcon(":/icons/build2.png"), tr("Build"), this, SLOT(programBuild()), Qt::Key_F9);
-    debugMenu->addAction(QIcon(":/icons/run.png"), tr("Run"), this, SLOT(programRun()), Qt::Key_F10);
-    debugMenu->addAction(QIcon(":/icons/burnee.png"), tr("Burn"), this, SLOT(programBurnEE()), Qt::Key_F11);
-#if defined(IDEDEBUG)
-    debugMenu->addAction(QIcon(":/icons/Eye.png"), tr("IDE Debug Console"), this, SLOT(ideDebugConsole()));
-#endif
-}
-
 void MainWindow::ideDebugConsole()
 {
 #if defined(IDEDEBUG)
