@@ -15,9 +15,6 @@ SpinHighlighter::SpinHighlighter(QTextDocument *parent, Preferences *prop)
     highlight();
 }
 
-/*
- * this is mostly experimental. not sure if it can be used yet.
- */
 void SpinHighlighter::highlight()
 {
     this->parent();

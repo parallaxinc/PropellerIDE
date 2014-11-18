@@ -13,7 +13,7 @@
 
 
 #include "highlighter.h"
-#include "spinparser.h"
+#include "SpinParser.h"
 
 class LineNumberArea;
 

@@ -14,15 +14,15 @@
 
 #include "highlighter.h"
 #include "SpinBuilder.h"
-#include "treemodel.h"
+#include "SpinParser.h"
 #include "SpinModel.h"
+
 #include "PortListener.h"
 #include "qext/qextserialport.h"
 #include "terminal.h"
 #include "Preferences.h"
 #include "console.h"
 #include "editor.h"
-#include "spinparser.h"
 #include "PortConnectionMonitor.h"
 #include "StatusDialog.h"
 #include "spinzip/zipper.h"

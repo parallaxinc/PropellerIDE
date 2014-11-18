@@ -22,7 +22,7 @@ SOURCES += main.cpp\
     PortConnectionMonitor.cpp \
     editor.cpp \
     highlightSpin.cpp \
-    spinparser.cpp \
+    SpinParser.cpp \
     terminal.cpp \
     console.cpp \
     termprefs.cpp
@@ -39,7 +39,7 @@ HEADERS  += mainwindow.h \
     PortConnectionMonitor.h \
     editor.h \
     highlightSpin.h \
-    spinparser.h \
+    SpinParser.h \
     colors.h \
     Sleeper.h \
     terminal.h \

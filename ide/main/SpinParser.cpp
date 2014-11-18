@@ -1,4 +1,4 @@
-#include "spinparser.h"
+#include "SpinParser.h"
 
 #define KEY_ELEMENT_SEP ":"
 
