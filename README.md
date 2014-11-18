@@ -42,7 +42,7 @@ sudo apt-get update
 Install the required dependencies.
 
 ```
-sudo apt-get install git make g++ qt4-default zlib1g-dev
+sudo apt-get install git make g++ qt5-default zlib1g-dev
 ```
 
 Checkout the project.
@@ -61,6 +61,8 @@ make deb
 
 ### Building On Windows
 
+The easiest way to build the binaries on Windows is using QtCreator
+
 #### Cross-Compiling From Linux
 
 *Not yet available.*
@@ -77,15 +79,7 @@ Type `make win` to execute the build.
 make win
 ```
 
-#### With Cygwin
-
-*Not yet available.*
-
 ### Mac OS X
-
-*Not yet available.*
-
-#### Cross-Compiling From Linux
 
 *Not yet available.*
 
