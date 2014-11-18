@@ -58,7 +58,7 @@
 #include <QFont>
 #include <Qt>
 
-#include "preferences.h"
+#include "Preferences.h"
 
 QT_BEGIN_NAMESPACE
 class QTextDocument;

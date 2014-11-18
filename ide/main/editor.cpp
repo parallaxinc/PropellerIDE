@@ -1,5 +1,5 @@
 #include "editor.h"
-#include "preferences.h"
+#include "Preferences.h"
 
 #include <QToolTip>
 #include <QRect>

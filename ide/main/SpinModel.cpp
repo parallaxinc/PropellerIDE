@@ -5,7 +5,7 @@
 #include <QtWidgets>
 
 #include "treemodel.h"
-#include "preferences.h"
+#include "Preferences.h"
 #include "SpinModel.h"
 
 SpinModel::SpinModel(const QString name, QObject *parent) : TreeModel(name, parent)

@@ -53,7 +53,7 @@
 #include <QHash>
 #include <QTextCharFormat>
 
-#include "preferences.h"
+#include "Preferences.h"
 
 QT_BEGIN_NAMESPACE
 class QTextDocument;

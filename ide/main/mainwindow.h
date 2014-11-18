@@ -19,7 +19,7 @@
 #include "PortListener.h"
 #include "qext/qextserialport.h"
 #include "terminal.h"
-#include "preferences.h"
+#include "Preferences.h"
 #include "console.h"
 #include "editor.h"
 #include "spinparser.h"

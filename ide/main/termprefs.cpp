@@ -1,5 +1,5 @@
 #include "termprefs.h"
-#include "preferences.h"
+#include "Preferences.h"
 #include "ui_TermPrefs.h"
 #include "console.h"
 

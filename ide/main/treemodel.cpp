@@ -57,7 +57,7 @@
 
 #include "treeitem.h"
 #include "treemodel.h"
-#include "preferences.h"
+#include "Preferences.h"
 
 //! [0]
 TreeModel::TreeModel(const QString &shortFileName, QObject *parent)
