@@ -1,7 +1,10 @@
 #ifndef PORTCONNECTIONMONITOR_H
 #define PORTCONNECTIONMONITOR_H
 
-#include <QtCore>
+#include <QThread>
+#include <QObject>
+#include <QString>
+#include <QStringList>
 
 class PortConnectionMonitor : public QThread
 {

@@ -1,5 +1,3 @@
-#include "qtversion.h"
-
 #include "spinparser.h"
 
 #define KEY_ELEMENT_SEP ":"

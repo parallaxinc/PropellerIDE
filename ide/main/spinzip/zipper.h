@@ -1,7 +1,9 @@
 #ifndef ZIPPER_H
 #define ZIPPER_H
 
-#include "qtversion.h"
+#include <QObject>
+#include <QString>
+#include <QStringList>
 
 #include "StatusDialog.h"
 

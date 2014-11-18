@@ -1,7 +1,5 @@
-#ifndef PROPERTYCOLORS_H
-#define PROPERTYCOLORS_H
-
-#include "qtversion.h"
+#ifndef COLORS_H
+#define COLORS_H
 
 class PColor : public QColor
 {
@@ -39,4 +37,4 @@ public:
 
 };
 
-#endif // PROPERTYCOLORS_H
+#endif // COLORS_H

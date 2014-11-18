@@ -45,9 +45,10 @@
 **
 ****************************************************************************/
 
-#include "qtversion.h"
-
 #include "highlighter.h"
+
+#include <QSettings>
+#include <QVariant>
 
 //! [0]
 Highlighter::Highlighter(QTextDocument *parent, Preferences *prop)

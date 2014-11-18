@@ -1,6 +1,12 @@
-#include "qtversion.h"
+#include <Qt>
+#include <QApplication>
+#include <QMessageBox>
+#include <QDir>
+#include <QByteArray>
+#include <QDebug>
 
 #include "SpinBuilder.h"
+
 #include "Sleeper.h"
 
 SpinBuilder::SpinBuilder() : EzBuilder(0)

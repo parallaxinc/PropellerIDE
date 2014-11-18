@@ -2,7 +2,10 @@
   This class extends Highlighter
 *****************************************************************************/
 
-#include "qtversion.h"
+#include <Qt> // Qt namespace
+#include <QRegExp>
+#include <QString>
+#include <QStringList>
 
 #include "highlightSpin.h"
 

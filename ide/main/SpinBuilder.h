@@ -1,8 +1,10 @@
 #ifndef SPINBUILDER_H
 #define SPINBUILDER_H
 
-#include <QtCore>
 #include "EzBuilder.h"
+
+#include <QStringList>
+#include <QProcess>
 
 class SpinBuilder : public EzBuilder
 {

@@ -3,7 +3,14 @@
 
 class Terminal;
 
-#include "qtversion.h"
+#include <QDialog>
+#include <QWidget>
+#include <QString>
+
+#include <QComboBox>
+#include <QCheckBox>
+#include <QLabel>
+#include <QTabWidget>
 
 #include "console.h"
 #include "PortListener.h"
@@ -53,7 +60,6 @@ private:
     QComboBox   *comboBoxBaud;
     QCheckBox   *cbEchoOn;
     QLabel      portLabel;
-    QTabWidget  *termTabs;
 
 private:
     QPushButton     *buttonEnable;

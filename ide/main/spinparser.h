@@ -1,7 +1,15 @@
 #ifndef SPINPARSER_H
 #define SPINPARSER_H
 
-#include <QtCore>
+#include <QString>
+#include <QStringList>
+#include <QFile>
+#include <QList>
+#include <QMap>
+#include <QRegExp>
+#include <QDir>
+#include <QDebug>
+#include <QTextStream>
 
 class SpinParser
 {

@@ -1,10 +1,13 @@
 #ifndef EZBUILDER_H
 #define EZBUILDER_H
 
-#include "qtversion.h"
-
 #include <QObject>
-#include <QtCore>
+#include <QString>
+#include <QLabel>
+#include <QComboBox>
+#include <QProgressBar>
+#include <QProcess>
+#include <QMutex>
 
 class EzBuilder : public QObject
 {

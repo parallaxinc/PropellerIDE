@@ -1,7 +1,14 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
-#include "qtversion.h"
+#include <QWidget>
+#include <QTabWidget>
+#include <QPlainTextEdit>
+#include <QString>
+#include <QKeyEvent>
+#include <QResizeEvent>
+#include <QByteArray>
+
 
 #include "qext/qextserialport.h"
 
@@ -44,8 +51,6 @@ public:
     void setMaxRows(int rows);
 
     void setTabWidget(QTabWidget *tabs);
-    bool graphMode();
-    void graph(QString s);
 
 public:
 
@@ -146,7 +151,6 @@ protected:
 
 signals:
     void sendSerial(QByteArray bytes);
-    void queueGraph(QString value);
 
 public slots:
     void updateReady(QextSerialPort*);

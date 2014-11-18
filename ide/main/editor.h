@@ -1,7 +1,16 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
-#include "qtversion.h"
+#include <QWidget>
+#include <QTabWidget>
+#include <QPlainTextEdit>
+#include <QString>
+#include <QKeyEvent>
+#include <QResizeEvent>
+#include <QPaintEvent>
+#include <QByteArray>
+#include <QTextCursor>
+
 
 #include "highlighter.h"
 #include "spinparser.h"
@@ -49,7 +58,7 @@ private:
     bool isNotAutoComplete();
     QString selectAutoComplete();
     QString deletePrefix(QString s);
-    void spinSuggest(int key);
+    void spinSuggest();
     void selectSpinSuggestion(int key);
     void useSpinSuggestion(int key);
     QPoint keyPopPoint(QTextCursor cursor);

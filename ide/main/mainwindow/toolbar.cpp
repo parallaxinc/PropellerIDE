@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 
+#include <QToolBar> 
+
 void MainWindow::setupToolBars()
 {
     fileToolBar = addToolBar(tr("File"));
@@ -38,7 +40,7 @@ void MainWindow::setupToolBars()
     QToolButton *btnFileZip = new QToolButton(this);
     addToolButton(propToolBar, btnFileZip, QString(":/images/zip.png"));
     connect(btnFileZip,SIGNAL(clicked()),this,SLOT(zipFiles()));
-    btnFileZip->setToolTip(tr("Zip"));
+    btnFileZip->setToolTip(tr("Zip Project"));
 #endif
 
     //propToolBar = addToolBar(tr("Preferences"));

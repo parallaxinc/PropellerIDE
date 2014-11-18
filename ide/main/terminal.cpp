@@ -1,5 +1,17 @@
 #include "terminal.h"
 
+#include <QApplication>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QFrame>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QSettings>
+#include <QVariant>
+#include <QAction>
+#include <QFont>
+
+
 //#if defined(Q_WS_WIN32)
 #define TERM_ENABLE_BUTTON
 //#endif

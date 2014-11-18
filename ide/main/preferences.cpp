@@ -1,5 +1,22 @@
 #include "preferences.h"
 
+#include <QApplication>
+#include <QDialog>
+#include <QFileInfo>
+#include <QFileDialog>
+#include <QDialogButtonBox>
+#include <QFrame>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QSettings>
+#include <QVariant>
+#include <QDateTime>
+#include <QStringList>
+#include <QFormLayout>
+#include <QGroupBox>
+#include <QLabel>
+#include <QDebug>
+
 Preferences::Preferences(QWidget *parent) : QDialog(parent)
 {
     setWindowTitle(QString(PropellerIdeGuiKey)+tr(" Preferences"));

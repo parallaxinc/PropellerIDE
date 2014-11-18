@@ -1,4 +1,13 @@
 #include "mainwindow.h"
+
+#include <QMessageBox> 
+#include <QStatusBar> 
+#include <QMenuBar> 
+#include <QToolBar> 
+#include <QFileDialog> 
+#include <QMenu> 
+
+
 #include "StatusDialog.h"
 #include "qext/qextserialenumerator.h"
 
@@ -292,46 +301,6 @@ void MainWindow::openLastFile()
     /** ******************************************************************
      *                  MainWindow::MainWindow all done.
      * ******************************************************************/
-}
-
-void MainWindow::keyHandler(QKeyEvent* event)
-{
-#if 0
-    //qDebug() << "MainWindow::keyHandler";
-    int key = event->key();
-    term->print(QByteArray(event->text().toLatin1()));
-    switch(key)
-    {
-#if defined(Q_OS_WIN32)
-    // stupid windows
-    case Qt::Key_Enter:
-        key = '\r';
-        break;
-    case Qt::Key_Return:
-        key = '\n';
-        break;
-#else
-    case Qt::Key_Enter:
-        key = '\n';
-        break;
-    case Qt::Key_Return:
-        key = '\r';
-        break;
-#endif
-    case Qt::Key_Backspace:
-        key = '\b';
-        break;
-    default:
-        if(key & Qt::Key_Escape)
-            return;
-        QChar c = event->text().at(0);
-        key = (int)c.toLatin1();
-        break;
-    }
-    QByteArray barry;
-    barry.append((char)key);
-    portListener->send(barry);
-#endif
 }
 
 void MainWindow::terminalEditorTextChanged()

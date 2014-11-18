@@ -1,6 +1,8 @@
-#include "qtversion.h"
-
 #include "PortConnectionMonitor.h"
+
+#include <QApplication>
+#include <QList>
+
 #include "qext/qextserialenumerator.h"
 
 PortConnectionMonitor::PortConnectionMonitor(QObject *parent) :

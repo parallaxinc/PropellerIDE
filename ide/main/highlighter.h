@@ -52,6 +52,11 @@
 
 #include <QHash>
 #include <QTextCharFormat>
+#include <QString>
+#include <QRegExp>
+#include <QVector>
+#include <QFont>
+#include <Qt>
 
 #include "preferences.h"
 

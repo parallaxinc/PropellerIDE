@@ -45,7 +45,15 @@
     models.
 */
 
-#include "qtversion.h"
+#include <QApplication>
+#include <QLabel>
+#include <QObject>
+#include <QAbstractItemModel>
+#include <QVariant>
+#include <QList>
+#include <QString>
+#include <QStringList>
+#include <QModelIndex>
 
 #include "treeitem.h"
 #include "treemodel.h"

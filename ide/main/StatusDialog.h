@@ -1,9 +1,12 @@
 #ifndef STATUSDIALOG_H
 #define STATUSDIALOG_H
 
-#include "qtversion.h"
-
+#include <QApplication>
+#include <QDialog>
+#include <QThread>
 #include <QTimer>
+#include <QLabel>
+#include <QVBoxLayout>
 
 class StatusDialogThread : public QThread
 {

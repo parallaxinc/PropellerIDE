@@ -199,9 +199,6 @@ void PortListener::onReadyRead(QByteArray arr)
         return;
     }
 
-    if(textEditor->graphMode()) {
-        textEditor->graph(QString(arr));
-    }
     else {
         if(textEditor->getHexMode()) {
             for(int n = 0; n < size; n++) {

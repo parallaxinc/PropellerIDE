@@ -1,10 +1,13 @@
 #include "zipper.h"
 
-#include "qtversion.h"
-
-#include <QtCore>
 #include "zipreader.h"
 #include "zipwriter.h"
+
+#include <QFile>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QDir>
+#include <QDebug>
 
 Zipper::Zipper(QObject *parent) :
     QObject(parent)

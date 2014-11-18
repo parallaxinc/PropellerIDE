@@ -1,12 +1,22 @@
-#ifndef PROPERTIES_H
-#define PROPERTIES_H
+#ifndef PREFERENCES_H
+#define PREFERENCES_H
 
-#include "qtversion.h"
+#include <Qt>
+#include <QWidget>
+#include <QString>
+#include <QLineEdit>
+#include <QTabWidget>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QPushButton>
+#include <QFontDialog>
+#include <QVector>
+#include <QToolButton>
 
 #include "colors.h"
 
-#define publisherKey        "MicroCSource"
-#define publisherComKey     "MicroCSource.com"
+#define publisherKey        "Parallax"
+#define publisherComKey     "parallax.com"
 #define PropellerIdeGuiKey  "PropellerIDE"
 
 #define useKeys             PropellerIdeGuiKey "_UseKeys"
@@ -208,4 +218,4 @@ private:
     QVector<PColor*> propertyColors;
 };
 
-#endif // PROPERTIES_H
+#endif // PREFERENCES_H 

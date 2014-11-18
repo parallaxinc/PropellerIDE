@@ -46,7 +46,6 @@ HEADERS  += mainwindow.h \
     terminal.h \
     console.h \
     termprefs.h \
-    qtversion.h \
     spinzip/*.h
 
 OTHER_FILES +=

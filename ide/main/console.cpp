@@ -315,25 +315,6 @@ void Console::setMaxRows(int rows)
      maxrow = rows;
 }
 
-void Console::setTabWidget(QTabWidget *tabs)
-{
-#ifdef ENABLE_TERM_TABS
-    tabWidget = tabs;
-#endif
-}
-
-bool Console::graphMode()
-{
-#ifdef ENABLE_TERM_TABS
-    if(tabWidget) {
-        if(tabWidget->currentIndex() > -1) {
-            return tabWidget->tabText(tabWidget->currentIndex()).compare(TabConsole) != 0;
-        }
-    }
-#endif
-    return false;
-}
-
 #ifdef EVENT_DRIVEN
 enum { BUFFERSIZE = 2048 };
 #else
@@ -375,11 +356,6 @@ void Console::updateReady(QextSerialPort* port)
             update(buf[n]);
 #endif
     }
-}
-
-void Console::graph(QString s)
-{
-    emit queueGraph(s);
 }
 
 void Console::dumphex(int ch)

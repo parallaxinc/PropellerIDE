@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 
+#include <QMessageBox> 
+
 #ifndef QT5
 #define QStringLiteral QLatin1String
 #endif

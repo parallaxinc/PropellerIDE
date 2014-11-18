@@ -2,7 +2,6 @@ QT += core
 QT += gui
 
 greaterThan(QT_MAJOR_VERSION, 4): {
-    QT -= gui
     QT += widgets
     QT += printsupport
     DEFINES += QT5
@@ -13,6 +12,7 @@ INCLUDEPATH += . ..
 UI_DIR = tmp
 MOC_DIR = tmp
 OBJECTS_DIR = tmp
+RCC_DIR = tmp
 
 CONFIG  += exceptions
 

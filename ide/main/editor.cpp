@@ -1,6 +1,12 @@
 #include "editor.h"
 #include "preferences.h"
 
+#include <QToolTip>
+#include <QRect>
+#include <QColor>
+#include <QPainter>
+#include <QApplication>
+
 /* C and Spin highlighters prove more languages can be added easily.
  */
 #include "highlightSpin.h"
@@ -204,12 +210,12 @@ void Editor::keyPressEvent (QKeyEvent *e)
         }
 
         if(propDialog->getSpinSuggestEnable()) {
-            spinSuggest(key);
+            spinSuggest();
         }
     }
 }
 
-void Editor::spinSuggest(int key)
+void Editor::spinSuggest()
 {
     QTextCursor cur = textCursor();
     int oldpos = cur.position();

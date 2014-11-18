@@ -1,13 +1,13 @@
-
-
-
 #ifndef PORTLISTENER_H_
 #define PORTLISTENER_H_
 
-#include "qtversion.h"
-
+#include <QObject>
 #include <QThread>
 #include <QTimer>
+#include <QString>
+#include <QMutex>
+#include <QByteArray>
+
 #include "console.h"
 #include "StatusDialog.h"
 #include "qext/qextserialport.h"
