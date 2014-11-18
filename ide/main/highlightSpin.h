@@ -53,7 +53,7 @@
 #include <QHash>
 #include <QTextCharFormat>
 
-#include "properties.h"
+#include "preferences.h"
 
 QT_BEGIN_NAMESPACE
 class QTextDocument;
@@ -64,7 +64,7 @@ class SpinHighlighter : public Highlighter
     Q_OBJECT
 
 public:
-    SpinHighlighter(QTextDocument *parent, Properties *prop);
+    SpinHighlighter(QTextDocument *parent, Preferences *prop);
     void highlight();
 
 };

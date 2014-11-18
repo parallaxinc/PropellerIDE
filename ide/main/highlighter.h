@@ -53,7 +53,7 @@
 #include <QHash>
 #include <QTextCharFormat>
 
-#include "properties.h"
+#include "preferences.h"
 
 QT_BEGIN_NAMESPACE
 class QTextDocument;
@@ -64,13 +64,13 @@ class Highlighter : public QSyntaxHighlighter
     Q_OBJECT
 
 public:
-    Highlighter(QTextDocument *parent, Properties *prop);
+    Highlighter(QTextDocument *parent, Preferences *prop);
 
     bool getStyle(QString key,  bool *italic);
     bool getWeight(QString key, QFont::Weight *weight);
     bool getColor(QString key,  Qt::GlobalColor *color);
 
-    void getProperties();
+    void getPreferences();
 
     virtual void highlight();
 
@@ -96,7 +96,7 @@ protected:
     QTextCharFormat functionFormat;
     QTextCharFormat numberFormat;
 
-    Properties      *properties;
+    Preferences      *preferences;
 
     bool            hlNumStyle;
     QFont::Weight   hlNumWeight;

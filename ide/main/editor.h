@@ -76,7 +76,7 @@ private:
 
     bool expectAutoComplete;
 
-    Properties *propDialog;
+    Preferences *propDialog;
 
 private slots:
     void cbAutoSelected(int index);

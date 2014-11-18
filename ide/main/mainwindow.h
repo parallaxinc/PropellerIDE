@@ -55,7 +55,7 @@
 #include "PortListener.h"
 #include "qext/qextserialport.h"
 #include "terminal.h"
-#include "properties.h"
+#include "preferences.h"
 #include "console.h"
 #include "editor.h"
 #include "spinparser.h"
@@ -79,7 +79,7 @@ public:
     void init();
 
     QString     programName;
-    Properties  *propDialog;
+    Preferences  *propDialog;
     QSplitter   *leftSplit;
     QSplitter   *rightSplit;
 
@@ -138,8 +138,8 @@ public slots:
     void fontBigger();
     void fontSmaller();
     void hardware();
-    void properties();
-    void propertiesAccepted();
+    void preferences();
+    void preferencesAccepted();
     void programBuild();
     void programBurnEE();
     void programRun();

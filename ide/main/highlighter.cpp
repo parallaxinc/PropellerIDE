@@ -50,10 +50,10 @@
 #include "highlighter.h"
 
 //! [0]
-Highlighter::Highlighter(QTextDocument *parent, Properties *prop)
+Highlighter::Highlighter(QTextDocument *parent, Preferences *prop)
     : QSyntaxHighlighter(parent)
 {
-    properties = prop;
+    preferences = prop;
     highlight();
 }
 
@@ -91,13 +91,13 @@ bool Highlighter::getColor(QString key, Qt::GlobalColor *color)
     if(var.canConvert(QVariant::Int)) {
         QString s = var.toString();
         int n = var.toInt();
-        *color = (Qt::GlobalColor) properties->getQtColor(n);
+        *color = (Qt::GlobalColor) preferences->getQtColor(n);
         return true;
     }
     return false;
 }
 
-void Highlighter::getProperties()
+void Highlighter::getPreferences()
 {
     bool   style;
     QFont::Weight   weight;

@@ -93,12 +93,12 @@
 #define enableAutoComplete          PropellerIdeGuiKey "_enableAutoComplete"
 #define enableSpinSuggest           PropellerIdeGuiKey "_enableSpinSuggest"
 
-class Properties : public QDialog
+class Preferences : public QDialog
 {
     Q_OBJECT
 public:
-    explicit Properties(QWidget *parent = 0);
-    void showProperties(QString lastDir);
+    explicit Preferences(QWidget *parent = 0);
+    void showPreferences(QString lastDir);
     QString getSpinLibraryString();
     Qt::GlobalColor getQtColor(int index);
 

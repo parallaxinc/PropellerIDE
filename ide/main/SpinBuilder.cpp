@@ -16,18 +16,18 @@ int  SpinBuilder::checkCompilerInfo()
 {
     QMessageBox mbox(QMessageBox::Critical,tr("Build Error"),"",QMessageBox::Ok);
     if(compilerStr.length() == 0) {
-        mbox.setInformativeText(tr("Please specify compiler application in properties."));
+        mbox.setInformativeText(tr("Please specify compiler application in Preferences."));
         mbox.exec();
         return -1;
     }
 /*
     if(includesStr.length() == 0) {
-        mbox.setInformativeText(tr("Please specify a library path in properties."));
+        mbox.setInformativeText(tr("Please specify a library path in Preferences."));
         mbox.exec();
         return -1;
     }
     if(loader.length() == 0) {
-        mbox.setInformativeText(tr("Please specify the loader in properties."));
+        mbox.setInformativeText(tr("Please specify the loader in Preferences."));
         mbox.exec();
         return -1;
     }
@@ -95,7 +95,7 @@ int  SpinBuilder::loadProgram(QString copts)
     proc.start(loader,args);
 
     if(!proc.waitForStarted()) {
-        mbox.setInformativeText(tr("Could not start loader. Please check properties."));
+        mbox.setInformativeText(tr("Could not start loader. Please check Preferences."));
         mbox.exec();
         goto loaderror;
     }
@@ -191,7 +191,7 @@ int  SpinBuilder::runCompiler(QString copts)
     proc.start(compilerStr,args);
 
     if(!proc.waitForStarted()) {
-        mbox.setInformativeText(tr("Could not start compiler. Please check properties."));
+        mbox.setInformativeText(tr("Could not start compiler. Please check Preferences."));
         mbox.exec();
         goto error;
     }

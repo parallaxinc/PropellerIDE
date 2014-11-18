@@ -6,7 +6,7 @@
 
 #include "highlightSpin.h"
 
-SpinHighlighter::SpinHighlighter(QTextDocument *parent, Properties *prop)
+SpinHighlighter::SpinHighlighter(QTextDocument *parent, Preferences *prop)
     : Highlighter(parent, prop)
 {
     highlight();
@@ -19,7 +19,7 @@ void SpinHighlighter::highlight()
 {
     this->parent();
 
-    getProperties();
+    getPreferences();
 
     HighlightingRule rule;
 

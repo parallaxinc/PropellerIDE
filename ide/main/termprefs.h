@@ -6,7 +6,7 @@ class TermPrefs;
 #include <QtGui>
 #include "terminal.h"
 #include "console.h"
-#include "properties.h"
+#include "preferences.h"
 #include "colors.h"
 
 

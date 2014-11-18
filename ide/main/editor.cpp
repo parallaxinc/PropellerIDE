@@ -1,5 +1,5 @@
 #include "editor.h"
-#include "properties.h"
+#include "preferences.h"
 
 /* C and Spin highlighters prove more languages can be added easily.
  */

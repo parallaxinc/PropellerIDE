@@ -62,9 +62,9 @@ void MainWindow::init()
     /* global settings */
     settings = new QSettings(publisherKey, PropellerIdeGuiKey, this);
 
-    /* setup properties dialog */
-    propDialog = new Properties(this);
-    connect(propDialog,SIGNAL(accepted()),this,SLOT(propertiesAccepted()));
+    /* setup preferences dialog */
+    propDialog = new Preferences(this);
+    connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
     connect(propDialog,SIGNAL(openFontDialog()),this,SLOT(fontDialog()));
     connect(propDialog->getTabSpaceLedit(),SIGNAL(textChanged(QString)), this, SLOT(tabSpacesChanged()));
 
@@ -171,7 +171,7 @@ void MainWindow::init()
      * Some people want to be prepared, others just want to hack
      * their way through life ... i guess it's fun.
      * The latter is most common, so let's do it like that.
-     * In this case, we need the properties if their set, but we can't complain.
+     * In this case, we need the preferences if their set, but we can't complain.
      */
     getApplicationSettings(false);
 
@@ -354,7 +354,7 @@ void MainWindow::getApplicationSettings(bool complain)
         spinCompiler = dir.fromNativeSeparators(spinCompiler);
     }
     if(complain && !file.exists(spinCompiler)) {
-        propDialog->showProperties(this->lastDirectory);
+        propDialog->showPreferences(this->lastDirectory);
     }
     compv = settings->value(spinLoaderKey);
     if(compv.canConvert(QVariant::String)) {
@@ -922,13 +922,13 @@ void MainWindow::hardware()
 {
 }
 
-void MainWindow::properties()
+void MainWindow::preferences()
 {
-    propDialog->showProperties(this->lastDirectory);
+    propDialog->showPreferences(this->lastDirectory);
 }
-void MainWindow::propertiesAccepted()
+void MainWindow::preferencesAccepted()
 {
-    /* set properties */
+    /* set preferences */
     getApplicationSettings(false);
     initBoardTypes();
 }
@@ -1972,10 +1972,9 @@ void MainWindow::setupFileMenu()
 
 
     // Enable zipFiles after zipper works.
-#ifdef ENABLE_ZIP
-    fileMenu->addAction(QIcon(":/images/zip.png"), tr("Zip"), this, SLOT(zipFiles()), 0);
-#endif
-    fileMenu->addAction(QIcon(":/images/properties.png"), tr("Properties"), this, SLOT(properties()), Qt::Key_F5);
+    fileMenu->addAction(QIcon(":/images/zip.png"), tr("Zip Project"), this, SLOT(zipFiles()), 0);
+
+    fileMenu->addAction(QIcon(":/images/preferences.png"), tr("Preferences"), this, SLOT(preferences()), Qt::Key_F5);
 
     // recent file actions
     separatorFileAct = fileMenu->addSeparator();

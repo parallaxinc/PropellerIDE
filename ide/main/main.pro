@@ -18,7 +18,7 @@ SOURCES += main.cpp\
     EzBuilder.cpp \
     SpinBuilder.cpp \
     PortListener.cpp \
-    properties.cpp \
+    preferences.cpp \
     PortConnectionMonitor.cpp \
     editor.cpp \
     highlightSpin.cpp \
@@ -36,7 +36,7 @@ HEADERS  += mainwindow.h \
     EzBuilder.h \
     SpinBuilder.h \
     PortListener.h \
-    properties.h \
+    preferences.h \
     PortConnectionMonitor.h \
     editor.h \
     highlightSpin.h \

@@ -1,8 +1,8 @@
-#include "properties.h"
+#include "preferences.h"
 
-Properties::Properties(QWidget *parent) : QDialog(parent)
+Preferences::Preferences(QWidget *parent) : QDialog(parent)
 {
-    setWindowTitle(QString(PropellerIdeGuiKey)+tr(" Properties"));
+    setWindowTitle(QString(PropellerIdeGuiKey)+tr(" Preferences"));
 
     configSettings();
 
@@ -23,7 +23,7 @@ Properties::Properties(QWidget *parent) : QDialog(parent)
     resize(500,260);
 }
 
-void Properties::configSettings()
+void Preferences::configSettings()
 {
     bool ok;
     QSettings settings(publisherKey, PropellerIdeGuiKey);
@@ -39,7 +39,7 @@ void Properties::configSettings()
     return;
 }
 
-void Properties::cleanSettings()
+void Preferences::cleanSettings()
 {
     QSettings settings(publisherKey, PropellerIdeGuiKey);
     QStringList list = settings.allKeys();
@@ -55,7 +55,7 @@ void Properties::cleanSettings()
     settings.setValue(useKeys,0);
 }
 
-void Properties::setupOptions()
+void Preferences::setupOptions()
 {
     QFrame *frame = new QFrame(this);
     QHBoxLayout *hlayout = new QHBoxLayout();
@@ -105,12 +105,12 @@ void Properties::setupOptions()
     edlayout->addRow(new QLabel(tr("Set Editor Font")), &fontButton);
 }
 
-void Properties::showFontDialog()
+void Preferences::showFontDialog()
 {
     emit openFontDialog();
 }
 
-int Properties::getTabSpaces()
+int Preferences::getTabSpaces()
 {
     bool ok;
     int count = tabspaceLedit.text().toInt(&ok);
@@ -118,17 +118,17 @@ int Properties::getTabSpaces()
     return 2;
 }
 
-bool Properties::getAutoCompleteEnable()
+bool Preferences::getAutoCompleteEnable()
 {
     return autoCompleteEnable.isChecked();;
 }
 
-bool Properties::getSpinSuggestEnable()
+bool Preferences::getSpinSuggestEnable()
 {
     return spinSuggestEnable.isChecked();
 }
 
-bool Properties::getPortBoardNameEnable()
+bool Preferences::getPortBoardNameEnable()
 {
 #if ENABLE_PORT_BOARD_NAMES
     return portBoardNameEnable.isChecked();
@@ -137,12 +137,12 @@ bool Properties::getPortBoardNameEnable()
 #endif
 }
 
-QLineEdit *Properties::getTabSpaceLedit()
+QLineEdit *Preferences::getTabSpaceLedit()
 {
     return &tabspaceLedit;
 }
 
-void Properties::setupFolders()
+void Preferences::setupFolders()
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
     QFrame *box = new QFrame();
@@ -279,7 +279,7 @@ void Properties::setupFolders()
 
 }
 
-void Properties::addHighlights(QComboBox *box, QVector<PColor*> pcolor)
+void Preferences::addHighlights(QComboBox *box, QVector<PColor*> pcolor)
 {
     for(int n = 0; n < pcolor.count(); n++) {
         QPixmap pixmap(20,20);
@@ -289,7 +289,7 @@ void Properties::addHighlights(QComboBox *box, QVector<PColor*> pcolor)
     }
 }
 
-void Properties::setupHighlight()
+void Preferences::setupHighlight()
 {
     QGridLayout *hlayout = new QGridLayout();
     QFrame *hlbox = new QFrame();
@@ -602,7 +602,7 @@ void Properties::setupHighlight()
 
 }
 
-Qt::GlobalColor Properties::getQtColor(int index)
+Qt::GlobalColor Preferences::getQtColor(int index)
 {
     if(index > -1 && index < propertyColors.count()) {
         return static_cast<PColor*>(propertyColors.at(index))->getValue();
@@ -610,7 +610,7 @@ Qt::GlobalColor Properties::getQtColor(int index)
     return Qt::black; // just return black on failure
 }
 
-void Properties::spinBrowseCompiler()
+void Preferences::spinBrowseCompiler()
 {
     QString folder = spinLeditCompiler->text();
     if(!folder.length()) folder = lastFolder;
@@ -624,7 +624,7 @@ void Properties::spinBrowseCompiler()
     qDebug() << "browseSpinCompiler" << s;
 }
 
-void Properties::spinBrowseIncludes()
+void Preferences::spinBrowseIncludes()
 {
     QString folder = spinLeditIncludes->text();
     if(!folder.length()) folder = lastFolder;
@@ -641,7 +641,7 @@ void Properties::spinBrowseIncludes()
     qDebug() << "spinBrowseIncludes" << s;
 }
 
-void Properties::spinBrowseLoader()
+void Preferences::spinBrowseLoader()
 {
 #ifdef EXTERNAL_SPIN_LOADER
     QString folder = spinLoadLedit->text();
@@ -657,7 +657,7 @@ void Properties::spinBrowseLoader()
 #endif
 }
 
-void Properties::accept()
+void Preferences::accept()
 {
     QSettings settings(publisherKey, PropellerIdeGuiKey,this);
     settings.setValue(spinCompilerKey,spinLeditCompiler->text());
@@ -696,7 +696,7 @@ void Properties::accept()
     done(QDialog::Accepted);
 }
 
-void Properties::reject()
+void Preferences::reject()
 {
     spinLeditCompiler->setText(spinCompilerStr);
     spinLeditIncludes->setText(spinIncludesStr);
@@ -733,7 +733,7 @@ void Properties::reject()
     done(QDialog::Rejected);
 }
 
-void Properties::showProperties(QString lastDir)
+void Preferences::showPreferences(QString lastDir)
 {
     this->lastFolder = lastDir;
     spinCompilerStr = spinLeditCompiler->text();
@@ -741,7 +741,7 @@ void Properties::showProperties(QString lastDir)
 #ifdef EXTERNAL_SPIN_LOADER
     spinLoaderStr = spinLoadLedit->text();
 #endif
-    this->setWindowTitle(QString(PropellerIdeGuiKey) +" Properties");
+    this->setWindowTitle(QString(PropellerIdeGuiKey) +" Preferences");
 
     tabSpacesStr = tabspaceLedit.text();
     hlNumStyleBool = hlNumStyle.isChecked();
@@ -772,7 +772,7 @@ void Properties::showProperties(QString lastDir)
     this->show();
 }
 
-QString Properties::getSpinLibraryString()
+QString Preferences::getSpinLibraryString()
 {
     return this->spinLeditIncludes->text();
 }

@@ -41,12 +41,12 @@ void MainWindow::setupToolBars()
     btnFileZip->setToolTip(tr("Zip"));
 #endif
 
-    //propToolBar = addToolBar(tr("Properties"));
+    //propToolBar = addToolBar(tr("Preferences"));
 
-    QToolButton *btnProjectProperties = new QToolButton(this);
-    addToolButton(propToolBar, btnProjectProperties, QString(":/images/properties.png"));
-    connect(btnProjectProperties,SIGNAL(clicked()),this,SLOT(properties()));
-    btnProjectProperties->setToolTip(tr("Properties"));
+    QToolButton *btnProjectPreferences = new QToolButton(this);
+    addToolButton(propToolBar, btnProjectPreferences, QString(":/images/preferences.png"));
+    connect(btnProjectPreferences,SIGNAL(clicked()),this,SLOT(preferences()));
+    btnProjectPreferences->setToolTip(tr("Preferences"));
 
     debugToolBar = addToolBar(tr("Debug"));
     QToolButton *btnDebugDebugTerm = new QToolButton(this);
