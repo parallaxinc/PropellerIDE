@@ -1574,7 +1574,7 @@ void MainWindow::zipFiles()
     QString spinLibPath     = propDialog->getSpinLibraryString();
     QStringList fileTree    = spinParser.spinFileTree(fileName, spinLibPath);
     if(fileTree.count() > 0) {
-        zipper.makeZip(fileName, fileTree, spinLibPath, statusDialog);
+        zipper.makeZip(fileName, fileTree, spinLibPath);
     }
 #endif
 }

@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
-SUBDIRS = qext
+SUBDIRS = lib
 
 # build must be last:
 CONFIG += ordered

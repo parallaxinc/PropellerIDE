@@ -7,7 +7,7 @@ greaterThan(QT_MAJOR_VERSION, 4): {
     DEFINES += QT5
 }
 
-INCLUDEPATH += . ..
+INCLUDEPATH += . .. ../lib
 
 UI_DIR = tmp
 MOC_DIR = tmp

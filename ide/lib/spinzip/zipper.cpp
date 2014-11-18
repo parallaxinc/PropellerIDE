@@ -14,9 +14,8 @@ Zipper::Zipper(QObject *parent) :
 {
 }
 
-bool Zipper::makeZip(QString fileName, QStringList fileTree, QString libPath, StatusDialog *stat)
+bool Zipper::makeZip(QString fileName, QStringList fileTree, QString libPath)
 {
-    statusDialog = stat;
     spinLibPath = libPath;
     zipSpinProjectTree(fileName, fileTree);
     return true;
@@ -83,7 +82,6 @@ void Zipper::zipSpinProjectTree(QString fileName, QStringList fileTree)
     }
     QString sfile = shortFileName(dstName);
     qDebug() << "dstName: " << sfile;
-    statusDialog->init("Zipping Spin", sfile);
 
     QString source = sfile.left(sfile.indexOf(".",Qt::CaseInsensitive));
 
@@ -114,8 +112,6 @@ void Zipper::zipSpinProjectTree(QString fileName, QStringList fileTree)
         }
     }
     zip.close();
-
-    statusDialog->stop(4);
 }
 
 QStringList Zipper::directoryTreeList(QString folder)

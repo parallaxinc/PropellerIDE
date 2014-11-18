@@ -6,7 +6,7 @@ TEMPLATE = app
 
 TARGET = ../propelleride
 
-LIBS += -L../qext -lqext
+LIBS += -L../lib/qext -L../lib/spinzip -lqext -lspinzip
 
 SOURCES += main.cpp\
     mainwindow.cpp \
@@ -25,8 +25,7 @@ SOURCES += main.cpp\
     spinparser.cpp \
     terminal.cpp \
     console.cpp \
-    termprefs.cpp \
-    spinzip/*.cpp 
+    termprefs.cpp
 
 HEADERS  += mainwindow.h \
     StatusDialog.h \
@@ -46,7 +45,6 @@ HEADERS  += mainwindow.h \
     terminal.h \
     console.h \
     termprefs.h \
-    spinzip/*.h
 
 OTHER_FILES +=
 

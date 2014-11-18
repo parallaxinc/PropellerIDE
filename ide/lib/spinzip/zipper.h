@@ -5,8 +5,6 @@
 #include <QString>
 #include <QStringList>
 
-#include "StatusDialog.h"
-
 extern "C" {
     extern int minizip(const char *zipFileName, const char *fileListCSV);
     extern int miniunzip(const char *zipFile, const char *extractToFile);
@@ -17,7 +15,7 @@ class Zipper : public QObject
     Q_OBJECT
 public:
     explicit Zipper(QObject *parent = 0);
-    bool makeZip(QString fileName, QStringList fileTree, QString libPath, StatusDialog *stat);
+    bool makeZip(QString fileName, QStringList fileTree, QString libPath);
 
 private:
     QString getZipDestination(QString fileName);
@@ -28,8 +26,6 @@ private:
     QString shortFileName(QString fileName);
 
     QString spinLibPath;
-    StatusDialog *statusDialog;
-
 signals:
 
 public slots:

@@ -1,4 +1,4 @@
-! include( ../common.pri ) {
+! include( ../../common.pri ) {
     error( No common.pri file! )
 }
 
