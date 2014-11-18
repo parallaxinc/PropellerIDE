@@ -1,6 +1,10 @@
-#include "terminal.h"
 #include "console.h"
 #include "Sleeper.h"
+
+#include <QApplication>
+#include <QDebug>
+#include <QClipboard>
+#include <QTextBlock>
 
 // It's Spinning Windows world.
 #define SPIN_RETURN     0xA
@@ -101,11 +105,6 @@ void Console::keyPressEvent(QKeyEvent *event)
 {
     qDebug() << "keyPressEvent";
 
-    Terminal *term = (Terminal*) this->parentWidget();
-    if(event->matches((QKeySequence::Copy))) {
-        term->copyFromFile();
-    }
-    else
     if(event->matches((QKeySequence::Paste))) {
         QClipboard *clip = QApplication::clipboard();
         QString s = clip->text();
@@ -114,7 +113,7 @@ void Console::keyPressEvent(QKeyEvent *event)
     }
     else {
         if(this->enableEchoOn) {
-            //this->insertPlainText(event->text());
+            this->insertPlainText(event->text());
         }
         int key = event->key();
 
