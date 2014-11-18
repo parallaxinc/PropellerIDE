@@ -48,14 +48,14 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     findPreviousBtn = new QToolButton();
     findPreviousBtn->setObjectName(QStringLiteral("findPreviousBtn"));
     findPreviousBtn->setStyleSheet("QToolButton {\
-                                        background: url(:/images/findPrevious.png) center no-repeat;\
+                                        background: url(:/icons/findPrevious.png) center no-repeat;\
                                         width: 24;\
                                         height: 24;\
                                         border-width: 0;\
                                         border: none;\
                                     }\
                                     QToolButton:pressed {\
-                                        background: url(:/images/findPreviousPressed.png) center no-repeat;\
+                                        background: url(:/icons/findPreviousPressed.png) center no-repeat;\
                                         border-width: 0;\
                                         border: none;\
                                     }\
@@ -67,14 +67,14 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     findNextBtn = new QToolButton();
     findNextBtn->setObjectName(QStringLiteral("findNextBtn"));
     findNextBtn->setStyleSheet("QToolButton {\
-                                    background: url(:/images/findNext.png) center no-repeat;\
+                                    background: url(:/icons/findNext.png) center no-repeat;\
                                     width: 24;\
                                     height: 24;\
                                     border-width: 0;\
                                     border: none;\
                                 }\
                                 QToolButton:pressed {\
-                                    background: url(:/images/findNextPressed.png) center no-repeat;\
+                                    background: url(:/icons/findNextPressed.png) center no-repeat;\
                                     border-width: 0;\
                                     border: none;\
                                 }\
@@ -86,7 +86,7 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     /* dgately 03/17/2014 - need pressed icon mods */
     wholeWordFilterBtn = new QToolButton();
     wholeWordFilterBtn->setObjectName(QStringLiteral("wholeWordFilterBtn"));
-    wholeWordFilterBtn->setIcon(QIcon(":/images/newWord.png"));
+    wholeWordFilterBtn->setIcon(QIcon(":/icons/newWord.png"));
     wholeWordFilterBtn->setCheckable(true);
     wholeWordFilterBtn->setStyleSheet("background-color: white");
     findLayout->addWidget(wholeWordFilterBtn);
@@ -95,7 +95,7 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     /* dgately 03/17/2014 - need pressed icon mods */
     caseSensitiveFilterBtn = new QToolButton();
     caseSensitiveFilterBtn->setObjectName(QStringLiteral("caseSensitiveFilterBtn"));
-    caseSensitiveFilterBtn->setIcon(QIcon(":/images/newCase.png"));
+    caseSensitiveFilterBtn->setIcon(QIcon(":/icons/newCase.png"));
     caseSensitiveFilterBtn->setCheckable(true);
     caseSensitiveFilterBtn->setStyleSheet("background-color: white");
     findLayout->addWidget(caseSensitiveFilterBtn);

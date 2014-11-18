@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
         QApplication::setStyle("Fusion");
     }
 #endif
-    a.setWindowIcon(QIcon(":/images/blks.png"));
+    a.setWindowIcon(QIcon(":/icons/PropHatAlpha.png"));
     MainWindow w;
     w.init();
     if(argc > 1) {

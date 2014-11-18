@@ -1,0 +1,7 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/fonts">
+    <file>parallax2-bold.ttf</file>
+    <file>parallax2.ttf</file>
+    <file>Parallax.ttf</file>
+</qresource>
+</RCC>

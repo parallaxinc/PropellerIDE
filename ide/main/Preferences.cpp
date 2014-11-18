@@ -1,4 +1,4 @@
-#include "preferences.h"
+#include "Preferences.h"
 
 #include <QApplication>
 #include <QDialog>

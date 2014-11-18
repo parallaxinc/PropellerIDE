@@ -106,7 +106,7 @@ void Terminal::init()
     setLayout(termLayout);
 
     setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
-    setWindowIcon(QIcon(":/images/console.png"));
+    setWindowIcon(QIcon(":/icons/console.png"));
     resize(800,600); // initial size
 
     //show();

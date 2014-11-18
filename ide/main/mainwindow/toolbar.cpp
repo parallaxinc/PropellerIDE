@@ -12,11 +12,11 @@ void MainWindow::setupToolBars()
     QToolButton *btnFileSaveAs = new QToolButton(this);
 
 //    btnBrowser->setCheckable(true);
-//    addToolButton(fileToolBar, btnBrowser, QString(":/images/blks.png"));
-    addToolButton(fileToolBar, btnFileNew, QString(":/images/newfile.png"));
-    addToolButton(fileToolBar, btnFileOpen, QString(":/images/openfile.png"));
-    addToolButton(fileToolBar, btnFileSave, QString(":/images/savefile.png"));
-    addToolButton(fileToolBar, btnFileSaveAs, QString(":/images/saveasfile.png"));
+//    addToolButton(fileToolBar, btnBrowser, QString(":/icons/blks.png"));
+    addToolButton(fileToolBar, btnFileNew, QString(":/icons/newfile.png"));
+    addToolButton(fileToolBar, btnFileOpen, QString(":/icons/openfile.png"));
+    addToolButton(fileToolBar, btnFileSave, QString(":/icons/savefile.png"));
+    addToolButton(fileToolBar, btnFileSaveAs, QString(":/icons/saveasfile.png"));
 
 //    connect(btnBrowser,SIGNAL(clicked()),this,SLOT(showBrowser()));
     connect(btnFileNew,SIGNAL(clicked()),this,SLOT(newFileAction()));
@@ -34,11 +34,11 @@ void MainWindow::setupToolBars()
 
     //btnFilePrint->setToolTip(tr("Print"));
     //connect(btnFilePrint,SIGNAL(clicked()),this,SLOT(printFile()));
-    //addToolButton(fileToolBar, btnFilePrint, QString(":/images/print.png"));
+    //addToolButton(fileToolBar, btnFilePrint, QString(":/icons/print.png"));
     //QToolButton *btnFilePrint = new QToolButton(this);
 #ifdef ENABLE_ZIP
     QToolButton *btnFileZip = new QToolButton(this);
-    addToolButton(propToolBar, btnFileZip, QString(":/images/zip.png"));
+    addToolButton(propToolBar, btnFileZip, QString(":/icons/zip.png"));
     connect(btnFileZip,SIGNAL(clicked()),this,SLOT(zipFiles()));
     btnFileZip->setToolTip(tr("Zip Project"));
 #endif
@@ -46,7 +46,7 @@ void MainWindow::setupToolBars()
     //propToolBar = addToolBar(tr("Preferences"));
 
     QToolButton *btnProjectPreferences = new QToolButton(this);
-    addToolButton(propToolBar, btnProjectPreferences, QString(":/images/preferences.png"));
+    addToolButton(propToolBar, btnProjectPreferences, QString(":/icons/preferences.png"));
     connect(btnProjectPreferences,SIGNAL(clicked()),this,SLOT(preferences()));
     btnProjectPreferences->setToolTip(tr("Preferences"));
 
@@ -57,11 +57,11 @@ void MainWindow::setupToolBars()
     QToolButton *btnDebugBurnEEP = new QToolButton(this);
     QToolButton *btnDebugIdHw = new QToolButton(this);
 
-    addToolButton(debugToolBar, btnDebugIdHw, QString(":/images/PropHatAlpha.png"));
-    addToolButton(debugToolBar, btnDebugBuild, QString(":/images/build2.png"));
-    addToolButton(debugToolBar, btnDebugBurnEEP, QString(":/images/burnee.png"));
-    addToolButton(debugToolBar, btnDebugRun, QString(":/images/run.png"));
-    addToolButton(debugToolBar, btnDebugDebugTerm, QString(":/images/debug2.png"));
+    addToolButton(debugToolBar, btnDebugIdHw, QString(":/icons/PropHatAlpha.png"));
+    addToolButton(debugToolBar, btnDebugBuild, QString(":/icons/build2.png"));
+    addToolButton(debugToolBar, btnDebugBurnEEP, QString(":/icons/burnee.png"));
+    addToolButton(debugToolBar, btnDebugRun, QString(":/icons/run.png"));
+    addToolButton(debugToolBar, btnDebugDebugTerm, QString(":/icons/debug2.png"));
 
     connect(btnDebugIdHw,SIGNAL(clicked()),this,SLOT(findHardware()));
     connect(btnDebugBuild,SIGNAL(clicked()),this,SLOT(programBuild()));
@@ -88,7 +88,7 @@ void MainWindow::setupToolBars()
     btnConnected->setCheckable(true);
     connect(btnConnected,SIGNAL(clicked()),this,SLOT(connectButton()));
 
-    addToolButton(ctrlToolBar, btnConnected, QString(":/images/connected2.png"));
+    addToolButton(ctrlToolBar, btnConnected, QString(":/icons/connected2.png"));
     ctrlToolBar->addWidget(cbPort);
     ctrlToolBar->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
 }

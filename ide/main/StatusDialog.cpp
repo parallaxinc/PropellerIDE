@@ -7,7 +7,7 @@ StatusDialog::StatusDialog(QWidget *parent) : QDialog(parent, 0)
 
     for(int j = 0; j < 5; j++) {
         QLabel *r = new QLabel();
-        r->setPixmap(QPixmap(":/images//status.png"));
+        r->setPixmap(QPixmap(":/icons/status.png"));
         //r->setBackgroundRole(QPalette::Base);
         r->setEnabled(false);
         bump.append(r);
