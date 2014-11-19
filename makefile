@@ -5,16 +5,24 @@ DIR_OPENSPIN	:=	$(DIR)/openspin
 DIR_IDE			:=	$(DIR)/ide
 DIR_SPINLIB		:=	$(DIR)/spin
 DIR_LOADER		:=	$(DIR)/loader
-
-DIR_ROOT		:=	$(DIR)/root
 DIR_STAGING		:=	$(DIR)/staging
-DIR_BIN			:=	$(DIR_STAGING)/usr/bin
-DIR_DEB			:=	$(DIR_STAGING)/DEBIAN
+DIR_COMMON		:=	$(DIR)/common
+
+deb: OS 			:=	unix
+deb: DIR_PREBUILT	:=	$(DIR)/prebuilt/$(OS)
+deb: DIR_BIN		:=	$(DIR_STAGING)/usr/bin
+deb: DIR_TARGET		:=	$(DIR_STAGING)/usr/share/$(NAME)
+
+win: OS 			:=	win32
+win: DIR_PREBUILT	:=	$(DIR)/prebuilt/$(OS)
+
+mac: OS 			:=	macx
+mac: DIR_PREBUILT	:=	$(DIR)/prebuilt/$(OS)
 
 
-VERSION			:=	$(shell echo `grep -r VERSION= $(DIR_IDE)/common.pri \
+VERSION			:=	$(shell echo $(shell grep -r VERSION= $(DIR_IDE)/common.pri \
 					| cut -d'=' -f3 \
-					| sed -e 's/[\r]//g'` \
+					| sed -e 's/[\r]//g') \
 					| sed -e 's/ /./g')
 
 # if CPU (uname -m) equals...
@@ -30,8 +38,6 @@ else
 	endif
 endif
 
-all: build_all
-
 help:
 	@echo "Usage:    make [TYPE]"
 	@echo
@@ -43,10 +49,15 @@ help:
 	@echo
 	@echo "   no parameter builds only the binaries"
 
+checkout:
+	git submodule init
+	git submodule update
+
+
 
 build_all: build_ide build_openspin build_loader
 
-copy_all: clean_staging copy_root copy_bin
+copy_all: clean_staging copy_root copy_common copy_bin 
 
 clean: clean_staging
 	make -C $(DIR_LOADER) clean
@@ -72,18 +83,13 @@ copy_bin:
 	cp $(DIR_LOADER)/p1load $(DIR_BIN)
 
 copy_root:
-	rsync -ru $(DIR_ROOT)/* $(DIR_STAGING)
+	rsync -ru $(DIR_PREBUILT)/* $(DIR_STAGING)
 
-#copy_libs:
-#	cp `ldd $(DIR_IDE)/$(NAME) | grep 'libQt\|libz' | awk '{print $$3}'` $(DIR_BIN)
-
+copy_common:
+	rsync -ru $(DIR_COMMON)/* $(DIR_TARGET)
 
 deb: build_all copy_all
 	sed -e "s/VERSION/$(VERSION)/" \
 		-e "s/CPU/$(CPU)/" \
-		-i $(DIR_DEB)/control
+		-i $(DIR_STAGING)/DEBIAN/control
 	dpkg-deb -b $(DIR_STAGING) propelleride-$(VERSION)-$(CPU).deb
-
-checkout:
-	git submodule init
-	git submodule update
