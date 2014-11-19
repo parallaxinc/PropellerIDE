@@ -1,5 +1,7 @@
 NAME			:=	propelleride
 
+ISCC			:=	/c/Program\ Files\ \(x86\)/Inno\ Setup\ 5/ISCC.exe 
+
 DIR				:=	$(shell pwd)
 DIR_OPENSPIN	:=	$(DIR)/openspin
 DIR_IDE			:=	$(DIR)/ide
@@ -93,3 +95,6 @@ deb: build_all copy_all
 		-e "s/CPU/$(CPU)/" \
 		-i $(DIR_STAGING)/DEBIAN/control
 	dpkg-deb -b $(DIR_STAGING) propelleride-$(VERSION)-$(CPU).deb
+
+win: build_all
+	$(ISCC) //dMyAppVersion=$(VERSION) "installer.iss"
