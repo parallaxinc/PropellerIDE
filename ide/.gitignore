@@ -1,8 +1,8 @@
 moc_*.cpp
 *.o
 *.a
-qrc_resources.cpp
+qrc_*.cpp
 ui_*.h
 *.pro.user
 Makefile
-propelleride
+object_script.*

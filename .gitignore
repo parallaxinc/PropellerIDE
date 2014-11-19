@@ -1,2 +1,6 @@
 propelleride-*
+propelleride
+propelleride.exe
 staging/
+*.swp
+*~

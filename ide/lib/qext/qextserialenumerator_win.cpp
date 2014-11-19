@@ -31,9 +31,9 @@
 
 #include "qextserialenumerator.h"
 #include "qextserialenumerator_p.h"
-#include <QtCore/QDebug>
-#include <QtCore/QMetaType>
-#include <QtCore/QRegExp>
+#include <QDebug>
+#include <QMetaType>
+#include <QRegExp>
 #include <objbase.h>
 #include <initguid.h>
 #include <setupapi.h>
@@ -41,7 +41,7 @@
 #include "qextserialport.h"
 
 #ifdef HAS_QWIDGET
-#include "qtversion.h"
+#include <QWidget>
 
 class QextSerialRegistrationWidget : public QWidget
 {

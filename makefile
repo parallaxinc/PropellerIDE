@@ -17,23 +17,6 @@ VERSION			:=	$(shell echo `grep -r VERSION= $(DIR_IDE)/common.pri \
 					| sed -e 's/[\r]//g'` \
 					| sed -e 's/ /./g')
 
-ARCH			:=	$(shell arch)
-COMPNAME		:=	$(shell uname -n)
-OS				:=	$(shell uname -s)
-
-PACKAGE			:=  ${NAME}-${VERSION}-${ARCH}-${OS}
-
-ifeq ($(shell uname -s),msys)				# if Windows
-	JOBS :=
-else
-	ifneq ($(filter arm%,$(ARCH)),) 		# if ARM
-		JOBS := -j2
-	else									# not ARM
-		JOBS := -j6
-	endif
-endif
-
-
 # if CPU (uname -m) equals...
 ifeq ($(shell uname -n),raspberrypi)		# if Raspberry Pi
 	CPU := armhf

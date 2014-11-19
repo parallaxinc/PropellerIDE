@@ -15,6 +15,11 @@ RCC_DIR = tmp
 
 CONFIG  += exceptions
 
+win32 {
+	# prevent debug/release builds on windows
+	CONFIG  -= debug_and_release debug_and_release_target	
+}
+
 DEFINES += IDEVERSION=0
 DEFINES += MINVERSION=20
 

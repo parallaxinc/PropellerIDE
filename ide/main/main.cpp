@@ -3,6 +3,7 @@
 #include "mainwindow.h"
 
 #include <QMessageBox>
+#include <QStyleFactory>
 
 int main(int argc, char *argv[])
 {
