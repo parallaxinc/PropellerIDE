@@ -44,6 +44,7 @@ UsePreviousUserInfo=no
 DisableDirPage=yes
 DisableProgramGroupPage=yes
 DisableReadyPage=no
+WizardImageFile="gfx\propellerbanner.bmp"
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -57,6 +58,7 @@ Name: FtdiChip; Description: "Install FTDI Chip USB Serial Port Drivers"; Flags:
 Source: "{#MyOutputDir}\ide\propelleride.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyLoader}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyOpenSpin}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "gfx\propellerhat.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyLib}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#MyPrebuilt}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
@@ -73,8 +75,8 @@ Source: "{#QtPath}\bin\Qt5PrintSupport.dll"; DestDir: "{#MyAppBin}"; Flags: igno
 Source: "{#QtPath}\plugins\platforms\qwindows.dll"; DestDir: "{#MyAppBin}\platforms"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}" ; IconFilename: "{app}\propellerhat.ico";
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}";
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}";
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}";
 
