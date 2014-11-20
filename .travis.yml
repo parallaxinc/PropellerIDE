@@ -10,8 +10,9 @@ before_install:
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo apt-get update -qq
   - sudo apt-get install -qq qt5-qmake qtbase5-dev zlib1g-dev cppcheck
+  - qmake -qt=qt5 -v
 
 script:
   - cd ide
-  - qmake
+  - qmake -qt=qt5
   - make
