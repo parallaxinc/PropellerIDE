@@ -4,7 +4,6 @@ matrix:
     include:
         - compiler: gcc
         - compiler: clang
-          env: QMAKESPEC=unsupported/linux-clang
 
 before_install:
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
