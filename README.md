@@ -1,4 +1,4 @@
-![the hat](gfx/propellerhat.png) PropellerIDE
+![the hat](gfx/propellerhat.png) PropellerIDE [![Build Status](https://travis-ci.org/bweir/PropellerIDE.svg?branch=master)](https://travis-ci.org/bweir/PropellerIDE)
 ============
 
 ![the interface](gfx/interface.png "The PropellerIDE interface")
