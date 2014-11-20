@@ -1,0 +1,14 @@
+language: cpp
+
+matrix:
+    include:
+        - compiler: gcc
+        - compiler: clang
+          env: QMAKESPEC=unsupported/linux-clang
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq qt5-default zlib1g-dev cppcheck
+script:
+  - qmake
+  - make
