@@ -4,6 +4,7 @@ SUBDIRS = \
     qext \
     spinzip \
     p1load \
+    OpenSpin \
     propelleride \
 
-propeller.depends = qext spinzip
+propelleride.depends = qext spinzip
