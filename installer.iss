@@ -2,18 +2,10 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "PropellerIDE"
-#define MyDocName "PropellerIDE"
-#define MyAppPublisher "Parallax"
 #define MyAppURL "www.parallax.com"
 #define MyAppExeName "propelleride.exe"
-#define MyOpenSpin "openspin\openspin.exe"
-#define MyLoader "loader\p1load.exe"
-#define MyLib "common"
-#define MyPrebuilt "prebuilt\win32"
 #define MyAppBin "{app}"
 ;#define FtdiChipApp "CDM v2.12.00 WHQL Certified.exe"
-
-#define MyOutputDir "."
 
 ; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; ---- IMPORTANT!!! ---- Set this to your QtPath
@@ -28,13 +20,13 @@ AppID={{FFFE6E20-C961-487B-B55B-510E4BCE479B}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
-AppPublisher={#MyAppPublisher}
+AppPublisher="Parallax Inc."
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-OutputDir={#MyOutputDir}
+OutputDir="."
 OutputBaseFilename=propelleride-{#MyAppVersion}-win-setup
 Compression=lzma/Max
 SolidCompression=true
@@ -55,12 +47,13 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: FtdiChip; Description: "Install FTDI Chip USB Serial Port Drivers"; Flags: checkedonce; 
 
 [Files]
-Source: "{#MyOutputDir}\src\propelleride.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyLoader}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyOpenSpin}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "src\propelleride\propelleride.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "src\p1load\p1load.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "openspin\openspin.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "gfx\propellerhat.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyLib}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#MyPrebuilt}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "doc\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "library\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "prebuilt\win32\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 ;Source: "{#QtBinPath}\icuin52.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
 ;Source: "{#QtBinPath}\icuuc52.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
@@ -97,5 +90,4 @@ Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; Valu
 Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_SpinIncludes; ValueData: {app}\library;             Flags: UninsDeleteKey;
 Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_LastFileName; ValueData: {app}\library\Welcome.spin;   Flags: UninsDeleteKey; 
 ;Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_EditorFont; ValueData: Parallax; Flags: UninsDeleteKey; 
-
 
