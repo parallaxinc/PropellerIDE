@@ -49,7 +49,7 @@ Name: FtdiChip; Description: "Install FTDI Chip USB Serial Port Drivers"; Flags:
 [Files]
 Source: "src\propelleride\propelleride.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "src\p1load\p1load.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "openspin\openspin.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "src\OpenSpin\openspin.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "gfx\propellerhat.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "doc\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "library\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs

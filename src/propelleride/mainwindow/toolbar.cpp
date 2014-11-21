@@ -36,12 +36,10 @@ void MainWindow::setupToolBars()
     //connect(btnFilePrint,SIGNAL(clicked()),this,SLOT(printFile()));
     //addToolButton(fileToolBar, btnFilePrint, QString(":/icons/print.png"));
     //QToolButton *btnFilePrint = new QToolButton(this);
-#ifdef ENABLE_ZIP
     QToolButton *btnFileZip = new QToolButton(this);
     addToolButton(propToolBar, btnFileZip, QString(":/icons/zip.png"));
     connect(btnFileZip,SIGNAL(clicked()),this,SLOT(zipFiles()));
     btnFileZip->setToolTip(tr("Zip Project"));
-#endif
 
     //propToolBar = addToolBar(tr("Preferences"));
 

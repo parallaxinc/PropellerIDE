@@ -1115,8 +1115,6 @@ void MainWindow::programBuild()
     runCompiler(COMPILE_ONLY);
 }
 
-#ifdef EXTERNAL_SPIN_LOADER
-
 int  MainWindow::loadProgram(int type, bool closePort, QString file)
 {
     int rc = -1;
@@ -1178,67 +1176,6 @@ int  MainWindow::loadProgram(int type, bool closePort, QString file)
     emit signalStatusDone(true);
     return rc;
 }
-
-#else
-
-int  MainWindow::loadProgram(int type, bool closePort, QString file)
-{
-    int rc = -1;
-    P1Loader myloader;
-
-    // if find in progress, ignore request
-    if(!statusDone) {
-        QMessageBox::information(this,tr("Patience Please"),tr("Can't handle more than one request at this time. Try again."));
-        return rc;
-    }
-    emit signalStatusDone(false);
-
-    if(!file.length()) {
-        file = projectFile.replace(".spin",".binary",Qt::CaseInsensitive);
-    }
-
-    bool stat = portListener->isOpen();
-    if(cbPort->currentText().length() == 0) {
-        QMessageBox::critical(this,tr("Propeller Load"), tr("Port not available. Please connect Propeller board."), QMessageBox::Ok);
-        goto endLoadProgram;
-    }
-    if(stat) {
-        // changing selected port now changes terminal port
-        if(cbPort->currentText().compare(portListener->getPortName()) != 0) {
-            portListener->close();
-            setCurrentPort(cbPort->currentIndex());
-            portListener->open();
-            term->setPortName(cbPort->currentText());
-        }
-    } else {
-        portListener->open();
-    }
-    portListener->stop();
-    portConnectionMonitor->stop();
-#ifdef Q_OS_WIN
-    rc = myloader.load(file, type, portListener->getFileHandle());
-#else
-    rc = myloader.load(file, type, cbPort->currentText(), term->getBaud());
-    myloader.close();
-#endif
-    portListener->start();
-    if(!stat && closePort) portListener->close();
-    portConnectionMonitor->start();
-
-    if(rc) {
-        QMessageBox::critical(this,tr("Propeller Load Failed"), tr("Failed to load Propeller on port")+" "+cbPort->currentText(), QMessageBox::Ok);
-    }
-    else {
-        QString s = msgLabel->text();
-        sizeLabel->setText(s.mid(s.indexOf("is ")+3)+"loaded");
-    }
-
-endLoadProgram:
-    emit signalStatusDone(true);
-
-    return rc;
-}
-#endif
 
 void MainWindow::programBurnEE()
 {
@@ -1548,7 +1485,6 @@ void MainWindow::addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile)
 
 void MainWindow::zipFiles()
 {
-#ifdef ENABLE_ZIP
     int n = this->editorTabs->currentIndex();
     QString fileName = editorTabs->tabToolTip(n);
     if (fileName.isEmpty()) {
@@ -1559,7 +1495,6 @@ void MainWindow::zipFiles()
     if(fileTree.count() > 0) {
         zipper.makeZip(fileName, fileTree, spinLibPath);
     }
-#endif
 }
 
 void MainWindow::updateProjectTree(QString fileName, QString text)

@@ -424,7 +424,6 @@ void SpinBuilder::procReadyRead()
         }
     }
 
-#ifdef EXTERNAL_SPIN_LOADER
     if(bytes.contains("RECEIVED")) {
         receiving = true;
     }
@@ -441,5 +440,4 @@ void SpinBuilder::procReadyRead()
             qDebug() << "RECEIVED" << s;
         }
     }
-#endif
 }

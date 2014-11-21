@@ -9,9 +9,6 @@ TermPrefs::TermPrefs(Terminal *term) : ui(new Ui::TermPrefs)
     serialConsole = term->getEditor();
     terminal = term;
 
-#ifndef ENABLE_ENTER_ISNL
-    ui->cbEnterIsNL->setVisible(false);
-#endif
     ui->cbSwapNLCR->setVisible(false);
 
     /* setup application registry info */

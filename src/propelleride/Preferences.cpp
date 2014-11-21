@@ -267,7 +267,6 @@ void Preferences::setupFolders()
     settings.setValue(spinCompilerKey,spinLeditCompiler->text());
     settings.setValue(spinIncludesKey,spinLeditIncludes->text());
 
-#ifdef EXTERNAL_SPIN_LOADER
     QString loader("/p1load");
 #ifdef Q_OS_WIN
     loader += ".exe";
@@ -292,7 +291,6 @@ void Preferences::setupFolders()
     }
 
     settings.setValue(spinLoaderKey,spinLoadLedit->text());
-#endif
 
 }
 
@@ -660,7 +658,6 @@ void Preferences::spinBrowseIncludes()
 
 void Preferences::spinBrowseLoader()
 {
-#ifdef EXTERNAL_SPIN_LOADER
     QString folder = spinLoadLedit->text();
     if(!folder.length()) folder = lastFolder;
     QString fileName = QFileDialog::getOpenFileName(this,
@@ -671,7 +668,6 @@ void Preferences::spinBrowseLoader()
     if(s.length() > 0)
         spinLoadLedit->setText(s);
     qDebug() << "spinBrowseLoader" << s;
-#endif
 }
 
 void Preferences::accept()
@@ -679,9 +675,7 @@ void Preferences::accept()
     QSettings settings(publisherKey, PropellerIdeGuiKey,this);
     settings.setValue(spinCompilerKey,spinLeditCompiler->text());
     settings.setValue(spinIncludesKey,spinLeditIncludes->text());
-#ifdef EXTERNAL_SPIN_LOADER
     settings.setValue(spinLoaderKey,spinLoadLedit->text());
-#endif
 
     settings.setValue(tabSpacesKey,tabspaceLedit.text());
 
@@ -717,9 +711,7 @@ void Preferences::reject()
 {
     spinLeditCompiler->setText(spinCompilerStr);
     spinLeditIncludes->setText(spinIncludesStr);
-#ifdef EXTERNAL_SPIN_LOADER
     spinLoadLedit->setText(spinLoaderStr);
-#endif
 
     tabspaceLedit.setText(tabSpacesStr);
     hlNumStyle.setChecked(hlNumStyleBool);
@@ -755,9 +747,7 @@ void Preferences::showPreferences(QString lastDir)
     this->lastFolder = lastDir;
     spinCompilerStr = spinLeditCompiler->text();
     spinIncludesStr = spinLeditIncludes->text();
-#ifdef EXTERNAL_SPIN_LOADER
     spinLoaderStr = spinLoadLedit->text();
-#endif
     this->setWindowTitle(QString(PropellerIdeGuiKey) +" Preferences");
 
     tabSpacesStr = tabspaceLedit.text();
