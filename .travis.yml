@@ -13,6 +13,5 @@ before_install:
   - qmake -qt=qt5 -v
 
 script:
-  - cd ide
   - qmake -qt=qt5
   - make

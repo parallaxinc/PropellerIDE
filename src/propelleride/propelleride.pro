@@ -1,12 +1,10 @@
-! include( ../common.pri ) {
-    error( No common.pri file! )
+! include( ../../propelleride.pri ) {
+    error( No propelleride.pri file! )
 }
 
 TEMPLATE = app
 
-TARGET = ../propelleride
-
-LIBS += -L../lib/qext -L../lib/spinzip -lqext -lspinzip
+LIBS += -L../qext -L../spinzip -lqext -lspinzip
 
 SOURCES += main.cpp\
     mainwindow.cpp \

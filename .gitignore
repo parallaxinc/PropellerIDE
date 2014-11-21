@@ -5,3 +5,4 @@ p1load.exe
 staging/
 *.swp
 *~
+Makefile

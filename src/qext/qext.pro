@@ -1,5 +1,5 @@
-! include( ../../common.pri ) {
-    error( No common.pri file! )
+! include( ../../propelleride.pri ) {
+    error( No propelleride.pri file! )
 }
 
 TEMPLATE = lib

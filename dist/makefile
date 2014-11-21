@@ -4,7 +4,7 @@ ISCC			:=	/c/Program\ Files\ \(x86\)/Inno\ Setup\ 5/ISCC.exe
 
 DIR				:=	$(shell pwd)
 DIR_OPENSPIN	:=	$(DIR)/openspin
-DIR_IDE			:=	$(DIR)/ide
+DIR_IDE			:=	$(DIR)/src
 DIR_SPINLIB		:=	$(DIR)/spin
 DIR_LOADER		:=	$(DIR)/loader
 DIR_STAGING		:=	$(DIR)/staging
@@ -39,6 +39,8 @@ else
 		CPU := $(shell uname -m)
 	endif
 endif
+
+all: build_all
 
 help:
 	@echo "Usage:    make [TYPE]"

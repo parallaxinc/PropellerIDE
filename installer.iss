@@ -55,7 +55,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: FtdiChip; Description: "Install FTDI Chip USB Serial Port Drivers"; Flags: checkedonce; 
 
 [Files]
-Source: "{#MyOutputDir}\ide\propelleride.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyOutputDir}\src\propelleride.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyLoader}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyOpenSpin}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "gfx\propellerhat.ico"; DestDir: "{app}"; Flags: ignoreversion
