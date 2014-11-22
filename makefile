@@ -3,10 +3,7 @@ NAME			:=	propelleride
 ISCC			:=	/c/Program\ Files\ \(x86\)/Inno\ Setup\ 5/ISCC.exe 
 
 DIR				:=	$(shell pwd)
-DIR_OPENSPIN	:=	$(DIR)/openspin
-DIR_IDE			:=	$(DIR)/src
-DIR_SPINLIB		:=	$(DIR)/spin
-DIR_LOADER		:=	$(DIR)/loader
+DIR_SRC			:=	$(DIR)/src
 DIR_STAGING		:=	$(DIR)/staging
 DIR_COMMON		:=	$(DIR)/common
 
@@ -22,7 +19,7 @@ mac: OS 			:=	macx
 mac: DIR_PREBUILT	:=	$(DIR)/prebuilt/$(OS)
 
 
-VERSION			:=	$(shell echo $(shell grep -r VERSION= $(DIR_IDE)/common.pri \
+VERSION			:=	$(shell echo $(shell grep -r VERSION= propelleride.pri \
 					| cut -d'=' -f3 \
 					| sed -e 's/[\r]//g') \
 					| sed -e 's/ /./g')
@@ -40,7 +37,7 @@ else
 	endif
 endif
 
-all: build_all
+all: build
 
 help:
 	@echo "Usage:    make [TYPE]"
@@ -57,46 +54,28 @@ checkout:
 	git submodule init
 	git submodule update
 
-
-
-build_all: build_ide build_openspin build_loader
-
 copy_all: clean_staging copy_root copy_common copy_bin 
 
-clean: clean_staging
-	make -C $(DIR_LOADER) clean
-	make -C $(DIR_OPENSPIN) clean
-	make -C $(DIR_IDE) clean
+build:
+	qmake -r; $(MAKE) -f Makefile
 
 clean_staging:
 	rm -rf $(DIR_STAGING)
 
-build_ide:
-	cd $(DIR_IDE); qmake PropellerIDE.pro; make $(JOBS)
+clean: clean_staging
+	qmake -r; $(MAKE) -f Makefile clean
 
-build_openspin:
-	cd $(DIR_OPENSPIN); make
-
-build_loader:
-	cd $(DIR_LOADER); make
-
-copy_bin:
-	mkdir -p $(DIR_BIN)
-	cp $(DIR_IDE)/$(NAME) $(DIR_BIN)
-	cp $(DIR_OPENSPIN)/openspin $(DIR_BIN)
-	cp $(DIR_LOADER)/p1load $(DIR_BIN)
-
-copy_root:
+copy:
+	mkdir -p $(DIR_BIN); cp -u `find $(DIR_SRC) -executable -type f` $(DIR_BIN)
 	rsync -ru $(DIR_PREBUILT)/* $(DIR_STAGING)
+	rsync -ru doc $(DIR_STAGING)/usr/share/propelleride
+	rsync -ru library $(DIR_STAGING)/usr/share/propelleride
 
-copy_common:
-	rsync -ru $(DIR_COMMON)/* $(DIR_TARGET)
-
-deb: build_all copy_all
+deb: copy
 	sed -e "s/VERSION/$(VERSION)/" \
 		-e "s/CPU/$(CPU)/" \
 		-i $(DIR_STAGING)/DEBIAN/control
 	dpkg-deb -b $(DIR_STAGING) propelleride-$(VERSION)-$(CPU).deb
 
-win: build_all
+win: build
 	$(ISCC) //dMyAppVersion=$(VERSION) "installer.iss"

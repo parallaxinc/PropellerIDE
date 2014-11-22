@@ -19,7 +19,6 @@
 AppID={{FFFE6E20-C961-487B-B55B-510E4BCE479B}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher="Parallax Inc."
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
