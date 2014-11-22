@@ -1,3 +1,3 @@
 [submodule "OpenSpin"]
-	path = src/openspin
-	url = https://github.com/parallaxinc/OpenSpin
+	path = src/OpenSpin
+	url = https://github.com/bweir/OpenSpin.git
