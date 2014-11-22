@@ -770,22 +770,22 @@ int Editor::addAutoItem(QString type, QString s)
     QString ch = type.at(0);
 
     if(ch.compare("c") == 0) {
-        icon.addFile(":/icons/con2.png");
+        icon.addFile(":/icons/block-con.png");
         split = true;
     } else if(ch.compare("e") == 0) {
-        icon.addFile(":/icons/con2.png");
+        icon.addFile(":/icons/block-con.png");
         split = true;
     } else if(ch.compare("o") == 0) {
-        icon.addFile(":/icons/blks.png");
+        icon.addFile(":/icons/blocks.png");
     } else if(ch.compare("p") == 0) {
-        icon.addFile(":/icons/pri2.png");
+        icon.addFile(":/icons/block-pri.png");
     } else if(ch.compare("f") == 0) {
-        icon.addFile(":/icons/pub2.png");
+        icon.addFile(":/icons/block-pub.png");
     } else if(ch.compare("v") == 0) {
-        icon.addFile(":/icons/var2.png");
+        icon.addFile(":/icons/block-var.png");
         split = true;
     } else if(ch.compare("x") == 0) {
-        icon.addFile(":/icons/dat2.png");
+        icon.addFile(":/icons/block-dat.png");
         split = true;
     }
 

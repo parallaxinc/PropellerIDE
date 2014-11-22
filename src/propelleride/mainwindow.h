@@ -98,7 +98,6 @@ public slots:
     void propellerManual();
     void propellerDatasheet();
     void about();
-    void aboutQt();
 
     void findMultilineComment(QPoint point);
     void findMultilineComment(QTextCursor cur);

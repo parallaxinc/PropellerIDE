@@ -15,20 +15,20 @@ void MainWindow::setupFileMenu()
     QMenu *fileMenu = new QMenu(tr("&File"), this);
     menuBar()->addMenu(fileMenu);
 
-    fileMenu->addAction(QIcon(":/icons/newfile.png"), tr("&New"), this, SLOT(newFileAction()), QKeySequence::New);
-    fileMenu->addAction(QIcon(":/icons/openfile.png"), tr("&Open"), this, SLOT(openFile()), QKeySequence::Open);
+    fileMenu->addAction(QIcon(":/icons/file-new.png"), tr("&New"), this, SLOT(newFileAction()), QKeySequence::New);
+    fileMenu->addAction(QIcon(":/icons/file-open.png"), tr("&Open"), this, SLOT(openFile()), QKeySequence::Open);
 
     fileMenu->addSeparator();
 
-    fileMenu->addAction(QIcon(":/icons/savefile.png"), tr("&Save"), this, SLOT(saveFile()), QKeySequence::Save);
-    fileMenu->addAction(QIcon(":/icons/saveasfile.png"), tr("Save &As"), this, SLOT(saveAsFile()), QKeySequence::SaveAs);
+    fileMenu->addAction(QIcon(":/icons/file-save.png"), tr("&Save"), this, SLOT(saveFile()), QKeySequence::Save);
+    fileMenu->addAction(QIcon(":/icons/file-save-as.png"), tr("Save &As"), this, SLOT(saveAsFile()), QKeySequence::SaveAs);
 
     fileMenu->addSeparator();
 
-    // fileMenu->addAction(QIcon(":/icons/print.png"), tr("Print"), this, SLOT(printFile()), QKeySequence::Print);
+    // fileMenu->addAction(QIcon(":/icons/file-print.png"), tr("Print"), this, SLOT(printFile()), QKeySequence::Print);
 
     // Enable zipFiles after zipper works.
-    fileMenu->addAction(QIcon(":/icons/zip.png"), tr("Zip Project"), this, SLOT(zipFiles()), 0);
+    fileMenu->addAction(QIcon(":/icons/file-zip.png"), tr("Zip Project"), this, SLOT(zipFiles()), 0);
 
 
     // recent file actions
@@ -47,7 +47,7 @@ void MainWindow::setupFileMenu()
 
     fileMenu->addSeparator();
 
-    fileMenu->addAction(QIcon(":/icons/exit.png"), tr("E&xit"), this, SLOT(quitProgram()), QKeySequence::Quit);
+    fileMenu->addAction(QIcon(":/icons/file-exit.png"), tr("E&xit"), this, SLOT(quitProgram()), QKeySequence::Quit);
 
 }
 
@@ -57,14 +57,14 @@ void MainWindow::setupEditMenu()
     QMenu * editMenu = new QMenu(tr("&Edit"), this);
     menuBar()->addMenu(editMenu);
 
-    editMenu->addAction(QIcon::fromTheme("edit-undo"), tr("&Undo"), this, SLOT(undo()), QKeySequence::Undo);
-    editMenu->addAction(QIcon::fromTheme("edit-redo"), tr("&Redo"), this, SLOT(redo()), QKeySequence::Redo);
+    editMenu->addAction(QIcon(":/icons/edit-undo.png"), tr("&Undo"), this, SLOT(undo()), QKeySequence::Undo);
+    editMenu->addAction(QIcon(":/icons/edit-redo.png"), tr("&Redo"), this, SLOT(redo()), QKeySequence::Redo);
 
     editMenu->addSeparator();
 
-    editMenu->addAction(QIcon::fromTheme("edit-find"), tr("Find"), this, SLOT(showFindFrame()), QKeySequence::Find);
-    editMenu->addAction(QIcon::fromTheme("go-next"), tr("Find Next"), this, SLOT(findNextClicked()), QKeySequence::FindNext);
-    editMenu->addAction(QIcon::fromTheme("go-previous"), tr("Find Previous"), this, SLOT(findPrevClicked()), QKeySequence::FindPrevious);
+    editMenu->addAction(QIcon(":/icons/edit-find.png"), tr("Find"), this, SLOT(showFindFrame()), QKeySequence::Find);
+    editMenu->addAction(QIcon(":/icons/go-next.png"), tr("Find Next"), this, SLOT(findNextClicked()), QKeySequence::FindNext);
+    editMenu->addAction(QIcon(":/icons/go-previous.png"), tr("Find Previous"), this, SLOT(findPrevClicked()), QKeySequence::FindPrevious);
 
     editMenu->addSeparator();
 
@@ -102,15 +102,15 @@ void MainWindow::setupViewMenu()
     viewMenu->addSeparator();
 
 #ifdef Q_OS_MAC
-    viewMenu->addAction(QIcon(":/icons/FontTT.png"), tr("Font"), this, SLOT(fontDialog()), QKeySequence(tr("Ctrl+T")));
+    viewMenu->addAction(QIcon(":/icons/preferences-font.png"), tr("Font"), this, SLOT(fontDialog()), QKeySequence(tr("Ctrl+T")));
 #else
-    viewMenu->addAction(QIcon(":/icons/FontTT.png"), tr("Font"), this, SLOT(fontDialog()));
+    viewMenu->addAction(QIcon(":/icons/preferences-font.png"), tr("Font"), this, SLOT(fontDialog()));
 #endif
 
-    viewMenu->addAction(QIcon(":/icons/fontsmaller.png"), tr("Smaller Font"), this, SLOT(fontSmaller()), QKeySequence::ZoomOut);
+    viewMenu->addAction(QIcon(":/icons/preferences-font-smaller.png"), tr("Smaller Font"), this, SLOT(fontSmaller()), QKeySequence::ZoomOut);
 
     /* special provision for bigger fonts to use default ZoomIn or Ctrl+= */
-    QAction *bigger = new QAction(QIcon(":/icons/fontbigger.png"), tr("Bigger Font"), this);
+    QAction *bigger = new QAction(QIcon(":/icons/preferences-font-bigger.png"), tr("Bigger Font"), this);
     QList<QKeySequence> biggerKeys;
     biggerKeys.append(QKeySequence::ZoomIn);
     biggerKeys.append(QKeySequence(Qt::CTRL+Qt::Key_Equal));
@@ -130,13 +130,13 @@ void MainWindow::setupProjectMenu()
     QMenu * projectMenu = new QMenu(tr("&Project"), this);
     menuBar()->addMenu(projectMenu);
 
-    projectMenu->addAction(QIcon(":/icons/PropHatAlpha.png"), tr("Identify Hardware"), this, SLOT(findHardware()), Qt::Key_F7);
-    projectMenu->addAction(QIcon(":/icons/debug2.png"), tr("Debug"), this, SLOT(programDebug()), Qt::Key_F8);
-    projectMenu->addAction(QIcon(":/icons/build2.png"), tr("Build"), this, SLOT(programBuild()), Qt::Key_F9);
-    projectMenu->addAction(QIcon(":/icons/run.png"), tr("Run"), this, SLOT(programRun()), Qt::Key_F10);
-    projectMenu->addAction(QIcon(":/icons/burnee.png"), tr("Burn"), this, SLOT(programBurnEE()), Qt::Key_F11);
+    projectMenu->addAction(QIcon(":/icons/project-identify.png"), tr("Identify Hardware"), this, SLOT(findHardware()), Qt::Key_F7);
+    projectMenu->addAction(QIcon(":/icons/project-terminal.png"), tr("Debug"), this, SLOT(programDebug()), Qt::Key_F8);
+    projectMenu->addAction(QIcon(":/icons/project-build.png"), tr("Build"), this, SLOT(programBuild()), Qt::Key_F9);
+    projectMenu->addAction(QIcon(":/icons/project-run.png"), tr("Run"), this, SLOT(programRun()), Qt::Key_F10);
+    projectMenu->addAction(QIcon(":/icons/project-burn.png"), tr("Burn"), this, SLOT(programBurnEE()), Qt::Key_F11);
 #if defined(IDEDEBUG)
-    projectMenu->addAction(QIcon(":/icons/Eye.png"), tr("IDE Debug Console"), this, SLOT(ideDebugConsole()));
+    projectMenu->addAction(QIcon(":/icons/project-debug.png"), tr("IDE Debug Console"), this, SLOT(ideDebugConsole()));
 #endif
 }
 
@@ -146,13 +146,12 @@ void MainWindow::setupHelpMenu()
     QMenu *helpMenu = new QMenu(tr("&Help"), this);
     menuBar()->addMenu(helpMenu);
 
-    helpMenu->addAction(QIcon(":/icons/helpsymbol.png"), tr("Propeller &Datasheet"), this, SLOT(propellerDatasheet()));
-    helpMenu->addAction(QIcon(":/icons/helpsymbol.png"), tr("Propeller &Manual"), this, SLOT(propellerManual()));
+    helpMenu->addAction(QIcon(":/icons/help-datasheet.png"), tr("Propeller &Datasheet"), this, SLOT(propellerDatasheet()));
+    helpMenu->addAction(QIcon(":/icons/help-manual.png"), tr("Propeller &Manual"), this, SLOT(propellerManual()));
 
     helpMenu->addSeparator();
 
-    helpMenu->addAction(QIcon::fromTheme("help-about"), tr("&About"), this, SLOT(about()));
-    helpMenu->addAction(tr("About &Qt"), this, SLOT(aboutQt()));
+    helpMenu->addAction(QIcon(":/icons/help-about.png"), tr("&About"), this, SLOT(about()));
 }
 
 void MainWindow::propellerManual()
@@ -187,9 +186,4 @@ void MainWindow::about()
            "<h4>Get the source:</p>"
            "<ul><li><a href=\"https://github.com/parallaxinc/PropellerIDE\">PropellerIDE Repository</a></li>"
            "<li><a href=\"https://github.com/parallaxinc/OpenSpin\">OpenSpin Repository</a></li></ul>");
-}
-
-void MainWindow::aboutQt()
-{
-    QMessageBox::aboutQt(this, tr("About Qt"));
 }
