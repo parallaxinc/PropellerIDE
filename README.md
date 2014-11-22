@@ -61,17 +61,14 @@ make deb
 
 ### Building On Windows
 
-The easiest way to build the binaries on Windows is using QtCreator
+The easiest way to build on Windows is with QtCreator itself.
 
-#### Cross-Compiling From Linux
+The automated build environment uses the following tools.
 
-*Not yet available.*
-
-The following dependencies are needed if you are planning to cross-compile to Windows.
-
-```
-sudo apt-get install mingw32 nsis
-```
+* MinGW
+* MSYS
+* Inno Setup 5
+* Qt5
 
 Type `make win` to execute the build.
 
@@ -79,12 +76,9 @@ Type `make win` to execute the build.
 make win
 ```
 
-### Mac OS X
+### Building On OS X
 
 *Not yet available.*
-
-#### Building On 
-
 
 ## Clean Up
 
