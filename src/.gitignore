@@ -1,0 +1,7 @@
+moc_*.cpp
+*.o
+*.a
+qrc_*.cpp
+ui_*.h
+*.pro.user
+object_script.*
