@@ -6,6 +6,7 @@ target.path = $${PREFIX}/bin
 INSTALLS += target
 
 CONFIG -= qt debug_and_release
+CONFIG += console
 
 SOURCES += \
     $$files(OpenSpin/PropellerCompiler/*.cpp) \

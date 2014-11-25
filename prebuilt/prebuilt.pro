@@ -1,4 +1,5 @@
 TEMPLATE = aux
+CONFIG -= debug_and_release
 
 extras.files += \
     ../LICENSE.GPL \
