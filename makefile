@@ -1,23 +1,16 @@
 NAME			:=	propelleride
 
-ISCC			:=	/c/Program\ Files\ \(x86\)/Inno\ Setup\ 5/ISCC.exe 
-
-DIR				:=	$(shell pwd)
+DIR			:=	$(shell pwd)
 DIR_SRC			:=	$(DIR)/src
+DIR_BUILD		:=	$(DIR)/build
+
 DIR_STAGING		:=	$(DIR)/staging
+deb:	DIR_STAGING	:= 	$(DIR)/staging/usr
+
 DIR_COMMON		:=	$(DIR)/common
 
-deb: OS 			:=	unix
-deb: DIR_PREBUILT	:=	$(DIR)/prebuilt/$(OS)
-deb: DIR_BIN		:=	$(DIR_STAGING)/usr/bin
-deb: DIR_TARGET		:=	$(DIR_STAGING)/usr/share/$(NAME)
-
-win: OS 			:=	win32
-win: DIR_PREBUILT	:=	$(DIR)/prebuilt/$(OS)
-
-mac: OS 			:=	macx
-mac: DIR_PREBUILT	:=	$(DIR)/prebuilt/$(OS)
-
+ISCC			:=	iscc
+QMAKE			:=	qmake -r
 
 VERSION			:=	$(shell echo $(shell grep -r VERSION= propelleride.pri \
 					| cut -d'=' -f3 \
@@ -54,28 +47,25 @@ checkout:
 	git submodule init
 	git submodule update
 
-copy_all: clean_staging copy_root copy_common copy_bin 
-
 build:
-	qmake -r; $(MAKE) -f Makefile
+	cd $(DIR_SRC); $(QMAKE) PREFIX=$(DIR_STAGING); $(MAKE)
+
+copy: build
+	cd $(DIR_SRC); $(MAKE) install
 
 clean_staging:
 	rm -rf $(DIR_STAGING)
 
 clean: clean_staging
-	qmake -r; $(MAKE) -f Makefile clean
+	cd $(DIR_SRC); $(QMAKE); $(MAKE) clean
 
-copy:
-	mkdir -p $(DIR_BIN); cp -u `find $(DIR_SRC) -executable -type f` $(DIR_BIN)
-	rsync -ru $(DIR_PREBUILT)/* $(DIR_STAGING)
-	rsync -ru doc $(DIR_STAGING)/usr/share/propelleride
-	rsync -ru library $(DIR_STAGING)/usr/share/propelleride
-
-deb: copy
+deb: clean_staging copy
+	mkdir -p $(DIR_STAGING)/DEBIAN/
+	cp -f dist/control $(DIR_STAGING)/DEBIAN/control
 	sed -e "s/VERSION/$(VERSION)/" \
 		-e "s/CPU/$(CPU)/" \
 		-i $(DIR_STAGING)/DEBIAN/control
 	dpkg-deb -b $(DIR_STAGING) propelleride-$(VERSION)-$(CPU).deb
 
 win: build
-	$(ISCC) //dMyAppVersion=$(VERSION) "installer.iss"
+	$(ISCC) //dMyAppVersion=$(VERSION) "dist/installer.iss"

@@ -2,12 +2,12 @@ TEMPLATE = aux
 CONFIG -= debug_and_release
 
 extras.files += \
-    ../LICENSE.GPL \
-    ../LICENSE.MIT \
-    ../COPYING \
-    ../AUTHORS \
-    ../library \
-    ../doc
+    ../../LICENSE.GPL \
+    ../../LICENSE.MIT \
+    ../../COPYING \
+    ../../AUTHORS \
+    ../../library \
+    ../../doc
 
 unix {
     prebuilt.files += $$files(unix/*)

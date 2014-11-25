@@ -1,6 +1,7 @@
 TEMPLATE  = subdirs
 
 SUBDIRS = \
+    prebuilt \
     qext \
     spinzip \
     p1load \
