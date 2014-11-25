@@ -1,0 +1,3 @@
+[submodule "src/openspin/OpenSpin"]
+	path = src/openspin/OpenSpin
+	url = https://github.com/bweir/OpenSpin
