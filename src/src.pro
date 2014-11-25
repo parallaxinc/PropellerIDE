@@ -1,10 +1,11 @@
 TEMPLATE  = subdirs
 
 SUBDIRS = \
+    prebuilt \
     qext \
     spinzip \
     p1load \
-    OpenSpin \
+    openspin \
     propelleride \
 
 propelleride.depends = qext spinzip

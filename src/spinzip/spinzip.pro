@@ -1,9 +1,9 @@
-! include( ../../propelleride.pri ) {
-    error( No propelleride.pri file! )
-}
+include( ../../propelleride.pri )
 
 TEMPLATE = lib
+TARGET = spinzip
+target.path = $${PREFIX}/bin
 CONFIG += staticlib
 
-SOURCES += *.cpp 
-HEADERS  += *.h
+SOURCES += $$files(*.cpp)
+HEADERS  += $$files(*.h)

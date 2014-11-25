@@ -5,12 +5,13 @@
 #define MyAppURL "www.parallax.com"
 #define MyAppExeName "propelleride.exe"
 #define MyAppBin "{app}"
+#define MyPath ".."
 ;#define FtdiChipApp "CDM v2.12.00 WHQL Certified.exe"
 
 ; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; ---- IMPORTANT!!! ---- Set this to your QtPath
 ; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#define QtPath "C:\Qt\5.3.2\5.3\mingw482_32"
+#define QtPath "C:\Qt\5.3\mingw482_32"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -35,7 +36,7 @@ UsePreviousUserInfo=no
 DisableDirPage=yes
 DisableProgramGroupPage=yes
 DisableReadyPage=no
-WizardImageFile="gfx\propellerbanner.bmp"
+WizardImageFile="{#MyPath}\gfx\propellerbanner.bmp"
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -46,20 +47,14 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: FtdiChip; Description: "Install FTDI Chip USB Serial Port Drivers"; Flags: checkedonce; 
 
 [Files]
-Source: "src\propelleride\propelleride.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "src\p1load\p1load.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "src\OpenSpin\openspin.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "gfx\propellerhat.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "doc\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "library\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "prebuilt\win32\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#MyPath}\src\propelleride\propelleride.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyPath}\src\p1load\p1load.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyPath}\src\OpenSpin\openspin.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyPath}\gfx\propellerhat.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyPath}\doc"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#MyPath}\library"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#MyPath}\src\prebuilt\win32\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
-;Source: "{#QtBinPath}\icuin52.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
-;Source: "{#QtBinPath}\icuuc52.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
-;Source: "{#QtBinPath}\icudt52.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
-;Source: "{#QtBinPath}\libgcc_s_dw2-1.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
-;Source: "{#QtBinPath}\libstdc++-6.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
-;Source: "{#QtBinPath}\libwinpthread-1.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
 Source: "{#QtPath}\bin\Qt5Core.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
 Source: "{#QtPath}\bin\Qt5Gui.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
 Source: "{#QtPath}\bin\Qt5Widgets.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
@@ -69,8 +64,8 @@ Source: "{#QtPath}\plugins\platforms\qwindows.dll"; DestDir: "{#MyAppBin}\platfo
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}" ; IconFilename: "{app}\propellerhat.ico";
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}";
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}";
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}";
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\propellerhat.ico";
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\propellerhat.ico";
 
 [Run]
 ;Filename: {app}\{#FtdiChipApp}; Tasks: FtdiChip; Flags: RunAsCurrentUser NoWait; 
@@ -88,5 +83,4 @@ Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; Valu
 Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_SpinLoader;   ValueData: {app}\p1load.exe;          Flags: UninsDeleteKey; 
 Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_SpinIncludes; ValueData: {app}\library;             Flags: UninsDeleteKey;
 Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_LastFileName; ValueData: {app}\library\Welcome.spin;   Flags: UninsDeleteKey; 
-;Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_EditorFont; ValueData: Parallax; Flags: UninsDeleteKey; 
 

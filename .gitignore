@@ -1,8 +1,16 @@
-propelleride-*
+dist/propelleride-*
+
 src/propelleride/propelleride
+src/openspin/openspin
+src/p1load/p1load
+
 propelleride.exe
+openspin.exe
 p1load.exe
+
 staging/
 *.swp
+*.pro.user
 *~
 Makefile
+*.binary

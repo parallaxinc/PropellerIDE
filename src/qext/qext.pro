@@ -1,8 +1,8 @@
-! include( ../../propelleride.pri ) {
-    error( No propelleride.pri file! )
-}
+include( ../../propelleride.pri )
 
 TEMPLATE = lib
+TARGET = qext
+target.path = $${PREFIX}/bin
 CONFIG += staticlib
 
 SOURCES += qextserialport.cpp \
@@ -12,7 +12,6 @@ HEADERS  += qextserialport.h \
     qextserialenumerator.h \
     qextserialenumerator_p.h \
     qextserialport_p.h 
-
 
 unix {
     SOURCES        += qextserialport_unix.cpp

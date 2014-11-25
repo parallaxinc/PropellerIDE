@@ -1,7 +1,14 @@
+isEmpty(PREFIX):PREFIX = /usr/local
+
 TEMPLATE = app
+TARGET = p1load
+target.path = $${PREFIX}/bin
+INSTALLS += target
+
+CONFIG -= qt debug_and_release
+CONFIG += console
 
 SOURCES += p1load.c
-CONFIG -= qt
 
 unix {
     DEFINES += LINUX
@@ -9,9 +16,10 @@ unix {
 }
 macx {
     DEFINES += MACOSX
-    SOURCES += osint_mingw.c enumcom.c
+    SOURCES += osint_linux.c
 }
 win32 {
     DEFINES += MINGW
     LIBS    += -lsetupapi
+    SOURCES += osint_mingw.c enumcom.c
 }
