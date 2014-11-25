@@ -11,5 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): {
 
 INCLUDEPATH += . ..
 
+CONFIG -= debug_and_release
+
 DEFINES += IDEVERSION=0
 DEFINES += MINVERSION=20
