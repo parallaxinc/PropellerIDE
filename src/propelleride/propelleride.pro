@@ -1,14 +1,16 @@
-! include( ../../propelleride.pri ) {
-    error( No propelleride.pri file! )
-}
+include( ../../propelleride.pri )
 
 TEMPLATE = app
+TARGET = propelleride
+target.path = $${PREFIX}/bin
+INSTALLS += target
 
-LIBS += -L../qext -L../spinzip -lqext -lspinzip
+LIBS += -L$${OUT_PWD}/../qext/ -lqext
+LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
 
 SOURCES += main.cpp\
     mainwindow.cpp \
-    mainwindow/*.cpp \
+    $$files(mainwindow/*.cpp) \
     StatusDialog.cpp \
     highlighter.cpp \
     treemodel.cpp \
@@ -54,12 +56,17 @@ RESOURCES += \
     fonts/fonts.qrc
 
 unix {
-    LIBS           += -lz
+    LIBS            += -lz
 }
 macx {
-  LIBS             += -framework IOKit -framework CoreFoundation
+    LIBS            += -framework IOKit -framework CoreFoundation
 }
 win32 {
-  LIBS             += -lsetupapi
-  LIBS             += -L$$PWD -lzlib1
+    LIBS            += -lsetupapi
+    LIBS            += -L$$PWD -lz
 }
+
+# ENABLE_AUTO_ENTER turns on AUTO-INDENT
+DEFINES += ENABLE_AUTO_ENTER
+# SPIN_AUTOCOMPLETE turns on spinny-sense
+DEFINES += SPIN_AUTOCOMPLETE
