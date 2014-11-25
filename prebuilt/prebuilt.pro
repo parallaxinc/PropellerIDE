@@ -1,4 +1,4 @@
-include (../nocompile.pri)
+TEMPLATE = aux
 
 extras.files += \
     ../LICENSE.GPL \
