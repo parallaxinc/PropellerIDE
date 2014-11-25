@@ -27,11 +27,13 @@ PropellerIDE was created using C++ and Qt.
 
 ## Building
 
-Current PropellerIDE builds are manual, but the target is to build the application using an Amazon EC2 instance to make cross-platform support as easy as possible.
+PropellerIDE 
 
-The following instructions have been prepared using clean EC2 Ubuntu and Windows Server instances.
+### Dependencies
 
-### Building On Ubuntu
+PropellerIDE can be built against Qt4 or Qt5.
+
+### Linux
 
 Run an update to ensure your apt repositories are up-to-date.
 
@@ -59,43 +61,49 @@ Type `make deb` in the project root to build a Debian package.
 make deb
 ```
 
-### Building On Windows
-
-The easiest way to build the binaries on Windows is using QtCreator
-
-#### Cross-Compiling From Linux
-
-*Not yet available.*
-
-The following dependencies are needed if you are planning to cross-compile to Windows.
-
-```
-sudo apt-get install mingw32 nsis
-```
-
-Type `make win` to execute the build.
-
-```
-make win
-```
-
-### Mac OS X
-
-*Not yet available.*
-
-#### Building On 
-
-
-## Clean Up
-
 Type `make clean` to remove old build files.
 
 ```
 make clean
 ```
 
+PropellerIDE is known to build on Ubuntu as far back as 12.04.
+
+### Windows
+
+PropellerIDE on Windows is built using the Qt5 MinGW distribution from Qt's website:
+
+* http://qt-project.org/downloads
+
+For development, the easiest way to get started building the project is through QtCreator. Open the `src/src.pro` file as a project in the editor and build. Shadowed builds are not currently supported.
+
+PropellerIDE can also be built from the Windows PowerShell. This is how release builds and installers are produced. You will need to set the system path correctly.
+
+{code}
+C:\Qt\Tools\mingw482_32\bin;C:\Qt\5.3\mingw482_32\bin;C:\Program Files (x86)\Inno Setup 5
+{code}
+
+Open the PowerShell. The `make` command on Windows is `mingw32-make.exe`. Add the `win` parameter to build a Windows installer.
+
+```
+mingw32-make.exe win
+```
+
+Add `clean` to clean up old build files.
+
+```
+mingw32-make.exe clean
+```
+
+PropellerIDE has been built on Windows 7 and 8.
+
+*Note: QtCreator and command-line builds generate build files that are incompatible with each other, so you will need to call `make distclean` in the `src/` directory before you can switch from one to the other.*
+
+### OS X
+
+*Not yet available.*
+
 ## Credits
 
+Developed by LameStation LLC (contact@lamestation.com) in collaboration with Parallax Inc.
 Originally developed by Steve Denson, Dennis Gately, and Roy Eltham.
-
-**Related Projects**: [OpenSpin](https://github.com/parallaxinc/OpenSpin)
