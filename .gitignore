@@ -8,3 +8,4 @@ staging/
 *.pro.user
 *~
 Makefile
+*.binary
