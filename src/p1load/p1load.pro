@@ -5,7 +5,8 @@ TARGET = p1load
 target.path = $${PREFIX}/bin
 INSTALLS += target
 
-CONFIG -= qt
+CONFIG -= qt debug_and_release
+CONFIG += console
 
 SOURCES += p1load.c
 

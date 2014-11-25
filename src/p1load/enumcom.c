@@ -33,12 +33,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
-#include <objbase.h>
 #include <initguid.h>
+#include <objbase.h>
 #include <setupapi.h>
 
-#ifndef GUID_CLASS_COMPORT
-DEFINE_GUID(GUID_CLASS_COMPORT, 0x86e0d1e0L, 0x8089, 0x11d0, 0x9c, 0xe4, 0x08, 0x00, 0x3e, 0x30, 0x1f, 0x73);
+#ifndef GUID_DEVINTERFACE_COMPORT
+DEFINE_GUID(GUID_DEVINTERFACE_COMPORT, 0x86e0d1e0L, 0x8089, 0x11d0, 0x9c, 0xe4, 0x08, 0x00, 0x3e, 0x30, 0x1f, 0x73);
 #endif
 
 #ifdef MAIN
@@ -57,7 +57,7 @@ int main(void)
 
 int serial_find(const char* prefix, int (*check)(const char* port, void* data), void* data)
 {
-	GUID *guidDev = (GUID *) &GUID_CLASS_COMPORT;
+	GUID *guidDev = (GUID *) &GUID_DEVINTERFACE_COMPORT;
 	HDEVINFO hDevInfo = INVALID_HANDLE_VALUE;
 	SP_DEVICE_INTERFACE_DETAIL_DATA *pDetData = NULL;
 	SP_DEVICE_INTERFACE_DATA ifcData;
