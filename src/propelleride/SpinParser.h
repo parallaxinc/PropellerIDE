@@ -126,6 +126,7 @@ private:
     void match_pub (QString p, int line);
     void match_var (QString p, int line);
     int objectInfo(QString tag, QString &name, QString &file);
+    int objectInfo(QString tag, QString &name, QString &file, QString &parent);
     QString checkFile(QString fileName);
     void findSpinTags (QString fileName, QString objnode);
 

@@ -1,6 +1,6 @@
 #include "SpinParser.h"
 
-#define KEY_ELEMENT_SEP ":"
+#define KEY_ELEMENT_SEP ':'
 
 SpinParser::SpinParser()
 {
@@ -446,9 +446,6 @@ void SpinParser::match_dat (QString p, int line)
 
 void SpinParser::match_object (QString p, int line)
 {
-    QString tag = "";
-    QString subfile = "";
-    QString subnode = "";
     int len = p.indexOf(":");
     if(p.indexOf(":=") > 0)
         len = 0;
@@ -465,15 +462,38 @@ void SpinParser::match_object (QString p, int line)
         if(s.contains("[",Qt::CaseInsensitive))
             p = p.mid(0,p.indexOf("[",0,Qt::CaseInsensitive));
         p = p.trimmed();
-        tag = s+"\t"+currentFile+"\t"+p+"\t"+SpinKinds[K_OBJECT].letter;
-        objectInfo(tag, subnode, subfile);
-        QString file = checkFile(subfile);
-        if(QFile::exists(file) == false)
-            return;
+
         QString key = objectNode+KEY_ELEMENT_SEP+s;
-        if(db.contains(key) == false)
+        QString tag = s+"\t"+currentFile+"\t"+p+"\t"+SpinKinds[K_OBJECT].letter;
+        QString dummy, subnode, subfile, parent, curr = key;
+
+        objectInfo(tag, subnode, subfile, parent);
+        QString file = checkFile(subfile);
+
+		// file is missing, ignore object
+        if(!QFile::exists(file)) return;
+			
+		// avoid circular references, do this by scanning all existing
+		// parents of this particular key (*/*/*:*)
+		for (;;) {
+			int index;
+			// invalid match, ignore object
+			if (parent == file) {
+				qDebug() << "circular reference: " << s << currentFile;
+				return;
+			}
+			// cut off key at KEY_ELEMENT_SEP
+			if ((index = curr.lastIndexOf(KEY_ELEMENT_SEP)) == -1) break;
+			curr.resize(index);
+			// replace last / with KEY_ELEMENT_SEP
+			if ((index = curr.lastIndexOf('/')) == -1) break;
+			curr[index] = QChar(KEY_ELEMENT_SEP);
+			// extract parent file
+			objectInfo(db[curr], dummy, dummy, parent);
+		}
+        if(!db.contains(key))
             db.insert(key,tag+"\t"+QString("%1").arg(line));
-        // qDebug() << objectNode+"/"+subnode << " :: " << tag;
+
         findSpinTags(subfile,objectNode+"/"+subnode);
     }
 }
@@ -557,9 +577,15 @@ void SpinParser::match_var (QString p, int line)
 
 int SpinParser::objectInfo(QString tag, QString &name, QString &file)
 {
+	return objectInfo(tag, name, file, file);
+}
+
+int SpinParser::objectInfo(QString tag, QString &name, QString &file, QString &parent)
+{
     QStringList list = tag.split("\t",QString::KeepEmptyParts);
     if(list.length() == 0)
         return 0;
+
     name = QString(list[0]).trimmed();
     file = QString(list[2]).trimmed();
     file = file.mid(file.indexOf("\"")+1);
@@ -568,6 +594,9 @@ int SpinParser::objectInfo(QString tag, QString &name, QString &file)
 
     if(file.contains(".spin",Qt::CaseInsensitive) == false)
         file += ".spin";
+
+	if (parent != file)
+		parent = QString(list[1]).trimmed();
 
     return list.length();
 }
