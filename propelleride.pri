@@ -1,6 +1,4 @@
 isEmpty(PREFIX):PREFIX = /usr/local
-isEmpty(LIBDIR):LIBDIR = $${PREFIX}/lib
-isEmpty(RPATH):RPATH = yes
 
 QT += gui
 
@@ -11,7 +9,7 @@ greaterThan(QT_MAJOR_VERSION, 4): {
 
 INCLUDEPATH += . ..
 
-CONFIG -= debug_and_release
+CONFIG -= debug_and_release app_bundle
 
 DEFINES += IDEVERSION=0
 DEFINES += MINVERSION=20
