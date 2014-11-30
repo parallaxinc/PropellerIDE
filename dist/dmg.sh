@@ -2,6 +2,7 @@
 
 source="$1"
 title="$2"
+target="$3"
 size=$(echo "$((`du -s ${source} | awk '{print $1}'`+1000))")
 echo ${size}
 
@@ -46,5 +47,5 @@ chmod -Rf go-w /Volumes/"${title}"
 sync
 sync
 hdiutil detach "${device}"
-hdiutil convert "${tmpdevice}" -format UDZO -imagekey zlib-level=9 -o "$(dirname ${source})/PropellerIDE.dmg"
+hdiutil convert "${tmpdevice}" -format UDZO -imagekey zlib-level=9 -o "${target}"
 rm -f "${tmpdevice}"
