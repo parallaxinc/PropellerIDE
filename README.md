@@ -101,7 +101,19 @@ PropellerIDE has been built on Windows 7 and 8.
 
 ### OS X
 
-*Not yet available.*
+Install XCode through the App Store, then install the command-line tools through the terminal.
+
+```
+xcode-select --install
+```
+
+Type `make mac` to create an app bundle and DMG package for distribution.
+
+```
+make mac
+```
+
+The Qt version used must match the XCode version. The easiest solution is to use the latest version of xcode and Qt.
 
 ## Credits
 
