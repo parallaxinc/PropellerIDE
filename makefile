@@ -77,5 +77,7 @@ win: build
 
 mac: DIR_OUT := "$(DIR_STAGING)/PropellerIDE.app/Contents"
 mac: clean_staging copy
-	
-
+	cd $(DIR_STAGING) ; \
+	macdeployqt $(DIR_STAGING)/PropellerIDE.app ; \
+	cp -f $(DIR_DIST)/Info.plist $(DIR_OUT)
+	$(DIR_DIST)/dmg.sh $(DIR_STAGING)/PropellerIDE.app PropellerIDE

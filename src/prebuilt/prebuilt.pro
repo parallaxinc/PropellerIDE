@@ -16,7 +16,7 @@ unix:!macx {
 }
 macx {
     prebuilt.files += $$files(macx/*)
-    prebuilt.path = $${PREFIX}/MacOS
+    prebuilt.path = $${PREFIX}/
     extras.path = $${PREFIX}/Resources
 }
 win32 {
