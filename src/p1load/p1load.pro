@@ -5,8 +5,12 @@ TARGET = p1load
 
 macx {
     target.path = $${PREFIX}/MacOS
-} else {
+}
+unix:!macx {
     target.path = $${PREFIX}/bin
+}
+win32 {
+    target.path = $${PREFIX}/
 }
 
 INSTALLS += target

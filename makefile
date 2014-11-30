@@ -71,7 +71,10 @@ deb: clean_staging copy
 	dpkg-deb -b $(DIR_STAGING) $(DIR_DIST)/propelleride-$(VERSION)-$(CPU).deb
 
 
-win: build
+win: DIR_OUT := "$(DIR_STAGING)/propelleride"
+win: clean_staging copy
+	cd $(DIR_OUT); \
+	windeployqt propelleride.exe; \
 	$(ISCC) //dMyAppVersion=$(VERSION) "$(DIR_DIST)/installer.iss"
 
 

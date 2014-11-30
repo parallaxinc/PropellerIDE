@@ -5,8 +5,12 @@ TARGET = propelleride
 
 macx {
     target.path = $${PREFIX}/MacOS
-} else {
+}
+unix:!macx {
     target.path = $${PREFIX}/bin
+}
+win32 {
+    target.path = $${PREFIX}/
 }
 
 INSTALLS += target
@@ -72,6 +76,7 @@ macx {
 win32 {
     LIBS            += -lsetupapi
     LIBS            += -L$$PWD -lz
+    RC_FILE         = propelleride.rc
 }
 
 # ENABLE_AUTO_ENTER turns on AUTO-INDENT
