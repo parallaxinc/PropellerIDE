@@ -61,14 +61,14 @@ clean_staging:
 clean: clean_staging
 	cd $(DIR_SRC); $(QMAKE); $(MAKE) clean
 
-deb: DIR_OUT := $(DIR_STAGING)/usr
+deb: DIR_OUT := $(DIR_STAGING)/propelleride/usr
 deb: clean_staging copy
-	mkdir -p $(DIR_STAGING)/DEBIAN/ ; \
-	cp -f $(DIR_DIST)/control $(DIR_STAGING)/DEBIAN/control ; \
+	mkdir -p $(DIR_STAGING)/propelleride/DEBIAN/ ; \
+	cp -f $(DIR_DIST)/control $(DIR_STAGING)/propelleride/DEBIAN/control ; \
 	sed -e "s/VERSION/$(VERSION)/" \
 		-e "s/CPU/$(CPU)/" \
-		-i $(DIR_STAGING)/DEBIAN/control ; \
-	dpkg-deb -b $(DIR_STAGING) $(DIR_DIST)/propelleride-$(VERSION)-$(CPU).deb
+		-i $(DIR_STAGING)/propelleride/DEBIAN/control ; \
+	dpkg-deb -b $(DIR_STAGING)/propelleride $(DIR_STAGING)/propelleride-$(VERSION)-$(CPU).deb
 
 
 win: DIR_OUT := "$(DIR_STAGING)/propelleride"
