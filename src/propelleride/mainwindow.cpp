@@ -1615,10 +1615,10 @@ void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QSt
             line = sl.toInt();
             s = s.mid(s.indexOf("\t")+1);
             s = s.mid(0,s.indexOf("\t"));
-            if(s.indexOf(":") > 0)
-                s = s.mid(0, s.indexOf(":")-1);
-            if(s.indexOf("|") > 0)
-                s = s.mid(0, s.indexOf("|")-1);
+            if(s.indexOf(":") != -1)
+                s = s.mid(0, s.indexOf(":"));
+            if(s.indexOf("|") != -1)
+                s = s.mid(0, s.indexOf("|"));
             s = s.trimmed();
 
             referenceModel->addSymbolInfo(s, fileName, line);
