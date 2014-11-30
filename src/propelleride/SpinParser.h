@@ -77,7 +77,7 @@ private:
 
     typedef struct sKindOption {
         bool enabled;           /* are tags for kind enabled? */
-        int letter;             /* kind letter */
+        char letter;            /* kind letter */
         QString name;           /* kind name */
         QString description;    /* displayed in --help output */
     } kindOption;

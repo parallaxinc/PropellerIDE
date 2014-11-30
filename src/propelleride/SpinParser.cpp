@@ -75,17 +75,11 @@ QStringList SpinParser::spinFileTree(QString file, QString libpath)
     QStringList nodes;
     foreach(key, keys) {
         value = db[key];
-        QStringList levels = key.split("/");
-        int lcount = levels.count()-1;
-        QStringList keyel = levels[lcount].split(KEY_ELEMENT_SEP);
-        if(keyel.count() < 2)
-            continue;
-        if(QString(keyel[0]).compare(keyel[1]) == 0) {
-            //qDebug() << key;
-            objectInfo(value, subnode, subfile);
-            //for(int n = 0; n < lcount; n++) subfile = "    " + subfile;
-            nodes.append(subfile);
-        }
+        QStringList tags = value.split("\t");
+		if (tags.count() < 4 || !tags[3].startsWith(SpinKinds[K_OBJECT].letter))
+            continue;	// short list or not an object
+        objectInfo(value, subnode, subfile);
+        nodes.append(subfile);
     }
     // Indent later. Just sort for now.
 #ifdef QT5
@@ -97,7 +91,6 @@ QStringList SpinParser::spinFileTree(QString file, QString libpath)
         QString ns = nodes.at(n);
         spinFiles.append(ns.mid(ns.lastIndexOf(":")+1));
     }
-
     return spinFiles;
 }
 
@@ -477,7 +470,7 @@ void SpinParser::match_object (QString p, int line)
         QString file = checkFile(subfile);
         if(QFile::exists(file) == false)
             return;
-        QString key = objectNode+"/"+subnode+KEY_ELEMENT_SEP+s;
+        QString key = objectNode+KEY_ELEMENT_SEP+s;
         if(db.contains(key) == false)
             db.insert(key,tag+"\t"+QString("%1").arg(line));
         // qDebug() << objectNode+"/"+subnode << " :: " << tag;
