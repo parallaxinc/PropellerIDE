@@ -4,8 +4,11 @@ SUBDIRS = \
     prebuilt \
     qext \
     spinzip \
-    p1load \
     openspin \
-    propelleride \
+    propelleride
+
+!win32 {
+    SUBDIRS += p1load
+}
 
 propelleride.depends = qext spinzip
