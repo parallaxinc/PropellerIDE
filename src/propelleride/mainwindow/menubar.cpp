@@ -62,6 +62,12 @@ void MainWindow::setupEditMenu()
 
     editMenu->addSeparator();
 
+    editMenu->addAction(QIcon(":/icons/edit-cut.png"), tr("&Cut"), this, SLOT(cut()), QKeySequence::Cut);
+    editMenu->addAction(QIcon(":/icons/edit-copy.png"), tr("&Copy"), this, SLOT(copy()), QKeySequence::Copy);
+    editMenu->addAction(QIcon(":/icons/edit-paste.png"), tr("&Paste"), this, SLOT(paste()), QKeySequence::Paste);
+
+    editMenu->addSeparator();
+
     editMenu->addAction(QIcon(":/icons/edit-find.png"), tr("Find"), this, SLOT(showFindFrame()), QKeySequence::Find);
     editMenu->addAction(QIcon(":/icons/go-next.png"), tr("Find Next"), this, SLOT(findNextClicked()), QKeySequence::FindNext);
     editMenu->addAction(QIcon(":/icons/go-previous.png"), tr("Find Previous"), this, SLOT(findPrevClicked()), QKeySequence::FindPrevious);
@@ -72,18 +78,30 @@ void MainWindow::setupEditMenu()
 }
 
 
+void MainWindow::cut()
+{
+    getEditor(editorTabs->currentIndex())->cut();
+}
+
+void MainWindow::copy()
+{
+    getEditor(editorTabs->currentIndex())->copy();
+}
+
+void MainWindow::paste()
+{
+    getEditor(editorTabs->currentIndex())->paste();
+}
+
+
 void MainWindow::undo()
 {
-    int index = editorTabs->currentIndex();
-    Editor * editor = getEditor(index);
-    editor->undo();
+    getEditor(editorTabs->currentIndex())->undo();
 }
 
 void MainWindow::redo()
 {
-    int index = editorTabs->currentIndex();
-    Editor * editor = getEditor(index);
-    editor->redo();
+    getEditor(editorTabs->currentIndex())->redo();
 }
 
 

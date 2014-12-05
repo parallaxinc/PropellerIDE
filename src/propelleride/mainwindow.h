@@ -85,6 +85,9 @@ public slots:
 
 
     // edit
+    void cut();
+    void copy();
+    void paste();
     void undo();
     void redo();
 
