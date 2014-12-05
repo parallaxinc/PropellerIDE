@@ -198,6 +198,7 @@ private:
     QPushButton *regexButton;
     QString     findText;
     QString     replaceText;
+    bool        showFindMessage(QString type);
     
     QHBoxLayout *findLayout;
     QLineEdit   *findEdit;

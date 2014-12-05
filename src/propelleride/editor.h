@@ -41,7 +41,7 @@ public:
     inline void setCodeType(CodeType type)  { codeType = type; }
 
 private:
-    int  autoEnterColumn();
+    int  autoIndent();
     int  braceMatchColumn();
     bool isCommentOpen(int line);
     bool isSpinCommentOpen(int line);

@@ -124,24 +124,19 @@ void Editor::keyPressEvent (QKeyEvent *e)
             useSpinSuggestion(key);
         }
         else {
-#ifdef ENABLE_AUTO_ENTER
-            if(autoEnterColumn() == 0)
+            if(autoIndent() == 0)
                 QPlainTextEdit::keyPressEvent(e);
-#endif
         }
     }
-#ifdef ENABLE_AUTO_ENTER
     else if(key == Qt::Key_BraceRight) {
         if(braceMatchColumn() == 0)
             QPlainTextEdit::keyPressEvent(e);;
     }
-#endif
     /* if F1 get word under mouse and pass to findSymbolHelp. no word is ok too. */
     else if(key == Qt::Key_F1) {
         contextHelp();
         QPlainTextEdit::keyPressEvent(e);
     }
-#if defined(SPIN_AUTOCOMPLETE)
 #ifdef SPIN_AUTOCON
     /* #-auto complete */
     else if(key == Qt::Key_NumberSign) {
@@ -164,7 +159,7 @@ void Editor::keyPressEvent (QKeyEvent *e)
             QPlainTextEdit::keyPressEvent(e);
         }
     }
-#endif
+
     /* if TAB key do block move */
     else if(key == Qt::Key_Tab || key == Qt::Key_Backtab) {
         if(QToolTip::isVisible() && propDialog->getSpinSuggestEnable()) {
@@ -429,7 +424,7 @@ void Editor::mouseDoubleClickEvent (QMouseEvent *e)
     mousepos = e->pos();
 }
 
-int Editor::autoEnterColumn()
+int Editor::autoIndent()
 {
     QTextCursor cur = this->textCursor();
     if(cur.selectedText().length() > 0) {
@@ -445,18 +440,6 @@ int Editor::autoEnterColumn()
 
     QRegExp sections("\\b(con|dat|pub|pri|obj|var)\\b");
     sections.setCaseSensitivity(Qt::CaseInsensitive);
-
-    if((text.length() == 0 && col == 0) || text.indexOf(sections) == 0) {
-        cur.beginEditBlock();
-        cur.insertBlock();
-        for(int n = propDialog->getTabSpaces(); n > 0; n--) {
-            cur.insertText(" ");
-        }
-        this->setTextCursor(cur);
-        /* end a single undo/redo operation */
-        cur.endEditBlock();
-        return 1;
-    }
 
     // handle indent for spin
     int stop = -1;

@@ -25,7 +25,7 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     findLayout->setContentsMargins(11, 11, 11, 11);
     findLayout->setObjectName(QStringLiteral("findLayout"));
     findLayout->setContentsMargins(4, 4, 4, 0);
-    
+
     /* "Find:" */
     findLabel = new QLabel();
     findLabel->setObjectName(QStringLiteral("findLabel"));
@@ -48,18 +48,18 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     findPreviousBtn = new QToolButton();
     findPreviousBtn->setObjectName(QStringLiteral("findPreviousBtn"));
     findPreviousBtn->setStyleSheet("QToolButton {\
-                                        background: url(:/icons/find-previous.png) center no-repeat;\
-                                        width: 24;\
-                                        height: 24;\
-                                        border-width: 0;\
-                                        border: none;\
-                                    }\
-                                    QToolButton:pressed {\
-                                        background: url(:/icons/find-previous-pressed.png) center no-repeat;\
-                                        border-width: 0;\
-                                        border: none;\
-                                    }\
-                                ");
+        background: url(:/icons/find-previous.png) center no-repeat;\
+            width: 24;\
+            height: 24;\
+            border-width: 0;\
+            border: none;\
+        }\
+        QToolButton:pressed {\
+        background: url(:/icons/find-previous-pressed.png) center no-repeat;\
+        border-width: 0;\
+        border: none;\
+    }\
+    ");
     findLayout->addWidget(findPreviousBtn);
     connect(findPreviousBtn,SIGNAL(clicked()),this,SLOT(findPrevClicked()));
 
@@ -67,18 +67,18 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     findNextBtn = new QToolButton();
     findNextBtn->setObjectName(QStringLiteral("findNextBtn"));
     findNextBtn->setStyleSheet("QToolButton {\
-                                    background: url(:/icons/find-next.png) center no-repeat;\
-                                    width: 24;\
-                                    height: 24;\
-                                    border-width: 0;\
-                                    border: none;\
-                                }\
-                                QToolButton:pressed {\
-                                    background: url(:/icons/find-next-pressed.png) center no-repeat;\
-                                    border-width: 0;\
-                                    border: none;\
-                                }\
-                            ");
+        background: url(:/icons/find-next.png) center no-repeat;\
+            width: 24;\
+            height: 24;\
+            border-width: 0;\
+            border: none;\
+        }\
+        QToolButton:pressed {\
+        background: url(:/icons/find-next-pressed.png) center no-repeat;\
+        border-width: 0;\
+        border: none;\
+    }\
+    ");
     findLayout->addWidget(findNextBtn);
     connect(findNextBtn,SIGNAL(clicked()),this,SLOT(findNextClicked()));
 
@@ -150,7 +150,7 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     replaceAllBtn->setObjectName(QStringLiteral("replaceAllBtn"));
     replaceLayout->addWidget(replaceAllBtn);
     connect(replaceAllBtn,SIGNAL(clicked()),this,SLOT(replaceAllClicked()));
-    
+
     /* add replace feature to the layout */
     verticalLayout->addLayout(replaceLayout);
 
@@ -199,13 +199,8 @@ void MainWindow::showFindFrame()
         clearFindText();
     }
 
-    if (findFrame->isVisible()) {
-       findFrame->setVisible(false);
-    }
-    else {
-        findEdit->setFocus();
-        findFrame->setVisible(true);
-    }
+    findEdit->setFocus();
+    findFrame->setVisible(true);
 }
 
 void MainWindow::hideFindFrame()
@@ -373,12 +368,6 @@ void MainWindow::findPrevClicked()
 
     if(count > 0) {
         QTextCursor cur = editor->textCursor();
-        // the following code was setting the cursor left by 1
-        //int len = cur.selectedText().length();
-        //cur.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor);
-        //cur.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor);
-        //cur.movePosition(QTextCursor::Left, QTextCursor::KeepAnchor,len);
-        //editor->setTextCursor(cur);
         findPosition = editor->textCursor().position();
     }
 }
@@ -407,9 +396,7 @@ void MainWindow::replaceClicked()
         hide();
     }
 }
-/*
- * If find text is highlighted, replace and find again.
- */
+
 void MainWindow::replaceNextClicked()
 {
     Editor *editor = getEditor(editorTabs->currentIndex());
@@ -427,9 +414,6 @@ void MainWindow::replaceNextClicked()
     }
 }
 
-/*
- * If find text is highlighted, replace and find again.
- */
 void MainWindow::replacePrevClicked()
 {
     Editor *editor = getEditor(editorTabs->currentIndex());
@@ -485,7 +469,7 @@ void MainWindow::replaceAllClicked()
     editor->textCursor().endEditBlock();
 
     QMessageBox::information(this, tr("Replace Done"),
-        tr("Replaced %1 instances of \"%2\".").arg(count).arg(text));
+            tr("Replaced %1 instances of \"%2\".").arg(count).arg(text));
 }
 
 QString MainWindow::getReplaceText()
@@ -497,11 +481,15 @@ void MainWindow::clearReplaceText()
     replaceEdit->clear();
 }
 
-bool MainWindow::showBeginMessage(QString type)
+
+bool MainWindow::showFindMessage(QString text)
 {
-    QMessageBox::StandardButton ret = QMessageBox::information(
-        this, type, type+tr(" from beginning?"),
-        QMessageBox::Cancel, QMessageBox::Ok);
+    QMessageBox msgBox;
+    msgBox.setText(text);
+    msgBox.setStandardButtons(QMessageBox::Cancel | QMessageBox::Ok);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    int ret = msgBox.exec();
+
     if(ret == QMessageBox::Cancel) {
         return false;
     }
@@ -514,19 +502,12 @@ bool MainWindow::showBeginMessage(QString type)
     return true;
 }
 
+bool MainWindow::showBeginMessage(QString type)
+{
+    return showFindMessage(type+tr(" from beginning?"));
+}
+
 bool MainWindow::showEndMessage(QString type)
 {
-    QMessageBox::StandardButton ret = QMessageBox::information(
-        this, type, type+tr(" from end?"),
-        QMessageBox::Cancel, QMessageBox::Ok);
-    if(ret == QMessageBox::Cancel) {
-        return false;
-    }
-    Editor *editor = getEditor(editorTabs->currentIndex());
-    if(editor == NULL)
-        return false;
-    QTextCursor cur = editor->textCursor();
-    cur.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-    editor->setTextCursor(cur);
-    return true;
+    return showFindMessage(type+tr(" from end?"));
 }

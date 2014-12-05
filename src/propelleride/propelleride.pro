@@ -77,8 +77,3 @@ win32 {
     LIBS            += -L$$PWD -lz
     RC_FILE         = propelleride.rc
 }
-
-# ENABLE_AUTO_ENTER turns on AUTO-INDENT
-DEFINES += ENABLE_AUTO_ENTER
-# SPIN_AUTOCOMPLETE turns on spinny-sense
-DEFINES += SPIN_AUTOCOMPLETE

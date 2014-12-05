@@ -35,8 +35,6 @@ public:
         K_KINDS
     } SpinKind;
 
-    void makeTags(QString file);
-
     /*
      * Parse and get a spin project tree list.
      * All object instances will be listed with sub-objects.
