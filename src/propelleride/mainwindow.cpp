@@ -12,49 +12,8 @@
 
 #define AUTOPORT "AUTO"
 
-/**
- * Having some global symbols may seem a little odd, but serves a purpose.
- * This is the IDE debug editor where all qDebug() output goes. The output is
- * used for IDE debug information displayed by Build Status with CTRL+SHIFT+D.
- */
-#undef  IDEDEBUG
-//#define IDEDEBUG
-
-
-QPlainTextEdit *debugStatus;
-
-void clearDebugStatus()
-{
-#if defined(IDEDEBUG)
-    debugStatus->setPlainText("");
-#endif
-}
-
-#if defined(IDEDEBUG)
-void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    debugStatus->appendPlainText(msg);
-    debugStatus->setFont(QFont("Courier New"));
-}
-#endif
-
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMutex::Recursive), statusDone(true)
 {
-#if defined(IDEDEBUG)
-    debugStatus = new QPlainTextEdit(this);
-    debugStatus->setLineWrapMode(QPlainTextEdit::NoWrap);
-    ideDebugFrame = new QDialog(this);
-    QVBoxLayout *lay = new QVBoxLayout();
-    ideDebugFrame->setLayout(lay);
-    ideDebugFrame->setWindowTitle("Serial Debug");
-    setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
-    lay->addWidget(debugStatus);
-    lay->setMargin(0);
-    lay->setSpacing(0);
-    ideDebugFrame->resize(700,300);
-    ideDebugFrame->hide();
-    qInstallMessageHandler(myMessageOutput);
-#endif
 }
 
 void MainWindow::init()
@@ -83,17 +42,7 @@ void MainWindow::init()
 
     connect(spinBuilder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
 
-    /*
-    font.setFamily("Parallax");
-    font.setFixedPitch(true);
-    font.setPointSize(10);
-     */
-
-    // Parallax font is buggy. 26, 36, and 48 are bad.
     QFontDatabase::addApplicationFont(":/fonts/parallax2-bold.ttf");
-#ifdef Q_OS_WIN
-    QFontDatabase::addApplicationFont(":/fonts/Parallax.ttf");
-#endif
 
     /* setup user's editor font */
     QVariant fontv = settings->value(editorFontKey);
@@ -103,12 +52,12 @@ void MainWindow::init()
         qDebug() << "Settings Editor Font" << editorFont.family();
     }
     else {
-        int fontsz = 12;
-#ifdef Q_WS_MAC
-        fontsz = 14;
-#endif
-        editorFont = QFont("Parallax2", fontsz, QFont::Normal, false);
+        int fontsz = 14;
+        QFont font("Monospace");
+        font.setStyleHint(QFont::TypeWriter);
+        editorFont = font;
         settings->setValue(fontSizeKey,fontsz);
+        qDebug() << "Setting default font" << editorFont.family();
     }
 
     fontv = settings->value(fontSizeKey);
@@ -165,7 +114,7 @@ void MainWindow::init()
     this->setStatusBar(statusBar);
 
     /* get last geometry. using x,y,w,h is unreliable.
-     */
+    */
     QVariant geov = settings->value(mainWindowGeometry);
     if(geov.canConvert(QVariant::ByteArray)) {
         // byte array convert is always possible
@@ -275,11 +224,11 @@ void MainWindow::openLastFile()
 
             if(fileName.compare(welcome) == 0) {
                 QMessageBox::information(this,tr("Welcome to PropellerIDE"),
-                    tr("The Welcome.spin file must be saved to a user folder where you can change it.")+" "+
-                    tr("The installed package location is not writable by most users.")+"\n\n"+
-                    tr("Please note that opening a library file from the installed package will also require saving to a user folder for compiling or modifications.")+" "+
-                    tr("Don't worry, you will be reminded if necessary.")+"\n\n"+
-                    tr("The Save As dialog will now open to let you choose a working folder."));
+                        tr("The Welcome.spin file must be saved to a user folder where you can change it.")+" "+
+                        tr("The installed package location is not writable by most users.")+"\n\n"+
+                        tr("Please note that opening a library file from the installed package will also require saving to a user folder for compiling or modifications.")+" "+
+                        tr("Don't worry, you will be reminded if necessary.")+"\n\n"+
+                        tr("The Save As dialog will now open to let you choose a working folder."));
                 lastDirectory = QDir::homePath()+"/Documents";
                 if(!QFile::exists(lastDirectory)) {
                     lastDirectory = QDir::homePath();
@@ -356,7 +305,7 @@ bool MainWindow::exitSave()
 {
     bool saveAll = false;
     QMessageBox mbox(QMessageBox::Question, "Save File?", "",
-                     QMessageBox::Discard | QMessageBox::Save | QMessageBox::SaveAll | QMessageBox::Cancel, this);
+            QMessageBox::Discard | QMessageBox::Save | QMessageBox::SaveAll | QMessageBox::Cancel, this);
 
     for(int tab = editorTabs->count()-1; tab > -1; tab--)
     {
@@ -447,7 +396,7 @@ void MainWindow::newFile()
     changeTabDisable = true;
     fileChangeDisable = true;
     editorTabs->addTab(createEditor(),(const QString&)untitledstr);
-	int tab = editorTabs->count()-1;
+    int tab = editorTabs->count()-1;
     editorTabs->setCurrentIndex(tab);
     editorTabs->setTabToolTip(tab, QString(""));
     delete projectModel;
@@ -467,7 +416,7 @@ void MainWindow::openFile(const QString &path)
 
     if (fileName.isNull())
         fileName = QFileDialog::getOpenFileName(this,
-            tr("Open File"), lastDirectory, programName + " Files (*.spin);;All Files (*)");
+                tr("Open File"), lastDirectory, "Spin Files (*.spin);;All Files (*)");
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     openFileName(fileName);
     lastDirectory = filePathName(fileName);
@@ -526,7 +475,7 @@ void MainWindow::openFileName(QString fileName)
                 return;
             }
             newFile();
-			int tab = editorTabs->count()-1;
+            int tab = editorTabs->count()-1;
             setEditor(tab, sname, fileName, data);
             setEditorCodeType(getEditor(tab), QString(in.codec()->name()));
             setProject();
@@ -534,14 +483,6 @@ void MainWindow::openFileName(QString fileName)
     }
 }
 
-/**
- * @brief MainWindow::saveAsCodec
- * Forces save to UTF-16 for now.
- * May want to choose type later depending on the editor's type.
- * @param fileName The full fileName with path to save.
- * @param data The file data
- * @return false if file could not be opened.
- */
 bool MainWindow::saveAsCodec(QString fileName, Editor *ed)
 {
     QFile file(fileName);
@@ -618,7 +559,7 @@ QString MainWindow::saveAsFile(const QString &path)
 
         if (fileName.isEmpty())
             fileName = QFileDialog::getSaveFileName(this,
-                tr("Save As File"), lastDirectory+"/"+this->editorTabs->tabText(n), programName + " Files (*.spin)");
+                    tr("Save As File"), lastDirectory+"/"+this->editorTabs->tabText(n), "Spin Files (*.spin)");
 
         if (fileName.isEmpty()) {
             return QString();
@@ -652,7 +593,7 @@ void MainWindow::fileChanged()
     if(file.open(QFile::ReadOnly))
     {
         QString curt = getEditor(index)->toPlainText();
-        QString text; // = file.readAll();
+        QString text;
         QTextStream in(&file);
         if(this->isFileUTF16(&file)) {
             in.setCodec("UTF-16");
@@ -753,7 +694,7 @@ void MainWindow::setProject()
     // it's ok for fileName to be zero length as in the case of "Untitled"
 
     QString text = getEditor(index)->toPlainText();
-    updateProjectTree(fileName,text);
+    updateProjectTree(fileName);
     if(leftSplit->isVisible()) {
         updateReferenceTree(fileName,text);
     }
@@ -817,31 +758,20 @@ void MainWindow::fontDialog()
     }
 }
 
-void MainWindow::fontBigger()
+void MainWindow::adjustFontSize(float ratio)
 {
     Editor *editor = getEditor(editorTabs->currentIndex());
     if(editor) {
         QFont font = editor->font();
         int size = font.pointSize();
+
         QString fname = font.family();
-        // Parallax font is buggy. 26, 36, and 48 are bad.
-        if(fname.compare("Parallax", Qt::CaseInsensitive) == 0) {
-            int fsizes[] = { 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 28, 72 };
-            int flast = (sizeof(fsizes)/4)-1;
-            if(size >= fsizes[0] && size < fsizes[flast]) {
-                for(int n = 0; n <= flast-1; n++) {
-                    if(size == fsizes[n]) {
-                        font.setPointSize(fsizes[n+1]);
-                        break;
-                    }
-                }
-            }
-        }
-        else {
-            size = size*10/8;
-            if(size < 90)
-                font.setPointSize(size);
-        }
+        size = (int) ((float) size*ratio);
+
+        if ((ratio < 1.0 && size > 3) ||
+            (ratio > 1.0 && size < 90))
+            font.setPointSize(size);
+
         for(int n = editorTabs->count()-1; n >= 0; n--) {
             Editor *ed = getEditor(n);
             ed->setFont(font);
@@ -852,52 +782,23 @@ void MainWindow::fontBigger()
         editorFont = font;
         QApplication::processEvents();
     }
+}
+
+void MainWindow::fontBigger()
+{
+    adjustFontSize(1.25);
 }
 
 void MainWindow::fontSmaller()
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
-    if(editor) {
-        QFont font = editor->font();
-        int size = font.pointSize();
-        QString fname = font.family();
-        // Parallax font is buggy. 26, 36, and 48 are bad.
-        if(fname.compare("Parallax", Qt::CaseInsensitive) == 0) {
-            int fsizes[] = { 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 28, 72 };
-            int flast = (sizeof(fsizes)/4)-1;
-            if(size > fsizes[0] && size <= fsizes[flast]) {
-                for(int n = 1; n <= flast; n++) {
-                    if(size == fsizes[n]) {
-                        font.setPointSize(fsizes[n-1]);
-                        break;
-                    }
-                }
-            }
-        }
-        else {
-            size = size*8/10;
-            if(size > 3)
-                font.setPointSize(size);
-        }
-        for(int n = editorTabs->count()-1; n >= 0; n--) {
-            Editor *ed = getEditor(n);
-            ed->setFont(font);
-            QString fs = QString("font: %1pt \"%2\";").arg(font.pointSize()).arg(font.family());
-            ed->setStyleSheet(fs);
-        }
-        editorFont = font;
-        QApplication::processEvents();
-    }
-}
-
-void MainWindow::hardware()
-{
+    adjustFontSize(0.8);
 }
 
 void MainWindow::preferences()
 {
     propDialog->showPreferences(this->lastDirectory);
 }
+
 void MainWindow::preferencesAccepted()
 {
     /* set preferences */
@@ -1008,12 +909,12 @@ void MainWindow::highlightFileLine(QString file, int line)
 void MainWindow::buildSourceWriteError(QString fileName)
 {
     QMessageBox::critical(this, tr("Build Problem"),
-        "\n"+tr("Problem building:")+" "+this->shortFileName(fileName)+"\n\n"+
-        tr("Can't write the file or folder.")+" "+
-        tr("This can happen when compiling a packaged file.")+"\n\n"+
-        tr("The code must be saved to a folder with write permissions.")+" "+
-        tr("A good location would be the user's Documents folder or a folder with other sources.")+"\n\n"+
-        tr("Please save to a different file and/or folder when prompted."));
+            "\n"+tr("Problem building:")+" "+this->shortFileName(fileName)+"\n\n"+
+            tr("Can't write the file or folder.")+" "+
+            tr("This can happen when compiling a packaged file.")+"\n\n"+
+            tr("The code must be saved to a folder with write permissions.")+" "+
+            tr("A good location would be the user's Documents folder or a folder with other sources.")+"\n\n"+
+            tr("Please save to a different file and/or folder when prompted."));
 }
 
 
@@ -1036,14 +937,14 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
 
     if(projectModel == NULL) {
         QMessageBox mbox(QMessageBox::Critical, "No File",
-            "Please create or load a file.", QMessageBox::Ok);
+                "Please create or load a file.", QMessageBox::Ok);
         mbox.exec();
         goto endRunCompiler;
     }
 
     if(this->editorTabs->currentIndex() < 0) {
         QMessageBox mbox(QMessageBox::Critical, "Error No Source",
-            "Please open a source file.", QMessageBox::Ok);
+                "Please open a source file.", QMessageBox::Ok);
         mbox.exec();
         goto endRunCompiler;
     }
@@ -1051,8 +952,8 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     // don't allow if no port available
     if(type != COMPILE_ONLY && cbPort->count() < 1) {
         QMessageBox mbox(QMessageBox::Critical, tr("No Serial Port"),
-             tr("Serial port not available.")+" "+tr("Connect a USB Propeller board, turn it on, and try again."),
-             QMessageBox::Ok);
+                tr("Serial port not available.")+" "+tr("Connect a USB Propeller board, turn it on, and try again."),
+                QMessageBox::Ok);
         mbox.exec();
         goto endRunCompiler;
     }
@@ -1072,7 +973,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     }
 
     // Yes, we should do this for compiles.
-    updateProjectTree(fileName, text);
+    updateProjectTree(fileName);
 
     // No, we don't really need to do this for compiles.
     // updateReferenceTree(fileName,text);
@@ -1084,7 +985,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     progress->setVisible(true);
 
     /* Ok zombieartists, you've had your fun. Now you have to answer. Good luck.
-     */
+    */
     getApplicationSettings(true);
 
     checkAndSaveFiles();
@@ -1096,7 +997,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
         spinBuilder->setLoader(spinLoader);
 
         // send stop first in case of error. later let dialog kill it on error.
-        statusDialog->stop(4);
+        statusDialog->stop();
 
         copts = "-b";
         rc = spinBuilder->runCompiler(copts);
@@ -1105,7 +1006,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     else {
         QMessageBox::critical(this,tr("Can't compile unknown file type"), tr("Files must be of type '.spin'"));
     }
-    endRunCompiler:
+endRunCompiler:
     emit signalStatusDone(true);
     return rc;
 }
@@ -1115,7 +1016,7 @@ void MainWindow::programBuild()
     runCompiler(COMPILE_ONLY);
 }
 
-int  MainWindow::loadProgram(int type, bool closePort, QString file)
+int  MainWindow::loadProgram(int type, QString file)
 {
     int rc = -1;
     QString copts;
@@ -1148,19 +1049,19 @@ int  MainWindow::loadProgram(int type, bool closePort, QString file)
 
     portListener->setLoadEnable(true);
 #ifdef Q_OS_MAC
-        copts = "-q ";
+    copts = "-q ";
 #endif
     switch (type) {
         case MainWindow::LoadRunHubRam:
             copts += "-r -p"+portListener->getPortName();
             rc = spinBuilder->loadProgram(copts);
-        break;
+            break;
         case MainWindow::LoadRunEeprom:
             copts += "-e -p"+portListener->getPortName();
             rc = spinBuilder->loadProgram(copts);
-        break;
+            break;
         default:
-        break;
+            break;
     }
     portListener->setLoadEnable(false);
 
@@ -1172,7 +1073,7 @@ int  MainWindow::loadProgram(int type, bool closePort, QString file)
     if(rc) {
         QMessageBox::critical(this,tr("Propeller Load Failed"), tr("Failed to load Propeller on port")+" "+cbPort->currentText(), QMessageBox::Ok);
     }
-    endLoadProgram:
+endLoadProgram:
     emit signalStatusDone(true);
     return rc;
 }
@@ -1187,7 +1088,7 @@ void MainWindow::programBurnEE()
     }
     setCurrentPort(cbPort->currentIndex());
 
-    loadProgram(MainWindow::LoadRunEeprom, !term->isVisible());
+    loadProgram(MainWindow::LoadRunEeprom);
 }
 
 void MainWindow::programRun()
@@ -1200,7 +1101,7 @@ void MainWindow::programRun()
     }
     setCurrentPort(cbPort->currentIndex());
 
-    loadProgram(MainWindow::LoadRunHubRam, !term->isVisible());
+    loadProgram(MainWindow::LoadRunHubRam);
 }
 
 void MainWindow::programDebug()
@@ -1217,7 +1118,7 @@ void MainWindow::programDebug()
     portListener->init(cbPort->currentText(), term->getBaud());
     setCurrentPort(cbPort->currentIndex());
     portListener->open();
-    if(!loadProgram(MainWindow::LoadRunHubRam, false)) {
+    if(!loadProgram(MainWindow::LoadRunHubRam)) {
         btnConnected->setChecked(true);
         connectButton(true);
     }
@@ -1271,10 +1172,10 @@ void MainWindow::findHardware(bool showFoundBox)
             statusDialog->addMessage("\nPropeller not found on any port.");
         else
             statusDialog->addMessage("Please connect a serial port.");
-        statusDialog->stop(8);
+        statusDialog->stop();
     }
     else {
-        statusDialog->stop(0);
+        statusDialog->stop();
         if(showFoundBox) {
             QMessageBox::information(this,tr("Propeller found"), statusDialog->getMessage());
         }
@@ -1466,7 +1367,7 @@ void MainWindow::closeTab(int index)
 void MainWindow::changeTab(int index)
 {
     /* index is a QAction menu state. we don't really care about it
-     */
+    */
     if(index < 0) return; // compiler happy now
 
     if(!changeTabDisable)
@@ -1497,7 +1398,7 @@ void MainWindow::zipFiles()
     }
 }
 
-void MainWindow::updateProjectTree(QString fileName, QString text)
+void MainWindow::updateProjectTree(QString fileName)
 {
     projectFile = fileName;
     QString s = this->shortFileName(fileName);
@@ -1615,10 +1516,10 @@ void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QSt
             line = sl.toInt();
             s = s.mid(s.indexOf("\t")+1);
             s = s.mid(0,s.indexOf("\t"));
-            if(s.indexOf(":") > 0)
-                s = s.mid(0, s.indexOf(":")-1);
-            if(s.indexOf("|") > 0)
-                s = s.mid(0, s.indexOf("|")-1);
+            if(s.indexOf(":") != -1)
+                s = s.mid(0, s.indexOf(":"));
+            if(s.indexOf("|") != -1)
+                s = s.mid(0, s.indexOf("|"));
             s = s.trimmed();
 
             referenceModel->addSymbolInfo(s, fileName, line);
@@ -1830,7 +1731,7 @@ Editor *MainWindow::createEditor()
     connect(editor,SIGNAL(cursorPositionChanged()),editor,SLOT(updateBackgroundColors()));
     highlighter = new Highlighter(editor->document(), propDialog);
 
-	return editor;
+    return editor;
 }
 
 void MainWindow::tabSpacesChanged()
@@ -1843,30 +1744,19 @@ void MainWindow::tabSpacesChanged()
         ed->setTabStopWidth(spaces*width);
     }
 }
-void MainWindow::ideDebugConsole()
-{
-#if defined(IDEDEBUG)
-    if(ideDebugFrame->isVisible()) {
-        ideDebugFrame->hide();
-    } else {
-        ideDebugFrame->show();
-    }
-#endif
-}
 
 void MainWindow::setupProjectTools(QSplitter *vsplit)
 {
     int handlewidth = 8;
 
-    /* container for project, etc... */
+    // container for project, etc...
     leftSplit = new QSplitter(this);
-    //leftSplit->setMinimumHeight(500);
     leftSplit->setOrientation(Qt::Vertical);
     leftSplit->setChildrenCollapsible(false);
     leftSplit->setHandleWidth(handlewidth);
     vsplit->addWidget(leftSplit);
 
-    /* project tree */
+    // project tree
     projectTree = new QTreeView(this);
     connect(projectTree,SIGNAL(clicked(QModelIndex)),this,SLOT(projectTreeClicked(QModelIndex)));
     projectTree->setToolTip(tr("Current Project"));
@@ -1879,7 +1769,7 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
 
     leftSplit->addWidget(projectTree);
 
-    /* project reference tree */
+    // project reference tree
     referenceTree = new QTreeView(this);
     QFont font = referenceTree->font();
     font.setItalic(true);   // pretty and matches def name font
@@ -1895,31 +1785,28 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
 
     leftSplit->addWidget(referenceTree);
 
-    QList<int> lsizes;
-    lsizes.append(180);
-    lsizes.append(500);
-    leftSplit->setSizes(lsizes);
+    leftSplit->setStretchFactor(0,1);
+    leftSplit->setStretchFactor(1,2);
 
-    rightSplit = new QSplitter(this);
-    rightSplit->setOrientation(Qt::Vertical);
-    vsplit->addWidget(rightSplit);
+    findSplit = new QSplitter(this);
+    findSplit->setOrientation(Qt::Vertical);
+    vsplit->addWidget(findSplit);
 
-    /* project editor tabs */
+    // project editor tabs
     editorTabs = new QTabWidget(this);
     editorTabs->setTabsClosable(true);
     editorTabs->setMovable(true);
     connect(editorTabs,SIGNAL(tabCloseRequested(int)),this,SLOT(closeTab(int)));
     connect(editorTabs,SIGNAL(currentChanged(int)),this,SLOT(changeTab(int)));
-    rightSplit->addWidget(editorTabs);
+    findSplit->addWidget(editorTabs);
 
-    QList<int> rsizes;
-    rsizes.append(500);
-    rsizes.append(100);
-    rightSplit->setSizes(rsizes);
-    rightSplit->setContentsMargins(0,0,handlewidth,0);
+    findSplit->setStretchFactor(0,1);
+    findSplit->setStretchFactor(1,0);
+    findSplit->setContentsMargins(0,0,handlewidth,0);
+    findSplit->addWidget(newFindFrame(findSplit));
+    QSplitterHandle *hndl = findSplit->handle(1);
+    hndl->setEnabled(false);
 
-    rightSplit->addWidget(newFindFrame(rightSplit));
-    //rightSplit->setChildrenCollapsible(true);
 
     QList<int> vsizes;
     vsizes.append(130);
@@ -1928,7 +1815,5 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     vsplit->setLineWidth(handlewidth*1/2);
     vsplit->setHandleWidth(handlewidth);
     vsplit->setChildrenCollapsible(true);
-    //QSplitterHandle *vsh = vsplit->handle(0);
-    //vsplit->setStyleSheet("QSplitter { default-color: green; background-color: red; color:blue; }");
 
 }

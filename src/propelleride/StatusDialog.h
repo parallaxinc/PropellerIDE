@@ -40,7 +40,7 @@ public:
     void setMessage(const QString message);
     QString getMessage();
 
-    void stop(int count = 0);
+    void stop();
     bool isRunning();
 
 public slots:

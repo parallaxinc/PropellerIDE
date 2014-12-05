@@ -86,7 +86,7 @@ void Editor::setLineNumber(int num)
     setTextCursor(cur);
 }
 
-#undef SPIN_AUTOCON
+#define SPIN_AUTOCON
 
 void Editor::keyPressEvent (QKeyEvent *e)
 {
@@ -109,13 +109,6 @@ void Editor::keyPressEvent (QKeyEvent *e)
             QPlainTextEdit::keyPressEvent(e);
             return;
         }
-#if 0   // highlighting like this causes editor trouble. don't do it.
-        if(text.length() > 0) {
-            //qDebug() << "keyPressEvent ctrlPressed " << text;
-            if(static_cast<MAINWINDOW*>(mainwindow)->isTagged(text))
-                this->setTextCursor(cur);
-        }
-#endif
         QPlainTextEdit::keyPressEvent(e);
         return;
     }
@@ -437,85 +430,6 @@ void Editor::mouseDoubleClickEvent (QMouseEvent *e)
 }
 
 int Editor::autoEnterColumn()
-{
-    if(fileName.endsWith(".spin", Qt::CaseInsensitive)) {
-        return autoEnterColumnSpin();
-    }
-    else if(fileName.endsWith(".c", Qt::CaseInsensitive) ||
-            fileName.endsWith(".cpp", Qt::CaseInsensitive) ||
-            fileName.endsWith(".h", Qt::CaseInsensitive)
-            ) {
-        return autoEnterColumnC();
-    }
-    return 0;
-}
-
-int Editor::autoEnterColumnC()
-{
-    QTextCursor cur = this->textCursor();
-    if(cur.selectedText().length() > 0) {
-        return 0;
-    }
-
-    int line = cur.blockNumber();
-    int col  = cur.columnNumber();
-    cur.movePosition(QTextCursor::StartOfLine,QTextCursor::MoveAnchor);
-    cur.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor,col);
-    QString text = cur.selectedText();
-    cur.clearSelection();
-    if(text.length() == 0) return 0;
-
-    int stop = -1;
-    int indent = -1;
-    int star = -1;
-    int slcm = text.indexOf("//");
-
-    // don't indent under closed comment
-    if(text.indexOf("*/") > -1) {
-        return 0;
-    }
-    if(isCommentOpen(line)) {
-        star = stop = text.indexOf("*");
-    }
-    if(stop < 0 && slcm > -1) {
-        stop = slcm;
-    }
-    if(stop < 0 && text.lastIndexOf("{") == text.length()-1) {
-        indent = propDialog->getTabSpaces();
-    }
-
-    qDebug() << text;
-    /* start a single undo/redo operation */
-    cur.beginEditBlock();
-
-    cur.insertBlock();
-
-    for(int n = 0; n <= stop || isspace(text[n].toLatin1()); n++) {
-        if(n == star) {
-            cur.insertText("*");
-        }
-        else if(n == slcm) {
-            cur.insertText("// ");
-        }
-        else {
-            cur.insertText(" ");
-        }
-    }
-
-    if(indent > 0) {
-        for(int n = 0; n < indent; n++) {
-            cur.insertText(" ");
-        }
-    }
-
-    this->setTextCursor(cur);
-    /* end a single undo/redo operation */
-    cur.endEditBlock();
-
-    return 1;
-}
-
-int Editor::autoEnterColumnSpin()
 {
     QTextCursor cur = this->textCursor();
     if(cur.selectedText().length() > 0) {

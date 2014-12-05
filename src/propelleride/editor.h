@@ -42,8 +42,6 @@ public:
 
 private:
     int  autoEnterColumn();
-    int  autoEnterColumnC();
-    int  autoEnterColumnSpin();
     int  braceMatchColumn();
     bool isCommentOpen(int line);
     bool isSpinCommentOpen(int line);

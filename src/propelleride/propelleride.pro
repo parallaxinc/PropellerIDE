@@ -64,8 +64,7 @@ FORMS += \
     TermPrefs.ui
 
 RESOURCES += \
-    icons/icons.qrc \
-    fonts/fonts.qrc
+    icons/icons.qrc
 
 unix {
     LIBS            += -lz

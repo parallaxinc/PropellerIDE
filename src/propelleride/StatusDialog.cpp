@@ -79,9 +79,8 @@ QString StatusDialog::getMessage()
     return messageLabel->text();
 }
 
-void StatusDialog::stop(int count)
+void StatusDialog::stop()
 {
-    //thread.stop(count);
     displayTimer->stop();
     hide();
 }

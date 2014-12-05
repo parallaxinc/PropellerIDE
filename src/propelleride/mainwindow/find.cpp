@@ -184,8 +184,6 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     replaceNextBtn->setToolTip(tr("Search forward and replace text"));
     replaceAllBtn->setToolTip(tr("Search and replace all occurrences of text"));
 
-    // don't connect find text, it causes unnecessary changes in editors
-    // dagtely 03/17/2014 - connected for testing!!!
     connect(findEdit,SIGNAL(textChanged(QString)),this,SLOT(findChanged(QString)));
 
     return findFrame;
