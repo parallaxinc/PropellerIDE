@@ -2,8 +2,20 @@ include( ../../propelleride.pri )
 
 TEMPLATE = app
 TARGET = propelleride
-target.path = $${PREFIX}/bin
+
+macx {
+    target.path = $${PREFIX}/MacOS
+}
+unix:!macx {
+    target.path = $${PREFIX}/bin
+}
+win32 {
+    target.path = $${PREFIX}/
+}
+
 INSTALLS += target
+
+CONFIG -= app_bundle
 
 LIBS += -L$${OUT_PWD}/../qext/ -lqext
 LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
@@ -64,6 +76,7 @@ macx {
 win32 {
     LIBS            += -lsetupapi
     LIBS            += -L$$PWD -lz
+    RC_FILE         = propelleride.rc
 }
 
 # ENABLE_AUTO_ENTER turns on AUTO-INDENT

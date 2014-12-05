@@ -6,7 +6,6 @@ DIR_BUILD		:=	$(DIR)/build
 
 DIR_STAGING		:=	$(DIR)/staging
 DIR_OUT			:=	$(DIR_STAGING)
-deb: DIR_OUT	:=	$(DIR_STAGING)/usr
 
 DIR_DIST		:=	$(DIR)/dist
 
@@ -21,7 +20,7 @@ VERSION			:=	$(shell echo $(shell grep -r VERSION= propelleride.pri \
 					| sed -e 's/ /./g')
 
 # if CPU (uname -m) equals...
-ifeq ($(shell uname -n),raspberrypi)		# if Raspberry Pi
+ifeq ($(shell cat /etc/os-release | grep "ID=raspbian"),"ID=raspbian") # if Raspberry Pi
 	CPU := armhf
 else
 	ifeq ($(shell uname -m),i686)			# if i686
@@ -62,13 +61,26 @@ clean_staging:
 clean: clean_staging
 	cd $(DIR_SRC); $(QMAKE); $(MAKE) clean
 
+deb: DIR_OUT := $(DIR_STAGING)/propelleride/usr
 deb: clean_staging copy
-	mkdir -p $(DIR_STAGING)/DEBIAN/ ; \
-	cp -f $(DIR_DIST)/control $(DIR_STAGING)/DEBIAN/control ; \
+	mkdir -p $(DIR_STAGING)/propelleride/DEBIAN/ ; \
+	cp -f $(DIR_DIST)/control $(DIR_STAGING)/propelleride/DEBIAN/control ; \
 	sed -e "s/VERSION/$(VERSION)/" \
 		-e "s/CPU/$(CPU)/" \
-		-i $(DIR_STAGING)/DEBIAN/control ; \
-	dpkg-deb -b $(DIR_STAGING) $(DIR_DIST)/propelleride-$(VERSION)-$(CPU).deb
+		-i $(DIR_STAGING)/propelleride/DEBIAN/control ; \
+	dpkg-deb -b $(DIR_STAGING)/propelleride $(DIR_STAGING)/propelleride-$(VERSION)-$(CPU).deb
 
-win: build
+
+win: DIR_OUT := "$(DIR_STAGING)/propelleride"
+win: clean_staging copy
+	cd $(DIR_OUT); \
+	windeployqt propelleride.exe; \
 	$(ISCC) //dMyAppVersion=$(VERSION) "$(DIR_DIST)/installer.iss"
+
+
+mac: DIR_OUT := "$(DIR_STAGING)/PropellerIDE.app/Contents"
+mac: clean_staging copy
+	cd $(DIR_STAGING) ; \
+	macdeployqt $(DIR_STAGING)/PropellerIDE.app ; \
+	cp -f $(DIR_DIST)/Info.plist $(DIR_OUT)
+	$(DIR_DIST)/dmg.sh $(DIR_STAGING)/PropellerIDE.app PropellerIDE $(DIR_STAGING)/propelleride-$(VERSION)-$(CPU).dmg

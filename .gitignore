@@ -8,9 +8,16 @@ propelleride.exe
 openspin.exe
 p1load.exe
 
+propelleride.app
+openspin.app
+p1load.app
+
 staging/
 *.swp
 *.pro.user
 *~
 Makefile
 *.binary
+
+.DS_Store
+.qmake.stash

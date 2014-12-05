@@ -2,12 +2,22 @@ isEmpty(PREFIX):PREFIX = /usr/local
 
 TEMPLATE = app
 TARGET = openspin
-target.path = $${PREFIX}/bin
+
+macx {
+    target.path = $${PREFIX}/MacOS
+}
+unix:!macx {
+    target.path = $${PREFIX}/bin
+}
+win32 {
+    target.path = $${PREFIX}/
+}
+
 INSTALLS += target
 
-CONFIG -= qt debug_and_release
+CONFIG -= qt debug_and_release app_bundle
 CONFIG += console
 
 SOURCES += \
-    $$files(OpenSpin/PropellerCompiler/*.cpp) \
-    $$files(OpenSpin/SpinSource/*.cpp) \
+    $$files(repo/PropellerCompiler/*.cpp) \
+    $$files(repo/SpinSource/*.cpp) \

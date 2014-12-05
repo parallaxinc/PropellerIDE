@@ -9,7 +9,7 @@ extras.files += \
     ../../library \
     ../../doc
 
-unix {
+unix:!macx {
     prebuilt.files += $$files(unix/*)
     prebuilt.path = $${PREFIX}/
     extras.path = $${PREFIX}/share/propelleride
@@ -17,7 +17,7 @@ unix {
 macx {
     prebuilt.files += $$files(macx/*)
     prebuilt.path = $${PREFIX}/
-    extras.path = $${PREFIX}/share/propelleride
+    extras.path = $${PREFIX}/Resources
 }
 win32 {
     prebuilt.files += $$files(win32/*)

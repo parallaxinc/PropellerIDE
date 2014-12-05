@@ -4,14 +4,7 @@
 #define MyAppName "PropellerIDE"
 #define MyAppURL "www.parallax.com"
 #define MyAppExeName "propelleride.exe"
-#define MyAppBin "{app}"
-#define MyPath ".."
 ;#define FtdiChipApp "CDM v2.12.00 WHQL Certified.exe"
-
-; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; ---- IMPORTANT!!! ---- Set this to your QtPath
-; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#define QtPath "C:\Qt\5.3\mingw482_32"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -26,7 +19,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-OutputDir="."
+OutputDir="../staging/"
 OutputBaseFilename=propelleride-{#MyAppVersion}-win-setup
 Compression=lzma/Max
 SolidCompression=true
@@ -36,7 +29,7 @@ UsePreviousUserInfo=no
 DisableDirPage=yes
 DisableProgramGroupPage=yes
 DisableReadyPage=no
-WizardImageFile="{#MyPath}\gfx\propellerbanner.bmp"
+WizardImageFile="..\gfx\propellerbanner.bmp"
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -47,19 +40,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: FtdiChip; Description: "Install FTDI Chip USB Serial Port Drivers"; Flags: checkedonce; 
 
 [Files]
-Source: "{#MyPath}\src\propelleride\propelleride.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyPath}\src\p1load\p1load.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyPath}\src\OpenSpin\openspin.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyPath}\gfx\propellerhat.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyPath}\doc"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#MyPath}\library"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#MyPath}\src\prebuilt\win32\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-
-Source: "{#QtPath}\bin\Qt5Core.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
-Source: "{#QtPath}\bin\Qt5Gui.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
-Source: "{#QtPath}\bin\Qt5Widgets.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
-Source: "{#QtPath}\bin\Qt5PrintSupport.dll"; DestDir: "{#MyAppBin}"; Flags: ignoreversion
-Source: "{#QtPath}\plugins\platforms\qwindows.dll"; DestDir: "{#MyAppBin}\platforms"; Flags: ignoreversion
+Source: "../staging/propelleride/*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}" ; IconFilename: "{app}\propellerhat.ico";
