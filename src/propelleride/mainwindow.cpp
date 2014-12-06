@@ -1729,7 +1729,6 @@ Editor *MainWindow::createEditor()
     editor->setTabStopWidth(width);
     connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
     connect(editor,SIGNAL(cursorPositionChanged()),editor,SLOT(updateBackgroundColors()));
-    highlighter = new Highlighter(editor->document(), propDialog);
 
     return editor;
 }

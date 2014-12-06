@@ -24,7 +24,7 @@ SOURCES += main.cpp\
     mainwindow.cpp \
     $$files(mainwindow/*.cpp) \
     StatusDialog.cpp \
-    highlighter.cpp \
+    Highlighter.cpp \
     treemodel.cpp \
     treeitem.cpp \
     Builder.cpp \
@@ -33,7 +33,7 @@ SOURCES += main.cpp\
     Preferences.cpp \
     PortConnectionMonitor.cpp \
     editor.cpp \
-    highlightSpin.cpp \
+    SpinHighlighter.cpp \
     SpinParser.cpp \
     terminal.cpp \
     console.cpp \
@@ -41,7 +41,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     StatusDialog.h \
-    highlighter.h \
+    Highlighter.h \
     treemodel.h \
     treeitem.h \
     Builder.h \
@@ -50,7 +50,7 @@ HEADERS  += mainwindow.h \
     Preferences.h \
     PortConnectionMonitor.h \
     editor.h \
-    highlightSpin.h \
+    SpinHighlighter.h \
     SpinParser.h \
     colors.h \
     Sleeper.h \

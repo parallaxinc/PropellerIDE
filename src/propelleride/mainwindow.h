@@ -11,7 +11,6 @@
 #include <QPlainTextEdit> 
 #include <QTreeView> 
 
-#include "highlighter.h"
 #include "SpinBuilder.h"
 #include "SpinParser.h"
 #include "SpinModel.h"
@@ -186,7 +185,6 @@ private:
     QString     spinCompilerPath;
     QString     spinIncludes;
     QString     spinLoader;
-    Highlighter *highlighter;
 
     QToolBar    *fileToolBar;
     QToolBar    *propToolBar;

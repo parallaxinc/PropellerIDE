@@ -11,7 +11,7 @@
 #include <QTextCursor>
 
 
-#include "highlighter.h"
+#include "Highlighter.h"
 #include "SpinParser.h"
 
 class LineNumberArea;

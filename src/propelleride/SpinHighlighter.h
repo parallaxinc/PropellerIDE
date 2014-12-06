@@ -47,7 +47,7 @@
 **
 ****************************************************************************/
 
-#include "highlighter.h"
+#include "Highlighter.h"
 
 #include <QHash>
 #include <QTextCharFormat>
