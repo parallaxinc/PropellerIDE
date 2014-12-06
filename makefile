@@ -20,7 +20,7 @@ VERSION			:=	$(shell echo $(shell grep -r VERSION= propelleride.pri \
 					| sed -e 's/ /./g')
 
 # if CPU (uname -m) equals...
-ifeq ($(shell uname -n),raspberrypi)		# if Raspberry Pi
+ifeq ($(shell cat /etc/os-release | grep "ID=raspbian"),ID=raspbian) # if Raspberry Pi
 	CPU := armhf
 else
 	ifeq ($(shell uname -m),i686)			# if i686

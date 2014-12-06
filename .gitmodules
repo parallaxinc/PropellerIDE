@@ -1,3 +1,3 @@
-[submodule "src/openspin/OpenSpin"]
+[submodule "src/openspin/repo"]
 	path = src/openspin/repo
-	url = https://github.com/bweir/OpenSpin
+	url = https://github.com/bweir/OpenSpin.git
