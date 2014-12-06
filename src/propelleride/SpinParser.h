@@ -1,5 +1,4 @@
-#ifndef SPINPARSER_H
-#define SPINPARSER_H
+#pragma once
 
 #include <QString>
 #include <QStringList>
@@ -56,13 +55,13 @@ public:
     QStringList spinMethods(QString file, QString objname);
 
     /* parse a file for autocomplete variables */
-    QStringList spinVars(QString file, QString objname);
+    QStringList spinVars(QString objname);
 
     /* parse a file for autocomplete dat labels*/
-    QStringList spinDat(QString file, QString objname);
+    QStringList spinDat(QString objname);
 
     /* parse a file for autocomplete objects */
-    QStringList spinObjects(QString file, QString objname);
+    QStringList spinObjects(QString objname);
 
     typedef struct {
         QString name;
@@ -129,5 +128,3 @@ private:
 
     QString shortFileName(QString fileName);
 };
-
-#endif // SPINPARSER_H

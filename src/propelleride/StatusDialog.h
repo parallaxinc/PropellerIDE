@@ -1,5 +1,4 @@
-#ifndef STATUSDIALOG_H
-#define STATUSDIALOG_H
+#pragma once
 
 #include <QApplication>
 #include <QDialog>
@@ -54,5 +53,3 @@ private:
     QList<QLabel*> bump;
     QTimer *displayTimer;
 };
-
-#endif // STATUSDIALOG_H

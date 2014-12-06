@@ -1,3 +1,5 @@
+#pragma once
+
 /****************************************************************************
   The basis of this code is the Qt Highlighter example having the copyright
   below. This code is substanially different for choosing the rules, and it
@@ -44,9 +46,6 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
-#ifndef HIGHLIGHTER_H
-#define HIGHLIGHTER_H
 
 #include <QSyntaxHighlighter>
 
@@ -125,5 +124,3 @@ protected:
     QFont::Weight   hlBlockComWeight;
     Qt::GlobalColor hlBlockComColor;
 };
-
-#endif

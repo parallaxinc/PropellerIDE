@@ -1,5 +1,4 @@
-#ifndef PREFERENCES_H
-#define PREFERENCES_H
+#pragma once
 
 #include <Qt>
 #include <QWidget>
@@ -217,5 +216,3 @@ private:
 
     QVector<PColor*> propertyColors;
 };
-
-#endif // PREFERENCES_H 

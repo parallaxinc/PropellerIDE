@@ -1,5 +1,4 @@
-#ifndef CONSOLE_H
-#define CONSOLE_H
+#pragma once
 
 #include <QWidget>
 #include <QTabWidget>
@@ -158,5 +157,3 @@ public slots:
     void update(char ch);
 
 };
-
-#endif // CONSOLE_H

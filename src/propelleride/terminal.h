@@ -1,5 +1,4 @@
-#ifndef TERMINAL2_H
-#define TERMINAL2_H
+#pragma once
 
 class Terminal;
 
@@ -65,5 +64,3 @@ private:
     QPushButton     *buttonEnable;
     PortListener    *portListener;
 };
-
-#endif // TERMINAL2_H

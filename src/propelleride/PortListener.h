@@ -1,5 +1,4 @@
-#ifndef PORTLISTENER_H_
-#define PORTLISTENER_H_
+#pragma once
 
 #include <QObject>
 #include <QThread>
@@ -170,6 +169,3 @@ private:
     void flushPort();
 
 };
-
-
-#endif /*PORTLISTENER_H_*/

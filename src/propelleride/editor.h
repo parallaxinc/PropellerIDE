@@ -1,5 +1,4 @@
-#ifndef EDITOR_H
-#define EDITOR_H
+#pragma once
 
 #include <QWidget>
 #include <QTabWidget>
@@ -174,5 +173,3 @@ protected:
 private:
     Editor *codeEditor;
 };
-
-#endif // EDITOR_H

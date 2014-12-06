@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <iostream>
 #include <exception>
@@ -285,6 +284,3 @@ signals:
 public slots:
     void setStatusDone(bool done);
 };
-
-
-#endif// MAINWINDOW_H

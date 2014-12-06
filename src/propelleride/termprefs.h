@@ -1,5 +1,4 @@
-#ifndef TERMPREFS_H
-#define TERMPREFS_H
+#pragma once
 
 class TermPrefs;
 
@@ -50,5 +49,3 @@ private:
 
     QString         styleText;
 };
-
-#endif // TERMPREFS_H

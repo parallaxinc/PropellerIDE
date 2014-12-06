@@ -27,7 +27,7 @@ SOURCES += main.cpp\
     highlighter.cpp \
     treemodel.cpp \
     treeitem.cpp \
-    EzBuilder.cpp \
+    Builder.cpp \
     SpinBuilder.cpp \
     PortListener.cpp \
     Preferences.cpp \
@@ -44,7 +44,7 @@ HEADERS  += mainwindow.h \
     highlighter.h \
     treemodel.h \
     treeitem.h \
-    EzBuilder.h \
+    Builder.h \
     SpinBuilder.h \
     PortListener.h \
     Preferences.h \

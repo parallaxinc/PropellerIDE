@@ -220,7 +220,7 @@ QStringList SpinParser::spinMethods(QString file, QString objname)
     return list;
 }
 
-QStringList SpinParser::spinDat(QString file, QString objname)
+QStringList SpinParser::spinDat(QString objname)
 {
     QStringList list;
     QStringList keys = db.keys();
@@ -240,7 +240,7 @@ QStringList SpinParser::spinDat(QString file, QString objname)
     return list;
 }
 
-QStringList SpinParser::spinVars(QString file, QString objname)
+QStringList SpinParser::spinVars(QString objname)
 {
     QStringList list;
     QStringList keys = db.keys();
@@ -260,7 +260,7 @@ QStringList SpinParser::spinVars(QString file, QString objname)
     return list;
 }
 
-QStringList SpinParser::spinObjects(QString file, QString objname)
+QStringList SpinParser::spinObjects(QString objname)
 {
     QStringList list;
     QStringList keys = db.keys();

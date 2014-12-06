@@ -1,3 +1,5 @@
+#pragma once
+
 /****************************************************************************
   The basis of this code is the Qt SpinHighlighter example having the copyright
   below. This code is substanially different for choosing the rules, and it
@@ -45,9 +47,6 @@
 **
 ****************************************************************************/
 
-#ifndef SpinHighlighter_H
-#define SpinHighlighter_H
-
 #include "highlighter.h"
 
 #include <QHash>
@@ -68,5 +67,3 @@ public:
     void highlight();
 
 };
-
-#endif

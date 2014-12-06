@@ -9,7 +9,7 @@
 
 #include "Sleeper.h"
 
-SpinBuilder::SpinBuilder() : EzBuilder(0)
+SpinBuilder::SpinBuilder() : Builder(0)
 {
 }
 
