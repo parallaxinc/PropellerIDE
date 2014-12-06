@@ -1,7 +1,6 @@
-#include "termprefs.h"
+#include "TermPrefs.h"
 #include "Preferences.h"
 #include "ui_TermPrefs.h"
-#include "console.h"
 
 TermPrefs::TermPrefs(Terminal *term) : ui(new Ui::TermPrefs)
 {

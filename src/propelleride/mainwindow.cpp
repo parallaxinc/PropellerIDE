@@ -255,11 +255,6 @@ void MainWindow::openLastFile()
      * ******************************************************************/
 }
 
-void MainWindow::terminalEditorTextChanged()
-{
-    QString text = termEditor->toPlainText();
-}
-
 /*
  * get the application settings from the registry for compile/startup
  */

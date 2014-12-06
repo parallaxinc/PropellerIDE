@@ -11,9 +11,9 @@ class Terminal;
 #include <QLabel>
 #include <QTabWidget>
 
-#include "console.h"
+#include "Console.h"
 #include "PortListener.h"
-#include "termprefs.h"
+#include "TermPrefs.h"
 
 class Terminal : public QDialog
 {

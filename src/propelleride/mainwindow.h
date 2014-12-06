@@ -17,9 +17,8 @@
 
 #include "PortListener.h"
 #include "qext/qextserialport.h"
-#include "terminal.h"
+#include "Terminal.h"
 #include "Preferences.h"
-#include "console.h"
 #include "editor.h"
 #include "PortConnectionMonitor.h"
 #include "StatusDialog.h"
@@ -70,7 +69,6 @@ signals:
     void updateBackgroundColors();
 
 public slots:
-    void terminalEditorTextChanged();
     void newFile();
     void newFileAction();
     void openFile(const QString &path = QString());
@@ -248,7 +246,6 @@ private:
     QComboBox   *cbBoard;
     QComboBox   *cbPort;
     QToolButton *btnConnected;
-    Console     *termEditor;
     PortListener *portListener;
     Terminal    *term;
     int         termXpos;

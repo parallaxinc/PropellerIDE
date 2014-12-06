@@ -3,8 +3,8 @@
 class TermPrefs;
 
 #include <QtGui>
-#include "terminal.h"
-#include "console.h"
+#include "Terminal.h"
+#include "Console.h"
 #include "Preferences.h"
 #include "colors.h"
 

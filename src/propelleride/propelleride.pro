@@ -35,8 +35,8 @@ SOURCES += main.cpp\
     editor.cpp \
     SpinHighlighter.cpp \
     SpinParser.cpp \
-    terminal.cpp \
-    console.cpp \
+    Terminal.cpp \
+    Console.cpp \
     termprefs.cpp
 
 HEADERS  += mainwindow.h \
@@ -54,8 +54,8 @@ HEADERS  += mainwindow.h \
     SpinParser.h \
     colors.h \
     Sleeper.h \
-    terminal.h \
-    console.h \
+    Terminal.h \
+    Console.h \
     termprefs.h \
 
 OTHER_FILES +=

@@ -7,7 +7,7 @@
 #include <QMutex>
 #include <QByteArray>
 
-#include "console.h"
+#include "Console.h"
 #include "StatusDialog.h"
 #include "qext/qextserialport.h"
 
