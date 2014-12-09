@@ -1112,16 +1112,16 @@ int Editor::tabBlockShift()
 
     /* block is selected */
     if (cur.hasSelection() && cur.selectedText().contains(QChar::ParagraphSeparator)) {
-		/* determine current selection */
-		int curbeg = cur.selectionStart();
-		int	curend = cur.selectionEnd();
+        /* determine current selection */
+        int curbeg = cur.selectionStart();
+        int curend = cur.selectionEnd();
 
-		if (curbeg > curend) std::swap(curbeg, curend);
+        if (curbeg > curend) std::swap(curbeg, curend);
 
-		/* create workable selection */
-		cur.setPosition(curbeg, QTextCursor::MoveAnchor);
-		cur.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
-		cur.setPosition(curend, QTextCursor::KeepAnchor);
+        /* create workable selection */
+        cur.setPosition(curbeg, QTextCursor::MoveAnchor);
+        cur.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
+        cur.setPosition(curend, QTextCursor::KeepAnchor);
 
         /* get a list of lines in the selected block. keep empty lines */
         QStringList mylist = cur.selectedText().split(QChar::ParagraphSeparator);
@@ -1131,33 +1131,33 @@ int Editor::tabBlockShift()
 
         /* indent list */
         QString text;
-		
+        
         for(int n = 1; n <= mylist.length(); n++) {
             QString s = mylist[n-1];
-			int size = s.length();
-			
-			/* ignore empty last line */
+            int size = s.length();
+            
+            /* ignore empty last line */
             if (size == 0 && n == mylist.length()) break;
 
-            if (!shiftTab) s.insert(0, tab);						// indent line
-			else if (s.startsWith(tab)) s.remove(0, tabSpaces);	// decrease line indent
-			else s.replace(QRegExp("^ *"), "");					// remove leading spaces
+            if (!shiftTab) s.insert(0, tab);                        // indent line
+            else if (s.startsWith(tab)) s.remove(0, tabSpaces);     // decrease line indent
+            else s.replace(QRegExp("^ *"), "");                     // remove leading spaces
 
-			/* adjust selection */
-			if (n == 1) {
-				curbeg -= size - s.length();						// only first line
-				curbeg  = std::max(curbeg, cur.selectionStart());	// avoid underflow
-			}
-			curend -= size - s.length();							// all but an empty last line
-			
-			/* rebuild block */
+            /* adjust selection */
+            if (n == 1) {
+                curbeg -= size - s.length();                        // only first line
+                curbeg  = std::max(curbeg, cur.selectionStart());   // avoid underflow
+            }
+            curend -= size - s.length();                            // all but an empty last line
+            
+            /* rebuild block */
             text += s;
             if (n < mylist.length()) text += QChar::ParagraphSeparator;
         }
         /* insert new block */
         cur.insertText(text);
 
-		/* update selection */
+        /* update selection */
         cur.setPosition(curbeg, QTextCursor::MoveAnchor);
         cur.setPosition(curend, QTextCursor::KeepAnchor);
 
