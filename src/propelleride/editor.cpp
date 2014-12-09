@@ -1099,117 +1099,67 @@ int Editor::contextHelp()
     return 1;
 }
 
-void Editor::highlightBlock(QTextCursor *cur)
-{
-    // anchor and position vary depending on select up or down
-    int beg = cur->position();
-    int end = cur->anchor();
-
-    // swap begin and end?
-    if(beg > end) {
-        beg = cur->anchor();
-        end = cur->position();
-    }
-
-    // find new begin and end
-    cur->setPosition(beg, QTextCursor::MoveAnchor);
-    cur->movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
-    beg = cur->anchor();
-    cur->setPosition(end, QTextCursor::MoveAnchor);
-    cur->movePosition(QTextCursor::EndOfLine, QTextCursor::MoveAnchor);
-    end = cur->anchor();
-
-    // set new cursor positions
-    cur->setPosition(beg, QTextCursor::MoveAnchor);
-    cur->setPosition(end, QTextCursor::KeepAnchor);
-}
-
 int Editor::tabBlockShift()
 {
+    /* make tabs based on user preference - set by mainwindow */
     int tabSpaces = propDialog->getTabSpaces();
+    QString tab(tabSpaces, ' ');
 
     QTextCursor cur = this->textCursor();
-    int curbeg = cur.selectionStart();
 
     /* do we have shift ? */
-    bool shift = false;
-    if((QApplication::keyboardModifiers() & Qt::SHIFT))
-        shift = true;
+    bool shiftTab = QApplication::keyboardModifiers() & Qt::SHIFT;
 
-    /* make tabs based on user preference - set by mainwindow */
-    QString tab = "";
-    for(int n = tabSpaces; n > 0; n--) tab+=" ";
+    /* block is selected */
+    if (cur.hasSelection() && cur.selectedText().contains(QChar::ParagraphSeparator)) {
+		/* determine current selection */
+		int curbeg = cur.selectionStart();
+		int	curend = cur.selectionEnd();
 
-    QString text = cur.selectedText();
+		if (curbeg > curend) std::swap(curbeg, curend);
 
-    /* if a block is selected */
-    if(cur.selectedText().length() > 0 && cur.selectedText().contains(QChar::ParagraphSeparator) == true) {
+		/* create workable selection */
+		cur.setPosition(curbeg, QTextCursor::MoveAnchor);
+		cur.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
+		cur.setPosition(curend, QTextCursor::KeepAnchor);
 
-        highlightBlock(&cur);
-        curbeg = cur.selectionStart();
-
-        QStringList mylist;
-
-        /* highlight block from beginning of the first line to the last line */
-        int column = cur.columnNumber();
-#if 0
-        // I found this method had some troubles.
-        // Using highlightBlock() instead.
-        if(column > 0) {
-            cur.setPosition(curbeg-column,QTextCursor::MoveAnchor);
-            cur.movePosition(QTextCursor::Right,QTextCursor::KeepAnchor, text.length()+column);
-            text = cur.selectedText();
-        }
-#endif
-        text = cur.selectedText();
-        if(text.length() == 0)
-            return 0;
-
-        /* get a list of the selected block. keep empty lines */
-        mylist = text.split(QChar::ParagraphSeparator);
+        /* get a list of lines in the selected block. keep empty lines */
+        QStringList mylist = cur.selectedText().split(QChar::ParagraphSeparator);
 
         /* start a single undo/redo operation */
         cur.beginEditBlock();
 
-        /* get rid of old block */
-        cur.removeSelectedText();
-
         /* indent list */
-        text = "";
-        for(int n = 0; n < mylist.length(); n++) {
-            QString s = mylist.at(n);
-            if(s.length() == 0 && n+1 == mylist.length())
-                break;
+        QString text;
+		
+        for(int n = 1; n <= mylist.length(); n++) {
+            QString s = mylist[n-1];
+			int size = s.length();
+			
+			/* ignore empty last line */
+            if (size == 0 && n == mylist.length()) break;
 
-            if(shift == false) {
-                for(int n = tabSpaces; n > 0; n--) s = " " + s;
-            }
-            else {
-                if(s.indexOf(tab) == 0 || (n == 0 && column >= tabSpaces && s.at(0) == ' ')) {
-                    s = s.mid(tabSpaces);
-                }
-                /* Sometimes code isn't aligned according to tabSpaces. Fix it.
-                 * This means that some indented lines can get unindented though.
-                 */
-                else {
-                    for(int j = tabSpaces; s.length() > 0 && j > 0; j--) {
-                        if(s.at(0) == ' ') {
-                            s = s.mid(1);
-                        }
-                    }
-                }
-            }
+            if (!shiftTab) s.insert(0, tab);						// indent line
+			else if (s.startsWith(tab)) s.remove(0, tabSpaces);	// decrease line indent
+			else s.replace(QRegExp("^ *"), "");					// remove leading spaces
+
+			/* adjust selection */
+			if (n == 1) {
+				curbeg -= size - s.length();						// only first line
+				curbeg  = std::max(curbeg, cur.selectionStart());	// avoid underflow
+			}
+			curend -= size - s.length();							// all but an empty last line
+			
+			/* rebuild block */
             text += s;
-            if(n+1 < mylist.length())
-                text += "\n";
+            if (n < mylist.length()) text += QChar::ParagraphSeparator;
         }
         /* insert new block */
         cur.insertText(text);
 
-        cur.setPosition(curbeg,QTextCursor::MoveAnchor);
-        cur.movePosition(QTextCursor::Right,QTextCursor::MoveAnchor, text.length());
-        cur.movePosition(QTextCursor::Left,QTextCursor::KeepAnchor, text.length());
-        this->setTextCursor(cur);
+		/* update selection */
+        cur.setPosition(curbeg, QTextCursor::MoveAnchor);
+        cur.setPosition(curend, QTextCursor::KeepAnchor);
 
         /* end single undo/redo operation */
         cur.endEditBlock();
@@ -1224,7 +1174,7 @@ int Editor::tabBlockShift()
         int cursorPos = cur.position();                         /* cursor position within text        */
 
         if(cursorPos > -1) {
-            if (shift == false) {
+            if (!shiftTab) {
                 for(int n = column % tabSpaces; n < tabSpaces; n++) {
                     cur.insertText(" ");
                     cursorPos++;
@@ -1232,7 +1182,6 @@ int Editor::tabBlockShift()
                 cur.setPosition(cursorPos,QTextCursor::MoveAnchor);                /* reset selection */
                 cur.movePosition(QTextCursor::Right,QTextCursor::MoveAnchor, selectLength);
                 cur.movePosition(QTextCursor::Left,QTextCursor::KeepAnchor, selectLength);
-                this->setTextCursor(cur);
             }
             else if(cur.columnNumber() != 0) {
                 QString st;
@@ -1250,11 +1199,11 @@ int Editor::tabBlockShift()
                                                                                    /* reset selection */
                 cur.movePosition(QTextCursor::Right,QTextCursor::MoveAnchor, selectLength);
                 cur.movePosition(QTextCursor::Left,QTextCursor::KeepAnchor, selectLength);
-                this->setTextCursor(cur);
             }
         }
-        this->setTextCursor(cur);
     }
+    this->setTextCursor(cur);
+
     return 1;
 }
 
