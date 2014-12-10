@@ -15,10 +15,10 @@ win32 {
 
 INSTALLS += target
 
-CONFIG -= app_bundle
-
 LIBS += -L$${OUT_PWD}/../qext/ -lqext
 LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
+
+DEFINES += VERSION=0.20
 
 SOURCES += main.cpp\
     mainwindow.cpp \

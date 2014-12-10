@@ -5,5 +5,13 @@ TARGET = spinzip
 target.path = $${PREFIX}/bin
 CONFIG += staticlib
 
-SOURCES += $$files(*.cpp)
-HEADERS  += $$files(*.h)
+SOURCES += \
+    zip.cpp \
+    zipper.cpp
+
+HEADERS += \
+    zconf.h \
+    zipper.h \
+    zipreader.h \
+    zipwriter.h \
+    zlib.h
