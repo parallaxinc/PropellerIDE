@@ -7,7 +7,7 @@
 #include <QString>
 #include <QStringList>
 
-#include "highlightSpin.h"
+#include "SpinHighlighter.h"
 
 SpinHighlighter::SpinHighlighter(QTextDocument *parent, Preferences *prop)
     : Highlighter(parent, prop)

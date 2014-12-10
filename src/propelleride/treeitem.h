@@ -1,3 +1,5 @@
+#pragma once
+
 /****************************************************************************
 **
 ** Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
@@ -38,13 +40,9 @@
 **
 ****************************************************************************/
 
-#ifndef TREEITEM_H
-#define TREEITEM_H
-
 #include <QList>
 #include <QVariant>
 
-//! [0]
 class TreeItem
 {
 public:
@@ -69,6 +67,3 @@ private:
     TreeItem *parentItem;
     QString filePath;
 };
-//! [0]
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <iostream>
 #include <exception>
@@ -12,16 +11,14 @@
 #include <QPlainTextEdit> 
 #include <QTreeView> 
 
-#include "highlighter.h"
 #include "SpinBuilder.h"
 #include "SpinParser.h"
 #include "SpinModel.h"
 
 #include "PortListener.h"
 #include "qext/qextserialport.h"
-#include "terminal.h"
+#include "Terminal.h"
 #include "Preferences.h"
-#include "console.h"
 #include "editor.h"
 #include "PortConnectionMonitor.h"
 #include "StatusDialog.h"
@@ -40,7 +37,7 @@ public:
     QString     programName;
     Preferences  *propDialog;
     QSplitter   *leftSplit;
-    QSplitter   *rightSplit;
+    QSplitter   *findSplit;
 
 public:
     QTextDocument::FindFlag getFlags(int prev = 0);
@@ -72,7 +69,6 @@ signals:
     void updateBackgroundColors();
 
 public slots:
-    void terminalEditorTextChanged();
     void newFile();
     void newFileAction();
     void openFile(const QString &path = QString());
@@ -85,6 +81,9 @@ public slots:
 
 
     // edit
+    void cut();
+    void copy();
+    void paste();
     void undo();
     void redo();
 
@@ -109,7 +108,6 @@ public slots:
     void connectButton(bool show = true);
     void terminalClosed();
     void setProject();
-    void hardware();
     void preferences();
     void preferencesAccepted();
     void programBuild();
@@ -134,7 +132,6 @@ public slots:
 
     void highlightFileLine(QString file, int line);
 
-    void ideDebugConsole();
     void tabSpacesChanged();
 
 private:
@@ -160,7 +157,7 @@ private:
     void addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile);
     int isFileOpen(QString fileName);
     void openTreeFile(QString fileName);
-    void updateProjectTree(QString fileName, QString text);
+    void updateProjectTree(QString fileName);
     void updateSpinProjectTree(QString fileName);
     void updateReferenceTree(QString fileName, QString text);
     void updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level);
@@ -175,7 +172,7 @@ private:
 
     typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
     int  runCompiler(COMPILE_TYPE type);
-    int  loadProgram(int type, bool closePort, QString file = QString());
+    int  loadProgram(int type, QString file = QString());
 
     int  isPackageSource(QString fileName);
     int  extractSource(QString &fileName);
@@ -186,7 +183,6 @@ private:
     QString     spinCompilerPath;
     QString     spinIncludes;
     QString     spinLoader;
-    Highlighter *highlighter;
 
     QToolBar    *fileToolBar;
     QToolBar    *propToolBar;
@@ -200,6 +196,7 @@ private:
     QPushButton *regexButton;
     QString     findText;
     QString     replaceText;
+    bool        showFindMessage(QString type);
     
     QHBoxLayout *findLayout;
     QLineEdit   *findEdit;
@@ -226,6 +223,7 @@ private:
 
     QTabWidget  *editorTabs;
     QFont       editorFont;
+    void        adjustFontSize(float ratio);
     bool        fileChangeDisable;
     bool        changeTabDisable;
 
@@ -248,7 +246,6 @@ private:
     QComboBox   *cbBoard;
     QComboBox   *cbPort;
     QToolButton *btnConnected;
-    Console     *termEditor;
     PortListener *portListener;
     Terminal    *term;
     int         termXpos;
@@ -268,7 +265,6 @@ private:
     PortConnectionMonitor *portConnectionMonitor;
 
     Zipper      zipper;
-    QDialog     *ideDebugFrame;
 
     enum { LoadRunHubRam = 1 };
     enum { LoadRunEeprom = 2 };
@@ -283,6 +279,3 @@ signals:
 public slots:
     void setStatusDone(bool done);
 };
-
-
-#endif// MAINWINDOW_H

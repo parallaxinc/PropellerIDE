@@ -1,12 +1,11 @@
-#ifndef SPINBUILDER_H
-#define SPINBUILDER_H
+#pragma once
 
-#include "EzBuilder.h"
+#include "Builder.h"
 
 #include <QStringList>
 #include <QProcess>
 
-class SpinBuilder : public EzBuilder
+class SpinBuilder : public Builder
 {
 public:
     SpinBuilder();
@@ -26,5 +25,3 @@ private:
     QStringList getCompilerParameters();
     bool receiving;
 };
-
-#endif // SPINBUILDER_H

@@ -1,5 +1,4 @@
-#ifndef PORTLISTENER_H_
-#define PORTLISTENER_H_
+#pragma once
 
 #include <QObject>
 #include <QThread>
@@ -8,7 +7,7 @@
 #include <QMutex>
 #include <QByteArray>
 
-#include "console.h"
+#include "Console.h"
 #include "StatusDialog.h"
 #include "qext/qextserialport.h"
 
@@ -170,6 +169,3 @@ private:
     void flushPort();
 
 };
-
-
-#endif /*PORTLISTENER_H_*/

@@ -1,10 +1,10 @@
-#include "EzBuilder.h"
+#include "Builder.h"
 
-EzBuilder::EzBuilder(QObject *parent) : QObject(parent)
+Builder::Builder(QObject *parent) : QObject(parent)
 {
 }
 
-void EzBuilder::setParameters(QString comp, QString incl, QString compPath, QString projFile, QString compstat)
+void Builder::setParameters(QString comp, QString incl, QString compPath, QString projFile, QString compstat)
 {
     compilerStr = comp;
     compilerPath = compPath;
@@ -13,7 +13,7 @@ void EzBuilder::setParameters(QString comp, QString incl, QString compPath, QStr
     compileResult = compstat;
 }
 
-void EzBuilder::setObjects(QLabel *stat, QLabel *progsize, QProgressBar *progbar, QComboBox *ports)
+void Builder::setObjects(QLabel *stat, QLabel *progsize, QProgressBar *progbar, QComboBox *ports)
 {
     msgLabel = stat;
     sizeLabel = progsize;
@@ -21,7 +21,7 @@ void EzBuilder::setObjects(QLabel *stat, QLabel *progsize, QProgressBar *progbar
     cbPort = ports;
 }
 
-QString EzBuilder::filePathName(QString fileName)
+QString Builder::filePathName(QString fileName)
 {
     QString rets;
     if(fileName.lastIndexOf("/") > -1)
@@ -31,7 +31,7 @@ QString EzBuilder::filePathName(QString fileName)
     return rets;
 }
 
-int EzBuilder::runCompiler(QString copts)
+int Builder::runCompiler(QString copts)
 {
     // satisfy warnings only
     if(copts.length())
@@ -39,20 +39,20 @@ int EzBuilder::runCompiler(QString copts)
     return 0;
 }
 
-void EzBuilder::compilerError(QProcess::ProcessError error)
+void Builder::compilerError(QProcess::ProcessError error)
 {
     // satisfy warnings only
     if(error != QProcess::Crashed) return;
 }
 
-void EzBuilder::compilerFinished(int exitCode, QProcess::ExitStatus status)
+void Builder::compilerFinished(int exitCode, QProcess::ExitStatus status)
 {
     // satisfy warnings only
     if(exitCode) return;
     if(status != QProcess::CrashExit) return;
 }
 
-void EzBuilder::procReadyRead()
+void Builder::procReadyRead()
 {
 }
 

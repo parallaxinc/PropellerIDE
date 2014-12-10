@@ -1,5 +1,4 @@
-#ifndef COLORS_H
-#define COLORS_H
+#pragma once
 
 class PColor : public QColor
 {
@@ -36,5 +35,3 @@ public:
         White, LastColor };
 
 };
-
-#endif // COLORS_H

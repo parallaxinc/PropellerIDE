@@ -68,10 +68,6 @@ QStringList SpinParser::spinFileTree(QString file, QString libpath)
     spinFiles.append(file.mid(file.lastIndexOf("/")+1));
     QStringList keys = db.keys();
 
-#if defined(SPIN_AUTOCOMPLETE)
-    makeTags(file);
-#endif
-
     QStringList nodes;
     foreach(key, keys) {
         value = db[key];
@@ -92,34 +88,6 @@ QStringList SpinParser::spinFileTree(QString file, QString libpath)
         spinFiles.append(ns.mid(ns.lastIndexOf(":")+1));
     }
     return spinFiles;
-}
-
-void SpinParser::makeTags(QString file)
-{
-#if 0
-    // not actually used?
-    QStringList keys = db.keys();
-
-    QString tagheader = \
-"!_TAG_FILE_FORMAT	1	/original ctags format/\n"
-"!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/\n"
-"!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/\n"
-"!_TAG_PROGRAM_NAME	Exuberant Ctags	//\n"
-"!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/\n"
-"!_TAG_PROGRAM_VERSION	5.8	//\n";
-
-    QString path = file.mid(0,file.lastIndexOf("/")+1);
-    QFile tags(path+"tags");
-    if(tags.open(QFile::WriteOnly | QFile::Text)) {
-        tags.write(tagheader.toLatin1());
-        foreach(QString key, keys) {
-            QStringList tl = db[key].split("\t");
-            QString ts = tl[0]+"\t"+tl[1]+"\t/^"+tl[2]+"$/";
-            tags.write(ts.toLatin1()+"\n");
-        }
-        tags.close();
-    }
-#endif
 }
 
 QString SpinParser::tagItem(QStringList tabs, int field)
@@ -245,7 +213,7 @@ QStringList SpinParser::spinMethods(QString file, QString objname)
     return list;
 }
 
-QStringList SpinParser::spinDat(QString file, QString objname)
+QStringList SpinParser::spinDat(QString objname)
 {
     QStringList list;
     QStringList keys = db.keys();
@@ -265,7 +233,7 @@ QStringList SpinParser::spinDat(QString file, QString objname)
     return list;
 }
 
-QStringList SpinParser::spinVars(QString file, QString objname)
+QStringList SpinParser::spinVars(QString objname)
 {
     QStringList list;
     QStringList keys = db.keys();
@@ -285,7 +253,7 @@ QStringList SpinParser::spinVars(QString file, QString objname)
     return list;
 }
 
-QStringList SpinParser::spinObjects(QString file, QString objname)
+QStringList SpinParser::spinObjects(QString objname)
 {
     QStringList list;
     QStringList keys = db.keys();
@@ -734,37 +702,6 @@ void SpinParser::findSpinTags (QString fileName, QString objnode)
             //qDebug() << shortFileName(fileName) << objnode << "Section " << ": " << line;
         }
 
-#if !defined(SPIN_AUTOCOMPLETE)
-        /* In Spin, keywords always are at the start of the line. */
-        SpinKind type = K_NONE;
-        KeyWord kw = spin_keywords[1]; // K_OBJECT is not 1, but OBJ keyword is.
-        line = line.trimmed();
-        QRegExp tokens("\\b(con|obj|pri|pub|dat|var)\\b");
-        tokens.setCaseSensitivity(Qt::CaseInsensitive);
-        if(line.indexOf(tokens) == 0) {
-            // if line has obj at position 0, get the type and store it
-            // else set to some other type so we stop looking for objects
-            if(line.indexOf("obj",0,Qt::CaseInsensitive) == 0)
-                type = (SpinKind) match_keyword (line.toLatin1(), &kw, tag);
-            else
-                type = this->K_CONST;
-
-            // keep state until it changes from K_NONE
-            if(type != K_NONE) {
-                state = type;
-            }
-        }
-
-        //printf ("state %d\n", state);
-        switch(state) {
-            case K_OBJECT:
-                match_object(line);
-            break;
-            default:
-                tag = "";
-            break;
-        }
-#else
         /* In Spin, keywords always are at the start of the line. */
         SpinKind type = K_NONE;
         foreach(KeyWord kw, spin_keywords) {
@@ -807,7 +744,6 @@ void SpinParser::findSpinTags (QString fileName, QString objnode)
                 tag = "";
             break;
         }
-#endif
     }
 }
 

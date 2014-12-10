@@ -45,7 +45,7 @@
 **
 ****************************************************************************/
 
-#include "highlighter.h"
+#include "Highlighter.h"
 
 #include <QSettings>
 #include <QVariant>

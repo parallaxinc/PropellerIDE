@@ -27,8 +27,6 @@ PropellerIDE was created using C++ and Qt.
 
 ## Building
 
-PropellerIDE 
-
 ### Dependencies
 
 PropellerIDE can be built against Qt4 or Qt5.
