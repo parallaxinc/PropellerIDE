@@ -1116,8 +1116,6 @@ int Editor::tabBlockShift()
         int curbeg = cur.selectionStart();
         int curend = cur.selectionEnd();
 
-        if (curbeg > curend) std::swap(curbeg, curend);
-
         /* create workable selection */
         cur.setPosition(curbeg, QTextCursor::MoveAnchor);
         cur.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
@@ -1125,9 +1123,6 @@ int Editor::tabBlockShift()
 
         /* get a list of lines in the selected block. keep empty lines */
         QStringList mylist = cur.selectedText().split(QChar::ParagraphSeparator);
-
-        /* start a single undo/redo operation */
-        cur.beginEditBlock();
 
         /* indent list */
         QString text;
@@ -1139,7 +1134,7 @@ int Editor::tabBlockShift()
             /* ignore empty last line */
             if (size == 0 && n == mylist.length()) break;
 
-            if (!shiftTab) s.insert(0, tab);                        // indent line
+            if (!shiftTab) s.insert(0, tab);                        // increase line indent
             else if (s.startsWith(tab)) s.remove(0, tabSpaces);     // decrease line indent
             else s.replace(QRegExp("^ *"), "");                     // remove leading spaces
 
@@ -1155,52 +1150,44 @@ int Editor::tabBlockShift()
             if (n < mylist.length()) text += QChar::ParagraphSeparator;
         }
         /* insert new block */
-        cur.insertText(text);
+        if (cur.selectedText().length() != text.length())           // avoid empty undo actions
+            cur.insertText(text);
 
         /* update selection */
         cur.setPosition(curbeg, QTextCursor::MoveAnchor);
         cur.setPosition(curend, QTextCursor::KeepAnchor);
 
-        /* end single undo/redo operation */
-        cur.endEditBlock();
-    }
-    /* a single-line selection */
-    else {
-        int selectStart = cur.selectionStart();                 /* for resetting selection when done */
-        int selectEnd = cur.selectionEnd();
-        int selectLength = selectEnd - selectStart;
-        cur.setPosition(selectStart,QTextCursor::MoveAnchor);   /* reset cursor to start of selection */
-        int column = cur.columnNumber();                        /* column to start insertion          */
-        int cursorPos = cur.position();                         /* cursor position within text        */
+    } else if (!shiftTab) {
+        int column = cur.columnNumber() + (cur.selectionStart() - cur.position());
+        cur.insertText(QString(tabSpaces - column % tabSpaces, ' '));
+    } else {
+        /* determine current selection */
+        int curbeg = cur.selectionStart();
+        int curend = cur.selectionEnd();
 
-        if(cursorPos > -1) {
-            if (!shiftTab) {
-                for(int n = column % tabSpaces; n < tabSpaces; n++) {
-                    cur.insertText(" ");
-                    cursorPos++;
-                }
-                cur.setPosition(cursorPos,QTextCursor::MoveAnchor);                /* reset selection */
-                cur.movePosition(QTextCursor::Right,QTextCursor::MoveAnchor, selectLength);
-                cur.movePosition(QTextCursor::Left,QTextCursor::KeepAnchor, selectLength);
-            }
-            else if(cur.columnNumber() != 0) {
-                QString st;
-                for(int n = column % tabSpaces; n < tabSpaces; n++) {
-                    cur.movePosition(QTextCursor::Left,QTextCursor::KeepAnchor);
-                    st = cur.selectedText();
-                    if(st.length() == 1 && st.at(0) == ' ') {
-                        cur.removeSelectedText();
-                        if(cur.columnNumber() % tabSpaces == 0)
-                            break;
-                    }
-                    if(st.at(0) != ' ')
-                        cur.movePosition(QTextCursor::Right,QTextCursor::MoveAnchor);
-                }
-                                                                                   /* reset selection */
-                cur.movePosition(QTextCursor::Right,QTextCursor::MoveAnchor, selectLength);
-                cur.movePosition(QTextCursor::Left,QTextCursor::KeepAnchor, selectLength);
-            }
-        }
+        /* create workable selection */
+        cur.setPosition(curbeg, QTextCursor::MoveAnchor);
+        cur.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
+        cur.movePosition(QTextCursor::EndOfLine,   QTextCursor::KeepAnchor);
+
+        /* indent line */
+        QString line = cur.selectedText();
+        int size = line.length();
+
+        if (line.startsWith(tab)) line.remove(0, tabSpaces);        // decrease line indent
+        else line.replace(QRegExp("^ *"), "");                      // remove leading spaces
+
+        /* adjust selection */
+        curbeg = std::max(curbeg - size + line.length(), cur.selectionStart());
+        curend = std::max(curend - size + line.length(), cur.selectionStart());
+
+        /* insert new line */
+        if (cur.selectedText().length() != line.length())           // avoid empty undo actions
+            cur.insertText(line);
+
+        /* update selection */
+        cur.setPosition(curbeg, QTextCursor::MoveAnchor);
+        cur.setPosition(curend, QTextCursor::KeepAnchor);
     }
     this->setTextCursor(cur);
 
