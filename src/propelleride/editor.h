@@ -51,7 +51,6 @@ private:
     int  spinAutoCompleteCON();
     int  contextHelp();
     int  tabBlockShift();
-    void highlightBlock(QTextCursor *cur);
     bool isNotAutoComplete();
     QString selectAutoComplete();
     QString deletePrefix(QString s);
