@@ -15,7 +15,7 @@ ISCC			:=	iscc
 QMAKE			:=	qmake -r
 
 VERSION := $(shell git describe --tags --long)
-ifeq ($(shell git describe --tags --long),)
+ifeq ($(VERSION),)
 	VERSION := 0.0.0-phony
 endif
 
@@ -50,7 +50,7 @@ checkout:
 	git submodule update
 
 build:
-	cd $(DIR_SRC); $(QMAKE) "VERSION=$(VERSION)" "PREFIX=$(DIR_OUT)"; $(MAKE)
+	cd $(DIR_SRC); $(QMAKE) "VERSION='$(VERSION)'" "PREFIX=$(DIR_OUT)"; $(MAKE)
 
 copy: build
 	cd $(DIR_SRC); $(MAKE) install
