@@ -1,4 +1,4 @@
-#include "terminal.h"
+#include "Terminal.h"
 
 #include <QApplication>
 #include <QDialog>

@@ -97,12 +97,6 @@ void Preferences::setupOptions()
     spinSuggestEnable.setChecked(enss.toBool());
     edlayout->addRow(new QLabel(tr("Enable Code Suggestion")), &spinSuggestEnable);
 
-#if ENABLE_PORT_BOARD_NAMES
-    portBoardNameEnable.setChecked(false);
-    portBoardNameEnable.setDisabled(true);
-    otlayout->addRow(new QLabel(tr("Enable Port Board Names")), &portBoardNameEnable);
-#endif
-
     QVariant tabsv = settings.value(tabSpacesKey,"4");
     if(tabsv.canConvert(QVariant::String)) {
         tabspaceLedit.setText(tabsv.toString());
@@ -143,15 +137,6 @@ bool Preferences::getAutoCompleteEnable()
 bool Preferences::getSpinSuggestEnable()
 {
     return spinSuggestEnable.isChecked();
-}
-
-bool Preferences::getPortBoardNameEnable()
-{
-#if ENABLE_PORT_BOARD_NAMES
-    return portBoardNameEnable.isChecked();
-#else
-    return false;
-#endif
 }
 
 QLineEdit *Preferences::getTabSpaceLedit()

@@ -1,5 +1,4 @@
-#ifndef EDITOR_H
-#define EDITOR_H
+#pragma once
 
 #include <QWidget>
 #include <QTabWidget>
@@ -12,7 +11,7 @@
 #include <QTextCursor>
 
 
-#include "highlighter.h"
+#include "Highlighter.h"
 #include "SpinParser.h"
 
 class LineNumberArea;
@@ -41,9 +40,7 @@ public:
     inline void setCodeType(CodeType type)  { codeType = type; }
 
 private:
-    int  autoEnterColumn();
-    int  autoEnterColumnC();
-    int  autoEnterColumnSpin();
+    int  autoIndent();
     int  braceMatchColumn();
     bool isCommentOpen(int line);
     bool isSpinCommentOpen(int line);
@@ -175,5 +172,3 @@ protected:
 private:
     Editor *codeEditor;
 };
-
-#endif // EDITOR_H

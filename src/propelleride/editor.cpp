@@ -9,7 +9,7 @@
 
 /* C and Spin highlighters prove more languages can be added easily.
  */
-#include "highlightSpin.h"
+#include "SpinHighlighter.h"
 
 #include "mainwindow.h"
 #define MAINWINDOW MainWindow
@@ -86,7 +86,7 @@ void Editor::setLineNumber(int num)
     setTextCursor(cur);
 }
 
-#undef SPIN_AUTOCON
+#define SPIN_AUTOCON
 
 void Editor::keyPressEvent (QKeyEvent *e)
 {
@@ -109,13 +109,6 @@ void Editor::keyPressEvent (QKeyEvent *e)
             QPlainTextEdit::keyPressEvent(e);
             return;
         }
-#if 0   // highlighting like this causes editor trouble. don't do it.
-        if(text.length() > 0) {
-            //qDebug() << "keyPressEvent ctrlPressed " << text;
-            if(static_cast<MAINWINDOW*>(mainwindow)->isTagged(text))
-                this->setTextCursor(cur);
-        }
-#endif
         QPlainTextEdit::keyPressEvent(e);
         return;
     }
@@ -131,24 +124,19 @@ void Editor::keyPressEvent (QKeyEvent *e)
             useSpinSuggestion(key);
         }
         else {
-#ifdef ENABLE_AUTO_ENTER
-            if(autoEnterColumn() == 0)
+            if(autoIndent() == 0)
                 QPlainTextEdit::keyPressEvent(e);
-#endif
         }
     }
-#ifdef ENABLE_AUTO_ENTER
     else if(key == Qt::Key_BraceRight) {
         if(braceMatchColumn() == 0)
             QPlainTextEdit::keyPressEvent(e);;
     }
-#endif
     /* if F1 get word under mouse and pass to findSymbolHelp. no word is ok too. */
     else if(key == Qt::Key_F1) {
         contextHelp();
         QPlainTextEdit::keyPressEvent(e);
     }
-#if defined(SPIN_AUTOCOMPLETE)
 #ifdef SPIN_AUTOCON
     /* #-auto complete */
     else if(key == Qt::Key_NumberSign) {
@@ -171,7 +159,7 @@ void Editor::keyPressEvent (QKeyEvent *e)
             QPlainTextEdit::keyPressEvent(e);
         }
     }
-#endif
+
     /* if TAB key do block move */
     else if(key == Qt::Key_Tab || key == Qt::Key_Backtab) {
         if(QToolTip::isVisible() && propDialog->getSpinSuggestEnable()) {
@@ -436,86 +424,7 @@ void Editor::mouseDoubleClickEvent (QMouseEvent *e)
     mousepos = e->pos();
 }
 
-int Editor::autoEnterColumn()
-{
-    if(fileName.endsWith(".spin", Qt::CaseInsensitive)) {
-        return autoEnterColumnSpin();
-    }
-    else if(fileName.endsWith(".c", Qt::CaseInsensitive) ||
-            fileName.endsWith(".cpp", Qt::CaseInsensitive) ||
-            fileName.endsWith(".h", Qt::CaseInsensitive)
-            ) {
-        return autoEnterColumnC();
-    }
-    return 0;
-}
-
-int Editor::autoEnterColumnC()
-{
-    QTextCursor cur = this->textCursor();
-    if(cur.selectedText().length() > 0) {
-        return 0;
-    }
-
-    int line = cur.blockNumber();
-    int col  = cur.columnNumber();
-    cur.movePosition(QTextCursor::StartOfLine,QTextCursor::MoveAnchor);
-    cur.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor,col);
-    QString text = cur.selectedText();
-    cur.clearSelection();
-    if(text.length() == 0) return 0;
-
-    int stop = -1;
-    int indent = -1;
-    int star = -1;
-    int slcm = text.indexOf("//");
-
-    // don't indent under closed comment
-    if(text.indexOf("*/") > -1) {
-        return 0;
-    }
-    if(isCommentOpen(line)) {
-        star = stop = text.indexOf("*");
-    }
-    if(stop < 0 && slcm > -1) {
-        stop = slcm;
-    }
-    if(stop < 0 && text.lastIndexOf("{") == text.length()-1) {
-        indent = propDialog->getTabSpaces();
-    }
-
-    qDebug() << text;
-    /* start a single undo/redo operation */
-    cur.beginEditBlock();
-
-    cur.insertBlock();
-
-    for(int n = 0; n <= stop || isspace(text[n].toLatin1()); n++) {
-        if(n == star) {
-            cur.insertText("*");
-        }
-        else if(n == slcm) {
-            cur.insertText("// ");
-        }
-        else {
-            cur.insertText(" ");
-        }
-    }
-
-    if(indent > 0) {
-        for(int n = 0; n < indent; n++) {
-            cur.insertText(" ");
-        }
-    }
-
-    this->setTextCursor(cur);
-    /* end a single undo/redo operation */
-    cur.endEditBlock();
-
-    return 1;
-}
-
-int Editor::autoEnterColumnSpin()
+int Editor::autoIndent()
 {
     QTextCursor cur = this->textCursor();
     if(cur.selectedText().length() > 0) {
@@ -531,18 +440,6 @@ int Editor::autoEnterColumnSpin()
 
     QRegExp sections("\\b(con|dat|pub|pri|obj|var)\\b");
     sections.setCaseSensitivity(Qt::CaseInsensitive);
-
-    if((text.length() == 0 && col == 0) || text.indexOf(sections) == 0) {
-        cur.beginEditBlock();
-        cur.insertBlock();
-        for(int n = propDialog->getTabSpaces(); n > 0; n--) {
-            cur.insertText(" ");
-        }
-        this->setTextCursor(cur);
-        /* end a single undo/redo operation */
-        cur.endEditBlock();
-        return 1;
-    }
 
     // handle indent for spin
     int stop = -1;
@@ -1460,23 +1357,17 @@ void Editor::updateBackgroundColors()
     setExtraSelections(OurExtraSelections);
 }
 
-//![extraAreaPaintEvent_0]
 
 void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(lineNumberArea);
     painter.fillRect(event->rect(), QColor(Qt::lightGray).lighter(120));
 
-    //![extraAreaPaintEvent_0]
-
-//![extraAreaPaintEvent_1]
     QTextBlock block = firstVisibleBlock();
     int blockNumber = block.blockNumber();
     int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
     int bottom = top + (int) blockBoundingRect(block).height();
-//![extraAreaPaintEvent_1]
 
-//![extraAreaPaintEvent_2]
     while (block.isValid() && top <= event->rect().bottom()) {
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
@@ -1491,4 +1382,3 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
         ++blockNumber;
     }
 }
-//![extraAreaPaintEvent_2]

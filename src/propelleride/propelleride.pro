@@ -7,7 +7,7 @@ macx {
     target.path = $${PREFIX}/MacOS
 }
 unix:!macx {
-    target.path = $${PREFIX}/bin
+    target.path = $${PREFIX}/share/propelleride/bin
 }
 win32 {
     target.path = $${PREFIX}/
@@ -15,47 +15,49 @@ win32 {
 
 INSTALLS += target
 
-CONFIG -= app_bundle
-
 LIBS += -L$${OUT_PWD}/../qext/ -lqext
 LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
+
+isEmpty(VERSION):VERSION = 0.0.0
+VERSION = '\\"$${VERSION}\\"'
+DEFINES += VERSION=\"$${VERSION}\"
 
 SOURCES += main.cpp\
     mainwindow.cpp \
     $$files(mainwindow/*.cpp) \
     StatusDialog.cpp \
-    highlighter.cpp \
+    Highlighter.cpp \
     treemodel.cpp \
     treeitem.cpp \
-    EzBuilder.cpp \
+    Builder.cpp \
     SpinBuilder.cpp \
     PortListener.cpp \
     Preferences.cpp \
     PortConnectionMonitor.cpp \
     editor.cpp \
-    highlightSpin.cpp \
+    SpinHighlighter.cpp \
     SpinParser.cpp \
-    terminal.cpp \
-    console.cpp \
+    Terminal.cpp \
+    Console.cpp \
     termprefs.cpp
 
 HEADERS  += mainwindow.h \
     StatusDialog.h \
-    highlighter.h \
+    Highlighter.h \
     treemodel.h \
     treeitem.h \
-    EzBuilder.h \
+    Builder.h \
     SpinBuilder.h \
     PortListener.h \
     Preferences.h \
     PortConnectionMonitor.h \
     editor.h \
-    highlightSpin.h \
+    SpinHighlighter.h \
     SpinParser.h \
     colors.h \
     Sleeper.h \
-    terminal.h \
-    console.h \
+    Terminal.h \
+    Console.h \
     termprefs.h \
 
 OTHER_FILES +=
@@ -64,8 +66,7 @@ FORMS += \
     TermPrefs.ui
 
 RESOURCES += \
-    icons/icons.qrc \
-    fonts/fonts.qrc
+    icons/icons.qrc
 
 unix {
     LIBS            += -lz
@@ -78,8 +79,3 @@ win32 {
     LIBS            += -L$$PWD -lz
     RC_FILE         = propelleride.rc
 }
-
-# ENABLE_AUTO_ENTER turns on AUTO-INDENT
-DEFINES += ENABLE_AUTO_ENTER
-# SPIN_AUTOCOMPLETE turns on spinny-sense
-DEFINES += SPIN_AUTOCOMPLETE

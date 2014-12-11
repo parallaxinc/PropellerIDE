@@ -1,5 +1,4 @@
-#ifndef SLEEPER_H
-#define SLEEPER_H
+#pragma once
 
 #include <QThread>
 
@@ -15,6 +14,3 @@ public:
         sleep(s);
     }
 };
-
-
-#endif // SLEEPER_H

@@ -1,3 +1,5 @@
+#pragma once
+
 /****************************************************************************
 **
 ** Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
@@ -38,9 +40,6 @@
 **
 ****************************************************************************/
 
-#ifndef TREEMODEL_H
-#define TREEMODEL_H
-
 #include <QAbstractItemModel>
 #include <QModelIndex>
 #include <QVariant>
@@ -48,7 +47,6 @@
 
 #include "treeitem.h"
 
-//! [0]
 class TreeModel : public QAbstractItemModel
 {
     Q_OBJECT
@@ -95,6 +93,3 @@ private:
 protected:
     QHash<QString, QString> symbolHash;
 };
-//! [0]
-
-#endif

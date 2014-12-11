@@ -27,8 +27,6 @@ PropellerIDE was created using C++ and Qt.
 
 ## Building
 
-PropellerIDE 
-
 ### Dependencies
 
 PropellerIDE can be built against Qt4 or Qt5.
@@ -118,4 +116,5 @@ The Qt version used must match the XCode version. The easiest solution is to use
 ## Credits
 
 Developed by LameStation LLC (contact@lamestation.com) in collaboration with Parallax Inc.
+
 Originally developed by Steve Denson, Dennis Gately, and Roy Eltham.

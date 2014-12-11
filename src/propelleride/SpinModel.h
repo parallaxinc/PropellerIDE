@@ -1,5 +1,4 @@
-#ifndef SPINMODEL_H
-#define SPINMODEL_H
+#pragma once
 
 #include <QAbstractItemModel>
 #include <QModelIndex>
@@ -24,6 +23,3 @@ private:
     bool isSectionHead(QString s, QString nocmp);
     QString removeComments(QString text);
 };
-//! [0]
-
-#endif

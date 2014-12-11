@@ -1,5 +1,4 @@
-#ifndef TERMINAL2_H
-#define TERMINAL2_H
+#pragma once
 
 class Terminal;
 
@@ -12,9 +11,9 @@ class Terminal;
 #include <QLabel>
 #include <QTabWidget>
 
-#include "console.h"
+#include "Console.h"
 #include "PortListener.h"
-#include "termprefs.h"
+#include "TermPrefs.h"
 
 class Terminal : public QDialog
 {
@@ -65,5 +64,3 @@ private:
     QPushButton     *buttonEnable;
     PortListener    *portListener;
 };
-
-#endif // TERMINAL2_H

@@ -1,5 +1,4 @@
-#ifndef PREFERENCES_H
-#define PREFERENCES_H
+#pragma once
 
 #include <Qt>
 #include <QWidget>
@@ -23,13 +22,9 @@
 #define spinCompilerKey     PropellerIdeGuiKey "_SpinCompiler"
 #define spinIncludesKey     PropellerIdeGuiKey "_SpinIncludes"
 #define spinLoaderKey       PropellerIdeGuiKey "_SpinLoader"
-//#define separatorKey      PropellerIdeGuiKey "_PathSeparator"
-//#define configFileKey     PropellerIdeGuiKey "_ConfigFile"
 #define editorFontKey       PropellerIdeGuiKey "_EditorFont"
 #define fontSizeKey         PropellerIdeGuiKey "_FontSize"
 #define lastFileNameKey     PropellerIdeGuiKey "_LastFileName"
-//#define lastBoardNameKey  PropellerIdeGuiKey "_LastBoardName"
-//#define lastPortNameKey   PropellerIdeGuiKey "_LastPortName"
 #define lastTermXposKey     PropellerIdeGuiKey "_LastTermXposition"
 #define lastTermYposKey     PropellerIdeGuiKey "_LastTermYposition"
 #define termGeometryKey     PropellerIdeGuiKey "_TermGeometry"
@@ -97,9 +92,6 @@
 #define terminalEchoOn              PropellerIdeGuiKey "_termKeyEchoOn"
 #define termKeyBaudRate             PropellerIdeGuiKey "_termBaudRate"
 
-#define externalLoader              "p1load"
-#define externalWinLoader           externalLoader ".exe"
-
 #define enableAutoComplete          PropellerIdeGuiKey "_enableAutoComplete"
 #define enableSpinSuggest           PropellerIdeGuiKey "_enableSpinSuggest"
 
@@ -115,7 +107,6 @@ public:
     int  getTabSpaces();
     bool getAutoCompleteEnable();
     bool getSpinSuggestEnable();
-    bool getPortBoardNameEnable();
     QLineEdit *getTabSpaceLedit();
 
 signals:
@@ -158,7 +149,6 @@ private:
     QString     tabSpacesStr;
     QCheckBox   autoCompleteEnable;
     QCheckBox   spinSuggestEnable;
-    QCheckBox   portBoardNameEnable;
     QLineEdit   tabspaceLedit;
     QPushButton clearSettingsButton;
     QPushButton fontButton;
@@ -217,5 +207,3 @@ private:
 
     QVector<PColor*> propertyColors;
 };
-
-#endif // PREFERENCES_H 

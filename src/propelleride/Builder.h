@@ -1,5 +1,4 @@
-#ifndef EZBUILDER_H
-#define EZBUILDER_H
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -9,11 +8,11 @@
 #include <QProcess>
 #include <QMutex>
 
-class EzBuilder : public QObject
+class Builder : public QObject
 {
     Q_OBJECT
 public:
-    explicit EzBuilder(QObject *parent = 0);
+    explicit Builder(QObject *parent = 0);
 
     void setParameters(QString comp, QString incl, QString compPath, QString projFile, QString compstat);
     void setObjects(QLabel *stat, QLabel *progsize, QProgressBar *progbar, QComboBox *ports);
@@ -53,5 +52,3 @@ public:
     QMutex      procMutex;
     bool        procDone;
 };
-
-#endif // EZBUILDER_H

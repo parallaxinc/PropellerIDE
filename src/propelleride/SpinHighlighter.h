@@ -1,7 +1,9 @@
+#pragma once
+
 /****************************************************************************
-  The basis of this code is the Qt Highlighter example having the copyright
+  The basis of this code is the Qt SpinHighlighter example having the copyright
   below. This code is substanially different for choosing the rules, and it
-  adds registry selection for highlight attributes, but the basic highlighter
+  adds registry selection for highlight attributes, but the basic SpinHighlighter
   mechanism is the same as the original.
 *****************************************************************************/
 
@@ -45,18 +47,10 @@
 **
 ****************************************************************************/
 
-#ifndef HIGHLIGHTER_H
-#define HIGHLIGHTER_H
-
-#include <QSyntaxHighlighter>
+#include "Highlighter.h"
 
 #include <QHash>
 #include <QTextCharFormat>
-#include <QString>
-#include <QRegExp>
-#include <QVector>
-#include <QFont>
-#include <Qt>
 
 #include "Preferences.h"
 
@@ -64,66 +58,12 @@ QT_BEGIN_NAMESPACE
 class QTextDocument;
 QT_END_NAMESPACE
 
-class Highlighter : public QSyntaxHighlighter
+class SpinHighlighter : public Highlighter
 {
     Q_OBJECT
 
 public:
-    Highlighter(QTextDocument *parent, Preferences *prop);
+    SpinHighlighter(QTextDocument *parent, Preferences *prop);
+    void highlight();
 
-    bool getStyle(QString key,  bool *italic);
-    bool getWeight(QString key, QFont::Weight *weight);
-    bool getColor(QString key,  Qt::GlobalColor *color);
-
-    void getPreferences();
-
-    virtual void highlight();
-
-protected:
-    void highlightBlock(const QString &text);
-
-    struct HighlightingRule
-    {
-        QRegExp pattern;
-        QTextCharFormat format;
-    };
-    QVector<HighlightingRule> highlightingRules;
-
-    QRegExp commentStartExpression;
-    QRegExp commentEndExpression;
-
-    QTextCharFormat keywordFormat;
-    QTextCharFormat preprocessorFormat;
-    QTextCharFormat classFormat;
-    QTextCharFormat singleLineCommentFormat;
-    QTextCharFormat multiLineCommentFormat;
-    QTextCharFormat quotationFormat;
-    QTextCharFormat functionFormat;
-    QTextCharFormat numberFormat;
-
-    Preferences      *preferences;
-
-    bool            hlNumStyle;
-    QFont::Weight   hlNumWeight;
-    Qt::GlobalColor hlNumColor;
-    bool            hlFuncStyle;
-    QFont::Weight   hlFuncWeight;
-    Qt::GlobalColor hlFuncColor;
-    bool            hlKeyWordStyle;
-    QFont::Weight   hlKeyWordWeight;
-    Qt::GlobalColor hlKeyWordColor;
-    bool            hlPreProcStyle;
-    QFont::Weight   hlPreProcWeight;
-    Qt::GlobalColor hlPreProcColor;
-    bool            hlQuoteStyle;
-    QFont::Weight   hlQuoteWeight;
-    Qt::GlobalColor hlQuoteColor;
-    bool            hlLineComStyle;
-    QFont::Weight   hlLineComWeight;
-    Qt::GlobalColor hlLineComColor;
-    bool            hlBlockComStyle;
-    QFont::Weight   hlBlockComWeight;
-    Qt::GlobalColor hlBlockComColor;
 };
-
-#endif

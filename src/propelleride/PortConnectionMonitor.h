@@ -1,5 +1,4 @@
-#ifndef PORTCONNECTIONMONITOR_H
-#define PORTCONNECTIONMONITOR_H
+#pragma once
 
 #include <QThread>
 #include <QObject>
@@ -27,5 +26,3 @@ private:
     bool running;
 
 };
-
-#endif // PORTCONNECTIONMONITOR_H

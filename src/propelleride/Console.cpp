@@ -1,4 +1,4 @@
-#include "console.h"
+#include "Console.h"
 #include "Sleeper.h"
 
 #include <QApplication>
