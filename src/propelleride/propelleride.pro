@@ -18,7 +18,9 @@ INSTALLS += target
 LIBS += -L$${OUT_PWD}/../qext/ -lqext
 LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
 
-DEFINES += VERSION=0.20
+isEmpty(VERSION):VERSION = 0.0.0
+VERSION = '\\"$${VERSION}\\"'
+DEFINES += VERSION=\"$${VERSION}\"
 
 SOURCES += main.cpp\
     mainwindow.cpp \

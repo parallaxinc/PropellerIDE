@@ -14,10 +14,7 @@ DIR_COMMON		:=	$(DIR)/common
 ISCC			:=	iscc
 QMAKE			:=	qmake -r
 
-VERSION			:=	$(shell echo $(shell grep -r VERSION= propelleride.pri \
-					| cut -d'=' -f3 \
-					| sed -e 's/[\r]//g') \
-					| sed -e 's/ /./g')
+VERSION := $(shell git describe --tags --long)
 
 # if CPU (uname -m) equals...
 ifeq ($(shell cat /etc/os-release | grep "ID=raspbian"),ID=raspbian) # if Raspberry Pi
@@ -50,7 +47,7 @@ checkout:
 	git submodule update
 
 build:
-	cd $(DIR_SRC); $(QMAKE) PREFIX=$(DIR_OUT); $(MAKE)
+	cd $(DIR_SRC); $(QMAKE) "VERSION=$(VERSION)" "PREFIX=$(DIR_OUT)"; $(MAKE)
 
 copy: build
 	cd $(DIR_SRC); $(MAKE) install
