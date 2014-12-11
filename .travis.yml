@@ -14,7 +14,6 @@ script:
 - QMAKE_OPTS="-qt=qt4" make deb
 - make clean
 - QMAKE_OPTS="-qt=qt5" make deb
-- make clean
 after_script:
 - pushd src
 - cppcheck --enable=all -q `git ls-files *.cpp *.c`
