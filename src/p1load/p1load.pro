@@ -7,7 +7,7 @@ macx {
     target.path = $${PREFIX}/MacOS
 }
 unix:!macx {
-    target.path = $${PREFIX}/bin
+    target.path = $${PREFIX}/share/propelleride/bin
 }
 win32 {
     target.path = $${PREFIX}/

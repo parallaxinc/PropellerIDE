@@ -12,12 +12,13 @@ DIR_DIST		:=	$(DIR)/dist
 DIR_COMMON		:=	$(DIR)/common
 
 ISCC			:=	iscc
-QMAKE			:=	qmake -r
+QMAKE_OPTS		+=  -r
+QMAKE			:=	qmake $(QMAKE_OPTS)
 
-VERSION			:=	$(shell echo $(shell grep -r VERSION= propelleride.pri \
-					| cut -d'=' -f3 \
-					| sed -e 's/[\r]//g') \
-					| sed -e 's/ /./g')
+VERSION := $(shell git describe --tags --long)
+ifeq ($(VERSION),)
+	VERSION := 0.0.0-phony
+endif
 
 # if CPU (uname -m) equals...
 ifeq ($(shell cat /etc/os-release | grep "ID=raspbian"),ID=raspbian) # if Raspberry Pi
@@ -50,7 +51,7 @@ checkout:
 	git submodule update
 
 build:
-	cd $(DIR_SRC); $(QMAKE) PREFIX=$(DIR_OUT); $(MAKE)
+	cd $(DIR_SRC); $(QMAKE) "VERSION='$(VERSION)'" "PREFIX=$(DIR_OUT)"; $(MAKE)
 
 copy: build
 	cd $(DIR_SRC); $(MAKE) install
@@ -64,6 +65,7 @@ clean: clean_staging
 deb: DIR_OUT := $(DIR_STAGING)/propelleride/usr
 deb: clean_staging copy
 	mkdir -p $(DIR_STAGING)/propelleride/DEBIAN/ ; \
+	cp -f $(shell ldd $(DIR_OUT)/bin/propelleride | grep "libQt" | awk '{print $$3}') $(DIR_OUT)/bin/; \
 	cp -f $(DIR_DIST)/control $(DIR_STAGING)/propelleride/DEBIAN/control ; \
 	sed -e "s/VERSION/$(VERSION)/" \
 		-e "s/CPU/$(CPU)/" \

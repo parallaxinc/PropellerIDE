@@ -189,8 +189,7 @@ void MainWindow::propellerDatasheet()
 
 void MainWindow::about()
 {
-    QString version = QString(programName + " Version %1.%2")
-            .arg(IDEVERSION).arg(MINVERSION);
+    QString version = QString(programName + " v" +VERSION);
     QMessageBox::about(this, tr("About") + " " + programName,
            "<h2>" + version + "</h2>"
            "<p>PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.</p>"
@@ -199,9 +198,6 @@ void MainWindow::about()
 
            "<h3>Credits</h3>"
            "<p>Copyright &copy; 2014 by Parallax, Inc.</p>"
-           "<p>Originally developed by Steve Denson, Dennis Gately, and Roy Eltham."
-           "Now developed by LameStation LLC in collaboration with Parallax.</p>"
-           "<h4>Get the source:</p>"
-           "<ul><li><a href=\"https://github.com/parallaxinc/PropellerIDE\">PropellerIDE Repository</a></li>"
-           "<li><a href=\"https://github.com/parallaxinc/OpenSpin\">OpenSpin Repository</a></li></ul>");
+           "<p>Originally developed by Steve Denson, Dennis Gately, and Roy Eltham. "
+           "Now developed by LameStation LLC in collaboration with Parallax.</p>");
 }

@@ -7,7 +7,7 @@ macx {
     target.path = $${PREFIX}/MacOS
 }
 unix:!macx {
-    target.path = $${PREFIX}/bin
+    target.path = $${PREFIX}/share/propelleride/bin
 }
 win32 {
     target.path = $${PREFIX}/
@@ -15,10 +15,12 @@ win32 {
 
 INSTALLS += target
 
-CONFIG -= app_bundle
-
 LIBS += -L$${OUT_PWD}/../qext/ -lqext
 LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
+
+isEmpty(VERSION):VERSION = 0.0.0
+VERSION = '\\"$${VERSION}\\"'
+DEFINES += VERSION=\"$${VERSION}\"
 
 SOURCES += main.cpp\
     mainwindow.cpp \
