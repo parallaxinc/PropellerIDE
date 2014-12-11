@@ -1018,9 +1018,9 @@ int Editor::tabBlockShift()
         cur.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
         cur.setPosition(curend, QTextCursor::KeepAnchor);
 
-		/* don't inflate last line selection if cursor is at start */
-		if (!cur.selectedText().endsWith(QChar::ParagraphSeparator))
-			cur.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+        /* don't inflate last line selection if cursor is at start */
+        if (!cur.selectedText().endsWith(QChar::ParagraphSeparator))
+            cur.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
 
         /* get a list of lines in the selected block. keep empty lines */
         QStringList mylist = cur.selectedText().split(QChar::ParagraphSeparator);
