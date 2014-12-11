@@ -12,7 +12,8 @@ DIR_DIST		:=	$(DIR)/dist
 DIR_COMMON		:=	$(DIR)/common
 
 ISCC			:=	iscc
-QMAKE			:=	qmake -r
+QMAKE_OPTS		+=  -r
+QMAKE			:=	qmake $(QMAKE_OPTS)
 
 VERSION := $(shell git describe --tags --long)
 ifeq ($(VERSION),)
