@@ -198,9 +198,6 @@ void MainWindow::about()
 
            "<h3>Credits</h3>"
            "<p>Copyright &copy; 2014 by Parallax, Inc.</p>"
-           "<p>Originally developed by Steve Denson, Dennis Gately, and Roy Eltham."
-           "Now developed by LameStation LLC in collaboration with Parallax.</p>"
-           "<h4>Get the source:</p>"
-           "<ul><li><a href=\"https://github.com/parallaxinc/PropellerIDE\">PropellerIDE Repository</a></li>"
-           "<li><a href=\"https://github.com/parallaxinc/OpenSpin\">OpenSpin Repository</a></li></ul>");
+           "<p>Originally developed by Steve Denson, Dennis Gately, and Roy Eltham. "
+           "Now developed by LameStation LLC in collaboration with Parallax.</p>");
 }

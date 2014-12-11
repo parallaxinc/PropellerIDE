@@ -1,7 +1,7 @@
 Package: propelleride
 Version: VERSION
 Architecture: CPU
-Depends: libqtgui4, libqtcore4, zlib1g, libftdi1
+Depends: zlib1g, libftdi1
 Pre-Depends:
 Recommends:
 Maintainer: lamestation.com

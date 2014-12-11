@@ -64,6 +64,7 @@ clean: clean_staging
 deb: DIR_OUT := $(DIR_STAGING)/propelleride/usr
 deb: clean_staging copy
 	mkdir -p $(DIR_STAGING)/propelleride/DEBIAN/ ; \
+	cp -f $(shell ldd $(DIR_OUT)/bin/propelleride | grep "libQt" | awk '{print $$3}') $(DIR_OUT)/bin/; \
 	cp -f $(DIR_DIST)/control $(DIR_STAGING)/propelleride/DEBIAN/control ; \
 	sed -e "s/VERSION/$(VERSION)/" \
 		-e "s/CPU/$(CPU)/" \
