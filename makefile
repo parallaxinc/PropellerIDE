@@ -15,6 +15,9 @@ ISCC			:=	iscc
 QMAKE			:=	qmake -r
 
 VERSION := $(shell git describe --tags --long)
+ifeq ($(shell git describe --tags --long),)
+	VERSION := 0.0.0-phony
+endif
 
 # if CPU (uname -m) equals...
 ifeq ($(shell cat /etc/os-release | grep "ID=raspbian"),ID=raspbian) # if Raspberry Pi
