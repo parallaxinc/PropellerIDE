@@ -22,7 +22,7 @@ after_script:
 deploy:
   provider: releases
   api_key:
-    secure: Aqc568913TUntnDfhy16yL5kqOgw5aMppFlO6C3hsDaZIFFpV9A8azQo9853uavCuGWXgIG4kt4qZcGl6aTWiDbVFI0MoOdXkNERhuWSaAPwWXZ2xz+vhl9SXW9jL5zj2ERTMsIC9AvhUuqMIWgkluq51MzTQnXxS9C6ph+5Jo4=
+    secure: pXTKmYwykeSD1FSVFvkfR4q91X9AVkNPS2/FKDs+CnWDgFJyDrxsD8D596fLKA3OwbLD7QkXTBj4alhmj7OmcIf56ZZXlKy/O47OfC4JgHjkWYGIbE6CR/UpLRnGS251/zs8NjypnLSk+puiw1lHUqeIBqYGGCzkBN19uaGiyUc=
   file_glob: true
   file: staging/propelleride-*.deb
   skip_cleanup: true
