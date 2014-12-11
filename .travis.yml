@@ -5,9 +5,23 @@ matrix:
         - compiler: gcc
 
 before_install:
+  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo apt-get update -qq
+  - sudo apt-get install -qq qt5-qmake qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev libsqlite3-dev
   - sudo apt-get install -qq libqt4-dev libqt4-opengl-dev zlib1g-dev cppcheck
   - qmake -v
+  - qmake -qt=qt5 -v
 
 script:
   - make
+  - make deb
+  - make clean
+  - pushd src
+  - qmake -qt=qt5 -r
+  - make
+  - popd
+  - make clean
+  - cppcheck --enable=all -q `git ls-files *.cpp *.c`
+  - pushd src/openspin/repo
+  - cppcheck --enable=all -q `git ls-files *.cpp`
+  - popd
