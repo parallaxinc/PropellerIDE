@@ -1,4 +1,5 @@
 NAME			:=	propelleride
+TITLE			:=	PropellerIDE
 
 DIR				:=	$(shell pwd)
 DIR_SRC			:=	$(DIR)/src
@@ -59,29 +60,29 @@ clean_staging:
 clean: clean_staging
 	cd $(DIR_SRC); $(QMAKE); $(MAKE) clean
 
-deb: DIR_OUT := $(DIR_STAGING)/propelleride/usr
+deb: DIR_OUT := $(DIR_STAGING)/$(NAME)/usr
 deb: clean_staging copy
-	mkdir -p $(DIR_STAGING)/propelleride/DEBIAN/ ; \
-	cp -f $(shell ldd $(DIR_OUT)/bin/propelleride | grep "libQt" | awk '{print $$3}') $(DIR_OUT)/bin/; \
-	cp -f $(DIR_DIST)/control $(DIR_STAGING)/propelleride/DEBIAN/control ; \
+	mkdir -p $(DIR_STAGING)/$(NAME)/DEBIAN/ ; \
+	cp -f $(shell ldd $(DIR_OUT)/bin/$(NAME) | grep "libQt" | awk '{print $$3}') $(DIR_OUT)/share/$(NAME)/bin/; \
+	cp -f $(DIR_DIST)/control $(DIR_STAGING)/$(NAME)/DEBIAN/control ; \
 	sed -e "s/VERSION/$(VERSION)/" \
 		-e "s/CPU/$(CPU)/" \
-		-i $(DIR_STAGING)/propelleride/DEBIAN/control ; \
-	dpkg-deb -b $(DIR_STAGING)/propelleride $(DIR_STAGING)/propelleride-$(VERSION)-$(CPU).deb
+		-i $(DIR_STAGING)/$(NAME)/DEBIAN/control ; \
+	dpkg-deb -b $(DIR_STAGING)/$(NAME) $(DIR_STAGING)/$(NAME)-$(VERSION)-$(CPU).deb
 
 rpi: CPU := armhf
 rpi: deb
 
-win: DIR_OUT := "$(DIR_STAGING)/propelleride"
+win: DIR_OUT := "$(DIR_STAGING)/$(NAME)"
 win: clean_staging copy
 	cd $(DIR_OUT); \
-	windeployqt propelleride.exe; \
+	windeployqt $(NAME).exe; \
 	$(ISCC) //dMyAppVersion=$(VERSION) "$(DIR_DIST)/installer.iss"
 
 
-mac: DIR_OUT := "$(DIR_STAGING)/PropellerIDE.app/Contents"
+mac: DIR_OUT := "$(DIR_STAGING)/$(NAME).app/Contents"
 mac: clean_staging copy
 	cd $(DIR_STAGING) ; \
-	macdeployqt $(DIR_STAGING)/PropellerIDE.app ; \
+	macdeployqt $(DIR_STAGING)/$(TITLE).app ; \
 	cp -f $(DIR_DIST)/Info.plist $(DIR_OUT)
-	$(DIR_DIST)/dmg.sh $(DIR_STAGING)/PropellerIDE.app PropellerIDE $(DIR_STAGING)/propelleride-$(VERSION)-$(CPU).dmg
+	$(DIR_DIST)/dmg.sh $(DIR_STAGING)/$(TITLE).app $(TITLE) $(DIR_STAGING)/$(NAME)-$(VERSION)-$(CPU).dmg
