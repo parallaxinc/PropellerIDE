@@ -11,6 +11,7 @@
 #include <QFontDialog>
 #include <QVector>
 #include <QToolButton>
+#include <QHBoxLayout>
 
 #include "colors.h"
 
@@ -137,9 +138,9 @@ public slots:
     void configSettings();
     void cleanSettings();
     void showFontDialog();
-    void spinBrowseCompiler();
-    void spinBrowseIncludes();
-    void spinBrowseLoader();
+    void browseCompiler();
+    void browseLibrary();
+    void browseLoader();
     void accept();
     void reject();
 
@@ -149,6 +150,11 @@ private:
     void setupOptions();
     void addHighlights(QComboBox *box, QVector<PColor*> p);
     void setupHighlight();
+    QHBoxLayout * createPathSelector(
+        QString const & labelname,
+        QString const & errormessage,
+        QLineEdit * lineEdit,
+        const char * slot);
 
     void fileStringProperty(QVariant *var, QLineEdit *ledit, const char *key, QString *value);
 
@@ -158,12 +164,12 @@ private:
 
     enum Language { SPIN = 1, XBASIC = 2 };
 
-    QLineEdit   *spinLeditCompiler;
-    QLineEdit   *spinLeditIncludes;
+    QLineEdit   lineEditCompiler;
+    QLineEdit   lineEditLibrary;
+    QLineEdit   lineEditLoader;
     QString     spinCompilerStr;
     QString     spinIncludesStr;
 
-    QLineEdit   *spinLoadLedit;
     QString     spinLoaderStr;
 
     QString     tabSpacesStr;

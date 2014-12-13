@@ -66,9 +66,6 @@ void Preferences::cleanSettings()
             settings.remove(key);
         }
     }
-    // mac doesn't filter settings by publisher, etc...
-    //settings.setValue(useKeys,1);
-    //list = settings.allKeys(); // debug only
     settings.setValue(useKeys,0);
 }
 
@@ -85,7 +82,7 @@ void Preferences::setupOptions()
     hlayout->addWidget(editor);
     hlayout->addWidget(other);
     frame->setLayout(hlayout);
-    tabWidget.addTab(frame,"General");
+    tabWidget.addTab(frame,tr("General"));
 
     QSettings settings(publisherKey, PropellerIdeGuiKey,this);
     QVariant enac = settings.value(enableAutoComplete,true);
@@ -100,13 +97,12 @@ void Preferences::setupOptions()
     QVariant tabsv = settings.value(tabSpacesKey,"4");
     if(tabsv.canConvert(QVariant::String)) {
         tabspaceLedit.setText(tabsv.toString());
-    }
-    else {
+    } else {
         tabspaceLedit.setText("4");
     }
     edlayout->addRow(new QLabel(tr("Editor Tab Space Count")), &tabspaceLedit);
 
-    clearSettingsButton.setText("Clear Settings");
+    clearSettingsButton.setText(tr("Clear Settings"));
     clearSettingsButton.setToolTip(tr("Clear Settings on Exit"));
     connect(&clearSettingsButton,SIGNAL(clicked()), this, SLOT(cleanSettings()));
     otlayout->addRow(new QLabel(tr("Clear Settings on Exit")), &clearSettingsButton);
@@ -144,6 +140,30 @@ QLineEdit *Preferences::getTabSpaceLedit()
     return &tabspaceLedit;
 }
 
+QHBoxLayout * Preferences::createPathSelector(
+        QString const & labelname,
+        QString const & errormessage,
+        QLineEdit * lineEdit,
+        const char * slot) 
+{
+    QHBoxLayout * layout = new QHBoxLayout();
+
+    QLabel * label = new QLabel(labelname);
+    label->setMinimumWidth(70);
+
+    lineEdit->setMinimumWidth(300);
+    lineEdit->setToolTip(errormessage);
+
+    layout->addWidget(label);
+    layout->addWidget(lineEdit);
+    QPushButton * browseButton = new QPushButton(tr("Browse"), this);
+    layout->addWidget(browseButton);
+
+    connect(browseButton, SIGNAL(clicked()), this, slot);
+    return layout;
+}
+
+
 void Preferences::setupFolders()
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -151,57 +171,26 @@ void Preferences::setupFolders()
     box->setLayout(layout);
     tabWidget.addTab(box,"System");
 
-    int minledit = 300;
+    layout->addLayout(createPathSelector(
+                tr("Compiler"),
+                tr("Must add a compiler."),
+                &lineEditCompiler,
+                SLOT(browseCompiler())
+                ));
 
-    // Compiler Path Selector
-    QLabel *spinCmpLabel = new QLabel("Compiler");
-    spinCmpLabel->setMinimumWidth(70);
+    layout->addLayout(createPathSelector(
+                tr("Loader"),
+                tr("Must add a loader program."),
+                &lineEditLoader,
+                SLOT(browseLoader())
+                ));
 
-    QHBoxLayout *spincLayout = new QHBoxLayout();
-    spinLeditCompiler = new QLineEdit(this);
-    spinLeditCompiler->setMinimumWidth(minledit);
-    spinLeditCompiler->setToolTip("Must add a Spin compiler.");
-    spincLayout->addWidget(spinCmpLabel);
-    spincLayout->addWidget(spinLeditCompiler);
-    QPushButton *spinBtnCompilerBrowse = new QPushButton(tr("Browse"), this);
-    spincLayout->addWidget(spinBtnCompilerBrowse);
-
-    layout->addLayout(spincLayout);
-
-
-    // Loader Path Selector
-    QLabel *spinLoadLabel = new QLabel(tr("Loader"));
-    spinLoadLabel->setMinimumWidth(70);
-
-    QHBoxLayout *spinLoadLayout = new QHBoxLayout();
-    spinLoadLedit = new QLineEdit(this);
-    spinLoadLedit->setMinimumWidth(minledit);
-    spinLoadLedit->setToolTip(tr("Must add a loader program."));
-    spinLoadLayout->addWidget(spinLoadLabel);
-    spinLoadLayout->addWidget(spinLoadLedit);
-    QPushButton *spinLoaderBtnBrowse = new QPushButton(tr("Browse"), this);
-    spinLoadLayout->addWidget(spinLoaderBtnBrowse);
-
-    layout->addLayout(spinLoadLayout);
-
-
-    // Library Path Selector
-    QLabel *spinIncLabel = new QLabel(tr("Library"));
-    spinIncLabel->setMinimumWidth(70);
-
-    QHBoxLayout *spiniLayout = new QHBoxLayout();
-    spinLeditIncludes = new QLineEdit(this);
-    spinLeditIncludes->setMinimumWidth(minledit);
-    spinLeditIncludes->setToolTip(tr("Add Spin library folder here."));
-    spiniLayout->addWidget(spinIncLabel);
-    spiniLayout->addWidget(spinLeditIncludes);
-    QPushButton *spinBtnIncludesBrowse = new QPushButton(tr("Browse"), this);
-    spiniLayout->addWidget(spinBtnIncludesBrowse);
-
-    layout->addLayout(spiniLayout);
-
-    connect(spinBtnCompilerBrowse, SIGNAL(clicked()), this, SLOT(spinBrowseCompiler()));
-    connect(spinBtnIncludesBrowse, SIGNAL(clicked()), this, SLOT(spinBrowseIncludes()));
+    layout->addLayout(createPathSelector(
+                tr("Library Path"),
+                tr("Must add a library path."),
+                &lineEditLibrary,
+                SLOT(browseLibrary())
+                ));
 
     QSettings settings(publisherKey, PropellerIdeGuiKey,this);
 
@@ -217,54 +206,53 @@ void Preferences::setupFolders()
         QString s = compv.toString();
         s = QDir::fromNativeSeparators(s);
         if(s.length() > 0) {
-            spinLeditCompiler->setText(s);
+            lineEditCompiler.setText(s);
         }
         else {
-            spinLeditCompiler->setText(compiler);
+            lineEditCompiler.setText(compiler);
         }
     }
     else {
-        spinLeditCompiler->setText(compiler);
+        lineEditCompiler.setText(compiler);
     }
 
     if(incv.canConvert(QVariant::String)) {
         QString s = incv.toString();
         s = QDir::fromNativeSeparators(s);
         if(s.length() > 0) {
-            spinLeditIncludes->setText(s);
+            lineEditLibrary.setText(s);
         }
         else {
-            spinLeditIncludes->setText(library);
+            lineEditLibrary.setText(library);
         }
     }
     else {
-        spinLeditIncludes->setText(library);
+        lineEditLibrary.setText(library);
     }
 
-    settings.setValue(spinCompilerKey,spinLeditCompiler->text());
-    settings.setValue(spinIncludesKey,spinLeditIncludes->text());
+    settings.setValue(spinCompilerKey,lineEditCompiler.text());
+    settings.setValue(spinIncludesKey,lineEditLibrary.text());
 
     QString loader(DEFAULT_LOADER);
     loader = QApplication::applicationDirPath()+loader;
 
-    connect(spinLoaderBtnBrowse, SIGNAL(clicked()), this, SLOT(spinBrowseLoader()));
     QVariant loadv = settings.value(spinLoaderKey,loader);
 
     if(loadv.canConvert(QVariant::String)) {
         QString s = loadv.toString();
         s = QDir::fromNativeSeparators(s);
         if(s.length() > 0) {
-            spinLoadLedit->setText(s);
+            lineEditLoader.setText(s);
         }
         else {
-            spinLoadLedit->setText(loader);
+            lineEditLoader.setText(loader);
         }
     }
     else {
-        spinLoadLedit->setText(loader);
+        lineEditLoader.setText(loader);
     }
 
-    settings.setValue(spinLoaderKey,spinLoadLedit->text());
+    settings.setValue(spinLoaderKey,lineEditLoader.text());
 
 }
 
@@ -340,9 +328,6 @@ void Preferences::setupHighlight()
       */
 
     bool checkBold = true;
-#ifdef Q_WS_MAC
-    checkBold = false;
-#endif
 
     QLabel *lNumStyle = new QLabel(tr("Numbers"));
     hlayout->addWidget(lNumStyle,hlrow,0);
@@ -599,23 +584,23 @@ Qt::GlobalColor Preferences::getQtColor(int index)
     return Qt::black; // just return black on failure
 }
 
-void Preferences::spinBrowseCompiler()
+void Preferences::browseCompiler()
 {
-    QString folder = spinLeditCompiler->text();
+    QString folder = lineEditCompiler.text();
     if(!folder.length()) folder = lastFolder;
     QString fileName = QFileDialog::getOpenFileName(this,
             tr("Select Spin Compiler"), folder, "OpenSpin (openspin*)|BST Compiler (bstc*)");
     QString s = QDir::fromNativeSeparators(fileName);
     lastFolder = s.mid(0,s.lastIndexOf("/")+1);
-    spinCompilerStr = spinLeditCompiler->text();
+    spinCompilerStr = lineEditCompiler.text();
     if(s.length() > 0)
-        spinLeditCompiler->setText(s);
+        lineEditCompiler.setText(s);
     qDebug() << "browseSpinCompiler" << s;
 }
 
-void Preferences::spinBrowseIncludes()
+void Preferences::browseLibrary()
 {
-    QString folder = spinLeditIncludes->text();
+    QString folder = lineEditLibrary.text();
     if(!folder.length()) folder = lastFolder;
     QString pathName = QFileDialog::getExistingDirectory(this,
             tr("Select Spin Library Path"), folder, QFileDialog::ShowDirsOnly);
@@ -626,30 +611,30 @@ void Preferences::spinBrowseIncludes()
     if(!s.endsWith("/")) {
         s += "/";
     }
-    spinLeditIncludes->setText(s);
-    qDebug() << "spinBrowseIncludes" << s;
+    lineEditLibrary.setText(s);
+    qDebug() << "browseLibrary" << s;
 }
 
-void Preferences::spinBrowseLoader()
+void Preferences::browseLoader()
 {
-    QString folder = spinLoadLedit->text();
+    QString folder = lineEditLoader.text();
     if(!folder.length()) folder = lastFolder;
     QString fileName = QFileDialog::getOpenFileName(this,
             tr("Select Loader"), folder, "Spin Loader (*load*)");
     QString s = QDir::fromNativeSeparators(fileName);
     lastFolder = s.mid(0,s.lastIndexOf("/")+1);
-    spinLoaderStr = spinLoadLedit->text();
+    spinLoaderStr = lineEditLoader.text();
     if(s.length() > 0)
-        spinLoadLedit->setText(s);
-    qDebug() << "spinBrowseLoader" << s;
+        lineEditLoader.setText(s);
+    qDebug() << "browseLoader" << s;
 }
 
 void Preferences::accept()
 {
     QSettings settings(publisherKey, PropellerIdeGuiKey,this);
-    settings.setValue(spinCompilerKey,spinLeditCompiler->text());
-    settings.setValue(spinIncludesKey,spinLeditIncludes->text());
-    settings.setValue(spinLoaderKey,spinLoadLedit->text());
+    settings.setValue(spinCompilerKey,lineEditCompiler.text());
+    settings.setValue(spinIncludesKey,lineEditLibrary.text());
+    settings.setValue(spinLoaderKey,lineEditLoader.text());
 
     settings.setValue(tabSpacesKey,tabspaceLedit.text());
 
@@ -683,9 +668,9 @@ void Preferences::accept()
 
 void Preferences::reject()
 {
-    spinLeditCompiler->setText(spinCompilerStr);
-    spinLeditIncludes->setText(spinIncludesStr);
-    spinLoadLedit->setText(spinLoaderStr);
+    lineEditCompiler.setText(spinCompilerStr);
+    lineEditLibrary.setText(spinIncludesStr);
+    lineEditLoader.setText(spinLoaderStr);
 
     tabspaceLedit.setText(tabSpacesStr);
     hlNumStyle.setChecked(hlNumStyleBool);
@@ -719,9 +704,9 @@ void Preferences::reject()
 void Preferences::showPreferences(QString lastDir)
 {
     this->lastFolder = lastDir;
-    spinCompilerStr = spinLeditCompiler->text();
-    spinIncludesStr = spinLeditIncludes->text();
-    spinLoaderStr = spinLoadLedit->text();
+    spinCompilerStr = lineEditCompiler.text();
+    spinIncludesStr = lineEditLibrary.text();
+    spinLoaderStr = lineEditLoader.text();
     this->setWindowTitle(QString(PropellerIdeGuiKey) +" Preferences");
 
     tabSpacesStr = tabspaceLedit.text();
@@ -755,5 +740,5 @@ void Preferences::showPreferences(QString lastDir)
 
 QString Preferences::getSpinLibraryString()
 {
-    return this->spinLeditIncludes->text();
+    return this->lineEditLibrary.text();
 }
