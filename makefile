@@ -14,23 +14,20 @@ DIR_COMMON		:=	$(DIR)/common
 ISCC			:=	iscc
 QMAKE_OPTS		+=  -r
 QMAKE			:=	qmake $(QMAKE_OPTS)
+MAKE_OPTS		+=  
+MAKE			:= $(MAKE) $(MAKE_OPTS)
 
 VERSION := $(shell git describe --tags --long)
 ifeq ($(VERSION),)
 	VERSION := 0.0.0-phony
 endif
 
-# if CPU (uname -m) equals...
-ifeq ($(shell cat /etc/os-release | grep "ID=raspbian"),ID=raspbian) # if Raspberry Pi
-	CPU := armhf
+ifeq ($(shell uname -m),i686)			# if i686
+	CPU := i386
+else ifeq ($(shell uname -m),x86_64)	# if x64
+	CPU := amd64
 else
-	ifeq ($(shell uname -m),i686)			# if i686
-		CPU := i386
-	else ifeq ($(shell uname -m),x86_64)	# if x64
-		CPU := amd64
-	else
-		CPU := $(shell uname -m)
-	endif
+	CPU := $(shell uname -m)
 endif
 
 all: build
@@ -72,6 +69,8 @@ deb: clean_staging copy
 		-i $(DIR_STAGING)/propelleride/DEBIAN/control ; \
 	dpkg-deb -b $(DIR_STAGING)/propelleride $(DIR_STAGING)/propelleride-$(VERSION)-$(CPU).deb
 
+rpi: CPU := armhf
+rpi: deb
 
 win: DIR_OUT := "$(DIR_STAGING)/propelleride"
 win: clean_staging copy
