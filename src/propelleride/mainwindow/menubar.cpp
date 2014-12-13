@@ -119,20 +119,17 @@ void MainWindow::setupViewMenu()
 
     viewMenu->addSeparator();
 
-#ifdef Q_OS_MAC
-    viewMenu->addAction(QIcon(":/icons/preferences-font.png"), tr("Font"), this, SLOT(fontDialog()), QKeySequence(tr("Ctrl+T")));
-#else
     viewMenu->addAction(QIcon(":/icons/preferences-font.png"), tr("Font"), this, SLOT(fontDialog()));
-#endif
-
     viewMenu->addAction(QIcon(":/icons/preferences-font-smaller.png"), tr("Smaller Font"), this, SLOT(fontSmaller()), QKeySequence::ZoomOut);
 
     /* special provision for bigger fonts to use default ZoomIn or Ctrl+= */
     QAction *bigger = new QAction(QIcon(":/icons/preferences-font-bigger.png"), tr("Bigger Font"), this);
+
     QList<QKeySequence> biggerKeys;
     biggerKeys.append(QKeySequence::ZoomIn);
     biggerKeys.append(QKeySequence(Qt::CTRL+Qt::Key_Equal));
     bigger->setShortcuts(biggerKeys);
+
     connect(bigger,SIGNAL(triggered()),this,SLOT(fontBigger()));
 
     /* insert action before smaller font action */
@@ -172,19 +169,22 @@ void MainWindow::setupHelpMenu()
     helpMenu->addAction(QIcon(":/icons/help-about.png"), tr("&About"), this, SLOT(about()));
 }
 
+void openFileResource(QString const & resource)
+{
+    QString path = QApplication::applicationDirPath()
+            + QString(APP_RESOURCES_PATH)
+            + resource;
+    QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+}
+
 void MainWindow::propellerManual()
 {
-    QString path = "/usr/share/propelleride/doc/pdf/P8X32A-Web-PropellerManual-v1.2_0.pdf";
-    QUrl pathUrl = QUrl::fromLocalFile(path);
-    QDesktopServices::openUrl(pathUrl);
+    openFileResource("/doc/pdf/P8X32A-Web-PropellerManual-v1.2_0.pdf");
 }
-    
-    
+
 void MainWindow::propellerDatasheet()
 {
-    QString path = "/usr/share/propelleride/doc/pdf/P8X32A-Propeller-Datasheet-v1.4.0_0.pdf";
-    QUrl pathUrl = QUrl::fromLocalFile(path);
-    QDesktopServices::openUrl(pathUrl);
+    openFileResource("/doc/pdf/P8X32A-Propeller-Datasheet-v1.4.0_0.pdf");
 }
 
 void MainWindow::about()
