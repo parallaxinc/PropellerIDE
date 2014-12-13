@@ -170,13 +170,13 @@ void Preferences::setupFolders()
 
 
     // Loader Path Selector
-    QLabel *spinLoadLabel = new QLabel("Loader");
+    QLabel *spinLoadLabel = new QLabel(tr("Loader"));
     spinLoadLabel->setMinimumWidth(70);
 
     QHBoxLayout *spinLoadLayout = new QHBoxLayout();
     spinLoadLedit = new QLineEdit(this);
     spinLoadLedit->setMinimumWidth(minledit);
-    spinLoadLedit->setToolTip("Must add a loader program.");
+    spinLoadLedit->setToolTip(tr("Must add a loader program."));
     spinLoadLayout->addWidget(spinLoadLabel);
     spinLoadLayout->addWidget(spinLoadLedit);
     QPushButton *spinLoaderBtnBrowse = new QPushButton(tr("Browse"), this);
@@ -186,13 +186,13 @@ void Preferences::setupFolders()
 
 
     // Library Path Selector
-    QLabel *spinIncLabel = new QLabel("Library");
+    QLabel *spinIncLabel = new QLabel(tr("Library"));
     spinIncLabel->setMinimumWidth(70);
 
     QHBoxLayout *spiniLayout = new QHBoxLayout();
     spinLeditIncludes = new QLineEdit(this);
     spinLeditIncludes->setMinimumWidth(minledit);
-    spinLeditIncludes->setToolTip("Add Spin library folder here.");
+    spinLeditIncludes->setToolTip(tr("Add Spin library folder here."));
     spiniLayout->addWidget(spinIncLabel);
     spiniLayout->addWidget(spinLeditIncludes);
     QPushButton *spinBtnIncludesBrowse = new QPushButton(tr("Browse"), this);
@@ -205,18 +205,10 @@ void Preferences::setupFolders()
 
     QSettings settings(publisherKey, PropellerIdeGuiKey,this);
 
-    QString compiler("/openspin");
-#ifdef Q_OS_WIN
-    QString library("/spin/");
-#else
-    QString library("/../spin/");
-#endif
+    QString compiler(DEFAULT_COMPILER);
+    QString library(QString(APP_RESOURCES_PATH)+"/library");
     compiler = QApplication::applicationDirPath()+compiler;
     library  = QApplication::applicationDirPath()+library;
-
-#ifdef  Q_OS_WIN
-    compiler += ".exe";
-#endif
 
     QVariant compv = settings.value(spinCompilerKey, compiler);
     QVariant incv = settings.value(spinIncludesKey, library);
@@ -252,10 +244,7 @@ void Preferences::setupFolders()
     settings.setValue(spinCompilerKey,spinLeditCompiler->text());
     settings.setValue(spinIncludesKey,spinLeditIncludes->text());
 
-    QString loader("/p1load");
-#ifdef Q_OS_WIN
-    loader += ".exe";
-#endif
+    QString loader(DEFAULT_LOADER);
     loader = QApplication::applicationDirPath()+loader;
 
     connect(spinLoaderBtnBrowse, SIGNAL(clicked()), this, SLOT(spinBrowseLoader()));
@@ -615,7 +604,7 @@ void Preferences::spinBrowseCompiler()
     QString folder = spinLeditCompiler->text();
     if(!folder.length()) folder = lastFolder;
     QString fileName = QFileDialog::getOpenFileName(this,
-            tr("Select Spin Compiler"), folder, "Spin Compiler (openspin* openspin.*)");
+            tr("Select Spin Compiler"), folder, "OpenSpin (openspin*)|BST Compiler (bstc*)");
     QString s = QDir::fromNativeSeparators(fileName);
     lastFolder = s.mid(0,s.lastIndexOf("/")+1);
     spinCompilerStr = spinLeditCompiler->text();

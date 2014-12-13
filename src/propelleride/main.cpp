@@ -7,7 +7,8 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
+    qDebug() << "App path:" << app.applicationFilePath();
 #if defined(Q_OS_WIN32)
     QStringList styles = QStyleFactory::keys();
     qDebug() << "Available window styles" << styles;
@@ -15,7 +16,7 @@ int main(int argc, char *argv[])
         QApplication::setStyle("Fusion");
     }
 #endif
-    a.setWindowIcon(QIcon(":/icons/PropHatAlpha.png"));
+    app.setWindowIcon(QIcon(":/icons/PropHatAlpha.png"));
     MainWindow w;
     w.init();
     if(argc > 1) {
@@ -32,5 +33,5 @@ int main(int argc, char *argv[])
         }
     }
     w.show();
-    return a.exec();
+    return app.exec();
 }
