@@ -1327,7 +1327,8 @@ void Editor::updateBackgroundColors()
             newColor = 5;
         }
 
-        if ( ( nInComment > 0 ) || ( currBlock.text().length() > 3 && currBlock.text().at(3).isLetterOrNumber() ) )
+        if (nInComment > 0
+		|| (currBlock.text().length() > 3 && QRegExp("\\w").exactMatch(QString(currBlock.text()[3]))))
         {
             newColor = -1;
         }
