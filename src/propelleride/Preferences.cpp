@@ -300,33 +300,6 @@ void Preferences::setupHighlight()
     QVariant var;
 
     int hlrow = 0;
-
-    /*
-        hlEnableKey                 // not implemented
-
-        hlNumStyleKey               // Numeric style normal = 0 italic = 1
-        hlNumWeightKey              // bold weight checked
-        hlNumColorKey               // color integer
-        hlFuncStyleKey              // function style - see Numeric
-        hlFuncWeightKey             // bold weight checked
-        hlFuncColorKey              // color integer
-        hlKeyWordStyleKey
-        hlKeyWordWeightKey
-        hlKeyWordColorKey
-        hlPreProcStyleKey
-        hlPreProcWeightKey
-        hlPreProcColorKey
-        hlQuoteStyleKey
-        hlQuoteWeightKey
-        hlQuoteColorKey
-        hlLineComStyleKey
-        hlLineComWeightKey
-        hlLineComColorKey
-        hlBlockComStyleKey
-        hlBlockComWeightKey
-        hlBlockComColorKey
-      */
-
     bool checkBold = true;
 
     QLabel *lNumStyle = new QLabel(tr("Numbers"));
@@ -584,49 +557,77 @@ Qt::GlobalColor Preferences::getQtColor(int index)
     return Qt::black; // just return black on failure
 }
 
-void Preferences::browseCompiler()
+void Preferences::browsePath(
+        QString const & pathlabel, 
+        QString const & pathregex,  
+        QLineEdit * currentvalue,
+        QString * oldvalue,
+        bool isfolder
+        )
 {
-    QString folder = lineEditCompiler.text();
-    if(!folder.length()) folder = lastFolder;
-    QString fileName = QFileDialog::getOpenFileName(this,
-            tr("Select Spin Compiler"), folder, "OpenSpin (openspin*)|BST Compiler (bstc*)");
-    QString s = QDir::fromNativeSeparators(fileName);
+    QString folder = *oldvalue = currentvalue->text();
+    QString pathname;
+
+    if (!folder.length()) 
+        folder = lastFolder;
+
+    if (isfolder) 
+        pathname = QFileDialog::getExistingDirectory(this,
+                pathlabel, folder, QFileDialog::ShowDirsOnly);
+    else
+        pathname = QFileDialog::getOpenFileName(this,
+                pathlabel, folder, pathregex);
+
+    QString s = QDir::fromNativeSeparators(pathname);
+
+    if(s.length() == 0)
+    {
+        qDebug() << "browsePath(" << pathlabel << "): " << "No selection";
+        return;
+    }
+
+    if (isfolder)
+        if(!s.endsWith("/"))
+            s += "/";
+
+    qDebug() << "browsePath(" << pathlabel << "): " << s;
+    currentvalue->setText(s);
+
     lastFolder = s.mid(0,s.lastIndexOf("/")+1);
-    spinCompilerStr = lineEditCompiler.text();
-    if(s.length() > 0)
-        lineEditCompiler.setText(s);
-    qDebug() << "browseSpinCompiler" << s;
 }
 
-void Preferences::browseLibrary()
+
+void Preferences::browseCompiler()
 {
-    QString folder = lineEditLibrary.text();
-    if(!folder.length()) folder = lastFolder;
-    QString pathName = QFileDialog::getExistingDirectory(this,
-            tr("Select Spin Library Path"), folder, QFileDialog::ShowDirsOnly);
-    QString s = QDir::fromNativeSeparators(pathName);
-    lastFolder = s.mid(0,s.lastIndexOf("/")+1);
-    if(s.length() == 0)
-        return;
-    if(!s.endsWith("/")) {
-        s += "/";
-    }
-    lineEditLibrary.setText(s);
-    qDebug() << "browseLibrary" << s;
+    browsePath(
+            tr("Select Compiler"),
+            "OpenSpin (openspin*);;BST Compiler (bstc*)",
+            &lineEditCompiler,
+            &spinCompilerStr,
+            false
+        );
 }
 
 void Preferences::browseLoader()
 {
-    QString folder = lineEditLoader.text();
-    if(!folder.length()) folder = lastFolder;
-    QString fileName = QFileDialog::getOpenFileName(this,
-            tr("Select Loader"), folder, "Spin Loader (*load*)");
-    QString s = QDir::fromNativeSeparators(fileName);
-    lastFolder = s.mid(0,s.lastIndexOf("/")+1);
-    spinLoaderStr = lineEditLoader.text();
-    if(s.length() > 0)
-        lineEditLoader.setText(s);
-    qDebug() << "browseLoader" << s;
+    browsePath(
+            tr("Select Loader"),
+            "Loader (p1load* p2load*);;BST Loader (bstl*)",
+            &lineEditLoader,
+            &spinLoaderStr,
+            false
+        );
+}
+
+void Preferences::browseLibrary()
+{
+    browsePath(
+            tr("Select Spin Library Path"),
+            NULL,
+            &lineEditLibrary,
+            &spinIncludesStr,
+            true
+        );
 }
 
 void Preferences::accept()

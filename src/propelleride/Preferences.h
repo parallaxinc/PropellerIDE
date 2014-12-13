@@ -150,19 +150,27 @@ private:
     void setupOptions();
     void addHighlights(QComboBox *box, QVector<PColor*> p);
     void setupHighlight();
+
     QHBoxLayout * createPathSelector(
-        QString const & labelname,
-        QString const & errormessage,
-        QLineEdit * lineEdit,
-        const char * slot);
+            QString const & labelname,
+            QString const & errormessage,
+            QLineEdit * lineEdit,
+            const char * slot
+        );
 
     void fileStringProperty(QVariant *var, QLineEdit *ledit, const char *key, QString *value);
+
+    void browsePath(
+            QString const & pathlabel, 
+            QString const & pathregex,  
+            QLineEdit * currentvalue,
+            QString * oldvalue,
+            bool isfolder
+        );
 
     QTabWidget  tabWidget;
 
     QString     lastFolder;
-
-    enum Language { SPIN = 1, XBASIC = 2 };
 
     QLineEdit   lineEditCompiler;
     QLineEdit   lineEditLibrary;
