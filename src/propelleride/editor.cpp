@@ -1018,8 +1018,15 @@ int Editor::tabBlockShift()
         cur.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
         cur.setPosition(curend, QTextCursor::KeepAnchor);
 
+        /* don't inflate last line selection if cursor is at start */
+        if (!cur.selectedText().endsWith(QChar::ParagraphSeparator))
+            cur.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+
         /* get a list of lines in the selected block. keep empty lines */
         QStringList mylist = cur.selectedText().split(QChar::ParagraphSeparator);
+
+        /* initialise curend limiter */
+        int climit = cur.selectionEnd() - mylist.last().length();
 
         /* indent list */
         QString text;
@@ -1035,16 +1042,21 @@ int Editor::tabBlockShift()
             else if (s.startsWith(tab)) s.remove(0, tabSpaces);     // decrease line indent
             else s.replace(QRegExp("^ *"), "");                     // remove leading spaces
 
-            /* adjust selection */
-            if (n == 1) {
-                curbeg -= size - s.length();                        // only first line
-                curbeg  = std::max(curbeg, cur.selectionStart());   // avoid underflow
-            }
-            curend -= size - s.length();                            // all but an empty last line
-            
+            size -= s.length();                                     // size is now delta
+                                                                    // inc/dec indent -ve/+ve
             /* rebuild block */
             text += s;
-            if (n < mylist.length()) text += QChar::ParagraphSeparator;
+            if (n < mylist.length()) {
+                text   += QChar::ParagraphSeparator;
+                climit -= size;                                     // update limiter
+            }
+
+            /* adjust selection */
+            if (n == 1) {
+                curbeg -= size;                                     // only first line
+                curbeg  = std::max(curbeg, cur.selectionStart());   // avoid underflow
+            }
+            curend = std::max(curend - size, climit);               // all but an empty last line
         }
         /* insert new block */
         if (cur.selectedText().length() != text.length())           // avoid empty undo actions
