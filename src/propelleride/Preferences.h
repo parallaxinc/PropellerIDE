@@ -11,6 +11,7 @@
 #include <QFontDialog>
 #include <QVector>
 #include <QToolButton>
+#include <QHBoxLayout>
 
 #include "colors.h"
 
@@ -95,6 +96,26 @@
 #define enableAutoComplete          PropellerIdeGuiKey "_enableAutoComplete"
 #define enableSpinSuggest           PropellerIdeGuiKey "_enableSpinSuggest"
 
+
+#if defined(Q_OS_WIN) || defined(CYGWIN)
+  #define APP_EXTENSION            ".exe"
+  #define APP_RESOURCES_PATH        "/"
+
+#elif defined(Q_OS_MAC)
+  #define APP_EXTENSION            ""
+  #define APP_RESOURCES_PATH        "/../Resources"
+
+#elif defined(Q_OS_UNIX)
+  #define APP_EXTENSION            ""
+  #define APP_RESOURCES_PATH       "/.."
+
+#else
+  #error "We don't support that OS yet..."
+#endif
+
+#define DEFAULT_COMPILER            "/openspin"  APP_EXTENSION 
+#define DEFAULT_LOADER              "/p1load"    APP_EXTENSION
+
 class Preferences : public QDialog
 {
     Q_OBJECT
@@ -117,9 +138,9 @@ public slots:
     void configSettings();
     void cleanSettings();
     void showFontDialog();
-    void spinBrowseCompiler();
-    void spinBrowseIncludes();
-    void spinBrowseLoader();
+    void browseCompiler();
+    void browseLibrary();
+    void browseLoader();
     void accept();
     void reject();
 
@@ -130,20 +151,33 @@ private:
     void addHighlights(QComboBox *box, QVector<PColor*> p);
     void setupHighlight();
 
+    QHBoxLayout * createPathSelector(
+            QString const & labelname,
+            QString const & errormessage,
+            QLineEdit * lineEdit,
+            const char * slot
+        );
+
     void fileStringProperty(QVariant *var, QLineEdit *ledit, const char *key, QString *value);
+
+    void browsePath(
+            QString const & pathlabel, 
+            QString const & pathregex,  
+            QLineEdit * currentvalue,
+            QString * oldvalue,
+            bool isfolder
+        );
 
     QTabWidget  tabWidget;
 
     QString     lastFolder;
 
-    enum Language { SPIN = 1, XBASIC = 2 };
-
-    QLineEdit   *spinLeditCompiler;
-    QLineEdit   *spinLeditIncludes;
+    QLineEdit   lineEditCompiler;
+    QLineEdit   lineEditLibrary;
+    QLineEdit   lineEditLoader;
     QString     spinCompilerStr;
     QString     spinIncludesStr;
 
-    QLineEdit   *spinLoadLedit;
     QString     spinLoaderStr;
 
     QString     tabSpacesStr;
