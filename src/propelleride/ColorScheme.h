@@ -12,15 +12,17 @@
 
 class ColorScheme
 {
-private:
-
-    QString mName;
-    QString mFileName;
-
+public:
     struct color {
         QColor color;
         QString key;
     };
+
+
+private:
+
+    QString mName;
+    QString mFileName;
 
     QMap<int, color> colors;
 

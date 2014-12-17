@@ -88,41 +88,6 @@ void Highlighter::getPreferences()
 {
     bool   style;
     QFont::Weight   weight;
-
-    if(getStyle(hlNumStyleKey,&style))
-        hlNumStyle = style;
-    if(getWeight(hlNumWeightKey, &weight))
-        hlNumWeight = weight;
-
-    if(getStyle(hlFuncStyleKey,&style))
-        hlFuncStyle = style;
-    if(getWeight(hlFuncWeightKey, &weight))
-        hlFuncWeight = weight;
-
-    if(getStyle(hlKeyWordStyleKey,&style))
-        hlKeyWordStyle = style;
-    if(getWeight(hlKeyWordWeightKey, &weight))
-        hlKeyWordWeight = weight;
-
-    if(getStyle(hlPreProcStyleKey,&style))
-        hlPreProcStyle = style;
-    if(getWeight(hlPreProcWeightKey, &weight))
-        hlPreProcWeight = weight;
-
-    if(getStyle(hlQuoteStyleKey,&style))
-        hlQuoteStyle = style;
-    if(getWeight(hlQuoteWeightKey, &weight))
-        hlQuoteWeight = weight;
-
-    if(getStyle(hlLineComStyleKey,&style))
-        hlLineComStyle = style;
-    if(getWeight(hlLineComWeightKey, &weight))
-        hlLineComWeight = weight;
-
-    if(getStyle(hlBlockComStyleKey,&style))
-        hlBlockComStyle = style;
-    if(getWeight(hlBlockComWeightKey, &weight))
-        hlBlockComWeight = weight;
 }
 
 void Highlighter::highlight()

@@ -35,27 +35,6 @@
 #define tabSpacesKey        PropellerIdeGuiKey "_TabSpacesCount"
 #define recentFilesKey      PropellerIdeGuiKey "_recentFileList"
 #define hlEnableKey         PropellerIdeGuiKey "_HighlightEnable"
-#define hlNumStyleKey       PropellerIdeGuiKey "_HighlightNumberStyle"
-#define hlNumWeightKey      PropellerIdeGuiKey "_HighlightNumberWeight"
-#define hlNumColorKey       PropellerIdeGuiKey "_HighlightNumberColor"
-#define hlFuncStyleKey      PropellerIdeGuiKey "_HighlightFunctionStyle"
-#define hlFuncWeightKey     PropellerIdeGuiKey "_HighlightFunctionWeight"
-#define hlFuncColorKey      PropellerIdeGuiKey "_HighlightFunctionColor"
-#define hlKeyWordStyleKey   PropellerIdeGuiKey "_HighlightKeyWordTypeStyle"
-#define hlKeyWordWeightKey  PropellerIdeGuiKey "_HighlightKeyWordTypeWeight"
-#define hlKeyWordColorKey   PropellerIdeGuiKey "_HighlightKeyWordTypeColor"
-#define hlPreProcStyleKey   PropellerIdeGuiKey "_HighlightPreProcTypeStyle"
-#define hlPreProcWeightKey  PropellerIdeGuiKey "_HighlightPreProcTypeWeight"
-#define hlPreProcColorKey   PropellerIdeGuiKey "_HighlightPreProcTypeColor"
-#define hlQuoteStyleKey     PropellerIdeGuiKey "_HighlightQuoteTypeStyle"
-#define hlQuoteWeightKey    PropellerIdeGuiKey "_HighlightQuoteTypeWeight"
-#define hlQuoteColorKey     PropellerIdeGuiKey "_HighlightQuoteTypeColor"
-#define hlLineComStyleKey   PropellerIdeGuiKey "_HighlightLineCommmentTypeStyle"
-#define hlLineComWeightKey  PropellerIdeGuiKey "_HighlightLineCommmentTypeWeight"
-#define hlLineComColorKey   PropellerIdeGuiKey "_HighlightLineCommmentTypeColor"
-#define hlBlockComStyleKey  PropellerIdeGuiKey "_HighlightBlockCommentTypeStyle"
-#define hlBlockComWeightKey PropellerIdeGuiKey "_HighlightBlockCommentTypeWeight"
-#define hlBlockComColorKey  PropellerIdeGuiKey "_HighlightBlockCommentTypeColor"
 
 #define enableKeyClearScreen        PropellerIdeGuiKey "_enableClearScreen"
 #define enableKeyClearScreen16      PropellerIdeGuiKey "_enableClearScreen16"
@@ -130,6 +109,7 @@ public:
     bool getSpinSuggestEnable();
     QLineEdit *getTabSpaceLedit();
 
+
 signals:
     void openFontDialog();
 
@@ -143,6 +123,7 @@ public slots:
     void browseLoader();
     void accept();
     void reject();
+    void updateColor(const QColor & color);
 
 private:
 
@@ -167,6 +148,8 @@ private:
             QString * oldvalue,
             bool isfolder
         );
+
+    ColorScheme * currentTheme;
 
     QTabWidget  tabWidget;
 
@@ -194,24 +177,6 @@ private:
     bool         hlNumStyleBool;
     bool         hlNumWeightBool;
     int          hlNumColorIndex;
-    bool         hlFuncStyleBool;
-    bool         hlFuncWeightBool;
-    int          hlFuncColorIndex;
-    bool         hlKeyWordStyleBool;
-    bool         hlKeyWordWeightBool;
-    int          hlKeyWordColorIndex;
-    bool         hlPreProcStyleBool;
-    bool         hlPreProcWeightBool;
-    int          hlPreProcColorIndex;
-    bool         hlQuoteStyleBool;
-    bool         hlQuoteWeightBool;
-    int          hlQuoteColorIndex;
-    bool         hlLineComStyleBool;
-    bool         hlLineComWeightBool;
-    int          hlLineComColorIndex;
-    bool         hlBlockComStyleBool;
-    bool         hlBlockComWeightBool;
-    int          hlBlockComColorIndex;
 
     QToolButton hlNumButton;
 
@@ -220,24 +185,4 @@ private:
     QCheckBox   hlNumStyle;
     QCheckBox   hlNumWeight;
     QComboBox   hlNumColor;
-    QCheckBox   hlFuncStyle;
-    QCheckBox   hlFuncWeight;
-    QComboBox   hlFuncColor;
-    QCheckBox   hlKeyWordStyle;
-    QCheckBox   hlKeyWordWeight;
-    QComboBox   hlKeyWordColor;
-    QCheckBox   hlPreProcStyle;
-    QCheckBox   hlPreProcWeight;
-    QComboBox   hlPreProcColor;
-    QCheckBox   hlQuoteStyle;
-    QCheckBox   hlQuoteWeight;
-    QComboBox   hlQuoteColor;
-    QCheckBox   hlLineComStyle;
-    QCheckBox   hlLineComWeight;
-    QComboBox   hlLineComColor;
-    QCheckBox   hlBlockComStyle;
-    QCheckBox   hlBlockComWeight;
-    QComboBox   hlBlockComColor;
-
-    QVector<PColor*> propertyColors;
 };

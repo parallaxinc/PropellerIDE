@@ -23,6 +23,8 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
 {
     setWindowTitle(tr("Preferences"));
 
+    currentTheme = &Singleton<ColorScheme>::Instance();
+
     configSettings();
 
     setupFolders();
@@ -260,14 +262,9 @@ void Preferences::setupFolders()
 
 }
 
-void Preferences::addHighlights(QComboBox *box, QVector<PColor*> pcolor)
+void Preferences::updateColor(const QColor & color)
 {
-    for(int n = 0; n < pcolor.count(); n++) {
-        QPixmap pixmap(32,32);
-        pixmap.fill(pcolor.at(n)->getValue());
-        QIcon icon(pixmap);
-        box->addItem(icon, static_cast<PColor*>(propertyColors[n])->getName());
-    }
+    qDebug() << "Sending" << color.name() << "to nowhere...";
 }
 
 void Preferences::setupHighlight()
@@ -277,70 +274,36 @@ void Preferences::setupHighlight()
     hlbox->setLayout(hlayout);
     tabWidget.addTab(hlbox,tr("Highlight"));
 
-    QStringList colorlist;
-    for(int n = 0; n < propertyColors.count(); n++) {
-        colorlist.append(static_cast<PColor*>(propertyColors[n])->getName());
-    }
-
     QSettings settings(publisherKey, PropellerIdeGuiKey);
     QVariant var;
 
+
     int hlrow = 0;
-    bool checkBold = true;
+    QMap<int, ColorScheme::color> colors = 
+        currentTheme->getColorList();
 
-    QLabel *lNumStyle = new QLabel(tr("Numbers"));
-    hlayout->addWidget(lNumStyle,hlrow,0);
+    QMap<int, ColorScheme::color>::const_iterator i;
+    for (i = colors.constBegin(); i != colors.constEnd(); ++i)
+    {
 
-    hlNumWeight.setText(tr("Bold"));
-    hlNumWeight.setChecked(false);
-    hlayout->addWidget(&hlNumWeight,hlrow,1);
+        QLabel * name = new QLabel(i.value().key);
+        hlayout->addWidget(name,hlrow,0);
 
-    hlNumStyle.setText(tr("Italic"));
-    hlNumStyle.setChecked(false);
-    hlayout->addWidget(&hlNumStyle,hlrow,2);
+        QCheckBox * setWeight = new QCheckBox(this);
+        setWeight->setText(tr("Bold"));
+        setWeight->setChecked(false);
+        hlayout->addWidget(setWeight,hlrow,1);
+        
+        ColorChooser * colorPicker = new ColorChooser(i.value().color.name(), this);
+        colorPicker->setStatusTip(i.value().key);
+        colorPicker->setToolTip(i.value().key);
+        hlayout->addWidget(colorPicker, hlrow, 2);
 
-    addHighlights(&hlNumColor, propertyColors);
+        connect(colorPicker, SIGNAL(sendColor(const QColor &)), 
+                this,        SLOT(updateColor(const QColor &)) );
 
-//    QMap<int, ColorScheme::color> colors = 
-//
-//    QMap<int, ColorScheme::color>::iterator i;
-//    for (i = colors.constBegin(); i != colors.constEnd(); ++i)
-//    {
-//        ColorChooser * blah = new ColorChooser(i.value().color.name(), this);
-//        blah->setStatusTip(i.value().key);
-//        blah->setToolTip(i.value().key);
-//    
-//        hlayout->addWidget(blah, hlrow, 3);
-//    }
-
-
-
-    hlNumColor.setCurrentIndex(PColor::Magenta);
-    hlrow++;
-
-    var = settings.value(hlNumWeightKey,checkBold);
-    if(var.canConvert(QVariant::Bool)) {
-        QString s = var.toString();
-        hlNumWeight.setChecked(var.toBool());
-        settings.setValue(hlNumWeightKey,var.toBool());
+        hlrow++;
     }
-
-    var = settings.value(hlNumStyleKey,false);
-    if(var.canConvert(QVariant::Bool)) {
-        QString s = var.toString();
-        hlNumStyle.setChecked(var.toBool());
-        settings.setValue(hlNumStyleKey,var.toBool());
-    }
-
-    var = settings.value(hlNumColorKey,PColor::Magenta);
-    if(var.canConvert(QVariant::Int)) {
-        QString s = var.toString();
-        int n = var.toInt();
-        hlNumColor.setCurrentIndex(n);
-        settings.setValue(hlNumColorKey,n);
-    }
-
-
 }
 
 void Preferences::browsePath(
@@ -425,10 +388,6 @@ void Preferences::accept()
 
     settings.setValue(tabSpacesKey,tabspaceLedit.text());
 
-    settings.setValue(hlNumStyleKey,hlNumStyle.isChecked());
-    settings.setValue(hlNumWeightKey,hlNumWeight.isChecked());
-    settings.setValue(hlNumColorKey,hlNumColor.currentIndex());
-
     settings.setValue(enableAutoComplete,autoCompleteEnable.isChecked());
     settings.setValue(enableSpinSuggest,spinSuggestEnable.isChecked());
 
@@ -442,9 +401,6 @@ void Preferences::reject()
     lineEditLoader.setText(spinLoaderStr);
 
     tabspaceLedit.setText(tabSpacesStr);
-    hlNumStyle.setChecked(hlNumStyleBool);
-    hlNumWeight.setChecked(hlNumWeightBool);
-    hlNumColor.setCurrentIndex(hlNumColorIndex);
 
     autoCompleteEnable.setChecked(autoCompleteEnableSaved);
     spinSuggestEnable.setChecked(spinSuggestEnableSaved);
@@ -460,9 +416,6 @@ void Preferences::showPreferences(QString lastDir)
     spinLoaderStr = lineEditLoader.text();
 
     tabSpacesStr = tabspaceLedit.text();
-    hlNumStyleBool = hlNumStyle.isChecked();
-    hlNumWeightBool = hlNumWeight.isChecked();
-    hlNumColorIndex = hlNumColor.currentIndex();
 
     autoCompleteEnableSaved = autoCompleteEnable.isChecked();
     spinSuggestEnableSaved = spinSuggestEnable.isChecked();
