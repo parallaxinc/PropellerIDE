@@ -47,47 +47,10 @@
 
 #include "Highlighter.h"
 
-#include <QSettings>
-#include <QVariant>
-
-//! [0]
-Highlighter::Highlighter(QTextDocument *parent, Preferences *prop)
+Highlighter::Highlighter(QTextDocument *parent)
     : QSyntaxHighlighter(parent)
 {
-    preferences = prop;
     highlight();
-}
-
-bool Highlighter::getStyle(QString key, bool *italic)
-{
-    QSettings settings(publisherKey, PropellerIdeGuiKey, this);
-    QVariant var = settings.value(key, false);
-
-    if(var.canConvert(QVariant::Bool)) {
-        QString s = var.toString();
-        *italic = var.toBool();
-        return true;
-    }
-    return false;
-}
-
-bool Highlighter::getWeight(QString key, QFont::Weight *weight)
-{
-    QSettings settings(publisherKey, PropellerIdeGuiKey, this);
-    QVariant var = settings.value(key, false);
-
-    if(var.canConvert(QVariant::Bool)) {
-        QString s = var.toString();
-        *weight = var.toBool() ? QFont::Bold : QFont::Normal;
-        return true;
-    }
-    return false;
-}
-
-void Highlighter::getPreferences()
-{
-    bool   style;
-    QFont::Weight   weight;
 }
 
 void Highlighter::highlight()
@@ -95,7 +58,6 @@ void Highlighter::highlight()
 
 }
 
-//! [7]
 void Highlighter::highlightBlock(const QString &text)
 {
     int rules = 0;
@@ -111,22 +73,16 @@ void Highlighter::highlightBlock(const QString &text)
             index = expression.indexIn(text, index + length);
         }
     }
-    // don't parse empty rules
     if(rules == 0)
         return;
 
-//! [7] //! [8]
     setCurrentBlockState(0);
-//! [8]
 
-//! [9]
     int startIndex = 0;
     if (previousBlockState() != 1)
         startIndex = commentStartExpression.indexIn(text);
 
-//! [9] //! [10]
     while (startIndex >= 0) {
-//! [10] //! [11]
         int endIndex = commentEndExpression.indexIn(text, startIndex);
         int commentLength;
         if (endIndex == -1) {
@@ -140,4 +96,3 @@ void Highlighter::highlightBlock(const QString &text)
         startIndex = commentStartExpression.indexIn(text, startIndex + commentLength);
     }
 }
-//! [11]

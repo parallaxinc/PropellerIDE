@@ -1,16 +1,12 @@
-/****************************************************************************
-  This class extends Highlighter
-*****************************************************************************/
-
-#include <Qt> // Qt namespace
+#include <Qt>
 #include <QRegExp>
 #include <QString>
 #include <QStringList>
 
 #include "SpinHighlighter.h"
 
-SpinHighlighter::SpinHighlighter(QTextDocument *parent, Preferences *prop)
-    : Highlighter(parent, prop)
+SpinHighlighter::SpinHighlighter(QTextDocument *parent)
+    : Highlighter(parent)
 {
     currentTheme = &Singleton<ColorScheme>::Instance();
     highlight();
@@ -19,9 +15,6 @@ SpinHighlighter::SpinHighlighter(QTextDocument *parent, Preferences *prop)
 void SpinHighlighter::highlight()
 {
     this->parent();
-
-    getPreferences();
-
     HighlightingRule rule;
 
     // quoted strings

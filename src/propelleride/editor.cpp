@@ -80,7 +80,7 @@ void Editor::setHighlights(QString filename)
         highlighter = 0;
     }
     if(filename.isEmpty() == false) {
-        highlighter = new SpinHighlighter(this->document(), propDialog);
+        highlighter = new SpinHighlighter(this->document());
         isSpin = true;
     }
 }

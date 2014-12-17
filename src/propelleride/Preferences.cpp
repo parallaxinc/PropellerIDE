@@ -286,14 +286,11 @@ void Preferences::setupHighlight()
     for (i = colors.constBegin(); i != colors.constEnd(); ++i)
     {
 
-        QLabel * name = new QLabel(i.value().key);
+        QString strang = QString(i.value().key);
+        strang.replace("_"," ");
+        QLabel * name = new QLabel(strang);
         hlayout->addWidget(name,hlrow,0);
 
-        QCheckBox * setWeight = new QCheckBox(this);
-        setWeight->setText(tr("Bold"));
-        setWeight->setChecked(false);
-        hlayout->addWidget(setWeight,hlrow,1);
-        
         ColorChooser * colorPicker = new ColorChooser(i.value().color.name(), this);
         colorPicker->setStatusTip(i.value().key);
         colorPicker->setToolTip(i.value().key);

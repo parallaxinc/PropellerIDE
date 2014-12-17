@@ -87,7 +87,7 @@ public slots:
     void paste();
     void undo();
     void redo();
-
+    void selectAll();
 
     // view
     void fontDialog();

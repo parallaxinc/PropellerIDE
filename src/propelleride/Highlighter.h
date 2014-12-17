@@ -59,22 +59,12 @@
 
 #include "Preferences.h"
 
-QT_BEGIN_NAMESPACE
-class QTextDocument;
-QT_END_NAMESPACE
-
 class Highlighter : public QSyntaxHighlighter
 {
     Q_OBJECT
 
 public:
-    Highlighter(QTextDocument *parent, Preferences *prop);
-
-    bool getStyle(QString key,  bool *italic);
-    bool getWeight(QString key, QFont::Weight *weight);
-
-    void getPreferences();
-
+    Highlighter(QTextDocument *parent);
     virtual void highlight();
 
 protected:
@@ -98,28 +88,4 @@ protected:
     QTextCharFormat quotationFormat;
     QTextCharFormat functionFormat;
     QTextCharFormat numberFormat;
-
-    Preferences      *preferences;
-
-    bool            hlNumStyle;
-    QFont::Weight   hlNumWeight;
-    QColor hlNumColor;
-    bool            hlFuncStyle;
-    QFont::Weight   hlFuncWeight;
-    QColor hlFuncColor;
-    bool            hlKeyWordStyle;
-    QFont::Weight   hlKeyWordWeight;
-    QColor hlKeyWordColor;
-    bool            hlPreProcStyle;
-    QFont::Weight   hlPreProcWeight;
-    QColor hlPreProcColor;
-    bool            hlQuoteStyle;
-    QFont::Weight   hlQuoteWeight;
-    QColor hlQuoteColor;
-    bool            hlLineComStyle;
-    QFont::Weight   hlLineComWeight;
-    QColor hlLineComColor;
-    bool            hlBlockComStyle;
-    QFont::Weight   hlBlockComWeight;
-    QColor hlBlockComColor;
 };
