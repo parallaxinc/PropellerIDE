@@ -9,10 +9,10 @@
 
 #include "SpinHighlighter.h"
 
-SpinHighlighter::SpinHighlighter(QTextDocument *parent, Preferences *prop, ColorScheme *useTheme)
+SpinHighlighter::SpinHighlighter(QTextDocument *parent, Preferences *prop)
     : Highlighter(parent, prop)
 {
-    currentTheme = useTheme;
+    currentTheme = &Singleton<ColorScheme>::Instance();
     highlight();
 }
 

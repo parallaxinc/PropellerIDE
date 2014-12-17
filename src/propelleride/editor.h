@@ -39,6 +39,9 @@ public:
     inline CodeType getCodeType()           { return codeType; }
     inline void setCodeType(CodeType type)  { codeType = type; }
 
+    ColorScheme * currentTheme;
+
+
 private:
     int  autoIndent();
     int  braceMatchColumn();

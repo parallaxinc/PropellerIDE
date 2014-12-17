@@ -17,7 +17,6 @@ INSTALLS += target
 
 LIBS += -L$${OUT_PWD}/../qext/ -lqext
 LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
-LIBS += -L$${OUT_PWD}/../colorpicker/ -lcolorpicker
 
 isEmpty(VERSION):VERSION = 0.0.0
 VERSION = '\\"$${VERSION}\\"'
@@ -41,6 +40,7 @@ SOURCES += main.cpp\
     Terminal.cpp \
     Console.cpp \
     ColorScheme.cpp \
+    colorchooser.cpp \
     termprefs.cpp
 
 HEADERS  += mainwindow.h \
@@ -61,7 +61,10 @@ HEADERS  += mainwindow.h \
     Terminal.h \
     Console.h \
     termprefs.h \
+    colorchooser.h \
     ColorScheme.h \
+    templates/Singleton.h \
+
 
 OTHER_FILES +=
 

@@ -39,7 +39,7 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     setWordWrapMode(QTextOption::NoWrap);
     QPalette p = this->palette();
 
-    ColorScheme *currentTheme = static_cast<MAINWINDOW*>(mainwindow)->currentTheme;
+    currentTheme = &Singleton<ColorScheme>::Instance();
 
     p.setColor(QPalette::Active,   QPalette::Base, currentTheme->getColor(ColorScheme::EditorBG));
     p.setColor(QPalette::Inactive, QPalette::Base, currentTheme->getColor(ColorScheme::EditorBG));
@@ -80,8 +80,7 @@ void Editor::setHighlights(QString filename)
         highlighter = 0;
     }
     if(filename.isEmpty() == false) {
-        ColorScheme *currentTheme = static_cast<MAINWINDOW*>(mainwindow)->currentTheme;
-        highlighter = new SpinHighlighter(this->document(), propDialog, currentTheme);
+        highlighter = new SpinHighlighter(this->document(), propDialog);
         isSpin = true;
     }
 }
@@ -1266,8 +1265,6 @@ void Editor::updateBackgroundColors()
 {
     QList<QTextEdit::ExtraSelection> OurExtraSelections;
 
-    ColorScheme *currentTheme = static_cast<MAINWINDOW*>(mainwindow)->currentTheme;
-
     QColor blockColors[] =
     {
         currentTheme->getColor(ColorScheme::ConBG),
@@ -1287,27 +1284,6 @@ void Editor::updateBackgroundColors()
         currentTheme->getColor(ColorScheme::PriAltBG),
         currentTheme->getColor(ColorScheme::DatAltBG),
     };
-
-    /*
-    QColor blockColors[] =
-    {
-        QColor(255,248,192), // CON
-        QColor(255,223,191), // VAR
-        QColor(255,191,191), // OBJ
-        QColor(191,223,255), // PUB
-        QColor(191,248,255), // PRI
-        QColor(191,255,200)  // DAT
-    };
-    QColor blockColorsAlt[] =
-    {
-        QColor(253,243,168), // CON
-        QColor(253,210,167), // VAR
-        QColor(253,167,167), // OBJ
-        QColor(167,210,253), // PUB
-        QColor(167,243,253), // PRI
-        QColor(167,253,179)  // DAT
-    };
-    */
 
     QTextEdit::ExtraSelection selection;
     selection.format.setBackground(blockColors[0]);

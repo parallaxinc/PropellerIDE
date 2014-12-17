@@ -65,7 +65,7 @@ class SpinHighlighter : public Highlighter
 private:
     ColorScheme      *currentTheme;
 public:
-    SpinHighlighter(QTextDocument *parent, Preferences *prop, ColorScheme *useTheme);
+    SpinHighlighter(QTextDocument *parent, Preferences *prop);
     void highlight();
 
 };

@@ -29,7 +29,7 @@ void MainWindow::init()
     /* global settings */
     settings = new QSettings(publisherKey, PropellerIdeGuiKey, this);
 
-    currentTheme = new ColorScheme("default");
+    currentTheme = &Singleton<ColorScheme>::Instance();
 
     /* setup preferences dialog */
     propDialog = new Preferences(this);
@@ -250,11 +250,6 @@ void MainWindow::openLastFile()
             }
         }
     }
-
-
-    /** ******************************************************************
-     *                  MainWindow::MainWindow all done.
-     * ******************************************************************/
 }
 
 /*

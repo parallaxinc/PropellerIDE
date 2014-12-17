@@ -8,6 +8,8 @@
 #include <QMap>
 #include <QColor>
 
+#include "templates/Singleton.h"
+
 class ColorScheme
 {
 private:
@@ -52,11 +54,15 @@ public:
         SyntaxBlockComments
     };
 
-    ColorScheme(QString name);
+    ColorScheme();
 
     void save();
     void load();
     QColor getColor(ColorScheme::Color key);
+    void setColor(ColorScheme::Color key, QColor newcolor);
+
+    const QMap<int, color>& getColorList() const;
+
 
 private:
 
