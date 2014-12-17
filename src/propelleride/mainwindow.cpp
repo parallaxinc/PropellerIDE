@@ -29,6 +29,8 @@ void MainWindow::init()
     /* global settings */
     settings = new QSettings(publisherKey, PropellerIdeGuiKey, this);
 
+    currentTheme = new ColorScheme("default");
+
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
@@ -895,7 +897,7 @@ void MainWindow::highlightFileLine(QString file, int line)
         cur.movePosition(QTextCursor::Down,QTextCursor::MoveAnchor,line);
         cur.clearSelection();
         editor->setTextCursor(cur);
-        emit highlightCurrentLine(QColor(255, 255, 0));
+        emit highlightCurrentLine(currentTheme->getColor(ColorScheme::EditorHL));
     }
     QApplication::processEvents();
     QApplication::restoreOverrideCursor();

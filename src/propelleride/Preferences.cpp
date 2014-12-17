@@ -97,7 +97,9 @@ void Preferences::setupOptions()
     QVariant tabsv = settings.value(tabSpacesKey,"4");
     if(tabsv.canConvert(QVariant::String)) {
         tabspaceLedit.setText(tabsv.toString());
-    } else {
+    }
+    else 
+    {
         tabspaceLedit.setText("4");
     }
     edlayout->addRow(new QLabel(tr("Editor Tab Space Count")), &tabspaceLedit);
@@ -547,14 +549,6 @@ void Preferences::setupHighlight()
         settings.setValue(hlBlockComColorKey,n);
     }
 
-}
-
-Qt::GlobalColor Preferences::getQtColor(int index)
-{
-    if(index > -1 && index < propertyColors.count()) {
-        return static_cast<PColor*>(propertyColors.at(index))->getValue();
-    }
-    return Qt::black; // just return black on failure
 }
 
 void Preferences::browsePath(

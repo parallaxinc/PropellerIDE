@@ -5,10 +5,10 @@ class PColor : public QColor
 private:
     QString mName;
     QString mTrName;
-    Qt::GlobalColor mValue;
+    QColor mValue;
 
 public:
-    PColor (QString trname, QString name, Qt::GlobalColor value) {
+    PColor (QString trname, QString name, QColor value) {
         mTrName = trname;
         mName = name;
         mValue = value;
@@ -19,7 +19,7 @@ public:
     QString getTrName() {
         return mTrName;
     }
-    Qt::GlobalColor getValue() {
+    QColor getValue() {
         return mValue;
     }
 

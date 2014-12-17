@@ -9,9 +9,10 @@
 
 #include "SpinHighlighter.h"
 
-SpinHighlighter::SpinHighlighter(QTextDocument *parent, Preferences *prop)
+SpinHighlighter::SpinHighlighter(QTextDocument *parent, Preferences *prop, ColorScheme *useTheme)
     : Highlighter(parent, prop)
 {
+    currentTheme = useTheme;
     highlight();
 }
 
@@ -25,14 +26,14 @@ void SpinHighlighter::highlight()
 
     // quoted strings
     quotationFormat.setFontItalic(hlQuoteStyle);
-    quotationFormat.setForeground(hlQuoteColor);
+    quotationFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxQuotes));
     quotationFormat.setFontWeight(hlQuoteWeight);
     rule.pattern = QRegExp("[\"].*[\"]");
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
     // numbers
-    numberFormat.setForeground(hlNumColor);
+    numberFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxNumbers));
     numberFormat.setFontWeight(hlNumWeight);
     numberFormat.setFontItalic(hlNumStyle);
     rule.format = numberFormat;
@@ -43,7 +44,7 @@ void SpinHighlighter::highlight()
 
     // functions before keywords if names are keywords
     functionFormat.setFontItalic(hlFuncStyle);
-    functionFormat.setForeground(hlFuncColor);
+    functionFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxFunctions));
     functionFormat.setFontWeight(hlFuncWeight);
     rule.pattern = QRegExp("\\b[A-Za-z0-9_.]+(?=\\()\\b");
     //rule.pattern = QRegExp("\\bpub[ \t].+[^\r^\n]\\b|\\bpri[ \t].+[^\r^\n]\\b|\\b[A-Za-z0-9_.]+(?=\\()\\b");
@@ -52,7 +53,7 @@ void SpinHighlighter::highlight()
     highlightingRules.append(rule);
 
     // handle Spin keywords
-    keywordFormat.setForeground(hlKeyWordColor);
+    keywordFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxKeywords));
     keywordFormat.setFontWeight(hlKeyWordWeight);
     keywordFormat.setFontItalic(hlKeyWordStyle);
     QStringList keywordPatterns;
@@ -346,7 +347,7 @@ void SpinHighlighter::highlight()
     }
 
     preprocessorFormat.setFontItalic(hlPreProcStyle);
-    preprocessorFormat.setForeground(hlPreProcColor);
+    preprocessorFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxPreprocessor));
     preprocessorFormat.setFontWeight(hlPreProcWeight);
     QStringList preprocessorPatterns;
     preprocessorPatterns
@@ -368,7 +369,7 @@ void SpinHighlighter::highlight()
 
     // single line comments
     singleLineCommentFormat.setFontItalic(hlLineComStyle);
-    singleLineCommentFormat.setForeground(hlLineComColor);
+    singleLineCommentFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxLineComments));
     singleLineCommentFormat.setFontWeight(hlLineComWeight);
     rule.pattern = QRegExp("'[^\n]*");
     rule.format = singleLineCommentFormat;
@@ -376,7 +377,7 @@ void SpinHighlighter::highlight()
 
     // multilineline comments
     multiLineCommentFormat.setFontItalic(hlBlockComStyle);
-    multiLineCommentFormat.setForeground(hlBlockComColor);
+    multiLineCommentFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxBlockComments));
     multiLineCommentFormat.setFontWeight(hlBlockComWeight);
     commentStartExpression = QRegExp("{",Qt::CaseInsensitive,QRegExp::Wildcard);
     commentEndExpression = QRegExp("*}",Qt::CaseInsensitive,QRegExp::Wildcard);

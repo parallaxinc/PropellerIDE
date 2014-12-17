@@ -72,7 +72,6 @@ public:
 
     bool getStyle(QString key,  bool *italic);
     bool getWeight(QString key, QFont::Weight *weight);
-    bool getColor(QString key,  Qt::GlobalColor *color);
 
     void getPreferences();
 
@@ -104,23 +103,23 @@ protected:
 
     bool            hlNumStyle;
     QFont::Weight   hlNumWeight;
-    Qt::GlobalColor hlNumColor;
+    QColor hlNumColor;
     bool            hlFuncStyle;
     QFont::Weight   hlFuncWeight;
-    Qt::GlobalColor hlFuncColor;
+    QColor hlFuncColor;
     bool            hlKeyWordStyle;
     QFont::Weight   hlKeyWordWeight;
-    Qt::GlobalColor hlKeyWordColor;
+    QColor hlKeyWordColor;
     bool            hlPreProcStyle;
     QFont::Weight   hlPreProcWeight;
-    Qt::GlobalColor hlPreProcColor;
+    QColor hlPreProcColor;
     bool            hlQuoteStyle;
     QFont::Weight   hlQuoteWeight;
-    Qt::GlobalColor hlQuoteColor;
+    QColor hlQuoteColor;
     bool            hlLineComStyle;
     QFont::Weight   hlLineComWeight;
-    Qt::GlobalColor hlLineComColor;
+    QColor hlLineComColor;
     bool            hlBlockComStyle;
     QFont::Weight   hlBlockComWeight;
-    Qt::GlobalColor hlBlockComColor;
+    QColor hlBlockComColor;
 };

@@ -17,6 +17,7 @@ INSTALLS += target
 
 LIBS += -L$${OUT_PWD}/../qext/ -lqext
 LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
+LIBS += -L$${OUT_PWD}/../colorpicker/ -lcolorpicker
 
 isEmpty(VERSION):VERSION = 0.0.0
 VERSION = '\\"$${VERSION}\\"'
@@ -39,6 +40,7 @@ SOURCES += main.cpp\
     SpinParser.cpp \
     Terminal.cpp \
     Console.cpp \
+    ColorScheme.cpp \
     termprefs.cpp
 
 HEADERS  += mainwindow.h \
@@ -59,6 +61,7 @@ HEADERS  += mainwindow.h \
     Terminal.h \
     Console.h \
     termprefs.h \
+    ColorScheme.h \
 
 OTHER_FILES +=
 

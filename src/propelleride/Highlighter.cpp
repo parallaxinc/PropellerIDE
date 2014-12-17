@@ -84,74 +84,45 @@ bool Highlighter::getWeight(QString key, QFont::Weight *weight)
     return false;
 }
 
-bool Highlighter::getColor(QString key, Qt::GlobalColor *color)
-{
-    QSettings settings(publisherKey, PropellerIdeGuiKey, this);
-    QVariant var = settings.value(key, false);
-
-    if(var.canConvert(QVariant::Int)) {
-        QString s = var.toString();
-        int n = var.toInt();
-        *color = (Qt::GlobalColor) preferences->getQtColor(n);
-        return true;
-    }
-    return false;
-}
-
 void Highlighter::getPreferences()
 {
     bool   style;
     QFont::Weight   weight;
-    Qt::GlobalColor color;
 
     if(getStyle(hlNumStyleKey,&style))
         hlNumStyle = style;
     if(getWeight(hlNumWeightKey, &weight))
         hlNumWeight = weight;
-    if(getColor(hlNumColorKey, &color))
-        hlNumColor = color;
 
     if(getStyle(hlFuncStyleKey,&style))
         hlFuncStyle = style;
     if(getWeight(hlFuncWeightKey, &weight))
         hlFuncWeight = weight;
-    if(getColor(hlFuncColorKey, &color))
-        hlFuncColor = color;
 
     if(getStyle(hlKeyWordStyleKey,&style))
         hlKeyWordStyle = style;
     if(getWeight(hlKeyWordWeightKey, &weight))
         hlKeyWordWeight = weight;
-    if(getColor(hlKeyWordColorKey, &color))
-        hlKeyWordColor = color;
 
     if(getStyle(hlPreProcStyleKey,&style))
         hlPreProcStyle = style;
     if(getWeight(hlPreProcWeightKey, &weight))
         hlPreProcWeight = weight;
-    if(getColor(hlPreProcColorKey, &color))
-        hlPreProcColor = color;
 
     if(getStyle(hlQuoteStyleKey,&style))
         hlQuoteStyle = style;
     if(getWeight(hlQuoteWeightKey, &weight))
         hlQuoteWeight = weight;
-    if(getColor(hlQuoteColorKey, &color))
-        hlQuoteColor = color;
 
     if(getStyle(hlLineComStyleKey,&style))
         hlLineComStyle = style;
     if(getWeight(hlLineComWeightKey, &weight))
         hlLineComWeight = weight;
-    if(getColor(hlLineComColorKey, &color))
-        hlLineComColor = color;
 
     if(getStyle(hlBlockComStyleKey,&style))
         hlBlockComStyle = style;
     if(getWeight(hlBlockComWeightKey, &weight))
         hlBlockComWeight = weight;
-    if(getColor(hlBlockComColorKey, &color))
-        hlBlockComColor = color;
 }
 
 void Highlighter::highlight()

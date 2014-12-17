@@ -14,6 +14,7 @@
 #include <QHBoxLayout>
 
 #include "colors.h"
+#include "ColorScheme.h"
 
 #define publisherKey        "Parallax"
 #define publisherComKey     "parallax.com"
@@ -123,7 +124,6 @@ public:
     explicit Preferences(QWidget *parent = 0);
     void showPreferences(QString lastDir);
     QString getSpinLibraryString();
-    Qt::GlobalColor getQtColor(int index);
 
     int  getTabSpaces();
     bool getAutoCompleteEnable();

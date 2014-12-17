@@ -37,6 +37,7 @@ public:
     QString     programName;
     Preferences  *propDialog;
     QSplitter   *leftSplit;
+    ColorScheme      *currentTheme;
     QSplitter   *findSplit;
 
 public:

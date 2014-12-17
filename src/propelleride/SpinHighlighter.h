@@ -53,6 +53,7 @@
 #include <QTextCharFormat>
 
 #include "Preferences.h"
+#include "ColorScheme.h"
 
 QT_BEGIN_NAMESPACE
 class QTextDocument;
@@ -61,9 +62,10 @@ QT_END_NAMESPACE
 class SpinHighlighter : public Highlighter
 {
     Q_OBJECT
-
+private:
+    ColorScheme      *currentTheme;
 public:
-    SpinHighlighter(QTextDocument *parent, Preferences *prop);
+    SpinHighlighter(QTextDocument *parent, Preferences *prop, ColorScheme *useTheme);
     void highlight();
 
 };
