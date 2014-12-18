@@ -1190,17 +1190,13 @@ void Editor::updateColors()
         i.value().color = i.value().color.lighter(105+((int)10.0*colordiff ));
     }
 
+    setHighlights();
+
     QPalette p = this->palette();
-
-    p.setColor(QPalette::Active,   QPalette::Text, currentTheme->getColor(ColorScheme::SyntaxText));
-    p.setColor(QPalette::Inactive, QPalette::Text, currentTheme->getColor(ColorScheme::SyntaxText));
-
-    p.setColor(QPalette::Active,   QPalette::Base, currentTheme->getColor(ColorScheme::ConBG));
-    p.setColor(QPalette::Inactive, QPalette::Base, currentTheme->getColor(ColorScheme::ConBG));
-
+    p.setColor(QPalette::Text, colors[ColorScheme::SyntaxText].color);
+    p.setColor(QPalette::Base, colors[ColorScheme::ConBG].color);
     this->setPalette(p);
 
-    setHighlights();
     updateBackgroundColors();
 
 }
