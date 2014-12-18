@@ -7,18 +7,15 @@ ColorScheme::ColorScheme()
                 QStandardPaths::DataLocation)).filePath(mName + ".theme.conf");
 
     // Default Colors
-    colors[EditorFG]            = (color) { QColor(0  ,0  ,0  )   , "Editor_Foreground"    };
-    colors[EditorBG]            = (color) { QColor(255,248,192)   , "Editor_Background"    };
-    colors[EditorHL]            = (color) { QColor(255,255,0  )   , "Editor_Highlight"     };
-
-    colors[ConBG]               = (color) { QColor(255,248,192)   , "Block_CON"       };
-    colors[VarBG]               = (color) { QColor(255,223,191)   , "Block_VAR"       };
-    colors[ObjBG]               = (color) { QColor(255,191,191)   , "Block_OBJ"       };
-    colors[PubBG]               = (color) { QColor(191,223,255)   , "Block_PUB"       };
-    colors[PriBG]               = (color) { QColor(191,248,255)   , "Block_PRI"       };
-    colors[DatBG]               = (color) { QColor(191,255,200)   , "Block_DAT"       };
+    colors[ConBG]               = (color) { QColor(255,248,192)   , "Block_CON"  };
+    colors[VarBG]               = (color) { QColor(255,223,191)   , "Block_VAR"  };
+    colors[ObjBG]               = (color) { QColor(255,191,191)   , "Block_OBJ"  };
+    colors[PubBG]               = (color) { QColor(191,223,255)   , "Block_PUB"  };
+    colors[PriBG]               = (color) { QColor(191,248,255)   , "Block_PRI"  };
+    colors[DatBG]               = (color) { QColor(191,255,200)   , "Block_DAT"  };
 
     // Syntax Highlighting
+    colors[SyntaxText]          = (color) { Qt::black             , "Syntax_Text"          };
     colors[SyntaxNumbers]       = (color) { Qt::magenta           , "Syntax_Numbers"       };
     colors[SyntaxFunctions]     = (color) { Qt::blue              , "Syntax_Functions"     };
     colors[SyntaxKeywords]      = (color) { Qt::darkBlue          , "Syntax_Keywords"      };

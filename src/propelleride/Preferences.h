@@ -34,7 +34,6 @@
 #define mainWindowGeometry  "WindowGeometry"
 #define tabSpacesKey        "TabSpacesCount"
 #define recentFilesKey      "recentFileList"
-#define hlEnableKey         "HighlightEnable"
 
 #define enableKeyClearScreen        "enableClearScreen"
 #define enableKeyClearScreen16      "enableClearScreen16"
@@ -130,7 +129,6 @@ private:
 
     void setupFolders();
     void setupOptions();
-    void addHighlights(QComboBox *box, QVector<PColor*> p);
     void setupHighlight();
 
     QHBoxLayout * createPathSelector(
@@ -174,16 +172,4 @@ private:
 
     bool        autoCompleteEnableSaved;
     bool        spinSuggestEnableSaved;
-
-    bool         hlNumStyleBool;
-    bool         hlNumWeightBool;
-    int          hlNumColorIndex;
-
-    QToolButton hlNumButton;
-
-    QCheckBox   hlEnable;
-
-    QCheckBox   hlNumStyle;
-    QCheckBox   hlNumWeight;
-    QComboBox   hlNumColor;
 };

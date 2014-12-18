@@ -34,11 +34,11 @@
 ColorChooser::ColorChooser(int newkey, QString hex, QWidget *parent) :
     QLabel(parent)
 {
-//    setFrameStyle(QFrame::Raised | QFrame::Box);
+    //setFrameStyle(QFrame::Raised | QFrame::Box);
     mCurrentColor = new QColor(hex);
-    mPixmapColor = new QPixmap(20, 20);
+    mPixmapColor = new QPixmap(80, 20);
     mPainterColor = new QPainter(mPixmapColor);
-    mPainterColor->fillRect(0, 0, 20, 20, *mCurrentColor);
+    mPainterColor->fillRect(0, 0, 80, 20, *mCurrentColor);
     mPainterColor->end();
     setMargin(3);
     setAlignment(Qt::AlignHCenter);
@@ -57,7 +57,7 @@ void ColorChooser::setColor(const QColor &color)
 {
     *mCurrentColor = color;
     mPainterColor->begin(mPixmapColor);
-    mPainterColor->fillRect(0, 0, 20, 20, *mCurrentColor);
+    mPainterColor->fillRect(0, 0, 80, 20, *mCurrentColor);
     mPainterColor->end();
     setPixmap(*mPixmapColor);
 }

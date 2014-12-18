@@ -268,41 +268,54 @@ void Preferences::updateColor(int key, const QColor & color)
     currentTheme->setColor(
             static_cast<ColorScheme::Color>(key), 
             color);
+    emit updateColors();
 }
 
 void Preferences::setupHighlight()
 {
-    QGridLayout *hlayout = new QGridLayout();
     QFrame *hlbox = new QFrame();
+    QHBoxLayout *hlayout = new QHBoxLayout();
     hlbox->setLayout(hlayout);
-    tabWidget.addTab(hlbox,tr("Highlight"));
 
-    QSettings settings(publisherKey, PropellerIdeGuiKey);
-    QVariant var;
+    tabWidget.addTab(hlbox,tr("Highlighting"));
 
+    QFormLayout *synlayout = new QFormLayout(this);
+    QGroupBox *synbox = new QGroupBox(tr("Syntax Colors"));
+    synbox->setLayout(synlayout);
 
-    int hlrow = 0;
+    QFormLayout *blocklayout = new QFormLayout(this);
+    QGroupBox *blockbox = new QGroupBox(tr("Block Colors"));
+    blockbox->setLayout(blocklayout);
+
+    hlayout->addWidget(synbox);
+    hlayout->addWidget(blockbox);
+    hlbox->setLayout(hlayout);
+
     QMap<int, ColorScheme::color> colors = 
         currentTheme->getColorList();
 
     QMap<int, ColorScheme::color>::const_iterator i;
     for (i = colors.constBegin(); i != colors.constEnd(); ++i)
     {
-
-        QString strang = QString(i.value().key);
-        strang.replace("_"," ");
-        QLabel * name = new QLabel(strang);
-        hlayout->addWidget(name,hlrow,0);
-
+        QString prettyname = QString(i.value().key);
         ColorChooser * colorPicker = new ColorChooser(i.key(), i.value().color.name(), this);
-        colorPicker->setStatusTip(i.value().key);
-        colorPicker->setToolTip(i.value().key);
-        hlayout->addWidget(colorPicker, hlrow, 2);
 
+        if (i.value().key.startsWith("Syntax_"))
+        {
+            prettyname.remove("Syntax_").replace("_"," ");
+            synlayout->addRow(new QLabel(prettyname), colorPicker);
+        }
+        else if (i.value().key.startsWith("Block_"))
+        {
+            prettyname.remove("Block_").replace("_"," ");
+            blocklayout->addRow(new QLabel(prettyname), colorPicker);
+        }
+    
+        colorPicker->setStatusTip(prettyname);
+        colorPicker->setToolTip(prettyname);
+    
         connect(colorPicker, SIGNAL(sendColor(int, const QColor &)), 
-                this, SLOT(updateColor(int, const QColor &)) );
-
-        hlrow++;
+                this,        SLOT(updateColor(int, const QColor &)) );
     }
 }
 
@@ -407,6 +420,9 @@ void Preferences::reject()
 
     autoCompleteEnable.setChecked(autoCompleteEnableSaved);
     spinSuggestEnable.setChecked(spinSuggestEnableSaved);
+
+    currentTheme->load();
+    emit updateColors();
 
     done(QDialog::Rejected);
 }

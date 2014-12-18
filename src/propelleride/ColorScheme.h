@@ -29,18 +29,15 @@ private:
 public:
 
     enum Color {
-        /* Default Editor Colors */
-        EditorBG,
-        EditorFG,
-        EditorHL,
-        /* Section Background Colors */
+        /* Block Colors */
         ConBG,
         VarBG,
         ObjBG,
         PubBG,
         PriBG,
         DatBG,
-        /* Code Syntax Colors */
+        /* Syntax Colors */
+        SyntaxText,
         SyntaxNumbers,
         SyntaxFunctions,
         SyntaxKeywords,

@@ -445,12 +445,9 @@ int Editor::autoIndent()
         stop = slcm;
     }
 
-    //qDebug() << text;
-    /* start a single undo/redo operation */
     cur.beginEditBlock();
 
     cur.insertBlock();
-    //cur.movePosition(QTextCursor::StartOfLine,QTextCursor::MoveAnchor);
 
     for(int n = 0; n <= stop || isspace(text[n].toLatin1()); n++) {
         if(n == slcm) {
@@ -471,7 +468,6 @@ int Editor::autoIndent()
     }
 
     this->setTextCursor(cur);
-    /* end a single undo/redo operation */
     cur.endEditBlock();
 
     return 1;
@@ -1189,17 +1185,18 @@ void Editor::updateColors()
     QMap<int, ColorScheme::color>::iterator i;
     for (i = colorsAlt.begin(); i != colorsAlt.end(); ++i)
     {
+        // little fun formula to create two editor tones when color updated.
         float colordiff = 1.0 - i.value().color.valueF();
         i.value().color = i.value().color.lighter(105+((int)10.0*colordiff ));
     }
 
     QPalette p = this->palette();
 
-    p.setColor(QPalette::Active,   QPalette::Text, currentTheme->getColor(ColorScheme::EditorFG));
-    p.setColor(QPalette::Inactive, QPalette::Text, currentTheme->getColor(ColorScheme::EditorFG));
+    p.setColor(QPalette::Active,   QPalette::Text, currentTheme->getColor(ColorScheme::SyntaxText));
+    p.setColor(QPalette::Inactive, QPalette::Text, currentTheme->getColor(ColorScheme::SyntaxText));
 
-    p.setColor(QPalette::Active,   QPalette::Base, currentTheme->getColor(ColorScheme::EditorBG));
-    p.setColor(QPalette::Inactive, QPalette::Base, currentTheme->getColor(ColorScheme::EditorBG));
+    p.setColor(QPalette::Active,   QPalette::Base, currentTheme->getColor(ColorScheme::ConBG));
+    p.setColor(QPalette::Inactive, QPalette::Base, currentTheme->getColor(ColorScheme::ConBG));
 
     this->setPalette(p);
 
@@ -1213,7 +1210,7 @@ void Editor::updateBackgroundColors()
     QList<QTextEdit::ExtraSelection> OurExtraSelections;
 
     QTextEdit::ExtraSelection selection;
-    selection.format.setBackground(colors[ColorScheme::EditorBG].color);
+    selection.format.setBackground(colors[ColorScheme::ConBG].color);
     selection.format.setProperty(QTextFormat::FullWidthSelection, true);
     selection.cursor = textCursor();
     selection.cursor.clearSelection();
