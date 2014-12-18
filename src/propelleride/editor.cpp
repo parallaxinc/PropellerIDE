@@ -28,8 +28,6 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     lineNumberArea = new LineNumberArea(this);
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
-    connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-    connect(parent, SIGNAL(highlightCurrentLine(QColor)), this, SLOT(highlightCurrentLine(QColor)));
     updateLineNumberAreaWidth(0);
 
     highlighter = 0;
@@ -1158,18 +1156,10 @@ int Editor::lineNumberAreaWidth()
     return space;
 }
 
-//![extraAreaWidth]
-
-//![slotUpdateExtraAreaWidth]
-
 void Editor::updateLineNumberAreaWidth(int /* newBlockCount */)
 {
     setViewportMargins(lineNumberAreaWidth()-6, -4, -3, 0);
 }
-
-//![slotUpdateExtraAreaWidth]
-
-//![slotUpdateRequest]
 
 void Editor::updateLineNumberArea(const QRect &rect, int dy)
 {
@@ -1182,72 +1172,12 @@ void Editor::updateLineNumberArea(const QRect &rect, int dy)
         updateLineNumberAreaWidth(0);
 }
 
-//![slotUpdateRequest]
-
-//![resizeEvent]
-
 void Editor::resizeEvent(QResizeEvent *e)
 {
     QPlainTextEdit::resizeEvent(e);
 
     QRect cr = contentsRect();
     lineNumberArea->setGeometry(QRect(cr.left()-2, cr.top()-3, lineNumberAreaWidth(), cr.height()+3));
-}
-
-//![resizeEvent]
-
-//![cursorPositionChanged]
-
-
-//![cursorPositionChanged]
-
-/*
- * variation of highlighCurrent line
- */
-void Editor::highlightCurrentLine(QColor lineColor)
-{
-    if(lineColor.isValid() == false) {
-        QList<QTextEdit::ExtraSelection> OurExtraSelections = extraSelections();
-
-        for ( int i = 0; i < OurExtraSelections.count(); i++)
-        {
-            if ( OurExtraSelections.at(i).format.property(QTextFormat::UserProperty + 0) == 1 )
-            {
-                OurExtraSelections.removeAt(i);
-                break;
-            }
-        }
-        setExtraSelections(OurExtraSelections);
-        return;
-    }
-    // for gdb use: QColor lineColor = QColor(Qt::yellow).lighter(160);
-
-    if (!isReadOnly()) {
-        QList<QTextEdit::ExtraSelection> OurExtraSelections = extraSelections();
-
-        QTextEdit::ExtraSelection selection;
-        selection.format.setBackground(lineColor);
-        selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-        selection.format.setProperty(QTextFormat::UserProperty + 0, 1); // mark it as a highlightCurrentLine format
-        selection.cursor = textCursor();
-        selection.cursor.clearSelection();
-
-        bool bFound = false;
-        for ( int i = 0; i < OurExtraSelections.count(); i++)
-        {
-            if ( OurExtraSelections.at(i).format.property(QTextFormat::UserProperty + 0) == 1 )
-            {
-                OurExtraSelections.replace(i, selection);
-                bFound = true;
-            }
-        }
-        if (!bFound)
-        {
-            OurExtraSelections.append(selection);
-        }
-
-        setExtraSelections(OurExtraSelections);
-    }
 }
 
 void Editor::updateColors()
@@ -1285,7 +1215,6 @@ void Editor::updateBackgroundColors()
     QTextEdit::ExtraSelection selection;
     selection.format.setBackground(colors[ColorScheme::EditorBG].color);
     selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-    selection.format.setProperty(QTextFormat::UserProperty + 1, 1); // mark it as a highlightCurrentLine format
     selection.cursor = textCursor();
     selection.cursor.clearSelection();
     selection.cursor.movePosition(QTextCursor::Start);

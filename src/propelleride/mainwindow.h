@@ -66,7 +66,6 @@ public slots:
 
 signals:
     void doPortEnumerate();
-    void highlightCurrentLine(QColor lineColor);
     void updateBackgroundColors();
 
 public slots:
@@ -145,7 +144,6 @@ private:
     void openFileName(QString fileName);
     void checkAndSaveFiles();
     Editor *createEditor();
-    void clearTabHighlight();
 
     void setupFileMenu();
     void setupEditMenu();

@@ -102,7 +102,6 @@ protected:
 
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
-    void highlightCurrentLine(QColor lineColor = QColor::Invalid);
     void updateBackgroundColors();
     void updateLineNumberArea(const QRect &, int);
 

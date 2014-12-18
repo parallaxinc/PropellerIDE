@@ -667,17 +667,9 @@ void MainWindow::setProject()
     QString fileName = editorTabs->tabToolTip(index);
     setCurrentFile(fileName);
 
-    /* this should be changed to editor->clearHighlight() ...
-     * or something whenever background coloring is used.
-     */
-    emit highlightCurrentLine(QColor());
-
     setWindowTitle(programName +" "+fileName);
     sizeLabel->setText("");
     msgLabel->setText("");
-
-    //if(fileName.length() != 0)
-    // it's ok for fileName to be zero length as in the case of "Untitled"
 
     QString text = getEditor(index)->toPlainText();
     updateProjectTree(fileName);
@@ -886,7 +878,6 @@ void MainWindow::highlightFileLine(QString file, int line)
         cur.movePosition(QTextCursor::Down,QTextCursor::MoveAnchor,line);
         cur.clearSelection();
         editor->setTextCursor(cur);
-        emit highlightCurrentLine(currentTheme->getColor(ColorScheme::EditorHL));
     }
     QApplication::processEvents();
     QApplication::restoreOverrideCursor();
@@ -1543,11 +1534,6 @@ void MainWindow::setEditorCodeType(Editor *ed, QString name)
     else {
         ed->setCodeType(Editor::CodeTypeUTF8);
     }
-}
-
-void MainWindow::clearTabHighlight()
-{
-    emit highlightCurrentLine(QColor());
 }
 
 void MainWindow::checkConfigSerialPort()
