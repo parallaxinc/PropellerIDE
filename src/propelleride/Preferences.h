@@ -112,6 +112,7 @@ public:
 
 signals:
     void openFontDialog();
+    void updateColors();
 
 public slots:
 

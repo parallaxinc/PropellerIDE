@@ -264,7 +264,7 @@ void Preferences::setupFolders()
 
 void Preferences::updateColor(int key, const QColor & color)
 {
-    qDebug() << "Sending" << color.name() << "to nowhere...";
+    qDebug() << "Preferences::updateColor(" << key << "," << color.name() << ")";
     currentTheme->setColor(
             static_cast<ColorScheme::Color>(key), 
             color);
@@ -392,6 +392,7 @@ void Preferences::accept()
     settings.setValue(enableSpinSuggest,spinSuggestEnable.isChecked());
 
     currentTheme->save();
+    emit updateColors();
 
     done(QDialog::Accepted);
 }

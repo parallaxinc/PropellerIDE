@@ -522,7 +522,6 @@ void MainWindow::saveFile()
         this->editorTabs->setTabText(n,shortFileName(fileName));
 
         if (!fileName.isEmpty()) {
-            ed->setHighlights(fileName);
             if(saveAsCodec(fileName, ed))
                 setProject();
         }
@@ -562,7 +561,6 @@ QString MainWindow::saveAsFile(const QString &path)
         editorTabs->setTabToolTip(n,fileName);
 
         if (!fileName.isEmpty()) {
-            getEditor(n)->setHighlights(fileName);
             if(saveAsCodec(fileName, getEditor(n)))
                 setProject();
         }
@@ -668,10 +666,6 @@ void MainWindow::setProject()
 
     QString fileName = editorTabs->tabToolTip(index);
     setCurrentFile(fileName);
-
-    // Function setHighlights() only needs to be called once in setEditor().
-    // Calling it again causes performance issues. Don't do it.
-    // getEditor(index)->setHighlights(fileName);
 
     /* this should be changed to editor->clearHighlight() ...
      * or something whenever background coloring is used.
@@ -1529,7 +1523,6 @@ void MainWindow::setEditor(int num, QString shortName, QString fileName, QString
     fileChangeDisable = true;
     Editor *editor = getEditor(num);
     editor->setPlainText(text);
-    editor->setHighlights(shortName);
     editorTabs->setTabText(num,shortName);
     editorTabs->setTabToolTip(num,fileName);
     editorTabs->setCurrentIndex(num);

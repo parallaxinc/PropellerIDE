@@ -39,8 +39,10 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     setWordWrapMode(QTextOption::NoWrap);
 
     currentTheme = &Singleton<ColorScheme>::Instance();
+    updateColors();
 
     connect(this,SIGNAL(cursorPositionChanged()),this,SLOT(updateBackgroundColors()));
+    connect(propDialog,SIGNAL(updateColors()),this,SLOT(updateColors()));
 
     // this must be a pointer otherwise we can't control the position.
     cbAuto = new QComboBox(this);
@@ -65,18 +67,17 @@ SpinParser *Editor::getSpinParser()
     return spinParser;
 }
 
-void Editor::setHighlights(QString filename)
+void Editor::setHighlights()
 {
-    fileName = filename;
     if(highlighter) {
         delete highlighter;
         highlighter = 0;
     }
-    if(filename.isEmpty() == false) {
-        highlighter = new SpinHighlighter(this->document());
-        isSpin = true;
-    }
+    highlighter = new SpinHighlighter(this->document());
+    isSpin = true;
 }
+
+
 
 void Editor::setLineNumber(int num)
 {
@@ -253,11 +254,7 @@ void Editor::spinSuggest()
 
         if(toolTextList.count() > 0) {
             QString tooltext("");
-#ifdef QT5
             toolTextList.sort(Qt::CaseInsensitive);
-#else
-            toolTextList.sort();
-#endif
             for(int n = 0; n < toolTextList.count(); n++) {
                 if(n) {
                     if(QString(toolTextList[n-1]).compare(toolTextList[n],Qt::CaseInsensitive))
@@ -1253,8 +1250,19 @@ void Editor::highlightCurrentLine(QColor lineColor)
     }
 }
 
-void Editor::updateForegroundColors()
+void Editor::updateColors()
 {
+    qDebug() << Q_FUNC_INFO;
+    colors = currentTheme->getColorList();
+    colorsAlt = colors;
+
+    QMap<int, ColorScheme::color>::iterator i;
+    for (i = colorsAlt.begin(); i != colorsAlt.end(); ++i)
+    {
+        float colordiff = 1.0 - i.value().color.valueF();
+        i.value().color = i.value().color.lighter(105+((int)10.0*colordiff ));
+    }
+
     QPalette p = this->palette();
 
     p.setColor(QPalette::Active,   QPalette::Text, currentTheme->getColor(ColorScheme::EditorFG));
@@ -1264,26 +1272,18 @@ void Editor::updateForegroundColors()
     p.setColor(QPalette::Inactive, QPalette::Base, currentTheme->getColor(ColorScheme::EditorBG));
 
     this->setPalette(p);
+
+    setHighlights();
+    updateBackgroundColors();
+
 }
 
 void Editor::updateBackgroundColors()
 {
     QList<QTextEdit::ExtraSelection> OurExtraSelections;
 
-    updateForegroundColors();
-
-    QColor blockColors[] =
-    {
-        currentTheme->getColor(ColorScheme::ConBG),
-        currentTheme->getColor(ColorScheme::VarBG),
-        currentTheme->getColor(ColorScheme::ObjBG),
-        currentTheme->getColor(ColorScheme::PubBG),
-        currentTheme->getColor(ColorScheme::PriBG),
-        currentTheme->getColor(ColorScheme::DatBG),
-    };
-
     QTextEdit::ExtraSelection selection;
-    selection.format.setBackground(blockColors[0]);
+    selection.format.setBackground(colors[ColorScheme::EditorBG].color);
     selection.format.setProperty(QTextFormat::FullWidthSelection, true);
     selection.format.setProperty(QTextFormat::UserProperty + 1, 1); // mark it as a highlightCurrentLine format
     selection.cursor = textCursor();
@@ -1309,27 +1309,27 @@ void Editor::updateBackgroundColors()
 
         if ( currBlock.text().startsWith("CON", Qt::CaseInsensitive) )
         {
-            newColor = 0;
+            newColor = ColorScheme::ConBG;
         }
         else if ( currBlock.text().startsWith("VAR", Qt::CaseInsensitive) )
         {
-            newColor = 1;
+            newColor = ColorScheme::VarBG;
         }
         else if ( currBlock.text().startsWith("OBJ", Qt::CaseInsensitive) )
         {
-            newColor = 2;
+            newColor = ColorScheme::ObjBG;
         }
         else if ( currBlock.text().startsWith("PUB", Qt::CaseInsensitive) )
         {
-            newColor = 3;
+            newColor = ColorScheme::PubBG;
         }
         else if ( currBlock.text().startsWith("PRI", Qt::CaseInsensitive) )
         {
-            newColor = 4;
+            newColor = ColorScheme::PriBG;
         }
         else if ( currBlock.text().startsWith("DAT", Qt::CaseInsensitive) )
         {
-            newColor = 5;
+            newColor = ColorScheme::DatBG;
         }
 
         if ( ( nInComment > 0 ) || ( currBlock.text().length() > 3 && currBlock.text().at(3).isLetterOrNumber() ) )
@@ -1339,16 +1339,12 @@ void Editor::updateBackgroundColors()
 
         if (newColor != -1)
         {
-            QColor newBlockColor = blockColors[newColor];
+            QColor newBlockColor = colors[newColor].color;
             if (newColor == prevColor)
             {
                 if (!bAlt)
                 {
-                    // lower saturation on the fly for alt colors
-                    int h, s, v, offset = 26, max = 255;
-                    newBlockColor.getHsv(&h, &s, &v);
-                    s + offset <= max ? s += offset : s = max;
-                    newBlockColor.setHsv(h,s,v);
+                    newBlockColor = colorsAlt[newColor].color;
                 }
                 bAlt = !bAlt;
             }
