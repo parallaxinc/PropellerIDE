@@ -18,13 +18,6 @@ ColorScheme::ColorScheme()
     colors[PriBG]               = (color) { QColor(191,248,255)   , "PRI_Background"       };
     colors[DatBG]               = (color) { QColor(191,255,200)   , "DAT_Background"       };
 
-    colors[ConAltBG]            = (color) { QColor(253,243,168)   , "CON_Alt_Background"   };
-    colors[VarAltBG]            = (color) { QColor(253,210,167)   , "VAR_Alt_Background"   };
-    colors[ObjAltBG]            = (color) { QColor(253,167,167)   , "OBJ_Alt_Background"   };
-    colors[PubAltBG]            = (color) { QColor(167,210,253)   , "PUB_Alt_Background"   };
-    colors[PriAltBG]            = (color) { QColor(167,243,253)   , "PRI_Alt_Background"   };
-    colors[DatAltBG]            = (color) { QColor(167,253,179)   , "DAT_Alt_Background"   };
-
     // Syntax Highlighting
     colors[SyntaxNumbers]       = (color) { Qt::magenta           , "Syntax_Numbers"       };
     colors[SyntaxFunctions]     = (color) { Qt::blue              , "Syntax_Functions"     };

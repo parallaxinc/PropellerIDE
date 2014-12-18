@@ -1275,16 +1275,6 @@ void Editor::updateBackgroundColors()
         currentTheme->getColor(ColorScheme::DatBG),
     };
 
-    QColor blockColorsAlt[] =
-    {
-        currentTheme->getColor(ColorScheme::ConAltBG),
-        currentTheme->getColor(ColorScheme::VarAltBG),
-        currentTheme->getColor(ColorScheme::ObjAltBG),
-        currentTheme->getColor(ColorScheme::PubAltBG),
-        currentTheme->getColor(ColorScheme::PriAltBG),
-        currentTheme->getColor(ColorScheme::DatAltBG),
-    };
-
     QTextEdit::ExtraSelection selection;
     selection.format.setBackground(blockColors[0]);
     selection.format.setProperty(QTextFormat::FullWidthSelection, true);
@@ -1345,11 +1335,15 @@ void Editor::updateBackgroundColors()
             QColor newBlockColor = blockColors[newColor];
             if (newColor == prevColor)
             {
-                 if (!bAlt)
-                 {
-                    newBlockColor = blockColorsAlt[newColor];
-                 }
-                 bAlt = !bAlt;
+                if (!bAlt)
+                {
+                    // lower saturation on the fly for alt colors
+                    int h, s, v, offset = 26, max = 255;
+                    newBlockColor.getHsv(&h, &s, &v);
+                    s + offset <= max ? s += offset : s = max;
+                    newBlockColor.setHsv(h,s,v);
+                }
+                bAlt = !bAlt;
             }
             else
             {

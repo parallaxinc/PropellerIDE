@@ -40,12 +40,6 @@ public:
         PubBG,
         PriBG,
         DatBG,
-        ConAltBG,
-        VarAltBG,
-        ObjAltBG,
-        PubAltBG,
-        PriAltBG,
-        DatAltBG,
         /* Code Syntax Colors */
         SyntaxNumbers,
         SyntaxFunctions,
