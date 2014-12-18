@@ -40,7 +40,7 @@ SOURCES += main.cpp\
     Terminal.cpp \
     Console.cpp \
     ColorScheme.cpp \
-    colorchooser.cpp \
+    ColorChooser.cpp \
     termprefs.cpp
 
 HEADERS  += mainwindow.h \
@@ -61,7 +61,7 @@ HEADERS  += mainwindow.h \
     Terminal.h \
     Console.h \
     termprefs.h \
-    colorchooser.h \
+    ColorChooser.h \
     ColorScheme.h \
     templates/Singleton.h \
 

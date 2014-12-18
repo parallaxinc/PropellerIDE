@@ -37,17 +37,10 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     setMouseTracking(true);
     setCenterOnScroll(true);
     setWordWrapMode(QTextOption::NoWrap);
-    QPalette p = this->palette();
 
     currentTheme = &Singleton<ColorScheme>::Instance();
 
-    p.setColor(QPalette::Active,   QPalette::Base, currentTheme->getColor(ColorScheme::EditorBG));
-    p.setColor(QPalette::Inactive, QPalette::Base, currentTheme->getColor(ColorScheme::EditorBG));
-
-    p.setColor(QPalette::Active,   QPalette::Text, currentTheme->getColor(ColorScheme::EditorFG));
-    p.setColor(QPalette::Inactive, QPalette::Text, currentTheme->getColor(ColorScheme::EditorFG));
-
-    this->setPalette(p);
+    connect(this,SIGNAL(cursorPositionChanged()),this,SLOT(updateBackgroundColors()));
 
     // this must be a pointer otherwise we can't control the position.
     cbAuto = new QComboBox(this);
@@ -999,7 +992,6 @@ int Editor::contextHelp()
     cur.select(QTextCursor::WordUnderCursor);
     QString text = cur.selectedText();
     qDebug() << "keyPressEvent F1 (not implemented yet)" << text;
-    //static_cast<MAINWINDOW*>(mainwindow)->findSymbolHelp(text);
     return 1;
 }
 
@@ -1261,9 +1253,24 @@ void Editor::highlightCurrentLine(QColor lineColor)
     }
 }
 
+void Editor::updateForegroundColors()
+{
+    QPalette p = this->palette();
+
+    p.setColor(QPalette::Active,   QPalette::Text, currentTheme->getColor(ColorScheme::EditorFG));
+    p.setColor(QPalette::Inactive, QPalette::Text, currentTheme->getColor(ColorScheme::EditorFG));
+
+    p.setColor(QPalette::Active,   QPalette::Base, currentTheme->getColor(ColorScheme::EditorBG));
+    p.setColor(QPalette::Inactive, QPalette::Base, currentTheme->getColor(ColorScheme::EditorBG));
+
+    this->setPalette(p);
+}
+
 void Editor::updateBackgroundColors()
 {
     QList<QTextEdit::ExtraSelection> OurExtraSelections;
+
+    updateForegroundColors();
 
     QColor blockColors[] =
     {

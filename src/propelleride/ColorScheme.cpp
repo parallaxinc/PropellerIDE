@@ -7,16 +7,16 @@ ColorScheme::ColorScheme()
                 QStandardPaths::DataLocation)).filePath(mName + ".theme.conf");
 
     // Default Colors
-    colors[EditorFG]            = (color) { QColor(0  ,0  ,0  )   , "Editor_Background"    };
-    colors[EditorBG]            = (color) { QColor(255,248,192)   , "Editor_Foreground"    };
+    colors[EditorFG]            = (color) { QColor(0  ,0  ,0  )   , "Editor_Foreground"    };
+    colors[EditorBG]            = (color) { QColor(255,248,192)   , "Editor_Background"    };
     colors[EditorHL]            = (color) { QColor(255,255,0  )   , "Editor_Highlight"     };
 
-    colors[ConBG]               = (color) { QColor(255,248,192)   , "CON_Background"       };
-    colors[VarBG]               = (color) { QColor(255,223,191)   , "VAR_Background"       };
-    colors[ObjBG]               = (color) { QColor(255,191,191)   , "OBJ_Background"       };
-    colors[PubBG]               = (color) { QColor(191,223,255)   , "PUB_Background"       };
-    colors[PriBG]               = (color) { QColor(191,248,255)   , "PRI_Background"       };
-    colors[DatBG]               = (color) { QColor(191,255,200)   , "DAT_Background"       };
+    colors[ConBG]               = (color) { QColor(255,248,192)   , "Block_CON"       };
+    colors[VarBG]               = (color) { QColor(255,223,191)   , "Block_VAR"       };
+    colors[ObjBG]               = (color) { QColor(255,191,191)   , "Block_OBJ"       };
+    colors[PubBG]               = (color) { QColor(191,223,255)   , "Block_PUB"       };
+    colors[PriBG]               = (color) { QColor(191,248,255)   , "Block_PRI"       };
+    colors[DatBG]               = (color) { QColor(191,255,200)   , "Block_DAT"       };
 
     // Syntax Highlighting
     colors[SyntaxNumbers]       = (color) { Qt::magenta           , "Syntax_Numbers"       };
@@ -71,6 +71,10 @@ void ColorScheme::load()
     theme_settings.endGroup();
 }
 
+void ColorScheme::setColor(ColorScheme::Color key, const QColor & color)
+{
+    colors[key].color = color;
+}
 
 QColor ColorScheme::getColor(ColorScheme::Color key){
     return colors[key].color;

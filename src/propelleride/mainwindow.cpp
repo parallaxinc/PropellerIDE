@@ -1708,19 +1708,15 @@ Editor *MainWindow::createEditor()
     Editor *editor = new Editor(this);
     editor->initSpin(&spinParser);
 
-    /* font is user's preference */
-    //qDebug() << "Initial Editor Font" << editorFont.family();
-    editor->setFont(editorFont); // setFont doesn't work very well but style sheet does
-    QString fs = QString("font: %1pt \"%2\";").arg(editorFont.pointSize()).arg(editorFont.family());
-    editor->setStyleSheet(fs);
-    //qDebug() << "Editor Font" << editor->font().family();
+    editor->setFont(editorFont); 
+//    QString fs = QString("font: %1pt \"%2\";").arg(editorFont.pointSize()).arg(editorFont.family());
+//    editor->setStyleSheet(fs);
 
     //editor->setTabStopWidth(font.pointSize()*3);
     QFontMetrics fm(editorFont);
     int width = fm.width(QLatin1Char('9'))*propDialog->getTabSpaces();
     editor->setTabStopWidth(width);
     connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
-    connect(editor,SIGNAL(cursorPositionChanged()),editor,SLOT(updateBackgroundColors()));
 
     return editor;
 }

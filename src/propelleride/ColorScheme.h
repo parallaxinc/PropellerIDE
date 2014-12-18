@@ -55,7 +55,7 @@ public:
     void save();
     void load();
     QColor getColor(ColorScheme::Color key);
-    void setColor(ColorScheme::Color key, QColor newcolor);
+    void setColor(ColorScheme::Color key, const QColor & newcolor);
 
     const QMap<int, color>& getColorList() const;
 

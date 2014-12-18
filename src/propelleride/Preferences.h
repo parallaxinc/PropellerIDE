@@ -123,7 +123,7 @@ public slots:
     void browseLoader();
     void accept();
     void reject();
-    void updateColor(const QColor & color);
+    void updateColor(int key, const QColor & color);
 
 private:
 

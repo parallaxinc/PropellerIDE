@@ -16,7 +16,7 @@
 #include <QDebug>
 
 #include "Preferences.h"
-#include "colorchooser.h"
+#include "ColorChooser.h"
 
 
 Preferences::Preferences(QWidget *parent) : QDialog(parent)
@@ -262,9 +262,12 @@ void Preferences::setupFolders()
 
 }
 
-void Preferences::updateColor(const QColor & color)
+void Preferences::updateColor(int key, const QColor & color)
 {
     qDebug() << "Sending" << color.name() << "to nowhere...";
+    currentTheme->setColor(
+            static_cast<ColorScheme::Color>(key), 
+            color);
 }
 
 void Preferences::setupHighlight()
@@ -291,13 +294,13 @@ void Preferences::setupHighlight()
         QLabel * name = new QLabel(strang);
         hlayout->addWidget(name,hlrow,0);
 
-        ColorChooser * colorPicker = new ColorChooser(i.value().color.name(), this);
+        ColorChooser * colorPicker = new ColorChooser(i.key(), i.value().color.name(), this);
         colorPicker->setStatusTip(i.value().key);
         colorPicker->setToolTip(i.value().key);
         hlayout->addWidget(colorPicker, hlrow, 2);
 
-        connect(colorPicker, SIGNAL(sendColor(const QColor &)), 
-                this,        SLOT(updateColor(const QColor &)) );
+        connect(colorPicker, SIGNAL(sendColor(int, const QColor &)), 
+                this, SLOT(updateColor(int, const QColor &)) );
 
         hlrow++;
     }
@@ -387,6 +390,8 @@ void Preferences::accept()
 
     settings.setValue(enableAutoComplete,autoCompleteEnable.isChecked());
     settings.setValue(enableSpinSuggest,spinSuggestEnable.isChecked());
+
+    currentTheme->save();
 
     done(QDialog::Accepted);
 }

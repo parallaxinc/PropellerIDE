@@ -1,5 +1,7 @@
+#pragma once
+
 /*
- * This source file is part of LSPaint.
+ * This source file is part of EasyPaint.
  *
  * Copyright (c) 2012 LSPaint <https://github.com/Gr1N/LSPaint>
  *
@@ -22,9 +24,6 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
-#ifndef COLORCHOOSER_H
-#define COLORCHOOSER_H
 
 #include <QLabel>
 
@@ -53,7 +52,8 @@ public:
      * @param b Blue
      * @param parent Pointer for parent.
      */
-    explicit ColorChooser(QString hex,
+    explicit ColorChooser(int newkey,
+                          QString hex,
                           QWidget *parent = 0);
     ~ColorChooser();
     
@@ -61,6 +61,7 @@ private:
     QColor *mCurrentColor;
     QPixmap *mPixmapColor;
     QPainter *mPainterColor;
+    int key;
 
 public slots:
     /**
@@ -76,11 +77,9 @@ signals:
      *
      * @param Color to send
      */
-    void sendColor(const QColor &);
+    void sendColor(int, const QColor &);
 
 protected:
     void mousePressEvent(QMouseEvent *event);
     
 };
-
-#endif // COLORCHOOSER_H

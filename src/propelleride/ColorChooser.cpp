@@ -23,7 +23,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "colorchooser.h"
+#include "ColorChooser.h"
 
 #include <QColor>
 #include <QPixmap>
@@ -31,7 +31,7 @@
 #include <QMouseEvent>
 #include <QColorDialog>
 
-ColorChooser::ColorChooser(QString hex, QWidget *parent) :
+ColorChooser::ColorChooser(int newkey, QString hex, QWidget *parent) :
     QLabel(parent)
 {
 //    setFrameStyle(QFrame::Raised | QFrame::Box);
@@ -43,6 +43,7 @@ ColorChooser::ColorChooser(QString hex, QWidget *parent) :
     setMargin(3);
     setAlignment(Qt::AlignHCenter);
     setPixmap(*mPixmapColor);
+    key = newkey;
 }
 
 ColorChooser::~ColorChooser()
@@ -69,7 +70,7 @@ void ColorChooser::mousePressEvent(QMouseEvent *event)
         if(color.isValid())
         {
             setColor(color);
-            emit sendColor(color);
+            emit sendColor(key, color);
         }
     }
 }
