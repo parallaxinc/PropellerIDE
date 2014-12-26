@@ -37,6 +37,7 @@ public:
     QString     programName;
     Preferences  *propDialog;
     QSplitter   *leftSplit;
+    ColorScheme      *currentTheme;
     QSplitter   *findSplit;
 
 public:
@@ -65,7 +66,6 @@ public slots:
 
 signals:
     void doPortEnumerate();
-    void highlightCurrentLine(QColor lineColor);
     void updateBackgroundColors();
 
 public slots:
@@ -86,7 +86,7 @@ public slots:
     void paste();
     void undo();
     void redo();
-
+    void selectAll();
 
     // view
     void fontDialog();
@@ -144,7 +144,6 @@ private:
     void openFileName(QString fileName);
     void checkAndSaveFiles();
     Editor *createEditor();
-    void clearTabHighlight();
 
     void setupFileMenu();
     void setupEditMenu();

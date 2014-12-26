@@ -1,40 +1,32 @@
-/****************************************************************************
-  This class extends Highlighter
-*****************************************************************************/
-
-#include <Qt> // Qt namespace
+#include <Qt>
 #include <QRegExp>
 #include <QString>
 #include <QStringList>
 
 #include "SpinHighlighter.h"
 
-SpinHighlighter::SpinHighlighter(QTextDocument *parent, Preferences *prop)
-    : Highlighter(parent, prop)
+SpinHighlighter::SpinHighlighter(QTextDocument *parent)
+    : Highlighter(parent)
 {
+    currentTheme = &Singleton<ColorScheme>::Instance();
     highlight();
 }
 
 void SpinHighlighter::highlight()
 {
     this->parent();
-
-    getPreferences();
-
     HighlightingRule rule;
 
     // quoted strings
-    quotationFormat.setFontItalic(hlQuoteStyle);
-    quotationFormat.setForeground(hlQuoteColor);
-    quotationFormat.setFontWeight(hlQuoteWeight);
+    quotationFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxQuotes));
+    quotationFormat.setFontWeight(QFont::Normal);
     rule.pattern = QRegExp("[\"].*[\"]");
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
     // numbers
-    numberFormat.setForeground(hlNumColor);
-    numberFormat.setFontWeight(hlNumWeight);
-    numberFormat.setFontItalic(hlNumStyle);
+    numberFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxNumbers));
+    numberFormat.setFontWeight(QFont::Normal);
     rule.format = numberFormat;
     rule.pattern = QRegExp("\\b[0-9_]+\\b",Qt::CaseSensitive,QRegExp::RegExp2);
     highlightingRules.append(rule);
@@ -42,19 +34,16 @@ void SpinHighlighter::highlight()
     highlightingRules.append(rule);
 
     // functions before keywords if names are keywords
-    functionFormat.setFontItalic(hlFuncStyle);
-    functionFormat.setForeground(hlFuncColor);
-    functionFormat.setFontWeight(hlFuncWeight);
+    functionFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxFunctions));
+    functionFormat.setFontWeight(QFont::Normal);
     rule.pattern = QRegExp("\\b[A-Za-z0-9_.]+(?=\\()\\b");
-    //rule.pattern = QRegExp("\\bpub[ \t].+[^\r^\n]\\b|\\bpri[ \t].+[^\r^\n]\\b|\\b[A-Za-z0-9_.]+(?=\\()\\b");
     rule.pattern.setCaseSensitivity(Qt::CaseInsensitive);
     rule.format = functionFormat;
     highlightingRules.append(rule);
 
     // handle Spin keywords
-    keywordFormat.setForeground(hlKeyWordColor);
-    keywordFormat.setFontWeight(hlKeyWordWeight);
-    keywordFormat.setFontItalic(hlKeyWordStyle);
+    keywordFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxKeywords));
+    keywordFormat.setFontWeight(QFont::Bold);
     QStringList keywordPatterns;
     /*
      * add spin patterns later
@@ -345,9 +334,8 @@ void SpinHighlighter::highlight()
         highlightingRules.append(rule);
     }
 
-    preprocessorFormat.setFontItalic(hlPreProcStyle);
-    preprocessorFormat.setForeground(hlPreProcColor);
-    preprocessorFormat.setFontWeight(hlPreProcWeight);
+    preprocessorFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxPreprocessor));
+    preprocessorFormat.setFontWeight(QFont::Normal);
     QStringList preprocessorPatterns;
     preprocessorPatterns
             << "\\bdefine\\b"
@@ -367,17 +355,15 @@ void SpinHighlighter::highlight()
     }
 
     // single line comments
-    singleLineCommentFormat.setFontItalic(hlLineComStyle);
-    singleLineCommentFormat.setForeground(hlLineComColor);
-    singleLineCommentFormat.setFontWeight(hlLineComWeight);
+    singleLineCommentFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxLineComments));
+    singleLineCommentFormat.setFontWeight(QFont::Normal);
     rule.pattern = QRegExp("'[^\n]*");
     rule.format = singleLineCommentFormat;
     highlightingRules.append(rule);
 
     // multilineline comments
-    multiLineCommentFormat.setFontItalic(hlBlockComStyle);
-    multiLineCommentFormat.setForeground(hlBlockComColor);
-    multiLineCommentFormat.setFontWeight(hlBlockComWeight);
+    multiLineCommentFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxBlockComments));
+    multiLineCommentFormat.setFontWeight(QFont::Normal);
     commentStartExpression = QRegExp("{",Qt::CaseInsensitive,QRegExp::Wildcard);
     commentEndExpression = QRegExp("*}",Qt::CaseInsensitive,QRegExp::Wildcard);
 

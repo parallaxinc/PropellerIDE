@@ -27,7 +27,7 @@ public:
     void initSpin(SpinParser *parser);
     SpinParser *getSpinParser();
 
-    void setHighlights(QString filename = "");
+    void setHighlights();
     void setLineNumber(int num);
 
     void clearCtrlPressed();
@@ -59,6 +59,10 @@ private:
     void useSpinSuggestion(int key);
     QPoint keyPopPoint(QTextCursor cursor);
 
+    ColorScheme * currentTheme;
+    QMap<int, ColorScheme::color> colors;
+    QMap<int, ColorScheme::color> colorsAlt;
+
 protected:
     void keyPressEvent(QKeyEvent* e);
     void keyReleaseEvent(QKeyEvent* e);
@@ -86,6 +90,7 @@ private:
 private slots:
     void cbAutoSelected(int index);
     void cbAutoSelected0insert(int index);
+    void updateColors();
 
 /* lineNumberArea support below this line: see Nokia Copyright below */
 public:
@@ -97,7 +102,6 @@ protected:
 
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
-    void highlightCurrentLine(QColor lineColor = QColor::Invalid);
     void updateBackgroundColors();
     void updateLineNumberArea(const QRect &, int);
 

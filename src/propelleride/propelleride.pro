@@ -39,6 +39,8 @@ SOURCES += main.cpp\
     SpinParser.cpp \
     Terminal.cpp \
     Console.cpp \
+    ColorScheme.cpp \
+    ColorChooser.cpp \
     termprefs.cpp
 
 HEADERS  += mainwindow.h \
@@ -59,6 +61,10 @@ HEADERS  += mainwindow.h \
     Terminal.h \
     Console.h \
     termprefs.h \
+    ColorChooser.h \
+    ColorScheme.h \
+    templates/Singleton.h \
+
 
 OTHER_FILES +=
 

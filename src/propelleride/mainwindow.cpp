@@ -29,6 +29,8 @@ void MainWindow::init()
     /* global settings */
     settings = new QSettings(publisherKey, PropellerIdeGuiKey, this);
 
+    currentTheme = &Singleton<ColorScheme>::Instance();
+
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
@@ -248,11 +250,6 @@ void MainWindow::openLastFile()
             }
         }
     }
-
-
-    /** ******************************************************************
-     *                  MainWindow::MainWindow all done.
-     * ******************************************************************/
 }
 
 /*
@@ -525,7 +522,6 @@ void MainWindow::saveFile()
         this->editorTabs->setTabText(n,shortFileName(fileName));
 
         if (!fileName.isEmpty()) {
-            ed->setHighlights(fileName);
             if(saveAsCodec(fileName, ed))
                 setProject();
         }
@@ -565,7 +561,6 @@ QString MainWindow::saveAsFile(const QString &path)
         editorTabs->setTabToolTip(n,fileName);
 
         if (!fileName.isEmpty()) {
-            getEditor(n)->setHighlights(fileName);
             if(saveAsCodec(fileName, getEditor(n)))
                 setProject();
         }
@@ -672,21 +667,9 @@ void MainWindow::setProject()
     QString fileName = editorTabs->tabToolTip(index);
     setCurrentFile(fileName);
 
-    // Function setHighlights() only needs to be called once in setEditor().
-    // Calling it again causes performance issues. Don't do it.
-    // getEditor(index)->setHighlights(fileName);
-
-    /* this should be changed to editor->clearHighlight() ...
-     * or something whenever background coloring is used.
-     */
-    emit highlightCurrentLine(QColor());
-
     setWindowTitle(programName +" "+fileName);
     sizeLabel->setText("");
     msgLabel->setText("");
-
-    //if(fileName.length() != 0)
-    // it's ok for fileName to be zero length as in the case of "Untitled"
 
     QString text = getEditor(index)->toPlainText();
     updateProjectTree(fileName);
@@ -895,7 +878,6 @@ void MainWindow::highlightFileLine(QString file, int line)
         cur.movePosition(QTextCursor::Down,QTextCursor::MoveAnchor,line);
         cur.clearSelection();
         editor->setTextCursor(cur);
-        emit highlightCurrentLine(QColor(255, 255, 0));
     }
     QApplication::processEvents();
     QApplication::restoreOverrideCursor();
@@ -1532,7 +1514,6 @@ void MainWindow::setEditor(int num, QString shortName, QString fileName, QString
     fileChangeDisable = true;
     Editor *editor = getEditor(num);
     editor->setPlainText(text);
-    editor->setHighlights(shortName);
     editorTabs->setTabText(num,shortName);
     editorTabs->setTabToolTip(num,fileName);
     editorTabs->setCurrentIndex(num);
@@ -1553,11 +1534,6 @@ void MainWindow::setEditorCodeType(Editor *ed, QString name)
     else {
         ed->setCodeType(Editor::CodeTypeUTF8);
     }
-}
-
-void MainWindow::clearTabHighlight()
-{
-    emit highlightCurrentLine(QColor());
 }
 
 void MainWindow::checkConfigSerialPort()
@@ -1711,19 +1687,15 @@ Editor *MainWindow::createEditor()
     Editor *editor = new Editor(this);
     editor->initSpin(&spinParser);
 
-    /* font is user's preference */
-    //qDebug() << "Initial Editor Font" << editorFont.family();
-    editor->setFont(editorFont); // setFont doesn't work very well but style sheet does
-    QString fs = QString("font: %1pt \"%2\";").arg(editorFont.pointSize()).arg(editorFont.family());
-    editor->setStyleSheet(fs);
-    //qDebug() << "Editor Font" << editor->font().family();
+    editor->setFont(editorFont); 
+//    QString fs = QString("font: %1pt \"%2\";").arg(editorFont.pointSize()).arg(editorFont.family());
+//    editor->setStyleSheet(fs);
 
     //editor->setTabStopWidth(font.pointSize()*3);
     QFontMetrics fm(editorFont);
     int width = fm.width(QLatin1Char('9'))*propDialog->getTabSpaces();
     editor->setTabStopWidth(width);
     connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
-    connect(editor,SIGNAL(cursorPositionChanged()),editor,SLOT(updateBackgroundColors()));
 
     return editor;
 }

@@ -16,6 +16,7 @@
 
 Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 {
+
     mainwindow = parent;
     propDialog = static_cast<MAINWINDOW*>(mainwindow)->propDialog;
     spinParser = 0;
@@ -27,8 +28,6 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     lineNumberArea = new LineNumberArea(this);
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
-    connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-    connect(parent, SIGNAL(highlightCurrentLine(QColor)), this, SLOT(highlightCurrentLine(QColor)));
     updateLineNumberAreaWidth(0);
 
     highlighter = 0;
@@ -36,11 +35,12 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     setMouseTracking(true);
     setCenterOnScroll(true);
     setWordWrapMode(QTextOption::NoWrap);
-    QPalette p = this->palette();
-    QColor pal(255,248,192);
-    p.setColor(QPalette::Active, QPalette::Base, pal);
-    p.setColor(QPalette::Inactive, QPalette::Base, pal);
-    this->setPalette(p);
+
+    currentTheme = &Singleton<ColorScheme>::Instance();
+    updateColors();
+
+    connect(this,SIGNAL(cursorPositionChanged()),this,SLOT(updateBackgroundColors()));
+    connect(propDialog,SIGNAL(updateColors()),this,SLOT(updateColors()));
 
     // this must be a pointer otherwise we can't control the position.
     cbAuto = new QComboBox(this);
@@ -65,18 +65,17 @@ SpinParser *Editor::getSpinParser()
     return spinParser;
 }
 
-void Editor::setHighlights(QString filename)
+void Editor::setHighlights()
 {
-    fileName = filename;
     if(highlighter) {
         delete highlighter;
         highlighter = 0;
     }
-    if(filename.isEmpty() == false) {
-        highlighter = new SpinHighlighter(this->document(), propDialog);
-        isSpin = true;
-    }
+    highlighter = new SpinHighlighter(this->document());
+    isSpin = true;
 }
+
+
 
 void Editor::setLineNumber(int num)
 {
@@ -253,11 +252,7 @@ void Editor::spinSuggest()
 
         if(toolTextList.count() > 0) {
             QString tooltext("");
-#ifdef QT5
             toolTextList.sort(Qt::CaseInsensitive);
-#else
-            toolTextList.sort();
-#endif
             for(int n = 0; n < toolTextList.count(); n++) {
                 if(n) {
                     if(QString(toolTextList[n-1]).compare(toolTextList[n],Qt::CaseInsensitive))
@@ -450,12 +445,9 @@ int Editor::autoIndent()
         stop = slcm;
     }
 
-    //qDebug() << text;
-    /* start a single undo/redo operation */
     cur.beginEditBlock();
 
     cur.insertBlock();
-    //cur.movePosition(QTextCursor::StartOfLine,QTextCursor::MoveAnchor);
 
     for(int n = 0; n <= stop || isspace(text[n].toLatin1()); n++) {
         if(n == slcm) {
@@ -476,7 +468,6 @@ int Editor::autoIndent()
     }
 
     this->setTextCursor(cur);
-    /* end a single undo/redo operation */
     cur.endEditBlock();
 
     return 1;
@@ -992,7 +983,6 @@ int Editor::contextHelp()
     cur.select(QTextCursor::WordUnderCursor);
     QString text = cur.selectedText();
     qDebug() << "keyPressEvent F1 (not implemented yet)" << text;
-    //static_cast<MAINWINDOW*>(mainwindow)->findSymbolHelp(text);
     return 1;
 }
 
@@ -1162,18 +1152,10 @@ int Editor::lineNumberAreaWidth()
     return space;
 }
 
-//![extraAreaWidth]
-
-//![slotUpdateExtraAreaWidth]
-
 void Editor::updateLineNumberAreaWidth(int /* newBlockCount */)
 {
     setViewportMargins(lineNumberAreaWidth()-6, -4, -3, 0);
 }
-
-//![slotUpdateExtraAreaWidth]
-
-//![slotUpdateRequest]
 
 void Editor::updateLineNumberArea(const QRect &rect, int dy)
 {
@@ -1186,10 +1168,6 @@ void Editor::updateLineNumberArea(const QRect &rect, int dy)
         updateLineNumberAreaWidth(0);
 }
 
-//![slotUpdateRequest]
-
-//![resizeEvent]
-
 void Editor::resizeEvent(QResizeEvent *e)
 {
     QPlainTextEdit::resizeEvent(e);
@@ -1198,89 +1176,38 @@ void Editor::resizeEvent(QResizeEvent *e)
     lineNumberArea->setGeometry(QRect(cr.left()-2, cr.top()-3, lineNumberAreaWidth(), cr.height()+3));
 }
 
-//![resizeEvent]
-
-//![cursorPositionChanged]
-
-
-//![cursorPositionChanged]
-
-/*
- * variation of highlighCurrent line
- */
-void Editor::highlightCurrentLine(QColor lineColor)
+void Editor::updateColors()
 {
-    if(lineColor.isValid() == false) {
-        QList<QTextEdit::ExtraSelection> OurExtraSelections = extraSelections();
+    qDebug() << Q_FUNC_INFO;
+    colors = currentTheme->getColorList();
+    colorsAlt = colors;
 
-        for ( int i = 0; i < OurExtraSelections.count(); i++)
-        {
-            if ( OurExtraSelections.at(i).format.property(QTextFormat::UserProperty + 0) == 1 )
-            {
-                OurExtraSelections.removeAt(i);
-                break;
-            }
-        }
-        setExtraSelections(OurExtraSelections);
-        return;
+    QMap<int, ColorScheme::color>::iterator i;
+    for (i = colorsAlt.begin(); i != colorsAlt.end(); ++i)
+    {
+        // little fun formula to create two editor tones when color updated.
+        float colordiff = 1.0 - i.value().color.valueF();
+        i.value().color = i.value().color.lighter(105+((int)10.0*colordiff ));
     }
-    // for gdb use: QColor lineColor = QColor(Qt::yellow).lighter(160);
 
-    if (!isReadOnly()) {
-        QList<QTextEdit::ExtraSelection> OurExtraSelections = extraSelections();
+    setHighlights();
 
-        QTextEdit::ExtraSelection selection;
-        selection.format.setBackground(lineColor);
-        selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-        selection.format.setProperty(QTextFormat::UserProperty + 0, 1); // mark it as a highlightCurrentLine format
-        selection.cursor = textCursor();
-        selection.cursor.clearSelection();
+    QPalette p = this->palette();
+    p.setColor(QPalette::Text, colors[ColorScheme::SyntaxText].color);
+    p.setColor(QPalette::Base, colors[ColorScheme::ConBG].color);
+    this->setPalette(p);
 
-        bool bFound = false;
-        for ( int i = 0; i < OurExtraSelections.count(); i++)
-        {
-            if ( OurExtraSelections.at(i).format.property(QTextFormat::UserProperty + 0) == 1 )
-            {
-                OurExtraSelections.replace(i, selection);
-                bFound = true;
-            }
-        }
-        if (!bFound)
-        {
-            OurExtraSelections.append(selection);
-        }
+    updateBackgroundColors();
 
-        setExtraSelections(OurExtraSelections);
-    }
 }
 
 void Editor::updateBackgroundColors()
 {
     QList<QTextEdit::ExtraSelection> OurExtraSelections;
 
-    QColor blockColors[] =
-    {
-        QColor(255,248,192), // CON
-        QColor(255,223,191), // VAR
-        QColor(255,191,191), // OBJ
-        QColor(191,223,255), // PUB
-        QColor(191,248,255), // PRI
-        QColor(191,255,200)  // DAT
-    };
-    QColor blockColorsAlt[] =
-    {
-        QColor(253,243,168), // CON
-        QColor(253,210,167), // VAR
-        QColor(253,167,167), // OBJ
-        QColor(167,210,253), // PUB
-        QColor(167,243,253), // PRI
-        QColor(167,253,179)  // DAT
-    };
-
     QTextEdit::ExtraSelection selection;
-    selection.format.setBackground(blockColors[0]);
+    selection.format.setBackground(colors[ColorScheme::ConBG].color);
     selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-    selection.format.setProperty(QTextFormat::UserProperty + 1, 1); // mark it as a highlightCurrentLine format
     selection.cursor = textCursor();
     selection.cursor.clearSelection();
     selection.cursor.movePosition(QTextCursor::Start);
@@ -1304,27 +1231,27 @@ void Editor::updateBackgroundColors()
 
         if ( currBlock.text().startsWith("CON", Qt::CaseInsensitive) )
         {
-            newColor = 0;
+            newColor = ColorScheme::ConBG;
         }
         else if ( currBlock.text().startsWith("VAR", Qt::CaseInsensitive) )
         {
-            newColor = 1;
+            newColor = ColorScheme::VarBG;
         }
         else if ( currBlock.text().startsWith("OBJ", Qt::CaseInsensitive) )
         {
-            newColor = 2;
+            newColor = ColorScheme::ObjBG;
         }
         else if ( currBlock.text().startsWith("PUB", Qt::CaseInsensitive) )
         {
-            newColor = 3;
+            newColor = ColorScheme::PubBG;
         }
         else if ( currBlock.text().startsWith("PRI", Qt::CaseInsensitive) )
         {
-            newColor = 4;
+            newColor = ColorScheme::PriBG;
         }
         else if ( currBlock.text().startsWith("DAT", Qt::CaseInsensitive) )
         {
-            newColor = 5;
+            newColor = ColorScheme::DatBG;
         }
 
         if (nInComment > 0
@@ -1335,14 +1262,14 @@ void Editor::updateBackgroundColors()
 
         if (newColor != -1)
         {
-            QColor newBlockColor = blockColors[newColor];
+            QColor newBlockColor = colors[newColor].color;
             if (newColor == prevColor)
             {
-                 if (!bAlt)
-                 {
-                    newBlockColor = blockColorsAlt[newColor];
-                 }
-                 bAlt = !bAlt;
+                if (!bAlt)
+                {
+                    newBlockColor = colorsAlt[newColor].color;
+                }
+                bAlt = !bAlt;
             }
             else
             {
