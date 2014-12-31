@@ -34,6 +34,7 @@ SOURCES += main.cpp\
     PortListener.cpp \
     Preferences.cpp \
     PortConnectionMonitor.cpp \
+    ReferenceTree.cpp \
     editor.cpp \
     SpinHighlighter.cpp \
     SpinParser.cpp \
@@ -53,6 +54,7 @@ HEADERS  += mainwindow.h \
     PortListener.h \
     Preferences.h \
     PortConnectionMonitor.h \
+    ReferenceTree.h \
     editor.h \
     SpinHighlighter.h \
     SpinParser.h \

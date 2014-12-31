@@ -23,6 +23,7 @@
 #include "PortConnectionMonitor.h"
 #include "StatusDialog.h"
 #include "spinzip/zipper.h"
+#include "ReferenceTree.h"
 
 #define untitledstr "Untitled"
 
@@ -158,6 +159,7 @@ private:
     void updateSpinProjectTree(QString fileName);
     void updateReferenceTree(QString fileName, QString text);
     void updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level);
+
     void setEditor(int num, QString shortName, QString fileName, QString text);
     Editor *getEditor(int num);
     void setEditorCodeType(Editor *ed, QString name);
@@ -226,12 +228,12 @@ private:
     SpinParser  spinParser;
 
     QString     projectFile;
-    QTreeView   *projectTree;
-    QTreeView   *referenceTree;
-    TreeModel   *projectModel;
-    TreeModel   *referenceModel;
-    SpinModel   *spinProjectModel;
-    SpinModel   *spinReferenceModel;
+    ReferenceTree   *projectTree;
+    ReferenceTree   *referenceTree;
+    TreeModel       *projectModel;
+    TreeModel       *referenceModel;
+    SpinModel       *spinProjectModel;
+    SpinModel       *spinReferenceModel;
 
     SpinBuilder     *spinBuilder;
 

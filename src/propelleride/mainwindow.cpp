@@ -1684,31 +1684,21 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     vsplit->addWidget(leftSplit);
 
     // project tree
-    projectTree = new QTreeView(this);
+    projectTree = new ReferenceTree(tr("Current Project"),ColorScheme::ConBG);
     connect(projectTree,SIGNAL(clicked(QModelIndex)),this,SLOT(projectTreeClicked(QModelIndex)));
-    projectTree->setToolTip(tr("Current Project"));
 
-    QPalette p = projectTree->palette();
-    QColor tc(255,250,192); // CON
-    p.setColor(QPalette::Active, QPalette::Base, tc);
-    p.setColor(QPalette::Inactive, QPalette::Base, tc);
-    projectTree->setPalette(p);
 
     leftSplit->addWidget(projectTree);
 
     // project reference tree
-    referenceTree = new QTreeView(this);
-    QFont font = referenceTree->font();
-    font.setItalic(true);   // pretty and matches def name font
-    referenceTree->setFont(font);
-    referenceTree->setToolTip(tr("Project References"));
+    referenceTree = new ReferenceTree(tr("Project References"), ColorScheme::PubBG);
     connect(referenceTree,SIGNAL(clicked(QModelIndex)),this,SLOT(referenceTreeClicked(QModelIndex)));
 
-    QPalette rp = referenceTree->palette();
-    QColor rc(167,210,253); // Dark PUB
-    rp.setColor(QPalette::Active, QPalette::Base, rc);
-    rp.setColor(QPalette::Inactive, QPalette::Base, rc);
-    referenceTree->setPalette(rp);
+    connect(propDialog,SIGNAL(updateColors()),referenceTree,SLOT(updateColors()));
+    connect(propDialog,SIGNAL(updateColors()),projectTree,SLOT(updateColors()));
+
+    projectTree->updateColors();
+    referenceTree->updateColors();
 
     leftSplit->addWidget(referenceTree);
 
