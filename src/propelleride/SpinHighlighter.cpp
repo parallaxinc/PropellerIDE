@@ -355,14 +355,14 @@ void SpinHighlighter::highlight()
     }
 
     // single line comments
-    singleLineCommentFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxLineComments));
+    singleLineCommentFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxComments));
     singleLineCommentFormat.setFontWeight(QFont::Normal);
     rule.pattern = QRegExp("'[^\n]*");
     rule.format = singleLineCommentFormat;
     highlightingRules.append(rule);
 
     // multilineline comments
-    multiLineCommentFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxBlockComments));
+    multiLineCommentFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxComments));
     multiLineCommentFormat.setFontWeight(QFont::Normal);
     commentStartExpression = QRegExp("{",Qt::CaseInsensitive,QRegExp::Wildcard);
     commentEndExpression = QRegExp("*}",Qt::CaseInsensitive,QRegExp::Wildcard);

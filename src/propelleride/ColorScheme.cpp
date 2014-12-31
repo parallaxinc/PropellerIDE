@@ -21,8 +21,7 @@ ColorScheme::ColorScheme()
     colors[SyntaxKeywords]      = (color) { Qt::darkBlue          , "Syntax_Keywords"      };
     colors[SyntaxPreprocessor]  = (color) { Qt::darkYellow        , "Syntax_Preprocessor"  };
     colors[SyntaxQuotes]        = (color) { Qt::red               , "Syntax_Quotes"        };
-    colors[SyntaxLineComments]  = (color) { Qt::darkGreen         , "Syntax_Line_Comments" };
-    colors[SyntaxBlockComments] = (color) { Qt::darkGreen         , "Syntax_Block_Comments"};
+    colors[SyntaxComments]      = (color) { Qt::darkGreen         , "Syntax_Comments"      };
 
     if( QFile::exists(mFileName) ){
         load();

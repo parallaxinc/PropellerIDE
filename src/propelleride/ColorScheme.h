@@ -43,8 +43,7 @@ public:
         SyntaxKeywords,
         SyntaxPreprocessor,
         SyntaxQuotes,
-        SyntaxLineComments,
-        SyntaxBlockComments
+        SyntaxComments
     };
 
     ColorScheme();
