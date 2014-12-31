@@ -29,8 +29,6 @@ void MainWindow::init()
     /* global settings */
     settings = new QSettings(publisherKey, PropellerIdeGuiKey, this);
 
-    currentTheme = &Singleton<ColorScheme>::Instance();
-
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
@@ -43,8 +41,6 @@ void MainWindow::init()
     spinBuilder = new SpinBuilder();
 
     connect(spinBuilder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
-
-    QFontDatabase::addApplicationFont(":/fonts/parallax2-bold.ttf");
 
     /* setup user's editor font */
     QVariant fontv = settings->value(editorFontKey);

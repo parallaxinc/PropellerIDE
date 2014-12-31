@@ -234,25 +234,7 @@ void MainWindow::findChanged(QString text)
     editor->setTextCursor(cur);
     cur.endEditBlock();
 
-#if USE_REGEX
-    if(regexButton->isChecked()) {
-        QRegExp reg(text);
-        reg.setPatternSyntax(QRegExp::RegExp2);
-        QTextDocument *ted = const_cast<QTextDocument *>(editor->document());
-        cur.beginEditBlock();
-        cur = ted->find(reg,findPosition,getFlags());
-        editor->setTextCursor(cur);
-        cur.endEditBlock();
-    }
-    else
-    {
-        /* non regex version */
-        editor->find(text,getFlags());
-    }
-#else
     editor->find(text,getFlags());
-#endif
-
 }
 
 
@@ -281,26 +263,6 @@ void MainWindow::findNextClicked()
 
     editor->setCenterOnScroll(true);
 
-#if USE_REGEX
-    if(regexButton->isChecked()) {
-        QRegExp reg(text);
-        QTextDocument *ted = const_cast<QTextDocument *>(editor->document());
-        QTextCursor cur = ted->find(reg,findPosition,getFlags());
-        if(cur.hasSelection()) {
-            count++;
-        }
-        else {
-            if(showBeginMessage(tr("Find"))) {
-                QTextCursor cur = ted->find(reg,findPosition,getFlags());
-                if(cur.hasSelection()) {
-                    count++;
-                }
-            }
-        }
-        editor->setTextCursor(cur);
-    }
-    else
-#endif
     {
         if(editor->find(text,getFlags()) == true) {
             count++;
@@ -331,26 +293,6 @@ void MainWindow::findPrevClicked()
 
     editor->setCenterOnScroll(true);
 
-#if USE_REGEX
-    if(regexButton->isChecked()) {
-        QRegExp reg(text);
-        QTextDocument *ted = const_cast<QTextDocument *>(editor->document());
-        QTextCursor cur = ted->find(reg,findPosition,getFlags(QTextDocument::FindBackward));
-        if(cur.hasSelection()) {
-            count++;
-        }
-        else {
-            if(showBeginMessage(tr("Find"))) {
-                QTextCursor cur = ted->find(reg,findPosition,getFlags(QTextDocument::FindBackward));
-                if(cur.hasSelection()) {
-                    count++;
-                }
-            }
-        }
-        editor->setTextCursor(cur);
-    }
-    else
-#endif
     {
         if(edtext.contains(text,Qt::CaseInsensitive)) {
             if(editor->find(text,getFlags(QTextDocument::FindBackward)) == true) {

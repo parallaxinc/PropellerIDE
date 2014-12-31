@@ -37,7 +37,6 @@ public:
     QString     programName;
     Preferences  *propDialog;
     QSplitter   *leftSplit;
-    ColorScheme      *currentTheme;
     QSplitter   *findSplit;
 
 public:
@@ -192,7 +191,6 @@ private:
     QAction *recentFileActs[MaxRecentFiles];
     QAction *separatorFileAct;
 
-    QPushButton *regexButton;
     QString     findText;
     QString     replaceText;
     bool        showFindMessage(QString type);
