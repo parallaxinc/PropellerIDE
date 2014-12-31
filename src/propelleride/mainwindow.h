@@ -120,7 +120,6 @@ public slots:
     void fileChanged();
     void enumeratePorts();
     void enumeratePortsEvent();
-    void initBoardTypes();
     void showFindFrame();
     void hideFindFrame();
     void showBrowser();

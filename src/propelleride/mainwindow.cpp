@@ -134,8 +134,6 @@ void MainWindow::init()
      */
     getApplicationSettings(false);
 
-    initBoardTypes();
-
     /* setup the terminal dialog box */
     term = new Terminal(this);
 
@@ -777,7 +775,6 @@ void MainWindow::preferencesAccepted()
 {
     /* set preferences */
     getApplicationSettings(false);
-    initBoardTypes();
 }
 
 void MainWindow::setCurrentPort(int index)
@@ -931,8 +928,6 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
         goto endRunCompiler;
     }
 
-    //setCurrentPort(cbPort->currentIndex());
-
     index = editorTabs->currentIndex();
     fileName = editorTabs->tabToolTip(index);
     text = getEditor(index)->toPlainText();
@@ -945,10 +940,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
         }
     }
 
-    // Yes, we should do this for compiles.
     updateProjectTree(fileName);
-
-    // No, we don't really need to do this for compiles.
     // updateReferenceTree(fileName,text);
 
     sizeLabel->setText("");
@@ -957,8 +949,6 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     progress->setValue(0);
     progress->setVisible(true);
 
-    /* Ok zombieartists, you've had your fun. Now you have to answer. Good luck.
-    */
     getApplicationSettings(true);
 
     checkAndSaveFiles();
@@ -969,7 +959,6 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
         spinBuilder->setObjects(msgLabel, sizeLabel, progress, cbPort);
         spinBuilder->setLoader(spinLoader);
 
-        // send stop first in case of error. later let dialog kill it on error.
         statusDialog->stop();
 
         copts = "-b";
@@ -996,7 +985,6 @@ int  MainWindow::loadProgram(int type, QString file)
 
     // if find in progress, ignore request
     if(!statusDone) {
-        QMessageBox::information(this,tr("Patience Please"),tr("Can't handle more than one request at this time. Try again."));
         return -1;
     }
     emit signalStatusDone(false);
@@ -1021,9 +1009,6 @@ int  MainWindow::loadProgram(int type, QString file)
     }
 
     portListener->setLoadEnable(true);
-#ifdef Q_OS_MAC
-    copts = "-q ";
-#endif
     switch (type) {
         case MainWindow::LoadRunHubRam:
             copts += "-r -p"+portListener->getPortName();
@@ -1178,10 +1163,8 @@ void MainWindow::findMultilineComment(QPoint point)
 
 void MainWindow::findMultilineComment(QTextCursor cur)
 {
-    /*  RegExpression for  multi-line Spin comment  */
     QRegExp commentStartExpression = QRegExp("{*",Qt::CaseInsensitive,QRegExp::Wildcard);
     QRegExp commentEndExpression = QRegExp("}*",Qt::CaseInsensitive,QRegExp::Wildcard);
-    /* could try /(\{\{[^\}]*\}\})|(\{[^\}]*\})/g */
 
     Editor *editor = getEditor(editorTabs->currentIndex());
     if(editor)
@@ -1193,42 +1176,38 @@ void MainWindow::findMultilineComment(QTextCursor cur)
             text = cur.selectedText();
         }
 
-        //qDebug() << "Selected text: " << text;
-        int selectedWordLength = text.length();                 /* repair final cursor selection offset */
+        int selectedWordLength = text.length();
 
-        /* if the user selected the beginning of a multi-line comment, start there */
         if(text.length() > 0 && (commentStartExpression.indexIn(text, 0)!= -1 ))
         {
-            int startPos = cur.position();                      /* save start-of-comment position */
+            int startPos = cur.position();
             cur.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-            editor->setTextCursor(cur);                         /* expand cursor to doc-end */
-            text = cur.selectedText();                          /* the 'text' we'll search through */
+            editor->setTextCursor(cur);
+            text = cur.selectedText();
 
             int endIndex;
             if ((endIndex = commentEndExpression.indexIn(text, 0)) != -1 )
             {
-                cur.setPosition(startPos - selectedWordLength); /* regexp selects after, so subtract orig selection*/
+                cur.setPosition(startPos - selectedWordLength);
                 cur.setPosition(endIndex + startPos, QTextCursor::KeepAnchor);
                 editor->setTextCursor(cur);
-                editor->setFocus();                             /* highlight the selection */
+                editor->setFocus();
             }
         }
-        /* if the user selected the end of a multi-line comment, start there */
         else if(text.length() > 0 && (commentEndExpression.indexIn(text, 0)!= -1 ))
         {
-            int endPos = cur.position();                        /* save end-of-comment position */
+            int endPos = cur.position();
             cur.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
-            editor->setTextCursor(cur);                         /* expand cursor from current position to start-of-doc */
-            text = cur.selectedText();                          /* the 'text' we'll search through */
+            editor->setTextCursor(cur);
+            text = cur.selectedText();
 
             int startIndex;
-            /* from start of doc find the last occurence of "{{" before the current cursor point */
             if ((startIndex = commentStartExpression.lastIndexIn(text, -1)) != -1)
             {
                 cur.setPosition(endPos);
                 cur.setPosition(startIndex - selectedWordLength + 1, QTextCursor::KeepAnchor);
                 editor->setTextCursor(cur);
-                editor->setFocus();                             /* highlight the selection */
+                editor->setFocus();
             }
         }
     }
@@ -1286,12 +1265,6 @@ void MainWindow::projectTreeClicked(QModelIndex index)
     }
 }
 
-/**
- * @brief MainWindow::referenceTreeClicked
- * This function should only open a file and line number.
- * All the hard work should already be done.
- * @param index
- */
 void MainWindow::referenceTreeClicked(QModelIndex index)
 {
     QString method = NULL;
@@ -1674,20 +1647,12 @@ QString MainWindow::filePathName(QString fileName)
     return rets;
 }
 
-void MainWindow::initBoardTypes()
-{
-}
-
 Editor *MainWindow::createEditor()
 {
     Editor *editor = new Editor(this);
     editor->initSpin(&spinParser);
 
     editor->setFont(editorFont); 
-//    QString fs = QString("font: %1pt \"%2\";").arg(editorFont.pointSize()).arg(editorFont.family());
-//    editor->setStyleSheet(fs);
-
-    //editor->setTabStopWidth(font.pointSize()*3);
     QFontMetrics fm(editorFont);
     int width = fm.width(QLatin1Char('9'))*propDialog->getTabSpaces();
     editor->setTabStopWidth(width);
