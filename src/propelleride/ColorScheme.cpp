@@ -75,6 +75,9 @@ void ColorScheme::load()
     QMap<int, color>::iterator i;
     for (i = colors.begin(); i != colors.end(); ++i)
     {
+        if (! theme_settings.contains(i.value().key))
+            theme_settings.setValue(i.value().key,i.value().color.name());
+
         QString strNamedColor = theme_settings.value(i.value().key).toString();
 
         QColor qcColor = QColor(strNamedColor);
@@ -86,6 +89,11 @@ void ColorScheme::load()
     theme_settings.endGroup();
 
     theme_settings.beginGroup("Font");
+
+    if (! theme_settings.contains("Family"))
+        theme_settings.setValue("Family", font.family());
+    if (! theme_settings.contains("Size"))
+        theme_settings.setValue("Size", font.pointSize());
 
     font.setFamily(
             theme_settings.value("Family", font.family()).toString()

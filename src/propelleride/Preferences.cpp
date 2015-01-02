@@ -124,7 +124,7 @@ void Preferences::setupOptions()
 
 void Preferences::fontDialog()
 {
-    bool ok = true;
+    bool ok;
 
     QFontDialog fd(this);
     QFont font = currentTheme->getFont();
@@ -340,7 +340,7 @@ void Preferences::showPreferences()
 
 QString Preferences::getSpinLibraryString()
 {
-    return QString();//this->lineEditLibrary.text();
+    return librarypath->get();
 }
 
 void Preferences::adjustFontSize(float ratio)

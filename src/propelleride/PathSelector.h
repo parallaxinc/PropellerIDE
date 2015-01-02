@@ -33,6 +33,7 @@ public:
     void save();
     void load();
     void restore();
+    QString const & get();
     
 private:
     QHBoxLayout * layout;

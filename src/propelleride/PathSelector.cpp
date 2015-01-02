@@ -113,3 +113,8 @@ void PathSelector::load()
         lineEdit->setText(defaultpath);
     }
 }
+
+QString const & PathSelector::get()
+{
+    return lineEdit->text();
+}
