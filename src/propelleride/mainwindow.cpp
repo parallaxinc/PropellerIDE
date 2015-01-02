@@ -32,8 +32,6 @@ void MainWindow::init()
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
-    connect(propDialog,SIGNAL(openFontDialog()),this,SLOT(fontDialog()));
-    connect(propDialog->getTabSpaceLedit(),SIGNAL(textChanged(QString)), this, SLOT(tabSpacesChanged()));
 
     projectModel = NULL;
     referenceModel = NULL;
@@ -41,31 +39,6 @@ void MainWindow::init()
     spinBuilder = new SpinBuilder();
 
     connect(spinBuilder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
-
-    /* setup user's editor font */
-    QVariant fontv = settings->value(editorFontKey);
-    if(fontv.canConvert(QVariant::Font)) {
-        QString family = fontv.toString();
-        editorFont = QFont(family);
-        qDebug() << "Settings Editor Font" << editorFont.family();
-    }
-    else {
-        int fontsz = 14;
-        QFont font("Monospace");
-        font.setStyleHint(QFont::TypeWriter);
-        editorFont = font;
-        settings->setValue(fontSizeKey,fontsz);
-        qDebug() << "Setting default font" << editorFont.family();
-    }
-
-    fontv = settings->value(fontSizeKey);
-    if(fontv.canConvert(QVariant::Int)) {
-        int size = fontv.toInt();
-        editorFont.setPointSize(size);
-    }
-    else {
-        editorFont.setPointSize(10);
-    }
 
     /* setup gui components */
     setupFileMenu();
@@ -354,13 +327,6 @@ void MainWindow::closeEvent(QCloseEvent *e)
     {
         settings->setValue(lastFileNameKey,filestr);
         settings->setValue(lastDirectoryKey, lastDirectory);
-
-        // save user's font info
-        qDebug() << "Saving Editor Font" << editorFont.family();
-        QString fontstr = editorFont.family();
-        settings->setValue(editorFontKey,fontstr);
-        int fontsize = editorFont.pointSize();
-        settings->setValue(fontSizeKey,fontsize);
 
         // save user's width/height
         QByteArray geo = this->saveGeometry();
@@ -701,69 +667,15 @@ void MainWindow::showBrowser()
     }
 }
 
-void MainWindow::fontDialog()
-{
-    bool ok = true;
-
-    QFontDialog fd(this);
-    QFont font;
-    Editor *editor = getEditor(editorTabs->currentIndex());
-    if(editor) {
-        QFont edfont = editor->font();
-        qDebug() << "Editor Font" << editor->font().family();
-        font = fd.getFont(&ok, edfont, this);
-    }
-    else {
-        font = fd.getFont(&ok, editorFont, this);
-    }
-    qDebug() << "New Editor Font" << font.family();
-
-    if(ok) {
-        for(int n = editorTabs->count()-1; n >= 0; n--) {
-            Editor *ed = getEditor(n);
-            ed->setFont(font);
-            QString fs = QString("font: %1pt \"%2\";").arg(font.pointSize()).arg(font.family());
-            ed->setStyleSheet(fs);
-        }
-        editorFont = font;
-        qDebug() << "Ok, Editor Font" << editorFont.family();
-    }
-}
-
-void MainWindow::adjustFontSize(float ratio)
-{
-    Editor *editor = getEditor(editorTabs->currentIndex());
-    if(editor) {
-        QFont font = editor->font();
-        int size = font.pointSize();
-
-        QString fname = font.family();
-        size = (int) ((float) size*ratio);
-
-        if ((ratio < 1.0 && size > 3) ||
-            (ratio > 1.0 && size < 90))
-            font.setPointSize(size);
-
-        for(int n = editorTabs->count()-1; n >= 0; n--) {
-            Editor *ed = getEditor(n);
-            ed->setFont(font);
-            QString fs = QString("font: %1pt \"%2\";").arg(font.pointSize()).arg(font.family());
-            ed->setStyleSheet(fs);
-
-        }
-        editorFont = font;
-        QApplication::processEvents();
-    }
-}
 
 void MainWindow::fontBigger()
 {
-    adjustFontSize(1.25);
+    propDialog->adjustFontSize(1.25);
 }
 
 void MainWindow::fontSmaller()
 {
-    adjustFontSize(0.8);
+    propDialog->adjustFontSize(0.8);
 }
 
 void MainWindow::preferences()
@@ -899,7 +811,6 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
 
     // if find in progress, ignore request
     if(!statusDone) {
-        QMessageBox::information(this,tr("Patience Please"),tr("Can't handle more than one request at this time. Try again."));
         return -1;
     }
 
@@ -1652,24 +1563,9 @@ Editor *MainWindow::createEditor()
     Editor *editor = new Editor(this);
     editor->initSpin(&spinParser);
 
-    editor->setFont(editorFont); 
-    QFontMetrics fm(editorFont);
-    int width = fm.width(QLatin1Char('9'))*propDialog->getTabSpaces();
-    editor->setTabStopWidth(width);
     connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
 
     return editor;
-}
-
-void MainWindow::tabSpacesChanged()
-{
-    for(int n = 0; n < editorTabs->count(); n++) {
-        Editor *ed = getEditor(n);
-        QFontMetrics fm(editorFont);
-        int spaces = propDialog->getTabSpaces();
-        int width = fm.width(QLatin1Char('9'));
-        ed->setTabStopWidth(spaces*width);
-    }
 }
 
 void MainWindow::setupProjectTools(QSplitter *vsplit)
@@ -1697,8 +1593,14 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     connect(propDialog,SIGNAL(updateColors()),referenceTree,SLOT(updateColors()));
     connect(propDialog,SIGNAL(updateColors()),projectTree,SLOT(updateColors()));
 
+    connect(propDialog,SIGNAL(updateFonts()),referenceTree,SLOT(updateFonts()));
+    connect(propDialog,SIGNAL(updateFonts()),projectTree,SLOT(updateFonts()));
+
     projectTree->updateColors();
     referenceTree->updateColors();
+
+    projectTree->updateFonts();
+    referenceTree->updateFonts();
 
     leftSplit->addWidget(referenceTree);
 

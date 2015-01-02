@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QMap>
 #include <QColor>
+#include <QFont>
 
 #include "templates/Singleton.h"
 
@@ -25,6 +26,7 @@ private:
     QString mFileName;
 
     QMap<int, color> colors;
+    QFont font;
 
 public:
 
@@ -50,8 +52,12 @@ public:
 
     void save();
     void load();
+
     QColor getColor(ColorScheme::Color key);
     void setColor(ColorScheme::Color key, const QColor & newcolor);
+
+    QFont getFont();
+    void setFont(const QFont & newfont);
 
     const QMap<int, color>& getColorList() const;
 

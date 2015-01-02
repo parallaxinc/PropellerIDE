@@ -38,9 +38,12 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 
     currentTheme = &Singleton<ColorScheme>::Instance();
     updateColors();
+    updateFonts();
 
     connect(this,SIGNAL(cursorPositionChanged()),this,SLOT(updateBackgroundColors()));
     connect(propDialog,SIGNAL(updateColors()),this,SLOT(updateColors()));
+    connect(propDialog,SIGNAL(updateFonts()),this,SLOT(updateFonts()));
+    connect(propDialog->getTabSpaceLedit(),SIGNAL(textChanged(QString)), this, SLOT(tabSpacesChanged()));
 
     // this must be a pointer otherwise we can't control the position.
     cbAuto = new QComboBox(this);
@@ -1197,8 +1200,14 @@ void Editor::updateColors()
     p.setColor(QPalette::Base, colors[ColorScheme::ConBG].color);
     this->setPalette(p);
 
+
     updateBackgroundColors();
 
+}
+
+void Editor::updateFonts()
+{
+    this->setFont(currentTheme->getFont());
 }
 
 void Editor::updateBackgroundColors()
@@ -1321,3 +1330,14 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
         ++blockNumber;
     }
 }
+
+
+void Editor::tabSpacesChanged()
+{
+    this->setTabStopWidth(
+            propDialog->getTabSpaces() *
+            QFontMetrics(currentTheme->getFont()).width(' ')
+            );
+}
+
+

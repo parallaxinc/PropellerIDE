@@ -89,7 +89,6 @@ public slots:
     void selectAll();
 
     // view
-    void fontDialog();
     void fontBigger();
     void fontSmaller();
 
@@ -131,7 +130,6 @@ public slots:
 
     void highlightFileLine(QString file, int line);
 
-    void tabSpacesChanged();
 
 private:
     void openLastFile();
@@ -220,8 +218,6 @@ private:
     int         wasClicked;
 
     QTabWidget  *editorTabs;
-    QFont       editorFont;
-    void        adjustFontSize(float ratio);
     bool        fileChangeDisable;
     bool        changeTabDisable;
 

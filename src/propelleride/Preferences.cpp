@@ -114,13 +114,23 @@ void Preferences::setupOptions()
     otlayout->addRow(new QLabel(tr("Clear Settings on Exit")), &clearSettingsButton);
 
     fontButton.setText(tr("Set Editor Font"));
-    connect(&fontButton,SIGNAL(clicked()),this,SLOT(showFontDialog()));
+    connect(&fontButton,SIGNAL(clicked()),this,SLOT(fontDialog()));
     edlayout->addRow(new QLabel(tr("Set Editor Font")), &fontButton);
 }
 
-void Preferences::showFontDialog()
+void Preferences::fontDialog()
 {
-    emit openFontDialog();
+    bool ok = true;
+
+    QFontDialog fd(this);
+    QFont font = currentTheme->getFont();
+    font = fd.getFont(&ok, font, this);
+
+    if(ok) {
+        currentTheme->setFont(font);
+        emit updateFonts();
+        qDebug() << "New Editor Font" << font.family();
+    }
 }
 
 int Preferences::getTabSpaces()
@@ -406,6 +416,7 @@ void Preferences::accept()
 
     currentTheme->save();
     emit updateColors();
+    emit updateFonts();
 
     done(QDialog::Accepted);
 }
@@ -423,6 +434,7 @@ void Preferences::reject()
 
     currentTheme->load();
     emit updateColors();
+    emit updateFonts();
 
     done(QDialog::Rejected);
 }
@@ -445,4 +457,21 @@ void Preferences::showPreferences(QString lastDir)
 QString Preferences::getSpinLibraryString()
 {
     return this->lineEditLibrary.text();
+}
+
+void Preferences::adjustFontSize(float ratio)
+{
+    QFont font = currentTheme->getFont();
+    int size = font.pointSize();
+
+    QString fname = font.family();
+    size = (int) ((float) size*ratio);
+
+    if ((ratio < 1.0 && size > 3) ||
+        (ratio > 1.0 && size < 90))
+        font.setPointSize(size);
+
+    currentTheme->setFont(font);
+
+    emit updateFonts();
 }

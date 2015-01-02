@@ -130,3 +130,8 @@ void ReferenceTree::updateColors()
     p.setColor(QPalette::Base, currentTheme->getColor(color));
     this->setPalette(p);
 }
+
+void ReferenceTree::updateFonts()
+{
+    this->setFont(currentTheme->getFont());
+}

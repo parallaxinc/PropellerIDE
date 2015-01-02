@@ -91,6 +91,8 @@ private slots:
     void cbAutoSelected(int index);
     void cbAutoSelected0insert(int index);
     void updateColors();
+    void updateFonts();
+    void tabSpacesChanged();
 
 /* lineNumberArea support below this line: see Nokia Copyright below */
 public:

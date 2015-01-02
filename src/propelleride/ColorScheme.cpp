@@ -6,7 +6,7 @@ ColorScheme::ColorScheme()
     mFileName = QDir(QStandardPaths::writableLocation(
                 QStandardPaths::DataLocation)).filePath(mName + ".theme.conf");
 
-    // Default Colors
+    // Background Colors
     colors[ConBG]               = (color) { QColor(255,248,192)   , "Block_CON"  };
     colors[VarBG]               = (color) { QColor(255,223,191)   , "Block_VAR"  };
     colors[ObjBG]               = (color) { QColor(255,191,191)   , "Block_OBJ"  };
@@ -23,6 +23,13 @@ ColorScheme::ColorScheme()
     colors[SyntaxQuotes]        = (color) { Qt::red               , "Syntax_Quotes"        };
     colors[SyntaxComments]      = (color) { Qt::darkGreen         , "Syntax_Comments"      };
 
+    // Editor font
+    font = QFont("Monospace");
+    font.setStyleHint(QFont::TypeWriter);
+    font.setFixedPitch(true);
+    font.setPointSize(14);
+
+
     if( QFile::exists(mFileName) ){
         load();
     }
@@ -35,7 +42,9 @@ ColorScheme::ColorScheme()
 
 void ColorScheme::save()
 {
-    QSettings theme_settings(mFileName, QSettings::NativeFormat);
+    QSettings theme_settings(mFileName, 
+            QSettings::NativeFormat);
+
     theme_settings.beginGroup("Colors");
 
     QMap<int, color>::iterator i;
@@ -45,12 +54,22 @@ void ColorScheme::save()
     }
 
     theme_settings.endGroup();
+
+    theme_settings.beginGroup("Font");
+
+    theme_settings.setValue("Family", font.family());
+    theme_settings.setValue("Size", font.pointSize());
+
+    theme_settings.endGroup();
+
 }
 
 
 void ColorScheme::load()
 {
-    QSettings theme_settings(mFileName, QSettings::NativeFormat);
+    QSettings theme_settings(mFileName,
+            QSettings::NativeFormat);
+
     theme_settings.beginGroup("Colors");
 
     QMap<int, color>::iterator i;
@@ -65,6 +84,20 @@ void ColorScheme::load()
     }
 
     theme_settings.endGroup();
+
+    theme_settings.beginGroup("Font");
+
+    font.setFamily(
+            theme_settings.value("Family", font.family()).toString()
+            );
+    font.setPointSize(
+            theme_settings.value("Size", font.pointSize()).toInt()
+            );
+
+    theme_settings.endGroup();
+
+
+
 }
 
 void ColorScheme::setColor(ColorScheme::Color key, const QColor & color)
@@ -72,7 +105,8 @@ void ColorScheme::setColor(ColorScheme::Color key, const QColor & color)
     colors[key].color = color;
 }
 
-QColor ColorScheme::getColor(ColorScheme::Color key){
+QColor ColorScheme::getColor(ColorScheme::Color key)
+{
     return colors[key].color;
 };
 
@@ -80,3 +114,15 @@ const QMap<int, ColorScheme::color>& ColorScheme::getColorList() const
 {
     return colors;
 }
+
+void ColorScheme::setFont(const QFont & newfont)
+{
+    font = newfont;
+}
+
+QFont ColorScheme::getFont()
+{
+    return font;
+}
+
+

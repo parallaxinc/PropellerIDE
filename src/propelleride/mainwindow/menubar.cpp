@@ -87,9 +87,7 @@ void MainWindow::setupViewMenu()
 
     viewMenu->addSeparator();
 
-    viewMenu->addAction(QIcon(":/icons/preferences-font.png"),          tr("Font"),         this, SLOT(fontDialog()));
     viewMenu->addAction(QIcon(":/icons/preferences-font-smaller.png"),  tr("Smaller Font"), this, SLOT(fontSmaller()), QKeySequence::ZoomOut);
-
     QAction *bigger = new QAction(QIcon(":/icons/preferences-font-bigger.png"), tr("Bigger Font"), this);
 
     /* special provision for bigger fonts to use default ZoomIn or Ctrl+= */

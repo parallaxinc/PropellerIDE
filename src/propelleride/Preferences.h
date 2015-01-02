@@ -24,8 +24,6 @@
 #define spinCompilerKey     "SpinCompiler"
 #define spinIncludesKey     "SpinIncludes"
 #define spinLoaderKey       "SpinLoader"
-#define editorFontKey       "EditorFont"
-#define fontSizeKey         "FontSize"
 #define lastFileNameKey     "LastFileName"
 #define lastTermXposKey     "LastTermXposition"
 #define lastTermYposKey     "LastTermYposition"
@@ -108,16 +106,18 @@ public:
     bool getSpinSuggestEnable();
     QLineEdit *getTabSpaceLedit();
 
+    void adjustFontSize(float ratio);
+
 
 signals:
-    void openFontDialog();
     void updateColors();
+    void updateFonts();
 
 public slots:
 
     void configSettings();
     void cleanSettings();
-    void showFontDialog();
+    void fontDialog();
     void browseCompiler();
     void browseLibrary();
     void browseLoader();
@@ -168,7 +168,6 @@ private:
     QLineEdit   tabspaceLedit;
     QPushButton clearSettingsButton;
     QPushButton fontButton;
-    QFontDialog fontDialog;
 
     bool        autoCompleteEnableSaved;
     bool        spinSuggestEnableSaved;

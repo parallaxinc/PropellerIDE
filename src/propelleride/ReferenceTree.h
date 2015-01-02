@@ -24,5 +24,6 @@ private:
 
 public slots:
     void updateColors();
+    void updateFonts();
 
 };
