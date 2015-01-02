@@ -17,6 +17,9 @@ int main(int argc, char *argv[])
     }
 #endif
     app.setWindowIcon(QIcon(":/icons/PropHatAlpha.png"));
+    QCoreApplication::setOrganizationName("Parallax");
+    QCoreApplication::setOrganizationDomain("www.parallax.com");
+    QCoreApplication::setApplicationName("PropellerIDE");
     MainWindow w;
     w.init();
     if(argc > 1) {

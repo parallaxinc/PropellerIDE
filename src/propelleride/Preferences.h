@@ -15,15 +15,13 @@
 
 #include "colors.h"
 #include "ColorScheme.h"
+#include "PathSelector.h"
 
 #define publisherKey        "Parallax"
 #define publisherComKey     "parallax.com"
 #define PropellerIdeGuiKey  "PropellerIDE"
 
 #define useKeys             "UseKeys"
-#define spinCompilerKey     "SpinCompiler"
-#define spinIncludesKey     "SpinIncludes"
-#define spinLoaderKey       "SpinLoader"
 #define lastFileNameKey     "LastFileName"
 #define lastTermXposKey     "LastTermXposition"
 #define lastTermYposKey     "LastTermYposition"
@@ -98,7 +96,7 @@ class Preferences : public QDialog
     Q_OBJECT
 public:
     explicit Preferences(QWidget *parent = 0);
-    void showPreferences(QString lastDir);
+    void showPreferences();
     QString getSpinLibraryString();
 
     int  getTabSpaces();
@@ -131,36 +129,13 @@ private:
     void setupOptions();
     void setupHighlight();
 
-    QHBoxLayout * createPathSelector(
-            QString const & labelname,
-            QString const & errormessage,
-            QLineEdit * lineEdit,
-            const char * slot
-        );
-
-    void fileStringProperty(QVariant *var, QLineEdit *ledit, const char *key, QString *value);
-
-    void browsePath(
-            QString const & pathlabel, 
-            QString const & pathregex,  
-            QLineEdit * currentvalue,
-            QString * oldvalue,
-            bool isfolder
-        );
-
     ColorScheme * currentTheme;
 
     QTabWidget  tabWidget;
 
-    QString     lastFolder;
-
-    QLineEdit   lineEditCompiler;
-    QLineEdit   lineEditLibrary;
-    QLineEdit   lineEditLoader;
-    QString     spinCompilerStr;
-    QString     spinIncludesStr;
-
-    QString     spinLoaderStr;
+    PathSelector * compilerpath;
+    PathSelector * loaderpath;
+    PathSelector * librarypath;
 
     QString     tabSpacesStr;
     QCheckBox   autoCompleteEnable;

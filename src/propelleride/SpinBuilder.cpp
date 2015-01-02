@@ -26,18 +26,6 @@ int  SpinBuilder::checkCompilerInfo()
         mbox.exec();
         return -1;
     }
-/*
-    if(includesStr.length() == 0) {
-        mbox.setInformativeText(tr("Please specify a library path in Preferences."));
-        mbox.exec();
-        return -1;
-    }
-    if(loader.length() == 0) {
-        mbox.setInformativeText(tr("Please specify the loader in Preferences."));
-        mbox.exec();
-        return -1;
-    }
- */
     return 0;
 }
 
@@ -320,11 +308,6 @@ void SpinBuilder::procReadyRead()
     if(bytes.length() == 0)
         return;
 
-#if defined(Q_OS_WIN32)
-    QString eol("\r");
-#else
-    QString eol("\n");
-#endif
     bytes = bytes.replace("\r\n","\n");
     compileResult = QString(bytes);
     QStringList lines = QString(bytes).split("\n",QString::SkipEmptyParts);
@@ -335,7 +318,7 @@ void SpinBuilder::procReadyRead()
         for (int n = 0; n < lines.length(); n++) {
             QString line = lines[n];
             if(line.endsWith(" bytes")) {
-                msgLabel->setText(line+eol);
+                msgLabel->setText(line);
             }
         }
     }
@@ -354,24 +337,7 @@ void SpinBuilder::procReadyRead()
     for (int n = 0; n < lines.length(); n++) {
         QString line = lines[n];
         if(line.length() > 0) {
-            /*
-            bool iserror = compileResult.contains("error:",Qt::CaseInsensitive);
-            if(iserror && line.contains(" line ", Qt::CaseInsensitive)) {
-                QStringList sl = line.split(" ", QString::SkipEmptyParts);
-                if(sl.count() > 1) {
-                    int num = QString(sl[sl.count()-1]).toInt();
-                    QPlainTextEdit *ed = editors->at(editorTabs->currentIndex());
-                    QTextCursor cur = ed->textCursor();
-                    cur.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
-                    cur.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, num);
-                    cur.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
-                    cur.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
-                    QApplication::processEvents();
-                }
-            }
-            */
             if(line.contains("Propeller Version",Qt::CaseInsensitive)) {
-                //msgLabel->setText(line+eol);
                 progMax = 0;
                 progress->setValue(0);
                 progress->setVisible(true);
@@ -381,7 +347,6 @@ void SpinBuilder::procReadyRead()
                 progMax = 0;
                 progress->setValue(0);
                 progress->setVisible(true);
-                //msgLabel->setText(line+eol);
             }
             else
             if(line.contains("writing",Qt::CaseInsensitive)) {
@@ -392,12 +357,9 @@ void SpinBuilder::procReadyRead()
             else
             if(line.contains("Download OK",Qt::CaseInsensitive)) {
                 progress->setValue(100);
-                //msgLabel->setText(line+eol);
             }
             else
             if(line.contains("sent",Qt::CaseInsensitive)) {
-                //msgLabel->setText(line+eol);
-                //sizeLabel->setText(line);
                 line = line.trimmed();
                 progress->setVisible(false);
                 sizeLabel->setText(line.left(line.indexOf(" "))+tr(" bytes loaded"));
@@ -407,7 +369,6 @@ void SpinBuilder::procReadyRead()
                 if(progMax == 0) {
                     QString bs = line.mid(0,line.indexOf(" "));
                     progMax = bs.toInt();
-                    // include VM size
                     progMax /= 1024;
                     progMax++;
                     progCount = 0;
@@ -419,7 +380,6 @@ void SpinBuilder::procReadyRead()
                     progCount++;
                     progress->setValue(100*progCount/progMax);
                 }
-                //msgLabel->setText(line);
             }
         }
     }

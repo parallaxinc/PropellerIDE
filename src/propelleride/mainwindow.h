@@ -175,7 +175,6 @@ private:
     int  extractSource(QString &fileName);
     void buildSourceWriteError(QString fileName);
 
-    QSettings   *settings;
     QString     spinCompiler;
     QString     spinCompilerPath;
     QString     spinIncludes;

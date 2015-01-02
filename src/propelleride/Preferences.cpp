@@ -47,7 +47,7 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
 void Preferences::configSettings()
 {
     bool ok;
-    QSettings settings(publisherKey, PropellerIdeGuiKey);
+    QSettings settings;
     QString app = QApplication::applicationFilePath();
     QVariant keyv = settings.value(useKeys);
     int keyday = keyv.toInt(&ok);
@@ -62,7 +62,7 @@ void Preferences::configSettings()
 
 void Preferences::cleanSettings()
 {
-    QSettings settings(publisherKey, PropellerIdeGuiKey);
+    QSettings settings;
     QStringList list = settings.allKeys();
 
     foreach(QString key, list) {
@@ -77,18 +77,22 @@ void Preferences::setupOptions()
 {
     QFrame *frame = new QFrame(this);
     QHBoxLayout *hlayout = new QHBoxLayout();
+
     QFormLayout *edlayout = new QFormLayout(this);
     QGroupBox *editor = new QGroupBox(tr("Editor Settings"));
     editor->setLayout(edlayout);
+
     QFormLayout *otlayout = new QFormLayout(this);
     QGroupBox *other  = new QGroupBox(tr("Other Settings"));
     other->setLayout(otlayout);
+
     hlayout->addWidget(editor);
     hlayout->addWidget(other);
+
     frame->setLayout(hlayout);
     tabWidget.addTab(frame,tr("General"));
 
-    QSettings settings(publisherKey, PropellerIdeGuiKey,this);
+    QSettings settings;
     QVariant enac = settings.value(enableAutoComplete,true);
     QVariant enss = settings.value(enableSpinSuggest,true);
 
@@ -129,7 +133,6 @@ void Preferences::fontDialog()
     if(ok) {
         currentTheme->setFont(font);
         emit updateFonts();
-        qDebug() << "New Editor Font" << font.family();
     }
 }
 
@@ -138,7 +141,7 @@ int Preferences::getTabSpaces()
     bool ok;
     int count = tabspaceLedit.text().toInt(&ok);
     if(ok) return count;
-    return 2;
+    return 4;
 }
 
 bool Preferences::getAutoCompleteEnable()
@@ -156,119 +159,49 @@ QLineEdit *Preferences::getTabSpaceLedit()
     return &tabspaceLedit;
 }
 
-QHBoxLayout * Preferences::createPathSelector(
-        QString const & labelname,
-        QString const & errormessage,
-        QLineEdit * lineEdit,
-        const char * slot) 
-{
-    QHBoxLayout * layout = new QHBoxLayout();
-
-    QLabel * label = new QLabel(labelname);
-    label->setMinimumWidth(70);
-
-    lineEdit->setMinimumWidth(300);
-    lineEdit->setToolTip(errormessage);
-
-    layout->addWidget(label);
-    layout->addWidget(lineEdit);
-    QPushButton * browseButton = new QPushButton(tr("Browse"), this);
-    layout->addWidget(browseButton);
-
-    connect(browseButton, SIGNAL(clicked()), this, slot);
-    return layout;
-}
-
-
 void Preferences::setupFolders()
 {
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    QVBoxLayout * vlayout = new QVBoxLayout(this);
     QFrame *box = new QFrame();
-    box->setLayout(layout);
+    box->setLayout(vlayout);
     tabWidget.addTab(box,"System");
 
-    layout->addLayout(createPathSelector(
-                tr("Compiler"),
-                tr("Must add a compiler."),
-                &lineEditCompiler,
-                SLOT(browseCompiler())
-                ));
+    QFormLayout * pathlayout = new QFormLayout(this);
+    QGroupBox *paths= new QGroupBox(tr("System Paths"));
+    paths->setLayout(pathlayout);
 
-    layout->addLayout(createPathSelector(
-                tr("Loader"),
-                tr("Must add a loader program."),
-                &lineEditLoader,
-                SLOT(browseLoader())
-                ));
+    compilerpath = new PathSelector(
+            tr("Compiler"),
+            QApplication::applicationDirPath() +
+                    QString(DEFAULT_COMPILER),
+            tr("Must add a compiler."),
+            SLOT(browseCompiler()),
+            this
+            );
 
-    layout->addLayout(createPathSelector(
-                tr("Library Path"),
-                tr("Must add a library path."),
-                &lineEditLibrary,
-                SLOT(browseLibrary())
-                ));
+    loaderpath = new PathSelector(
+            tr("Loader"),
+            QApplication::applicationDirPath() +
+                    QString(DEFAULT_LOADER),
+            tr("Must add a loader program."),
+            SLOT(browseLoader()),
+            this
+            );
 
-    QSettings settings(publisherKey, PropellerIdeGuiKey,this);
+    librarypath = new PathSelector(
+            tr("Library Path"),
+            QApplication::applicationDirPath() +
+                    QString(APP_RESOURCES_PATH) +
+                    QString("/library"),
+            tr("Must add a library path."),
+            SLOT(browseLibrary()),
+            this
+            );
 
-    QString compiler(DEFAULT_COMPILER);
-    QString library(QString(APP_RESOURCES_PATH)+"/library");
-    compiler = QApplication::applicationDirPath()+compiler;
-    library  = QApplication::applicationDirPath()+library;
-
-    QVariant compv = settings.value(spinCompilerKey, compiler);
-    QVariant incv = settings.value(spinIncludesKey, library);
-
-    if(compv.canConvert(QVariant::String)) {
-        QString s = compv.toString();
-        s = QDir::fromNativeSeparators(s);
-        if(s.length() > 0) {
-            lineEditCompiler.setText(s);
-        }
-        else {
-            lineEditCompiler.setText(compiler);
-        }
-    }
-    else {
-        lineEditCompiler.setText(compiler);
-    }
-
-    if(incv.canConvert(QVariant::String)) {
-        QString s = incv.toString();
-        s = QDir::fromNativeSeparators(s);
-        if(s.length() > 0) {
-            lineEditLibrary.setText(s);
-        }
-        else {
-            lineEditLibrary.setText(library);
-        }
-    }
-    else {
-        lineEditLibrary.setText(library);
-    }
-
-    settings.setValue(spinCompilerKey,lineEditCompiler.text());
-    settings.setValue(spinIncludesKey,lineEditLibrary.text());
-
-    QString loader(DEFAULT_LOADER);
-    loader = QApplication::applicationDirPath()+loader;
-
-    QVariant loadv = settings.value(spinLoaderKey,loader);
-
-    if(loadv.canConvert(QVariant::String)) {
-        QString s = loadv.toString();
-        s = QDir::fromNativeSeparators(s);
-        if(s.length() > 0) {
-            lineEditLoader.setText(s);
-        }
-        else {
-            lineEditLoader.setText(loader);
-        }
-    }
-    else {
-        lineEditLoader.setText(loader);
-    }
-
-    settings.setValue(spinLoaderKey,lineEditLoader.text());
+    pathlayout->addWidget(compilerpath);
+    pathlayout->addWidget(loaderpath);
+    pathlayout->addWidget(librarypath);
+    vlayout->addWidget(paths);
 
 }
 
@@ -329,85 +262,40 @@ void Preferences::setupHighlight()
     }
 }
 
-void Preferences::browsePath(
-        QString const & pathlabel, 
-        QString const & pathregex,  
-        QLineEdit * currentvalue,
-        QString * oldvalue,
-        bool isfolder
-        )
-{
-    QString folder = *oldvalue = currentvalue->text();
-    QString pathname;
-
-    if (!folder.length()) 
-        folder = lastFolder;
-
-    if (isfolder) 
-        pathname = QFileDialog::getExistingDirectory(this,
-                pathlabel, folder, QFileDialog::ShowDirsOnly);
-    else
-        pathname = QFileDialog::getOpenFileName(this,
-                pathlabel, folder, pathregex);
-
-    QString s = QDir::fromNativeSeparators(pathname);
-
-    if(s.length() == 0)
-    {
-        qDebug() << "browsePath(" << pathlabel << "): " << "No selection";
-        return;
-    }
-
-    if (isfolder)
-        if(!s.endsWith("/"))
-            s += "/";
-
-    qDebug() << "browsePath(" << pathlabel << "): " << s;
-    currentvalue->setText(s);
-
-    lastFolder = s.mid(0,s.lastIndexOf("/")+1);
-}
-
-
 void Preferences::browseCompiler()
 {
-    browsePath(
+    compilerpath->browsePath(
             tr("Select Compiler"),
             "OpenSpin (openspin*);;BST Compiler (bstc*)",
-            &lineEditCompiler,
-            &spinCompilerStr,
             false
         );
 }
 
 void Preferences::browseLoader()
 {
-    browsePath(
+    loaderpath->browsePath(
             tr("Select Loader"),
             "Loader (p1load* p2load*);;BST Loader (bstl*)",
-            &lineEditLoader,
-            &spinLoaderStr,
             false
         );
 }
 
 void Preferences::browseLibrary()
 {
-    browsePath(
+    librarypath->browsePath(
             tr("Select Spin Library Path"),
             NULL,
-            &lineEditLibrary,
-            &spinIncludesStr,
             true
         );
 }
 
 void Preferences::accept()
 {
-    QSettings settings(publisherKey, PropellerIdeGuiKey,this);
-    settings.setValue(spinCompilerKey,lineEditCompiler.text());
-    settings.setValue(spinIncludesKey,lineEditLibrary.text());
-    settings.setValue(spinLoaderKey,lineEditLoader.text());
+    compilerpath->save();
+    loaderpath->save();
+    librarypath->save();
+
+    QSettings settings;
 
     settings.setValue(tabSpacesKey,tabspaceLedit.text());
 
@@ -423,9 +311,10 @@ void Preferences::accept()
 
 void Preferences::reject()
 {
-    lineEditCompiler.setText(spinCompilerStr);
-    lineEditLibrary.setText(spinIncludesStr);
-    lineEditLoader.setText(spinLoaderStr);
+    compilerpath->restore();
+    loaderpath->restore();
+    librarypath->restore();
+
 
     tabspaceLedit.setText(tabSpacesStr);
 
@@ -439,13 +328,8 @@ void Preferences::reject()
     done(QDialog::Rejected);
 }
 
-void Preferences::showPreferences(QString lastDir)
+void Preferences::showPreferences()
 {
-    this->lastFolder = lastDir;
-    spinCompilerStr = lineEditCompiler.text();
-    spinIncludesStr = lineEditLibrary.text();
-    spinLoaderStr = lineEditLoader.text();
-
     tabSpacesStr = tabspaceLedit.text();
 
     autoCompleteEnableSaved = autoCompleteEnable.isChecked();
@@ -456,7 +340,7 @@ void Preferences::showPreferences(QString lastDir)
 
 QString Preferences::getSpinLibraryString()
 {
-    return this->lineEditLibrary.text();
+    return QString();//this->lineEditLibrary.text();
 }
 
 void Preferences::adjustFontSize(float ratio)
@@ -472,6 +356,7 @@ void Preferences::adjustFontSize(float ratio)
         font.setPointSize(size);
 
     currentTheme->setFont(font);
+    currentTheme->save();
 
     emit updateFonts();
 }

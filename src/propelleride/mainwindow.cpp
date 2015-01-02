@@ -26,9 +26,6 @@ void MainWindow::init()
     QCoreApplication::setOrganizationDomain(publisherComKey);
     QCoreApplication::setApplicationName(PropellerIdeGuiKey);
 
-    /* global settings */
-    settings = new QSettings(publisherKey, PropellerIdeGuiKey, this);
-
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
@@ -86,7 +83,7 @@ void MainWindow::init()
 
     /* get last geometry. using x,y,w,h is unreliable.
     */
-    QVariant geov = settings->value(mainWindowGeometry);
+    QVariant geov = QSettings().value(mainWindowGeometry);
     if(geov.canConvert(QVariant::ByteArray)) {
         // byte array convert is always possible
         QByteArray geo = geov.toByteArray();
@@ -110,7 +107,7 @@ void MainWindow::init()
     /* setup the terminal dialog box */
     term = new Terminal(this);
 
-    QVariant gv = settings->value(termGeometryKey);
+    QVariant gv = QSettings().value(termGeometryKey);
     if(gv.canConvert(QVariant::ByteArray)) {
         QByteArray geo = gv.toByteArray();
         term->restoreGeometry(geo);
@@ -182,7 +179,7 @@ void MainWindow::openLastFile()
     /* load the last file into the editor to make user happy */
     QString welcome = propDialog->getSpinLibraryString()+"Welcome.spin";
     QString fileName;
-    QVariant lastfilev = settings->value(lastFileNameKey, welcome);
+    QVariant lastfilev = QSettings().value(lastFileNameKey, welcome);
     if(!lastfilev.isNull()) {
         if(lastfilev.canConvert(QVariant::String)) {
             if(lastfilev.toString().length() > 0) {
@@ -209,7 +206,7 @@ void MainWindow::openLastFile()
 
     /* load the last directory to make user happy */
     lastDirectory = filePathName(fileName);
-    QVariant lastdirv = settings->value(lastDirectoryKey, lastDirectory);
+    QVariant lastdirv = QSettings().value(lastDirectoryKey, lastDirectory);
     if(!lastdirv.isNull()) {
         if(lastdirv.canConvert(QVariant::String)) {
             if(lastdirv.toString().length() > 0) {
@@ -219,24 +216,21 @@ void MainWindow::openLastFile()
     }
 }
 
-/*
- * get the application settings from the registry for compile/startup
- */
 void MainWindow::getApplicationSettings(bool complain)
 {
     QDir dir(this->lastDirectory);
     QFile file;
     QVariant compv;
 
-    compv = settings->value(spinCompilerKey);
+    compv = QSettings().value("Compiler");
     if(compv.canConvert(QVariant::String)) {
         spinCompiler = compv.toString();
         spinCompiler = dir.fromNativeSeparators(spinCompiler);
     }
     if(complain && !file.exists(spinCompiler)) {
-        propDialog->showPreferences(this->lastDirectory);
+        propDialog->showPreferences();
     }
-    compv = settings->value(spinLoaderKey);
+    compv = QSettings().value("Loader");
     if(compv.canConvert(QVariant::String)) {
         spinLoader = compv.toString();
         spinLoader = dir.fromNativeSeparators(spinLoader);
@@ -249,17 +243,14 @@ void MainWindow::getApplicationSettings(bool complain)
     /* get the include path and config file set by user */
     QVariant incv;
 
-    incv = settings->value(spinIncludesKey);
+    incv = QSettings().value("Library Path");
     if(incv.canConvert(QVariant::String)) {
         spinIncludes = incv.toString();
         spinIncludes = dir.fromNativeSeparators(spinIncludes);
     }
+    qDebug() << spinIncludes;
 }
 
-/**
- * @brief MainWindow::exitSave
- * @return false to cancel exit
- */
 bool MainWindow::exitSave()
 {
     bool saveAll = false;
@@ -323,14 +314,14 @@ void MainWindow::closeEvent(QCloseEvent *e)
 
     QString filestr = editorTabs->tabToolTip(editorTabs->currentIndex());
 
-    if(settings->value(useKeys).toInt())
+    if(QSettings().value(useKeys).toInt())
     {
-        settings->setValue(lastFileNameKey,filestr);
-        settings->setValue(lastDirectoryKey, lastDirectory);
+        QSettings().setValue(lastFileNameKey,filestr);
+        QSettings().setValue(lastDirectoryKey, lastDirectory);
 
         // save user's width/height
         QByteArray geo = this->saveGeometry();
-        settings->setValue(mainWindowGeometry,geo);
+        QSettings().setValue(mainWindowGeometry,geo);
     }
     if(e) e->accept();
     qApp->exit(0);
@@ -568,13 +559,13 @@ void MainWindow::fileChanged()
 
 void MainWindow::setCurrentFile(const QString &fileName)
 {
-    QStringList files = settings->value(recentFilesKey).toStringList();
+    QStringList files = QSettings().value(recentFilesKey).toStringList();
     files.removeAll(fileName);
     files.prepend(fileName);
     while (files.size() > MaxRecentFiles)
         files.removeLast();
 
-    settings->setValue(recentFilesKey, files);
+    QSettings().setValue(recentFilesKey, files);
 
     foreach (QWidget *widget, QApplication::topLevelWidgets()) {
         MainWindow *mainWin = qobject_cast<MainWindow *>(widget);
@@ -585,7 +576,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
 
 void MainWindow::updateRecentFileActions()
 {
-    QStringList files = settings->value(recentFilesKey).toStringList();
+    QStringList files = QSettings().value(recentFilesKey).toStringList();
 
     int numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
 
@@ -680,7 +671,7 @@ void MainWindow::fontSmaller()
 
 void MainWindow::preferences()
 {
-    propDialog->showPreferences(this->lastDirectory);
+    propDialog->showPreferences();
 }
 
 void MainWindow::preferencesAccepted()

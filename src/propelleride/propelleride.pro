@@ -31,6 +31,7 @@ SOURCES += main.cpp\
     treeitem.cpp \
     Builder.cpp \
     SpinBuilder.cpp \
+    PathSelector.cpp \
     PortListener.cpp \
     Preferences.cpp \
     PortConnectionMonitor.cpp \
@@ -51,6 +52,7 @@ HEADERS  += mainwindow.h \
     treeitem.h \
     Builder.h \
     SpinBuilder.h \
+    PathSelector.h \
     PortListener.h \
     Preferences.h \
     PortConnectionMonitor.h \
