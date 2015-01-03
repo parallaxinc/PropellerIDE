@@ -173,16 +173,16 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     replaceAllBtn->setText(QApplication::translate("MainWindow", "Replace All", 0));
 
     /* tool-tips translations */
-    findEdit->setToolTip(trUtf8("Enter search text here"));
-    findPreviousBtn->setToolTip(trUtf8("Backward search"));
-    findNextBtn->setToolTip(trUtf8("Forward search"));
-    wholeWordFilterBtn->setToolTip(trUtf8("Whole word search"));
-    caseSensitiveFilterBtn->setToolTip(trUtf8("Case sensitive search"));
-    doneFindBtn->setToolTip(trUtf8("Exit Search"));
-    replaceEdit->setToolTip(trUtf8("Enter replacement text here"));
-    replacePreviousBtn->setToolTip(trUtf8("Search backward and replace text"));
-    replaceNextBtn->setToolTip(trUtf8("Search forward and replace text"));
-    replaceAllBtn->setToolTip(trUtf8("Search and replace all occurrences of text"));
+    findEdit->setToolTip(tr("Enter search text here"));
+    findPreviousBtn->setToolTip(tr("Backward search"));
+    findNextBtn->setToolTip(tr("Forward search"));
+    wholeWordFilterBtn->setToolTip(tr("Whole word search"));
+    caseSensitiveFilterBtn->setToolTip(tr("Case sensitive search"));
+    doneFindBtn->setToolTip(tr("Exit Search"));
+    replaceEdit->setToolTip(tr("Enter replacement text here"));
+    replacePreviousBtn->setToolTip(tr("Search backward and replace text"));
+    replaceNextBtn->setToolTip(tr("Search forward and replace text"));
+    replaceAllBtn->setToolTip(tr("Search and replace all occurrences of text"));
 
     connect(findEdit,SIGNAL(textChanged(QString)),this,SLOT(findChanged(QString)));
 
@@ -268,7 +268,7 @@ void MainWindow::findNextClicked()
             count++;
         }
         else {
-            if(showBeginMessage(trUtf8("Find"))) {
+            if(showBeginMessage(tr("Find"))) {
                 if(editor->find(text,getFlags()) == true) {
                     count++;
                 }
@@ -299,7 +299,7 @@ void MainWindow::findPrevClicked()
                 count++;
             }
             else {
-                if(showEndMessage(trUtf8("Find"))) {
+                if(showEndMessage(tr("Find"))) {
                     if(editor->find(text,getFlags(QTextDocument::FindBackward)) == true) {
                         count++;
                     }
@@ -403,15 +403,15 @@ void MainWindow::replaceAllClicked()
             count++;
         }
         else {
-            if(showBeginMessage(trUtf8("Replace")) == false)
+            if(showBeginMessage(tr("Replace")) == false)
                 break;
         }
         edtext = editor->toPlainText();
     }
     editor->textCursor().endEditBlock();
 
-    QMessageBox::information(this, trUtf8("Replace Done"),
-            trUtf8("Replaced %1 instances of \"%2\".").arg(count).arg(text));
+    QMessageBox::information(this, tr("Replace Done"),
+            tr("Replaced %1 instances of \"%2\".").arg(count).arg(text));
 }
 
 QString MainWindow::getReplaceText()
@@ -446,10 +446,10 @@ bool MainWindow::showFindMessage(QString text)
 
 bool MainWindow::showBeginMessage(QString type)
 {
-    return showFindMessage(type+trUtf8(" from beginning?"));
+    return showFindMessage(type+tr(" from beginning?"));
 }
 
 bool MainWindow::showEndMessage(QString type)
 {
-    return showFindMessage(type+trUtf8(" from end?"));
+    return showFindMessage(type+tr(" from end?"));
 }

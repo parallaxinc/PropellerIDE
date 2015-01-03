@@ -19,7 +19,7 @@
 Terminal::Terminal(QWidget *parent) : QDialog(parent), portListener(NULL)
 {
     termEditor = new Console(parent);
-    setWindowTitle(QCoreApplication::applicationName()+" "+trUtf8("Terminal"));
+    setWindowTitle(QCoreApplication::applicationName()+" "+tr("Terminal"));
 
     init();
 }
@@ -32,10 +32,10 @@ void Terminal::init()
 
     options = new TermPrefs(this);
 
-    QAction *copyAction = new QAction(trUtf8("Copy"),this);
+    QAction *copyAction = new QAction(tr("Copy"),this);
     copyAction->setShortcuts(QKeySequence::Copy);
     termEditor->addAction(copyAction);
-    QAction *pasteAction = new QAction(trUtf8("Paste"),this);
+    QAction *pasteAction = new QAction(tr("Paste"),this);
     pasteAction->setShortcuts(QKeySequence::Paste);
     termEditor->addAction(pasteAction);
     termEditor->setFont(QFont("Parallax", 14, QFont::Bold));
@@ -43,7 +43,7 @@ void Terminal::init()
 
     termLayout->addWidget(termEditor);
 
-    QPushButton *buttonClear = new QPushButton(trUtf8("Clear"),this);
+    QPushButton *buttonClear = new QPushButton(tr("Clear"),this);
     connect(buttonClear,SIGNAL(clicked()), this, SLOT(clearScreen()));
     buttonClear->setAutoDefault(false);
     buttonClear->setDefault(false);
@@ -70,18 +70,18 @@ void Terminal::init()
     }
     connect(comboBoxBaud,SIGNAL(currentIndexChanged(int)),this,SLOT(baudRateChange(int)));
 
-    cbEchoOn = new QCheckBox(trUtf8("Echo On"),this);
+    cbEchoOn = new QCheckBox(tr("Echo On"),this);
     connect(cbEchoOn,SIGNAL(clicked(bool)),this,SLOT(echoOnChange(bool)));
 
     setEchoOn(options->getEchoOn());
 
-    QPushButton *buttonOpt = new QPushButton(trUtf8("Options"),this);
+    QPushButton *buttonOpt = new QPushButton(tr("Options"),this);
     connect(buttonOpt,SIGNAL(clicked()), this, SLOT(showOptions()));
     buttonOpt->setAutoDefault(false);
     buttonOpt->setDefault(false);
 
 #ifdef TERM_ENABLE_BUTTON
-    buttonEnable = new QPushButton(trUtf8("Disable"),this);
+    buttonEnable = new QPushButton(tr("Disable"),this);
     connect(buttonEnable,SIGNAL(clicked()), this, SLOT(toggleEnable()));
     buttonEnable->setAutoDefault(false);
     buttonEnable->setDefault(false);

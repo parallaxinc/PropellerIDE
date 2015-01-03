@@ -69,15 +69,18 @@ HEADERS  += mainwindow.h \
     templates/Singleton.h \
 
 TRANSLATIONS += \
-    propelleride_zn.ts
+    translations/propelleride_zn.ts
 
 OTHER_FILES +=
 
 FORMS += \
-    TermPrefs.ui
+    TermPrefs.ui \
+    finder.ui
 
 RESOURCES += \
     icons/icons.qrc
+
+CODECFORTR = UTF-8
 
 unix {
     LIBS            += -lz
