@@ -19,6 +19,8 @@
 Terminal::Terminal(QWidget *parent) : QDialog(parent), portListener(NULL)
 {
     termEditor = new Console(parent);
+    setWindowTitle(QCoreApplication::applicationName()+" "+trUtf8("Terminal"));
+
     init();
 }
 
@@ -201,10 +203,10 @@ void Terminal::accept()
     buttonEnable->setText("Disable");
 #endif
     // save Terminal geometry
-    QSettings *settings = new QSettings(publisherKey, PropellerIdeGuiKey, this);
-    if(settings->value(useKeys).toInt() == 1) {
+    QSettings settings;
+    if(settings.value(useKeys).toInt() == 1) {
         QByteArray geo = this->saveGeometry();
-        settings->setValue(termGeometryKey,geo);
+        settings.setValue(termGeometryKey,geo);
     }
     termEditor->setPortEnable(false);
     portLabel.setEnabled(false);
@@ -218,9 +220,9 @@ void Terminal::reject()
     buttonEnable->setText("Disable");
 #endif
     // save Terminal geometry
-    QSettings *settings = new QSettings(publisherKey, PropellerIdeGuiKey, this);
+    QSettings settings;
     QByteArray geo = this->saveGeometry();
-    settings->setValue(termGeometryKey,geo);
+    settings.setValue(termGeometryKey,geo);
     termEditor->setPortEnable(false);
     portLabel.setEnabled(false);
     portListener->stop();

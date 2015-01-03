@@ -81,15 +81,7 @@ TermPrefs::~TermPrefs()
 
 void TermPrefs::resetSettings()
 {
-    QStringList list = settings->allKeys();
-    foreach(QString s, list) {
-        if(s.indexOf(QString(PropellerIdeGuiKey)+"_term")== 0)
-            settings->remove(s);
-        if(s.indexOf(QString(PropellerIdeGuiKey)+"_enable")== 0)
-            settings->remove(s);
-    }
-
-    readSettings();
+    QSettings().clear();
 
     ui->cbClearScreen->setChecked(true);
     ui->cbHomeCursor->setChecked(true);

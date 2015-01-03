@@ -112,10 +112,6 @@ void MainWindow::init()
 
     term->setPortListener(portListener);
 
-    //term->setWindowTitle(QString(ASideGuiKey)+" "+trUtf8("Simple Terminal"));
-    // education request that the window title be SimpleIDE Terminal
-    term->setWindowTitle(QString(PropellerIdeGuiKey)+" "+trUtf8("Terminal"));
-
     connect(term,SIGNAL(accepted()),this,SLOT(terminalClosed()));
     connect(term,SIGNAL(rejected()),this,SLOT(terminalClosed()));
 

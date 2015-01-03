@@ -6,7 +6,6 @@
 #include <QDebug>
 
 #include "SpinBuilder.h"
-
 #include "Sleeper.h"
 
 SpinBuilder::SpinBuilder() : Builder(0)

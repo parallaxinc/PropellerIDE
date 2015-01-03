@@ -62,15 +62,7 @@ void Preferences::configSettings()
 
 void Preferences::cleanSettings()
 {
-    QSettings settings;
-    QStringList list = settings.allKeys();
-
-    foreach(QString key, list) {
-        if(key.indexOf(PropellerIdeGuiKey) == 0) {
-            settings.remove(key);
-        }
-    }
-    settings.setValue(useKeys,0);
+    QSettings().clear();
 }
 
 void Preferences::setupOptions()

@@ -16,10 +16,6 @@
 #include "ColorScheme.h"
 #include "PathSelector.h"
 
-#define publisherKey        "Parallax"
-#define publisherComKey     "parallax.com"
-#define PropellerIdeGuiKey  "PropellerIDE"
-
 #define useKeys             "UseKeys"
 #define lastFileNameKey     "LastFileName"
 #define lastTermXposKey     "LastTermXposition"
