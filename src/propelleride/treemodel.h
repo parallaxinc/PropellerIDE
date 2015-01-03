@@ -71,7 +71,7 @@ public:
 
     bool isDuplicate(TreeItem *item, QString str);
 
-    virtual void includes(QString filePath, QString incPath, QString text, int level);
+    virtual void includes(QString filePath, QString incPath, QString text);
     virtual void addFileReferences(QString filePath, QString incPath, QString text, int level);
 
     void    clearSymbolInfo();

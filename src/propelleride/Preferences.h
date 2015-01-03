@@ -13,7 +13,6 @@
 #include <QToolButton>
 #include <QHBoxLayout>
 
-#include "colors.h"
 #include "ColorScheme.h"
 #include "PathSelector.h"
 

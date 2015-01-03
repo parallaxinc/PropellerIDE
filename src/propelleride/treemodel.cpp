@@ -273,10 +273,10 @@ void TreeModel::addRootItem(QString text, QString file)
 /*
  * this is overloaded in a child class
  */
-void TreeModel::includes(QString filePath, QString incPath, QString text, int level)
+void TreeModel::includes(QString filePath, QString incPath, QString text)
 {
     /* suppress stupid compiler warnings */
-    if(filePath.length() && incPath.length() && text.length() && level)
+    if(filePath.length() && incPath.length() && text.length())
         return;
 }
 

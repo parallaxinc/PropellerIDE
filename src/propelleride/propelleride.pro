@@ -60,7 +60,6 @@ HEADERS  += mainwindow.h \
     editor.h \
     SpinHighlighter.h \
     SpinParser.h \
-    colors.h \
     Sleeper.h \
     Terminal.h \
     Console.h \

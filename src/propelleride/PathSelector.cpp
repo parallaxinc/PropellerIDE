@@ -90,6 +90,7 @@ void PathSelector::save()
 {
     oldvalue = lineEdit->text();
     QSettings().setValue(key,lineEdit->text());
+    qDebug() << Q_FUNC_INFO << oldvalue;
 }
 
 void PathSelector::load()
@@ -116,5 +117,6 @@ void PathSelector::load()
 
 QString const & PathSelector::get()
 {
-    return lineEdit->text();
+    static const QString & string = lineEdit->text();
+    return string;
 }
