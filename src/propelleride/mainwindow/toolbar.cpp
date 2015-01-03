@@ -4,7 +4,7 @@
 
 void MainWindow::setupToolBars()
 {
-    fileToolBar = addToolBar(tr("File"));
+    fileToolBar = addToolBar(trUtf8("File"));
 //    QToolButton *btnBrowser = new QToolButton(this);
     QToolButton *btnFileNew = new QToolButton(this);
     QToolButton *btnFileOpen = new QToolButton(this);
@@ -24,31 +24,31 @@ void MainWindow::setupToolBars()
     connect(btnFileSave,SIGNAL(clicked()),this,SLOT(saveFile()));
     connect(btnFileSaveAs,SIGNAL(clicked()),this,SLOT(saveAsFile()));
 
-//    btnBrowser->setToolTip(tr("Show Browser"));
-    btnFileNew->setToolTip(tr("New"));
-    btnFileOpen->setToolTip(tr("Open"));
-    btnFileSave->setToolTip(tr("Save"));
-    btnFileSaveAs->setToolTip(tr("Save As"));
+//    btnBrowser->setToolTip(trUtf8("Show Browser"));
+    btnFileNew->setToolTip(trUtf8("New"));
+    btnFileOpen->setToolTip(trUtf8("Open"));
+    btnFileSave->setToolTip(trUtf8("Save"));
+    btnFileSaveAs->setToolTip(trUtf8("Save As"));
 
-    propToolBar = addToolBar(tr("Tools"));
+    propToolBar = addToolBar(trUtf8("Tools"));
 
-    //btnFilePrint->setToolTip(tr("Print"));
+    //btnFilePrint->setToolTip(trUtf8("Print"));
     //connect(btnFilePrint,SIGNAL(clicked()),this,SLOT(printFile()));
     //addToolButton(fileToolBar, btnFilePrint, QString(":/icons/file-print.png"));
     //QToolButton *btnFilePrint = new QToolButton(this);
     QToolButton *btnFileZip = new QToolButton(this);
     addToolButton(propToolBar, btnFileZip, QString(":/icons/file-zip.png"));
     connect(btnFileZip,SIGNAL(clicked()),this,SLOT(zipFiles()));
-    btnFileZip->setToolTip(tr("Zip Project"));
+    btnFileZip->setToolTip(trUtf8("Zip Project"));
 
-    //propToolBar = addToolBar(tr("Preferences"));
+    //propToolBar = addToolBar(trUtf8("Preferences"));
 
     QToolButton *btnProjectPreferences = new QToolButton(this);
     addToolButton(propToolBar, btnProjectPreferences, QString(":/icons/preferences.png"));
     connect(btnProjectPreferences,SIGNAL(clicked()),this,SLOT(preferences()));
-    btnProjectPreferences->setToolTip(tr("Preferences"));
+    btnProjectPreferences->setToolTip(trUtf8("Preferences"));
 
-    debugToolBar = addToolBar(tr("Debug"));
+    debugToolBar = addToolBar(trUtf8("Debug"));
     QToolButton *btnDebugDebugTerm = new QToolButton(this);
     QToolButton *btnDebugRun = new QToolButton(this);
     QToolButton *btnDebugBuild = new QToolButton(this);
@@ -67,22 +67,22 @@ void MainWindow::setupToolBars()
     connect(btnDebugDebugTerm,SIGNAL(clicked()),this,SLOT(programDebug()));
     connect(btnDebugRun,SIGNAL(clicked()),this,SLOT(programRun()));
 
-    btnDebugBuild->setToolTip(tr("Build"));
-    btnDebugBurnEEP->setToolTip(tr("Burn EEPROM"));
-    btnDebugDebugTerm->setToolTip(tr("Debug"));
-    btnDebugRun->setToolTip(tr("Run"));
-    btnDebugIdHw->setToolTip(tr("Detect Attached Propellers"));
+    btnDebugBuild->setToolTip(trUtf8("Build"));
+    btnDebugBurnEEP->setToolTip(trUtf8("Burn EEPROM"));
+    btnDebugDebugTerm->setToolTip(trUtf8("Debug"));
+    btnDebugRun->setToolTip(trUtf8("Run"));
+    btnDebugIdHw->setToolTip(trUtf8("Detect Attached Propellers"));
 
-    ctrlToolBar = addToolBar(tr("Control"));
+    ctrlToolBar = addToolBar(trUtf8("Control"));
     ctrlToolBar->setLayoutDirection(Qt::RightToLeft);
     cbPort = new QComboBox(this);
     cbPort->setLayoutDirection(Qt::LeftToRight);
-    cbPort->setToolTip(tr("Select Serial Port"));
+    cbPort->setToolTip(trUtf8("Select Serial Port"));
     cbPort->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     connect(cbPort,SIGNAL(currentIndexChanged(int)),this,SLOT(setCurrentPort(int)));
 
     btnConnected = new QToolButton(this);
-    btnConnected->setToolTip(tr("View Serial Terminal"));
+    btnConnected->setToolTip(trUtf8("View Serial Terminal"));
     btnConnected->setCheckable(true);
     connect(btnConnected,SIGNAL(clicked()),this,SLOT(connectButton()));
 

@@ -10,13 +10,8 @@ TermPrefs::TermPrefs(Terminal *term) : ui(new Ui::TermPrefs)
 
     ui->cbSwapNLCR->setVisible(false);
 
-    /* setup application registry info */
-    QCoreApplication::setOrganizationName(publisherKey);
-    QCoreApplication::setOrganizationDomain(publisherComKey);
-    QCoreApplication::setApplicationName(PropellerIdeGuiKey);
-
     /* global settings */
-    settings = new QSettings(QString(publisherKey), QString(PropellerIdeGuiKey));
+    settings = new QSettings();
 
     /* the order of these settings is critical for read/save */
     settingNames.clear();
@@ -41,23 +36,23 @@ TermPrefs::TermPrefs(Terminal *term) : ui(new Ui::TermPrefs)
     settingNames.append(enableKeyEnterIsNL);
 
 
-    propertyColors.insert(PColor::Black, new PColor(tr("Black"), "Black", Qt::black));
-    propertyColors.insert(PColor::DarkGray, new PColor(tr("Dark Gray"), "Dark Gray", Qt::darkGray));
-    propertyColors.insert(PColor::Gray, new PColor(tr("Gray"), "Gray", Qt::gray));
-    propertyColors.insert(PColor::LightGray, new PColor(tr("Light Gray"), "Light Gray", Qt::lightGray));
-    propertyColors.insert(PColor::Blue, new PColor(tr("Blue"), "Blue", Qt::blue));
-    propertyColors.insert(PColor::DarkBlue, new PColor(tr("Dark Blue"), "Dark Blue", Qt::darkBlue));
-    propertyColors.insert(PColor::Cyan, new PColor(tr("Cyan"), "Cyan", Qt::cyan));
-    propertyColors.insert(PColor::DarkCyan, new PColor(tr("Dark Cyan"), "Dark Cyan", Qt::darkCyan));
-    propertyColors.insert(PColor::Green, new PColor(tr("Green"), "Green", Qt::green));
-    propertyColors.insert(PColor::DarkGreen, new PColor(tr("Dark Green"), "Dark Green", Qt::darkGreen));
-    propertyColors.insert(PColor::Magenta, new PColor(tr("Magenta"), "Magenta", Qt::magenta));
-    propertyColors.insert(PColor::DarkMagenta, new PColor(tr("Dark Magenta"), "Dark Magenta", Qt::darkMagenta));
-    propertyColors.insert(PColor::Red, new PColor(tr("Red"), "Red", Qt::red));
-    propertyColors.insert(PColor::DarkRed, new PColor(tr("Dark Red"), "Dark Red", Qt::darkRed));
-    propertyColors.insert(PColor::Yellow, new PColor(tr("Yellow"), "Yellow", Qt::yellow));
-    propertyColors.insert(PColor::DarkYellow, new PColor(tr("Dark Yellow"), "Dark Yellow", Qt::darkYellow));
-    propertyColors.insert(PColor::White, new PColor(tr("White"), "White", Qt::white));
+    propertyColors.insert(PColor::Black, new PColor(trUtf8("Black"), "Black", Qt::black));
+    propertyColors.insert(PColor::DarkGray, new PColor(trUtf8("Dark Gray"), "Dark Gray", Qt::darkGray));
+    propertyColors.insert(PColor::Gray, new PColor(trUtf8("Gray"), "Gray", Qt::gray));
+    propertyColors.insert(PColor::LightGray, new PColor(trUtf8("Light Gray"), "Light Gray", Qt::lightGray));
+    propertyColors.insert(PColor::Blue, new PColor(trUtf8("Blue"), "Blue", Qt::blue));
+    propertyColors.insert(PColor::DarkBlue, new PColor(trUtf8("Dark Blue"), "Dark Blue", Qt::darkBlue));
+    propertyColors.insert(PColor::Cyan, new PColor(trUtf8("Cyan"), "Cyan", Qt::cyan));
+    propertyColors.insert(PColor::DarkCyan, new PColor(trUtf8("Dark Cyan"), "Dark Cyan", Qt::darkCyan));
+    propertyColors.insert(PColor::Green, new PColor(trUtf8("Green"), "Green", Qt::green));
+    propertyColors.insert(PColor::DarkGreen, new PColor(trUtf8("Dark Green"), "Dark Green", Qt::darkGreen));
+    propertyColors.insert(PColor::Magenta, new PColor(trUtf8("Magenta"), "Magenta", Qt::magenta));
+    propertyColors.insert(PColor::DarkMagenta, new PColor(trUtf8("Dark Magenta"), "Dark Magenta", Qt::darkMagenta));
+    propertyColors.insert(PColor::Red, new PColor(trUtf8("Red"), "Red", Qt::red));
+    propertyColors.insert(PColor::DarkRed, new PColor(trUtf8("Dark Red"), "Dark Red", Qt::darkRed));
+    propertyColors.insert(PColor::Yellow, new PColor(trUtf8("Yellow"), "Yellow", Qt::yellow));
+    propertyColors.insert(PColor::DarkYellow, new PColor(trUtf8("Dark Yellow"), "Dark Yellow", Qt::darkYellow));
+    propertyColors.insert(PColor::White, new PColor(trUtf8("White"), "White", Qt::white));
 
     QStringList colorlist;
     for(int n = 0; n < propertyColors.count(); n++) {
@@ -134,7 +129,7 @@ void TermPrefs::chooseFont()
     settings->setValue(termKeyFontSize, size);
     settings->setValue(termKeyFontWeight, font.weight());
     settings->setValue(termKeyFontItalic, font.italic());
-    font = QFontDialog::getFont(&ok, font, this, tr("Choose Font"));
+    font = QFontDialog::getFont(&ok, font, this, trUtf8("Choose Font"));
     if(ok) {
         serialConsole->setFont(font);
         settings->setValue(termKeyFontFamily,font.family());

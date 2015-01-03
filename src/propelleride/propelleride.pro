@@ -68,6 +68,8 @@ HEADERS  += mainwindow.h \
     ColorScheme.h \
     templates/Singleton.h \
 
+TRANSLATIONS += \
+    propelleride_zn.ts
 
 OTHER_FILES +=
 

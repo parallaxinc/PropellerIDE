@@ -18,14 +18,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
 
 void MainWindow::init()
 {
-    /* the program name used in all windows/diaglogs */
-    programName = QString(PropellerIdeGuiKey);
-
-    /* setup application registry info */
-    QCoreApplication::setOrganizationName(publisherKey);
-    QCoreApplication::setOrganizationDomain(publisherComKey);
-    QCoreApplication::setApplicationName(PropellerIdeGuiKey);
-
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
@@ -47,7 +39,7 @@ void MainWindow::init()
     setupToolBars();
 
     /* main container */
-    setWindowTitle(programName);
+    setWindowTitle(QCoreApplication::applicationName());
     QSplitter *vsplit = new QSplitter(this);
     setCentralWidget(vsplit);
 
@@ -120,9 +112,9 @@ void MainWindow::init()
 
     term->setPortListener(portListener);
 
-    //term->setWindowTitle(QString(ASideGuiKey)+" "+tr("Simple Terminal"));
+    //term->setWindowTitle(QString(ASideGuiKey)+" "+trUtf8("Simple Terminal"));
     // education request that the window title be SimpleIDE Terminal
-    term->setWindowTitle(QString(PropellerIdeGuiKey)+" "+tr("Terminal"));
+    term->setWindowTitle(QString(PropellerIdeGuiKey)+" "+trUtf8("Terminal"));
 
     connect(term,SIGNAL(accepted()),this,SLOT(terminalClosed()));
     connect(term,SIGNAL(rejected()),this,SLOT(terminalClosed()));
@@ -189,12 +181,12 @@ void MainWindow::openLastFile()
             QApplication::processEvents();
 
             if(fileName.compare(welcome) == 0) {
-                QMessageBox::information(this,tr("Welcome to PropellerIDE"),
-                        tr("The Welcome.spin file must be saved to a user folder where you can change it.")+" "+
-                        tr("The installed package location is not writable by most users.")+"\n\n"+
-                        tr("Please note that opening a library file from the installed package will also require saving to a user folder for compiling or modifications.")+" "+
-                        tr("Don't worry, you will be reminded if necessary.")+"\n\n"+
-                        tr("The Save As dialog will now open to let you choose a working folder."));
+                QMessageBox::information(this,trUtf8("Welcome to PropellerIDE"),
+                        trUtf8("The Welcome.spin file must be saved to a user folder where you can change it.")+" "+
+                        trUtf8("The installed package location is not writable by most users.")+"\n\n"+
+                        trUtf8("Please note that opening a library file from the installed package will also require saving to a user folder for compiling or modifications.")+" "+
+                        trUtf8("Don't worry, you will be reminded if necessary.")+"\n\n"+
+                        trUtf8("The Save As dialog will now open to let you choose a working folder."));
                 lastDirectory = QDir::homePath()+"/Documents";
                 if(!QFile::exists(lastDirectory)) {
                     lastDirectory = QDir::homePath();
@@ -248,7 +240,6 @@ void MainWindow::getApplicationSettings(bool complain)
         spinIncludes = incv.toString();
         spinIncludes = dir.fromNativeSeparators(spinIncludes);
     }
-    qDebug() << spinIncludes;
 }
 
 bool MainWindow::exitSave()
@@ -262,7 +253,7 @@ bool MainWindow::exitSave()
         QString tabName = editorTabs->tabText(tab);
         if(tabName.at(tabName.length()-1) == '*')
         {
-            mbox.setInformativeText(tr("Save File: ") + tabName.mid(0,tabName.indexOf(" *")) + tr(" ?"));
+            mbox.setInformativeText(trUtf8("Save File: ") + tabName.mid(0,tabName.indexOf(" *")) + trUtf8(" ?"));
             if(saveAll)
             {
                 saveFileByTabIndex(tab);
@@ -359,7 +350,7 @@ void MainWindow::openFile(const QString &path)
 
     if (fileName.isNull())
         fileName = QFileDialog::getOpenFileName(this,
-                tr("Open File"), lastDirectory, "Spin Files (*.spin);;All Files (*)");
+                trUtf8("Open File"), lastDirectory, "Spin Files (*.spin);;All Files (*)");
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     openFileName(fileName);
     lastDirectory = filePathName(fileName);
@@ -454,7 +445,7 @@ bool MainWindow::saveAsCodec(QString fileName, Editor *ed)
         return true;
     }
     else {
-        QMessageBox::information(this, tr("Can't Save File"), tr("Can't save file ")+fileName, QMessageBox::Ok);
+        QMessageBox::information(this, trUtf8("Can't Save File"), trUtf8("Can't save file ")+fileName, QMessageBox::Ok);
     }
     return false;
 }
@@ -501,7 +492,7 @@ QString MainWindow::saveAsFile(const QString &path)
 
         if (fileName.isEmpty())
             fileName = QFileDialog::getSaveFileName(this,
-                    tr("Save As File"), lastDirectory+"/"+this->editorTabs->tabText(n), "Spin Files (*.spin)");
+                    trUtf8("Save As File"), lastDirectory+"/"+this->editorTabs->tabText(n), "Spin Files (*.spin)");
 
         if (fileName.isEmpty()) {
             return QString();
@@ -552,7 +543,7 @@ void MainWindow::fileChanged()
         }
     }
     if(!name.endsWith('*')) {
-        name += tr(" *");
+        name += trUtf8(" *");
         editorTabs->setTabText(index, name);
     }
 }
@@ -585,7 +576,7 @@ void MainWindow::updateRecentFileActions()
         if(estr.length() == 0)
             continue;
         //QString filename = QFileInfo(projects[i]).fileName();
-        QString text = tr("&%1 %2").arg(i + 1).arg(estr);
+        QString text = trUtf8("&%1 %2").arg(i + 1).arg(estr);
         recentFileActs[i]->setText(text);
         recentFileActs[i]->setData(estr);
         recentFileActs[i]->setVisible(true);
@@ -618,7 +609,10 @@ void MainWindow::setProject()
     QString fileName = editorTabs->tabToolTip(index);
     setCurrentFile(fileName);
 
-    setWindowTitle(programName +" "+fileName);
+    QStringList pathpieces = fileName.split("/");
+    setWindowTitle( pathpieces.value( pathpieces.length()-1) + " - " +
+                    QCoreApplication::applicationName()
+                    );
     sizeLabel->setText("");
     msgLabel->setText("");
 
@@ -781,13 +775,13 @@ void MainWindow::highlightFileLine(QString file, int line)
 
 void MainWindow::buildSourceWriteError(QString fileName)
 {
-    QMessageBox::critical(this, tr("Build Problem"),
-            "\n"+tr("Problem building:")+" "+this->shortFileName(fileName)+"\n\n"+
-            tr("Can't write the file or folder.")+" "+
-            tr("This can happen when compiling a packaged file.")+"\n\n"+
-            tr("The code must be saved to a folder with write permissions.")+" "+
-            tr("A good location would be the user's Documents folder or a folder with other sources.")+"\n\n"+
-            tr("Please save to a different file and/or folder when prompted."));
+    QMessageBox::critical(this, trUtf8("Build Problem"),
+            "\n"+trUtf8("Problem building:")+" "+this->shortFileName(fileName)+"\n\n"+
+            trUtf8("Can't write the file or folder.")+" "+
+            trUtf8("This can happen when compiling a packaged file.")+"\n\n"+
+            trUtf8("The code must be saved to a folder with write permissions.")+" "+
+            trUtf8("A good location would be the user's Documents folder or a folder with other sources.")+"\n\n"+
+            trUtf8("Please save to a different file and/or folder when prompted."));
 }
 
 
@@ -823,8 +817,8 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
 
     // don't allow if no port available
     if(type != COMPILE_ONLY && cbPort->count() < 1) {
-        QMessageBox mbox(QMessageBox::Critical, tr("No Serial Port"),
-                tr("Serial port not available.")+" "+tr("Connect a USB Propeller board, turn it on, and try again."),
+        QMessageBox mbox(QMessageBox::Critical, trUtf8("No Serial Port"),
+                trUtf8("Serial port not available.")+" "+trUtf8("Connect a USB Propeller board, turn it on, and try again."),
                 QMessageBox::Ok);
         mbox.exec();
         goto endRunCompiler;
@@ -868,7 +862,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
         goto endRunCompiler;
     }
     else {
-        QMessageBox::critical(this,tr("Can't compile unknown file type"), tr("Files must be of type '.spin'"));
+        QMessageBox::critical(this,trUtf8("Can't compile unknown file type"), trUtf8("Files must be of type '.spin'"));
     }
 endRunCompiler:
     emit signalStatusDone(true);
@@ -897,7 +891,7 @@ int  MainWindow::loadProgram(int type, QString file)
 
     bool stat = portListener->isOpen();
     if(cbPort->currentText().length() == 0) {
-        QMessageBox::critical(this,tr("Propeller Load"), tr("Port not available. Please connect Propeller board."), QMessageBox::Ok);
+        QMessageBox::critical(this,trUtf8("Propeller Load"), trUtf8("Port not available. Please connect Propeller board."), QMessageBox::Ok);
         goto endLoadProgram;
     }
 
@@ -931,7 +925,7 @@ int  MainWindow::loadProgram(int type, QString file)
     }
 
     if(rc) {
-        QMessageBox::critical(this,tr("Propeller Load Failed"), tr("Failed to load Propeller on port")+" "+cbPort->currentText(), QMessageBox::Ok);
+        QMessageBox::critical(this,trUtf8("Propeller Load Failed"), trUtf8("Failed to load Propeller on port")+" "+cbPort->currentText(), QMessageBox::Ok);
     }
 endLoadProgram:
     emit signalStatusDone(true);
@@ -1037,7 +1031,7 @@ void MainWindow::findHardware(bool showFoundBox)
     else {
         statusDialog->stop();
         if(showFoundBox) {
-            QMessageBox::information(this,tr("Propeller found"), statusDialog->getMessage());
+            QMessageBox::information(this,trUtf8("Propeller found"), statusDialog->getMessage());
         }
     }
 
@@ -1571,14 +1565,14 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     vsplit->addWidget(leftSplit);
 
     // project tree
-    projectTree = new ReferenceTree(tr("Current Project"),ColorScheme::ConBG);
+    projectTree = new ReferenceTree(trUtf8("Current Project"),ColorScheme::ConBG);
     connect(projectTree,SIGNAL(clicked(QModelIndex)),this,SLOT(projectTreeClicked(QModelIndex)));
 
 
     leftSplit->addWidget(projectTree);
 
     // project reference tree
-    referenceTree = new ReferenceTree(tr("Project References"), ColorScheme::PubBG);
+    referenceTree = new ReferenceTree(trUtf8("Project References"), ColorScheme::PubBG);
     connect(referenceTree,SIGNAL(clicked(QModelIndex)),this,SLOT(referenceTreeClicked(QModelIndex)));
 
     connect(propDialog,SIGNAL(updateColors()),referenceTree,SLOT(updateColors()));

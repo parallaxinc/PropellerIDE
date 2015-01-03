@@ -35,7 +35,6 @@ public:
     MainWindow(QWidget *parent = 0);
     void init();
 
-    QString     programName;
     Preferences  *propDialog;
     QSplitter   *leftSplit;
     QSplitter   *findSplit;

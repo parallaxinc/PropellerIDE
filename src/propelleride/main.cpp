@@ -4,6 +4,7 @@
 
 #include <QMessageBox>
 #include <QStyleFactory>
+#include <QTranslator>
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,10 @@ int main(int argc, char *argv[])
         QApplication::setStyle("Fusion");
     }
 #endif
+//    QTranslator translator;
+//    translator.load("propelleride_zn");
+//    app.installTranslator(&translator);
+
     app.setWindowIcon(QIcon(":/icons/PropHatAlpha.png"));
     QCoreApplication::setOrganizationName("Parallax");
     QCoreApplication::setOrganizationDomain("www.parallax.com");
@@ -26,9 +31,9 @@ int main(int argc, char *argv[])
         QString s = QString(argv[1]);
         if(s.contains(QDir::toNativeSeparators(QDir::tempPath())) &&
            s.contains(".zip",Qt::CaseInsensitive)) {
-            QMessageBox::critical(&w, w.tr("Cannot Open from Zip"),
-                w.tr("The file is in a zipped archive. Unzip to")+"\n"+
-                w.tr("a folder first, and open from there instead."));
+            QMessageBox::critical(&w, w.trUtf8("Cannot Open from Zip"),
+                w.trUtf8("The file is in a zipped archive. Unzip to")+"\n"+
+                w.trUtf8("a folder first, and open from there instead."));
         }
         else {
             s = s.mid(s.lastIndexOf("."));

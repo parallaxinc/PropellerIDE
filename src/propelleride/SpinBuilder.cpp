@@ -20,9 +20,9 @@ void SpinBuilder::setLoader(QString loader)
 
 int  SpinBuilder::checkCompilerInfo()
 {
-    QMessageBox mbox(QMessageBox::Critical,tr("Build Error"),"",QMessageBox::Ok);
+    QMessageBox mbox(QMessageBox::Critical,trUtf8("Build Error"),"",QMessageBox::Ok);
     if(compilerStr.length() == 0) {
-        mbox.setInformativeText(tr("Please specify compiler application in Preferences."));
+        mbox.setInformativeText(trUtf8("Please specify compiler application in Preferences."));
         mbox.exec();
         return -1;
     }
@@ -89,7 +89,7 @@ int  SpinBuilder::loadProgram(QString copts)
     proc.start(loader,args);
 
     if(!proc.waitForStarted()) {
-        mbox.setInformativeText(tr("Could not start loader. Please check Preferences."));
+        mbox.setInformativeText(trUtf8("Could not start loader. Please check Preferences."));
         mbox.exec();
         goto loaderror;
     }
@@ -116,7 +116,7 @@ int  SpinBuilder::loadProgram(QString copts)
 
     if(exitStatus == QProcess::CrashExit)
     {
-        mbox.setText(tr("Loader Crashed"));
+        mbox.setText(trUtf8("Loader Crashed"));
         mbox.exec();
         goto loaderror;
     }
@@ -124,7 +124,7 @@ int  SpinBuilder::loadProgram(QString copts)
     if(exitCode != 0)
     {
         mbox.setInformativeText(compileResult);
-        mbox.setText(tr("Loader Error"));
+        mbox.setText(trUtf8("Loader Error"));
         mbox.exec();
         goto loaderror;
     }
@@ -132,7 +132,7 @@ int  SpinBuilder::loadProgram(QString copts)
     if(compileResult.indexOf("error") > -1)
     { // just in case we get an error without exitCode
         mbox.setInformativeText(compileResult);
-        mbox.setText(tr("Loader Error"));
+        mbox.setText(trUtf8("Loader Error"));
         mbox.exec();
         goto loaderror;
     }
@@ -185,7 +185,7 @@ int  SpinBuilder::runCompiler(QString copts)
     proc.start(compilerStr,args);
 
     if(!proc.waitForStarted()) {
-        mbox.setInformativeText(tr("Could not start compiler. Please check Preferences."));
+        mbox.setInformativeText(trUtf8("Could not start compiler. Please check Preferences."));
         mbox.exec();
         goto error;
     }
@@ -211,7 +211,7 @@ int  SpinBuilder::runCompiler(QString copts)
 
     if(exitStatus == QProcess::CrashExit)
     {
-        mbox.setText(tr("Compiler Crashed"));
+        mbox.setText(trUtf8("Compiler Crashed"));
         mbox.exec();
         goto error;
     }
@@ -253,14 +253,14 @@ int  SpinBuilder::runCompiler(QString copts)
         if(ok)
             emit compilerErrorInfo(file, line);
         mbox.setInformativeText(compileResult);
-        mbox.setText(tr("Compile Error"));
+        mbox.setText(trUtf8("Compile Error"));
         mbox.exec();
         goto error;
     }
     progress->setValue(40);
     if(compileResult.indexOf("error") > -1)
     { // just in case we get an error without exitCode
-        mbox.setText(tr("Compile Error"));
+        mbox.setText(trUtf8("Compile Error"));
         mbox.exec();
         goto error;
     }
@@ -362,7 +362,7 @@ void SpinBuilder::procReadyRead()
             if(line.contains("sent",Qt::CaseInsensitive)) {
                 line = line.trimmed();
                 progress->setVisible(false);
-                sizeLabel->setText(line.left(line.indexOf(" "))+tr(" bytes loaded"));
+                sizeLabel->setText(line.left(line.indexOf(" "))+trUtf8(" bytes loaded"));
             }
             else
             if(line.contains("remaining",Qt::CaseInsensitive)) {

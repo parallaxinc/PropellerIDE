@@ -12,21 +12,21 @@
 
 void MainWindow::setupFileMenu()
 {
-    QMenu *fileMenu = new QMenu(tr("&File"), this);
+    QMenu *fileMenu = new QMenu(trUtf8("&File"), this);
     menuBar()->addMenu(fileMenu);
 
-    fileMenu->addAction(QIcon(":/icons/file-new.png"),      tr("&New"),         this, SLOT(newFileAction()),    QKeySequence::New);
-    fileMenu->addAction(QIcon(":/icons/file-open.png"),     tr("&Open"),        this, SLOT(openFile()),         QKeySequence::Open);
+    fileMenu->addAction(QIcon(":/icons/file-new.png"),      trUtf8("&New"),         this, SLOT(newFileAction()),    QKeySequence::New);
+    fileMenu->addAction(QIcon(":/icons/file-open.png"),     trUtf8("&Open"),        this, SLOT(openFile()),         QKeySequence::Open);
 
     fileMenu->addSeparator();
 
-    fileMenu->addAction(QIcon(":/icons/file-save.png"),     tr("&Save"),        this, SLOT(saveFile()),         QKeySequence::Save);
-    fileMenu->addAction(QIcon(":/icons/file-save-as.png"),  tr("Save &As"),     this, SLOT(saveAsFile()),       QKeySequence::SaveAs);
+    fileMenu->addAction(QIcon(":/icons/file-save.png"),     trUtf8("&Save"),        this, SLOT(saveFile()),         QKeySequence::Save);
+    fileMenu->addAction(QIcon(":/icons/file-save-as.png"),  trUtf8("Save &As"),     this, SLOT(saveAsFile()),       QKeySequence::SaveAs);
 
     fileMenu->addSeparator();
 
-    // fileMenu->addAction(QIcon(":/icons/file-print.png"), tr("Print"),        this, SLOT(printFile()),        QKeySequence::Print);
-    fileMenu->addAction(QIcon(":/icons/file-zip.png"),      tr("Zip Project"),  this, SLOT(zipFiles()),         0);
+    // fileMenu->addAction(QIcon(":/icons/file-print.png"), trUtf8("Print"),        this, SLOT(printFile()),        QKeySequence::Print);
+    fileMenu->addAction(QIcon(":/icons/file-zip.png"),      trUtf8("Zip Project"),  this, SLOT(zipFiles()),         0);
 
     separatorFileAct = fileMenu->addSeparator();
 
@@ -42,43 +42,43 @@ void MainWindow::setupFileMenu()
 
     fileMenu->addSeparator();
 
-    fileMenu->addAction(QIcon(":/icons/file-exit.png"),     tr("E&xit"),        this, SLOT(quitProgram()),      QKeySequence::Quit);
+    fileMenu->addAction(QIcon(":/icons/file-exit.png"),     trUtf8("E&xit"),        this, SLOT(quitProgram()),      QKeySequence::Quit);
 
 }
 
 void MainWindow::setupEditMenu()
 {
 
-    QMenu * editMenu = new QMenu(tr("&Edit"), this);
+    QMenu * editMenu = new QMenu(trUtf8("&Edit"), this);
     menuBar()->addMenu(editMenu);
 
-    editMenu->addAction(QIcon(":/icons/edit-undo.png"),     tr("&Undo"),        this, SLOT(undo()),             QKeySequence::Undo);
-    editMenu->addAction(QIcon(":/icons/edit-redo.png"),     tr("&Redo"),        this, SLOT(redo()),             QKeySequence::Redo);
+    editMenu->addAction(QIcon(":/icons/edit-undo.png"),     trUtf8("&Undo"),        this, SLOT(undo()),             QKeySequence::Undo);
+    editMenu->addAction(QIcon(":/icons/edit-redo.png"),     trUtf8("&Redo"),        this, SLOT(redo()),             QKeySequence::Redo);
 
     editMenu->addSeparator();
 
-    editMenu->addAction(QIcon(":/icons/edit-cut.png"),      tr("&Cut"),         this, SLOT(cut()),              QKeySequence::Cut);
-    editMenu->addAction(QIcon(":/icons/edit-copy.png"),     tr("&Copy"),        this, SLOT(copy()),             QKeySequence::Copy);
-    editMenu->addAction(QIcon(":/icons/edit-paste.png"),    tr("&Paste"),       this, SLOT(paste()),            QKeySequence::Paste);
-    editMenu->addAction(QIcon(":/icons/edit-selectall.png"),tr("&Select All"),  this, SLOT(selectAll()),        QKeySequence::SelectAll);
+    editMenu->addAction(QIcon(":/icons/edit-cut.png"),      trUtf8("&Cut"),         this, SLOT(cut()),              QKeySequence::Cut);
+    editMenu->addAction(QIcon(":/icons/edit-copy.png"),     trUtf8("&Copy"),        this, SLOT(copy()),             QKeySequence::Copy);
+    editMenu->addAction(QIcon(":/icons/edit-paste.png"),    trUtf8("&Paste"),       this, SLOT(paste()),            QKeySequence::Paste);
+    editMenu->addAction(QIcon(":/icons/edit-selectall.png"),trUtf8("&Select All"),  this, SLOT(selectAll()),        QKeySequence::SelectAll);
 
     editMenu->addSeparator();
 
-    editMenu->addAction(QIcon(":/icons/edit-find.png"),     tr("Find"),         this, SLOT(showFindFrame()),    QKeySequence::Find);
-    editMenu->addAction(QIcon(":/icons/go-next.png"),       tr("Find Next"),    this, SLOT(findNextClicked()),  QKeySequence::FindNext);
-    editMenu->addAction(QIcon(":/icons/go-previous.png"),   tr("Find Previous"),this, SLOT(findPrevClicked()),  QKeySequence::FindPrevious);
+    editMenu->addAction(QIcon(":/icons/edit-find.png"),     trUtf8("Find"),         this, SLOT(showFindFrame()),    QKeySequence::Find);
+    editMenu->addAction(QIcon(":/icons/go-next.png"),       trUtf8("Find Next"),    this, SLOT(findNextClicked()),  QKeySequence::FindNext);
+    editMenu->addAction(QIcon(":/icons/go-previous.png"),   trUtf8("Find Previous"),this, SLOT(findPrevClicked()),  QKeySequence::FindPrevious);
 
     editMenu->addSeparator();
 
-    editMenu->addAction(QIcon(":/icons/preferences.png"), tr("Preferences"),    this, SLOT(preferences()),      Qt::Key_F5);
+    editMenu->addAction(QIcon(":/icons/preferences.png"), trUtf8("Preferences"),    this, SLOT(preferences()),      Qt::Key_F5);
 }
 
 void MainWindow::setupViewMenu()
 {
-    QMenu * viewMenu = new QMenu(tr("&View"), this);
+    QMenu * viewMenu = new QMenu(trUtf8("&View"), this);
     menuBar()->addMenu(viewMenu);
 
-    QAction * browser = new QAction(tr("&Show Browser"), this);
+    QAction * browser = new QAction(trUtf8("&Show Browser"), this);
     browser->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_B));
     browser->setCheckable(true);
     browser->setChecked(true);
@@ -87,8 +87,8 @@ void MainWindow::setupViewMenu()
 
     viewMenu->addSeparator();
 
-    viewMenu->addAction(QIcon(":/icons/preferences-font-smaller.png"),  tr("Smaller Font"), this, SLOT(fontSmaller()), QKeySequence::ZoomOut);
-    QAction *bigger = new QAction(QIcon(":/icons/preferences-font-bigger.png"), tr("Bigger Font"), this);
+    viewMenu->addAction(QIcon(":/icons/preferences-font-smaller.png"),  trUtf8("Smaller Font"), this, SLOT(fontSmaller()), QKeySequence::ZoomOut);
+    QAction *bigger = new QAction(QIcon(":/icons/preferences-font-bigger.png"), trUtf8("Bigger Font"), this);
 
     /* special provision for bigger fonts to use default ZoomIn or Ctrl+= */
     QList<QKeySequence> biggerKeys;
@@ -108,28 +108,28 @@ void MainWindow::setupViewMenu()
 
 void MainWindow::setupProjectMenu()
 {
-    QMenu * projectMenu = new QMenu(tr("&Project"), this);
+    QMenu * projectMenu = new QMenu(trUtf8("&Project"), this);
     menuBar()->addMenu(projectMenu);
 
-    projectMenu->addAction(QIcon(":/icons/project-identify.png"), tr("Identify Hardware"), this, SLOT(findHardware()), Qt::Key_F7);
-    projectMenu->addAction(QIcon(":/icons/project-terminal.png"), tr("Debug"), this, SLOT(programDebug()), Qt::Key_F8);
-    projectMenu->addAction(QIcon(":/icons/project-build.png"), tr("Build"), this, SLOT(programBuild()), Qt::Key_F9);
-    projectMenu->addAction(QIcon(":/icons/project-run.png"), tr("Run"), this, SLOT(programRun()), Qt::Key_F10);
-    projectMenu->addAction(QIcon(":/icons/project-burn.png"), tr("Burn"), this, SLOT(programBurnEE()), Qt::Key_F11);
+    projectMenu->addAction(QIcon(":/icons/project-identify.png"), trUtf8("Identify Hardware"), this, SLOT(findHardware()), Qt::Key_F7);
+    projectMenu->addAction(QIcon(":/icons/project-terminal.png"), trUtf8("Debug"), this, SLOT(programDebug()), Qt::Key_F8);
+    projectMenu->addAction(QIcon(":/icons/project-build.png"), trUtf8("Build"), this, SLOT(programBuild()), Qt::Key_F9);
+    projectMenu->addAction(QIcon(":/icons/project-run.png"), trUtf8("Run"), this, SLOT(programRun()), Qt::Key_F10);
+    projectMenu->addAction(QIcon(":/icons/project-burn.png"), trUtf8("Burn"), this, SLOT(programBurnEE()), Qt::Key_F11);
 }
 
 
 void MainWindow::setupHelpMenu()
 {
-    QMenu *helpMenu = new QMenu(tr("&Help"), this);
+    QMenu *helpMenu = new QMenu(trUtf8("&Help"), this);
     menuBar()->addMenu(helpMenu);
 
-    helpMenu->addAction(QIcon(":/icons/help-datasheet.png"), tr("Propeller &Datasheet"), this, SLOT(propellerDatasheet()));
-    helpMenu->addAction(QIcon(":/icons/help-manual.png"), tr("Propeller &Manual"), this, SLOT(propellerManual()));
+    helpMenu->addAction(QIcon(":/icons/help-datasheet.png"), trUtf8("Propeller &Datasheet"), this, SLOT(propellerDatasheet()));
+    helpMenu->addAction(QIcon(":/icons/help-manual.png"), trUtf8("Propeller &Manual"), this, SLOT(propellerManual()));
 
     helpMenu->addSeparator();
 
-    helpMenu->addAction(QIcon(":/icons/help-about.png"), tr("&About"), this, SLOT(about()));
+    helpMenu->addAction(QIcon(":/icons/help-about.png"), trUtf8("&About"), this, SLOT(about()));
 }
 
 void openFileResource(QString const & resource)
@@ -152,8 +152,8 @@ void MainWindow::propellerDatasheet()
 
 void MainWindow::about()
 {
-    QString version = QString(programName + " v" +VERSION);
-    QMessageBox::about(this, tr("About") + " " + programName,
+    QString version = QString(QCoreApplication::applicationName() + " v" +VERSION);
+    QMessageBox::about(this, trUtf8("About") + " " + QCoreApplication::applicationName(),
            "<h2>" + version + "</h2>"
            "<p>PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.</p>"
            "<p>Use it for writing Spin code, downloading programs to your Propeller board, and debugging your applications with the built-in serial terminal.<p>"

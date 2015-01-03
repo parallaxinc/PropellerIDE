@@ -21,7 +21,7 @@ PathSelector::PathSelector(
     layout = new QHBoxLayout(this);
     layout->addWidget(label);
     layout->addWidget(lineEdit);
-    browseButton = new QPushButton(tr("Browse"), this);
+    browseButton = new QPushButton(trUtf8("Browse"), this);
     layout->addWidget(browseButton);
 
     this->setLayout(layout);

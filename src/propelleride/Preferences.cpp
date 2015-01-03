@@ -21,7 +21,7 @@
 
 Preferences::Preferences(QWidget *parent) : QDialog(parent)
 {
-    setWindowTitle(tr("Preferences"));
+    setWindowTitle(trUtf8("Preferences"));
 
     currentTheme = &Singleton<ColorScheme>::Instance();
 
@@ -79,28 +79,28 @@ void Preferences::setupOptions()
     QHBoxLayout *hlayout = new QHBoxLayout();
 
     QFormLayout *edlayout = new QFormLayout(this);
-    QGroupBox *editor = new QGroupBox(tr("Editor Settings"));
+    QGroupBox *editor = new QGroupBox(trUtf8("Editor Settings"));
     editor->setLayout(edlayout);
 
     QFormLayout *otlayout = new QFormLayout(this);
-    QGroupBox *other  = new QGroupBox(tr("Other Settings"));
+    QGroupBox *other  = new QGroupBox(trUtf8("Other Settings"));
     other->setLayout(otlayout);
 
     hlayout->addWidget(editor);
     hlayout->addWidget(other);
 
     frame->setLayout(hlayout);
-    tabWidget.addTab(frame,tr("General"));
+    tabWidget.addTab(frame,trUtf8("General"));
 
     QSettings settings;
     QVariant enac = settings.value(enableAutoComplete,true);
     QVariant enss = settings.value(enableSpinSuggest,true);
 
     autoCompleteEnable.setChecked(enac.toBool());
-    edlayout->addRow(new QLabel(tr("Enable AutoComplete")), &autoCompleteEnable);
+    edlayout->addRow(new QLabel(trUtf8("Enable AutoComplete")), &autoCompleteEnable);
 
     spinSuggestEnable.setChecked(enss.toBool());
-    edlayout->addRow(new QLabel(tr("Enable Code Suggestion")), &spinSuggestEnable);
+    edlayout->addRow(new QLabel(trUtf8("Enable Code Suggestion")), &spinSuggestEnable);
 
     QVariant tabsv = settings.value(tabSpacesKey,"4");
     if(tabsv.canConvert(QVariant::String)) {
@@ -110,16 +110,16 @@ void Preferences::setupOptions()
     {
         tabspaceLedit.setText("4");
     }
-    edlayout->addRow(new QLabel(tr("Editor Tab Space Count")), &tabspaceLedit);
+    edlayout->addRow(new QLabel(trUtf8("Editor Tab Space Count")), &tabspaceLedit);
 
-    clearSettingsButton.setText(tr("Clear Settings"));
-    clearSettingsButton.setToolTip(tr("Clear Settings on Exit"));
+    clearSettingsButton.setText(trUtf8("Clear Settings"));
+    clearSettingsButton.setToolTip(trUtf8("Clear Settings on Exit"));
     connect(&clearSettingsButton,SIGNAL(clicked()), this, SLOT(cleanSettings()));
-    otlayout->addRow(new QLabel(tr("Clear Settings on Exit")), &clearSettingsButton);
+    otlayout->addRow(new QLabel(trUtf8("Clear Settings on Exit")), &clearSettingsButton);
 
-    fontButton.setText(tr("Set Editor Font"));
+    fontButton.setText(trUtf8("Set Editor Font"));
     connect(&fontButton,SIGNAL(clicked()),this,SLOT(fontDialog()));
-    edlayout->addRow(new QLabel(tr("Set Editor Font")), &fontButton);
+    edlayout->addRow(new QLabel(trUtf8("Set Editor Font")), &fontButton);
 }
 
 void Preferences::fontDialog()
@@ -167,33 +167,33 @@ void Preferences::setupFolders()
     tabWidget.addTab(box,"System");
 
     QFormLayout * pathlayout = new QFormLayout(this);
-    QGroupBox *paths= new QGroupBox(tr("System Paths"));
+    QGroupBox *paths= new QGroupBox(trUtf8("System Paths"));
     paths->setLayout(pathlayout);
 
     compilerpath = new PathSelector(
-            tr("Compiler"),
+            trUtf8("Compiler"),
             QApplication::applicationDirPath() +
                     QString(DEFAULT_COMPILER),
-            tr("Must add a compiler."),
+            trUtf8("Must add a compiler."),
             SLOT(browseCompiler()),
             this
             );
 
     loaderpath = new PathSelector(
-            tr("Loader"),
+            trUtf8("Loader"),
             QApplication::applicationDirPath() +
                     QString(DEFAULT_LOADER),
-            tr("Must add a loader program."),
+            trUtf8("Must add a loader program."),
             SLOT(browseLoader()),
             this
             );
 
     librarypath = new PathSelector(
-            tr("Library Path"),
+            trUtf8("Library Path"),
             QApplication::applicationDirPath() +
                     QString(APP_RESOURCES_PATH) +
                     QString("/library"),
-            tr("Must add a library path."),
+            trUtf8("Must add a library path."),
             SLOT(browseLibrary()),
             this
             );
@@ -220,14 +220,14 @@ void Preferences::setupHighlight()
     QHBoxLayout *hlayout = new QHBoxLayout();
     hlbox->setLayout(hlayout);
 
-    tabWidget.addTab(hlbox,tr("Highlighting"));
+    tabWidget.addTab(hlbox,trUtf8("Highlighting"));
 
     QFormLayout *synlayout = new QFormLayout(this);
-    QGroupBox *synbox = new QGroupBox(tr("Syntax Colors"));
+    QGroupBox *synbox = new QGroupBox(trUtf8("Syntax Colors"));
     synbox->setLayout(synlayout);
 
     QFormLayout *blocklayout = new QFormLayout(this);
-    QGroupBox *blockbox = new QGroupBox(tr("Block Colors"));
+    QGroupBox *blockbox = new QGroupBox(trUtf8("Block Colors"));
     blockbox->setLayout(blocklayout);
 
     hlayout->addWidget(synbox);
@@ -265,7 +265,7 @@ void Preferences::setupHighlight()
 void Preferences::browseCompiler()
 {
     compilerpath->browsePath(
-            tr("Select Compiler"),
+            trUtf8("Select Compiler"),
             "OpenSpin (openspin*);;BST Compiler (bstc*)",
             false
         );
@@ -274,7 +274,7 @@ void Preferences::browseCompiler()
 void Preferences::browseLoader()
 {
     loaderpath->browsePath(
-            tr("Select Loader"),
+            trUtf8("Select Loader"),
             "Loader (p1load* p2load*);;BST Loader (bstl*)",
             false
         );
@@ -283,7 +283,7 @@ void Preferences::browseLoader()
 void Preferences::browseLibrary()
 {
     librarypath->browsePath(
-            tr("Select Spin Library Path"),
+            trUtf8("Select Spin Library Path"),
             NULL,
             true
         );
