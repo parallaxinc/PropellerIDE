@@ -17,9 +17,9 @@ int main(int argc, char *argv[])
         QApplication::setStyle("Fusion");
     }
 #endif
-    QTranslator translator;
-    translator.load("translations/propelleride_zn");
-    app.installTranslator(&translator);
+//    QTranslator translator;
+//    translator.load("translations/propelleride_zn");
+//    app.installTranslator(&translator);
 
     app.setWindowIcon(QIcon(":/icons/PropHatAlpha.png"));
     QCoreApplication::setOrganizationName("Parallax");

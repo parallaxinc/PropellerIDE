@@ -74,8 +74,8 @@ TRANSLATIONS += \
 OTHER_FILES +=
 
 FORMS += \
-    TermPrefs.ui \
-    finder.ui
+    forms/TermPrefs.ui \
+    forms/finder.ui
 
 RESOURCES += \
     icons/icons.qrc
