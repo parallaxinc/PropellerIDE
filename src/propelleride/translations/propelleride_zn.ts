@@ -4,32 +4,32 @@
 <context>
     <name>Dialog</name>
     <message>
-        <location filename="../finder.ui" line="32"/>
+        <location filename="../forms/finder.ui" line="32"/>
         <source>Find &amp; Replace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../finder.ui" line="93"/>
+        <location filename="../forms/finder.ui" line="93"/>
         <source>Replace:</source>
         <translation type="unfinished">替换：</translation>
     </message>
     <message>
-        <location filename="../finder.ui" line="110"/>
+        <location filename="../forms/finder.ui" line="110"/>
         <source>Find:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../finder.ui" line="121"/>
+        <location filename="../forms/finder.ui" line="121"/>
         <source>Match Case</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../finder.ui" line="128"/>
+        <location filename="../forms/finder.ui" line="128"/>
         <source>Whole Word</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../finder.ui" line="141"/>
+        <location filename="../forms/finder.ui" line="141"/>
         <source>Done</source>
         <translation type="unfinished">Replace Previous</translation>
     </message>
@@ -729,212 +729,212 @@
 <context>
     <name>TermPrefs</name>
     <message>
-        <location filename="../TermPrefs.ui" line="14"/>
+        <location filename="../forms/TermPrefs.ui" line="14"/>
         <source>Simple Terminal Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="46"/>
+        <location filename="../forms/TermPrefs.ui" line="46"/>
         <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="58"/>
+        <location filename="../forms/TermPrefs.ui" line="58"/>
         <source>Foreground Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="71"/>
+        <location filename="../forms/TermPrefs.ui" line="71"/>
         <source>Background Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="84"/>
+        <location filename="../forms/TermPrefs.ui" line="84"/>
         <source>Wrap Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="98"/>
+        <location filename="../forms/TermPrefs.ui" line="98"/>
         <source>Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="103"/>
+        <location filename="../forms/TermPrefs.ui" line="103"/>
         <source>Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="137"/>
+        <location filename="../forms/TermPrefs.ui" line="137"/>
         <source>Set Font </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="150"/>
+        <location filename="../forms/TermPrefs.ui" line="150"/>
         <source>Page Wrap Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="185"/>
+        <location filename="../forms/TermPrefs.ui" line="185"/>
         <source>Max Buffer Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="199"/>
+        <location filename="../forms/TermPrefs.ui" line="199"/>
         <source>256</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="204"/>
+        <location filename="../forms/TermPrefs.ui" line="204"/>
         <source>512</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="209"/>
+        <location filename="../forms/TermPrefs.ui" line="209"/>
         <source>1024</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="214"/>
+        <location filename="../forms/TermPrefs.ui" line="214"/>
         <source>2048</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="219"/>
+        <location filename="../forms/TermPrefs.ui" line="219"/>
         <source>Infinite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="233"/>
+        <location filename="../forms/TermPrefs.ui" line="233"/>
         <source>Tab Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="268"/>
+        <location filename="../forms/TermPrefs.ui" line="268"/>
         <source>Font Family (size)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="281"/>
+        <location filename="../forms/TermPrefs.ui" line="281"/>
         <source>Show Hexadecimal Input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="294"/>
+        <location filename="../forms/TermPrefs.ui" line="294"/>
         <source>ASCII-Hex Dump</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="303"/>
+        <location filename="../forms/TermPrefs.ui" line="303"/>
         <source>Function</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="315"/>
+        <location filename="../forms/TermPrefs.ui" line="315"/>
         <source>(10)  New Line NL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="331"/>
+        <location filename="../forms/TermPrefs.ui" line="331"/>
         <source>(4) Move Cursor Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="347"/>
+        <location filename="../forms/TermPrefs.ui" line="347"/>
         <source>(11) Clear to End of Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="363"/>
+        <location filename="../forms/TermPrefs.ui" line="363"/>
         <source>(1) Home Cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="379"/>
+        <location filename="../forms/TermPrefs.ui" line="379"/>
         <source>(0) Clear Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="395"/>
+        <location filename="../forms/TermPrefs.ui" line="395"/>
         <source>(6) Move Cursor Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="411"/>
+        <location filename="../forms/TermPrefs.ui" line="411"/>
         <source>(13) Carriage Return CR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="427"/>
+        <location filename="../forms/TermPrefs.ui" line="427"/>
         <source>(12) Clear Lines Below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="443"/>
+        <location filename="../forms/TermPrefs.ui" line="443"/>
         <source>(14) Position Cursor (x)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="459"/>
+        <location filename="../forms/TermPrefs.ui" line="459"/>
         <source>(8) Backspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="475"/>
+        <location filename="../forms/TermPrefs.ui" line="475"/>
         <source>(9) Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="491"/>
+        <location filename="../forms/TermPrefs.ui" line="491"/>
         <source>Swap Receive CR/NL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="504"/>
+        <location filename="../forms/TermPrefs.ui" line="504"/>
         <source>(7) Beep Speaker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="520"/>
+        <location filename="../forms/TermPrefs.ui" line="520"/>
         <source>(2) Position Cursor X,Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="536"/>
+        <location filename="../forms/TermPrefs.ui" line="536"/>
         <source>(15) Position Cursor (y)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="552"/>
+        <location filename="../forms/TermPrefs.ui" line="552"/>
         <source>(5) Move Cursor Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="568"/>
+        <location filename="../forms/TermPrefs.ui" line="568"/>
         <source>(3) Move Cursor Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="584"/>
+        <location filename="../forms/TermPrefs.ui" line="584"/>
         <source>Enter is NL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="600"/>
+        <location filename="../forms/TermPrefs.ui" line="600"/>
         <source>(16) Clear Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="618"/>
+        <location filename="../forms/TermPrefs.ui" line="618"/>
         <source>Reset Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="623"/>
+        <location filename="../forms/TermPrefs.ui" line="623"/>
         <source>termPrefsOk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../TermPrefs.ui" line="628"/>
+        <location filename="../forms/TermPrefs.ui" line="628"/>
         <source>termPrefsCancel</source>
         <translation type="unfinished"></translation>
     </message>

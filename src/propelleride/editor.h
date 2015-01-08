@@ -32,13 +32,6 @@ public:
 
     void clearCtrlPressed();
 
-    typedef enum CodeTypeEnum {
-        CodeTypeUTF8, CodeTypeUTF16, CodeTypeOther
-    } CodeType;
-
-    inline CodeType getCodeType()           { return codeType; }
-    inline void setCodeType(CodeType type)  { codeType = type; }
-
 private:
     int  autoIndent();
     int  braceMatchColumn();
@@ -80,8 +73,6 @@ private:
     Highlighter *highlighter;
 
     QComboBox *cbAuto;
-
-    CodeType codeType;
 
     bool expectAutoComplete;
 

@@ -314,13 +314,6 @@ void MainWindow::closeEvent(QCloseEvent *e)
     qApp->exit(0);
 }
 
-void MainWindow::newFileAction()
-{
-    newFile();
-    int tab = editorTabs->count()-1;
-    setEditorCodeType(getEditor(tab), QString("UTF-16"));
-}
-
 void MainWindow::newFile()
 {
     changeTabDisable = true;
@@ -354,17 +347,6 @@ void MainWindow::openFile(const QString &path)
     QApplication::restoreOverrideCursor();
 }
 
-bool MainWindow::isFileUTF16(QFile *file)
-{
-    char str[2];
-    file->read(str,2);
-    file->seek(0);
-    if(str[0] == -1 && str[1] == -2) {
-        return true;
-    }
-    return false;
-}
-
 void MainWindow::openFileName(QString fileName)
 {
     QString data;
@@ -375,12 +357,8 @@ void MainWindow::openFileName(QString fileName)
             QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
             QTextStream in(&file);
-            if(this->isFileUTF16(&file)) {
-                in.setCodec("UTF-16");
-            }
-            else {
-                in.setCodec("UTF-8");
-            }
+            in.setAutoDetectUnicode(true);
+            in.setCodec("UTF-8");
             data = in.readAll();
             file.close();
 
@@ -392,7 +370,6 @@ void MainWindow::openFileName(QString fileName)
                 for(int n = editorTabs->count()-1; n > -1; n--) {
                     if(editorTabs->tabText(n) == sname) {
                         setEditor(n, sname, fileName, data);
-                        setEditorCodeType(getEditor(n), QString(in.codec()->name()));
                         setProject();
                         return;
                     }
@@ -400,14 +377,12 @@ void MainWindow::openFileName(QString fileName)
             }
             if(editorTabs->tabText(0) == untitledstr) {
                 setEditor(0, sname, fileName, data);
-                setEditorCodeType(getEditor(0), QString(in.codec()->name()));
                 setProject();
                 return;
             }
             newFile();
             int tab = editorTabs->count()-1;
             setEditor(tab, sname, fileName, data);
-            setEditorCodeType(getEditor(tab), QString(in.codec()->name()));
             setProject();
         }
     }
@@ -422,15 +397,9 @@ bool MainWindow::saveAsCodec(QString fileName, Editor *ed)
 
         setCurrentFile(fileName);
 
-        if(ed->getCodeType() == Editor::CodeTypeUTF16) {
-            os.setGenerateByteOrderMark(true);
-            os.setCodec("UTF-16");
-            os << data;
-        }
-        else {
-            os.setCodec("UTF-8");
-            os << data;
-        }
+        os.setCodec("UTF-8");
+        os << data;
+
         file.close();
         QString tab = editorTabs->tabText(editorTabs->currentIndex());
         if(tab.endsWith('*')) {
@@ -523,12 +492,8 @@ void MainWindow::fileChanged()
         QString curt = getEditor(index)->toPlainText();
         QString text;
         QTextStream in(&file);
-        if(this->isFileUTF16(&file)) {
-            in.setCodec("UTF-16");
-        }
-        else {
-            in.setCodec("UTF-8");
-        }
+        in.setAutoDetectUnicode(true);
+        in.setCodec("UTF-8");
         text = in.readAll();
         file.close();
 
@@ -1385,16 +1350,6 @@ void MainWindow::setEditor(int num, QString shortName, QString fileName, QString
 Editor *MainWindow::getEditor(int num)
 {
     return (Editor *)editorTabs->widget(num);
-}
-
-void MainWindow::setEditorCodeType(Editor *ed, QString name)
-{
-    if(name.contains("UTF-16")) {
-        ed->setCodeType(Editor::CodeTypeUTF16);
-    }
-    else {
-        ed->setCodeType(Editor::CodeTypeUTF8);
-    }
 }
 
 void MainWindow::checkConfigSerialPort()

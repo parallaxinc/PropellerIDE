@@ -69,7 +69,6 @@ signals:
 
 public slots:
     void newFile();
-    void newFileAction();
     void openFile(const QString &path = QString());
     bool saveAsCodec(QString fileName, Editor *ed);
     void saveFile();
@@ -159,7 +158,6 @@ private:
 
     void setEditor(int num, QString shortName, QString fileName, QString text);
     Editor *getEditor(int num);
-    void setEditorCodeType(Editor *ed, QString name);
 
     QString shortFileName(QString fileName);
     QString filePathName(QString fileName);
