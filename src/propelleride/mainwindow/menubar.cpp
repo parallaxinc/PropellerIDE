@@ -42,6 +42,7 @@ void MainWindow::setupFileMenu()
 
     fileMenu->addSeparator();
 
+    fileMenu->addAction(QIcon(":/icons/file-close.png"),    tr("&Close"),       this, SLOT(closeFile()),        QKeySequence::Close);
     fileMenu->addAction(QIcon(":/icons/file-exit.png"),     tr("E&xit"),        this, SLOT(quitProgram()),      QKeySequence::Quit);
 
 }

@@ -318,6 +318,7 @@ void MainWindow::newFile()
 {
     changeTabDisable = true;
     fileChangeDisable = true;
+    editorTabs->setStyleSheet("");
     editorTabs->addTab(createEditor(),(const QString&)untitledstr);
     int tab = editorTabs->count()-1;
     editorTabs->setCurrentIndex(tab);
@@ -329,6 +330,9 @@ void MainWindow::newFile()
         referenceModel = new TreeModel("", this);
     }
     spinParser.clearDB();
+
+    getEditor(editorTabs->currentIndex())->installEventFilter(this);
+
     fileChangeDisable = false;
     changeTabDisable = false;
 }
@@ -1157,24 +1161,61 @@ void MainWindow::referenceTreeClicked(QModelIndex index)
     }
 }
 
+void MainWindow::closeFile()
+{
+    fileChangeDisable = true;
+    int n = editorTabs->currentIndex();
+    getEditor(n)->setPlainText("");
+    editorTabs->removeTab(n);
+    if (editorTabs->count() == 0)
+    {
+        editorTabs->setStyleSheet("background-image: url(./propellerhat.png);"
+                      "background-repeat: no-repeat;"
+                      "background-position: center;");
+    }
+    fileChangeDisable = false;
+
+}
+
 void MainWindow::closeTab(int index)
 {
     fileChangeDisable = true;
     getEditor(index)->setPlainText("");
-    if(editorTabs->count() == 1)
-        newFile();
     editorTabs->removeTab(index);
     fileChangeDisable = false;
 }
 
+void MainWindow::nextTab()
+{
+    int n = editorTabs->currentIndex();
+    n++;
+    if (n > editorTabs->count()-1)
+        n = 0;
+    editorTabs->setCurrentIndex(n);
+    changeTab(n);
+}
+
+void MainWindow::previousTab()
+{
+    int n = editorTabs->currentIndex();
+    n--;
+    if (n < 0)
+        n = editorTabs->count()-1;
+    editorTabs->setCurrentIndex(n);
+    changeTab(n);
+
+
+}
+
 void MainWindow::changeTab(int index)
 {
-    /* index is a QAction menu state. we don't really care about it
-    */
-    if(index < 0) return; // compiler happy now
+    if(index < 0) return;
 
     if(!changeTabDisable)
+    {
+        getEditor(editorTabs->currentIndex())->setFocus();
         setProject();
+    }
 }
 
 void MainWindow::addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile)
@@ -1548,9 +1589,7 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     vsplit->addWidget(findSplit);
 
     // project editor tabs
-    editorTabs = new QTabWidget(this);
-    editorTabs->setTabsClosable(true);
-    editorTabs->setMovable(true);
+    editorTabs = new FileManager(this);
     connect(editorTabs,SIGNAL(tabCloseRequested(int)),this,SLOT(closeTab(int)));
     connect(editorTabs,SIGNAL(currentChanged(int)),this,SLOT(changeTab(int)));
     findSplit->addWidget(editorTabs);
@@ -1571,4 +1610,33 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     vsplit->setHandleWidth(handlewidth);
     vsplit->setChildrenCollapsible(true);
 
+}
+
+bool MainWindow::eventFilter(QObject *target, QEvent *event)
+{
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent *e = static_cast<QKeyEvent *>(event);
+
+        if (e->modifiers() & Qt::ControlModifier)
+        {
+            switch (e->key())
+            {
+            case (Qt::Key_T):
+                newFile();
+                return true;
+            case (Qt::Key_W):
+                closeFile();
+                return true;
+            case (Qt::Key_PageUp):
+                previousTab();
+                qDebug() << "Page up!";
+                return true;
+            case (Qt::Key_PageDown):
+                nextTab();
+                qDebug() << "Page down!";
+                return true;
+            }
+        }
+    }
+    return QMainWindow::eventFilter(target, event);
 }

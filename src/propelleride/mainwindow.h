@@ -24,6 +24,7 @@
 #include "StatusDialog.h"
 #include "spinzip/zipper.h"
 #include "ReferenceTree.h"
+#include "FileManager.h"
 
 #define untitledstr "Untitled"
 
@@ -69,6 +70,7 @@ signals:
 
 public slots:
     void newFile();
+    void closeFile();
     void openFile(const QString &path = QString());
     bool saveAsCodec(QString fileName, Editor *ed);
     void saveFile();
@@ -100,6 +102,8 @@ public slots:
     void projectTreeClicked(QModelIndex index);
     void referenceTreeClicked(QModelIndex index);
     void closeTab(int index = 0);
+    void nextTab();
+    void previousTab();
     void changeTab(int index);
     void setCurrentPort(int index);
     void connectButton(bool show = true);
@@ -139,6 +143,8 @@ private:
     void openFileName(QString fileName);
     void checkAndSaveFiles();
     Editor *createEditor();
+
+    bool eventFilter(QObject *target, QEvent *event);
 
     void setupFileMenu();
     void setupEditMenu();
@@ -213,7 +219,7 @@ private:
     int         findPosition;
     int         wasClicked;
 
-    QTabWidget  *editorTabs;
+    FileManager *editorTabs;
     bool        fileChangeDisable;
     bool        changeTabDisable;
 
@@ -268,4 +274,8 @@ signals:
 
 public slots:
     void setStatusDone(bool done);
+
+//protected:
+//    virtual void keyPressEvent(QKeyEvent *e);
+
 };

@@ -22,7 +22,8 @@ isEmpty(VERSION):VERSION = 0.0.0
 VERSION = '\\"$${VERSION}\\"'
 DEFINES += VERSION=\"$${VERSION}\"
 
-SOURCES += main.cpp\
+SOURCES += \
+    main.cpp \
     mainwindow.cpp \
     $$files(mainwindow/*.cpp) \
     StatusDialog.cpp \
@@ -43,9 +44,11 @@ SOURCES += main.cpp\
     Console.cpp \
     ColorScheme.cpp \
     ColorChooser.cpp \
-    termprefs.cpp
+    termprefs.cpp \
+    FileManager.cpp \
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
+    mainwindow.h \
     StatusDialog.h \
     Highlighter.h \
     treemodel.h \
@@ -67,6 +70,7 @@ HEADERS  += mainwindow.h \
     ColorChooser.h \
     ColorScheme.h \
     templates/Singleton.h \
+    FileManager.h \
 
 TRANSLATIONS += \
     translations/propelleride_zn.ts \
