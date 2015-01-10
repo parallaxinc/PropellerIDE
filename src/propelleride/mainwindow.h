@@ -155,8 +155,6 @@ private:
     void updateReferenceTree(QString fileName, QString text);
     void updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level);
 
-    QString shortFileName(QString fileName);
-    QString filePathName(QString fileName);
     void checkConfigSerialPort();
     QFrame *newFindFrame(QSplitter *split);
 

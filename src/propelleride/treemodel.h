@@ -78,8 +78,6 @@ public:
     void    addSymbolInfo(QString symbol, QString file, int line);
     QString getSymbolInfo(QString symbol, int *line);
 
-    QString shortFileName(QString s);
-
     int hashCount();
 
     TreeItem *rootItem;

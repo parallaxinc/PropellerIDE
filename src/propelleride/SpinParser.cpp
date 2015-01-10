@@ -311,8 +311,6 @@ int SpinParser::match_keyword (const char *p, KeyWord const *kw, QString &tag)
     int rc = K_NONE;
     char *tmp = (char*)p;
 
-    /* printf ("match_keyword\n"); */
-
     for (i = 0; i < kw->token.length(); i++)
     {
         if (tolower (p[i]) != kw->token[i])
@@ -694,10 +692,6 @@ void SpinParser::findSpinTags (QString fileName, QString objnode)
 
         line = line.trimmed();
 
-        if(line.indexOf(sregx) == 0) {
-            //qDebug() << shortFileName(fileName) << objnode << "Section " << ": " << line;
-        }
-
         /* In Spin, keywords always are at the start of the line. */
         SpinKind type = K_NONE;
         foreach(KeyWord kw, spin_keywords) {
@@ -716,7 +710,6 @@ void SpinParser::findSpinTags (QString fileName, QString objnode)
             }
         }
 
-        //printf ("state %d\n", state);
         switch(state) {
             case K_CONST:
                 match_constant(line, n);
@@ -742,14 +735,3 @@ void SpinParser::findSpinTags (QString fileName, QString objnode)
         }
     }
 }
-
-QString SpinParser::shortFileName(QString fileName)
-{
-    QString rets;
-    if(fileName.indexOf("/") > -1)
-        rets = fileName.mid(fileName.lastIndexOf("/")+1);
-    else
-        rets = fileName;
-    return rets;
-}
-

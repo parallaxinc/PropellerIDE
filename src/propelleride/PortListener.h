@@ -126,8 +126,6 @@ private:
      */
     void hwreset(void);
 
-    QString shortFileName(QString fileName);
-
 private:
 
     char LFSR; // 'P'

@@ -162,13 +162,13 @@ int  MainWindow::extractSource(QString &fileName)
     return 0;
 }
 
-// call from main ?
 void MainWindow::openLastFile()
 {
     /* load the last file into the editor to make user happy */
     QString welcome = propDialog->getSpinLibraryString()+"Welcome.spin";
     QString fileName;
     QVariant lastfilev = QSettings().value(lastFileNameKey, welcome);
+
     if(!lastfilev.isNull()) {
         if(lastfilev.canConvert(QVariant::String)) {
             if(lastfilev.toString().length() > 0) {
@@ -194,7 +194,7 @@ void MainWindow::openLastFile()
     }
 
     /* load the last directory to make user happy */
-    lastDirectory = filePathName(fileName);
+    lastDirectory = QFileInfo(fileName).path();
     QVariant lastdirv = QSettings().value(lastDirectoryKey, lastDirectory);
     if(!lastdirv.isNull()) {
         if(lastdirv.canConvert(QVariant::String)) {
@@ -226,7 +226,7 @@ void MainWindow::getApplicationSettings(bool complain)
     }
 
     /* get the compiler path */
-    spinCompilerPath = filePathName(spinCompiler);
+    spinCompilerPath = QFileInfo(spinCompiler).path();
     spinCompilerPath = dir.fromNativeSeparators(spinCompilerPath);
 
     /* get the include path and config file set by user */
@@ -354,7 +354,7 @@ void MainWindow::openFile(const QString &path)
                 tr("Open File"), lastDirectory, "Spin Files (*.spin);;All Files (*)");
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     openFileName(fileName);
-    lastDirectory = filePathName(fileName);
+    lastDirectory = QFileInfo(fileName).path();
     QApplication::processEvents();
     QApplication::restoreOverrideCursor();
 }
@@ -377,7 +377,7 @@ void MainWindow::openFileName(QString fileName)
             QApplication::processEvents();
             QApplication::restoreOverrideCursor();
 
-            QString sname = this->shortFileName(fileName);
+            QString sname = QFileInfo(fileName).fileName();
             if(editorTabs->count()>0) {
                 for(int n = editorTabs->count()-1; n > -1; n--) {
                     if(editorTabs->tabText(n) == sname) {
@@ -438,7 +438,7 @@ void MainWindow::saveFile()
                 return;
         }
         Editor *ed = editorTabs->getEditor(n);
-        this->editorTabs->setTabText(n,shortFileName(fileName));
+        this->editorTabs->setTabText(n,QFileInfo(fileName).fileName());
 
         if (!fileName.isEmpty()) {
             if(saveAsCodec(fileName, ed))
@@ -453,7 +453,7 @@ void MainWindow::saveFileByTabIndex(int tab)
     try {
         QString fileName = editorTabs->tabToolTip(tab);
 
-        this->editorTabs->setTabText(tab,shortFileName(fileName));
+        this->editorTabs->setTabText(tab,QFileInfo(fileName).fileName());
         if (!fileName.isEmpty()) {
             saveAsCodec(fileName, editorTabs->getEditor(tab));
         }
@@ -474,9 +474,9 @@ QString MainWindow::saveAsFile(const QString &path)
         if (fileName.isEmpty()) {
             return QString();
         }
-        lastDirectory = filePathName(fileName);
+        lastDirectory = QFileInfo(fileName).path();
 
-        this->editorTabs->setTabText(n,shortFileName(fileName));
+        this->editorTabs->setTabText(n,QFileInfo(fileName).fileName());
         editorTabs->setTabToolTip(n,fileName);
 
         if (!fileName.isEmpty()) {
@@ -511,7 +511,7 @@ void MainWindow::fileChanged()
 
         if(text == curt) {
             if(name.at(name.length()-1) == '*')
-                editorTabs->setTabText(index, this->shortFileName(fileName));
+                editorTabs->setTabText(index, QFileInfo(fileName).fileName());
             return;
         }
     }
@@ -710,11 +710,11 @@ void MainWindow::highlightFileLine(QString file, int line)
     if(QFile::exists(file)) {
         name = file;
     }
-    else if(QFile::exists(filePathName(projectFile)+"/"+file)) {
-        name = filePathName(projectFile)+"/"+file;
+    else if(QFile::exists(QDir(QFileInfo(projectFile).path()).filePath(file))) {
+        name = QDir(QFileInfo(projectFile).path()).filePath(file);
     }
-    else if(QFile::exists(spinIncludes+"/"+file)) {
-        name = spinIncludes+"/"+file;
+    else if(QFile::exists(QDir(spinIncludes).filePath(file))) {
+        name = QDir(spinIncludes).filePath(file);
     }
     else {
         return;
@@ -750,7 +750,7 @@ void MainWindow::highlightFileLine(QString file, int line)
 void MainWindow::buildSourceWriteError(QString fileName)
 {
     QMessageBox::critical(this, tr("Build Problem"),
-            "\n"+tr("Problem building:")+" "+this->shortFileName(fileName)+"\n\n"+
+            "\n"+tr("Problem building:")+" "+QFileInfo(fileName).fileName()+"\n\n"+
             tr("Can't write the file or folder.")+" "+
             tr("This can happen when compiling a packaged file.")+"\n\n"+
             tr("The code must be saved to a folder with write permissions.")+" "+
@@ -824,7 +824,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     checkAndSaveFiles();
 
     if(fileName.contains(".spin")) {
-        statusDialog->init("Compiling Program", this->shortFileName(this->projectFile));
+        statusDialog->init("Compiling Program", QFileInfo(this->projectFile).fileName());
         spinBuilder->setParameters(spinCompiler, spinIncludes, spinCompilerPath, projectFile, compileResult);
         spinBuilder->setObjects(&msgLabel, &sizeLabel, progress, cbPort);
         spinBuilder->setLoader(spinLoader);
@@ -1104,7 +1104,7 @@ void MainWindow::openTreeFile(QString fileName)
     fileName = fileName.trimmed();
     qDebug() << "openTreeFile opening " << fileName;
     QString userFile = editorTabs->tabToolTip(editorTabs->currentIndex());
-    QString userPath = filePathName(userFile);
+    QString userPath = QFileInfo(userFile).path();
     QFile file;
     QString fileToOpen;
     if(file.exists(userPath+fileName)) {
@@ -1188,8 +1188,7 @@ void MainWindow::zipFiles()
 void MainWindow::updateProjectTree(QString fileName)
 {
     projectFile = fileName;
-    QString s = this->shortFileName(fileName);
-    basicPath = filePathName(fileName);
+    QString s = QFileInfo(fileName).fileName();
 
     if(projectModel != NULL) {
         delete projectModel;
@@ -1220,8 +1219,7 @@ void MainWindow::updateSpinProjectTree(QString fileName)
 
 void MainWindow::updateReferenceTree(QString fileName, QString text)
 {
-    QString s = this->shortFileName(fileName);
-    basicPath = filePathName(fileName);
+    QString s = QFileInfo(fileName).fileName();
 
     // our startup strategy should change so that we have a tree and it starts collapsed.
 
@@ -1245,49 +1243,62 @@ void MainWindow::updateReferenceTree(QString fileName, QString text)
 
 void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level)
 {
-    QString path = filePathName(fileName);
+    QString path = QFileInfo(fileName).path();
 
     QStringList mlist = editorTabs->getEditor(
             editorTabs->currentIndex())->spinParser.spinMethods(fileName,  objname);
 
     // move objects to end of the list
-    for(int n = mlist.count()-1; n > -1; n--) {
-        if(mlist[n].at(0) == 'o') {
+    for (int n = mlist.count()-1; n > -1; n--)
+    {
+        if(mlist[n].at(0) == 'o')
+        {
             mlist.insert(mlist.count(),mlist[n]);
             mlist.removeAt(n);
         }
     }
+
     // display all
-    for(int n = 0; n < mlist.count(); n ++) {
+    for (int n = 0; n < mlist.count(); n ++)
+    {
         QString s = mlist[n];
 
-        if(s.at(0) == 'o') {
+        if (s.at(0) == 'o')
+        {
 
             /* get the file name */
             QString file = s.mid(s.indexOf(":")+1);
             file = file.mid(0, file.indexOf("\t"));
             file = file.trimmed();
-            if(file.startsWith("\""))
+
+            if (file.startsWith("\""))
                 file = file.mid(1);
-            if(file.endsWith("\""))
+
+            if (file.endsWith("\""))
                 file = file.mid(0,file.length()-1);
+
             file = file.trimmed();
-            if(file.endsWith(".spin",Qt::CaseInsensitive) == false)
+
+            if (!file.endsWith(".spin",Qt::CaseInsensitive))
                 file += ".spin";
 
             /* prepend path info to new file if found*/
-            if(QFile::exists(file)) {
+            if (QFile::exists(file))
+            {
                 referenceModel->addRootItem(file, file);
             }
-            else if(QFile::exists(path+file)) {
-                referenceModel->addRootItem(file, path+file);
-                file = path+file;
+            else if(QFile::exists(QDir(path).filePath(file)))
+            {
+                referenceModel->addRootItem(file, QDir(path).filePath(file));
+                file = QDir(path).filePath(file);
             }
-            else if(QFile::exists(includes+file)) {
-                referenceModel->addRootItem(file, includes+file);
-                file = includes+file;
+            else if(QFile::exists(QDir(includes).filePath(file)))
+            {
+                referenceModel->addRootItem(file, QDir(includes).filePath(file));
+                file = QDir(includes).filePath(file);
             }
-            else {
+            else
+            {
                 qDebug() << "updateSpinReferenceTree can't find file" << file;
             }
 
@@ -1298,7 +1309,8 @@ void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QSt
 
             updateSpinReferenceTree(file, includes, obj, level+1);
         }
-        else {
+        else
+        {
             int line = 0;
             QString sl = s.mid(s.lastIndexOf("\t")+1);
             line = sl.toInt();
@@ -1323,19 +1335,25 @@ void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QSt
 
 void MainWindow::checkConfigSerialPort()
 {
-    if(!cbPort->count()) {
+    if(!cbPort->count())
+    {
         enumeratePorts();
-    } else {
+    }
+    else
+    {
         QString name = cbPort->currentText();
         QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
         int index = -1;
-        for (int i = 0; i < ports.size(); i++) {
-            if(ports.at(i).portName.contains(name, Qt::CaseInsensitive)) {
+        for (int i = 0; i < ports.size(); i++)
+        {
+            if (ports.at(i).portName.contains(name, Qt::CaseInsensitive))
+            {
                 index = i;
                 break;
             }
         }
-        if(index < 0) {
+        if(index < 0)
+        {
             enumeratePorts();
         }
     }
@@ -1349,16 +1367,21 @@ void MainWindow::enumeratePortsEvent()
     // need to check if the port we are using disappeared.
     bool notFound = true;
     QString plPortName = this->term->getPortName();
-    for(int n = this->cbPort->count()-1; n > -1; n--) {
+    for(int n = this->cbPort->count()-1; n > -1; n--)
+    {
         QString name = cbPort->itemText(n);
-        if(!name.compare(plPortName)) {
+        if(!name.compare(plPortName))
+        {
             notFound = false;
         }
     }
-    if(notFound) {
+
+    if (notFound)
+    {
         btnConnected->setChecked(false);
     }
-    else {
+    else
+    {
         btnConnected->setChecked(true);
     }
 
@@ -1441,26 +1464,6 @@ void MainWindow::connectButton(bool show)
         portListener->close();
         term->hide();
     }
-}
-
-QString MainWindow::shortFileName(QString fileName)
-{
-    QString rets;
-    if(fileName.indexOf("/") > -1)
-        rets = fileName.mid(fileName.lastIndexOf("/")+1);
-    else
-        rets = fileName;
-    return rets;
-}
-
-QString MainWindow::filePathName(QString fileName)
-{
-    QString rets;
-    if(fileName.lastIndexOf("/") > -1)
-        rets = fileName.mid(0,fileName.lastIndexOf("/")+1);
-    else
-        rets = fileName;
-    return rets;
 }
 
 void MainWindow::setupProjectTools(QSplitter *vsplit)

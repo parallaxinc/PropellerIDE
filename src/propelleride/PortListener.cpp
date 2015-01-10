@@ -528,13 +528,3 @@ int PortListener::findprop(const char* name)
 
     return version != 0 ? 1 : 0;
 }
-
-QString PortListener::shortFileName(QString fileName)
-{
-    QString rets;
-    if(fileName.indexOf("/") > -1)
-        rets = fileName.mid(fileName.lastIndexOf("/")+1);
-    else
-        rets = fileName;
-    return rets;
-}

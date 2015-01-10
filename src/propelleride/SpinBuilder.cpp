@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QByteArray>
 #include <QDebug>
+#include <QFileInfo>
 
 #include "SpinBuilder.h"
 #include "Sleeper.h"
@@ -32,7 +33,7 @@ QStringList SpinBuilder::getCompilerParameters()
 {
     QString srcpath = projectFile;
     srcpath = QDir::fromNativeSeparators(srcpath);
-    srcpath = filePathName(srcpath);
+    srcpath = QFileInfo(srcpath).filePath();
 
     QStringList args;
     if(srcpath.length()) {
@@ -56,7 +57,7 @@ int  SpinBuilder::loadProgram(QString copts)
     // use the projectFile instead of the current tab file
     QString srcpath = projectFile;
     srcpath = QDir::fromNativeSeparators(srcpath);
-    srcpath = filePathName(srcpath);
+    srcpath = QFileInfo(srcpath).filePath();
 
     portName = cbPort->itemText(cbPort->currentIndex());    // TODO should be itemToolTip
 
@@ -81,7 +82,7 @@ int  SpinBuilder::loadProgram(QString copts)
     connect(this->proc, SIGNAL(finished(int,QProcess::ExitStatus)),this,SLOT(compilerFinished(int,QProcess::ExitStatus)));
     proc.setProcessChannelMode(QProcess::MergedChannels);
 
-    proc.setWorkingDirectory(filePathName(loader));
+    proc.setWorkingDirectory(QFileInfo(loader).filePath());
 
     procDone = false;
     receiving = false;

@@ -21,16 +21,6 @@ void Builder::setObjects(QLabel *stat, QLabel *progsize, QProgressBar *progbar, 
     cbPort = ports;
 }
 
-QString Builder::filePathName(QString fileName)
-{
-    QString rets;
-    if(fileName.lastIndexOf("/") > -1)
-        rets = fileName.mid(0,fileName.lastIndexOf("/")+1);
-    else
-        rets = fileName;
-    return rets;
-}
-
 int Builder::runCompiler(QString copts)
 {
     // satisfy warnings only

@@ -336,13 +336,3 @@ int TreeModel::hashCount()
 {
     return symbolHash.count();
 }
-
-QString TreeModel::shortFileName(QString fileName)
-{
-    QString rets;
-    if(fileName.indexOf("/") > -1)
-        rets = fileName.mid(fileName.lastIndexOf("/")+1);
-    else
-        rets = fileName;
-    return rets;
-}
