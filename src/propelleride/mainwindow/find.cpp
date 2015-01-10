@@ -191,7 +191,7 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
 
 void MainWindow::showFindFrame()
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor->textCursor().selectedText().length() > 0) {
         setFindText(editor->textCursor().selectedText());
     }
@@ -224,7 +224,7 @@ QTextDocument::FindFlag MainWindow::getFlags(int prev)
 
 void MainWindow::findChanged(QString text)
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
 
     if(editor == NULL)
         return;
@@ -253,7 +253,7 @@ void MainWindow::findClicked()
 void MainWindow::findNextClicked()
 {
 
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -283,7 +283,7 @@ void MainWindow::findNextClicked()
 }
 void MainWindow::findPrevClicked()
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -341,7 +341,7 @@ void MainWindow::replaceClicked()
 
 void MainWindow::replaceNextClicked()
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -358,7 +358,7 @@ void MainWindow::replaceNextClicked()
 
 void MainWindow::replacePrevClicked()
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -380,7 +380,7 @@ void MainWindow::replaceAllClicked()
 {
     int count = 0;
     QString text = findEdit->text();
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -435,7 +435,7 @@ bool MainWindow::showFindMessage(QString text)
     if(ret == QMessageBox::Cancel) {
         return false;
     }
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return false;
     QTextCursor cur = editor->textCursor();

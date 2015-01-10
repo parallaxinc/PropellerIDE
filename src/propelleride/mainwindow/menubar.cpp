@@ -169,32 +169,32 @@ void MainWindow::about()
 
 void MainWindow::cut()
 {
-    getEditor(editorTabs->currentIndex())->cut();
+    editorTabs->getEditor(editorTabs->currentIndex())->cut();
 }
 
 void MainWindow::copy()
 {
-    getEditor(editorTabs->currentIndex())->copy();
+    editorTabs->getEditor(editorTabs->currentIndex())->copy();
 }
 
 void MainWindow::paste()
 {
-    getEditor(editorTabs->currentIndex())->paste();
+    editorTabs->getEditor(editorTabs->currentIndex())->paste();
 }
 
 void MainWindow::undo()
 {
-    getEditor(editorTabs->currentIndex())->undo();
+    editorTabs->getEditor(editorTabs->currentIndex())->undo();
 }
 
 void MainWindow::redo()
 {
-    getEditor(editorTabs->currentIndex())->redo();
+    editorTabs->getEditor(editorTabs->currentIndex())->redo();
 }
 
 void MainWindow::selectAll()
 {
-    getEditor(editorTabs->currentIndex())->selectAll();
+    editorTabs->getEditor(editorTabs->currentIndex())->selectAll();
 }
 
 

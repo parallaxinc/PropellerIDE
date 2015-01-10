@@ -331,7 +331,7 @@ void MainWindow::newFile()
     }
     spinParser.clearDB();
 
-    getEditor(editorTabs->currentIndex())->installEventFilter(this);
+    editorTabs->getEditor(editorTabs->currentIndex())->installEventFilter(this);
 
     fileChangeDisable = false;
     changeTabDisable = false;
@@ -373,20 +373,20 @@ void MainWindow::openFileName(QString fileName)
             if(editorTabs->count()>0) {
                 for(int n = editorTabs->count()-1; n > -1; n--) {
                     if(editorTabs->tabText(n) == sname) {
-                        setEditor(n, sname, fileName, data);
+                        editorTabs->setEditor(n, sname, fileName, data);
                         setProject();
                         return;
                     }
                 }
             }
             if(editorTabs->tabText(0) == untitledstr) {
-                setEditor(0, sname, fileName, data);
+                editorTabs->setEditor(0, sname, fileName, data);
                 setProject();
                 return;
             }
             newFile();
             int tab = editorTabs->count()-1;
-            setEditor(tab, sname, fileName, data);
+            editorTabs->setEditor(tab, sname, fileName, data);
             setProject();
         }
     }
@@ -429,7 +429,7 @@ void MainWindow::saveFile()
             if (fileName.isEmpty())
                 return;
         }
-        Editor *ed = getEditor(n);
+        Editor *ed = editorTabs->getEditor(n);
         this->editorTabs->setTabText(n,shortFileName(fileName));
 
         if (!fileName.isEmpty()) {
@@ -447,7 +447,7 @@ void MainWindow::saveFileByTabIndex(int tab)
 
         this->editorTabs->setTabText(tab,shortFileName(fileName));
         if (!fileName.isEmpty()) {
-            saveAsCodec(fileName, getEditor(tab));
+            saveAsCodec(fileName, editorTabs->getEditor(tab));
         }
     } catch(...) {
     }
@@ -472,7 +472,7 @@ QString MainWindow::saveAsFile(const QString &path)
         editorTabs->setTabToolTip(n,fileName);
 
         if (!fileName.isEmpty()) {
-            if(saveAsCodec(fileName, getEditor(n)))
+            if(saveAsCodec(fileName, editorTabs->getEditor(n)))
                 setProject();
         }
     } catch(...) {
@@ -493,7 +493,7 @@ void MainWindow::fileChanged()
     QFile file(fileName);
     if(file.open(QFile::ReadOnly))
     {
-        QString curt = getEditor(index)->toPlainText();
+        QString curt = editorTabs->getEditor(index)->toPlainText();
         QString text;
         QTextStream in(&file);
         in.setAutoDetectUnicode(true);
@@ -581,7 +581,7 @@ void MainWindow::setProject()
     sizeLabel->setText("");
     msgLabel->setText("");
 
-    QString text = getEditor(index)->toPlainText();
+    QString text = editorTabs->getEditor(index)->toPlainText();
     updateProjectTree(fileName);
     if(leftSplit->isVisible()) {
         updateReferenceTree(fileName,text);
@@ -606,7 +606,7 @@ void MainWindow::showBrowser()
         if(!projectModel || !referenceModel) {
             QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
             int index = editorTabs->currentIndex();
-            text = getEditor(index)->toPlainText();
+            text = editorTabs->getEditor(index)->toPlainText();
             fileName = editorTabs->tabToolTip(index);
         }
         if(!referenceModel)
@@ -717,14 +717,14 @@ void MainWindow::highlightFileLine(QString file, int line)
     for(int n = 0; n < len; n++) {
         QString s = editorTabs->tabToolTip(n);
         if(s.length() && s.compare(name) == 0) {
-            editor = getEditor(n);
+            editor = editorTabs->getEditor(n);
             editorTabs->setCurrentIndex(n);
             break;
         }
     }
     if(editor == NULL) {
         openFileName(name);
-        editor = getEditor(editorTabs->currentIndex());
+        editor = editorTabs->getEditor(editorTabs->currentIndex());
     }
     if(editor != NULL)
     {
@@ -791,7 +791,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
 
     index = editorTabs->currentIndex();
     fileName = editorTabs->tabToolTip(index);
-    text = getEditor(index)->toPlainText();
+    text = editorTabs->getEditor(index)->toPlainText();
 
     if(!isPackageSource(fileName)) {
         buildSourceWriteError(fileName);
@@ -1017,7 +1017,7 @@ void MainWindow::terminalClosed()
 
 void MainWindow::findMultilineComment(QPoint point)
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     QTextCursor cur = editor->cursorForPosition(point);
     findMultilineComment(cur);
 }
@@ -1027,7 +1027,7 @@ void MainWindow::findMultilineComment(QTextCursor cur)
     QRegExp commentStartExpression = QRegExp("{*",Qt::CaseInsensitive,QRegExp::Wildcard);
     QRegExp commentEndExpression = QRegExp("}*",Qt::CaseInsensitive,QRegExp::Wildcard);
 
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor)
     {
         QString text = cur.selectedText();
@@ -1165,7 +1165,7 @@ void MainWindow::closeFile()
 {
     fileChangeDisable = true;
     int n = editorTabs->currentIndex();
-    getEditor(n)->setPlainText("");
+    editorTabs->getEditor(n)->setPlainText("");
     editorTabs->removeTab(n);
     if (editorTabs->count() == 0)
     {
@@ -1180,7 +1180,7 @@ void MainWindow::closeFile()
 void MainWindow::closeTab(int index)
 {
     fileChangeDisable = true;
-    getEditor(index)->setPlainText("");
+    editorTabs->getEditor(index)->setPlainText("");
     editorTabs->removeTab(index);
     fileChangeDisable = false;
 }
@@ -1213,7 +1213,7 @@ void MainWindow::changeTab(int index)
 
     if(!changeTabDisable)
     {
-        getEditor(editorTabs->currentIndex())->setFocus();
+        editorTabs->getEditor(editorTabs->currentIndex())->setFocus();
         setProject();
     }
 }
@@ -1376,22 +1376,6 @@ void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QSt
     }
 }
 
-void MainWindow::setEditor(int num, QString shortName, QString fileName, QString text)
-{
-    fileChangeDisable = true;
-    Editor *editor = getEditor(num);
-    editor->setPlainText(text);
-    editorTabs->setTabText(num,shortName);
-    editorTabs->setTabToolTip(num,fileName);
-    editorTabs->setCurrentIndex(num);
-    QApplication::processEvents();
-    fileChangeDisable = false;
-}
-
-Editor *MainWindow::getEditor(int num)
-{
-    return (Editor *)editorTabs->widget(num);
-}
 
 void MainWindow::checkConfigSerialPort()
 {
@@ -1629,11 +1613,9 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
                 return true;
             case (Qt::Key_PageUp):
                 previousTab();
-                qDebug() << "Page up!";
                 return true;
             case (Qt::Key_PageDown):
                 nextTab();
-                qDebug() << "Page down!";
                 return true;
             }
         }

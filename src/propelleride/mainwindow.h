@@ -162,9 +162,6 @@ private:
     void updateReferenceTree(QString fileName, QString text);
     void updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level);
 
-    void setEditor(int num, QString shortName, QString fileName, QString text);
-    Editor *getEditor(int num);
-
     QString shortFileName(QString fileName);
     QString filePathName(QString fileName);
     void checkConfigSerialPort();
