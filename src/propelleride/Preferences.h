@@ -117,6 +117,7 @@ public slots:
     void accept();
     void reject();
     void updateColor(int key, const QColor & color);
+    void load(const QString & filename);
 
 private:
 

@@ -334,25 +334,25 @@ void SpinHighlighter::highlight()
         highlightingRules.append(rule);
     }
 
-    preprocessorFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxPreprocessor));
-    preprocessorFormat.setFontWeight(QFont::Normal);
-    QStringList preprocessorPatterns;
-    preprocessorPatterns
-            << "\\bdefine\\b"
-            << "\\bdefined\\b"
-            << "\\berror\\b"
-            << "\\belif\\b"
-            << "\\bendif\\b"
-            << "\\bifdef\\b"
-            << "\\binclude\\b"
-            << "\\bundef\\b"
-            << "\\bwarning\\b"
-            ;
-    foreach (const QString &pattern, preprocessorPatterns) {
-        rule.pattern = QRegExp(pattern,Qt::CaseInsensitive);
-        rule.format = preprocessorFormat;
-        highlightingRules.append(rule);
-    }
+//    preprocessorFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxPreprocessor));
+//    preprocessorFormat.setFontWeight(QFont::Normal);
+//    QStringList preprocessorPatterns;
+//    preprocessorPatterns
+//            << "\\bdefine\\b"
+//            << "\\bdefined\\b"
+//            << "\\berror\\b"
+//            << "\\belif\\b"
+//            << "\\bendif\\b"
+//            << "\\bifdef\\b"
+//            << "\\binclude\\b"
+//            << "\\bundef\\b"
+//            << "\\bwarning\\b"
+//            ;
+//    foreach (const QString &pattern, preprocessorPatterns) {
+//        rule.pattern = QRegExp(pattern,Qt::CaseInsensitive);
+//        rule.format = preprocessorFormat;
+//        highlightingRules.append(rule);
+//    }
 
     // single line comments
     singleLineCommentFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxComments));

@@ -84,7 +84,8 @@ FORMS += \
     forms/finder.ui
 
 RESOURCES += \
-    icons/icons.qrc
+    icons/icons.qrc \
+    themes/themes.qrc \
 
 CODECFORTR = UTF-8
 

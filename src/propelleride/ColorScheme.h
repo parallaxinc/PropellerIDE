@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QApplication>
-#include <QStandardPaths>
 #include <QDir>
 #include <QSettings>
 #include <QFile>
@@ -11,8 +10,10 @@
 
 #include "templates/Singleton.h"
 
-class ColorScheme
+class ColorScheme : public QObject
 {
+    Q_OBJECT
+
 public:
     struct color {
         QColor color;
@@ -21,9 +22,6 @@ public:
 
 
 private:
-
-    QString mName;
-    QString mFileName;
 
     QMap<int, color> colors;
     QFont font;
@@ -43,15 +41,23 @@ public:
         SyntaxNumbers,
         SyntaxFunctions,
         SyntaxKeywords,
-        SyntaxPreprocessor,
+//        SyntaxPreprocessor,
         SyntaxQuotes,
         SyntaxComments
     };
 
-    ColorScheme();
+    ColorScheme(QObject * parent = 0);
+
+
+public slots:
 
     void save();
     void load();
+    void load(const QString & filename);
+    void defaults();
+
+public:
+    void load(QSettings * settings);
 
     QColor getColor(ColorScheme::Color key);
     void setColor(ColorScheme::Color key, const QColor & newcolor);
@@ -60,8 +66,5 @@ public:
     void setFont(const QFont & newfont);
 
     const QMap<int, color>& getColorList() const;
-
-
-private:
 
 };

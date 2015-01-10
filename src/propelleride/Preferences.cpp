@@ -14,6 +14,7 @@
 #include <QGroupBox>
 #include <QLabel>
 #include <QDebug>
+#include <QDirIterator>
 
 #include "Preferences.h"
 #include "ColorChooser.h"
@@ -206,14 +207,51 @@ void Preferences::updateColor(int key, const QColor & color)
     emit updateColors();
 }
 
+void Preferences::load(const QString & filename)
+{
+    currentTheme->load(filename);
+    emit updateColors();
+    emit updateFonts();
+}
+
+
 void Preferences::setupHighlight()
 {
-    QFrame *hlbox = new QFrame();
-    QHBoxLayout *hlayout = new QHBoxLayout();
-    hlbox->setLayout(hlayout);
+    QFrame * box = new QFrame();
+    QVBoxLayout *vlayout = new QVBoxLayout();
+    box->setLayout(vlayout);
 
-    tabWidget.addTab(hlbox,tr("Highlighting"));
+    tabWidget.addTab(box,tr("Highlighting"));
 
+    // row 1
+    QHBoxLayout * themelayout = new QHBoxLayout(this);
+    QGroupBox * themebox = new QGroupBox(tr("Themes"));
+    themebox->setLayout(themelayout);
+
+    QComboBox * themeedit = new QComboBox(this);
+    QPushButton * themesave = new QPushButton(tr("Save"),this);
+    QPushButton * themeload = new QPushButton(tr("Load"),this);
+
+    themeedit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    themesave->setSizePolicy(QSizePolicy::Minimum,   QSizePolicy::Preferred);
+    themeload->setSizePolicy(QSizePolicy::Minimum,   QSizePolicy::Preferred);
+
+    connect(themeedit, SIGNAL(activated(const QString &)), this, SLOT(load(const QString &)));
+
+    QDirIterator it(":/themes", QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        QString thing = it.next();
+        themeedit->addItem(thing);
+    }
+
+    themelayout->addWidget(themeedit);
+    themelayout->addWidget(themesave);
+    themelayout->addWidget(themeload);
+
+    vlayout->addWidget(themebox);
+
+    // row 2
     QFormLayout *synlayout = new QFormLayout(this);
     QGroupBox *synbox = new QGroupBox(tr("Syntax Colors"));
     synbox->setLayout(synlayout);
@@ -222,9 +260,14 @@ void Preferences::setupHighlight()
     QGroupBox *blockbox = new QGroupBox(tr("Block Colors"));
     blockbox->setLayout(blocklayout);
 
-    hlayout->addWidget(synbox);
-    hlayout->addWidget(blockbox);
-    hlbox->setLayout(hlayout);
+
+    QHBoxLayout *h2layout = new QHBoxLayout();
+    h2layout->addWidget(synbox);
+    h2layout->addWidget(blockbox);
+
+    vlayout->addLayout(h2layout);
+
+    box->setLayout(vlayout);
 
     QMap<int, ColorScheme::color> colors = 
         currentTheme->getColorList();

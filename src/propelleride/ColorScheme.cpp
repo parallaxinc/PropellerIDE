@@ -1,11 +1,16 @@
 #include "ColorScheme.h"
 
-ColorScheme::ColorScheme()
-{
-    mName = "default";
-    mFileName = QDir(QStandardPaths::writableLocation(
-                QStandardPaths::DataLocation)).filePath(mName + ".theme.conf");
+#include <QDebug>
 
+ColorScheme::ColorScheme(QObject * parent) :
+    QObject(parent)
+{
+    defaults();
+    load();
+}
+
+void ColorScheme::defaults()
+{
     // Background Colors
     colors[ConBG]               = (color) { QColor(255,248,192)   , "Block_CON"  };
     colors[VarBG]               = (color) { QColor(255,223,191)   , "Block_VAR"  };
@@ -19,7 +24,7 @@ ColorScheme::ColorScheme()
     colors[SyntaxNumbers]       = (color) { Qt::magenta           , "Syntax_Numbers"       };
     colors[SyntaxFunctions]     = (color) { Qt::blue              , "Syntax_Functions"     };
     colors[SyntaxKeywords]      = (color) { Qt::darkBlue          , "Syntax_Keywords"      };
-    colors[SyntaxPreprocessor]  = (color) { Qt::darkYellow        , "Syntax_Preprocessor"  };
+//    colors[SyntaxPreprocessor]  = (color) { Qt::darkYellow        , "Syntax_Preprocessor"  };
     colors[SyntaxQuotes]        = (color) { Qt::red               , "Syntax_Quotes"        };
     colors[SyntaxComments]      = (color) { Qt::darkGreen         , "Syntax_Comments"      };
 
@@ -28,57 +33,55 @@ ColorScheme::ColorScheme()
     font.setStyleHint(QFont::TypeWriter);
     font.setFixedPitch(true);
     font.setPointSize(14);
-
-
-    if( QFile::exists(mFileName) ){
-        load();
-    }
-    else
-    {
-        save();
-    }
-
 }
+
 
 void ColorScheme::save()
 {
-    QSettings theme_settings(mFileName, 
-            QSettings::NativeFormat);
+    QSettings settings;
 
-    theme_settings.beginGroup("Colors");
+    settings.beginGroup("Colors");
 
     QMap<int, color>::iterator i;
     for (i = colors.begin(); i != colors.end(); ++i)
     {
-        theme_settings.setValue(i.value().key,i.value().color.name());
+        settings.setValue(i.value().key,i.value().color.name());
     }
 
-    theme_settings.endGroup();
+    settings.endGroup();
 
-    theme_settings.beginGroup("Font");
+    settings.beginGroup("Font");
 
-    theme_settings.setValue("Family", font.family());
-    theme_settings.setValue("Size", font.pointSize());
+    settings.setValue("Family", font.family());
+    settings.setValue("Size", font.pointSize());
 
-    theme_settings.endGroup();
+    settings.endGroup();
 
 }
 
-
 void ColorScheme::load()
 {
-    QSettings theme_settings(mFileName,
-            QSettings::NativeFormat);
+    QSettings settings;
+    load(&settings);
+}
 
-    theme_settings.beginGroup("Colors");
+void ColorScheme::load(const QString & filename)
+{
+    QSettings settings(filename, QSettings::IniFormat);
+    load(&settings);
+}
+
+void ColorScheme::load(QSettings * settings)
+{
+    settings->beginGroup("Colors");
 
     QMap<int, color>::iterator i;
     for (i = colors.begin(); i != colors.end(); ++i)
     {
-        if (! theme_settings.contains(i.value().key))
-            theme_settings.setValue(i.value().key,i.value().color.name());
+        if (! settings->contains(i.value().key))
+            settings->setValue(i.value().key,i.value().color.name());
 
-        QString strNamedColor = theme_settings.value(i.value().key).toString();
+        QString strNamedColor = settings->value(i.value().key).toString();
 
         QColor qcColor = QColor(strNamedColor);
         if( qcColor.isValid() ){
@@ -86,25 +89,23 @@ void ColorScheme::load()
         }
     }
 
-    theme_settings.endGroup();
+    settings->endGroup();
 
-    theme_settings.beginGroup("Font");
+    settings->beginGroup("Font");
 
-    if (! theme_settings.contains("Family"))
-        theme_settings.setValue("Family", font.family());
-    if (! theme_settings.contains("Size"))
-        theme_settings.setValue("Size", font.pointSize());
+    if (! settings->contains("Family"))
+        settings->setValue("Family", font.family());
+    if (! settings->contains("Size"))
+        settings->setValue("Size", font.pointSize());
 
     font.setFamily(
-            theme_settings.value("Family", font.family()).toString()
+            settings->value("Family", font.family()).toString()
             );
     font.setPointSize(
-            theme_settings.value("Size", font.pointSize()).toInt()
+            settings->value("Size", font.pointSize()).toInt()
             );
 
-    theme_settings.endGroup();
-
-
+    settings->endGroup();
 
 }
 

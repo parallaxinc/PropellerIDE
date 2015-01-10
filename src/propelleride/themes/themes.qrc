@@ -1,0 +1,13 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/themes">
+    <file>duskocean.theme</file>
+    <file>ice.theme</file>
+    <file>IIe.theme</file>
+    <file>lame.theme</file>
+    <file>noire.theme</file>
+    <file>princess.theme</file>
+    <file>simple.theme</file>
+    <file>terminal.theme</file>
+    <file>termpaper.theme</file>
+</qresource>
+</RCC>
