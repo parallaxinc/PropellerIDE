@@ -16,7 +16,6 @@
 
 Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 {
-
     mainwindow = parent;
     propDialog = static_cast<MAINWINDOW*>(mainwindow)->propDialog;
     spinParser = 0;

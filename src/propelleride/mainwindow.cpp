@@ -132,6 +132,8 @@ void MainWindow::init()
     this->show();
 
     openLastFile();
+
+    this->installEventFilter(this);
 }
 
 int  MainWindow::isPackageSource(QString fileName)
@@ -313,6 +315,13 @@ void MainWindow::closeEvent(QCloseEvent *e)
     if(e) e->accept();
     qApp->exit(0);
 }
+
+void MainWindow::changeTab(int index)
+{
+    editorTabs->changeTab(index);
+//    setProject();
+}
+
 
 void MainWindow::newFile()
 {
@@ -1163,59 +1172,27 @@ void MainWindow::referenceTreeClicked(QModelIndex index)
 
 void MainWindow::closeFile()
 {
+    closeTab(editorTabs->currentIndex());
+}
+
+void MainWindow::closeTab(int index)
+{
     fileChangeDisable = true;
-    int n = editorTabs->currentIndex();
-    editorTabs->getEditor(n)->setPlainText("");
-    editorTabs->removeTab(n);
+
+    if (editorTabs->count() > 0)
+    {
+        editorTabs->getEditor(index)->close();
+        editorTabs->removeTab(index);
+    }
+
     if (editorTabs->count() == 0)
     {
         editorTabs->setStyleSheet("background-image: url(./propellerhat.png);"
                       "background-repeat: no-repeat;"
                       "background-position: center;");
     }
+
     fileChangeDisable = false;
-
-}
-
-void MainWindow::closeTab(int index)
-{
-    fileChangeDisable = true;
-    editorTabs->getEditor(index)->setPlainText("");
-    editorTabs->removeTab(index);
-    fileChangeDisable = false;
-}
-
-void MainWindow::nextTab()
-{
-    int n = editorTabs->currentIndex();
-    n++;
-    if (n > editorTabs->count()-1)
-        n = 0;
-    editorTabs->setCurrentIndex(n);
-    changeTab(n);
-}
-
-void MainWindow::previousTab()
-{
-    int n = editorTabs->currentIndex();
-    n--;
-    if (n < 0)
-        n = editorTabs->count()-1;
-    editorTabs->setCurrentIndex(n);
-    changeTab(n);
-
-
-}
-
-void MainWindow::changeTab(int index)
-{
-    if(index < 0) return;
-
-    if(!changeTabDisable)
-    {
-        editorTabs->getEditor(editorTabs->currentIndex())->setFocus();
-        setProject();
-    }
 }
 
 void MainWindow::addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile)
@@ -1523,6 +1500,7 @@ Editor *MainWindow::createEditor()
 {
     Editor *editor = new Editor(this);
     editor->initSpin(&spinParser);
+    editor->setAttribute(Qt::WA_DeleteOnClose);
 
     connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
 
@@ -1612,10 +1590,10 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
                 closeFile();
                 return true;
             case (Qt::Key_PageUp):
-                previousTab();
+                editorTabs->previousTab();
                 return true;
             case (Qt::Key_PageDown):
-                nextTab();
+                editorTabs->nextTab();
                 return true;
             }
         }

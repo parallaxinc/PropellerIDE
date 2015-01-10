@@ -21,5 +21,8 @@ public:
     Editor * getEditor(int num);
     void setEditor(int num, QString shortName, QString fileName, QString text);
 
+    void nextTab();
+    void previousTab();
+    void changeTab(int index);
 
 };

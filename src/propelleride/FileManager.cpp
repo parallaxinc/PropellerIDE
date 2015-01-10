@@ -35,3 +35,32 @@ void FileManager::setEditor(int num, QString shortName, QString fileName, QStrin
     setCurrentIndex(num);
 }
 
+
+void FileManager::nextTab()
+{
+    int n = currentIndex();
+    n++;
+    if (n > count()-1)
+        n = 0;
+    changeTab(n);
+}
+
+void FileManager::previousTab()
+{
+    int n = currentIndex();
+    n--;
+    if (n < 0)
+        n = count()-1;
+    changeTab(n);
+
+
+}
+
+void FileManager::changeTab(int index)
+{
+    setCurrentIndex(index);
+    if(index < 0) return;
+
+    getEditor(currentIndex())->setFocus();
+}
+

@@ -70,7 +70,6 @@ signals:
 
 public slots:
     void newFile();
-    void closeFile();
     void openFile(const QString &path = QString());
     bool saveAsCodec(QString fileName, Editor *ed);
     void saveFile();
@@ -101,10 +100,9 @@ public slots:
     void findMultilineComment(QTextCursor cur);
     void projectTreeClicked(QModelIndex index);
     void referenceTreeClicked(QModelIndex index);
+    void closeFile();
     void closeTab(int index = 0);
-    void nextTab();
-    void previousTab();
-    void changeTab(int index);
+    void changeTab(int index = 0);
     void setCurrentPort(int index);
     void connectButton(bool show = true);
     void terminalClosed();
