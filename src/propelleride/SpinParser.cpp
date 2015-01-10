@@ -77,12 +77,8 @@ QStringList SpinParser::spinFileTree(QString file, QString libpath)
         objectInfo(value, subnode, subfile);
         nodes.append(subfile);
     }
-    // Indent later. Just sort for now.
-#ifdef QT5
     nodes.sort(Qt::CaseInsensitive);
-#else
-    nodes.sort();
-#endif
+
     for(int n = 0; n < nodes.count(); n++) {
         QString ns = nodes.at(n);
         spinFiles.append(ns.mid(ns.lastIndexOf(":")+1));

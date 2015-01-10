@@ -18,7 +18,6 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 {
     mainwindow = parent;
     propDialog = static_cast<MAINWINDOW*>(mainwindow)->propDialog;
-    spinParser = 0;
 
     ctrlPressed = false;
     isSpin = false;
@@ -55,16 +54,6 @@ Editor::~Editor()
     delete cbAuto;
     delete highlighter;
     delete lineNumberArea;
-}
-
-void Editor::initSpin(SpinParser *parser)
-{
-    spinParser = parser;
-}
-
-SpinParser *Editor::getSpinParser()
-{
-    return spinParser;
 }
 
 void Editor::setHighlights()
@@ -226,7 +215,7 @@ void Editor::spinSuggest()
     QStringList toolTextList;
     if(text.length() > 2) {
         int added = 0;
-        QStringList list = spinParser->spinSymbols(fileName,"");
+        QStringList list = spinParser.spinSymbols(fileName,"");
         foreach(QString s, list) {
             s = s.mid(s.indexOf("\t")+1); // skip type field
             if(s.contains(text,Qt::CaseInsensitive)) {
@@ -793,7 +782,7 @@ int Editor::spinAutoComplete()
      */
     if(text.length() > 0) {
         qDebug() << "keyPressEvent object dot pressed" << text;
-        QStringList list = spinParser->spinSymbols(fileName,text);
+        QStringList list = spinParser.spinSymbols(fileName,text);
         if(list.count() == 0)
             return 0;
         cbAuto->clear();
@@ -836,7 +825,7 @@ int Editor::spinAutoComplete()
      */
     else {
         //qDebug() << "keyPressEvent local dot pressed";
-        QStringList list = spinParser->spinSymbols(fileName,"");
+        QStringList list = spinParser.spinSymbols(fileName,"");
         if(list.count() == 0)
             return 0;
         cbAuto->clear();
@@ -882,7 +871,7 @@ int  Editor::spinAutoCompleteCON()
     if(text.length() > 0) {
         connect(cbAuto, SIGNAL(activated(int)), this, SLOT(cbAutoSelected0insert(int)));
         qDebug() << "keyPressEvent # pressed" << text;
-        QStringList list = spinParser->spinConstants(fileName,text);
+        QStringList list = spinParser.spinConstants(fileName,text);
         if(list.count() == 0)
             return 0;
         cbAuto->clear();
@@ -908,7 +897,7 @@ int  Editor::spinAutoCompleteCON()
     else {
         connect(cbAuto, SIGNAL(activated(int)), this, SLOT(cbAutoSelected(int)));
         qDebug() << "keyPressEvent local # pressed";
-        QStringList list = spinParser->spinConstants(fileName,"");
+        QStringList list = spinParser.spinConstants(fileName,"");
         if(list.count() == 0)
             return 0;
         cbAuto->clear();

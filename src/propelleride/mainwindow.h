@@ -26,8 +26,6 @@
 #include "ReferenceTree.h"
 #include "FileManager.h"
 
-#define untitledstr "Untitled"
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -150,7 +148,7 @@ private:
     void setupToolBars();
     void setupProjectTools(QSplitter *vsplit);
     void addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile);
-    int isFileOpen(QString fileName);
+    int  isFileOpen(QString fileName);
     void openTreeFile(QString fileName);
     void updateProjectTree(QString fileName);
     void updateSpinProjectTree(QString fileName);
@@ -215,8 +213,6 @@ private:
     bool        fileChangeDisable;
     bool        changeTabDisable;
 
-    SpinParser  spinParser;
-
     QString     projectFile;
     ReferenceTree   *projectTree;
     ReferenceTree   *referenceTree;
@@ -245,8 +241,8 @@ private:
 
     int progMax;
     int progCount;
-    QLabel *sizeLabel;
-    QLabel *msgLabel ;
+    QLabel sizeLabel;
+    QLabel msgLabel;
     QProgressBar *progress;
     QString compileResult;
 
@@ -266,8 +262,5 @@ signals:
 
 public slots:
     void setStatusDone(bool done);
-
-//protected:
-//    virtual void keyPressEvent(QKeyEvent *e);
 
 };

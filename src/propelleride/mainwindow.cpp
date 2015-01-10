@@ -56,9 +56,7 @@ void MainWindow::init()
     /* status bar for progressbar */
     QStatusBar *statusBar = new QStatusBar();
 
-    sizeLabel = new QLabel;
-    sizeLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    msgLabel  = new QLabel;
+    sizeLabel.setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
     progress = new QProgressBar();
     //progress->setMaximumSize(100,25);
@@ -68,8 +66,8 @@ void MainWindow::init()
     progress->setTextVisible(false);
     progress->setVisible(false);
 
-    statusBar->addPermanentWidget(msgLabel,70);
-    statusBar->addPermanentWidget(sizeLabel,15);
+    statusBar->addPermanentWidget(&msgLabel,70);
+    statusBar->addPermanentWidget(&sizeLabel,15);
     statusBar->addPermanentWidget(progress,15);
 
     this->setStatusBar(statusBar);
@@ -320,22 +318,19 @@ void MainWindow::closeEvent(QCloseEvent *e)
 void MainWindow::changeTab(int index)
 {
     editorTabs->changeTab(index);
-//    setProject();
+    setProject();
 }
 
 void MainWindow::newFile()
 {
-    changeTabDisable = true;
-    fileChangeDisable = true;
     editorTabs->setStyleSheet("");
 
     Editor *editor = new Editor(this);
-    editor->initSpin(&spinParser);
     editor->setAttribute(Qt::WA_DeleteOnClose);
 
     connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
 
-    editorTabs->addTab(editor,(const QString&)untitledstr);
+    editorTabs->addTab(editor,tr("Untitled"));
     int tab = editorTabs->count()-1;
     editorTabs->setCurrentIndex(tab);
     editorTabs->setTabToolTip(tab, QString(""));
@@ -348,10 +343,6 @@ void MainWindow::newFile()
         delete referenceModel;
         referenceModel = new TreeModel("", this);
     }
-    spinParser.clearDB();
-
-    fileChangeDisable = false;
-    changeTabDisable = false;
 }
 
 void MainWindow::openFile(const QString &path)
@@ -396,7 +387,7 @@ void MainWindow::openFileName(QString fileName)
                     }
                 }
             }
-            if(editorTabs->tabText(0) == untitledstr) {
+            if(editorTabs->tabText(0) == tr("Untitled")) {
                 editorTabs->setEditor(0, sname, fileName, data);
                 setProject();
                 return;
@@ -595,11 +586,12 @@ void MainWindow::setProject()
     setWindowTitle( pathpieces.value( pathpieces.length()-1) + " - " +
                     QCoreApplication::applicationName()
                     );
-    sizeLabel->setText("");
-    msgLabel->setText("");
+    sizeLabel.setText("");
+    msgLabel.setText("");
 
     QString text = editorTabs->getEditor(index)->toPlainText();
     updateProjectTree(fileName);
+
     if(leftSplit->isVisible()) {
         updateReferenceTree(fileName,text);
     }
@@ -821,8 +813,8 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     updateProjectTree(fileName);
     // updateReferenceTree(fileName,text);
 
-    sizeLabel->setText("");
-    msgLabel->setText("");
+    sizeLabel.setText("");
+    msgLabel.setText("");
 
     progress->setValue(0);
     progress->setVisible(true);
@@ -834,7 +826,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     if(fileName.contains(".spin")) {
         statusDialog->init("Compiling Program", this->shortFileName(this->projectFile));
         spinBuilder->setParameters(spinCompiler, spinIncludes, spinCompilerPath, projectFile, compileResult);
-        spinBuilder->setObjects(msgLabel, sizeLabel, progress, cbPort);
+        spinBuilder->setObjects(&msgLabel, &sizeLabel, progress, cbPort);
         spinBuilder->setLoader(spinLoader);
 
         statusDialog->stop();
@@ -1186,7 +1178,8 @@ void MainWindow::zipFiles()
         return;
     }
     QString spinLibPath     = propDialog->getSpinLibraryString();
-    QStringList fileTree    = spinParser.spinFileTree(fileName, spinLibPath);
+    QStringList fileTree    = editorTabs->getEditor(editorTabs->currentIndex()
+            )->spinParser.spinFileTree(fileName, spinLibPath);
     if(fileTree.count() > 0) {
         zipper.makeZip(fileName, fileTree, spinLibPath);
     }
@@ -1217,7 +1210,7 @@ void MainWindow::updateProjectTree(QString fileName)
 void MainWindow::updateSpinProjectTree(QString fileName)
 {
     /* for spin we always parse the program and stuff the file list */
-    QStringList flist = spinParser.spinFileTree(fileName, propDialog->getSpinLibraryString());
+    QStringList flist = editorTabs->getEditor(editorTabs->currentIndex())->spinParser.spinFileTree(fileName, propDialog->getSpinLibraryString());
     for(int n = 0; n < flist.count(); n ++) {
         QString s = flist[n];
         //qDebug() << s;
@@ -1254,7 +1247,8 @@ void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QSt
 {
     QString path = filePathName(fileName);
 
-    QStringList mlist = spinParser.spinMethods(fileName, objname);
+    QStringList mlist = editorTabs->getEditor(
+            editorTabs->currentIndex())->spinParser.spinMethods(fileName,  objname);
 
     // move objects to end of the list
     for(int n = mlist.count()-1; n > -1; n--) {

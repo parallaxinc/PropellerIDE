@@ -24,15 +24,16 @@ public:
     Editor(QWidget *parent);
     virtual ~Editor();
 
-    void initSpin(SpinParser *parser);
-    SpinParser *getSpinParser();
 
     void setHighlights();
     void setLineNumber(int num);
 
     void clearCtrlPressed();
 
+    SpinParser spinParser;
+
 private:
+
     int  autoIndent();
     int  braceMatchColumn();
     bool isCommentOpen(int line);
@@ -68,7 +69,6 @@ private:
     QTextCursor lastCursor;
     QPoint  mousepos;
     bool    ctrlPressed;
-    SpinParser  *spinParser;
     bool    isSpin;
     Highlighter *highlighter;
 
