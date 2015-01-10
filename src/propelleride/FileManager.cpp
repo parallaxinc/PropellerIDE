@@ -5,9 +5,8 @@ FileManager::FileManager(QWidget *parent) :
 {
     setTabsClosable(true);
     setMovable(true);
-    setStyleSheet("background-image: url(./propellerhat.png);"
-                  "background-repeat: no-repeat;"
-                  "background-position: center;");
+
+    createBackgroundImage();
 }
 
 void FileManager::saveFile()
@@ -20,21 +19,29 @@ void FileManager::newFile()
 
 void FileManager::closeFile()
 {
+    closeTab(currentIndex());
 }
 
-Editor * FileManager::getEditor(int num)
+void FileManager::closeTab(int index)
 {
-    return (Editor *)widget(num);
+    if (count() > 0)
+    {
+        getEditor(index)->close();
+        removeTab(index);
+    }
+
+    if (count() == 0)
+    {
+        createBackgroundImage();
+    }
 }
 
-void FileManager::setEditor(int num, QString shortName, QString fileName, QString text)
+void FileManager::createBackgroundImage()
 {
-    getEditor(num)->setPlainText(text);
-    setTabText(num,shortName);
-    setTabToolTip(num,fileName);
-    setCurrentIndex(num);
+    setStyleSheet("background-image: url(:/icons/propellerhat.png);"
+                  "background-repeat: no-repeat;"
+                  "background-position: center;");
 }
-
 
 void FileManager::nextTab()
 {
@@ -62,5 +69,18 @@ void FileManager::changeTab(int index)
     if(index < 0) return;
 
     getEditor(currentIndex())->setFocus();
+}
+
+Editor * FileManager::getEditor(int num)
+{
+    return (Editor *)widget(num);
+}
+
+void FileManager::setEditor(int num, QString shortName, QString fileName, QString text)
+{
+    getEditor(num)->setPlainText(text);
+    setTabText(num,shortName);
+    setTabToolTip(num,fileName);
+    setCurrentIndex(num);
 }
 

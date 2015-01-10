@@ -2,6 +2,16 @@
 
 #include <QToolBar> 
 
+void MainWindow::addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile)
+{
+    const QSize buttonSize(24, 24);
+    btn->setIcon(QIcon(QPixmap(imgfile.toLatin1())));
+    btn->setMinimumSize(buttonSize);
+    btn->setMaximumSize(buttonSize);
+    btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    bar->addWidget(btn);
+}
+
 void MainWindow::setupToolBars()
 {
     fileToolBar = addToolBar(tr("File"));

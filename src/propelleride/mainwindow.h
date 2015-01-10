@@ -100,8 +100,6 @@ public slots:
     void findMultilineComment(QTextCursor cur);
     void projectTreeClicked(QModelIndex index);
     void referenceTreeClicked(QModelIndex index);
-    void closeFile();
-    void closeTab(int index = 0);
     void changeTab(int index = 0);
     void setCurrentPort(int index);
     void connectButton(bool show = true);
@@ -137,7 +135,6 @@ private:
     void getApplicationSettings(bool complain);
     int  checkCompilerInfo();
     QStringList getCompilerParameters(QString compilerOptions);
-    bool isFileUTF16(QFile *file);
     void openFileName(QString fileName);
     void checkAndSaveFiles();
     Editor *createEditor();

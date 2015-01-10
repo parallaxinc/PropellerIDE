@@ -29,6 +29,17 @@ void MainWindow::init()
 
     connect(spinBuilder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
 
+    /* main container */
+    setWindowTitle(QCoreApplication::applicationName());
+    QSplitter *vsplit = new QSplitter(this);
+    setCentralWidget(vsplit);
+    /* project tools */
+    setupProjectTools(vsplit);
+
+    /* minimum window height */
+    this->setMinimumHeight(500);
+
+
     /* setup gui components */
     setupFileMenu();
     setupEditMenu();
@@ -38,16 +49,6 @@ void MainWindow::init()
 
     setupToolBars();
 
-    /* main container */
-    setWindowTitle(QCoreApplication::applicationName());
-    QSplitter *vsplit = new QSplitter(this);
-    setCentralWidget(vsplit);
-
-    /* minimum window height */
-    this->setMinimumHeight(500);
-
-    /* project tools */
-    setupProjectTools(vsplit);
 
     /* start with an empty file if fresh install */
     newFile();
@@ -322,16 +323,25 @@ void MainWindow::changeTab(int index)
 //    setProject();
 }
 
-
 void MainWindow::newFile()
 {
     changeTabDisable = true;
     fileChangeDisable = true;
     editorTabs->setStyleSheet("");
-    editorTabs->addTab(createEditor(),(const QString&)untitledstr);
+
+    Editor *editor = new Editor(this);
+    editor->initSpin(&spinParser);
+    editor->setAttribute(Qt::WA_DeleteOnClose);
+
+    connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
+
+    editorTabs->addTab(editor,(const QString&)untitledstr);
     int tab = editorTabs->count()-1;
     editorTabs->setCurrentIndex(tab);
     editorTabs->setTabToolTip(tab, QString(""));
+
+    editorTabs->getEditor(editorTabs->currentIndex())->installEventFilter(this);
+
     delete projectModel;
     projectModel = new TreeModel("", this);
     if(leftSplit->isVisible()) {
@@ -339,8 +349,6 @@ void MainWindow::newFile()
         referenceModel = new TreeModel("", this);
     }
     spinParser.clearDB();
-
-    editorTabs->getEditor(editorTabs->currentIndex())->installEventFilter(this);
 
     fileChangeDisable = false;
     changeTabDisable = false;
@@ -1170,41 +1178,6 @@ void MainWindow::referenceTreeClicked(QModelIndex index)
     }
 }
 
-void MainWindow::closeFile()
-{
-    closeTab(editorTabs->currentIndex());
-}
-
-void MainWindow::closeTab(int index)
-{
-    fileChangeDisable = true;
-
-    if (editorTabs->count() > 0)
-    {
-        editorTabs->getEditor(index)->close();
-        editorTabs->removeTab(index);
-    }
-
-    if (editorTabs->count() == 0)
-    {
-        editorTabs->setStyleSheet("background-image: url(./propellerhat.png);"
-                      "background-repeat: no-repeat;"
-                      "background-position: center;");
-    }
-
-    fileChangeDisable = false;
-}
-
-void MainWindow::addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile)
-{
-    const QSize buttonSize(24, 24);
-    btn->setIcon(QIcon(QPixmap(imgfile.toLatin1())));
-    btn->setMinimumSize(buttonSize);
-    btn->setMaximumSize(buttonSize);
-    btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    bar->addWidget(btn);
-}
-
 void MainWindow::zipFiles()
 {
     int n = this->editorTabs->currentIndex();
@@ -1496,17 +1469,6 @@ QString MainWindow::filePathName(QString fileName)
     return rets;
 }
 
-Editor *MainWindow::createEditor()
-{
-    Editor *editor = new Editor(this);
-    editor->initSpin(&spinParser);
-    editor->setAttribute(Qt::WA_DeleteOnClose);
-
-    connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
-
-    return editor;
-}
-
 void MainWindow::setupProjectTools(QSplitter *vsplit)
 {
     int handlewidth = 8;
@@ -1552,7 +1514,7 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
 
     // project editor tabs
     editorTabs = new FileManager(this);
-    connect(editorTabs,SIGNAL(tabCloseRequested(int)),this,SLOT(closeTab(int)));
+    connect(editorTabs,SIGNAL(tabCloseRequested(int)),editorTabs,SLOT(closeTab(int)));
     connect(editorTabs,SIGNAL(currentChanged(int)),this,SLOT(changeTab(int)));
     findSplit->addWidget(editorTabs);
 
@@ -1587,7 +1549,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
                 newFile();
                 return true;
             case (Qt::Key_W):
-                closeFile();
+                editorTabs->closeFile();
                 return true;
             case (Qt::Key_PageUp):
                 editorTabs->previousTab();
