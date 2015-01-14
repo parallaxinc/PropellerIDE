@@ -25,34 +25,16 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include "ColorScheme.h"
+
 #include <QLabel>
 
-QT_BEGIN_NAMESPACE
-class QColor;
-class QPixmap;
-class QPainter;
-class QMouseEvent;
-class QColorDialog;
-QT_END_NAMESPACE
-
-/**
- * @brief Widget for selecting color.
- *
- */
 class ColorChooser : public QLabel
 {
     Q_OBJECT
 
 public:
-    /**
-     * @brief Constructor
-     *
-     * @param r Red
-     * @param g Green
-     * @param b Blue
-     * @param parent Pointer for parent.
-     */
-    explicit ColorChooser(int newkey,
+    explicit ColorChooser(ColorScheme::Color newkey,
                           QString hex,
                           QWidget *parent = 0);
     ~ColorChooser();
@@ -61,22 +43,13 @@ private:
     QColor *mCurrentColor;
     QPixmap *mPixmapColor;
     QPainter *mPainterColor;
-    int key;
+    ColorScheme::Color key;
 
 public slots:
-    /**
-     * @brief Slot for set color to widget.
-     *
-     * @param color Color to set.
-     */
     void setColor(const QColor &color);
+    void updateColor();
 
 signals:
-    /**
-     * @brief Signal for sending choosen color
-     *
-     * @param Color to send
-     */
     void sendColor(int, const QColor &);
 
 protected:

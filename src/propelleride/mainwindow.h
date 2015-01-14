@@ -41,12 +41,6 @@ public:
 public:
     QTextDocument::FindFlag getFlags(int prev = 0);
 
-    QString getFindText();
-    void    clearFindText();
-    QString getReplaceText();
-    void    clearReplaceText();
-    void    setFindText(QString text);
-
     bool showBeginMessage(QString type);
     bool showEndMessage(QString type);
 

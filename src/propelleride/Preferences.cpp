@@ -269,10 +269,10 @@ void Preferences::setupHighlight()
 
     box->setLayout(vlayout);
 
-    QMap<int, ColorScheme::color> colors = 
+    QMap<ColorScheme::Color, ColorScheme::color> colors = 
         currentTheme->getColorList();
 
-    QMap<int, ColorScheme::color>::const_iterator i;
+    QMap<ColorScheme::Color, ColorScheme::color>::const_iterator i;
     for (i = colors.constBegin(); i != colors.constEnd(); ++i)
     {
         QString prettyname = QString(i.value().key);
@@ -292,8 +292,10 @@ void Preferences::setupHighlight()
         colorPicker->setStatusTip(prettyname);
         colorPicker->setToolTip(prettyname);
     
-        connect(colorPicker, SIGNAL(sendColor(int, const QColor &)), 
-                this,        SLOT(updateColor(int, const QColor &)) );
+        connect(colorPicker,SIGNAL(sendColor(int, const QColor &)), 
+                this,       SLOT(updateColor(int, const QColor &)) );
+        connect(this,       SIGNAL(updateColors()), 
+                colorPicker,SLOT(updateColor()) );
     }
 }
 

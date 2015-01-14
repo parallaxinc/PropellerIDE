@@ -73,9 +73,7 @@ HEADERS  += \
     FileManager.h \
 
 TRANSLATIONS += \
-    translations/propelleride_zn.ts \
-    translations/propelleride_de.ts \
-    translations/propelleride_vi.ts
+    translations/propelleride_zn.ts
 
 OTHER_FILES +=
 

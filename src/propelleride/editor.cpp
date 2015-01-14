@@ -1173,7 +1173,7 @@ void Editor::updateColors()
     colors = currentTheme->getColorList();
     colorsAlt = colors;
 
-    QMap<int, ColorScheme::color>::iterator i;
+    QMap<ColorScheme::Color, ColorScheme::color>::iterator i;
     for (i = colorsAlt.begin(); i != colorsAlt.end(); ++i)
     {
         // little fun formula to create two editor tones when color updated.
@@ -1215,7 +1215,7 @@ void Editor::updateBackgroundColors()
     QTextBlock currBlock = document()->firstBlock();
     while (1)
     {
-        int newColor = -1;
+        ColorScheme::Color newColor = ColorScheme::Invalid;
 
         if ( currBlock.text().contains('{') )
         {
@@ -1253,10 +1253,10 @@ void Editor::updateBackgroundColors()
 
         if ( ( nInComment > 0 ) || ( currBlock.text().length() > 3 && currBlock.text().at(3).isLetterOrNumber() ) )
         {
-            newColor = -1;
+            newColor = ColorScheme::Invalid;
         }
 
-        if (newColor != -1)
+        if (newColor != ColorScheme::Invalid)
         {
             QColor newBlockColor = colors[newColor].color;
             if (newColor == prevColor)

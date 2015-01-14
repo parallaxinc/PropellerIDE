@@ -42,7 +42,7 @@ void ColorScheme::save()
 
     settings.beginGroup("Colors");
 
-    QMap<int, color>::iterator i;
+    QMap<ColorScheme::Color, color>::iterator i;
     for (i = colors.begin(); i != colors.end(); ++i)
     {
         settings.setValue(i.value().key,i.value().color.name());
@@ -75,7 +75,7 @@ void ColorScheme::load(QSettings * settings)
 {
     settings->beginGroup("Colors");
 
-    QMap<int, color>::iterator i;
+    QMap<ColorScheme::Color, color>::iterator i;
     for (i = colors.begin(); i != colors.end(); ++i)
     {
         if (! settings->contains(i.value().key))
@@ -119,7 +119,7 @@ QColor ColorScheme::getColor(ColorScheme::Color key)
     return colors[key].color;
 };
 
-const QMap<int, ColorScheme::color>& ColorScheme::getColorList() const
+const QMap<ColorScheme::Color, ColorScheme::color>& ColorScheme::getColorList() const
 {
     return colors;
 }

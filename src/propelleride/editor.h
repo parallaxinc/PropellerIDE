@@ -54,8 +54,8 @@ private:
     QPoint keyPopPoint(QTextCursor cursor);
 
     ColorScheme * currentTheme;
-    QMap<int, ColorScheme::color> colors;
-    QMap<int, ColorScheme::color> colorsAlt;
+    QMap<ColorScheme::Color, ColorScheme::color> colors;
+    QMap<ColorScheme::Color, ColorScheme::color> colorsAlt;
 
 protected:
     void keyPressEvent(QKeyEvent* e);

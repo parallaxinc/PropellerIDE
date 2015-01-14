@@ -191,16 +191,19 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
 
 void MainWindow::showFindFrame()
 {
-    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
-    if(editor->textCursor().selectedText().length() > 0) {
-        setFindText(editor->textCursor().selectedText());
+    if (editorTabs->count() > 0)
+    {
+        Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
+        if(editor->textCursor().selectedText().length() > 0) {
+            findEdit->setText(editor->textCursor().selectedText());
+        }
+        else {
+            findEdit->clear();
+        }
+    
+        findEdit->setFocus();
+        findFrame->setVisible(true);
     }
-    else {
-        clearFindText();
-    }
-
-    findEdit->setFocus();
-    findFrame->setVisible(true);
 }
 
 void MainWindow::hideFindFrame()
@@ -314,19 +317,6 @@ void MainWindow::findPrevClicked()
     }
 }
 
-QString MainWindow::getFindText()
-{
-    return findText;
-}
-void MainWindow::clearFindText()
-{
-    findEdit->clear();
-}
-void MainWindow::setFindText(QString text)
-{
-    return findEdit->setText(text);
-}
-
 void MainWindow::replaceClicked()
 {
     QString text = replaceEdit->text();
@@ -413,16 +403,6 @@ void MainWindow::replaceAllClicked()
     QMessageBox::information(this, tr("Replace Done"),
             tr("Replaced %1 instances of \"%2\".").arg(count).arg(text));
 }
-
-QString MainWindow::getReplaceText()
-{
-    return replaceText;
-}
-void MainWindow::clearReplaceText()
-{
-    replaceEdit->clear();
-}
-
 
 bool MainWindow::showFindMessage(QString text)
 {

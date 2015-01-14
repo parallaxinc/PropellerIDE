@@ -21,14 +21,10 @@ public:
     };
 
 
-private:
-
-    QMap<int, color> colors;
-    QFont font;
-
 public:
 
     enum Color {
+        Invalid,
         /* Block Colors */
         ConBG,
         VarBG,
@@ -48,6 +44,10 @@ public:
 
     ColorScheme(QObject * parent = 0);
 
+private:
+
+    QMap<ColorScheme::Color, color> colors;
+    QFont font;
 
 public slots:
 
@@ -65,6 +65,6 @@ public:
     QFont getFont();
     void setFont(const QFont & newfont);
 
-    const QMap<int, color>& getColorList() const;
+    const QMap<ColorScheme::Color, color>& getColorList() const;
 
 };
