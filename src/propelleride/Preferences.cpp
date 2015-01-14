@@ -247,9 +247,14 @@ void Preferences::setupHighlight()
         themeEdit.addItem(prettyname, filename);
     }
 
+    QSettings settings;
+
+    // this routine is repeated often and needs to be abstracted
     themeEdit.setCurrentIndex(themeEdit.findData(
-                QSettings().value("Theme", ":/themes/Default.theme").toString())
+                settings.value("Theme", ":/themes/Default.theme").toString())
             );
+    settings.setValue("Theme",themeEdit.itemData(themeEdit.currentIndex()));
+    qDebug() << "themeEdit" << themeEdit.currentText();
 
 
     themelayout->addWidget(&themeEdit);
