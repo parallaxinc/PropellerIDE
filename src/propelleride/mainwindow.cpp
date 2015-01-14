@@ -362,6 +362,7 @@ void MainWindow::openFile(const QString &path)
 void MainWindow::openFileName(QString fileName)
 {
     QString data;
+    qDebug() << "Attempting to open file " << fileName;
     if (!fileName.isEmpty()) {
         QFile file(fileName);
         if (file.open(QFile::ReadOnly))
@@ -1088,6 +1089,7 @@ int MainWindow::isFileOpen(QString fileName)
 {
     QString tabName;
     fileName = fileName.trimmed();
+
     for(int n = editorTabs->count()-1; n > -1; n--) {
         tabName = editorTabs->tabToolTip(n);
         tabName = tabName.trimmed();
@@ -1095,6 +1097,7 @@ int MainWindow::isFileOpen(QString fileName)
             return n;
         }
     }
+
     return -1;
 }
 
@@ -1107,17 +1110,29 @@ void MainWindow::openTreeFile(QString fileName)
     QString userPath = QFileInfo(userFile).path();
     QFile file;
     QString fileToOpen;
-    if(file.exists(userPath+fileName)) {
-        fileToOpen = userPath+fileName;
+
+    if (file.exists(QDir(userPath).filePath(fileName)))
+    {
+        fileToOpen = QDir(userPath).filePath(fileName);
+        qDebug() << "File in " << userPath;
     }
-    else if(file.exists(spinIncludes+fileName)) {
-        fileToOpen = spinIncludes+fileName;
+    else if (file.exists(QDir(spinIncludes).filePath(fileName)))
+    {
+        fileToOpen = QDir(spinIncludes).filePath(fileName);
+        qDebug() << "File in " << spinIncludes;
     }
+    else
+    {
+        qDebug() << "File not found!";
+    }
+
     int index = isFileOpen(fileToOpen);
-    if(index < 0)
+
+    if (index < 0)
         openFileName(fileToOpen);
     else
         editorTabs->setCurrentIndex(index);
+
     QApplication::restoreOverrideCursor();
 }
 

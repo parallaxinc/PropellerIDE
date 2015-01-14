@@ -83,6 +83,7 @@ FORMS += \
 
 RESOURCES += \
     icons/icons.qrc \
+    fonts/fonts.qrc \
     themes/themes.qrc \
 
 CODECFORTR = UTF-8

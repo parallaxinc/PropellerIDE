@@ -9,6 +9,8 @@ Syntax_Functions=#000000
 Syntax_Keywords=#000000
 Syntax_Comments=#ff0000
 Syntax_Numbers=#000000
-Syntax_Preprocessor=#000000
 Syntax_Quotes=#000000
 Syntax_Text=#000000
+
+[Font]
+Family=FreeMono Mono

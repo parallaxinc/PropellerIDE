@@ -117,7 +117,9 @@ public slots:
     void accept();
     void reject();
     void updateColor(int key, const QColor & color);
-    void load(const QString & filename);
+
+private slots:
+    void loadTheme(int index);
 
 private:
 
@@ -139,6 +141,8 @@ private:
     QLineEdit   tabspaceLedit;
     QPushButton clearSettingsButton;
     QPushButton fontButton;
+
+    QComboBox   themeEdit;
 
     bool        autoCompleteEnableSaved;
     bool        spinSuggestEnableSaved;

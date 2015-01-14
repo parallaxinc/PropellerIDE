@@ -15,7 +15,7 @@ PathSelector::PathSelector(
     label->setMinimumWidth(70);
 
     lineEdit = new QLineEdit(this);
-    lineEdit->setMinimumWidth(300);
+    lineEdit->setMinimumWidth(200);
     lineEdit->setToolTip(errormessage);
 
     layout = new QHBoxLayout(this);

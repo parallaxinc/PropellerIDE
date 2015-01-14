@@ -36,9 +36,12 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
+    connect(&themeEdit, SIGNAL(currentIndexChanged(int)), this, SLOT(loadTheme(int)));
+
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(&tabWidget);
     layout->addWidget(buttonBox);
+    layout->setSizeConstraint(QLayout::SetFixedSize);
     setLayout(layout);
 
     setWindowFlags(Qt::Tool);
@@ -207,9 +210,10 @@ void Preferences::updateColor(int key, const QColor & color)
     emit updateColors();
 }
 
-void Preferences::load(const QString & filename)
+void Preferences::loadTheme(int index)
 {
-    currentTheme->load(filename);
+    currentTheme->load(themeEdit.itemData(index).toString());
+
     emit updateColors();
     emit updateFonts();
 }
@@ -221,33 +225,36 @@ void Preferences::setupHighlight()
     QVBoxLayout *vlayout = new QVBoxLayout();
     box->setLayout(vlayout);
 
-    tabWidget.addTab(box,tr("Highlighting"));
+    tabWidget.addTab(box,tr("Appearance"));
 
     // row 1
     QHBoxLayout * themelayout = new QHBoxLayout(this);
     QGroupBox * themebox = new QGroupBox(tr("Themes"));
     themebox->setLayout(themelayout);
 
-    QComboBox * themeedit = new QComboBox(this);
-    QPushButton * themesave = new QPushButton(tr("Save"),this);
-    QPushButton * themeload = new QPushButton(tr("Load"),this);
+//    QPushButton * themesave = new QPushButton(tr("Save"),this);
+//    QPushButton * themeload = new QPushButton(tr("Load"),this);
 
-    themeedit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    themesave->setSizePolicy(QSizePolicy::Minimum,   QSizePolicy::Preferred);
-    themeload->setSizePolicy(QSizePolicy::Minimum,   QSizePolicy::Preferred);
-
-    connect(themeedit, SIGNAL(activated(const QString &)), this, SLOT(load(const QString &)));
+    themeEdit.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+//    themesave->setSizePolicy(QSizePolicy::Minimum,   QSizePolicy::Minimum);
+//    themeload->setSizePolicy(QSizePolicy::Minimum,   QSizePolicy::Minimum);
 
     QDirIterator it(":/themes", QDirIterator::Subdirectories);
     while (it.hasNext())
     {
-        QString thing = it.next();
-        themeedit->addItem(thing);
+        QString filename = it.next();
+        QString prettyname = QFileInfo(filename).baseName().replace("_"," ");
+        themeEdit.addItem(prettyname, filename);
     }
 
-    themelayout->addWidget(themeedit);
-    themelayout->addWidget(themesave);
-    themelayout->addWidget(themeload);
+    themeEdit.setCurrentIndex(themeEdit.findData(
+                QSettings().value("Theme", ":/themes/Default.theme").toString())
+            );
+
+
+    themelayout->addWidget(&themeEdit);
+//    themelayout->addWidget(themesave);
+//    themelayout->addWidget(themeload);
 
     vlayout->addWidget(themebox);
 
@@ -338,6 +345,7 @@ void Preferences::accept()
 
     settings.setValue(enableAutoComplete,autoCompleteEnable.isChecked());
     settings.setValue(enableSpinSuggest,spinSuggestEnable.isChecked());
+    settings.setValue("Theme",themeEdit.itemData(themeEdit.currentIndex()));
 
     currentTheme->save();
     emit updateColors();
@@ -357,6 +365,11 @@ void Preferences::reject()
 
     autoCompleteEnable.setChecked(autoCompleteEnableSaved);
     spinSuggestEnable.setChecked(spinSuggestEnableSaved);
+
+    themeEdit.setCurrentIndex(
+            themeEdit.findData(QSettings().value("Theme").toString())
+            );
+
 
     currentTheme->load();
     emit updateColors();

@@ -1,13 +1,15 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/themes">
-    <file>duskocean.theme</file>
-    <file>ice.theme</file>
+    <file>Default.theme</file>
+    <file>Classic.theme</file>
+    <file>Dusk_Ocean.theme</file>
+    <file>Ice.theme</file>
     <file>IIe.theme</file>
-    <file>lame.theme</file>
-    <file>noire.theme</file>
-    <file>princess.theme</file>
-    <file>simple.theme</file>
-    <file>terminal.theme</file>
-    <file>termpaper.theme</file>
+    <file>Lame.theme</file>
+    <file>Noire.theme</file>
+    <file>Princess.theme</file>
+    <file>Simple.theme</file>
+    <file>Terminal.theme</file>
+    <file>Term_Paper.theme</file>
 </qresource>
 </RCC>

@@ -17,6 +17,13 @@ int main(int argc, char *argv[])
         QApplication::setStyle("Fusion");
     }
 #endif
+
+    QDirIterator it(":/fonts", QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        QFontDatabase::addApplicationFont(it.next());
+    }
+
 //    QTranslator translator;
 //    translator.load("translations/propelleride_zn");
 //    app.installTranslator(&translator);

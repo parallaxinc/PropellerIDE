@@ -9,10 +9,8 @@ Syntax_Comments=#028e04
 Syntax_Functions=#0000ff
 Syntax_Keywords=#003c79
 Syntax_Numbers=#ff00ff
-Syntax_Preprocessor=#c8c8c8
 Syntax_Quotes=#ad0c00
 Syntax_Text=#000000
 
 [Font]
-Family=Droid Sans Mono
-Size=15
+Family=FreeMono Mono

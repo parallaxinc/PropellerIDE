@@ -28,10 +28,7 @@ void ColorScheme::defaults()
     colors[SyntaxQuotes]        = (color) { Qt::red               , "Syntax_Quotes"        };
     colors[SyntaxComments]      = (color) { Qt::darkGreen         , "Syntax_Comments"      };
 
-    // Editor font
-    font = QFont("Monospace");
-    font.setStyleHint(QFont::TypeWriter);
-    font.setFixedPitch(true);
+    setFont(QFont("Monospace"));
     font.setPointSize(14);
 }
 
@@ -127,6 +124,8 @@ const QMap<ColorScheme::Color, ColorScheme::color>& ColorScheme::getColorList() 
 void ColorScheme::setFont(const QFont & newfont)
 {
     font = newfont;
+    font.setStyleHint(QFont::TypeWriter);
+    font.setFixedPitch(true);
 }
 
 QFont ColorScheme::getFont()
