@@ -22,8 +22,13 @@ public:
 public slots:
     void newFile();
 
+    void save();
+    void save(int index);
+    void saveAs();
+    void saveFile(const QString & fileName, int index);
+
     void closeFile();
-    void closeTab(int index = 0);
+    void closeFile(int index);
 
     void nextTab();
     void previousTab();

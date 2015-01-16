@@ -65,10 +65,6 @@ public slots:
     // file menu
     void newFile();
     void openFile(const QString &path = QString());
-    void save();
-    void save(int index);
-    void saveAs();
-    void saveFile(const QString & fileName, int index);
     void printFile();
     void zipFiles();
 

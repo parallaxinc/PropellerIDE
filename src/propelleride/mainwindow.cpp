@@ -227,7 +227,7 @@ bool MainWindow::exitSave()
             mbox.setInformativeText(tr("Save File: ") + tabName.mid(0,tabName.indexOf(" *")) + tr(" ?"));
             if(saveAll)
             {
-                save(tab);
+                editorTabs->save(tab);
             }
             else
             {
@@ -242,7 +242,7 @@ bool MainWindow::exitSave()
                         break;
                     case QMessageBox::Save:
                         // Save was clicked
-                        save(tab);
+                        editorTabs->save(tab);
                         break;
                     case QMessageBox::SaveAll:
                         // save all was clicked
@@ -375,91 +375,16 @@ void MainWindow::openFileName(QString fileName)
     }
 }
 
-void MainWindow::save()
-{
-    int index = editorTabs->currentIndex();
-    save(index);
-}
-
-void MainWindow::save(int index)
-{
-    QString fileName = editorTabs->tabToolTip(index);
-
-    if (fileName.isEmpty())
-        saveAs();
-    else
-        saveFile(fileName, index);
-}
-
-
-void MainWindow::saveAs()
-{
-    int n = editorTabs->currentIndex();
-
-    QString fileName = QFileDialog::getSaveFileName(this,
-            tr("Save File As..."), 
-            QDir(lastDirectory).filePath(editorTabs->tabText(n)), 
-            "Spin Files (*.spin)");
-
-    if (fileName.isEmpty())
-        return;
-
-    saveFile(fileName, n);
-}
-
-void MainWindow::saveFile(const QString & fileName, int index)
-{
-    QFile file(fileName);
-    if (!file.open(QFile::WriteOnly | QFile::Text))
-    {
-        QMessageBox::warning(this, tr("Recent Files"),
-                    tr("Cannot write file %1:\n%2.")
-                    .arg(fileName)
-                    .arg(file.errorString()));
-        return;
-    }
-
-    QTextStream os(&file);
-    os.setCodec("UTF-8");
-
-    QString data = editorTabs->getEditor(index)->toPlainText();
-    os << data;
-
-    file.close();
-
-    // gui stuff - doesn't belong here
-    QString tab = editorTabs->tabText(index);
-
-    if(tab.endsWith('*'))
-    {
-        tab = tab.mid(0, tab.length()-1);
-        tab = tab.trimmed();
-        editorTabs->setTabText(index,tab);
-    }
-
-    editorTabs->setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
-    editorTabs->setTabText(index,QFileInfo(fileName).fileName());
-    editorTabs->getEditor(index)->saveContent();
-
-    setProject();
-}
-
 void MainWindow::fileChanged()
 {
-    qDebug() << "MainWindow::fileChanged()";
-
     int index = editorTabs->currentIndex();
     QString file = editorTabs->tabToolTip(index);
     QString name = QFileInfo(file).fileName();
-
-    
 
     if (file.isEmpty())
         name = tr("Untitled*");
     else if (editorTabs->getEditor(index)->contentChanged())
         name += '*';
-
-    qDebug() << file << name;
 
     editorTabs->setTabText(index, name);
 }
@@ -597,7 +522,7 @@ void MainWindow::checkAndSaveFiles()
         QString tabName = editorTabs->tabText(tab);
         if(tabName == modTitle)
         {
-            save(tab);
+            editorTabs->save(tab);
             editorTabs->setTabText(tab,title);
         }
     }
@@ -616,7 +541,7 @@ void MainWindow::checkAndSaveFiles()
             QString tabName = editorTabs->tabText(tab);
             if(tabName == modName)
             {
-                save(tab);
+                editorTabs->save(tab);
                 editorTabs->setTabText(tab,name);
             }
         }
@@ -1427,7 +1352,7 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
 
     // project editor tabs
     editorTabs = new FileManager(this);
-    connect(editorTabs,SIGNAL(tabCloseRequested(int)),editorTabs,SLOT(closeTab(int)));
+    connect(editorTabs,SIGNAL(tabCloseRequested(int)),editorTabs,SLOT(closeFile(int)));
     connect(editorTabs,SIGNAL(currentChanged(int)),this,SLOT(changeTab(int)));
     findSplit->addWidget(editorTabs);
 
