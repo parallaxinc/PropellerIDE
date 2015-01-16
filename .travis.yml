@@ -3,10 +3,10 @@ matrix:
   include:
   - compiler: gcc
 before_install:
-  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty universe"
-  sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty main"
-  sudo apt-get update -qq
-  sudo apt-get install -qq qt5-default qt5-qmake qtbase5-dev-tools qtchooser qttools5-dev zlib1g-dev cppcheck
+- sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty universe"
+- sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty main"
+- sudo apt-get update -qq
+- sudo apt-get install -qq qt5-default qt5-qmake qtbase5-dev-tools qtchooser qttools5-dev zlib1g-dev cppcheck
 - qmake -v
 script:
 - make deb -j4
