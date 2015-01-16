@@ -18,7 +18,6 @@ public:
 
     Editor * getEditor(int num);
     void setEditor(int num, QString shortName, QString fileName, QString text);
-    bool saveFile(QString fileName, int index);
 
 public slots:
     void newFile();

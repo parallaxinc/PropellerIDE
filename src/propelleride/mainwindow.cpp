@@ -130,37 +130,11 @@ void MainWindow::init()
     QApplication::processEvents();
     this->show();
 
-    openLastFile();
+//    openLastFile();
 
     this->installEventFilter(this);
 }
 
-int  MainWindow::isPackageSource(QString fileName)
-{
-    QString dir = QFileInfo(fileName).absolutePath();
-    QString file= dir+"/tmp_"+QString("%1").arg(QDateTime::currentDateTime().toTime_t());
-
-    bool fw = QFileInfo(fileName).isWritable();
-    bool pw = false;
-
-    QFile wf(file);
-    if(wf.open(QFile::WriteOnly)) {
-        wf.close();
-        pw = true;
-        wf.remove();
-    }
-    return fw && pw;
-}
-
-int  MainWindow::extractSource(QString &fileName)
-{
-    fileName = this->saveFileAs();
-
-    if(fileName.length() > 0) {
-        return isPackageSource(fileName);
-    }
-    return 0;
-}
 
 void MainWindow::openLastFile()
 {
@@ -177,19 +151,19 @@ void MainWindow::openLastFile()
             openFileName(fileName);
             QApplication::processEvents();
 
-            if(fileName.compare(welcome) == 0) {
-                QMessageBox::information(this,tr("Welcome to PropellerIDE"),
-                        tr("The Welcome.spin file must be saved to a user folder where you can change it.")+" "+
-                        tr("The installed package location is not writable by most users.")+"\n\n"+
-                        tr("Please note that opening a library file from the installed package will also require saving to a user folder for compiling or modifications.")+" "+
-                        tr("Don't worry, you will be reminded if necessary.")+"\n\n"+
-                        tr("The Save As dialog will now open to let you choose a working folder."));
-                lastDirectory = QDir::homePath()+"/Documents";
-                if(!QFile::exists(lastDirectory)) {
-                    lastDirectory = QDir::homePath();
-                }
-                fileName = saveFileAs();
-            }
+//            if(fileName.compare(welcome) == 0) {
+//                QMessageBox::information(this,tr("Welcome to PropellerIDE"),
+//                        tr("The Welcome.spin file must be saved to a user folder where you can change it.")+" "+
+//                        tr("The installed package location is not writable by most users.")+"\n\n"+
+//                        tr("Please note that opening a library file from the installed package will also require saving to a user folder for compiling or modifications.")+" "+
+//                        tr("Don't worry, you will be reminded if necessary.")+"\n\n"+
+//                        tr("The Save As dialog will now open to let you choose a working folder."));
+//                lastDirectory = QDir::homePath()+"/Documents";
+//                if(!QFile::exists(lastDirectory)) {
+//                    lastDirectory = QDir::homePath();
+//                }
+//                fileName = ();
+//            }
         }
     }
 
@@ -253,7 +227,7 @@ bool MainWindow::exitSave()
             mbox.setInformativeText(tr("Save File: ") + tabName.mid(0,tabName.indexOf(" *")) + tr(" ?"));
             if(saveAll)
             {
-                saveFile(tab);
+                save(tab);
             }
             else
             {
@@ -268,7 +242,7 @@ bool MainWindow::exitSave()
                         break;
                     case QMessageBox::Save:
                         // Save was clicked
-                        saveFile(tab);
+                        save(tab);
                         break;
                     case QMessageBox::SaveAll:
                         // save all was clicked
@@ -401,61 +375,71 @@ void MainWindow::openFileName(QString fileName)
     }
 }
 
-void MainWindow::saveFile()
+void MainWindow::save()
 {
-    saveFile(editorTabs->currentIndex());
+    int index = editorTabs->currentIndex();
+    save(index);
+}
+
+void MainWindow::save(int index)
+{
+    QString fileName = editorTabs->tabToolTip(index);
+
+    if (fileName.isEmpty())
+        saveAs();
+    else
+        saveFile(fileName, index);
+}
+
+
+void MainWindow::saveAs()
+{
+    int n = editorTabs->currentIndex();
+
+    QString fileName = QFileDialog::getSaveFileName(this,
+            tr("Save File As..."), 
+            QDir(lastDirectory).filePath(editorTabs->tabText(n)), 
+            "Spin Files (*.spin)");
+
+    if (fileName.isEmpty())
+        return;
+
+    saveFile(fileName, n);
+}
+
+void MainWindow::saveFile(const QString & fileName, int index)
+{
+    QFile file(fileName);
+    if (!file.open(QFile::WriteOnly | QFile::Text))
+    {
+        QMessageBox::warning(this, tr("Recent Files"),
+                    tr("Cannot write file %1:\n%2.")
+                    .arg(fileName)
+                    .arg(file.errorString()));
+        return;
+    }
+
+    QTextStream os(&file);
+    os.setCodec("UTF-8");
+
+    QString data = editorTabs->getEditor(index)->toPlainText();
+    os << data;
+
+    file.close();
+
+    QString tab = editorTabs->tabText(index);
+
+    if(tab.endsWith('*'))
+    {
+        tab = tab.mid(0, tab.length()-1);
+        tab = tab.trimmed();
+        editorTabs->setTabText(index,tab);
+    }
+
+    editorTabs->setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
+    editorTabs->setTabText(index,QFileInfo(fileName).fileName());
+
     setProject();
-}
-
-void MainWindow::saveFile(int index)
-{
-    try 
-    {
-        QString fileName = editorTabs->tabToolTip(index);
-
-        if (fileName.isEmpty()) {
-            saveFileAs(fileName);
-            if (fileName.isEmpty())
-                return;
-        }
-        editorTabs->setTabText(index,QFileInfo(fileName).fileName());
-        editorTabs->saveFile(fileName, index);
-    } 
-    catch(...)
-    {
-
-    }
-}
-
-QString MainWindow::saveFileAs(const QString &path)
-{
-    QString fileName = path;
-    try
-    {
-        int n = editorTabs->currentIndex();
-
-        if (fileName.isEmpty())
-            fileName = QFileDialog::getSaveFileName(this,
-                    tr("Save File As..."), QDir(lastDirectory).filePath(editorTabs->tabText(n)), "Spin Files (*.spin)");
-
-        if (fileName.isEmpty()) {
-            return QString();
-        }
-        lastDirectory = QFileInfo(fileName).path();
-
-        editorTabs->setTabText(n,QFileInfo(fileName).fileName());
-        editorTabs->setTabToolTip(n,fileName);
-
-        if (!fileName.isEmpty()) {
-            if(editorTabs->saveFile(fileName, n))
-                setProject();
-        }
-    }
-    catch(...)
-    {
-        return QString();
-    }
-    return fileName;
 }
 
 void MainWindow::fileChanged()
@@ -621,7 +605,7 @@ void MainWindow::checkAndSaveFiles()
         QString tabName = editorTabs->tabText(tab);
         if(tabName == modTitle)
         {
-            saveFile(tab);
+            save(tab);
             editorTabs->setTabText(tab,title);
         }
     }
@@ -640,7 +624,7 @@ void MainWindow::checkAndSaveFiles()
             QString tabName = editorTabs->tabText(tab);
             if(tabName == modName)
             {
-                saveFile(tab);
+                save(tab);
                 editorTabs->setTabText(tab,name);
             }
         }
@@ -692,17 +676,6 @@ void MainWindow::highlightFileLine(QString file, int line)
     QApplication::restoreOverrideCursor();
 }
 
-void MainWindow::buildSourceWriteError(QString fileName)
-{
-    QMessageBox::critical(this, tr("Build Problem"),
-            "\n"+tr("Problem building:")+" "+QFileInfo(fileName).fileName()+"\n\n"+
-            tr("Can't write the file or folder.")+" "+
-            tr("This can happen when compiling a packaged file.")+"\n\n"+
-            tr("The code must be saved to a folder with write permissions.")+" "+
-            tr("A good location would be the user's Documents folder or a folder with other sources.")+"\n\n"+
-            tr("Please save to a different file and/or folder when prompted."));
-}
-
 
 int  MainWindow::runCompiler(COMPILE_TYPE type)
 {
@@ -746,14 +719,6 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     index = editorTabs->currentIndex();
     fileName = editorTabs->tabToolTip(index);
     text = editorTabs->getEditor(index)->toPlainText();
-
-    if(!isPackageSource(fileName)) {
-        buildSourceWriteError(fileName);
-        if(!extractSource(fileName)) {
-            buildSourceWriteError(fileName);
-            goto endRunCompiler;
-        }
-    }
 
     updateProjectTree(fileName);
     // updateReferenceTree(fileName,text);

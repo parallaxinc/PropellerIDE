@@ -20,8 +20,8 @@ void MainWindow::setupFileMenu()
 
     fileMenu->addSeparator();
 
-    fileMenu->addAction(QIcon(":/icons/file-save.png"),     tr("&Save"),        this, SLOT(saveFile()),         QKeySequence::Save);
-    fileMenu->addAction(QIcon(":/icons/file-save-as.png"),  tr("Save &As"),     this, SLOT(saveFileAs()),       QKeySequence::SaveAs);
+    fileMenu->addAction(QIcon(":/icons/file-save.png"),     tr("&Save"),        this, SLOT(save()),         QKeySequence::Save);
+    fileMenu->addAction(QIcon(":/icons/file-save-as.png"),  tr("Save &As"),     this, SLOT(saveAs()),       QKeySequence::SaveAs);
 
     fileMenu->addSeparator();
 

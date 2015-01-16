@@ -65,9 +65,10 @@ public slots:
     // file menu
     void newFile();
     void openFile(const QString &path = QString());
-    void saveFile();
-    void saveFile(int index);
-    QString saveFileAs(const QString &path = QString());
+    void save();
+    void save(int index);
+    void saveAs();
+    void saveFile(const QString & fileName, int index);
     void printFile();
     void zipFiles();
 
@@ -155,10 +156,6 @@ private:
     typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
     int  runCompiler(COMPILE_TYPE type);
     int  loadProgram(int type, QString file = QString());
-
-    int  isPackageSource(QString fileName);
-    int  extractSource(QString &fileName);
-    void buildSourceWriteError(QString fileName);
 
     QString     spinCompiler;
     QString     spinCompilerPath;

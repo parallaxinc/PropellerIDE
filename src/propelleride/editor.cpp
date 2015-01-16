@@ -1138,7 +1138,7 @@ int Editor::lineNumberAreaWidth()
         ++digits;
     }
 
-    int space = 6 + fontMetrics().width(QLatin1Char('9')) * digits;
+    int space = 6 + fontMetrics().width('9') * digits;
 
     return space;
 }

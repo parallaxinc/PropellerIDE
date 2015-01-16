@@ -31,8 +31,8 @@ void MainWindow::setupToolBars()
 //    connect(btnBrowser,SIGNAL(clicked()),this,SLOT(showBrowser()));
     connect(btnFileNew,SIGNAL(clicked()),this,SLOT(newFile()));
     connect(btnFileOpen,SIGNAL(clicked()),this,SLOT(openFile()));
-    connect(btnFileSave,SIGNAL(clicked()),this,SLOT(saveFile()));
-    connect(btnFileSaveAs,SIGNAL(clicked()),this,SLOT(saveFileAs()));
+    connect(btnFileSave,SIGNAL(clicked()),this,SLOT(save()));
+    connect(btnFileSaveAs,SIGNAL(clicked()),this,SLOT(saveAs()));
 
 //    btnBrowser->setToolTip(tr("Show Browser"));
     btnFileNew->setToolTip(tr("New"));

@@ -9,31 +9,6 @@ FileManager::FileManager(QWidget *parent) :
     createBackgroundImage();
 }
 
-bool FileManager::saveFile(QString fileName, int index)
-{
-    QFile file(fileName);
-    if (file.open(QFile::WriteOnly)) {
-        QTextStream os(&file);
-        QString data = getEditor(index)->toPlainText();
-
-        os.setCodec("UTF-8");
-        os << data;
-
-        file.close();
-        QString tab = tabText(index);
-        if(tab.endsWith('*')) {
-            tab = tab.mid(0, tab.length()-1);
-            tab = tab.trimmed();
-            setTabText(index,tab);
-        }
-        return true;
-    }
-    else {
-        QMessageBox::information(this, tr("Can't Save File"), tr("Can't save file ")+fileName, QMessageBox::Ok);
-    }
-    return false;
-}
-
 void FileManager::newFile()
 {
 }
