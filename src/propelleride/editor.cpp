@@ -37,6 +37,7 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     currentTheme = &Singleton<ColorScheme>::Instance();
     updateColors();
     updateFonts();
+    saveContent();
 
     connect(this,SIGNAL(cursorPositionChanged()),this,SLOT(updateBackgroundColors()));
     connect(propDialog,SIGNAL(updateColors()),this,SLOT(updateColors()));
@@ -66,6 +67,15 @@ void Editor::setHighlights()
     isSpin = true;
 }
 
+void Editor::saveContent()
+{
+    oldcontents = toPlainText();
+}
+
+int Editor::contentChanged()
+{
+    return oldcontents.compare(toPlainText());
+}
 
 
 void Editor::setLineNumber(int num)

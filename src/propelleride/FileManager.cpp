@@ -78,5 +78,6 @@ void FileManager::setEditor(int num, QString shortName, QString fileName, QStrin
     setTabText(num,shortName);
     setTabToolTip(num,fileName);
     setCurrentIndex(num);
+    getEditor(num)->saveContent();
 }
 

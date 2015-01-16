@@ -31,6 +31,8 @@ public:
     void clearCtrlPressed();
 
     SpinParser spinParser;
+    void saveContent();
+    int contentChanged();
 
 private:
 
@@ -56,6 +58,8 @@ private:
     ColorScheme * currentTheme;
     QMap<ColorScheme::Color, ColorScheme::color> colors;
     QMap<ColorScheme::Color, ColorScheme::color> colorsAlt;
+
+    QString oldcontents;
 
 protected:
     void keyPressEvent(QKeyEvent* e);

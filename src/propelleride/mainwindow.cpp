@@ -307,7 +307,7 @@ void MainWindow::newFile()
     editorTabs->addTab(editor,tr("Untitled"));
     int tab = editorTabs->count()-1;
     editorTabs->setCurrentIndex(tab);
-    editorTabs->setTabToolTip(tab, QString(""));
+    editorTabs->setTabToolTip(tab,"");
 
     editorTabs->getEditor(editorTabs->currentIndex())->installEventFilter(this);
 
@@ -427,6 +427,7 @@ void MainWindow::saveFile(const QString & fileName, int index)
 
     file.close();
 
+    // gui stuff - doesn't belong here
     QString tab = editorTabs->tabText(index);
 
     if(tab.endsWith('*'))
@@ -438,38 +439,29 @@ void MainWindow::saveFile(const QString & fileName, int index)
 
     editorTabs->setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
     editorTabs->setTabText(index,QFileInfo(fileName).fileName());
+    editorTabs->getEditor(index)->saveContent();
 
     setProject();
 }
 
 void MainWindow::fileChanged()
 {
-    int index = editorTabs->currentIndex();
-    QString name = editorTabs->tabText(index);
-    QString fileName = editorTabs->tabToolTip(index);
-    if(!QFile::exists(fileName))
-        return;
-    QFile file(fileName);
-    if(file.open(QFile::ReadOnly))
-    {
-        QString curt = editorTabs->getEditor(index)->toPlainText();
-        QString text;
-        QTextStream in(&file);
-        in.setAutoDetectUnicode(true);
-        in.setCodec("UTF-8");
-        text = in.readAll();
-        file.close();
+    qDebug() << "MainWindow::fileChanged()";
 
-        if(text == curt) {
-            if(name.at(name.length()-1) == '*')
-                editorTabs->setTabText(index, QFileInfo(fileName).fileName());
-            return;
-        }
-    }
-    if(!name.endsWith('*')) {
-        name += tr(" *");
-        editorTabs->setTabText(index, name);
-    }
+    int index = editorTabs->currentIndex();
+    QString file = editorTabs->tabToolTip(index);
+    QString name = QFileInfo(file).fileName();
+
+    
+
+    if (file.isEmpty())
+        name = tr("Untitled*");
+    else if (editorTabs->getEditor(index)->contentChanged())
+        name += '*';
+
+    qDebug() << file << name;
+
+    editorTabs->setTabText(index, name);
 }
 
 void MainWindow::setCurrentFile(const QString &fileName)
