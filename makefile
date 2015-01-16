@@ -33,6 +33,8 @@ ifeq ($(shell uname -m),i686)			# if i686
 	CPU := i386
 else ifeq ($(shell uname -m),x86_64)	# if x64
 	CPU := amd64
+else ifeq ($(shell uname -m),armv6l)	# if arm6l/raspberry pi
+	CPU := armhf
 else
 	CPU := $(shell uname -m)
 endif

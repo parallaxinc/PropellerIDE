@@ -113,6 +113,43 @@ make mac
 
 The Qt version used must match the XCode version. The easiest solution is to use the latest version of xcode and Qt.
 
+### Raspberry Pi - Raspbian Wheezy
+
+You will need Qt5 to build PropellerIDE, it can be obtained from backports.
+
+Edit /etc/apt/sources.list and add:
+
+```
+deb http://twolife.be/raspbian/ wheezy main backports
+deb-src http://twolife.be/raspbian/ wheezy main backports
+```
+
+And add the repository key:
+
+```
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key 2578B775
+```
+
+Then update and install Qt and dependencies:
+
+```
+sudo apt-get update
+sudo apt-get install qt5-default qt5-qmake libegl1-mesa libgles2-mesa
+```
+
+Finally, build a deb file as you would on Linux:
+
+```
+make checkout
+make deb
+```
+
+And install:
+
+```
+sudo dpkg -i staging/*armhf.deb
+```
+
 ## Credits
 
 Developed by LameStation LLC (contact@lamestation.com) in collaboration with Parallax Inc.
