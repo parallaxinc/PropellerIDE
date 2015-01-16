@@ -154,7 +154,7 @@ int  MainWindow::isPackageSource(QString fileName)
 
 int  MainWindow::extractSource(QString &fileName)
 {
-    fileName = this->saveAsFile();
+    fileName = this->saveFileAs();
 
     if(fileName.length() > 0) {
         return isPackageSource(fileName);
@@ -188,7 +188,7 @@ void MainWindow::openLastFile()
                 if(!QFile::exists(lastDirectory)) {
                     lastDirectory = QDir::homePath();
                 }
-                fileName = saveAsFile();
+                fileName = saveFileAs();
             }
         }
     }
@@ -253,7 +253,7 @@ bool MainWindow::exitSave()
             mbox.setInformativeText(tr("Save File: ") + tabName.mid(0,tabName.indexOf(" *")) + tr(" ?"));
             if(saveAll)
             {
-                saveFileByTabIndex(tab);
+                saveFile(tab);
             }
             else
             {
@@ -268,7 +268,7 @@ bool MainWindow::exitSave()
                         break;
                     case QMessageBox::Save:
                         // Save was clicked
-                        saveFileByTabIndex(tab);
+                        saveFile(tab);
                         break;
                     case QMessageBox::SaveAll:
                         // save all was clicked
@@ -401,90 +401,58 @@ void MainWindow::openFileName(QString fileName)
     }
 }
 
-bool MainWindow::saveAsCodec(QString fileName, Editor *ed)
-{
-    QFile file(fileName);
-    if (file.open(QFile::WriteOnly)) {
-        QTextStream os(&file);
-        QString data = ed->toPlainText();
-
-        setCurrentFile(fileName);
-
-        os.setCodec("UTF-8");
-        os << data;
-
-        file.close();
-        QString tab = editorTabs->tabText(editorTabs->currentIndex());
-        if(tab.endsWith('*')) {
-            tab = tab.mid(0, tab.length()-1);
-            tab = tab.trimmed();
-            editorTabs->setTabText(editorTabs->currentIndex(),tab);
-        }
-        return true;
-    }
-    else {
-        QMessageBox::information(this, tr("Can't Save File"), tr("Can't save file ")+fileName, QMessageBox::Ok);
-    }
-    return false;
-}
-
 void MainWindow::saveFile()
 {
-    try {
-        int n = this->editorTabs->currentIndex();
-        QString fileName = editorTabs->tabToolTip(n);
+    saveFile(editorTabs->currentIndex());
+    setProject();
+}
+
+void MainWindow::saveFile(int index)
+{
+    try 
+    {
+        QString fileName = editorTabs->tabToolTip(index);
+
         if (fileName.isEmpty()) {
-            saveAsFile(fileName);
+            saveFileAs(fileName);
             if (fileName.isEmpty())
                 return;
         }
-        Editor *ed = editorTabs->getEditor(n);
-        this->editorTabs->setTabText(n,QFileInfo(fileName).fileName());
+        editorTabs->setTabText(index,QFileInfo(fileName).fileName());
+        editorTabs->saveAsCodec(fileName, index);
+    } 
+    catch(...)
+    {
 
-        if (!fileName.isEmpty()) {
-            if(saveAsCodec(fileName, ed))
-                setProject();
-        }
-    } catch(...) {
     }
 }
 
-void MainWindow::saveFileByTabIndex(int tab)
-{
-    try {
-        QString fileName = editorTabs->tabToolTip(tab);
-
-        this->editorTabs->setTabText(tab,QFileInfo(fileName).fileName());
-        if (!fileName.isEmpty()) {
-            saveAsCodec(fileName, editorTabs->getEditor(tab));
-        }
-    } catch(...) {
-    }
-}
-
-QString MainWindow::saveAsFile(const QString &path)
+QString MainWindow::saveFileAs(const QString &path)
 {
     QString fileName = path;
-    try {
-        int n = this->editorTabs->currentIndex();
+    try
+    {
+        int n = editorTabs->currentIndex();
 
         if (fileName.isEmpty())
             fileName = QFileDialog::getSaveFileName(this,
-                    tr("Save As File"), lastDirectory+"/"+this->editorTabs->tabText(n), "Spin Files (*.spin)");
+                    tr("Save File As..."), QDir(lastDirectory).filePath(editorTabs->tabText(n)), "Spin Files (*.spin)");
 
         if (fileName.isEmpty()) {
             return QString();
         }
         lastDirectory = QFileInfo(fileName).path();
 
-        this->editorTabs->setTabText(n,QFileInfo(fileName).fileName());
+        editorTabs->setTabText(n,QFileInfo(fileName).fileName());
         editorTabs->setTabToolTip(n,fileName);
 
         if (!fileName.isEmpty()) {
-            if(saveAsCodec(fileName, editorTabs->getEditor(n)))
+            if(editorTabs->saveAsCodec(fileName, n))
                 setProject();
         }
-    } catch(...) {
+    }
+    catch(...)
+    {
         return QString();
     }
     return fileName;
@@ -677,7 +645,7 @@ void MainWindow::checkAndSaveFiles()
         QString tabName = editorTabs->tabText(tab);
         if(tabName == modTitle)
         {
-            saveFileByTabIndex(tab);
+            saveFile(tab);
             editorTabs->setTabText(tab,title);
         }
     }
@@ -696,7 +664,7 @@ void MainWindow::checkAndSaveFiles()
             QString tabName = editorTabs->tabText(tab);
             if(tabName == modName)
             {
-                saveFileByTabIndex(tab);
+                saveFile(tab);
                 editorTabs->setTabText(tab,name);
             }
         }

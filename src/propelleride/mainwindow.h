@@ -63,10 +63,9 @@ signals:
 public slots:
     void newFile();
     void openFile(const QString &path = QString());
-    bool saveAsCodec(QString fileName, Editor *ed);
     void saveFile();
-    void saveFileByTabIndex(int tab);
-    QString saveAsFile(const QString &path = QString());
+    void saveFile(int index);
+    QString saveFileAs(const QString &path = QString());
     void printFile();    // not implemented
     void zipFiles();
 

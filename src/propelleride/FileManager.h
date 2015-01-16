@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QTabWidget>
+#include <QMessageBox>
 
 #include "editor.h"
 
@@ -17,6 +18,7 @@ public:
 
     Editor * getEditor(int num);
     void setEditor(int num, QString shortName, QString fileName, QString text);
+    bool saveAsCodec(QString fileName, int index);
 
 public slots:
     void saveFile();
