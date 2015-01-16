@@ -47,6 +47,9 @@ void MainWindow::setupFileMenu()
 
 }
 
+
+// edit menu
+
 void MainWindow::setupEditMenu()
 {
 
@@ -73,6 +76,49 @@ void MainWindow::setupEditMenu()
 
     editMenu->addAction(QIcon(":/icons/preferences.png"), tr("Preferences"),    this, SLOT(preferences()),      Qt::Key_F5);
 }
+
+void MainWindow::cut()
+{
+    editorTabs->getEditor(editorTabs->currentIndex())->cut();
+}
+
+void MainWindow::copy()
+{
+    editorTabs->getEditor(editorTabs->currentIndex())->copy();
+}
+
+void MainWindow::paste()
+{
+    editorTabs->getEditor(editorTabs->currentIndex())->paste();
+}
+
+void MainWindow::undo()
+{
+    editorTabs->getEditor(editorTabs->currentIndex())->undo();
+}
+
+void MainWindow::redo()
+{
+    editorTabs->getEditor(editorTabs->currentIndex())->redo();
+}
+
+void MainWindow::selectAll()
+{
+    editorTabs->getEditor(editorTabs->currentIndex())->selectAll();
+}
+
+void MainWindow::preferences()
+{
+    propDialog->showPreferences();
+}
+
+void MainWindow::preferencesAccepted()
+{
+    getApplicationSettings(false);
+}
+
+
+// view menu
 
 void MainWindow::setupViewMenu()
 {
@@ -106,6 +152,18 @@ void MainWindow::setupViewMenu()
 
 }
 
+void MainWindow::fontBigger()
+{
+    propDialog->adjustFontSize(1.25);
+}
+
+void MainWindow::fontSmaller()
+{
+    propDialog->adjustFontSize(0.8);
+}
+
+
+// project menu
 
 void MainWindow::setupProjectMenu()
 {
@@ -119,6 +177,8 @@ void MainWindow::setupProjectMenu()
     projectMenu->addAction(QIcon(":/icons/project-burn.png"), tr("Burn"), this, SLOT(programBurnEE()), Qt::Key_F11);
 }
 
+
+// help menu
 
 void MainWindow::setupHelpMenu()
 {
@@ -165,36 +225,4 @@ void MainWindow::about()
            "<p>Originally developed by Steve Denson, Dennis Gately, and Roy Eltham. "
            "Now developed by LameStation LLC in collaboration with Parallax.</p>");
 }
-
-
-void MainWindow::cut()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->cut();
-}
-
-void MainWindow::copy()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->copy();
-}
-
-void MainWindow::paste()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->paste();
-}
-
-void MainWindow::undo()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->undo();
-}
-
-void MainWindow::redo()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->redo();
-}
-
-void MainWindow::selectAll()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->selectAll();
-}
-
 

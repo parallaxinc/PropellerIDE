@@ -595,28 +595,6 @@ void MainWindow::showBrowser()
     }
 }
 
-
-void MainWindow::fontBigger()
-{
-    propDialog->adjustFontSize(1.25);
-}
-
-void MainWindow::fontSmaller()
-{
-    propDialog->adjustFontSize(0.8);
-}
-
-void MainWindow::preferences()
-{
-    propDialog->showPreferences();
-}
-
-void MainWindow::preferencesAccepted()
-{
-    /* set preferences */
-    getApplicationSettings(false);
-}
-
 void MainWindow::setCurrentPort(int index)
 {
     QString portName = cbPort->itemText(index);
