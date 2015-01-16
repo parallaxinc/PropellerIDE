@@ -9,11 +9,7 @@ FileManager::FileManager(QWidget *parent) :
     createBackgroundImage();
 }
 
-void FileManager::saveFile()
-{
-}
-
-bool FileManager::saveAsCodec(QString fileName, int index)
+bool FileManager::saveFile(QString fileName, int index)
 {
     QFile file(fileName);
     if (file.open(QFile::WriteOnly)) {

@@ -213,7 +213,9 @@ void MainWindow::propellerDatasheet()
 
 void MainWindow::about()
 {
-    QString version = QString(QCoreApplication::applicationName() + " v" +VERSION);
+    QString version = QString(QCoreApplication::applicationName() 
+                     + " v" + QCoreApplication::applicationVersion()
+                     );
     QMessageBox::about(this, tr("About") + " " + QCoreApplication::applicationName(),
            "<h2>" + version + "</h2>"
            "<p>PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.</p>"

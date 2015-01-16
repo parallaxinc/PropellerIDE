@@ -61,14 +61,15 @@ signals:
     void updateBackgroundColors();
 
 public slots:
+
+    // file menu
     void newFile();
     void openFile(const QString &path = QString());
     void saveFile();
     void saveFile(int index);
     QString saveFileAs(const QString &path = QString());
-    void printFile();    // not implemented
+    void printFile();
     void zipFiles();
-
 
     // edit
     void cut();
@@ -201,8 +202,6 @@ private:
     int         wasClicked;
 
     FileManager *editorTabs;
-    bool        fileChangeDisable;
-    bool        changeTabDisable;
 
     QString     projectFile;
     ReferenceTree   *projectTree;

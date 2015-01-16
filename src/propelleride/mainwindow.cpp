@@ -419,7 +419,7 @@ void MainWindow::saveFile(int index)
                 return;
         }
         editorTabs->setTabText(index,QFileInfo(fileName).fileName());
-        editorTabs->saveAsCodec(fileName, index);
+        editorTabs->saveFile(fileName, index);
     } 
     catch(...)
     {
@@ -447,7 +447,7 @@ QString MainWindow::saveFileAs(const QString &path)
         editorTabs->setTabToolTip(n,fileName);
 
         if (!fileName.isEmpty()) {
-            if(editorTabs->saveAsCodec(fileName, n))
+            if(editorTabs->saveFile(fileName, n))
                 setProject();
         }
     }
@@ -460,8 +460,6 @@ QString MainWindow::saveFileAs(const QString &path)
 
 void MainWindow::fileChanged()
 {
-    if(fileChangeDisable)
-        return;
     int index = editorTabs->currentIndex();
     QString name = editorTabs->tabText(index);
     QString fileName = editorTabs->tabToolTip(index);
