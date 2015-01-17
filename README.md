@@ -5,7 +5,7 @@ PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax
 
 Write Spin code, download programs to your Propeller board, and debug your applications with the built-in serial terminal.
 
-- [Download PropellerIDE](https://lamestation.atlassian.net/wiki/display/PI/Downloads)
+- [Download PropellerIDE](http://www.lamestation.com/propelleride)
 
 ## Features
 
