@@ -1,15 +1,13 @@
 ![the hat](gfx/propellerhat.png) PropellerIDE [![Build Status](https://travis-ci.org/parallaxinc/PropellerIDE.svg?branch=master)](https://travis-ci.org/bweir/PropellerIDE)
 ============
 
-![the interface](gfx/interface.png "The PropellerIDE interface")
-
 PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.
 
 Write Spin code, download programs to your Propeller board, and debug your applications with the built-in serial terminal.
 
 - [Download PropellerIDE](https://lamestation.atlassian.net/wiki/display/PI/Downloads)
 
-### Features
+## Features
 
 - Spin syntax highlighting, auto-complete, code suggestion, and auto-indent
 - Unicode editing support
@@ -25,8 +23,14 @@ Write Spin code, download programs to your Propeller board, and debug your appli
 
 PropellerIDE was created using C++ and Qt.
 
-## Building
+### Screenshots
 
+![classic theme](gfx/screenshots/classic.png "Classic theme")
+
+![ice theme](gfx/screenshots/ice.png "Ice theme")
+
+
+## Building
 
 ### Dependencies
 
