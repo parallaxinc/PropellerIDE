@@ -27,9 +27,30 @@ PropellerIDE was created using C++ and Qt.
 
 ## Building
 
+
 ### Dependencies
 
-PropellerIDE can be built against Qt4 or Qt5.
+PropellerIDE requires Qt5 to be installed on all platform. Windows packaging
+requires Inno Setup 5 to be installed with preprocessor support. The build
+and release tools require Python 2.7 to be installed.
+
+### Targets
+
+Type `make help` to see a list of available package targets.
+
+```
+$ make help
+Usage:    make [TYPE]
+
+Enter package type to build. Options:
+
+   win    windows installer
+   mac    mac bundle
+   deb    debian package
+   rpi    debian package for Raspberry Pi
+
+   no parameter builds only the binaries
+```
 
 ### Linux
 
@@ -84,6 +105,7 @@ C:\Qt\Tools\mingw482_32\bin;C:\Qt\5.3\mingw482_32\bin;C:\Program Files (x86)\Inn
 Open the PowerShell. The `make` command on Windows is `mingw32-make.exe`. Add the `win` parameter to build a Windows installer.
 
 ```
+mingw32-make.exe checkout
 mingw32-make.exe win
 ```
 
@@ -108,6 +130,7 @@ xcode-select --install
 Type `make mac` to create an app bundle and DMG package for distribution.
 
 ```
+make checkout
 make mac
 ```
 
@@ -115,22 +138,22 @@ The Qt version used must match the XCode version. The easiest solution is to use
 
 ### Raspberry Pi - Raspbian Wheezy
 
-You will need Qt5 to build PropellerIDE, it can be obtained from backports.
+Qt5 is not available in the standard repository, but you can obtain it from Debian backports.
 
-Edit /etc/apt/sources.list and add:
+Add the following entries to `/etc/apt/sources.list`.
 
 ```
 deb http://twolife.be/raspbian/ wheezy main backports
 deb-src http://twolife.be/raspbian/ wheezy main backports
 ```
 
-And add the repository key:
+Add the repository key.
 
 ```
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key 2578B775
 ```
 
-Then update and install Qt and dependencies:
+Update and install Qt5 and its dependencies.
 
 ```
 sudo apt-get update
@@ -141,7 +164,7 @@ Finally, build a deb file as you would on Linux:
 
 ```
 make checkout
-make deb
+make rpi
 ```
 
 And install:

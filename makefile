@@ -33,8 +33,6 @@ ifeq ($(shell uname -m),i686)			# if i686
 	CPU := i386
 else ifeq ($(shell uname -m),x86_64)	# if x64
 	CPU := amd64
-else ifeq ($(shell uname -m),armv6l)	# if arm6l/raspberry pi
-	CPU := armhf
 else
 	CPU := $(shell uname -m)
 endif
@@ -46,9 +44,10 @@ help:
 	@echo
 	@echo "Enter package type to build. Options:"
 	@echo
+	@echo "   win    windows installer"
+	@echo "   mac    mac bundle"
 	@echo "   deb    debian package"
-	@echo "   win    windows installer (not yet available)"
-	@echo "   mac    mac bundle        (not yet available)"
+	@echo "   rpi    debian package for Raspberry Pi"
 	@echo
 	@echo "   no parameter builds only the binaries"
 
