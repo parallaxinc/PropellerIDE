@@ -7,8 +7,8 @@ before_install:
 - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty main"
 - sudo apt-get install debian-keyring debian-archive-keyring
 - sudo apt-key update
-- sudo apt-get update -qq
-- sudo apt-get install -qq qt5-default qt5-qmake qtbase5-dev-tools qtchooser qttools5-dev zlib1g-dev cppcheck qtbase5-dev libgles2-mesa-dev libqt5gui5 libqt5printsupport5 libqt5widgets5 libgles2-mesa libgl1-mesa-dev libgl1-mesa-glx libglapi-mesa libegl1-mesa-dev
+- sudo apt-get update
+- sudo apt-get install qt5-default qt5-qmake qtbase5-dev-tools qtchooser qttools5-dev zlib1g-dev cppcheck qtbase5-dev libgles2-mesa-dev libqt5gui5 libqt5printsupport5 libqt5widgets5 libgles2-mesa libgl1-mesa-dev libgl1-mesa-glx libglapi-mesa libegl1-mesa-dev
 - qmake -v
 script:
 - make deb -j4
