@@ -1,4 +1,4 @@
-![the hat](gfx/propellerhat.png) PropellerIDE [![Build Status](https://travis-ci.org/parallaxinc/PropellerIDE.svg?branch=master)](https://travis-ci.org/bweir/PropellerIDE)
+![the hat](gfx/propellerhat.png) PropellerIDE [![Build Status](https://travis-ci.org/parallaxinc/PropellerIDE.svg?branch=master)](https://travis-ci.org/parallaxinc/PropellerIDE)
 ============
 
 PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.
