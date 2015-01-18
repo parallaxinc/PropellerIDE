@@ -13,7 +13,8 @@
 
 #include "SpinBuilder.h"
 #include "SpinParser.h"
-#include "SpinModel.h"
+
+#include "treemodel.h"
 
 #include "PortListener.h"
 #include "qext/qextserialport.h"
@@ -199,8 +200,6 @@ private:
     ReferenceTree   *referenceTree;
     TreeModel       *projectModel;
     TreeModel       *referenceModel;
-    SpinModel       *spinProjectModel;
-    SpinModel       *spinReferenceModel;
 
     SpinBuilder     *spinBuilder;
 

@@ -145,7 +145,7 @@ void MainWindow::openLastFile()
             if(lastfilev.toString().length() > 0) {
                 fileName = lastfilev.toString();
             }
-            editorTabs->openFile(":/src/Welcome.spin");
+            //editorTabs->openFile(":/src/Welcome.spin");
         }
     }
 
