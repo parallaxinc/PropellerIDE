@@ -137,7 +137,48 @@ void FileManager::saveFile(const QString & fileName, int index)
 
 void FileManager::closeFile()
 {
-    closeFile(currentIndex());
+    int index = currentIndex();
+
+    if (getEditor(index)->contentChanged())
+        saveAndClose();
+    else
+        closeFile(index);
+}
+
+void FileManager::closeAll()
+{
+    setCurrentIndex(0);
+    while (count() > 0)
+    {
+        if (getEditor(0)->contentChanged())
+            saveAndClose();
+        else
+            closeFile(0);
+    }
+}
+
+void FileManager::saveAndClose()
+{
+    QMessageBox dialog;
+    dialog.setText(tr("Your code has been modified."));
+    dialog.setInformativeText(tr("Do you want to save your changes?"));
+    dialog.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+    dialog.setDefaultButton(QMessageBox::Save);
+
+    switch (dialog.exec())
+    {
+        case QMessageBox::Save:
+            save();
+            closeFile(currentIndex());
+            break;
+        case QMessageBox::Discard:
+            closeFile(currentIndex());
+            return;
+        case QMessageBox::Cancel:
+            return;
+        default:
+            return;
+    }
 }
 
 void FileManager::closeFile(int index)

@@ -204,51 +204,6 @@ void MainWindow::getApplicationSettings(bool complain)
     }
 }
 
-bool MainWindow::exitSave()
-{
-    bool saveAll = false;
-    QMessageBox mbox(QMessageBox::Question, "Save File?", "",
-            QMessageBox::Discard | QMessageBox::Save | QMessageBox::SaveAll | QMessageBox::Cancel, this);
-
-    for(int tab = editorTabs->count()-1; tab > -1; tab--)
-    {
-        QString tabName = editorTabs->tabText(tab);
-        if(tabName.at(tabName.length()-1) == '*')
-        {
-            mbox.setInformativeText(tr("Save File: ") + tabName.mid(0,tabName.indexOf(" *")) + tr(" ?"));
-            if(saveAll)
-            {
-                editorTabs->save(tab);
-            }
-            else
-            {
-                int ret = mbox.exec();
-                switch (ret) {
-                    case QMessageBox::Cancel:
-                        return false;
-                        break;
-                    case QMessageBox::Discard:
-                        // Don't Save was clicked
-                        return true;
-                        break;
-                    case QMessageBox::Save:
-                        // Save was clicked
-                        editorTabs->save(tab);
-                        break;
-                    case QMessageBox::SaveAll:
-                        // save all was clicked
-                        saveAll = true;
-                        break;
-                    default:
-                        // should never be reached
-                        break;
-                }
-            }
-        }
-    }
-    return true;
-}
-
 void MainWindow::quitProgram()
 {
     QCloseEvent e;
@@ -257,7 +212,10 @@ void MainWindow::quitProgram()
 
 void MainWindow::closeEvent(QCloseEvent *e)
 {
-    if(!exitSave()) {
+    editorTabs->closeAll();
+
+    if (editorTabs->count())
+    {
         if(e) e->ignore();
         return;
     }

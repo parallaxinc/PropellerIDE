@@ -28,8 +28,10 @@ public slots:
     void saveAs();
     void saveFile(const QString & fileName, int index);
 
+    void closeAll();
     void closeFile();
     void closeFile(int index);
+    void saveAndClose();
 
     void nextTab();
     void previousTab();

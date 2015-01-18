@@ -120,7 +120,6 @@ public slots:
 
 private:
     void openLastFile();
-    bool exitSave();
     void getApplicationSettings(bool complain);
     int  checkCompilerInfo();
     QStringList getCompilerParameters(QString compilerOptions);
