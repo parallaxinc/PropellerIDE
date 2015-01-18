@@ -57,12 +57,7 @@ debug your applications with the built-in serial terminal.")
     MainWindow w;
     w.init();
 
-    const QStringList args = parser.positionalArguments();
-    for (int i = 0; i < args.size(); i++)
-    {
-        qDebug() << args.at(i);
-        w.openFile(args.at(i));
-    }
+    w.openFiles(parser.positionalArguments());
 
     w.show();
     return app.exec();

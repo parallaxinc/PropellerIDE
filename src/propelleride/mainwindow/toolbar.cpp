@@ -29,8 +29,8 @@ void MainWindow::setupToolBars()
     addToolButton(fileToolBar, btnFileSaveAs, QString(":/icons/file-save-as.png"));
 
 //    connect(btnBrowser,SIGNAL(clicked()),this,SLOT(showBrowser()));
-    connect(btnFileNew,SIGNAL(clicked()),this,SLOT(newFile()));
-    connect(btnFileOpen,SIGNAL(clicked()),this,SLOT(openFile()));
+    connect(btnFileNew,SIGNAL(clicked()),editorTabs,SLOT(newFile()));
+    connect(btnFileOpen,SIGNAL(clicked()),editorTabs,SLOT(open()));
     connect(btnFileSave,SIGNAL(clicked()),editorTabs,SLOT(save()));
     connect(btnFileSaveAs,SIGNAL(clicked()),editorTabs,SLOT(saveAs()));
 

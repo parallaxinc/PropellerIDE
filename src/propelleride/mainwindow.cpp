@@ -50,8 +50,9 @@ void MainWindow::init()
     setupToolBars();
 
 
+
     /* start with an empty file if fresh install */
-    newFile();
+    editorTabs->newFile();
 
     /* status bar for progressbar */
     QStatusBar *statusBar = new QStatusBar();
@@ -126,11 +127,7 @@ void MainWindow::init()
 
     connect(this,SIGNAL(signalStatusDone(bool)),this,SLOT(setStatusDone(bool)));
 
-    // Show GUI now
-    QApplication::processEvents();
-    this->show();
-
-//    openLastFile();
+    openLastFile();
 
     this->installEventFilter(this);
 }
@@ -148,22 +145,7 @@ void MainWindow::openLastFile()
             if(lastfilev.toString().length() > 0) {
                 fileName = lastfilev.toString();
             }
-            openFileName(fileName);
-            QApplication::processEvents();
-
-//            if(fileName.compare(welcome) == 0) {
-//                QMessageBox::information(this,tr("Welcome to PropellerIDE"),
-//                        tr("The Welcome.spin file must be saved to a user folder where you can change it.")+" "+
-//                        tr("The installed package location is not writable by most users.")+"\n\n"+
-//                        tr("Please note that opening a library file from the installed package will also require saving to a user folder for compiling or modifications.")+" "+
-//                        tr("Don't worry, you will be reminded if necessary.")+"\n\n"+
-//                        tr("The Save As dialog will now open to let you choose a working folder."));
-//                lastDirectory = QDir::homePath()+"/Documents";
-//                if(!QFile::exists(lastDirectory)) {
-//                    lastDirectory = QDir::homePath();
-//                }
-//                fileName = ();
-//            }
+            editorTabs->openFile(":/src/Welcome.spin");
         }
     }
 
@@ -176,6 +158,15 @@ void MainWindow::openLastFile()
                 lastDirectory = lastdirv.toString();
             }
         }
+    }
+}
+
+void MainWindow::openFiles(const QStringList & files)
+{
+    for (int i = 0; i < files.size(); i++)
+    {
+        qDebug() << files.at(i);
+        editorTabs->openFile(files.at(i));
     }
 }
 
@@ -295,99 +286,18 @@ void MainWindow::changeTab(int index)
     setProject();
 }
 
-void MainWindow::newFile()
+void MainWindow::newProjectTrees()
 {
-    editorTabs->setStyleSheet("");
-
-    Editor *editor = new Editor(this);
-    editor->setAttribute(Qt::WA_DeleteOnClose);
-
-    connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
-
-    editorTabs->addTab(editor,tr("Untitled"));
-    int tab = editorTabs->count()-1;
-    editorTabs->setCurrentIndex(tab);
-    editorTabs->setTabToolTip(tab,"");
-
-    editorTabs->getEditor(editorTabs->currentIndex())->installEventFilter(this);
-
     delete projectModel;
     projectModel = new TreeModel("", this);
-    if(leftSplit->isVisible()) {
+    if(leftSplit->isVisible())
+    {
         delete referenceModel;
         referenceModel = new TreeModel("", this);
     }
 }
 
-void MainWindow::openFile(const QString &path)
-{
-    QString fileName = path;
 
-    if (fileName.isNull())
-        fileName = QFileDialog::getOpenFileName(this,
-                tr("Open File"), lastDirectory, "Spin Files (*.spin);;All Files (*)");
-    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-    openFileName(fileName);
-    lastDirectory = QFileInfo(fileName).path();
-    QApplication::processEvents();
-    QApplication::restoreOverrideCursor();
-}
-
-void MainWindow::openFileName(QString fileName)
-{
-    QString data;
-    qDebug() << "Attempting to open file " << fileName;
-    if (!fileName.isEmpty()) {
-        QFile file(fileName);
-        if (file.open(QFile::ReadOnly))
-        {
-            QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-            QTextStream in(&file);
-            in.setAutoDetectUnicode(true);
-            in.setCodec("UTF-8");
-            data = in.readAll();
-            file.close();
-
-            QApplication::processEvents();
-            QApplication::restoreOverrideCursor();
-
-            QString sname = QFileInfo(fileName).fileName();
-            if(editorTabs->count()>0) {
-                for(int n = editorTabs->count()-1; n > -1; n--) {
-                    if(editorTabs->tabText(n) == sname) {
-                        editorTabs->setEditor(n, sname, fileName, data);
-                        setProject();
-                        return;
-                    }
-                }
-            }
-            if(editorTabs->tabText(0) == tr("Untitled")) {
-                editorTabs->setEditor(0, sname, fileName, data);
-                setProject();
-                return;
-            }
-            newFile();
-            int tab = editorTabs->count()-1;
-            editorTabs->setEditor(tab, sname, fileName, data);
-            setProject();
-        }
-    }
-}
-
-void MainWindow::fileChanged()
-{
-    int index = editorTabs->currentIndex();
-    QString file = editorTabs->tabToolTip(index);
-    QString name = QFileInfo(file).fileName();
-
-    if (file.isEmpty())
-        name = tr("Untitled*");
-    else if (editorTabs->getEditor(index)->contentChanged())
-        name += '*';
-
-    editorTabs->setTabText(index, name);
-}
 
 void MainWindow::setCurrentFile(const QString &fileName)
 {
@@ -432,7 +342,7 @@ void MainWindow::openRecentFile()
 {
     QAction *action = qobject_cast<QAction *>(sender());
     if (action)
-        openFile(action->data().toString());
+        editorTabs->openFile(action->data().toString());
 }
 
 void MainWindow::printFile()
@@ -464,7 +374,6 @@ void MainWindow::setProject()
         updateReferenceTree(fileName,text);
     }
 
-    QApplication::processEvents();
     QApplication::restoreOverrideCursor();
 }
 
@@ -578,7 +487,7 @@ void MainWindow::highlightFileLine(QString file, int line)
         }
     }
     if(editor == NULL) {
-        openFileName(name);
+        editorTabs->openFile(name);
         editor = editorTabs->getEditor(editorTabs->currentIndex());
     }
     if(editor != NULL)
@@ -955,7 +864,7 @@ void MainWindow::openTreeFile(QString fileName)
     int index = isFileOpen(fileToOpen);
 
     if (index < 0)
-        openFileName(fileToOpen);
+        editorTabs->openFile(fileToOpen);
     else
         editorTabs->setCurrentIndex(index);
 
@@ -1322,7 +1231,6 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     projectTree = new ReferenceTree(tr("Current Project"),ColorScheme::ConBG);
     connect(projectTree,SIGNAL(clicked(QModelIndex)),this,SLOT(projectTreeClicked(QModelIndex)));
 
-
     leftSplit->addWidget(projectTree);
 
     // project reference tree
@@ -1335,13 +1243,15 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     connect(propDialog,SIGNAL(updateFonts()),referenceTree,SLOT(updateFonts()));
     connect(propDialog,SIGNAL(updateFonts()),projectTree,SLOT(updateFonts()));
 
+    leftSplit->addWidget(referenceTree);
+
+
     projectTree->updateColors();
     referenceTree->updateColors();
 
     projectTree->updateFonts();
     referenceTree->updateFonts();
 
-    leftSplit->addWidget(referenceTree);
 
     leftSplit->setStretchFactor(0,1);
     leftSplit->setStretchFactor(1,2);
@@ -1384,7 +1294,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
             switch (e->key())
             {
             case (Qt::Key_T):
-                newFile();
+                editorTabs->newFile();
                 return true;
             case (Qt::Key_W):
                 editorTabs->closeFile();

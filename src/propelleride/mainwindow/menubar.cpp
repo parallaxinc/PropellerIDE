@@ -15,8 +15,8 @@ void MainWindow::setupFileMenu()
     QMenu *fileMenu = new QMenu(tr("&File"), this);
     menuBar()->addMenu(fileMenu);
 
-    fileMenu->addAction(QIcon(":/icons/file-new.png"),      tr("&New"),         this, SLOT(newFile()),    QKeySequence::New);
-    fileMenu->addAction(QIcon(":/icons/file-open.png"),     tr("&Open"),        this, SLOT(openFile()),         QKeySequence::Open);
+    fileMenu->addAction(QIcon(":/icons/file-new.png"),      tr("&New"),         editorTabs, SLOT(newFile()),    QKeySequence::New);
+    fileMenu->addAction(QIcon(":/icons/file-open.png"),     tr("&Open"),        editorTabs, SLOT(open()),         QKeySequence::Open);
 
     fileMenu->addSeparator();
 

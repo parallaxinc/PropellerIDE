@@ -63,10 +63,10 @@ signals:
 public slots:
 
     // file menu
-    void newFile();
-    void openFile(const QString &path = QString());
+    void newProjectTrees();
     void printFile();
     void zipFiles();
+    void openFiles(const QStringList & files);
 
     // edit
     void cut();
@@ -104,7 +104,6 @@ public slots:
     void closeEvent(QCloseEvent *event);
     void quitProgram();
 
-    void fileChanged();
     void enumeratePorts();
     void enumeratePortsEvent();
     void showFindFrame();
@@ -124,7 +123,6 @@ private:
     void getApplicationSettings(bool complain);
     int  checkCompilerInfo();
     QStringList getCompilerParameters(QString compilerOptions);
-    void openFileName(QString fileName);
     void checkAndSaveFiles();
     Editor *createEditor();
 

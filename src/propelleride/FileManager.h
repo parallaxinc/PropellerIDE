@@ -11,16 +11,17 @@ class FileManager : public QTabWidget
 private:
     void createBackgroundImage();
 
-
 public:
-
     explicit FileManager(QWidget *parent = 0);
 
     Editor * getEditor(int num);
     void setEditor(int num, QString shortName, QString fileName, QString text);
 
 public slots:
-    void newFile();
+    int  newFile();
+    void open();
+    void openFile(const QString & fileName);
+    void fileChanged();
 
     void save();
     void save(int index);
@@ -33,5 +34,8 @@ public slots:
     void nextTab();
     void previousTab();
     void changeTab(int index);
+
+signals:
+    void fileUpdated(int index);
 
 };

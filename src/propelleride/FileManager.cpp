@@ -9,8 +9,69 @@ FileManager::FileManager(QWidget *parent) :
     createBackgroundImage();
 }
 
-void FileManager::newFile()
+int FileManager::newFile()
 {
+    // removes the background image (need to move this elsewhere)
+    setStyleSheet("");
+
+    Editor *editor = new Editor(QWidget::window());
+    editor->setAttribute(Qt::WA_DeleteOnClose);
+    editor->installEventFilter(QWidget::window());
+    editor->saveContent();
+
+    int index = addTab(editor,tr("Untitled"));
+
+    setCurrentIndex(index);
+    setTabToolTip(index,"");
+
+//  newProjectTrees();
+
+    connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
+
+    emit fileUpdated(index);
+
+    return index;
+}
+
+void FileManager::open()
+{
+    QString dir = QDir(tabToolTip(currentIndex())).path();
+    QString fileName = QFileDialog::getOpenFileName(this,
+                tr("Open File"), dir, "Spin Files (*.spin);;All Files (*)");
+
+    if (!fileName.isEmpty())
+        openFile(fileName);
+}
+
+
+void FileManager::openFile(const QString & fileName)
+{
+    qDebug() << "FileManager::openFile(" << fileName << ")";
+
+    QFile file(fileName);
+    if (!file.open(QFile::ReadOnly | QFile::Text))
+    {
+        QMessageBox::warning(this, tr("Recent Files"),
+                             tr("Cannot read file %1:\n%2.")
+                             .arg(fileName)
+                             .arg(file.errorString()));
+        return;
+    }
+
+    int index = newFile();
+
+    QTextStream in(&file);
+    in.setAutoDetectUnicode(true);
+    in.setCodec("UTF-8");
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    getEditor(index)->setPlainText(in.readAll());
+    QApplication::restoreOverrideCursor();
+
+    setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
+    setTabText(index,QFileInfo(fileName).fileName());
+    getEditor(index)->saveContent();
+
+    //setProject();
 }
 
 
@@ -61,22 +122,10 @@ void FileManager::saveFile(const QString & fileName, int index)
     }
 
     QTextStream os(&file);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     os.setCodec("UTF-8");
-
-    QString data = getEditor(index)->toPlainText();
-    os << data;
-
-    file.close();
-
-    // gui stuff - doesn't belong here
-    QString tab = tabText(index);
-
-    if(tab.endsWith('*'))
-    {
-        tab = tab.mid(0, tab.length()-1);
-        tab = tab.trimmed();
-        setTabText(index,tab);
-    }
+    os << getEditor(index)->toPlainText();
+    QApplication::restoreOverrideCursor();
 
     setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
     setTabText(index,QFileInfo(fileName).fileName());
@@ -95,6 +144,7 @@ void FileManager::closeFile(int index)
 {
     if (count() > 0)
     {
+        getEditor(index)->disconnect();
         getEditor(index)->close();
         removeTab(index);
     }
@@ -152,5 +202,20 @@ void FileManager::setEditor(int num, QString shortName, QString fileName, QStrin
     setTabToolTip(num,fileName);
     setCurrentIndex(num);
     getEditor(num)->saveContent();
+}
+
+void FileManager::fileChanged()
+{
+    int index = currentIndex();
+    QString file = tabToolTip(index);
+    QString name = QFileInfo(file).fileName();
+
+    if (file.isEmpty())
+        name = tr("Untitled");
+
+    if (getEditor(index)->contentChanged())
+        name += '*';
+
+    setTabText(index, name);
 }
 
