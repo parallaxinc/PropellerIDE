@@ -83,8 +83,7 @@ void FileManager::openFile(const QString & fileName)
 
 void FileManager::save()
 {
-    int index = currentIndex();
-    save(index);
+    save(currentIndex());
 }
 
 void FileManager::save(int index)
@@ -92,27 +91,41 @@ void FileManager::save(int index)
     QString fileName = tabToolTip(index);
 
     if (fileName.isEmpty())
-        saveAs();
+        saveAs(index);
     else
         saveFile(fileName, index);
 }
 
-
 void FileManager::saveAs()
 {
-    int n = currentIndex();
+    saveAs(currentIndex());
+}
 
-    QString fileName = QFileDialog::getSaveFileName(this,
+
+void FileManager::saveAs(int index)
+{
+    QString fileName = tabToolTip(index);
+
+    if (fileName.isEmpty())
+        fileName = tr("Untitled.spin");
+
+    fileName = QFileDialog::getSaveFileName(this,
             tr("Save File As..."), 
-            QDir(tabToolTip(n)).path(), 
-            "Spin Files (*.spin)");
+            QDir(fileName).path(), 
+            tr("Spin Files (*.spin)"));
 
     if (fileName.isEmpty())
         return;
 
-    saveFile(fileName, n);
+    saveFile(fileName, index);
 }
 
+
+void FileManager::saveAll()
+{
+    for (int i = 0; i < count(); i++)
+        save(i);
+}
 
 
 void FileManager::saveFile(const QString & fileName, int index)

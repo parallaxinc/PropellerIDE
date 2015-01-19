@@ -22,6 +22,7 @@ void MainWindow::setupFileMenu()
 
     fileMenu->addAction(QIcon(":/icons/file-save.png"),     tr("&Save"),        editorTabs, SLOT(save()),       QKeySequence::Save);
     fileMenu->addAction(QIcon(":/icons/file-save-as.png"),  tr("Save &As"),     editorTabs, SLOT(saveAs()),     QKeySequence::SaveAs);
+    fileMenu->addAction(QIcon(),                            tr("Save All"),     editorTabs, SLOT(saveAll()),    0);
 
     fileMenu->addSeparator();
 
@@ -43,6 +44,7 @@ void MainWindow::setupFileMenu()
     fileMenu->addSeparator();
 
     fileMenu->addAction(QIcon(":/icons/file-close.png"),    tr("&Close"),       editorTabs, SLOT(closeFile()),  QKeySequence::Close);
+    fileMenu->addAction(QIcon(),                            tr("Close All"),    editorTabs, SLOT(closeAll()),   0);
     fileMenu->addAction(QIcon(":/icons/file-exit.png"),     tr("E&xit"),        this, SLOT(quitProgram()),      QKeySequence::Quit);
 
 }

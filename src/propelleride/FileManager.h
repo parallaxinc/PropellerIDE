@@ -27,7 +27,9 @@ public slots:
     void save();
     void save(int index);
     void saveAs();
+    void saveAs(int index);
     void saveFile(const QString & fileName, int index);
+    void saveAll();
 
     void closeAll();
     void closeFile();
