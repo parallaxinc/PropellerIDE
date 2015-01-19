@@ -32,7 +32,7 @@ public slots:
     void closeAll();
     void closeFile();
     void closeFile(int index);
-    void saveAndClose();
+    int  saveAndClose();
 
     void nextTab();
     void previousTab();

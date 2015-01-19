@@ -160,19 +160,24 @@ void FileManager::closeAll()
     while (count() > 0)
     {
         if (getEditor(0)->contentChanged())
-            saveAndClose();
+        {
+            if (saveAndClose())
+                return;
+        }
         else
+        {
             closeFile(0);
+        }
     }
 }
 
-void FileManager::saveAndClose()
+int FileManager::saveAndClose()
 {
     QMessageBox dialog;
     dialog.setText(tr("Your code has been modified."));
     dialog.setInformativeText(tr("Do you want to save your changes?"));
     dialog.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-    dialog.setDefaultButton(QMessageBox::Save);
+    dialog.setDefaultButton(QMessageBox::Cancel);
 
     switch (dialog.exec())
     {
@@ -182,12 +187,13 @@ void FileManager::saveAndClose()
             break;
         case QMessageBox::Discard:
             closeFile(currentIndex());
-            return;
+            break;
         case QMessageBox::Cancel:
-            return;
+            return 1;
         default:
-            return;
+            break;
     }
+    return 0;
 }
 
 void FileManager::closeFile(int index)
