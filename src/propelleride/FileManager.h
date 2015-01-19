@@ -2,6 +2,7 @@
 
 #include <QTabWidget>
 #include <QMessageBox>
+#include <QStatusBar>
 
 #include "editor.h"
 

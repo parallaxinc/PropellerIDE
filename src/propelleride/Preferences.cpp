@@ -50,16 +50,17 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
 
 void Preferences::configSettings()
 {
-    bool ok;
+    // if new app installed, remove old config file
     QSettings settings;
     QString app = QApplication::applicationFilePath();
-    QVariant keyv = settings.value(useKeys);
-    int keyday = keyv.toInt(&ok);
-    QDateTime appinfo = QFileInfo(app).lastModified();
-    int appday = appinfo.date().toJulianDay();
-    if(appday > keyday) {
+
+    int keyday = settings.value("lastUse").toInt();
+    int appday = QFileInfo(app).lastModified().date().toJulianDay();
+
+    if(appday > keyday)
+    {
         cleanSettings();
-        settings.setValue(useKeys,appday);
+        settings.setValue("lastUse",appday);
     }
     return;
 }
@@ -185,7 +186,7 @@ void Preferences::setupFolders()
             );
 
     librarypath = new PathSelector(
-            tr("Library Path"),
+            tr("Library"),
             QApplication::applicationDirPath() +
                     QString(APP_RESOURCES_PATH) +
                     QString("/library"),

@@ -36,11 +36,12 @@ int FileManager::newFile()
 void FileManager::open()
 {
     QString dir = QDir(tabToolTip(currentIndex())).path();
-    QString fileName = QFileDialog::getOpenFileName(this,
+    QStringList fileNames = QFileDialog::getOpenFileNames(this,
                 tr("Open File"), dir, "Spin Files (*.spin);;All Files (*)");
 
-    if (!fileName.isEmpty())
-        openFile(fileName);
+    for (int i = 0; i < fileNames.size(); i++)
+        if (!fileNames.at(i).isEmpty())
+            openFile(fileNames.at(i));
 }
 
 
@@ -57,6 +58,11 @@ void FileManager::openFile(const QString & fileName)
                              .arg(file.errorString()));
         return;
     }
+
+    // check if file already open before opening another instance
+    for (int i = 0; i < count(); i++)
+        if (fileName == tabToolTip(i))
+            return;
 
     int index = newFile();
 
@@ -139,10 +145,13 @@ void FileManager::closeFile()
 {
     int index = currentIndex();
 
-    if (getEditor(index)->contentChanged())
-        saveAndClose();
-    else
-        closeFile(index);
+    if (count() > 0)
+    {
+        if (getEditor(index)->contentChanged())
+            saveAndClose();
+        else
+            closeFile(index);
+    }
 }
 
 void FileManager::closeAll()
@@ -183,7 +192,7 @@ void FileManager::saveAndClose()
 
 void FileManager::closeFile(int index)
 {
-    if (count() > 0)
+    if (count() > 0 && index >= 0 && index < count())
     {
         getEditor(index)->disconnect();
         getEditor(index)->close();

@@ -16,13 +16,6 @@
 #include "ColorScheme.h"
 #include "PathSelector.h"
 
-#define useKeys             "UseKeys"
-#define lastFileNameKey     "LastFileName"
-#define lastTermXposKey     "LastTermXposition"
-#define lastTermYposKey     "LastTermYposition"
-#define termGeometryKey     "TermGeometry"
-#define lastDirectoryKey    "LastDirectory"
-#define mainWindowGeometry  "WindowGeometry"
 #define tabSpacesKey        "TabSpacesCount"
 #define recentFilesKey      "recentFileList"
 

@@ -90,24 +90,24 @@ void PathSelector::restore()
 
 void PathSelector::save()
 {
-    QSettings().setValue(key,lineEdit->text());
+    QSettings settings;
+    settings.beginGroup("Paths");
+    settings.setValue(key,lineEdit->text());
+    settings.endGroup();
 }
 
 void PathSelector::load()
 {
-    QVariant compv = QSettings().value(key, defaultpath);
-    if(compv.canConvert(QVariant::String))
-    {
-        QString s = compv.toString();
-        s = QDir::fromNativeSeparators(s);
+    QSettings settings;
+    settings.beginGroup("Paths");
+    QString s = settings.value(key, defaultpath).toString();
+    settings.endGroup();
 
-        if(s.length() > 0) {
-            lineEdit->setText(s);
-        }
-        else
-        {
-            lineEdit->setText(defaultpath);
-        }
+    s = QDir::fromNativeSeparators(s);
+
+    if(!s.isEmpty())
+    {
+        lineEdit->setText(s);
     }
     else
     {

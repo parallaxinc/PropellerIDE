@@ -54,8 +54,6 @@ void MainWindow::init()
     /* start with an empty file if fresh install */
     editorTabs->newFile();
 
-    /* status bar for progressbar */
-    QStatusBar *statusBar = new QStatusBar();
 
     sizeLabel.setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
@@ -67,15 +65,14 @@ void MainWindow::init()
     progress->setTextVisible(false);
     progress->setVisible(false);
 
-    statusBar->addPermanentWidget(&msgLabel,70);
-    statusBar->addPermanentWidget(&sizeLabel,15);
-    statusBar->addPermanentWidget(progress,15);
-
-    this->setStatusBar(statusBar);
+    statusBar();
+    statusBar()->addPermanentWidget(&msgLabel,70);
+    statusBar()->addPermanentWidget(&sizeLabel,15);
+    statusBar()->addPermanentWidget(progress,15);
 
     /* get last geometry. using x,y,w,h is unreliable.
     */
-    QVariant geov = QSettings().value(mainWindowGeometry);
+    QVariant geov = QSettings().value("windowSize");
     if(geov.canConvert(QVariant::ByteArray)) {
         // byte array convert is always possible
         QByteArray geo = geov.toByteArray();
@@ -98,12 +95,6 @@ void MainWindow::init()
 
     /* setup the terminal dialog box */
     term = new Terminal(this);
-
-    QVariant gv = QSettings().value(termGeometryKey);
-    if(gv.canConvert(QVariant::ByteArray)) {
-        QByteArray geo = gv.toByteArray();
-        term->restoreGeometry(geo);
-    }
 
     /* setup the port listener */
     portListener = new PortListener(this, term->getEditor());
@@ -138,7 +129,7 @@ void MainWindow::openLastFile()
     /* load the last file into the editor to make user happy */
     QString welcome = propDialog->getSpinLibraryString()+"Welcome.spin";
     QString fileName;
-    QVariant lastfilev = QSettings().value(lastFileNameKey, welcome);
+    QVariant lastfilev = QSettings().value("lastFile", welcome);
 
     if(!lastfilev.isNull()) {
         if(lastfilev.canConvert(QVariant::String)) {
@@ -151,7 +142,7 @@ void MainWindow::openLastFile()
 
     /* load the last directory to make user happy */
     lastDirectory = QFileInfo(fileName).path();
-    QVariant lastdirv = QSettings().value(lastDirectoryKey, lastDirectory);
+    QVariant lastdirv = QSettings().value("lastDirectory", lastDirectory);
     if(!lastdirv.isNull()) {
         if(lastdirv.canConvert(QVariant::String)) {
             if(lastdirv.toString().length() > 0) {
@@ -225,14 +216,11 @@ void MainWindow::closeEvent(QCloseEvent *e)
 
     QString filestr = editorTabs->tabToolTip(editorTabs->currentIndex());
 
-    if(QSettings().value(useKeys).toInt())
+    if(QSettings().value("lastUse").toInt())
     {
-        QSettings().setValue(lastFileNameKey,filestr);
-        QSettings().setValue(lastDirectoryKey, lastDirectory);
-
-        // save user's width/height
-        QByteArray geo = this->saveGeometry();
-        QSettings().setValue(mainWindowGeometry,geo);
+        QSettings().setValue("lastFile",filestr);
+        QSettings().setValue("lastDirectory", lastDirectory);
+        QSettings().setValue("windowSize",saveGeometry());
     }
     if(e) e->accept();
     qApp->exit(0);
@@ -318,10 +306,7 @@ void MainWindow::setProject()
     QString fileName = editorTabs->tabToolTip(index);
     setCurrentFile(fileName);
 
-    QStringList pathpieces = fileName.split("/");
-    setWindowTitle( pathpieces.value( pathpieces.length()-1) + " - " +
-                    QCoreApplication::applicationName()
-                    );
+    setWindowFilePath(editorTabs->tabText(index));
     sizeLabel.setText("");
     msgLabel.setText("");
 
