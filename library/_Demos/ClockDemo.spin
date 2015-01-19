@@ -1,1 +1,152 @@
-筻貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ铢₂扏敪瑣䘠汩㩥䌠潬正䐠浥⹯灳湩††††††††††††††††芔芔嘠牥楳湯›††⸱㄰⠠潦⁲汃捯⁫ㅶ㈮ †††††††††††††芔芔䐠瑡㩥††††畊祬ㄠⰶ㈠㄰′†††††††††††††††††铢ં铢₂畁桴牯›††䨠晥⁦慍瑲湩††††††††††††††††††芔芔䌠浯慰祮›††慐慲汬硡匠浥捩湯畤瑣牯†††††††††††††铢ં铢₂浅楡㩬†††樠慭瑲湩灀牡污慬獸浥捩湯畤瑣牯挮浯†††††††芔芔䰠捩湥楳杮›†䥍⁔楌散獮⁥‭敳⁥湥⁤景映汩⁥潦⁲整浲⁳景甠敳‮铢ં铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢颔ਊ敄捳楲瑰潩㩮吊楨⁳獩愠搠浥湯瑳慲楴湯漠⁦桴⁥汃捯⁫扯敪瑣‮䤠⁴湩楤慣整⁳桴⁥晥敦瑣⁳景挠潬正猠畯捲੥档湡敧⁳猨数摥挠慨杮獥 桴潲杵⁨桴⁥獵⁥景攠杩瑨䰠䑅⁳湯琠敨倠潲数汬牥䐠浥⁯潂牡㭤∊捳潲汬湩≧愠氠瑩䰠䑅戠捡⁫湡⁤潦瑲⁨捡潲獳琠敨攠杩瑨䰭䑅搭獩汰祡愠⁴⁡汣捯⵫敤数摮湡⁴慲整ਮ桔⁥汣捯⵫敤数摮湡⁴慲整椠⁳牣慥整⁤祢甠楳杮眠楡捴瑮眠瑩⁨⁡楦數⁤潣湵ⱴ爠瑡敨⁲桴湡爠汥楹杮漊⁮⁡慦瑣牯漠⁦汣晫敲ⁱ眨楨档挠慨杮獥愠捣牯楤杮琠⁯汣捯⁫灳敥⥤ਮ圊敨⁮畲Ɱ琠敨攠杩瑨䰭䑅搭獩汰祡眠汩⁬汦獡⁨桷湥琠敨挠潬正猠畯捲⁥愨摮琠畨⁳汣捯⁫灳敥⥤栠獡挊慨杮摥‬湡⁤桴湥眠汩⁬捳潲汬琠敨䰠䑅⁳慢正愠摮映牯桴琠⁯敤潭獮牴瑡⁥桴⁥敲慬楴敶猠数摥漠੦桴⁥汣捯⹫†桔⁥敤潭猠慴瑲⁳捳潲汬湩⁧䕌獄眠瑩⁨⁡汣捯⁫潭敤漠⁦瑸污⬱汰ㅬ⁸㔨䴠穈 桴湥瀊潲牧獥楳敶祬椠据敲獡獥甠⁰潴砠慴ㅬ瀫汬㘱⁸㠨‰䡍⥺‬桴湥瀠潲牧獥楳敶祬搠捥敲獡獥搠睯⁮潴刊千佌⁗袉〲䴠穈 湡⁤敲数瑡⁳桴⁥牰捯獥⁳条楡⹮ਊ潎整㩳 胢₢瑁琠敨猠潬敷瑳猠数摥⠠䍒䱓坏Ⱙ琠敨䰠䑅⁳污潭瑳渠癥牥愠灰慥⁲潴∠捳潲汬∬戠瑵椠⁦潹ੵ†眠瑡档琠敨搠浥⁯潬杮攠潮杵ⱨ礠畯氧⁬潳敭楴敭⁳慣捴⁨瑩猠牣汯楬杮戠⁹‱䕌⁄敬瑦爯杩瑨 †畤楲杮琠敨删千佌⁗桰獡⹥ 胢₢瑉猧渠瑯爠捥浯敭摮摥琠⁯档湡敧琠敨挠潬正猠数摥眠瑩潨瑵挠浯畭楮慣楴杮愠摮∠祳据牨湯穩湩≧ †桴瑡瀠湥楤杮攠敶瑮眠瑩⁨瑯敨⁲潣獧眠楨档洠祡戠⁥晡敦瑣摥戠⁹瑩‮䘠牯攠慸灭敬‬晩愠挠杯 †獩椠⁮桴⁥業摤敬漠⁦⁡慷瑩湣⁴楷桴愠挠歬牦煥戭獡摥搠汥祡⠠⁡敤慬⁹景愠猠数楣楦੣†∠楴敭眠湩潤≷氠湥瑧⥨‬桷湥愠潮桴牥挠杯挠慨杮獥琠敨挠潬正映敲畱湥祣‬桴⁥慷瑩湩⁧潣੧†眠汩⁬硥瑩琠敨眠楡捴瑮琠潯攠牡祬漠⁲潴⁯慬整戠捥畡敳琠敨琠浩⁥敲敦敲据⁥畳摤湥祬挠慨杮摥ਮ匊档浥瑡捩਺桔⁥晥敦瑣癩⁥楣捲極⁴景琠敨搠獩汰祡甠敳⁤祢琠楨⁳敤潭椠⁳敲牰獥湥整⁤祢琠敨猠档浥瑡捩戊汥睯⠠瑳湡慤摲倠潲数汬牥挠湯敮瑣潩獮愠獳浵摥⸩ਊ†貔铢肔铢肔铢肔铢肔铢肔铢邔†ਠ†芔倠潲数汬牥芔 †铢₂倠堸㈳⁁†铢ં†芔†††††芔†㐲‰꧎†䕌獄††† †铢₂†††倠㘱铢肔铢肔苯뺂铢肔铢肔苯ꢂ铢肔铢邔††††ਠ†芔††††ㅐ鲔铢肔铢붂苯肔铢肔铢Ꚃ苯肔铢肔铢₫†††††††††ਠ†芔††††ㅐ鲔铢肔铢붂苯肔铢肔铢Ꚃ苯肔铢肔铢₫†††††††††ਠ†芔††††ㅐ鲔铢肔铢붂苯肔铢肔铢Ꚃ苯肔铢肔铢₫ਠ†芔††††㉐鲔铢肔铢붂苯肔铢肔铢Ꚃ苯肔铢肔铢ફ†芔††††㉐鲔铢肔铢붂苯肔铢肔铢Ꚃ苯肔铢肔铢ફ†芔††††㉐鲔铢肔铢붂苯肔铢肔铢Ꚃ苯肔铢肔铢ફ†芔††††㉐鲔铢肔铢붂苯肔铢肔铢Ꚃ苯肔铢肔铢ફ†芔†††††芔†††††††铢ં†钔铢肔铢肔铢肔铢肔铢肔铢颔†††††††胯ઘ笊⵻ⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭ刭噅卉佉⁎䥈呓剏ⵙⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭ ㅶ〮‱‭灕慤整⁤㔰〯⼲〲㌱琠⁯楦⁸祴潰⁳湩搠獥牣灩楴湯ਮ†ਠ絽ਊ佃੎†损歬潭敤†㴠砠慴ㅬ⬠瀠汬㘱⁸††††††††††††† 张楸普敲ⁱ†‽張〰弰〰‰†††††††††††††††✠敓⁴潴猠慴摮牡⁤汣捯⁫潭敤愠摮映敲畱湥祣⠠〸䴠穈਩ 匠䕌⁄†††‽㘱†††††††††††††††††††✠瑓牡楴杮䰠䑅⠠潦⁲捳潲汬湩⁧楤灳慬⥹ 䔠䕌⁄†††‽㌲†††††††††††††††††††✠湅楤杮䰠䑅⠠潦⁲捳潲汬湩⁧楤灳慬⥹ 匠䕄䅌⁙††‽ㄱ張〰‰††††††††††††††††✠捓潲汬湩⁧䕌⁄敤慬੹†䡓䙉䍔問呎㴠簠⡼䱅䑅匭䕌⥄††††††††††††††匧牣汯楬杮䰠䑅猠楨瑦挠畯瑮ਊ䅖੒†潬杮†瑳捡孫崹††††††††††††††††††††匧慴正猠慰散映牯匠牣汯䱬摥⁳敭桴摯 戠瑹⁥挠䥭硤†††††††††††††††††††††✠汃捯⁫潍敤愠牲祡椠摮硥 ਠ䉏⁊†††††††††††† 挠歬†††††㨠∠汃捯≫ ਠ啐⁂慍湩笊䱻畡据⁨潣⁧潴猠牣汯⁬䕌獄爠杩瑨氯晥⁴湡⁤捯慣楳湯污祬猠楷捴⁨汣捯⁫潳牵散⁳椨摮捩瑡摥戠੹汦獡⁨湯愠汬䰠䑅⥳紮੽†††††††††††††††††††††††††††††††††††††††††††††††††††† 挠歬䤮楮⡴張〰弰〰⤰†††††††††††††††††✠湉瑩慩楬敺䌠潬正漠橢捥ੴ†楤慲卛䕌⹄䔮䕌嵄繾††††††††††††††††††䐧楲敶䰠䑅ੳ†潣湧睥匨牣汯䱬摥ⱳ䀠瑳捡⥫††††††††††††††䰧畡据⁨潣⁧潴猠牣汯⁬楴敭搭灥湥慤瑮䰠䑅ੳ 爠灥慥⁴†††††††††††††††††††††††✠潌灯 †挠歬匮瑥潍敤挨潬正潍敤捛䥭硤⬫⥝††††††††††✠睓瑩档琠⁯敮⁷汣捯浫摯੥††汆獡䱨摥⁳†††††††††††††††††††††‧䘠慬桳䰠䑅ੳ††汣⹫慐獵卥捥㌨ ††††††††††††††††††‧圠楡⁴敢潦敲爠灥慥楴杮 †椠⁦繾汣捯䵫摯孥浣摉嵸㴠‽牴敵†††††††††††✠†桃捥⁫汣捯⁫潭敤氠獩㭴爠慥档摥攠摮ਿ†††浣摉繸††††††††††††††††††††††‧†删獥瑥戠捡⁫潴眠瑩⁨楦獲⁴湥牴੹倊䥒匠牣汯䱬摥⁳笊捓潲汬愠猠湩汧⁥楬⁴䕌⁄敬瑦爯杩瑨愠牣獯⁳楤灳慬⁹瑡愠挠潬正搭灥湥慤瑮猠数摥紮ਊ†汣⹫慐獵䵥敓⡣〱 ††††††††††††††††††圧楡⁴⁡楬瑴敬戠晥牯⁥牤癩湩⁧䕌੄†楤慲卛䕌⹄䔮䕌嵄繾††††††††††††††††††䐧楲敶䰠䑅ੳ†畯慴䕛䕌嵄繾†††††††††††††††††††††吧牵⁮湯漠汮⁹慬瑳䰠䑅ਊ†敲数瑡††††††††††††††††††††††††䰧潯⁰潦敲敶ੲ††敲数瑡匠䥈呆佃乕⁔†††††††††††††††††‧䰠潯⁰潴猠牣汯⁬敬瑦ਠ†††慷瑩湣⡴䑓䱅奁⬠挠瑮 ††††††††††††††‧†圠楡⁴灳捥晩捩挠畯瑮⠠汣捯⁫灳敥⁤敳獮瑩癩⥥ ††漠瑵孡䱓䑅⸮䱅䑅⁝㰼‽‱†††††††††††††✠††桓晩⁴楬⁴䕌⁄敬瑦 †爠灥慥⁴䡓䙉䍔問呎†††††††††††††††††✠†潌灯琠⁯捳潲汬爠杩瑨†††††††ਠ†††慷瑩湣⡴䑓䱅奁⬠挠瑮 ††††††††††††††‧†圠楡⁴灳捥晩捩挠畯瑮⠠汣捯⁫灳敥⁤敳獮瑩癩⥥ ††漠瑵孡䱓䑅⸮䱅䑅⁝㸾‽‱†††††††††††††✠††桓晩⁴楬⁴䕌⁄楲桧ੴ倊䥒䘠慬桳敌獤笊汆獡⁨污⁬䕌獄戠楲晥祬紮ਊ†畯慴卛䕌⹄䔮䕌嵄繾††††††††††††††††††䄧汬䰠䑅⁳湯 挠歬倮畡敳卍捥ㄨ㔲 †††††††††††††††††✠慐獵੥†畯慴卛䕌⹄䔮䕌嵄⁾††††††††††††††††††䰧䑅⁳慢正琠⁯潮浲污 †††††††††††††††††††††††††††ਠ䅄੔乻睥挠潬正洠摯⁥慴汢⹥†桔⁥牴癡牥慳⁬景琠楨⁳慴汢⁥祢琠敨挠摯⁥扡癯⁥慴敫⁳桴⁥牐灯汥敬❲ੳ汣捯⁫潳牵散映潲⁭桴⁥汳睯獥⁴灳敥⁤桴潲杵⁨桴⁥慦瑳獥⁴灳敥Ɽ琠敨⁮慢正琠牨畯桧猠潬敷瑳猊数摥愠慧湩紮 † 挠潬正潍敤†潷摲†汣⍫员䱁弱䱐ㅌ⁸††††††††††✠‽㔠た〰た〰䠠੺††††††眠牯⁤挠歬堣䅔ㅌ偟䱌砲†††††††††††㴧ㄠ弰〰弰〰‰穈 ††††††潷摲†汣⍫䍒䅆呓 ††††††††††††✠⁾㈱た〰た〰䠠੺††††††眠牯⁤挠歬堣䅔ㅌ偟䱌破†††††††††††㴧㈠弰〰弰〰‰穈 ††††††潷摲†汣⍫员䱁弱䱐㡌⁸††††††††††✠‽〴た〰た〰䠠੺††††††眠牯⁤挠歬堣䅔ㅌ偟䱌㘱⁸††††††††††㴧㠠弰〰弰〰‰穈 ††††††潷摲†汣⍫员䱁弱䱐㡌⁸††††††††††✠‽〴た〰た〰䠠੺††††††眠牯⁤挠歬堣䅔ㅌ偟䱌破†††††††††††㴧㈠弰〰弰〰‰穈 ††††††潷摲†汣⍫䍒䅆呓 ††††††††††††✠⁾㈱た〰た〰䠠੺††††††眠牯⁤挠歬堣䅔ㅌ偟䱌砲†††††††††††㴧ㄠ弰〰弰〰‰穈 ††††††潷摲†汣⍫员䱁弱䱐ㅌ⁸††††††††††✠‽㔠た〰た〰䠠੺††††††眠牯⁤挠歬刣千佌彗†††††††††††††縧††㈠弰〰‰穈 ††††††潷摲†牴敵††††††††††††††††✠攼摮漠⁦楬瑳ਾ††††††††††††††††††††††††††††笊੻貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢邔芔††††††††††††††††䕔䵒⁓䙏唠䕓›䥍⁔楌散獮⁥†††††††††††††††芔††††††††††††††††††††††††††††††鲔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢꒔芔敐浲獩楳湯椠⁳敨敲祢朠慲瑮摥‬牦敥漠⁦档牡敧‬潴愠祮瀠牥潳⁮扯慴湩湩⁧⁡潣祰漠⁦桴獩††芔芔潳瑦慷敲愠摮愠獳捯慩整⁤潤畣敭瑮瑡潩⁮楦敬⁳琨敨∠潓瑦慷敲⤢‬潴搠慥⁬湩琠敨匠景睴牡⁥†芔芔楷桴畯⁴敲瑳楲瑣潩Ɱ椠据畬楤杮眠瑩潨瑵氠浩瑩瑡潩⁮桴⁥楲桧獴琠⁯獵ⱥ挠灯ⱹ洠摯晩ⱹ洠牥敧芔芔異汢獩ⱨ搠獩牴扩瑵ⱥ猠扵楬散獮ⱥ愠摮漯⁲敳汬挠灯敩⁳景琠敨匠景睴牡ⱥ愠摮琠⁯数浲瑩†††芔芔数獲湯⁳潴眠潨⁭桴⁥潓瑦慷敲椠⁳畦湲獩敨⁤潴搠⁯潳‬畳橢捥⁴潴琠敨映汯潬楷杮挠湯楤楴湯㩳芔芔††††††††††††††††††††††††††††††††††††††††††††芔芔桔⁥扡癯⁥潣祰楲桧⁴潮楴散愠摮琠楨⁳数浲獩楳湯渠瑯捩⁥桳污⁬敢椠据畬敤⁤湩愠汬挠灯敩⁳牯芔芔畳獢慴瑮慩⁬潰瑲潩獮漠⁦桴⁥潓瑦慷敲‮†††††††††††††††††††††††††芔芔††††††††††††††††††††††††††††††††††††††††††††芔芔䡔⁅体呆䅗䕒䤠⁓剐噏䑉䑅∠十䤠≓‬䥗䡔問⁔䅗剒乁奔传⁆乁⁙䥋䑎‬塅剐卅䕓⁄剏䤠偍䥌䑅‬†芔芔义䱃䑕义⁇啂⁔低⁔䥌䥍䕔⁄佔吠䕈圠剁䅒呎䕉⁓䙏䴠剅䡃乁䅔䥂䥌奔‬䥆乔卅⁓但⁒⁁䅐呒䍉䱕剁芔芔啐偒协⁅乁⁄低䥎䙎䥒䝎䵅久⹔䤠⁎低䔠䕖呎匠䅈䱌吠䕈䄠呕佈卒传⁒佃奐䥒䡇⁔佈䑌剅⁓䕂䰠䅉䱂芔芔但⁒乁⁙䱃䥁ⱍ䐠䵁䝁卅传⁒呏䕈⁒䥌䉁䱉呉ⱙ圠䕈䡔剅䤠⁎乁䄠呃佉⁎䙏䌠乏剔䍁ⱔ吠剏⁔剏††芔芔呏䕈坒卉ⱅ䄠䥒䥓䝎䘠佒ⱍ传呕传⁆剏䤠⁎佃乎䍅䥔乏圠呉⁈䡔⁅体呆䅗䕒传⁒䡔⁅单⁅剏传䡔剅†芔芔䕄䱁义升䤠⁎䡔⁅体呆䅗䕒‮†††††††††††††††††††††††††††††††芔钔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢颔紊⁽†††††
+{{
+┌──────────────────────────────────────────────────────────────┐
+│ Object File: Clock Demo.spin                                 │
+│ Version:     1.01 (for Clock v1.2)                            │
+│ Date:        July 16, 2012                                   │
+│ Author:      Jeff Martin                                     │
+│ Company:     Parallax Semiconductor                          │
+│ Email:       jmartin@parallaxsemiconductor.com               │
+│ Licensing:   MIT License - see end of file for terms of use. │
+└──────────────────────────────────────────────────────────────┘
+
+Description:
+This is a demonstration of the Clock object.  It indicates the effects of clock source
+changes (speed changes) through the use of eight LEDs on the Propeller Demo Board;
+"scrolling" a lit LED back and forth across the eight-LED-display at a clock-dependant rate.
+The clock-dependant rate is created by using waitcnt with a fixed count, rather than relying
+on a factor of clkfreq (which changes according to clock speed).
+
+When run, the eight-LED-display will flash when the clock source (and thus clock speed) has
+changed, and then will scroll the LEDs back and forth to demonstrate the relative speed of
+the clock.  The demo starts scrolling LEDs with a clock mode of xtal1+pll1x (5 MHz) then
+progressively increases up to xtal1+pll16x (80 MHz), then progressively decreases down to
+RCSLOW (≈20 MHz) and repeats the process again.
+
+Notes:
+ • At the slowest speed (RCSLOW), the LEDs almost never appear to "scroll," but if you
+   watch the demo long enough, you'll sometimes catch it scrolling by 1 LED left/right
+   during the RCSLOW phase.
+ • It's not recommended to change the clock speed without communicating and "synchronizing"
+   that pending event with other cogs which may be affected by it.  For example, if a cog
+   is in the middle of a waitcnt with a clkfreq-based delay (a delay of a specific
+   "time window" length), when another cog changes the clock frequency, the waiting cog
+   will exit the waitcnt too early or too late because the time reference suddenly changed.
+
+Schematic:
+The effective circuit of the display used by this demo is represented by the schematic
+below (standard Propeller connections assumed).
+
+   ┌───────────┐   
+   │ Propeller │
+   │  P8X32A   │
+   │           │  240 Ω  LEDs      
+   │        P16├──────────┐         
+   │        P17├──────────┫                    
+   │        P18├──────────┫                    
+   │        P19├──────────┫  
+   │        P20├──────────┫
+   │        P21├──────────┫
+   │        P22├──────────┫
+   │        P23├──────────┫
+   │           │              │
+   └───────────┘              
+
+{{------------------------------------REVISION HISTORY-------------------------------------
+ v1.01 - Updated 05/02/2013 to fix typos in description.
+   
+}}
+
+CON
+  _clkmode   = xtal1 + pll16x                           
+  _xinfreq   = 5_000_000                                'Set to standard clock mode and frequency (80 MHz)
+
+  SLED       = 16                                       'Starting LED (for scrolling display)
+  ELED       = 23                                       'Ending LED (for scrolling display)
+  SDELAY     = 115_000                                  'Scrolling LED delay
+  SHIFTCOUNT = ||(ELED-SLED)                            'Scrolling LED shift count
+
+VAR
+  long  stack[9]                                        'Stack space for ScrollLeds method
+  byte  cmIdx                                           'Clock Mode array index
+  
+OBJ                         
+  clk           : "Clock"
+  
+PUB Main
+{{Launch cog to scroll LEDs right/left and occasionally switch clock sources (indicated by
+flash on all LEDs).}}
+                                                                                                        
+  clk.Init(5_000_000)                                   'Initialize Clock object
+  dira[SLED..ELED]~~                                    'Drive LEDs
+  cognew(ScrollLeds, @stack)                            'Launch cog to scroll time-dependant LEDs
+
+  repeat                                                'Loop
+    clk.SetMode(clockMode[cmIdx++])                     'Switch to new clockmode
+    FlashLeds                                           '  Flash LEDs
+    clk.PauseSec(3)                                     '  Wait before repeating
+    if ~~clockMode[cmIdx] == true                       '  Check clock mode list; reached end?
+      cmIdx~                                            '    Reset back to with first entry
+
+PRI ScrollLeds 
+{Scroll a single lit LED left/right across display at a clock-dependant speed.}
+
+  clk.PauseMSec(10)                                     'Wait a little before driving LED
+  dira[SLED..ELED]~~                                    'Drive LEDs
+  outa[ELED]~~                                          'Turn on only last LED
+
+  repeat                                                'Loop forever
+    repeat SHIFTCOUNT                                   '  Loop to scroll left 
+      waitcnt(SDELAY + cnt)                             '    Wait specific count (clock speed sensitive)
+      outa[SLED..ELED] <<= 1                            '    Shift lit LED left
+    repeat SHIFTCOUNT                                   '  Loop to scroll right               
+      waitcnt(SDELAY + cnt)                             '    Wait specific count (clock speed sensitive)
+      outa[SLED..ELED] >>= 1                            '    Shift lit LED right
+
+PRI FlashLeds
+{Flash all LEDs briefly.}
+
+  outa[SLED..ELED]~~                                    'All LEDs on
+  clk.PauseMSec(125)                                    'Pause
+  outa[SLED..ELED]~                                     'LEDs back to normal
+                                                        
+DAT
+{New clock mode table.  The traversal of this table by the code above takes the Propeller's
+clock source from the slowest speed through the fastest speed, then back through slowest
+speed again.}
+   
+  clockMode  word  clk#XTAL1_PLL1x                      '=  5_000_000 Hz
+             word  clk#XTAL1_PLL2x                      '= 10_000_000 Hz
+             word  clk#RCFAST_                          '~ 12_000_000 Hz
+             word  clk#XTAL1_PLL4x                      '= 20_000_000 Hz
+             word  clk#XTAL1_PLL8x                      '= 40_000_000 Hz
+             word  clk#XTAL1_PLL16x                     '= 80_000_000 Hz
+             word  clk#XTAL1_PLL8x                      '= 40_000_000 Hz
+             word  clk#XTAL1_PLL4x                      '= 20_000_000 Hz
+             word  clk#RCFAST_                          '~ 12_000_000 Hz
+             word  clk#XTAL1_PLL2x                      '= 10_000_000 Hz
+             word  clk#XTAL1_PLL1x                      '=  5_000_000 Hz
+             word  clk#RCSLOW_                          '~     20_000 Hz
+             word  true                                 '<end of list>
+                                                        
+{{
+
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                TERMS OF USE: MIT License                                │                                                            
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining a copy of this     │
+│software and associated documentation files (the "Software"), to deal in the Software    │
+│without restriction, including without limitation the rights to use, copy, modify, merge,│
+│publish, distribute, sublicense, and/or sell copies of the Software, and to permit       │
+│persons to whom the Software is furnished to do so, subject to the following conditions: │
+│                                                                                         │
+│The above copyright notice and this permission notice shall be included in all copies or │
+│substantial portions of the Software.                                                    │
+│                                                                                         │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESSED OR IMPLIED,    │
+│INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR │
+│PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE│
+│FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR     │
+│OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER   │
+│DEALINGS IN THE SOFTWARE.                                                                │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+}}           

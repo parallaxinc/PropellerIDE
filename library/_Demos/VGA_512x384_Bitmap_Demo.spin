@@ -1,1 +1,73 @@
-✧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪✊⨧†䝖⁁ㄵ砲㠳‴ⴲ潃潬⁲楂浴灡䐠楲敶⁲ㅶ〮†ਪ✧‪䄠瑵潨㩲䌠楨⁰片捡祥††††††††††⨠✊⨧†潃祰楲桧⁴挨 〲㘰倠牡污慬ⱸ䤠据‮†††ਪ✧‪匠敥攠摮漠⁦楦敬映牯琠牥獭漠⁦獵⹥†††⨠✊⨧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਪ䌊乏ਊ†损歬潭敤㴠砠慴ㅬ⬠瀠汬㘱੸†硟湩牦煥㴠㔠た〰た〰ਊ†楴敬⁳†㴠瘠慧砣楴敬⁳‪杶⍡瑹汩獥 琠汩獥㈳†‽楴敬⁳‪㈳ਊ伊䩂ਊ†杶⁡›嘢䅇㕟㈱㍸㐸䉟瑩慭≰ਊ嘊剁ਊ†潬杮†祳据‬楰數獬瑛汩獥㈳੝†潷摲†潣潬獲瑛汩獥੝ਊ啐⁂瑳牡⁴⁼ⱨ椠‬ⱪ欠‬ⱸ礠ਊ†猧慴瑲瘠慧 瘠慧献慴瑲ㄨⰶ䀠潣潬獲‬灀硩汥ⱳ䀠祳据਩ ✠湩瑩挠汯牯⁳潴挠慹⁮湯戠畬੥†敲数瑡椠映潲⁭‰潴琠汩獥ⴠㄠ †挠汯牯孳嵩㨠‽㈤〸਴ ✠牤睡猠浯⁥楬敮⁳ਠ†敲数瑡礠映潲⁭‱潴㠠 †爠灥慥⁴⁸牦浯〠琠⁯ㄵ਱†††汰瑯砨‬⽸⥹ਊ†眧楡⁴整⁮敳潣摮ੳ†慷瑩湣⡴汣晫敲ⁱ‪〱⬠挠瑮਩ ✠慲摮浯穩⁥桴⁥潣潬獲愠摮瀠硩汥ੳ†敲数瑡 †挠汯牯孳籼栿⼠ 楴敬嵳㨠‽椿 †爠灥慥⁴〱ਰ†††楰數獬籛㽼⁪⼯琠汩獥㈳⁝㴺欠ਿਊ剐⁉汰瑯砨礬 ⁼੩ 椠⁦⁸㸽〠愠摮砠㰠㔠㈱愠摮礠㴠‾‰湡⁤⁹‼㠳਴††楰數獬祛㰠‼‴‫⁸㸾㔠⁝㵼簠‼⁸ਠ笊੻铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢邔芔†††††††††††††††††††††††††吠剅卍传⁆单㩅䴠呉䰠捩湥敳†††††††††††††††††††††††††铢₂†††††††††††††††††††††††††††††ਠ铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢꒔芔敐浲獩楳湯椠⁳敨敲祢朠慲瑮摥‬牦敥漠⁦档牡敧‬潴愠祮瀠牥潳⁮扯慴湩湩⁧⁡潣祰漠⁦桴獩猠景睴牡⁥湡⁤獡潳楣瑡摥搠捯浵湥慴楴湯††铢₂芔楦敬⁳琨敨∠潓瑦慷敲⤢‬潴搠慥⁬湩琠敨匠景睴牡⁥楷桴畯⁴敲瑳楲瑣潩Ɱ椠据畬楤杮眠瑩潨瑵氠浩瑩瑡潩⁮桴⁥楲桧獴琠⁯獵ⱥ挠灯ⱹ††铢ં铢涂摯晩ⱹ洠牥敧‬異汢獩ⱨ搠獩牴扩瑵ⱥ猠扵楬散獮ⱥ愠摮漯⁲敳汬挠灯敩⁳景琠敨匠景睴牡ⱥ愠摮琠⁯数浲瑩瀠牥潳獮琠⁯桷浯琠敨匠景睴牡芔芔獩映牵楮桳摥琠⁯潤猠Ɐ猠扵敪瑣琠⁯桴⁥潦汬睯湩⁧潣摮瑩潩獮›†††††††††††††††††††††††††††††††††铢ં铢₂††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔桔⁥扡癯⁥潣祰楲桧⁴潮楴散愠摮琠楨⁳数浲獩楳湯渠瑯捩⁥桳污⁬敢椠据畬敤⁤湩愠汬挠灯敩⁳牯猠扵瑳湡楴污瀠牯楴湯⁳景琠敨匠景睴牡⹥铢ં铢₂††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔䡔⁅体呆䅗䕒䤠⁓剐噏䑉䑅∠十䤠≓‬䥗䡔問⁔䅗剒乁奔传⁆乁⁙䥋䑎‬塅剐卅⁓剏䤠偍䥌䑅‬义䱃䑕义⁇啂⁔低⁔䥌䥍䕔⁄佔吠䕈†††††铢ં铢垂剁䅒呎䕉⁓䙏䴠剅䡃乁䅔䥂䥌奔‬䥆乔卅⁓但⁒⁁䅐呒䍉䱕剁倠剕佐䕓䄠䑎丠乏义剆义䕇䕍呎‮义丠⁏噅久⁔䡓䱁⁌䡔⁅啁䡔剏⁓剏††††芔芔佃奐䥒䡇⁔佈䑌剅⁓䕂䰠䅉䱂⁅但⁒乁⁙䱃䥁ⱍ䐠䵁䝁卅传⁒呏䕈⁒䥌䉁䱉呉ⱙ圠䕈䡔剅䤠⁎乁䄠呃佉⁎䙏䌠乏剔䍁ⱔ吠剏⁔剏传䡔剅䥗䕓‬†铢ં铢䆂䥒䥓䝎䘠佒ⱍ传呕传⁆剏䤠⁎佃乎䍅䥔乏圠呉⁈䡔⁅体呆䅗䕒传⁒䡔⁅单⁅剏传䡔剅䐠䅅䥌䝎⁓义吠䕈匠䙏坔剁⹅††††††††††††芔钔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઘ絽††
+''********************************************
+''*  VGA 512x384 2-Color Bitmap Driver v1.0  *
+''*  Author: Chip Gracey                     *
+''*  Copyright (c) 2006 Parallax, Inc.       *
+''*  See end of file for terms of use.       *
+''********************************************
+
+CON
+
+  _clkmode = xtal1 + pll16x
+  _xinfreq = 5_000_000
+
+  tiles    = vga#xtiles * vga#ytiles
+  tiles32  = tiles * 32
+
+
+OBJ
+
+  vga : "VGA_512x384_Bitmap"
+
+
+VAR
+
+  long  sync, pixels[tiles32]
+  word  colors[tiles]
+
+
+PUB start | h, i, j, k, x, y
+
+  'start vga
+  vga.start(16, @colors, @pixels, @sync)
+
+  'init colors to cyan on blue
+  repeat i from 0 to tiles - 1
+    colors[i] := $2804
+
+  'draw some lines  
+  repeat y from 1 to 8
+    repeat x from 0 to 511
+      plot(x, x/y)
+
+  'wait ten seconds
+  waitcnt(clkfreq * 10 + cnt)
+
+  'randomize the colors and pixels
+  repeat
+    colors[||?h // tiles] := ?i
+    repeat 100
+      pixels[||?j // tiles32] := k?
+
+
+PRI plot(x,y) | i
+
+  if x => 0 and x < 512 and y => 0 and y < 384
+    pixels[y << 4 + x >> 5] |= |< x  
+
+{{
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                   TERMS OF USE: MIT License                                                  │                                                            
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation    │ 
+│files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,    │
+│modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software│
+│is furnished to do so, subject to the following conditions:                                                                   │
+│                                                                                                                              │
+│The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.│
+│                                                                                                                              │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE          │
+│WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR         │
+│COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,   │
+│ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                         │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+}}    

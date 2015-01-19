@@ -1,1 +1,83 @@
-筻⨊⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨊††††楐杮⤩ 扏敪瑣嘠⸱′††††⨠⨊䄠瑵潨㩲†桃楲⁳慓慶敧☠䨠晥⁦慍瑲湩⨠⨊䌠灯特杩瑨⠠⥣㈠〰‶慐慲汬硡‬湉⹣†⨠⨊匠敥攠摮漠⁦楦敬映牯琠牥獭漠⁦獵⹥†⨠††⨊匠慴瑲摥›㔰〭ⴸ〲㘰††††††††⨠⨊⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਊ湉整晲捡⁥潴倠湩⥧⤩猠湥潳⁲湡⁤敭獡牵⁥瑩⁳汵牴獡湯捩琠慲敶⁬楴敭‮䴠慥畳敲敭瑮⁳慣⁮敢椠⁮湵瑩⁳景琠浩⁥牯搠獩慴据⹥䔊捡⁨敭桴摯爠煥極敲⁳湯⁥慰慲敭整Ⱳ倠湩‬桴瑡椠⁳桴⁥⽉⁏楰⁮桴瑡椠⁳潣湮捥整⁤潴琠敨倠湩⥧⤩猧猠杩慮⁬楬敮ਮ 貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢邔 芔铢肔铢肔铢ₐ††††铢肔铢肔铢芔††潃湮捥楴湯吠⁯牐灯汥敬ੲ†铢芔ꎀ芔倠义⥇⤩芔ꎀ芔铢₂†删浥浥敢⁲䥐䝎⤩ 敒畱物獥 芔铢肔铢肔铢ₘ††††铢肔铢肔铢芔††㔫⁖潐敷⁲畓灰祬 芔††乇⁄㔫⁖䥓⁇†芔 钔铢肔铢肔铢겔铢肔铢겔铢肔铢겔铢肔铢肔铢颔 †††芔†胯芔†벂㌠㌮ੋ††††胯ₘ钔铢ₘ†铢뒂倠湩ਊⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭ䕒䥖䥓乏䠠卉佔奒ⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭ ㅶ㈮ⴠ唠摰瑡摥〠⼶㌱㈯㄰‱潴挠慨杮⁥䥓⁇敲楳瑳牯映潲⁭䬱琠⁯⸳䬳 ㅶㄮⴠ唠摰瑡摥〠⼳〲㈯〰‷潴挠慨杮⁥䥓⁇敲楳瑳牯映潲⁭〱⁋潴ㄠੋਠ絽ਊ佃੎ 吠彏义㴠㜠弳㐷‶†††††††††††††††††††††††††††††††✠䤠据敨ੳ†佔䍟⁍‽㤲た㐳††††††††††††††††††††††††††††††††‧敃瑮浩瑥牥ੳ††††††††††††††††††††††††††††††††††††††††ਠ††††††††††††††††††††††††††††††††††††††††ਠ啐⁂楔正⡳楐⥮㨠䴠捩潲敳潣摮⁳⁼湣ㅴ‬湣㉴✊刧瑥牵⁮楐杮⤩✩⁳湯ⵥ慷⁹汵牴獡湯捩琠慲敶⁬楴敭椠⁮業牣獯捥湯獤 †††††††††††††††††††††††††††††††††††††††† 漠瑵孡楐嵮⁾†††††††††††††††††††††††††††††††††✠䌠敬牡䤠伯倠湩 搠物孡楐嵮繾†††††††††††††††††††††††††††††††††✠䴠歡⁥楐⁮畏灴瑵 漠瑵孡楐嵮繾†††††††††††††††††††††††††††††††††✠匠瑥䤠伯倠湩 漠瑵孡楐嵮⁾†††††††††††††††††††††††††††††††††✠䌠敬牡䤠伯倠湩⠠‾′뗂⁳異獬⥥ 搠物孡楐嵮⁾†††††††††††††††††††††††††††††††††✠䴠歡⁥⽉⁏楐⁮湉異ੴ†慷瑩湰⡥ⰰ簠‼楐Ɱ〠 ††††††††††††††††††††††††††††‧慗瑩䘠牯倠湩吠⁯潇䠠䝉ੈ†湣ㅴ㨠‽湣⁴†††††††††††††††††††††††††††††††††‧瑓牯⁥畃牲湥⁴潃湵整⁲慖畬੥†慷瑩数⡱ⰰ簠‼楐Ɱ〠 ††††††††††††††††††††††††††††‧慗瑩䘠牯倠湩吠⁯潇䰠坏ਠ†湣㉴㨠‽湣⁴†††††††††††††††††††††††††††††††††‧瑓牯⁥敎⁷潃湵整⁲慖畬੥†楍牣獯捥湯獤㨠‽簨⡼湣ㅴⴠ挠瑮⤲⼠⠠汣晫敲ⁱ 弱〰弰〰⤰ 㸾ㄠ††††††††‧敒畴湲吠浩⁥湩술玵 ਠ倊䉕䤠据敨⡳楐⥮㨠䐠獩慴据੥✧敍獡牵⁥扯敪瑣搠獩慴据⁥湩椠据敨ੳ 䐠獩慴据⁥㴺吠捩獫倨湩 ‪弱〰‰ 佔䥟⁎†††††††††††††††††††✠䐠獩慴据⁥湉䤠据敨ੳ††††††††††††††††††††††††††††††††††††††††ਠ††††††††††††††††††††††††††††††††††††††††ਠ啐⁂敃瑮浩瑥牥⡳楐⥮㨠䐠獩慴据⁥††††††††††††††††††††††††ਠ✧敍獡牵⁥扯敪瑣搠獩慴据⁥湩挠湥楴敭整獲 ††††††††††††††††††††††ਠ†楄瑳湡散㨠‽楍汬浩瑥牥⡳楐⥮⼠ㄠ‰††††††††††††††††††††††‧楄瑳湡散䤠⁮敃瑮浩瑥牥ੳ††††††††††††††††††††††††††††††††††††††††ਠ††††††††††††††††††††††††††††††††††††††††ਠ啐⁂楍汬浩瑥牥⡳楐⥮㨠䐠獩慴据⁥††††††††††††††††††††††††ਠ✧敍獡牵⁥扯敪瑣搠獩慴据⁥湩洠汩楬敭整獲 ††††††††††††††††††††††ਠ†楄瑳湡散㨠‽楔正⡳楐⥮⨠ㄠ弰〰‰ 佔䍟⁍†††††††††††††††††††‧楄瑳湡散䤠⁮楍汬浩瑥牥ੳ笊੻貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ铢₂†††††††††††††††††††††††††䕔䵒⁓䙏唠䕓›䥍⁔楌散獮⁥††††††††††††††††††††††††芔††††††††††††††††††††††††††††††鲔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ત铢傂牥業獳潩⁮獩栠牥扥⁹牧湡整Ɽ映敲⁥景挠慨杲ⱥ琠⁯湡⁹数獲湯漠瑢楡楮杮愠挠灯⁹景琠楨⁳潳瑦慷敲愠摮愠獳捯慩整⁤潤畣敭瑮瑡潩⁮†芔ਠ铢暂汩獥⠠桴⁥匢景睴牡≥Ⱙ琠⁯敤污椠⁮桴⁥潓瑦慷敲眠瑩潨瑵爠獥牴捩楴湯‬湩汣摵湩⁧楷桴畯⁴楬業慴楴湯琠敨爠杩瑨⁳潴甠敳‬潣祰‬†芔芔潭楤祦‬敭杲ⱥ瀠扵楬桳‬楤瑳楲畢整‬畳汢捩湥敳‬湡⽤牯猠汥⁬潣楰獥漠⁦桴⁥潓瑦慷敲‬湡⁤潴瀠牥業⁴数獲湯⁳潴眠潨⁭桴⁥潓瑦慷敲铢ં铢概⁳畦湲獩敨⁤潴搠⁯潳‬畳橢捥⁴潴琠敨映汯潬楷杮挠湯楤楴湯㩳†††††††††††††††††††††††††††††††††芔芔†††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢咂敨愠潢敶挠灯特杩瑨渠瑯捩⁥湡⁤桴獩瀠牥業獳潩⁮潮楴散猠慨汬戠⁥湩汣摵摥椠⁮污⁬潣楰獥漠⁲畳獢慴瑮慩⁬潰瑲潩獮漠⁦桴⁥潓瑦慷敲芔芔†††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢咂䕈匠䙏坔剁⁅卉倠佒䥖䕄⁄䄢⁓卉Ⱒ圠呉佈呕圠剁䅒呎⁙䙏䄠奎䬠义ⱄ䔠偘䕒卓传⁒䵉䱐䕉ⱄ䤠䍎啌䥄䝎䈠呕丠呏䰠䵉呉䑅吠⁏䡔⁅††††芔芔䅗剒乁䥔卅传⁆䕍䍒䅈呎䉁䱉呉ⱙ䘠呉䕎卓䘠剏䄠倠剁䥔啃䅌⁒啐偒协⁅乁⁄低䥎䙎䥒䝎䵅久⹔䤠⁎低䔠䕖呎匠䅈䱌吠䕈䄠呕佈卒传⁒††††铢ં铢䎂偏剙䝉呈䠠䱏䕄卒䈠⁅䥌䉁䕌䘠剏䄠奎䌠䅌䵉‬䅄䅍䕇⁓剏传䡔剅䰠䅉䥂䥌奔‬䡗呅䕈⁒义䄠⁎䍁䥔乏传⁆佃呎䅒呃‬佔呒传⁒呏䕈坒卉ⱅ†芔芔剁卉义⁇剆䵏‬問⁔䙏传⁒义䌠乏䕎呃佉⁎䥗䡔吠䕈匠䙏坔剁⁅剏吠䕈唠䕓传⁒呏䕈⁒䕄䱁义升䤠⁎䡔⁅体呆䅗䕒‮††††††††††††铢ં铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢颔紊⁽††††
+{{
+***************************************
+*        Ping))) Object V1.2          *
+* Author:  Chris Savage & Jeff Martin *
+* Copyright (c) 2006 Parallax, Inc.   *
+* See end of file for terms of use.   *    
+* Started: 05-08-2006                 *
+***************************************
+
+Interface to Ping))) sensor and measure its ultrasonic travel time.  Measurements can be in units of time or distance.
+Each method requires one parameter, Pin, that is the I/O pin that is connected to the Ping)))'s signal line.
+
+  ┌───────────────────┐
+  │┌───┐         ┌───┐│    Connection To Propeller
+  ││ ‣ │ PING))) │ ‣ ││    Remember PING))) Requires
+  │└───┘         └───┘│    +5V Power Supply
+  │    GND +5V SIG    │
+  └─────┬───┬───┬─────┘
+        │  │    3.3K
+          └┘   └ Pin
+
+--------------------------REVISION HISTORY--------------------------
+ v1.2 - Updated 06/13/2011 to change SIG resistor from 1K to 3.3K
+ v1.1 - Updated 03/20/2007 to change SIG resistor from 10K to 1K
+ 
+}}
+
+CON
+
+  TO_IN = 73_746                                                                ' Inches
+  TO_CM = 29_034                                                                ' Centimeters
+                                                                                 
+                                                                                 
+PUB Ticks(Pin) : Microseconds | cnt1, cnt2
+''Return Ping)))'s one-way ultrasonic travel time in microseconds
+                                                                                 
+  outa[Pin]~                                                                    ' Clear I/O Pin
+  dira[Pin]~~                                                                   ' Make Pin Output
+  outa[Pin]~~                                                                   ' Set I/O Pin
+  outa[Pin]~                                                                    ' Clear I/O Pin (> 2 µs pulse)
+  dira[Pin]~                                                                    ' Make I/O Pin Input
+  waitpne(0, |< Pin, 0)                                                         ' Wait For Pin To Go HIGH
+  cnt1 := cnt                                                                   ' Store Current Counter Value
+  waitpeq(0, |< Pin, 0)                                                         ' Wait For Pin To Go LOW 
+  cnt2 := cnt                                                                   ' Store New Counter Value
+  Microseconds := (||(cnt1 - cnt2) / (clkfreq / 1_000_000)) >> 1                ' Return Time in µs
+  
+
+PUB Inches(Pin) : Distance
+''Measure object distance in inches
+
+  Distance := Ticks(Pin) * 1_000 / TO_IN                                        ' Distance In Inches
+                                                                                 
+                                                                                 
+PUB Centimeters(Pin) : Distance                                                  
+''Measure object distance in centimeters
+                                              
+  Distance := Millimeters(Pin) / 10                                             ' Distance In Centimeters
+                                                                                 
+                                                                                 
+PUB Millimeters(Pin) : Distance                                                  
+''Measure object distance in millimeters
+                                              
+  Distance := Ticks(Pin) * 10_000 / TO_CM                                       ' Distance In Millimeters
+
+{{
+
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                   TERMS OF USE: MIT License                                                  │                                                            
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation    │ 
+│files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,    │
+│modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software│
+│is furnished to do so, subject to the following conditions:                                                                   │
+│                                                                                                                              │
+│The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.│
+│                                                                                                                              │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE          │
+│WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR         │
+│COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,   │
+│ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                         │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+}}          

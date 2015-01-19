@@ -1,1 +1,192 @@
-筻⨊⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨊删呃䵉⁅慢正牧畯摮䐠浥⁯ㅶ〮戮††††⨠⨊䄠瑵潨㩲䈠慥⁵捓睨扡⁥††††††††⨠⨊䌠灯特杩瑨⠠⥣㈠㄰‰慐慲汬硡†††††⨠⨊匠敥攠摮漠⁦楦敬映牯琠牥獭漠⁦獵⹥††⨠⨊⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪紊੽✧✊‧獕条㩥✊ਧ✧戠捡杫潲湵㩤†吨楨⁳湯祬渠敥獤琠⁯敢爠湵漠据⁥潦⁲慥档倠瑯湥楴浯瑥牥礠畯栠癡⁥潣湮捥整⥤✊‧䍒献慴瑲倨湩匬慴整嘬牡慩汢䅥摤敲獳⤠††㰠ⴼ‭慖楲扡敬眠汩⁬敢甠摰瑡摥眠瑩⁨敲畳瑬愠摮挠湡戠⁥敲摡愠⁴湡⁹楴敭映潲⁭桴⁥牰杯慲⹭✊ਧ✧✊匧慴整㴠ㄠ⠠牐晥牥敲⥤ⴠ戠捥畡敳琠楨⁳潭敤瀠潲楶敤⁳⁡汳杩瑨祬栠杩敨⁲敲潳畬楴湯搠敵琠⁯桴⁥⽉⁏桴敲桳汯⁤潮⁴敢湩⁧硥捡汴⁹摖⽤′✊ਧ✧††††㈠〲꧎†੃✧⽉⁏楐⁮苯肔苯뺂铢뎔铢ꮂ铢ꪂ䜠䑎✊‧††††††铢ં✧†††††貔苯벂੒✧†††††芔芔✊‧†††††铢肔铢肔铢肔苯₪乇੄✧✊ਧ✧瑓瑡⁥‽‰✊ਧ✧††††㈠〲꧎†੃✧⽉⁏楐⁮苯肔苯뺂铢뎔铢ꮂ铢ꪂ䜠䑎✊‧††††††铢ં✧†††††貔苯벂੒✧†††††芔芔✊‧†††††铢肔铢肔铢肔苯₪㌫㌮੖ਊ✊䤧⁮祭琠獥⁴敳畴⁰⁉獵摥䤠伯瀠湩⌠‰湡⁤⁡〱䡍⁺牣獹慴⁬楷桴愠倠䱌猠瑥楴杮漠⁦㡸ਠ✧⁃‽⸰숱䚵✊ਧ✧††††††灡牰硯浩瑡⁥敲畴湲摥瘠污敵⁳牦浯删瑃浩㩥✊ਧ✧⁒‽ㄠ䴰†††弴㠳弰〰ਰ✧⁒‽⸴䴷†††弱㠹弰〰ਰ✧⁒‽⸲䴲††††㌹弹〰ਰ✧⁒‽†䴱††††㈴張〰ਰ✧⁒‽㜴䬰††††〲弰〰ਰ✧⁒‽㈲䬰††††㤠弳〰ਰ✧⁒‽㠱䬰††††㜠弶〰ਰ✧⁒‽㔱䬰††††㘠弳〰ਰ✧⁒‽〱䬰††††㐠弳〰ਰ✧⁒‽㔠䬸††††㈠弳〵ਰ✧⁒‽㐠䬷††††ㄠ弹〵ਰ✧⁒‽ㄠ䬵†††††弶〱ਰ✧⁒‽ㄠ䬰†††††弴〰ਰ✧⁒‽⸴䬷†††††弱〸ਰ✧⁒‽⸳䬹†††††弱㔴ਰ✧⁒‽⸳䬳†††††弱〲ਰ✧⁒‽†䬳†††††弱〱ਰ✧⁒‽⸲䬷††††††㘹ਰ✧⁒‽⸲䬲††††††㔷ਰ✧⁒‽⸱䬵††††††㔴ਰ✧⁒‽†䬱††††††㐲ਰ✧⁒‽㜴츰₩††††††㘲✊刧㴠㌠〳꧎†††††††ਰ䌊乏 张汣浫摯⁥‽瑸污‱‫汰ㅬ砶 张楸普敲ⁱ‽張〰弰〰ਰ†獟慴正㴠⠠㌤〰‰‫㌤〰‰‫〱⤰㸠‾′†愧捣浯摯瑡⁥楤灳慬⁹敭潭祲愠摮猠慴正ਊ†彸楴敬⁳‽㘱 礠瑟汩獥㴠ㄠਲ 瀠牡浡潣湵⁴‽㐱†††ਠ†楢浴灡扟獡⁥‽㈤〰ਰ†楤灳慬役慢敳㴠␠〵〰ਊ†楬敮⁳‽ਵ†桴捩湫獥⁳‽ਲ嘊剁 氠湯⁧癴獟慴畴⁳†✠⼰⼱′‽景⽦楶楳汢⽥湩楶楳汢⁥†††††敲摡漭汮੹†潬杮†癴敟慮汢⁥††〧㼯㴠漠晦漯⁮†††††††††††††眠楲整漭汮੹†潬杮†癴灟湩⁳†††┧灰浭⁭‽楰獮†††††††††††††眠楲整漭汮੹†潬杮†癴浟摯⁥†††┧捣湩⁰‽档潲慭椬瑮牥慬散測獴⽣慰ⱬ睳灡眠楲整漭汮੹†潬杮†癴獟牣敥⁮††瀧楯瑮牥琠⁯捳敲湥⠠潷摲⥳†††††††眠楲整漭汮੹†潬杮†癴损汯牯⁳††瀧楯瑮牥琠⁯潣潬獲⠠潬杮⥳†††††††眠楲整漭汮⁹††††††† 氠湯⁧琠彶捨††††✠潨楲潺瑮污挠汥獬††††††††††††牷瑩ⵥ湯祬 氠湯⁧琠彶捶††††✠敶瑲捩污挠汥獬†††††††††††††牷瑩ⵥ湯祬 氠湯⁧琠彶硨††††✠潨楲潺瑮污挠汥⁬硥慰獮潩⁮†††††††牷瑩ⵥ湯祬 氠湯⁧琠彶硶††††✠敶瑲捩污挠汥⁬硥慰獮潩⁮††††††††牷瑩ⵥ湯祬 氠湯⁧琠彶潨††††✠潨楲潺瑮污漠晦敳⁴†††††††††††牷瑩ⵥ湯祬 氠湯⁧琠彶潶††††✠敶瑲捩污漠晦敳⁴††††††††††††牷瑩ⵥ湯祬 氠湯⁧琠彶牢慯捤獡⁴✠牢慯捤獡⁴牦煥敵据⁹䠨⥺††††††††牷瑩ⵥ湯祬 氠湯⁧琠彶畡慲捬杯†✠畡慲⁬浦挠杯††††††††††††††牷瑩ⵥ湯祬ਊ†潬杮††潣潬獲㙛崴ਊ†潷摲猠牣敥孮彸楴敬⁳‪役楴敬嵳ਊ†祢整†學楬敮嵳 戠瑹⁥礠汛湩獥੝†祢整†獸汛湩獥੝†祢整†獹汛湩獥੝ਊ†潬杮删噃污敵 ਠ䉏੊†癴††›吢≖ 朠⁲†㨠∠片灡楨獣ਢ†䍒††›刢呃䵉≅ 丠浵†㨠∠畎扭牥≳ਊ啐⁂瑳牡⁴⁼Ⱪ硤搬੹†猧慴瑲琠੶†潬杮潭敶䀨癴獟慴畴ⱳ䀠癴慰慲獭‬慰慲捭畯瑮਩†癴獟牣敥⁮㴺䀠捳敲湥 琠彶潣潬獲㨠‽捀汯牯ੳ†癴献慴瑲䀨癴獟慴畴⥳ਊ†椧楮⁴潣潬獲 爠灥慥⁴⁩牦浯〠琠⁯㐶 †挠汯牯孳嵩㨠‽〤〰㄰㄰‰‪椨㐫 …䘤⬠␠䈲㘰䌰㈰ਊ†椧楮⁴楴敬猠牣敥੮†敲数瑡搠⁸牦浯〠琠⁯癴桟⁣‭਱††敲数瑡搠⁹牦浯〠琠⁯癴癟⁣‭਱†††捳敲湥摛⁹‪癴桟⁣‫硤⁝㴺搠獩汰祡扟獡⁥㸾㘠⬠搠⁹‫硤⨠琠彶捶⬠⠠搨⁹…㌤⥆㰠‼〱਩ ✠瑳牡⁴湡⁤敳畴⁰牧灡楨獣 朠⹲瑳牡ੴ†牧献瑥灵ㄨⰶㄠⰲㄠ㠲‬㘹‬楢浴灡扟獡⥥ਊ ✠湉瑩慩楬敺删噃污敵 删噃污敵㨠‽ਰ†䍒献慴瑲〨ㄬ䀬䍒慖畬⁥਩ 爠灥慥ੴ †✠汣慥⁲楢浴灡 †朠⹲汣慥ੲ †✠牤睡琠硥ੴ††牧琮硥浴摯⡥ⰱⰱⰷ⤵ †朠⹲潣潬睲摩桴ㄨ〬਩††牧琮硥⡴ⰰ〹猬牴湩⡧倢牡污慬⁸䍒䥔䕍戠捡杫潲湵⁤敤潭⤢਩ †✠楤灳慬⁹整瑸漠⁦䍒楴敭瘠污敵 †朠⹲整瑸〨㔬ⰰ畎⹭潔瑓⡲䍒慖畬ⱥㄠ⤰਩††挧灯⁹楢浴灡琠⁯楤灳慬੹††牧挮灯⡹楤灳慬役慢敳਩ਊ䅄੔癴慰慲獭††††††††潬杮††‰†††††††猧慴畴ੳ††††††††††††潬杮††‱†††††††攧慮汢੥†††††††††††† †††††††††††✠潬杮†┠㄰弱〰〰†††✠楰獮†††汏⁤潂牡⁤ †††††††††††氠湯⁧†┠〰弱㄰㄰†††✠楰獮†††敎⁷潂牡੤†††††††††††† †††††††††††氠湯⁧†┠〰〰†††††✠潭敤 †††††††††††氠湯⁧†〠†††††††✠捳敲湥 †††††††††††氠湯⁧†〠†††††††✠潣潬獲 †††††††††††氠湯⁧†砠瑟汩獥††††✠捨 †††††††††††氠湯⁧†礠瑟汩獥††††✠捶 †††††††††††氠湯⁧†ㄠ‰††††††✠硨 †††††††††††氠湯⁧†ㄠ†††††††✠硶 †††††††††††氠湯⁧†〠†††††††✠潨 †††††††††††氠湯⁧†〠†††††††✠潶 †††††††††††氠湯⁧†㘠弰〰弰〰✰硟湩牦煥㰼‴戧潲摡慣瑳 †††††††††††氠湯⁧†〠†††††††✠畡慲捬杯ਊ䅄੔筻貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ铢₂†††††††††††††††††††††††††䕔䵒⁓䙏唠䕓›䥍⁔楌散獮⁥††††††††††††††††††††††††芔鲔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ત铢傂牥業獳潩⁮獩栠牥扥⁹牧湡整Ɽ映敲⁥景挠慨杲ⱥ琠⁯湡⁹数獲湯漠瑢楡楮杮愠挠灯⁹景琠楨⁳潳瑦慷敲愠摮愠獳捯慩整⁤潤畣敭瑮瑡潩⁮†芔芔楦敬⁳琨敨∠潓瑦慷敲⤢‬潴搠慥⁬湩琠敨匠景睴牡⁥楷桴畯⁴敲瑳楲瑣潩Ɱ椠据畬楤杮眠瑩潨瑵氠浩瑩瑡潩⁮桴⁥楲桧獴琠⁯獵ⱥ挠灯ⱹ††铢ં铢涂摯晩ⱹ洠牥敧‬異汢獩ⱨ搠獩牴扩瑵ⱥ猠扵楬散獮ⱥ愠摮漯⁲敳汬挠灯敩⁳景琠敨匠景睴牡ⱥ愠摮琠⁯数浲瑩瀠牥潳獮琠⁯桷浯琠敨匠景睴牡芔芔獩映牵楮桳摥琠⁯潤猠Ɐ猠扵敪瑣琠⁯桴⁥潦汬睯湩⁧潣摮瑩潩獮›†††††††††††††††††††††††††††††††††铢ં铢₂††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔桔⁥扡癯⁥潣祰楲桧⁴潮楴散愠摮琠楨⁳数浲獩楳湯渠瑯捩⁥桳污⁬敢椠据畬敤⁤湩愠汬挠灯敩⁳牯猠扵瑳湡楴污瀠牯楴湯⁳景琠敨匠景睴牡⹥铢ં铢₂††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔䡔⁅体呆䅗䕒䤠⁓剐噏䑉䑅∠十䤠≓‬䥗䡔問⁔䅗剒乁奔传⁆乁⁙䥋䑎‬塅剐卅⁓剏䤠偍䥌䑅‬义䱃䑕义⁇啂⁔低⁔䥌䥍䕔⁄佔吠䕈†††††铢ં铢垂剁䅒呎䕉⁓䙏䴠剅䡃乁䅔䥂䥌奔‬䥆乔卅⁓但⁒⁁䅐呒䍉䱕剁倠剕佐䕓䄠䑎丠乏义剆义䕇䕍呎‮义丠⁏噅久⁔䡓䱁⁌䡔⁅啁䡔剏⁓剏††††芔芔佃奐䥒䡇⁔佈䑌剅⁓䕂䰠䅉䱂⁅但⁒乁⁙䱃䥁ⱍ䐠䵁䝁卅传⁒呏䕈⁒䥌䉁䱉呉ⱙ圠䕈䡔剅䤠⁎乁䄠呃佉⁎䙏䌠乏剔䍁ⱔ吠剏⁔剏传䡔剅䥗䕓‬†铢ં铢䆂䥒䥓䝎䘠佒ⱍ传呕传⁆剏䤠⁎佃乎䍅䥔乏圠呉⁈䡔⁅体呆䅗䕒传⁒䡔⁅单⁅剏传䡔剅䐠䅅䥌䝎⁓义吠䕈匠䙏坔剁⹅††††††††††††芔钔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઘ絽††††††††††††
+{{
+*****************************************
+* RCTIME background Demo v1.0.b         *
+* Author: Beau Schwabe                  *
+* Copyright (c) 2010 Parallax           *
+* See end of file for terms of use.     *
+*****************************************
+}}
+''
+'' Usage:
+''
+'' background:  (This only needs to be run once for each Potentiometer you have connected)
+'' RC.start(Pin,State,VariableAddress )     <<-- Variable will be updated with result and can be read at any time from the program.
+''
+''
+''State = 1 (Preferred) - because this mode provides a slightly higher resolution due to the I/O threshold not being exactly Vdd/2 
+''
+''         220Ω  C
+''I/O Pin ──┳── GND
+''             │
+''           ┌R
+''           │ │
+''           └─┻─── GND
+''
+''
+''State = 0 
+''
+''         220Ω  C
+''I/O Pin ──┳── GND
+''             │
+''           ┌R
+''           │ │
+''           └─┻─── +3.3V
+
+
+
+''In my test setup I used I/O pin #0 and a 10MHz crystal with a PLL setting of x8 
+''C = 0.1µF
+''
+''            approximate returned values from RCtime:
+''
+''R =  10M      4_380_000
+''R = 4.7M      1_980_000
+''R = 2.2M        939_000
+''R =   1M        425_000
+''R = 470K        200_000
+''R = 220K         93_000
+''R = 180K         76_000
+''R = 150K         63_000
+''R = 100K         43_000
+''R =  58K         23_500
+''R =  47K         19_500
+''R =  15K          6_100
+''R =  10K          4_000
+''R = 4.7K          1_800
+''R = 3.9K          1_450
+''R = 3.3K          1_200
+''R =   3K          1_100
+''R = 2.7K            960
+''R = 2.2K            750
+''R = 1.5K            450
+''R =   1K            240
+''R = 470Ω             26
+''R = 330Ω              0
+
+CON
+  _clkmode = xtal1 + pll16x
+  _xinfreq = 5_000_000
+  _stack = ($3000 + $3000 + 100) >> 2   'accomodate display memory and stack
+
+  x_tiles = 16
+  y_tiles = 12
+
+  paramcount = 14       
+  bitmap_base = $2000
+  display_base = $5000
+
+  lines = 5
+  thickness = 2
+
+VAR
+  long tv_status    '0/1/2 = off/visible/invisible           read-only
+  long  tv_enable     '0/? = off/on                            write-only
+  long  tv_pins       '%ppmmm = pins                           write-only
+  long  tv_mode       '%ccinp = chroma,interlace,ntsc/pal,swap write-only
+  long  tv_screen     'pointer to screen (words)               write-only
+  long  tv_colors     'pointer to colors (longs)               write-only               
+  long  tv_hc         'horizontal cells                        write-only
+  long  tv_vc         'vertical cells                          write-only
+  long  tv_hx         'horizontal cell expansion               write-only
+  long  tv_vx         'vertical cell expansion                 write-only
+  long  tv_ho         'horizontal offset                       write-only
+  long  tv_vo         'vertical offset                         write-only
+  long  tv_broadcast  'broadcast frequency (Hz)                write-only
+  long  tv_auralcog   'aural fm cog                            write-only
+
+  long    colors[64]
+
+  word screen[x_tiles * y_tiles]
+
+  byte  x[lines]
+  byte  y[lines]
+  byte  xs[lines]
+  byte  ys[lines]
+
+
+  long RCValue
+  
+OBJ
+  tv    : "TV"
+  gr    : "Graphics"
+  RC    : "RCTIME"
+  Num   : "Numbers"
+
+PUB start | i,dx,dy
+  'start tv
+  longmove(@tv_status, @tvparams, paramcount)
+  tv_screen := @screen
+  tv_colors := @colors
+  tv.start(@tv_status)
+
+  'init colors
+  repeat i from 0 to 64
+    colors[i] := $00001010 * (i+4) & $F + $2B060C02
+
+  'init tile screen
+  repeat dx from 0 to tv_hc - 1
+    repeat dy from 0 to tv_vc - 1
+      screen[dy * tv_hc + dx] := display_base >> 6 + dy + dx * tv_vc + ((dy & $3F) << 10)
+
+  'start and setup graphics
+  gr.start
+  gr.setup(16, 12, 128, 96, bitmap_base)
+
+
+  'Initialize RCValue
+  RCValue := 0
+  RC.start(0,1,@RCValue )
+
+  repeat
+
+    'clear bitmap
+    gr.clear
+
+    'draw text
+    gr.textmode(1,1,7,5)
+    gr.colorwidth(1,0)
+    gr.text(0,90,string("Parallax RCTIME background demo"))
+
+    'display text of RCtime value
+    gr.text(0,50,Num.ToStr(RCValue, 10))
+    'copy bitmap to display
+    gr.copy(display_base)
+
+
+DAT
+tvparams                long    0               'status
+                        long    1               'enable
+                        
+                        'long   %011_0000       'pins      Old Board 
+                        long    %001_0101       'pins      New Board
+                        
+                        long    %0000           'mode
+                        long    0               'screen
+                        long    0               'colors
+                        long    x_tiles         'hc
+                        long    y_tiles         'vc
+                        long    10              'hx
+                        long    1               'vx
+                        long    0               'ho
+                        long    0               'vo
+                        long    60_000_000'_xinfreq<<4 'broadcast
+                        long    0               'auralcog
+
+DAT
+{{
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                   TERMS OF USE: MIT License                                                  │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation    │
+│files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,    │
+│modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software│
+│is furnished to do so, subject to the following conditions:                                                                   │
+│                                                                                                                              │
+│The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.│
+│                                                                                                                              │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE          │
+│WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR         │
+│COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,   │
+│ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                         │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+}}                        

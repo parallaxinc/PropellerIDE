@@ -1,1 +1,395 @@
-✧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਪ✧‪䘠潬瑡湩ⵧ潐湩⁴ⴼ‾瑓楲杮⁳††††ਪ✧‪匠湩汧ⵥ牰捥獩潩⁮䕉䕅㜭㐵†††††ਪ✧‪䄠瑵潨㩲䌠楨⁰片捡祥††††††††ਪ✧‪䌠灯特杩瑨⠠⥣㈠〰‶慐慲汬硡‬湉⹣†ਪ✧‪匠敥攠摮漠⁦楦敬映牯琠牥獭漠⁦獵⹥†ਪ✧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਪ嘊剁ਊ†潬杮†Ɒ搠杩瑩ⱳ攠灸湯湥ⱴ椠瑮来牥‬整獮‬敺潲ⱳ†牰捥獩潩੮†潬杮†潰楳楴敶损牨‬敤楣慭彬档Ⱳ琠潨獵湡獤损牨‬桴畯慳摮桴彳档ੲ†祢整†汦慯彴瑳楲杮㉛崰ਊ†伊䩂ਊ†⁆›䘢潬瑡慍桴ਢਊ啐⁂汆慯呴卯牴湩⡧楓杮敬 ›瑓楲杮瑐ੲ✊䌧湯敶瑲映潬瑡湩ⵧ潰湩⁴畮扭牥琠⁯瑳楲杮✊ਧ✧†湥牴㩹✊‧††匠湩汧⁥‽汦慯楴杮瀭楯瑮渠浵敢ੲ✧✊‧攠楸㩴✊‧††匠牴湩偧牴㴠瀠楯瑮牥琠⁯敲畳瑬湡⁴⵺瑳楲杮✊ਧ✧†慍湧瑩摵獥戠汥睯ㄠ⭥㈱愠摮眠瑩楨⁮攱ㄭ′楷汬戠⁥硥牰獥敳⁤楤敲瑣祬਻✧†瑯敨睲獩ⱥ猠楣湥楴楦⁣潮慴楴湯眠汩⁬敢甠敳⹤✊ਧ✧†硥浡汰獥††††††††爠獥汵獴✊‧ⴠⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭ✊‧䘠潬瑡潔瑓楲杮〨〮 †††〢ਢ✧†汆慯呴卯牴湩⡧⸱⤰†††∠∱✊‧䘠潬瑡潔瑓楲杮⴨⸱⤰†††ⴢ∱✊‧䘠潬瑡潔瑓楲杮帨㉞〮 ††ㄢ㐮㐱ㄲ∴✊‧䘠潬瑡潔瑓楲杮㈨㌮攴㌭ †〢〮㈰㐳ਢ✧†汆慯呴卯牴湩⡧ㄭ㔮ⵥ⤵†∠〭〮〰㄰∵✊‧䘠潬瑡潔瑓楲杮㈨㜮⭥⤶††㈢〷〰〰ਢ✧†汆慯呴卯牴湩⡧攱ㄱ ††∠〱〰〰〰〰〰ਢ✧†汆慯呴卯牴湩⡧攱㈱ ††∠⸱〰〰〰⭥㈱ਢ✧†汆慯呴卯牴湩⡧攱ㄭ⤲††∠⸰〰〰〰〰〰㄰ਢ✧†汆慯呴卯牴湩⡧攱ㄭ⤳††∠⸱〰〰〰ⵥ㌱ਢ ✠数晲牯⁭湩瑩慩⁬敳畴ੰ†瑓楲杮瑐⁲㴺匠瑥灵匨湩汧⥥ਊ†攧楬業慮整琠慲汩湩⁧敺潲ੳ†晩椠瑮来牥 †爠灥慥⁴湵楴⁬湩整敧⁲⼯ㄠਰ†††湩整敧⁲㴯ㄠਰ†††整獮⼠‽〱 ††搠杩瑩⵳ਭ†汥敳 †搠杩瑩繳ਊ†攧灸敲獳渠浵敢⁲捡潣摲湩⁧潴攠灸湯湥ੴ†慣敳攠灸湯湥ੴ††椧⁮慲杮⁥敬瑦漠⁦敤楣慭੬††ㄱ⸮㨰 ††䄠摤楄楧獴攨灸湯湥⁴‫⤱ †✠湩爠湡敧爠杩瑨漠⁦敤楣慭੬††ㄭ⸮楤楧獴ⴠㄠ㨳 ††稠牥獯㨠‽攭灸湯湥ੴ†††摁䑤杩瑩⡳⤱ †✠畯⁴景爠湡敧‬潤猠楣湥楴楦⁣潮慴楴湯 †漠桴牥਺†††潄捓敩瑮晩捩ਊ†琧牥業慮整稠猭牴湩੧†祢整灛繝ਊ倊䉕䘠潬瑡潔捓敩瑮晩捩匨湩汧⥥㨠匠牴湩偧牴ਊ✧潃癮牥⁴汦慯楴杮瀭楯瑮渠浵敢⁲潴猠楣湥楴楦ⵣ潮慴楴湯猠牴湩੧✧✊‧攠瑮祲਺✧†††楓杮敬㴠映潬瑡湩ⵧ潰湩⁴畮扭牥✊ਧ✧†硥瑩਺✧†††瑓楲杮瑐⁲‽潰湩整⁲潴爠獥汵慴瑮稠猭牴湩੧✧✊‧攠慸灭敬⁳†††††††††††††敲畳瑬ੳ✧†ⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭਭ✧†汆慯呴卯楣湥楴楦⡣攱㤭 †††††∠⸱〰〰〰ⵥ∹✊‧䘠潬瑡潔捓敩瑮晩捩帨㉞〮 †††††ㄢ㐮㐱ㄲ攴〫ਢ✧†汆慯呴卯楣湥楴楦⡣⸰〰㔲⤱††††∠⸲ㄵ〰〰ⵥ∳✊‧䘠潬瑡潔捓敩瑮晩捩⴨⸰〰〰㔱〰㌴ †ⴢ⸱〵㐰〳ⵥ∵ਊ†瀧牥潦浲椠楮楴污猠瑥灵 匠牴湩偧牴㨠‽敓畴⡰楓杮敬਩ ✠潤猠楣湥楴楦⁣潮慴楴湯 䐠卯楣湥楴楦੣† ✠整浲湩瑡⁥⵺瑳楲杮 戠瑹孥嵰੾ ਠ啐⁂汆慯呴䵯瑥楲⡣楓杮敬‬畓晦硩桃⥲㨠匠牴湩偧牴簠砠‬੹✊䌧湯敶瑲映潬瑡湩ⵧ潰湩⁴畮扭牥琠⁯敭牴捩猠牴湩੧✧✊‧攠瑮祲਺✧†††楓杮敬㴠映潬瑡湩ⵧ潰湩⁴畮扭牥✊‧††匠晵楦䍸牨㴠漠瑰潩慮⁬湥楤杮挠慨慲瑣牥⠠㴰潮敮਩✧✊‧攠楸㩴✊‧††匠牴湩偧牴㴠瀠楯瑮牥琠⁯敲畳瑬湡⁴⵺瑳楲杮✊ਧ✧†慍湧瑩摵獥眠瑩楨⁮桴⁥敭牴捩爠湡敧⁳楷汬戠⁥硥牰獥敳⁤湩洠瑥楲੣✧†整浲㭳漠桴牥楷敳‬捳敩瑮晩捩渠瑯瑡潩⁮楷汬戠⁥獵摥ਮ✧✊‧爠湡敧†渠浡⁥††祳扭汯✊‧ⴠⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭ✊‧ㄠ㉥‴†礠瑯慴††ਖ਼✧†攱ㄲ††敺瑴⁡†娠✊‧ㄠㅥ‸†攠慸†††੅✧†攱㔱††数慴††倠✊‧ㄠㅥ′†琠牥⁡††੔✧†攱‹††楧慧††䜠✊‧ㄠ㙥††洠来⁡††੍✧†攱″††楫潬††欠✊‧ㄠづ††ⴠ††††ਭ✧†攱㌭††業汬⁩†洠✊‧ㄠⵥ‶†洠捩潲††ੵ✧†攱㤭††慮潮††渠✊‧ㄠⵥ㈱†瀠捩⁯††ੰ✧†攱ㄭ‵†敦瑭⁯†映✊‧ㄠⵥ㠱†愠瑴⁯††੡✧†攱㈭‱†敺瑰⁯†稠✊‧ㄠⵥ㐲†礠捯潴††੹✧✊‧攠慸灭敬⁳†††††††敲畳瑬ੳ✧†ⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭ✊‧洠瑥楲⡣〲〰〮‬洢⤢††㈢〮〰〰欰≭✊‧洠瑥楲⡣㐭㔮ⵥⰵ∠≁ †ⴢ㔴〮〰〰䅵ਢ✧†敭牴捩㈨㜮㙥‬⤰†††∠⸲〷〰〰≍✊‧洠瑥楲⡣㤳㍥ⰱ∠≗ ††㌢㤮〰攰㌫圲ਢ ✠数晲牯⁭湩瑩慩⁬敳畴ੰ†瑓楲杮瑐⁲㴺匠瑥灵匨湩汧⥥ਊ†搧瑥牥業敮琠潨獵湡獤攠灸湯湥⁴湡⁤敲慬楴敶琠湥⁳硥潰敮瑮 砠㨠‽攨灸湯湥⁴‫㔴  ″‭㔱 礠㨠‽攨灸湯湥⁴‫㔴 ⼯㌠ਊ†椧⁦湩洠瑥楲⁣慲杮ⱥ搠⁯敭牴捩 椠⁦籼⁸㰽㠠 †✠摡⁤楤楧獴眠瑩⁨潰獳扩敬搠捥浩污 †䄠摤楄楧獴礨⬠ㄠ਩††愧摤猠慰散 †戠瑹孥⭰崫㨠‽•ਢ††椧⁦桴畯慳摮⁳硥潰敮瑮渠瑯〠‬摡⁤敭牴捩椠摮捩瑡牯 †椠⁦੸†††祢整灛⬫⁝㴺洠瑥楲季嵸 ✠晩漠瑵漠⁦敭牴捩爠湡敧‬潤猠楣湥楴楦⁣潮慴楴湯 攠獬੥††潄捓敩瑮晩捩 †ਠ†椧⁦畓晦硩桃⁲潮⁴ⰰ愠摤匠晵楦䍸牨 椠⁦畓晦硩桃ੲ††祢整灛⬫⁝㴺匠晵楦䍸牨 †ਠ†琧牥業慮整稠猭牴湩੧†祢整灛繝ਊ倊䉕匠瑥牐捥獩潩⡮畎扭牥晏楄楧獴਩✊匧瑥瀠敲楣楳湯琠⁯硥牰獥⁳汦慯楴杮瀭楯瑮渠浵敢獲椠੮✧✊‧丠浵敢佲䑦杩瑩⁳‽畎扭牥漠⁦楤楧獴琠⁯潲湵⁤潴‬楬業整⁤潴ㄠ⸮‷㜨搽晥畡瑬਩✧✊‧攠慸灭敬⁳††††爠獥汵獴✊‧ⴠⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭ✊‧匠瑥牐捥獩潩⡮⤱†∠攱〫ਢ✧†敓側敲楣楳湯㐨 †ㄢ〮〰⭥∰✊‧匠瑥牐捥獩潩⡮⤷†∠⸱〰〰〰⭥∰ਊ†牰捥獩潩⁮㴺丠浵敢佲䑦杩瑩ੳ†ਊ啐⁂敓側獯瑩癩䍥牨倨獯瑩癩䍥牨਩✊匧瑥氠慥⁤档牡捡整⁲潦⁲潰楳楴敶渠浵敢獲✊ਧ✧†潐楳楴敶桃⁲‽㨰渠⁯档牡捡整⁲楷汬氠慥⁤潰楳楴敶渠浵敢獲⠠敤慦汵⥴✊‧†††††渠湯〭›潐楳楴敶桃⁲楷汬氠慥⁤潰楳楴敶渠浵敢獲⠠敩∠∠漠⁲⬢⤢✊ਧ✧†硥浡汰獥†††††††敲畳瑬ੳ✧†ⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭ✊‧匠瑥潐楳楴敶桃⡲⤰††∠〲〮∷†∠㈭⸰㜰ਢ✧†敓側獯瑩癩䍥牨∨∠ †•〲〮∷†ⴢ〲〮∷✊‧匠瑥潐楳楴敶桃⡲⬢⤢†∠㈫⸰㜰•∠㈭⸰㜰ਢ 瀠獯瑩癩彥档⁲㴺倠獯瑩癩䍥牨 ਠ倊䉕匠瑥敄楣慭䍬牨䐨捥浩污桃⥲ਊ✧敓⁴敤楣慭⁬潰湩⁴档牡捡整ੲ✧✊‧䐠捥浩污桃⁲‽㨰∠∮眠汩⁬敢甠敳⁤搨晥畡瑬਩✧†††††渠湯〭›敄楣慭䍬牨眠汩⁬敢甠敳⁤椨⁥Ⱒ•潦⁲畅潲数਩✧✊‧攠慸灭敬⁳††††††敲畳瑬ੳ✧†ⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭ✊‧匠瑥敄楣慭䍬牨〨 ††㈢⸰㤴ਢ✧†敓䑴捥浩污桃⡲Ⱒ⤢†∠〲㐬∹ਊ†敤楣慭彬档⁲㴺䐠捥浩污桃ੲ†ਊ啐⁂敓却灥牡瑡牯桃獲吨潨獵湡獤桃Ⱳ吠潨獵湡瑤獨桃⥲ਊ✧敓⁴桴畯慳摮⁳湡⁤桴畯慳摮桴⁳敳慰慲潴⁲档牡捡整獲✊ਧ✧†桔畯慳摮䍳牨㴠✊‧†††〠›潮挠慨慲瑣牥眠汩⁬敳慰慲整琠潨獵湡獤⠠敤慦汵⥴✊‧†渠湯〭›桔畯慳摮䍳牨眠汩⁬敳慰慲整琠潨獵湡獤✊ਧ✧†桔畯慳摮桴䍳牨㴠✊‧†††〠›潮挠慨慲瑣牥眠汩⁬敳慰慲整琠潨獵湡瑤獨⠠敤慦汵⥴✊‧†渠湯〭›桔畯慳摮桴䍳牨眠汩⁬敳慰慲整琠潨獵湡瑤獨✊ਧ✧†硥浡汰獥††††††††††爠獥汵獴✊‧ⴠⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭ✊‧匠瑥敓慰慲潴䍲牨⡳ⰰ〠 †††㈢〰〰〰〰•†∠⸰〰㜰㤲㐳∵✊‧匠瑥敓慰慲潴䍲牨⡳ⰰ∠≟ ††㈢〰〰〰〰•†∠⸰〰弰㈷弹㐳∵✊‧匠瑥敓慰慲潴䍲牨⡳ⰢⰢ〠 ††㈢〰〬〰〬〰•∠⸰〰㜰㤲㐳∵✊‧匠瑥敓慰慲潴䍲牨⡳ⰢⰢ∠≟ †㈢〰〬〰〬〰•∠⸰〰弰㈷弹㐳∵ਊ†桴畯慳摮彳档⁲㴺吠潨獵湡獤桃ੲ†桴畯慳摮桴彳档⁲㴺吠潨獵湡瑤獨桃ੲ†ਊ剐⁉敓畴⡰楳杮敬 ›瑳楲杮瑰ੲ 氧浩瑩搠杩瑩⁳潴ㄠ⸮਷†晩瀠敲楣楳湯 †搠杩瑩⁳㴺瀠敲楣楳湯⌠‾‱⌼㜠 攠獬੥††楤楧獴㨠‽਷ ✠湩瑩慩楬敺猠牴湩⁧潰湩整ੲ†⁰㴺䀠汦慯彴瑳楲杮ਊ†愧摤∠∭椠⁦敮慧楴敶 椠⁦楳杮敬☠␠〸〰〰〰 †戠瑹孥⭰崫㨠‽ⴢਢ†漧桴牥楷敳‬摡⁤湡⁹潰楳楴敶氠慥⁤档牡捡整ੲ†汥敳晩瀠獯瑩癩彥档ੲ††祢整灛⬫⁝㴺瀠獯瑩癩彥档ੲ ✠汣慥⁲楳湧愠摮挠敨正映牯〠 椠⁦楳杮敬☠‽㜤䙆䙆䙆੆ †✠潮⁴ⰰ攠瑳浩瑡⁥硥潰敮瑮 †攠灸湯湥⁴㴺⠠猨湩汧⁥㰼ㄠ㸠‾㐲ⴠㄠ㜲 ‪㜷 㹾㠠 †ਠ††椧⁦敶祲猠慭汬‬楢獡甠ੰ††晩攠灸湯湥⁴‼㌭ਲ†††楳杮敬㨠‽⹆䵆汵猨湩汧ⱥㄠㅥ⤳ ††攠灸湯湥⁴㴫爠獥汵⁴㴺ㄠਲ਼††† †✠敤整浲湩⁥硥捡⁴硥潰敮瑮愠摮椠瑮来牥 †爠灥慥ੴ†††湩整敧⁲㴺䘠䘮潒湵⡤⹆䵆汵猨湩汧ⱥ琠湥学硥潰敮瑮ⴠ搠杩瑩⁳‫崱⤩ ††椠⁦湩整敧⁲‼整楮摛杩瑩⁳‭崱 †††攠灸湯湥⵴ਭ†††汥敳晩椠瑮来牥㴠‾整楮摛杩瑩嵳 †††攠灸湯湥⭴ਫ†††汥敳 †††攠灸湯湥⁴㴭爠獥汵ੴ††††畱瑩ਊ†椧⁦ⰰ爠獥瑥攠灸湯湥⁴湡⁤湩整敧ੲ†汥敳 †攠灸湯湥繴 †椠瑮来牥੾ ✠敳⁴湩瑩慩⁬整獮愠摮挠敬牡稠牥獯 琠湥⁳㴺琠湥孩楤楧獴ⴠㄠ੝†敺潲繳ਊ†爧瑥牵⁮潰湩整⁲潴猠牴湩੧†瑳楲杮瑰⁲㴺䀠汦慯彴瑳楲杮ਊ倊䥒䐠卯楣湥楴楦੣ ✠摡⁤楤楧獴眠瑩⁨潰獳扩敬搠捥浩污 䄠摤楄楧獴ㄨ਩†愧摤攠灸湯湥⁴湩楤慣潴ੲ†祢整灛⬫⁝㴺∠≥ ✠摡⁤硥潰敮瑮猠杩੮†晩攠灸湯湥⁴㸽〠 †戠瑹孥⭰崫㨠‽⬢ਢ†汥敳 †戠瑹孥⭰崫㨠‽ⴢਢ††籼硥潰敮瑮 ✠摡⁤硥潰敮瑮搠杩瑩ੳ†晩攠灸湯湥⁴㸽ㄠਰ††祢整灛⬫⁝㴺攠灸湯湥⁴ 〱⬠∠∰ †攠灸湯湥⁴⼯‽〱 戠瑹孥⭰崫㨠‽硥潰敮瑮⬠∠∰ਊ倊䥒䄠摤楄楧獴氨慥楤杮 ⁼੩ ✠摡⁤敬摡湩⁧楤楧獴 爠灥慥⁴⁩㴺氠慥楤杮 †䄠摤楄楧ੴ††愧摤愠祮琠潨獵湡獤猠灥牡瑡牯戠瑥敷湥琠潨獵湡獤 †椠⁦桴畯慳摮彳档ੲ†††⵩ਭ†††晩椠愠摮渠瑯椠⼠ ਲ਼††††祢整灛⬫⁝㴺琠潨獵湡獤损牨 ✠晩琠慲汩湩⁧楤楧獴‬摡⁤敤楣慭⁬档牡捡整ੲ†晩搠杩瑩ੳ††摁䑤捥浩污 †✠桴湥愠摤琠慲汩湩⁧楤楧獴 †爠灥慥⁴桷汩⁥楤楧獴 ††✠摡⁤湡⁹桴畯慳摮桴⁳敳慰慲潴⁲敢睴敥⁮桴畯慳摮桴ੳ†††晩琠潨獵湡瑤獨损牨 †††椠⁦⁩湡⁤潮⁴⁩⼯㌠ ††††戠瑹孥⭰崫㨠‽桴畯慳摮桴彳档ੲ†††⭩ਫ†††摁䑤杩瑩ਊ倊䥒䄠摤楄楧ੴ ✠晩氠慥楤杮稠牥獯‬摡⁤〢ਢ†晩稠牥獯 †戠瑹孥⭰崫㨠‽〢ਢ††敺潲⵳ਭ†椧⁦潭敲搠杩瑩ⱳ愠摤挠牵敲瑮搠杩瑩愠摮瀠敲慰敲渠硥ੴ†汥敳晩搠杩瑩ੳ††祢整灛⬫⁝㴺椠瑮来牥⼠琠湥⁳‫〢ਢ††湩整敧⁲⼯‽整獮 †琠湥⁳㴯ㄠਰ††楤楧獴ⴭ ✠晩渠⁯潭敲搠杩瑩ⱳ愠摤∠∰ 攠獬੥††祢整灛⬫⁝㴺∠∰ਊ倊䥒䄠摤敄楣慭੬ 椠⁦敤楣慭彬档ੲ††祢整灛⬫⁝㴺搠捥浩污损牨 攠獬੥††祢整灛⬫⁝㴺∠∮ †††††††††ਠ䐊呁 †††氠湯⁧†††††††ㄠ⭥㠳‬攱㌫ⰷㄠ⭥㘳‬攱㌫ⰵㄠ⭥㐳‬攱㌫ⰳㄠ⭥㈳‬攱㌫਱††††潬杮†攱㌫ⰰㄠ⭥㤲‬攱㈫ⰸㄠ⭥㜲‬攱㈫ⰶㄠ⭥㔲‬攱㈫ⰴㄠ⭥㌲‬攱㈫ⰲㄠ⭥ㄲ †††氠湯⁧ㄠ⭥〲‬攱ㄫⰹㄠ⭥㠱‬攱ㄫⰷㄠ⭥㘱‬攱ㄫⰵㄠ⭥㐱‬攱ㄫⰳㄠ⭥㈱‬攱ㄫ਱††††潬杮†攱ㄫⰰㄠ⭥㤰‬攱〫ⰸㄠ⭥㜰‬攱〫ⰶㄠ⭥㔰‬攱〫ⰴㄠ⭥㌰‬攱〫ⰲㄠ⭥㄰琊湥⁦†氠湯⁧ㄠ⭥〰‬攱〭ⰱㄠⵥ㈰‬攱〭ⰳㄠⵥ㐰‬攱〭ⰵㄠⵥ㘰‬攱〭ⰷㄠⵥ㠰‬攱〭ਹ††††潬杮†攱ㄭⰰㄠⵥㄱ‬攱ㄭⰲㄠⵥ㌱‬攱ㄭⰴㄠⵥ㔱‬攱ㄭⰶㄠⵥ㜱‬攱ㄭⰸㄠⵥ㤱 †††氠湯⁧ㄠⵥ〲‬攱㈭ⰱㄠⵥ㈲‬攱㈭ⰳㄠⵥ㐲‬攱㈭ⰵㄠⵥ㘲‬攱㈭ⰷㄠⵥ㠲‬攱㈭ਹ††††潬杮†攱㌭ⰰㄠⵥㄳ‬攱㌭ⰲㄠⵥ㌳‬攱㌭ⰴㄠⵥ㔳‬攱㌭ⰶㄠⵥ㜳‬攱㌭ਸ琊湥⁩†氠湯⁧ㄠ‬〱‬〱ⰰㄠた〰‬〱た〰‬〱弰〰ⰰㄠた〰た〰‬〱た〰た〰ਊ††††祢整∠穹晡湰浵ਢ敭牴捩†祢整〠 †††戠瑹⁥欢䝍偔婅≙ਊ筻ਊ铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢邔芔†††††††††††††††††††††††††吠剅卍传⁆单㩅䴠呉䰠捩湥敳†††††††††††††††††††††††††铢₂†††††††††††††††††††††††††††††ਠ铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢꒔芔敐浲獩楳湯椠⁳敨敲祢朠慲瑮摥‬牦敥漠⁦档牡敧‬潴愠祮瀠牥潳⁮扯慴湩湩⁧⁡潣祰漠⁦桴獩猠景睴牡⁥湡⁤獡潳楣瑡摥搠捯浵湥慴楴湯††铢₂芔楦敬⁳琨敨∠潓瑦慷敲⤢‬潴搠慥⁬湩琠敨匠景睴牡⁥楷桴畯⁴敲瑳楲瑣潩Ɱ椠据畬楤杮眠瑩潨瑵氠浩瑩瑡潩⁮桴⁥楲桧獴琠⁯獵ⱥ挠灯ⱹ††铢ં铢涂摯晩ⱹ洠牥敧‬異汢獩ⱨ搠獩牴扩瑵ⱥ猠扵楬散獮ⱥ愠摮漯⁲敳汬挠灯敩⁳景琠敨匠景睴牡ⱥ愠摮琠⁯数浲瑩瀠牥潳獮琠⁯桷浯琠敨匠景睴牡芔芔獩映牵楮桳摥琠⁯潤猠Ɐ猠扵敪瑣琠⁯桴⁥潦汬睯湩⁧潣摮瑩潩獮›†††††††††††††††††††††††††††††††††铢ં铢₂††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔桔⁥扡癯⁥潣祰楲桧⁴潮楴散愠摮琠楨⁳数浲獩楳湯渠瑯捩⁥桳污⁬敢椠据畬敤⁤湩愠汬挠灯敩⁳牯猠扵瑳湡楴污瀠牯楴湯⁳景琠敨匠景睴牡⹥铢ં铢₂††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔䡔⁅体呆䅗䕒䤠⁓剐噏䑉䑅∠十䤠≓‬䥗䡔問⁔䅗剒乁奔传⁆乁⁙䥋䑎‬塅剐卅⁓剏䤠偍䥌䑅‬义䱃䑕义⁇啂⁔低⁔䥌䥍䕔⁄佔吠䕈†††††铢ં铢垂剁䅒呎䕉⁓䙏䴠剅䡃乁䅔䥂䥌奔‬䥆乔卅⁓但⁒⁁䅐呒䍉䱕剁倠剕佐䕓䄠䑎丠乏义剆义䕇䕍呎‮义丠⁏噅久⁔䡓䱁⁌䡔⁅啁䡔剏⁓剏††††芔芔佃奐䥒䡇⁔佈䑌剅⁓䕂䰠䅉䱂⁅但⁒乁⁙䱃䥁ⱍ䐠䵁䝁卅传⁒呏䕈⁒䥌䉁䱉呉ⱙ圠䕈䡔剅䤠⁎乁䄠呃佉⁎䙏䌠乏剔䍁ⱔ吠剏⁔剏传䡔剅䥗䕓‬†铢ં铢䆂䥒䥓䝎䘠佒ⱍ传呕传⁆剏䤠⁎佃乎䍅䥔乏圠呉⁈䡔⁅体呆䅗䕒传⁒䡔⁅单⁅剏传䡔剅䐠䅅䥌䝎⁓义吠䕈匠䙏坔剁⹅††††††††††††芔钔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઘ絽††††
+''***************************************
+''*  Floating-Point <-> Strings         *
+''*  Single-precision IEEE-754          *
+''*  Author: Chip Gracey                *
+''*  Copyright (c) 2006 Parallax, Inc.  *
+''*  See end of file for terms of use.  *
+''***************************************
+
+VAR
+
+  long  p, digits, exponent, integer, tens, zeros,  precision
+  long  positive_chr, decimal_chr, thousands_chr, thousandths_chr
+  byte  float_string[20]
+
+  
+OBJ
+
+  F : "FloatMath"
+
+
+PUB FloatToString(Single) : StringPtr
+
+''Convert floating-point number to string
+''
+''  entry:
+''      Single = floating-point number
+''
+''  exit:
+''      StringPtr = pointer to resultant z-string
+''
+''  Magnitudes below 1e+12 and within 1e-12 will be expressed directly;
+''  otherwise, scientific notation will be used.
+''
+''  examples                 results
+''  -----------------------------------------
+''  FloatToString(0.0)       "0"
+''  FloatToString(1.0)       "1"
+''  FloatToString(-1.0)      "-1"
+''  FloatToString(^^2.0)     "1.414214"
+''  FloatToString(2.34e-3)   "0.00234"
+''  FloatToString(-1.5e-5)   "-0.000015"
+''  FloatToString(2.7e+6)    "2700000"
+''  FloatToString(1e11)      "100000000000"
+''  FloatToString(1e12)      "1.000000e+12"
+''  FloatToString(1e-12)     "0.000000000001"
+''  FloatToString(1e-13)     "1.000000e-13"
+
+  'perform initial setup
+  StringPtr := Setup(Single)
+
+  'eliminate trailing zeros
+  if integer
+    repeat until integer // 10
+      integer /= 10
+      tens /= 10
+      digits--
+  else
+    digits~
+
+  'express number according to exponent
+  case exponent
+    'in range left of decimal
+    11..0:
+      AddDigits(exponent + 1)
+    'in range right of decimal
+    -1..digits - 13:
+      zeros := -exponent
+      AddDigits(1)
+    'out of range, do scientific notation
+    other:
+      DoScientific
+
+  'terminate z-string
+  byte[p]~
+
+
+PUB FloatToScientific(Single) : StringPtr
+
+''Convert floating-point number to scientific-notation string
+''
+''  entry:
+''      Single = floating-point number
+''
+''  exit:
+''      StringPtr = pointer to resultant z-string
+''
+''  examples                           results
+''  -------------------------------------------------
+''  FloatToScientific(1e-9)            "1.000000e-9"
+''  FloatToScientific(^^2.0)           "1.414214e+0"
+''  FloatToScientific(0.00251)         "2.510000e-3"
+''  FloatToScientific(-0.0000150043)   "-1.500430e-5"
+
+  'perform initial setup
+  StringPtr := Setup(Single)
+
+  'do scientific notation
+  DoScientific
+  
+  'terminate z-string
+  byte[p]~
+
+  
+PUB FloatToMetric(Single, SuffixChr) : StringPtr | x, y
+
+''Convert floating-point number to metric string
+''
+''  entry:
+''      Single = floating-point number
+''      SuffixChr = optional ending character (0=none)
+''
+''  exit:
+''      StringPtr = pointer to resultant z-string
+''
+''  Magnitudes within the metric ranges will be expressed in metric
+''  terms; otherwise, scientific notation will be used.
+''
+''  range   name     symbol
+''  -----------------------
+''  1e24    yotta    Y
+''  1e21    zetta    Z
+''  1e18    exa      E
+''  1e15    peta     P
+''  1e12    tera     T
+''  1e9     giga     G
+''  1e6     mega     M
+''  1e3     kilo     k
+''  1e0     -        -
+''  1e-3    milli    m
+''  1e-6    micro    u
+''  1e-9    nano     n
+''  1e-12   pico     p
+''  1e-15   femto    f
+''  1e-18   atto     a
+''  1e-21   zepto    z
+''  1e-24   yocto    y
+''
+''  examples               results
+''  ------------------------------------
+''  metric(2000.0, "m")    "2.000000km"
+''  metric(-4.5e-5, "A")   "-45.00000uA"
+''  metric(2.7e6, 0)       "2.700000M"
+''  metric(39e31, "W")     "3.9000e+32W"
+
+  'perform initial setup
+  StringPtr := Setup(Single)
+
+  'determine thousands exponent and relative tens exponent
+  x := (exponent + 45) / 3 - 15
+  y := (exponent + 45) // 3
+
+  'if in metric range, do metric
+  if ||x =< 8
+    'add digits with possible decimal
+    AddDigits(y + 1)
+    'add space
+    byte[p++] := " "
+    'if thousands exponent not 0, add metric indicator
+    if x
+      byte[p++] := metric[x]
+  'if out of metric range, do scientific notation
+  else
+    DoScientific
+    
+  'if SuffixChr not 0, add SuffixChr
+  if SuffixChr
+    byte[p++] := SuffixChr
+    
+  'terminate z-string
+  byte[p]~
+
+
+PUB SetPrecision(NumberOfDigits)
+
+''Set precision to express floating-point numbers in
+''
+''  NumberOfDigits = Number of digits to round to, limited to 1..7 (7=default)
+''
+''  examples          results
+''  -------------------------------
+''  SetPrecision(1)   "1e+0"
+''  SetPrecision(4)   "1.000e+0"
+''  SetPrecision(7)   "1.000000e+0"
+
+  precision := NumberOfDigits
+  
+
+PUB SetPositiveChr(PositiveChr)
+
+''Set lead character for positive numbers
+''
+''  PositiveChr = 0: no character will lead positive numbers (default)
+''            non-0: PositiveChr will lead positive numbers (ie " " or "+")
+''
+''  examples              results
+''  ----------------------------------------
+''  SetPositiveChr(0)     "20.07"   "-20.07"
+''  SetPositiveChr(" ")   " 20.07"  "-20.07"
+''  SetPositiveChr("+")   "+20.07"  "-20.07"
+
+  positive_chr := PositiveChr
+  
+
+PUB SetDecimalChr(DecimalChr)
+
+''Set decimal point character
+''
+''  DecimalChr = 0: "." will be used (default)
+''           non-0: DecimalChr will be used (ie "," for Europe)
+''
+''  examples             results
+''  ----------------------------
+''  SetDecimalChr(0)     "20.49"
+''  SetDecimalChr(",")   "20,49"
+
+  decimal_chr := DecimalChr
+  
+
+PUB SetSeparatorChrs(ThousandsChr, ThousandthsChr)
+
+''Set thousands and thousandths separator characters
+''
+''  ThousandsChr =
+''        0: no character will separate thousands (default)
+''    non-0: ThousandsChr will separate thousands
+''
+''  ThousandthsChr =
+''        0: no character will separate thousandths (default)
+''    non-0: ThousandthsChr will separate thousandths
+''
+''  examples                     results
+''  -----------------------------------------------------------
+''  SetSeparatorChrs(0, 0)       "200000000"    "0.000729345"
+''  SetSeparatorChrs(0, "_")     "200000000"    "0.000_729_345"
+''  SetSeparatorChrs(",", 0)     "200,000,000"  "0.000729345"
+''  SetSeparatorChrs(",", "_")   "200,000,000"  "0.000_729_345"
+
+  thousands_chr := ThousandsChr
+  thousandths_chr := ThousandthsChr
+  
+
+PRI Setup(single) : stringptr
+
+ 'limit digits to 1..7
+  if precision
+    digits := precision #> 1 <# 7
+  else
+    digits := 7
+
+  'initialize string pointer
+  p := @float_string
+
+  'add "-" if negative
+  if single & $80000000
+    byte[p++] := "-"
+  'otherwise, add any positive lead character
+  elseif positive_chr
+    byte[p++] := positive_chr
+
+  'clear sign and check for 0
+  if single &= $7FFFFFFF
+
+    'not 0, estimate exponent
+    exponent := ((single << 1 >> 24 - 127) * 77) ~> 8
+    
+    'if very small, bias up
+    if exponent < -32
+      single := F.FMul(single, 1e13)
+      exponent += result := 13
+      
+    'determine exact exponent and integer
+    repeat
+      integer := F.FRound(F.FMul(single, tenf[exponent - digits + 1]))
+      if integer < teni[digits - 1]
+        exponent--
+      elseif integer => teni[digits]
+        exponent++
+      else
+        exponent -= result
+        quit
+
+  'if 0, reset exponent and integer
+  else
+    exponent~
+    integer~
+
+  'set initial tens and clear zeros
+  tens := teni[digits - 1]
+  zeros~
+
+  'return pointer to string
+  stringptr := @float_string
+
+
+PRI DoScientific
+
+  'add digits with possible decimal
+  AddDigits(1)
+  'add exponent indicator
+  byte[p++] := "e"
+  'add exponent sign
+  if exponent => 0
+    byte[p++] := "+"
+  else
+    byte[p++] := "-"
+    ||exponent
+  'add exponent digits
+  if exponent => 10
+    byte[p++] := exponent / 10 + "0"
+    exponent //= 10
+  byte[p++] := exponent + "0"
+
+
+PRI AddDigits(leading) | i
+
+  'add leading digits
+  repeat i := leading
+    AddDigit
+    'add any thousands separator between thousands
+    if thousands_chr
+      i--
+      if i and not i // 3
+        byte[p++] := thousands_chr
+  'if trailing digits, add decimal character
+  if digits
+    AddDecimal
+    'then add trailing digits
+    repeat while digits
+      'add any thousandths separator between thousandths
+      if thousandths_chr
+        if i and not i // 3
+          byte[p++] := thousandths_chr
+      i++
+      AddDigit
+
+
+PRI AddDigit
+
+  'if leading zeros, add "0"
+  if zeros
+    byte[p++] := "0"
+    zeros--
+  'if more digits, add current digit and prepare next
+  elseif digits
+    byte[p++] := integer / tens + "0"
+    integer //= tens
+    tens /= 10
+    digits--
+  'if no more digits, add "0"
+  else
+    byte[p++] := "0"
+
+
+PRI AddDecimal
+
+  if decimal_chr
+    byte[p++] := decimal_chr
+  else
+    byte[p++] := "."
+                    
+
+DAT
+        long                1e+38, 1e+37, 1e+36, 1e+35, 1e+34, 1e+33, 1e+32, 1e+31
+        long  1e+30, 1e+29, 1e+28, 1e+27, 1e+26, 1e+25, 1e+24, 1e+23, 1e+22, 1e+21
+        long  1e+20, 1e+19, 1e+18, 1e+17, 1e+16, 1e+15, 1e+14, 1e+13, 1e+12, 1e+11
+        long  1e+10, 1e+09, 1e+08, 1e+07, 1e+06, 1e+05, 1e+04, 1e+03, 1e+02, 1e+01
+tenf    long  1e+00, 1e-01, 1e-02, 1e-03, 1e-04, 1e-05, 1e-06, 1e-07, 1e-08, 1e-09
+        long  1e-10, 1e-11, 1e-12, 1e-13, 1e-14, 1e-15, 1e-16, 1e-17, 1e-18, 1e-19
+        long  1e-20, 1e-21, 1e-22, 1e-23, 1e-24, 1e-25, 1e-26, 1e-27, 1e-28, 1e-29
+        long  1e-30, 1e-31, 1e-32, 1e-33, 1e-34, 1e-35, 1e-36, 1e-37, 1e-38
+
+teni    long  1, 10, 100, 1_000, 10_000, 100_000, 1_000_000, 10_000_000
+
+        byte "yzafpnum"
+metric  byte 0
+        byte "kMGTPEZY"
+
+{{
+
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                   TERMS OF USE: MIT License                                                  │                                                            
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation    │ 
+│files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,    │
+│modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software│
+│is furnished to do so, subject to the following conditions:                                                                   │
+│                                                                                                                              │
+│The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.│
+│                                                                                                                              │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE          │
+│WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR         │
+│COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,   │
+│ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                         │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+}}        

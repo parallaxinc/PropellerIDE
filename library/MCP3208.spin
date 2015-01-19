@@ -1,1 +1,244 @@
-✧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਪ✧‪䴠偃㈳㠰ㄠⴲ楢⽴ⴸ档湡敮⁬䑁⁃牄癩牥瘠⸱‰††††ਪ✧‪愠獬⁯牰癯摩獥甠⁰潴琠潷ㄠⴲ楢⁴楳浧ⵡ敤瑬⁡䅄獃†ਪ✧‪䄠瑵潨㩲䌠楨⁰片捡祥†††††††††††††††ਪ✧‪䌠灯特杩瑨⠠⥣㈠〰‵慐慲汬硡‬湉⹣††††††††ਪ✧‪匠敥攠摮漠⁦楦敬映牯琠牥獭漠⁦獵⹥††††††††ਪ✧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਪ嘊剁ਊ†潬杮†潣੧ 氠湯⁧椠獮㑛⁝††††✠‷潣瑮杩潵獵氠湯獧⠠‸潷摲⁳‫‱潬杮⬠㈠氠湯獧਩†潬杮†潣湵ੴ†潬杮†慤硣‬慤祣ਊ倊䉕猠慴瑲搨楰Ɱ挠楰Ɱ猠楰Ɱ洠摯⥥㨠漠慫੹✊‧瑓牡⁴牤癩牥ⴠ猠慴瑲⁳⁡潣੧✧爠瑥牵獮映污敳椠⁦潮挠杯愠慶汩扡敬✊‧慭⁹敢挠污敬⁤条楡⁮潴挠慨杮⁥敳瑴湩獧✊ਧ✧†搠楰⁮㴠瀠湩挠湯敮瑣摥琠⁯潢桴䐠义愠摮䐠問⁔湯䴠偃㈳㠰✊‧†灣湩†‽楰⁮潣湮捥整⁤潴䌠䭌漠⁮䍍㍐〲ਸ✧†猠楰⁮㴠瀠湩挠湯敮瑣摥琠⁯千漠⁮䍍㍐〲ਸ✧†洠摯⁥㴠挠慨湮汥攠慮汢獥椠⁮楢獴〠⸮ⰷ搠晩⁦潭敤攠慮汢獥椠⁮楢獴㠠⸮㔱ਊ†敲畴湲猠慴瑲⡸摀楰Ɱ〠਩ਊ啐⁂瑳牡ㅴ搨楰Ɱ挠楰Ɱ猠楰Ɱ洠摯ⱥ砠楰⥮㨠漠慫੹✊‧楌敫猠慴瑲‬畢⁴敳獴甠⁰‱硥牴⁡楰⁮獡愠㌠ⴲ楢⁴楳浧ⵡ敤瑬⁡䅄੃✧✊‧†灸湩†‽楰⁮潣湮捥整⁤潴删⁃楦瑬牥映牯✠❸䐠䍁✊ਧ✧†删愠摮䌠瘠污敵⁳慣⁮敢ㄠ⁋湡⁤ㄮ䙵ਊ†敲畴湲猠慴瑲⡸摀楰Ɱ砠楰⁮…ㄤ⁆⁼㠤⤰ਊ倊䉕猠慴瑲⠲灤湩‬灣湩‬灳湩‬潭敤‬灸湩‬灹湩 ›歯祡ਊ✧䰠歩⁥瑳牡ⱴ戠瑵猠瑥⁳灵㈠攠瑸慲瀠湩⁳獡㌠ⴲ楢⁴楳浧ⵡ敤瑬⁡䅄獃✊ਧ✧†砠楰⁮㴠瀠湩挠湯敮瑣摥琠⁯䍒映汩整⁲潦⁲砧‧䅄੃✧†礠楰⁮㴠瀠湩挠湯敮瑣摥琠⁯䍒映汩整⁲潦⁲礧‧䅄੃✧✊‧†⁒湡⁤⁃慶畬獥挠湡戠⁥䬱愠摮⸠由੆ 爠瑥牵⁮瑳牡硴䀨灤湩‬礨楰⁮…ㄤ⁆⁼㠤⤰㰠‼‸‫灸湩☠␠䘱簠␠〸਩ਊ剐⁉瑳牡硴瀨牴‬慤浣摯⥥㨠漠慫੹ 猠潴ੰ†潬杮潭敶䀨湩ⱳ瀠牴‬⤴ 挠畯瑮㨠‽慤浣摯੥†敲畴湲挠杯㨠‽潣湧睥䀨湥牴ⱹ䀠湩⥳⬠ㄠਊ倊䉕猠潴ੰ✊‧瑓灯搠楲敶⁲‭牦敥⁳⁡潣੧ 椠⁦潣੧††潣獧潴⡰潣繧ⴠㄠ਩ਊ啐⁂湩挨慨湮汥 ›慳灭敬ਊ✧删慥⁤桴⁥畣牲湥⁴慳灭敬映潲⁭湡䄠䍄挠慨湮汥⠠⸰㜮਩ 爠瑥牵⁮湩⹳潷摲捛慨湮汥੝ਊ啐⁂癡牥条⡥档湡敮ⱬ渠 ›慳灭敬簠挠ਊ✧䄠敶慲敧渠猠浡汰獥映潲⁭湡䄠䍄挠慨湮汥⠠⸰㜮਩ 挠㨠‽潣湵ੴ†敲数瑡渠 †爠灥慥⁴桷汩⁥⁣㴽挠畯瑮 †猠浡汰⁥㴫椠獮眮牯孤档湡敮嵬 †挠⬫ 猠浡汰⁥㴯渠ਊ倊䉕漠瑵砨‬⥹ਊ✧唠摰瑡⁥䅄獃眠瑩⁨㈳戭瑩瘠污敵ੳ 搠捡⁸㴺砠 搠捡⁹㴺礠ਊ䐊呁ਊ⨧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਪ⨧䄠獳浥汢⁹慬杮慵敧䴠偃㈳㠰搠楲敶⁲ਪ⨧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਪ †††††††††††漠杲✊✊✊䔠瑮祲✊攊瑮祲†††††††††洠癯††琠ⰱ慰⁲††††††††✠敲摡瀠牡浡瑥牥ੳ †††††††††††挠污⁬†⌠慰慲⁭††††††††✠敳畴⁰䥄⽎佄呕瀠湩 †††††††††††洠癯††搠慭歳琬ਲ †††††††††††挠污⁬†⌠慰慲⁭††††††††✠敳畴⁰䱃⁋楰੮††††††††††††潭⁶††浣獡Ⱬ㉴ਊ††††††††††††慣汬††瀣牡浡†††††††††猧瑥灵䌠⁓楰੮††††††††††††潭⁶††浳獡Ⱬ㉴ਊ††††††††††††慣汬††瀣牡浡†††††††††猧瑥洠摯੥††††††††††††潭⁶††湥扡敬ⱳ㍴ਊ††††††††††††慣汬††瀣牡浡†††††††††猧瑥灵䐠䍁挠湯楦畧慲楴湯 †††椠彦⁣†††††漠⁲††搠物ⱡ㉴ †††椠彦⁣†††††洠癯⁳†挠牴ⱡ㍴ †††椠彦⁣†††††洠癯⁩†挠牴ⱡ┣〰ㄱ弰〰ਰ †††††††††††猠牨††琠ⰳ㠣 †††††††††††挠污⁬†⌠慰慲㉭ †††椠彦⁣†††††漠⁲††搠物ⱡ㉴ †††椠彦⁣†††††洠癯⁳†挠牴Ɫ㍴ †††椠彦⁣†††††洠癯⁩†挠牴Ɫ┣〰ㄱ弰〰ਰ✊✊✊倠牥潦浲挠湯敶獲潩獮挠湯楴畮畯汳੹ਧ††††††††††††牯†††楤慲挬慭歳†††††††漧瑵異⁴䱃ੋ††††††††††††牯†††楤慲猬慭歳†††††††漧瑵異⁴千ਊ慭湩江潯⁰†††††††潭⁶††潣浭湡Ɽ␣〱††††††椧楮⁴潣浭湡੤††††††††††††潭⁶††ㅴ瀬牡†††††††††爧獥瑥猠浡汰⁥潰湩整ੲ††††††††††††潭⁶††㉴攬慮汢獥†††††††朧瑥攠慮汢獥 †††††††††††洠癯††琠ⰳ㠣†††††††††✠敲摡⁹‸档湡敮獬ਊ汣潯⁰†††††††††桳⁲††㉴⌬‱†††††捷†††椧⁦档湡敮⁬楤慳汢摥‬歳灩 †††椠彦据†††††樠灭††⌠歳灩ਊ††††††††††††整瑳††㉴⌬㠤‰††††捷†††挧慨湮汥攠慮汢摥‬敧⁴楳杮敬搯晩⁦潭敤 †††††††††††洠硵据†挠浯慭摮⌬〤ਸ††††††††††††潭⁶††瑳敲浡挬浯慭摮ਊ††††††††††††牯†††畯慴猬慭歳†††††††䌧⁓楨桧 †††††††††††漠⁲††搠物ⱡ浤獡⁫††††††✠慭敫䐠义䐯問⁔畯灴瑵 †††††††††††洠癯††戠瑩ⱳ㈣‰†††††††✠敲摡⁹〲戠瑩⁳挨⭳⬱楤晦挫孨崳〫〫搫瑡孡㈱⥝ਊ戊潬灯†††††††††琠獥⁴†猠牴慥Ɑ␣〲††眠⁣††✠灵慤整䐠义䐯問੔††††††††††††畭捸††畯慴搬慭歳ਊ††††††††††††浣⁰††楢獴⌬㐱††††穷†††椧⁦潣浭湡⁤潤敮‬湩異⁴䥄⽎佄呕 †††椠彦⁺†††††愠摮⁮†搠物ⱡ浤獡੫ †††††††††††愠摮⁮†漠瑵ⱡ浣獡⁫††††††✠䱃⁋潬੷††††††††††††潭⁶††㑴瀬牡†††††††††甧摰瑡⁥䅄獃戠瑥敷湥挠潬正琠慲獮瑩潩獮 †††††††††††愠摤††琠ⰴ㈣ਰ††††††††††††摲潬杮†牦慱琬਴††††††††††††摡⁤††㑴⌬਴††††††††††††摲潬杮†牦扱琬਴††††††††††††牯†††畯慴挬慭歳†††††††䌧䭌栠杩੨ †††††††††††琠獥⁴†搠慭歳椬慮†††眠⁣††✠慳灭敬䐠义䐯問੔††††††††††††捲⁬††瑳敲浡⌬਱ †††††††††††愠摮⁮†漠瑵ⱡ浳獡⁫††††††✠千氠睯ਊ††††††††††††橤穮††楢獴⌬汢潯⁰††††††渧硥⁴慤慴戠瑩ਊ †††††††††††愠摮††猠牴慥Ɑ慭歳㈱†††††✠牴浩愠摮眠楲整猠浡汰੥††††††††††††牷潷摲†瑳敲浡琬਱猊楫⁰†††††††††愠摤††琠ⰱ㈣†††††††††✠摡慶据⁥慳灭敬瀠楯瑮牥 †††††††††††愠摤††挠浯慭摮⌬〤‱†††††✠摡慶据⁥潣浭湡੤††††††††††††橤穮††㍴⌬汣潯⁰†††††††洧牯⁥档湡敮獬ਿ †††††††††††眠汲湯⁧挠畯瑮牥琬‱††††††✠档湡敮獬搠湯ⱥ甠摰瑡⁥潣湵整ੲ††††††††††††摡⁤††潣湵整Ⱳㄣਊ††††††††††††浪⁰††洣楡彮潬灯†††††††瀧牥潦浲挠湯敶獲潩獮愠慧湩✊✊✊䜠瑥瀠牡浡瑥牥✊瀊牡浡†††††††††爠汤湯⁧琠ⰳㅴ†††††††††✠敧⁴慰慲敭整⁲湩潴琠ਲ਼††††††††††††摡⁤††ㅴ⌬‴†††††††††瀧楯瑮琠⁯敮瑸瀠牡浡瑥牥ਊ慰慲㉭†††††††††潭⁶††㉴⌬‱†††††††††洧歡⁥楰⁮慭歳椠⁮㉴ †††††††††††猠汨††琠ⰲ㍴ਊ††††††††††††整瑳††㍴⌬㠤‰††††捷†††朧瑥䐠䍁映慬⁧湩潴挠瀊牡浡弲敲ੴ慰慲彭敲⁴†††††††敲ੴਧਧ‧湉瑩慩楬敺⁤慤慴✊搊獬⁢†††††††††氠湯⁧†ㄠ㰠‼ਹ慭歳㈱†††††††††潬杮††䘤䙆✊✊✊唠楮楮楴污穩摥搠瑡੡ਧㅴ†††††††††††敲⁳††਱㉴†††††††††††敲⁳††਱㍴†††††††††††敲⁳††਱㑴†††††††††††敲⁳††਱浤獡⁫†††††††††敲⁳††਱浣獡⁫†††††††††敲⁳††਱浳獡⁫†††††††††敲⁳††਱湥扡敬⁳††††††††敲⁳††਱潣浭湡⁤††††††††敲⁳††਱瑳敲浡†††††††††敲⁳††਱楢獴††††††††††敲⁳††਱潣湵整⁲††††††††敲⁳††਱笊੻貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ铢₂†††††††††††††††††††††††††䕔䵒⁓䙏唠䕓›䥍⁔楌散獮⁥††††††††††††††††††††††††芔††††††††††††††††††††††††††††††鲔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ત铢傂牥業獳潩⁮獩栠牥扥⁹牧湡整Ɽ映敲⁥景挠慨杲ⱥ琠⁯湡⁹数獲湯漠瑢楡楮杮愠挠灯⁹景琠楨⁳潳瑦慷敲愠摮愠獳捯慩整⁤潤畣敭瑮瑡潩⁮†芔ਠ铢暂汩獥⠠桴⁥匢景睴牡≥Ⱙ琠⁯敤污椠⁮桴⁥潓瑦慷敲眠瑩潨瑵爠獥牴捩楴湯‬湩汣摵湩⁧楷桴畯⁴楬業慴楴湯琠敨爠杩瑨⁳潴甠敳‬潣祰‬†芔芔潭楤祦‬敭杲ⱥ瀠扵楬桳‬楤瑳楲畢整‬畳汢捩湥敳‬湡⽤牯猠汥⁬潣楰獥漠⁦桴⁥潓瑦慷敲‬湡⁤潴瀠牥業⁴数獲湯⁳潴眠潨⁭桴⁥潓瑦慷敲铢ં铢概⁳畦湲獩敨⁤潴搠⁯潳‬畳橢捥⁴潴琠敨映汯潬楷杮挠湯楤楴湯㩳†††††††††††††††††††††††††††††††††芔芔†††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢咂敨愠潢敶挠灯特杩瑨渠瑯捩⁥湡⁤桴獩瀠牥業獳潩⁮潮楴散猠慨汬戠⁥湩汣摵摥椠⁮污⁬潣楰獥漠⁲畳獢慴瑮慩⁬潰瑲潩獮漠⁦桴⁥潓瑦慷敲芔芔†††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢咂䕈匠䙏坔剁⁅卉倠佒䥖䕄⁄䄢⁓卉Ⱒ圠呉佈呕圠剁䅒呎⁙䙏䄠奎䬠义ⱄ䔠偘䕒卓传⁒䵉䱐䕉ⱄ䤠䍎啌䥄䝎䈠呕丠呏䰠䵉呉䑅吠⁏䡔⁅††††芔芔䅗剒乁䥔卅传⁆䕍䍒䅈呎䉁䱉呉ⱙ䘠呉䕎卓䘠剏䄠倠剁䥔啃䅌⁒啐偒协⁅乁⁄低䥎䙎䥒䝎䵅久⹔䤠⁎低䔠䕖呎匠䅈䱌吠䕈䄠呕佈卒传⁒††††铢ં铢䎂偏剙䝉呈䠠䱏䕄卒䈠⁅䥌䉁䕌䘠剏䄠奎䌠䅌䵉‬䅄䅍䕇⁓剏传䡔剅䰠䅉䥂䥌奔‬䡗呅䕈⁒义䄠⁎䍁䥔乏传⁆佃呎䅒呃‬佔呒传⁒呏䕈坒卉ⱅ†芔芔剁卉义⁇剆䵏‬問⁔䙏传⁒义䌠乏䕎呃佉⁎䥗䡔吠䕈匠䙏坔剁⁅剏吠䕈唠䕓传⁒呏䕈⁒䕄䱁义升䤠⁎䡔⁅体呆䅗䕒‮††††††††††††铢ં铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢颔紊
+''*****************************************************
+''*  MCP3208 12-bit/8-channel ADC Driver v1.0         *
+''*  also provides up to two 12-bit sigma-delta DACs  *
+''*  Author: Chip Gracey                              *
+''*  Copyright (c) 2005 Parallax, Inc.                *
+''*  See end of file for terms of use.                *
+''*****************************************************
+
+VAR
+
+  long  cog
+
+  long  ins[4]          '7 contiguous longs (8 words + 1 long + 2 longs)
+  long  count
+  long  dacx, dacy
+
+
+PUB start(dpin, cpin, spin, mode) : okay
+
+'' Start driver - starts a cog
+'' returns false if no cog available
+'' may be called again to change settings
+''
+''   dpin  = pin connected to both DIN and DOUT on MCP3208
+''   cpin  = pin connected to CLK on MCP3208
+''   spin  = pin connected to CS on MCP3208
+''   mode  = channel enables in bits 0..7, diff mode enables in bits 8..15
+
+  return startx(@dpin, 0)
+
+
+PUB start1(dpin, cpin, spin, mode, xpin) : okay
+
+'' Like start, but sets up 1 extra pin as a 32-bit sigma-delta DAC
+''
+''   xpin  = pin connected to RC filter for 'x' DAC
+''
+''   R and C values can be 1K and .1uF
+
+  return startx(@dpin, xpin & $1F | $80)
+
+
+PUB start2(dpin, cpin, spin, mode, xpin, ypin) : okay
+
+'' Like start, but sets up 2 extra pins as 32-bit sigma-delta DACs
+''
+''   xpin  = pin connected to RC filter for 'x' DAC
+''   ypin  = pin connected to RC filter for 'y' DAC
+''
+''   R and C values can be 1K and .1uF
+
+  return startx(@dpin, (ypin & $1F | $80) << 8 + xpin & $1F | $80)
+
+
+PRI startx(ptr, dacmode) : okay
+
+  stop
+  longmove(@ins, ptr, 4)
+  count := dacmode
+  return cog := cognew(@entry, @ins) + 1
+
+
+PUB stop
+
+'' Stop driver - frees a cog
+
+  if cog
+    cogstop(cog~ - 1)
+
+
+PUB in(channel) : sample
+
+'' Read the current sample from an ADC channel (0..7)
+
+  return ins.word[channel]
+
+
+PUB average(channel, n) : sample | c
+
+'' Average n samples from an ADC channel (0..7)
+
+  c := count
+  repeat n
+    repeat while c == count
+    sample += ins.word[channel]
+    c++
+  sample /= n
+
+
+PUB out(x, y)
+
+'' Update DACs with 32-bit values
+
+  dacx := x
+  dacy := y
+
+
+DAT
+
+'************************************
+'* Assembly language MCP3208 driver *
+'************************************
+
+                        org
+'
+'
+' Entry
+'
+entry                   mov     t1,par                  'read parameters
+
+                        call    #param                  'setup DIN/DOUT pin
+                        mov     dmask,t2
+
+                        call    #param                  'setup CLK pin
+                        mov     cmask,t2
+
+                        call    #param                  'setup CS pin
+                        mov     smask,t2
+
+                        call    #param                  'set mode
+                        mov     enables,t3
+
+                        call    #param                  'setup DAC configuration
+        if_c            or      dira,t2
+        if_c            movs    ctra,t3
+        if_c            movi    ctra,#%00110_000
+
+                        shr     t3,#8
+                        call    #param2
+        if_c            or      dira,t2
+        if_c            movs    ctrb,t3
+        if_c            movi    ctrb,#%00110_000
+
+'
+'
+' Perform conversions continuously
+'
+                        or      dira,cmask              'output CLK
+                        or      dira,smask              'output CS
+
+main_loop               mov     command,#$10            'init command
+                        mov     t1,par                  'reset sample pointer
+                        mov     t2,enables              'get enables
+                        mov     t3,#8                   'ready 8 channels
+
+cloop                   shr     t2,#1           wc      'if channel disabled, skip
+        if_nc           jmp     #skip
+
+                        test    t2,#$80         wc      'channel enabled, get single/diff mode
+                        muxnc   command,#$08
+                        mov     stream,command
+
+                        or      outa,smask              'CS high
+                        or      dira,dmask              'make DIN/DOUT output
+                        mov     bits,#20                'ready 20 bits (cs+1+diff+ch[3]+0+0+data[12])
+
+
+bloop                   test    stream,#$20     wc      'update DIN/DOUT
+                        muxc    outa,dmask
+
+                        cmp     bits,#14        wz      'if command done, input DIN/DOUT
+        if_z            andn    dira,dmask
+
+                        andn    outa,cmask              'CLK low
+                        mov     t4,par                  'update DACs between clock transitions
+                        add     t4,#20
+                        rdlong  frqa,t4
+                        add     t4,#4
+                        rdlong  frqb,t4
+                        or      outa,cmask              'CLK high
+
+                        test    dmask,ina       wc      'sample DIN/DOUT
+                        rcl     stream,#1
+
+                        andn    outa,smask              'CS low
+
+                        djnz    bits,#bloop             'next data bit
+
+
+                        and     stream,mask12           'trim and write sample
+                        wrword  stream,t1
+
+skip                    add     t1,#2                   'advance sample pointer
+                        add     command,#$01            'advance command
+                        djnz    t3,#cloop               'more channels?
+
+                        wrlong  counter,t1              'channels done, update counter
+                        add     counter,#1
+
+                        jmp     #main_loop              'perform conversions again
+'
+'
+' Get parameter
+'
+param                   rdlong  t3,t1                   'get parameter into t3
+                        add     t1,#4                   'point to next parameter
+
+param2                  mov     t2,#1                   'make pin mask in t2
+                        shl     t2,t3
+
+                        test    t3,#$80         wc      'get DAC flag into c
+param2_ret
+param_ret               ret
+'
+'
+' Initialized data
+'
+dlsb                    long    1 << 9
+mask12                  long    $FFF
+'
+'
+' Uninitialized data
+'
+t1                      res     1
+t2                      res     1
+t3                      res     1
+t4                      res     1
+dmask                   res     1
+cmask                   res     1
+smask                   res     1
+enables                 res     1
+command                 res     1
+stream                  res     1
+bits                    res     1
+counter                 res     1
+
+{{
+
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                   TERMS OF USE: MIT License                                                  │                                                            
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation    │ 
+│files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,    │
+│modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software│
+│is furnished to do so, subject to the following conditions:                                                                   │
+│                                                                                                                              │
+│The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.│
+│                                                                                                                              │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE          │
+│WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR         │
+│COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,   │
+│ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                         │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+}}

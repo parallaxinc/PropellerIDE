@@ -1,1 +1,146 @@
-筻貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢겔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ铢₂敒污删湡潤⁭ㅶ㈮†††††††††††††铢₂祢䌠楨⁰片捡祥芔䌠灯特杩瑨⠠⥣㈠〰‷慐慲汬硡‬湉⹣芔㈠″慍捲⁨〲㜰芔鲔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢뒔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ત铢₂†††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔吠楨⁳扯敪瑣朠湥牥瑡獥爠慥⁬慲摮浯渠浵敢獲戠⁹瑳浩汵瑡湩⁧湡⁤牴捡楫杮䌠剔倠䱌樠瑩整⹲䤠⁴敲畱物獥漠敮挠杯愠摮†铢ં铢₂瑡氠慥瑳㈠䴰穈‮†††††††††††††††††††††††††††††††††††††††††††††††芔芔††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢꒔芔䈠捡杫潲湵⁤湡⁤敄慴汩›††††††††††††††††††††††††††††††††††††††††††††铢ં铢₂†††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔䄠爠慥⁬慲摮浯渠浵敢⁲獩椠灭獯楳汢⁥潴朠湥牥瑡⁥楷桴湩愠挠潬敳⁤楤楧慴⁬祳瑳浥‮桔獩椠⁳敢慣獵⁥桴牥⁥牡⁥潮††铢ં铢₂敲楬扡祬爭湡潤⁭瑳瑡獥眠瑩楨⁮畳档愠猠獹整⁭瑡瀠睯牥甭Ɒ愠摮愠瑦牥瀠睯牥甭Ɒ椠⁴敢慨敶⁳敤整浲湩獩楴慣汬⹹††芔芔删湡潤⁭慶畬獥挠湡漠汮⁹敢✠慥湲摥‧祢洠慥畳楲杮猠浯瑥楨杮漠瑵楳敤漠⁦桴⁥楤楧慴⁬祳瑳浥‮†††††††††††铢₂††††††††††††††††††††††††††††††††††††††††††芔††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢₂湉礠畯⁲牰杯慲浭湩Ⱨ礠畯洠杩瑨栠癡⁥獵摥✠慶㽲‧潴朠湥牥瑡⁥⁡獰略潤爭湡潤⁭敳畱湥散‬畢⁴潦湵⁤桴⁥慳敭†††芔芔瀠瑡整湲瀠慬楹杮攠敶祲琠浩⁥潹⁵慲⁮潹牵瀠潲牧浡‮潙⁵業桧⁴慨敶琠敨⁮獵摥✠湣❴琠⁯爧湡潤汭❹猠敥⁤桴⁥瘧牡⸧†铢ં铢₂獁氠湯⁧獡礠畯欠灥⁴潤湷潬摡湩⁧潴删䵁‬潹⁵慳⁷潣獮獩整瑮祬✠慲摮浯‧敲畳瑬⹳䄠⁴潳敭瀠楯瑮‬潹⁵牰扯扡祬††芔芔搠睯汮慯敤⁤潴䔠偅佒⁍潴猠瑥礠畯⁲牰橯捥⁴牦敥‮畂⁴桷瑡栠灡数敮⁤敮牡祬攠敶祲琠浩⁥潹⁵潰敷敲⁤瑩甠㽰夠畯眠牥⁥铢ં铢₂牰扯扡祬搠獩慭敹⁤潴搠獩潣敶⁲桴⁥慳敭猠煥敵据⁥汰祡湩⁧慥档琠浩Ⅵ吠敨瀠潲汢浥眠獡琠慨⁴挧瑮‧慷⁳污慷獹†††芔芔瀠睯牥湩ⵧ灵眠瑩⁨桴⁥慳敭椠楮楴污瘠污敵愠摮礠畯眠牥⁥桴湥猠浡汰湩⁧瑩愠⁴⁡潣獮慴瑮漠晦敳⹴吠楨⁳慣⁮慭敫礠畯†铢ં铢₂潷摮牥‬圢敨敲猧琠敨攠摮琠⁯桴獩洠摡敮獳‿湁⁤楷汬䤠攠敶⁲楦摮琠畲⁥慲摮浯敮獳∿‮††††††††††††††芔†††††††††††††††††††††††††††††††芔††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢₂湉漠摲牥琠⁯慨敶爠慥⁬慲摮浯渠浵敢獲‬楥桴牥猠浯⁥硥整湲污爠湡潤⁭楳湧污洠獵⁴敢椠灮瑵‬牯猠浯⁥湡污杯猠獹整⁭芔芔洠獵⁴敢甠敳⁤潴朠湥牥瑡⁥慲摮浯渠楯敳眠楨档挠湡戠⁥敭獡牵摥‮敗爧⁥湩氠捵⁫敨敲‬敢慣獵⁥瑩琠牵獮漠瑵琠慨⁴桴⁥铢ં铢₂牐灯汥敬⁲潤獥栠癡⁥畳晦捩敩瑮祬愭慮潬⁧畳獢獹整獭眠楨档挠湡戠⁥硥汰楯整⁤潦⁲桴獩瀠牵潰敳ⴠ‭慥档挠杯猧䌠剔†芔芔倠䱌⹳吠敨敳挠湡戠⁥硥牥楣敳⁤湩整湲污祬琠⁯潧摯攠晦捥ⱴ眠瑩潨瑵愠祮䤠伯愠瑣癩瑩⹹†††††††††††††††铢₂†††††††††††††††††††††††††††††††††芔††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢₂桔獩漠橢捥⁴敳獴甠⁰⁡潣❧⁳呃䅒倠䱌琠⁯畲⁮瑡琠敨洠楡⁮汣捯❫⁳牦煥敵据⹹䤠⁴桴湥甠敳⁳⁡獰略潤爭湡潤⁭†††芔芔猠煥敵据牥琠⁯潭畤慬整琠敨倠䱌猧琠牡敧⁴桰獡⹥吠敨倠䱌爠獥潰摮⁳祢猠数摥湩⁧灵愠摮猠潬楷杮搠睯⁮湩愠愠⁮湥汤獥⁳铢ં铢₂晥潦瑲琠⁯潬正‮桔獩爠獥汵獴椠⁮敶祲甠灮敲楤瑣扡敬映敲畱湥祣樠瑩整⁲桷捩⁨獩映摥戠捡⁫湩潴琠敨猠煥敵据牥琠⁯†芔芔欠敥⁰桴⁥楢⁴慳慬⁤潴獳湩⹧吠敨映湩污漠瑵異⁴獩愠琠畲祬爭湡潤⁭㈳戭瑩甠扮慩敳⁤慶畬⁥桴瑡椠⁳畦汬⁹灵慤整⁤††铢ં铢₂癥牥⁹ㅾ〰獵‬楷桴渠睥戠瑩⁳潲慴整⁤湩攠敶祲縠申⹳吠楨⁳慶畬⁥慣⁮敢猠浡汰摥戠⁹潹牵愠灰楬慣楴湯眠敨敮敶⁲⁡†芔ਠ铢₂慲摮浯渠浵敢⁲獩渠敥敤⹤†††††††††††††††††††††††††††††††††††††††††††芔芔††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢꒔芔删癥獩潩⁮楈瑳牯⁹†††††††††††††††††††††††††††††††††ㅶ〮爠汥慥敳⁤ㄲ䴠牡档㈠〰‷铢ં铢₂†††††††††††††††††††††††††††††††††††††††††††††††††††††††芔ਠ铢₂ㅶㄮ†楂獡爠浥癯污栠獡戠敥⁮摡敤⁤潴攠獮牵⁥牴敵爠湡潤湭獥⹳删汥慥敳⁤㈲䴠牡档㈠〰⸷†††††††††††††芔芔瘠⸱′䄠獳浥汢⁹潣敤洠摡⁥潭敲攠晦捩敩瑮‮潄畣敭瑮瑡潩⁮浩牰癯摥‮敒敬獡摥㈠″慍捲⁨〲㜰‮†††††††††††铢ં铢₂†††††††††††††††††††††††††††††††††††††††††††††††††††††††芔钔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઘ紊੽䅖੒ 氠湯⁧挠杯‬慲摮浯癟污敵ਊ倊䉕猠慴瑲㨠漠慫੹✊‧瑓牡⁴敲污爠湡潤⁭牤癩牥ⴠ猠慴瑲⁳⁡潣੧✧爠瑥牵獮映污敳椠⁦潮挠杯愠慶汩扡敬ਊ†刧獥瑥搠楲敶ੲ†瑳灯††††††††††††††††††††††††††ਊ†䰧畡据⁨敲污爠湡潤⁭潣੧†敲畴湲挠杯㨠‽潣湧睥䀨湥牴ⱹ䀠慲摮浯癟污敵 ‫਱ ✠污潬⁷洵⁳潴氠畡据⁨湡⁤慲摮浯穩੥†慷瑩湣⡴汣晫敲ⁱ 〲‰‫湣⥴ਊ倊䉕猠潴ੰ✊‧瑓灯爠慥⁬慲摮浯搠楲敶⁲‭牦敥⁳⁡潣੧ ✠晉愠牬慥祤爠湵楮杮‬瑳灯爠慥⁬慲摮浯挠杯 椠⁦潣੧††潣獧潴⡰潣繧ⴠ†⤱ਊ倊䉕爠湡潤⁭›慶畬੥✊‧敒畴湲⁳⁡敮⁷潬杮爠湡潤⁭慶畬੥ ✠慷瑩琠⁯湩畳敲渠睥爠湡潤⁭縨〲田⁳瑡㠠䴰穈猠獹整⁭汣捯⥫ 眠楡捴瑮␨〴〰⬠挠瑮਩† 爠瑥牵⁮慲摮浯癟污敵ਊ倊䉕爠湡潤彭瑰⁲›瑰ੲ✊‧敒畴湲⁳桴⁥摡牤獥⁳景琠敨氠湯⁧桷捩⁨敲散癩獥琠敨爠湡潤⁭慶畬੥✧✊‧⁁慲摮浯戠瑩椠⁳潲慴整⁤湩潴琠敨氠湯⁧癥牥⁹㍾獵‬敲畳楬杮椠⁮੡✧渠睥氠湯⁧癥牥⁹ㅾ〰獵‬湯愠敶慲敧‬瑡㠠䴰穈‮潙⁵慭⁹慷瑮琠⁯潤扵敬✊‧桴獥⁥楴敭ⱳ琠潨杵ⱨ琠⁯敢猠牵⁥桴瑡礠畯愠敲朠瑥楴杮渠睥戠瑩⹳吠敨✊‧楴業杮甠据牥慴湩祴挠浯獥映潲⁭桴⁥湵楢獡湩⁧污潧楲桴⁭桷捩⁨桴潲獷✊‧睡祡椠敤瑮捩污戠瑩瀠楡獲‬湡⁤湯祬漠瑵異獴琠敨搠晩敦敲瑮漠敮⹳ਊ†敲畴湲䀠慲摮浯癟污敵ਊ䐊呁ਊ‧铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ‧铢₂删慥⁬慒摮浯䜠湥牥瑡牯†铢ં‧铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઘ †††††††††††漠杲ਊ湥牴⁹†††††††††潭楶††瑣慲⌬〥〰㄰ㅟㄱ††††猧瑥挠牴⁡潴椠瑮牥慮⁬汰⁬潭敤‬敳敬瑣砠㘱琠灡 †††††††††††洠癯⁩†映煲ⱡ␣㈰‰††††††✠敳⁴牦慱琠⁯祳瑳浥挠潬正映敲畱湥祣⼠ㄠਸ਼††††††††††††潭楶††捶杦⌬〤〴†††††††猧瑥瘠晣⁧潴搠獩牣瑥⁥畯灴瑵‬畢⁴楷桴畯⁴楰獮 †††††††††††洠癯††瘠捳ⱬ㜣‰†††††††✠敳⁴獶汣琠⁯〷瀠硩汥挠潬正⁳数⁲慷瑩楶੤㨊睴扯瑩⁳†††††††眠楡癴摩〠〬††††††††††✠慷瑩映牯渠硥⁴〷瀭硩汥洠牡⁫뇂樠瑩整⁲楴敭 †††††††††††琠獥⁴†瀠獨ⱡ┣〱ㄱ‱†眠⁣††✠獰略潤爭湡潤汭⁹敳畱湥散瀠慨敳琠⁯湩畤散樠瑩整ੲ††††††††††††捲⁲††桰慳⌬‱††††††††⠧⁣潨摬⁳慲摮浯戠瑩⌠⤱ †††††††††††愠摤††瀠獨ⱡ湣⁴†††††††✠業⁸䱐⁌楪瑴牥戠捡⁫湩潴瀠慨敳ਠ †††††††††††爠汣††瀠牡⌬‱††††眠ⱺ渠⁲✠牴湡晳牥挠椠瑮⁯穮⠠慰⁲桳摡睯爠来獩整⁲‽⤰ †††††††††††眠汲湯⁧张慲摮浯癟污敵瀬牡†††✠牷瑩⁥慲摮浯瘠污敵戠捡⁫潴猠楰⁮慶楲扡敬ਊ††††††††††††慷瑩楶⁤ⰰ‰††††††††††眧楡⁴潦⁲敮瑸㜠ⴰ楰數⁬慭歲술₱楪瑴牥琠浩⁥††††† †††††††††††琠獥⁴†瀠獨ⱡ┣〱ㄱ‱†眠⁣††✠獰略潤爭湡潤汭⁹敳畱湥散瀠慨敳琠⁯湩畤散樠瑩整⁲†††ਠ††††††††††††捲⁲††桰慳⌬‱††††††††⠧⁣潨摬⁳慲摮浯戠瑩⌠⤲†††††††††††††††††††††††††††† †††††††††††愠摤††瀠獨ⱡ湣⁴†††††††✠業⁸䱐⁌楪瑴牥戠捡⁫湩潴瀠慨敳††††††††††ਊ††††晩穟敟影⁣†††捲⁬††牟湡潤彭慶畬ⱥㄣ††††漧汮⁹污潬⁷楤晦牥湥⁴楢獴⠠敲潭敶⁳楢獡਩††††††††††††浪⁰††㨣睴扯瑩⁳†††††††朧瑥渠硥⁴睴⁯楢獴ਊ弊慲摮浯癟污敵†††††爠獥††ㄠਊ筻ਊ铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢邔芔†††††††††††††††††††††††††吠剅卍传⁆单㩅䴠呉䰠捩湥敳†††††††††††††††††††††††††铢₂†††††††††††††††††††††††††††††ਠ铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢꒔芔敐浲獩楳湯椠⁳敨敲祢朠慲瑮摥‬牦敥漠⁦档牡敧‬潴愠祮瀠牥潳⁮扯慴湩湩⁧⁡潣祰漠⁦桴獩猠景睴牡⁥湡⁤獡潳楣瑡摥搠捯浵湥慴楴湯††铢₂芔楦敬⁳琨敨∠潓瑦慷敲⤢‬潴搠慥⁬湩琠敨匠景睴牡⁥楷桴畯⁴敲瑳楲瑣潩Ɱ椠据畬楤杮眠瑩潨瑵氠浩瑩瑡潩⁮桴⁥楲桧獴琠⁯獵ⱥ挠灯ⱹ††铢ં铢涂摯晩ⱹ洠牥敧‬異汢獩ⱨ搠獩牴扩瑵ⱥ猠扵楬散獮ⱥ愠摮漯⁲敳汬挠灯敩⁳景琠敨匠景睴牡ⱥ愠摮琠⁯数浲瑩瀠牥潳獮琠⁯桷浯琠敨匠景睴牡芔芔獩映牵楮桳摥琠⁯潤猠Ɐ猠扵敪瑣琠⁯桴⁥潦汬睯湩⁧潣摮瑩潩獮›†††††††††††††††††††††††††††††††††铢ં铢₂††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔桔⁥扡癯⁥潣祰楲桧⁴潮楴散愠摮琠楨⁳数浲獩楳湯渠瑯捩⁥桳污⁬敢椠据畬敤⁤湩愠汬挠灯敩⁳牯猠扵瑳湡楴污瀠牯楴湯⁳景琠敨匠景睴牡⹥铢ં铢₂††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔䡔⁅体呆䅗䕒䤠⁓剐噏䑉䑅∠十䤠≓‬䥗䡔問⁔䅗剒乁奔传⁆乁⁙䥋䑎‬塅剐卅⁓剏䤠偍䥌䑅‬义䱃䑕义⁇啂⁔低⁔䥌䥍䕔⁄佔吠䕈†††††铢ં铢垂剁䅒呎䕉⁓䙏䴠剅䡃乁䅔䥂䥌奔‬䥆乔卅⁓但⁒⁁䅐呒䍉䱕剁倠剕佐䕓䄠䑎丠乏义剆义䕇䕍呎‮义丠⁏噅久⁔䡓䱁⁌䡔⁅啁䡔剏⁓剏††††芔芔佃奐䥒䡇⁔佈䑌剅⁓䕂䰠䅉䱂⁅但⁒乁⁙䱃䥁ⱍ䐠䵁䝁卅传⁒呏䕈⁒䥌䉁䱉呉ⱙ圠䕈䡔剅䤠⁎乁䄠呃佉⁎䙏䌠乏剔䍁ⱔ吠剏⁔剏传䡔剅䥗䕓‬†铢ં铢䆂䥒䥓䝎䘠佒ⱍ传呕传⁆剏䤠⁎佃乎䍅䥔乏圠呉⁈䡔⁅体呆䅗䕒传⁒䡔⁅单⁅剏传䡔剅䐠䅅䥌䝎⁓义吠䕈匠䙏坔剁⹅††††††††††††芔钔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઘ絽††††††††
+{{
+┌───────────────────────────────────────────┬────────────────┬───────────────────────────────────┬───────────────┐
+│ Real Random v1.2                          │ by Chip Gracey │ Copyright (c) 2007 Parallax, Inc. │ 23 March 2007 │
+├───────────────────────────────────────────┴────────────────┴───────────────────────────────────┴───────────────┤
+│                                                                                                                │
+│ This object generates real random numbers by stimulating and tracking CTR PLL jitter. It requires one cog and  │
+│ at least 20MHz.                                                                                                │
+│                                                                                                                │
+├────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ Background and Detail:                                                                                         │
+│                                                                                                                │
+│ A real random number is impossible to generate within a closed digital system. This is because there are no    │
+│ reliably-random states within such a system at power-up, and after power-up, it behaves deterministically.     │
+│ Random values can only be 'earned' by measuring something outside of the digital system.                       │                                                                                     
+│                                                                                                                │
+│ In your programming, you might have used 'var?' to generate a pseudo-random sequence, but found the same       │
+│ pattern playing every time you ran your program. You might have then used 'cnt' to 'randomly' seed the 'var'.  │
+│ As long as you kept downloading to RAM, you saw consistently 'random' results. At some point, you probably     │
+│ downloaded to EEPROM to set your project free. But what happened nearly every time you powered it up? You were │
+│ probably dismayed to discover the same sequence playing each time! The problem was that 'cnt' was always       │
+│ powering-up with the same initial value and you were then sampling it at a constant offset. This can make you  │
+│ wonder, "Where's the end to this madness? And will I ever find true randomness?".                              │                                                              
+│                                                                                                                │
+│ In order to have real random numbers, either some external random signal must be input, or some analog system  │
+│ must be used to generate random noise which can be measured. We're in luck here, because it turns out that the │
+│ Propeller does have sufficiently-analog subsystems which can be exploited for this purpose -- each cog's CTR   │
+│ PLLs. These can be exercised internally to good effect, without any I/O activity.                              │                                                                   
+│                                                                                                                │
+│ This object sets up a cog's CTRA PLL to run at the main clock's frequency. It then uses a pseudo-random        │
+│ sequencer to modulate the PLL's target phase. The PLL responds by speeding up and slowing down in a an endless │
+│ effort to lock. This results in very unpredictable frequency jitter which is fed back into the sequencer to    │
+│ keep the bit salad tossing. The final output is a truly-random 32-bit unbiased value that is fully updated     │
+│ every ~100us, with new bits rotated in every ~3us. This value can be sampled by your application whenever a    │ 
+│ random number is needed.                                                                                       │
+│                                                                                                                │
+├────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ Revision History                                                                   v1.0 released 21 March 2007 │
+│                                                                                                                │ 
+│ v1.1  Bias removal has been added to ensure true randomness. Released 22 March 2007.                           │
+│ v1.2  Assembly code made more efficient. Documentation improved. Released 23 March 2007.                       │
+│                                                                                                                │
+└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+}}
+VAR
+
+  long  cog, random_value
+
+
+PUB start : okay
+
+'' Start real random driver - starts a cog
+'' returns false if no cog available
+
+  'Reset driver
+  stop                                                    
+
+  'Launch real random cog
+  return cog := cognew(@entry, @random_value) + 1
+
+  'allow 5ms to launch and randomize
+  waitcnt(clkfreq / 200 + cnt)
+
+
+PUB stop
+
+'' Stop real random driver - frees a cog
+
+  'If already running, stop real random cog
+  if cog
+    cogstop(cog~ -  1)
+
+
+PUB random : value
+
+'' Returns a new long random value
+
+  'wait to insure new random (~200us at 80MHz system clock)
+  waitcnt($4000 + cnt)
+  
+  return random_value
+
+
+PUB random_ptr : ptr
+
+'' Returns the address of the long which receives the random value
+''
+'' A random bit is rotated into the long every ~3us, resuling in a
+'' new long every ~100us, on average, at 80MHz. You may want to double
+'' these times, though, to be sure that you are getting new bits. The
+'' timing uncertainty comes from the unbiasing algorithm which throws
+'' away identical bit pairs, and only outputs the different ones.
+
+  return @random_value
+
+
+DAT
+
+' ┌─────────────────────────┐
+' │  Real Random Generator  │
+' └─────────────────────────┘
+
+                        org
+
+entry                   movi    ctra,#%00001_111        'set ctra to internal pll mode, select x16 tap
+                        movi    frqa,#$020              'set frqa to system clock frequency / 16
+                        movi    vcfg,#$040              'set vcfg to discrete output, but without pins
+                        mov     vscl,#70                'set vscl to 70 pixel clocks per waitvid
+
+:twobits                waitvid 0,0                     'wait for next 70-pixel mark ± jitter time
+                        test    phsa,#%10111    wc      'pseudo-randomly sequence phase to induce jitter
+                        rcr     phsa,#1                 '(c holds random bit #1)
+                        add     phsa,cnt                'mix PLL jitter back into phase 
+
+                        rcl     par,#1          wz, nr  'transfer c into nz (par shadow register = 0)
+                        wrlong  _random_value,par       'write random value back to spin variable
+
+                        waitvid 0,0                     'wait for next 70-pixel mark ± jitter time           
+                        test    phsa,#%10111    wc      'pseudo-randomly sequence phase to induce jitter        
+                        rcr     phsa,#1                 '(c holds random bit #2)                                                        
+                        add     phsa,cnt                'mix PLL jitter back into phase                    
+
+        if_z_eq_c       rcl     _random_value,#1        'only allow different bits (removes bias)
+                        jmp     #:twobits               'get next two bits
+
+
+_random_value           res     1
+
+{{
+
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                   TERMS OF USE: MIT License                                                  │                                                            
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation    │ 
+│files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,    │
+│modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software│
+│is furnished to do so, subject to the following conditions:                                                                   │
+│                                                                                                                              │
+│The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.│
+│                                                                                                                              │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE          │
+│WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR         │
+│COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,   │
+│ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                         │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+}}                

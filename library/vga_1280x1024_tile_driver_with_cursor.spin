@@ -1,1 +1,539 @@
-筻貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢겔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢겔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ铢₂䝖⁁㈱〸ㅸ㈰‴楔敬䐠楲敶⁲ぶ㤮††††芔戠⁹桃灩䜠慲散⁹铢₂潃祰楲桧⁴挨 〲㘰倠牡污慬ⱸ䤠据‮铢₂㈲丠癯浥敢⁲〲㘰芔鲔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢뒔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢뒔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ત铢₂†††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔吠楨⁳扯敪瑣朠湥牥瑡獥愠ㄠ㠲砰〱㐲嘠䅇搠獩汰祡映潲⁭⁡〸㙸‴牡慲⁹景ㄠ砶㘱瀭硩汥㐠挭汯牯琠汩獥‮䤠⁴敲畱物獥††铢ં铢₂桴敲⁥潣獧⠠牯映畯⁲楷桴漠瑰潩慮⁬畣獲牯攠慮汢摥 湡⁤瑡氠慥瑳㠠‰䡍⹺††††††††††††††††††††芔芔††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢颔 †††††††††††ਠ絽䌊乏ਊ‧㈱〸砠ㄠ㈰‴⁀〶穈猠瑥楴杮ੳ 栠⁰‽㈱〸††††††††††✠潨楲潺瑮污瀠硩汥ੳ†灶㴠ㄠ㈰‴††††††††††瘧牥楴慣⁬楰數獬 栠⁦‽㠴†††††††††††✠潨楲潺瑮污映潲瑮瀠牯档瀠硩汥ੳ†獨㴠ㄠ㈱†††††††††††栧牯穩湯慴⁬祳据瀠硩汥ੳ†扨㴠㈠㠴†††††††††††栧牯穩湯慴⁬慢正瀠牯档瀠硩汥ੳ†晶㴠ㄠ††††††††††††瘧牥楴慣⁬牦湯⁴潰捲⁨楬敮ੳ†獶㴠㌠††††††††††††瘧牥楴慣⁬祳据氠湩獥 瘠⁢‽㠳†††††††††††✠敶瑲捩污戠捡⁫潰捲⁨楬敮ੳ†牰㴠ㄠ〰†††††††††††瀧硩汥爠瑡⁥湩䴠穈愠⁴〸䡍⁺祳瑳浥挠潬正⠠䴵穈朠慲畮慬楲祴਩ 栠⁴‽灨⬠栠⁦‫獨⬠栠⁢†††✠潴慴⁬捳湡氠湩⁥楰數獬ਊ‧楔敬愠牲祡ਊ†瑸汩獥㴠栠⁰ 㘱 礠楴敬⁳‽灶⼠ㄠਸ਼ਊ䅖੒ 氠湯⁧潣孧崴 ਠ†潬杮搠物彡††††††††††㤧挠湯楴畧畯⁳潬杮ੳ†潬杮搠物形 氠湯⁧捶杦੟†潬杮挠瑮੟†潬杮愠牲祡灟牴੟†潬杮挠汯牯灟牴੟†潬杮挠牵潳彲瑰彲 氠湯⁧祳据灟牴੟†潬杮洠摯彥ਠ†ਊ啐⁂瑳牡⡴慢敳灟湩‬牡慲役瑰Ⱳ挠汯牯灟牴‬畣獲牯灟牴‬祳据灟牴‬潭敤 ›歯祡簠椠‬੪✊‧瑓牡⁴牤癩牥ⴠ猠慴瑲⁳睴⁯牯琠牨敥挠杯ੳ✧爠瑥牵獮映污敳椠⁦潣獧渠瑯愠慶汩扡敬✊‧✊‧††慢敳灟湩㴠䘠物瑳漠⁦楥桧⁴䝖⁁楰獮‬畭瑳戠⁥⁡畭瑬灩敬漠⁦楥桧⁴〨‬ⰸㄠⰶ㈠ⰴ攠捴㨩✊‧†††††††††††††††††††††✊‧†††††††††㈠〴꧎†††††††㈠〴꧎††††††††㈠〴꧎††††††††㐲츰₩††††††††ਠ✧††††††††㜫ꦂ铢붂苯肔铢뎔铢뮂删摥†⬠‵苯肔苯뺂铢肔铢肔苯₻片敥⁮†㌫ꦂ铢붂苯肔铢뎔铢뮂䈠畬⁥†ㄫꦂ铢붂苯肔苯₻⁈†††ਠ✧††††††††††㜴츰₩铢₂††††††㜴츰₩铢₂†††††††㜴츰₩铢₂††††††㈠〴꧎†††††††††✊‧†††††††⬠‶苯肔苯뺂铢肔铢ₘ††††㐫ꦂ铢붂苯肔铢颔†††††⬠′苯肔苯뺂铢肔铢ₘ††††⬠‰苯肔苯뺂铢뮂嘠††††ਠ✧†✊‧†愠牲祡灟牴㴠倠楯瑮牥琠⁯ⰵ㈱‰潬杮愭楬湧摥眠牯獤‬牯慧楮敺⁤獡㠠‰捡潲獳戠⁹㐶搠睯Ɱ✊‧†††††††眠楨档眠汩⁬敳癲⁥獡琠敨琠汩⁥牡慲⹹䔠捡⁨潷摲猠数楣楦獥愠琠汩⁥楢浴灡愠摮✊‧†††††††愠挠汯牯瀠污瑥整映牯椠獴琠汩⁥牡慥‮桔⁥潢瑴浯ㄠ‰楢獴漠⁦慥档眠牯⁤潨摬✊‧†††††††琠敨戠獡⁥摡牤獥⁳景愠ㄠⴶ潬杮琠汩⁥楢浴灡‬桷汩⁥桴⁥潴⁰‶楢獴猠汥捥⁴੡✧††††††††潣潬⁲慰敬瑴⁥潦⁲桴⁥楢浴灡‮潆⁲硥浡汰ⱥ␠㉂㕅眠畯摬猠数楣祦琠敨琠汩੥✧††††††††楢浴灡猠慰湮湩⁧䈤㐹⸰␮㥂䘷⠠㈤㕅㰼⤶愠摮挠汯牯瀠污瑥整␠䌲⠠䈤䔲㸵ㄾ⤰ਮ✧†✊‧†挠汯牯灟牴㴠倠楯瑮牥琠⁯㐶氠湯獧眠楨档眠汩⁬敤楦敮琠敨㘠‴潣潬⁲慰敬瑴獥‮桔⁥䝒⁂慤慴✊‧†††††††椠⁮慥档氠湯⁧獩愠牲湡敧⁤獡┠別䉇彸䝒硂剟䉇彸䝒硂眠瑩⁨桴⁥畳ⵢ祢整⁳⸳〮✊‧†††††††瀠潲楶楤杮琠敨挠汯牯搠瑡⁡潦⁲楰數⁬慶畬獥┠ㄱ⸮〥ⰰ爠獥数瑣癩汥㩹✊‧ਠ✧††††††††┥㌳〳たㄱ弰〰〲㍟〳㨰┠ㄱ眽楨整‬ㄥ㴰慤歲挠慹Ɱ┠㄰戽畬ⱥ┠〰朽汯੤✧†✊‧†畣獲牯灟牴㴠倠楯瑮牥琠⁯‴潬杮⁳桷捩⁨楷汬挠湯牴汯琠敨挠牵潳Ⱳ漠⁲‰潴搠獩扡敬琠敨✊‧†††††††挠牵潳⹲䤠⁦⁡潰湩整⁲獩朠癩湥‬湡攠瑸慲挠杯眠汩⁬敢猠慴瑲摥琠⁯敧敮慲整✊‧†††††††琠敨挠牵潳⁲癯牥慬⹹䠠牥⁥牡⁥桴⁥‴潬杮⁳桴瑡挠湯牴汯琠敨挠牵潳㩲✊‧✊‧†††††††挠牵潳彲⁸††ⴠ堠瀠獯瑩潩⁮景挠牵潳㩲⸠〮⸮㈱㤷⸮⠠敬瑦琠⁯楲桧⥴✊‧†††††††挠牵潳彲⁹††ⴠ夠瀠獯瑩潩⁮景挠牵潳㩲⸠〮⸮〱㌲⸮⠠潢瑴浯琠⁯潴⥰✊ਧ✧††††††††畣獲牯损汯牯†‭畃獲牯挠汯牯琠⁯敢传❒⁤潴戠捡杫潲湵⁤潣潬⁲獡┠別䉇㩸✊‧†††††††††††††††┠㌥㌳㴰桷瑩ⱥ┠㈥㈲‰牯┠ㄥㄱ㴰牴湡汳捵湥ⱴ┠〥〰㴰景੦✧✊‧†††††††挠牵潳彲桳灡⁥ⴠ〠映牯愠牲睯‬‱潦⁲牣獯桳楡Ⱳ漠⁲潰湩整⁲潴愠挠牵潳ੲ✧††††††††††††††††敤楦楮楴湯‮⁁畣獲牯搠晥湩瑩潩⁮潣獮獩獴漠⁦㈳氠湯獧✊‧†††††††††††††††挠湯慴湩湩⁧⁡㈳㍸′楰數⁬畣獲牯椠慭敧‬潦汬睯摥戠⁹睴੯✧††††††††††††††††祢整⁳桷捩⁨敤楦敮琠敨堠愠摮夠挠湥整⵲楰數⁬景獦瑥ੳ✧††††††††††††††††楷桴湩琠敨椠慭敧ਮ✧✊‧††祳据灟牴㴠倠楯瑮牥琠⁯⁡潬杮眠楨档眠汩⁬敢猠瑥琠⁯ㄭ愠瑦牥攠捡⁨敲牦獥ⱨ漠⁲‰潴✊‧†††††††搠獩扡敬琠楨⁳畦据楴湯‮桔獩椠⁳獵晥汵椠⁮摡慶据摥愠灰楬慣楴湯⁳桷牥੥✧††††††††睡牡湥獥⁳景搠獩汰祡琠浩湩⁧獩椠灭牯慴瑮ਮ✧†✊‧††††潭敤㴠〠映牯渠牯慭⁬㘱ㅸ‶楰數⁬楴敬⁳牯ㄠ映牯琠污敬⁲㘱㍸′楰數⁬楴敬⹳䴠摯⁥਱✧††††††††獩甠敳畦⁬潦⁲楤灳慬楹杮琠敨椠瑮牥慮⁬潦瑮眠楨敬爠煥極楲杮栠污⁦桴⁥牡慲੹✧††††††††敭潭祲※潨敷敶Ⱳ琠敨㌠䐭戠癥汥挠慨慲瑣牥⁳楷汬渠瑯戠⁥獵扡敬戠捥畡敳漠੦✧††††††††桴⁥慬杲牥瘠牥楴慣⁬楴敬朠慲畮慬楲祴漠⁦桴獩洠摯⹥ ††††††††††††††††††††††††††††††††††††††††††††††††† ✠晉搠楲敶⁲獩愠牬慥祤爠湵楮杮‬瑳灯椠ੴ†瑳灯ਊ†刧慥祤椠漯猠瑥楴杮ੳ†⁩㴺␠䙆㰠‼戨獡彥楰⁮…〥ㄱ〰⤰ 樠㨠‽慢敳灟湩☠┠〱〰〰㴠‽ਰ†楤慲 㴺椠☠樠 搠物形㨠‽⁩…模 瘠晣彧㨠‽㌤〰〰䘰⁆‫戨獡彥楰⁮…ㄥㄱ〰⤰㰠‼ਸ਼ ✠敒摡⁹湣⁴慶畬⁥潴猠湹⁣潣獧戠੹†湣彴㨠‽湣⁴‫ㄤ〰〰ਰ ✠敒摡⁹潰湩整獲愠摮洠摯੥†潬杮潭敶䀨牡慲役瑰彲‬慀牲祡灟牴‬⤵ਊ†䰧畡据⁨潣獧‬扡牯⁴晩攠牲牯 樠㨠‽潭敤੟†敲数瑡椠映潲⁭‰潴㌠ †洠摯彥㨠‽⁪㰼㈠⬠椠 †椠⁦⁩㴽㌠†††††††††✠畣獲牯挠杯ਿ†††晩潮⁴畣獲牯灟牴†††††挧牵潳⁲湥扡敬㽤 †††焠極⁴†††††††††✠晩渠瑯‬畱瑩氠潯ੰ†††捶杦 㵞␠〱〰〰〰††††攧獬ⱥ猠瑥琠潷挭汯牯洠摯੥††晩潮⁴潣孧嵩㨠‽潣湧睥䀨湥牴ⱹ䀠楤慲⥟⬠ㄠ ††猠潴ੰ†††敲畴湲笠慦獬絥 †眠楡捴瑮␨〸〰⬠挠瑮 †††✠污潬⁷潣⁧潴氠畡据⁨敢潦敲洠摯晩楹杮瘠牡慩汢獥ਊ†匧捵散獳畦੬†敲畴湲琠畲੥ਊ啐⁂瑳灯簠椠ਊ✧匠潴⁰牤癩牥ⴠ映敲獥挠杯ੳ ✠晉愠牬慥祤爠湵楮杮‬瑳灯愠祮嘠䅇挠杯ੳ†敲数瑡椠映潲⁭‰潴㌠ †椠⁦潣孧嵩 ††挠杯瑳灯挨杯楛繝ⴠㄠ ††††††ਠਊ䅄੔✊貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢邔✊芔†湉瑩慩楬慺楴湯ⴠ愠汬挠杯⁳芔✊钔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢颔ਊ††††††††††††牯੧✊䴠癯⁥楦汥⁤潬灯椠瑮⁯潰楳楴湯ਊ湥牴⁹†††††††††潭⁶††ㄤ䙅␬䔱⁆‭楦汥⁤‫楦汥彤敢楧⁮†††††††††††††††††ਠ††††††††††††畳⁢††湥牴ⱹつび ††††††⠧敲敶獲⁥潭敶琠⁯癡楯⁤癯牥牷瑩⥥††††††ਠ††††††††††††橤穮††敲獧⌬湥牴੹✊䈠極摬氠湩⁥楤灳慬⁹潣敤ਊ††††††††††††潭⁶††慰Ⱳ砣楴敬ੳ眺⁶††††††††††潭⁶††楬敮潣敤〫氬湩捥摯彥癷 †††††††††††愠摤††㨠癷搬਱††††††††††††摡⁤††楬敮潣敤睟ⱶㄣ †††††††††††挠灭††瀠牡⌬‱††††眠੺猺⁣††晩湟⁺†††††潭⁶††楬敮潣敤ㄫ氬湩捥摯彥捳 †††椠彦穮†††††愠摤††㨠捳搬਱††††晩湟⁺†††††摡⁤††楬敮潣敤獟Ᵽㅤ †††††††††††搠湪⁺†瀠牡⌬眺੶✊䄠煣極敲猠瑥楴杮ੳ††††††††††††††††††††††††††††搧物彡††††铢뮂†楤慲 †††††††††††洠癯††爠来ⱳ慰⁲†††††††✠楤扲 †††肔苯₻搠物੢渺硥⁴†††††††††潭摶††爺慥Ɽ灳獲†††††††瘧晣彧††††铢뮂†捶杦 †††††††††††漠⁲††㨠敲摡搬弸㑤††††††✠湣彴††††肔苯₻挠瑮 †††††††††††猠牨††猠牰ⱳ㐣††††††††✠牡慲役瑰彲†肔苯₻挠牴੢爺慥⁤†††††††††摲潬杮†楤慲爬来⁳†††††††挧汯牯灟牴 †铢뮂†牦扱 †††††††††††愠摤††爠来ⱳ㐣††††††††✠畣獲牯灟牴 肔苯₻瘠捳੬††††††††††††橴穮††灳獲⌬渺硥⁴††††††猧湹彣瑰彲††铢뮂†桰扳 †††††††††††爠汤湯⁧爠来ⱳ敲獧†††††††✠潭敤 †††肔苯₻爠来ੳ †††††††††††琠獥⁴†爠来ⱳ┣〱‰††眠⁣††✠晩洠摯⁥ⰱ猠瑥琠汩⁥楳敺琠⁯㘱砠㌠′楰數獬 †††椠彦⁣†††††洠癯⁳†琠汩彥祢整ⱳ㌣′‪਴††††晩损††††††桳⁲††牡慲役祢整ⱳㄣ †††††††††††††††††††††††††††✠摡番瑳†††潣⁧湩敤੸††††††††††††整瑳††敲獧⌬ㄥ‰†††捷†††猧瑥楴杮⁳†〠†ㄠ†㈠ †††††††††††琠獥⁴†爠来ⱳ┣㄰†††眠⁺††✠ⴭⴭⴭⴭⴭⴭⴭⴭⴭⴭਭ††††晩湟⁣†††††摡⁤††畢汩Ɽㄣ††††††††戧極摬†††ㄫ†ㄫ†〫†††††††††† †††椠彦据慟摮穟††愠摤††瘠彦楬敮ⱳ㈣†††††††††††††††††††††††††††††ਠ††††晩损慟摮穟†††摡⁤††晶江湩獥⌬‴††††††瘧彦楬敮⁳†㈫†〫†㐫†††††††††††††††††††††††††† †††椠彦据慟摮穟††猠扵††瘠形楬敮ⱳ㐣††††††††††††††††††††††††††††††††††††††††††††† †††椠彦据慟摮湟⁺†猠扵††瘠形楬敮ⱳ㈣††††††✠扶江湩獥†ⴠ‴ⴠ′ⴠ‰†††††††††††††††††††††††††ਠ††††晩湟彣湡彤穮††潭獶††瑳牡彴楬敮⌬′‪‴†††††††††††††††††††ਠ††††晩损慟摮穟†††潭獶††瑳牡彴楬敮⌬‴‪‴†††猧慴瑲江湩⁥〫†㈫†㐫 †††ਠ††††晩损潟彲⁺†††潭⁶††湳灯⌬‰††††††††猧湹⁣†††丠†夠†丠†††††††††ਠ †††††††††††洠癯††爠来ⱳ獶汣†††††††✠慳敶挠牵潳⁲潰湩整ੲ††††††††††††††††††††††††††††††††††††††††✊匠湹档潲楮敺愠汬挠杯❳瘠摩潥挠物畣瑩⁳潳琠慨⁴慷瑩楶❤⁳楷汬戠⁥楰數⵬潬正摥 ††††††††††††††††††††††††††††††††††††††††††††††ਠ††††††††††††潭楶††牦慱⌬瀨⁲ ⤵㰠‼‱††猧瑥瀠硩汥爠瑡⁥嘨佃爠湵⁳瑡ㄠ⥸††††††††††ਠ††††††††††††潭⁶††獶汣⌬‱††††††††猧瑥瘠摩潥猠楨瑦牥琠⁯敲潬摡漠⁮癥牥⁹楰數੬††††††††††††慷瑩湣⁴湣ⱴ㡤摟‴†††††††眧楡⁴潦⁲祳据挠畯瑮‬摡⁤㍾獭ⴠ挠杯⁳潬正摥ਡ††††††††††††潭楶††瑣慲⌬〥〰㄰ㅟㄱ††††攧慮汢⁥䱐獌渠睯ⴠ丠佃⁳潬正摥ਡ††††††††††††慷瑩湣⁴湣ⱴ〣†††††††††眧楡⁴㍾獭映牯倠䱌⁳潴猠慴楢楬敺ⴠ倠䱌⁳潬正摥ਡ††††††††††††潭⁶††獶汣⌬〱‰†††††††猧扵敳畱湥⁴䅗呉䥖獄眠汩⁬潮⁷敢瀠硩汥氭捯敫Ⅴਊ‧敄整浲湩⁥晩琠楨⁳潣⁧獩琠⁯数晲牯⁭湯⁥景琠潷映敩摬映湵瑣潩獮漠⁲桴⁥畣獲牯映湵瑣潩੮ †††椠彦据潟彲⁺††樠灭††⌠獶湹⁣††††††††✠晩挠杯椠摮硥〠⸮ⰲ樠浵⁰潴映敩摬映湵瑣潩੮††††††††††††††††††††††††††††攧獬ⱥ挠牵潳⁲畦据楴湯映汯潬獷ਊ‧铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ‧铢₂䌠牵潳⁲潌灯ⴠ漠敮挠杯†铢ં‧铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઘ✊䐠⁯敶瑲捩污猠湹⁣楬敮⁳業畮⁳睴੯挊牵潳⁲††††††††洠癯††瀠牡⌬晶⬠瘠⁳‫扶ⴠ㔠ਊ氺潯⁰†††††††††潭⁶††獶汣瘬捳彬楬敮㨊獶湹⁣††††††††眠楡癴摩挠潣潬Ⱳ〣 †††††††††††搠湪⁺†瀠牡⌬瘺祳据ਊ‧潄琠潷氠湩獥洠湩獵栠牯穩湯慴⁬慢正瀠牯档瀠硩汥⁳潴戠祵愠戠杩戠潬正漠⁦楴敭ਊ††††††††††††潭⁶††獶汣瘬捳彬睴彯楬敮彳桭੢††††††††††††慷瑩楶⁤捣汯牯⌬‰†ਊ‧敇⁴畣獲牯搠瑡੡ †††††††††††爠汤湯⁧挠ⱸ敲獧††††††††✠敧⁴畣獲牯砠 †††††††††††愠摤††爠来ⱳ㐣 †††††††††††爠汤湯⁧挠ⱹ敲獧††††††††✠敧⁴畣獲牯礠 †††††††††††愠摤††爠来ⱳ㐣 †††††††††††爠汤湯⁧挠潣潬Ⱳ敲獧††††††✠敧⁴畣獲牯挠汯牯 †††††††††††愠摤††爠来ⱳ㐣 †††††††††††爠汤湯⁧挠桳灡ⱥ敲獧††††††✠敧⁴畣獲牯猠慨数 †††††††††††猠扵††爠来ⱳ㌣⨠㐠ਊ††††††††††††湡⁤††捣汯牯⌬䘤⁃††††††琧楲⁭湡⁤番瑳晩⁹畣獲牯挠汯牯 †††††††††††猠汨††挠潣潬Ⱳ㠣ਊ‧畂汩⁤畣獲牯瀠硩汥ੳ †††††††††††洠癯††瀠牡⌬㈳††††††††✠敲摡⁹潦⁲㈳挠牵潳⁲敳浧湥獴 †††††††††††洠癯⁤†㨠楰ⱸ挣楰੸††††††††††††潭⁶††湣ⱴ獣慨数 †††††††††††ਠ瀺硩潬灯††††††††浣⁰††湣ⱴㄣ†††††捷‬穷†愧牲睯‬牣獯桳楡Ⱳ漠⁲畣瑳浯挠牵潳㽲 †††椠彦⁡†††††樠灭††⌠挺獵潴੭††††晩敟††††††浪⁰††㨣牣獯桳楡ੲ†††† †††††††††††挠灭††瀠牡⌬㈳††††眠⁺††✠牡潲੷††††††††††††浣⁰††慰Ⱳ㌣ⴲㄲ†††捷††† †††椠彦⁺†††††洠癯††挠敳Ⱨ㡨〰〰〰ਰ††††晩湟彺湡彤据††慳⁲††獣来⌬਱††††晩湟彺湡彤⁣††桳⁬††獣来⌬ਲ††††††††††††潭⁶††潣晦⌬ਰ††††††††††††浪⁰††㨣楰੸††††††††††††㨊牣獯桳楡⁲††††††挠灭††瀠牡⌬㈳ㄭ‵††眠⁺††✠牣獯桳楡ੲ††††晩湟⁥†††††潭⁶††獣来栬〰㄰〰〰 †††椠彦⁥†††††渠来††挠敳Ⱨ㈣ †††††††††††挠灭††瀠牡⌬‱††††眠੺††††晩敟††††††潭⁶††獣来⌬ਰ††††††††††††潭⁶††潣晦栬〰〰䘰䘰 †††††††††††樠灭††⌠瀺硩 †††††††††††ਠ挺獵潴⁭††††††††摲潬杮†獣来挬桳灡⁥††††††挧獵潴੭††††††††††††摡⁤††獣慨数⌬਴††††††††††††摲潬杮†潣晦挬桳灡੥††††††††††††㨊楰⁸†††††††††洠癯††挠楰ⱸ獣来†††††††✠慳敶猠来敭瑮椠瑮⁯楰數獬 †††††††††††愠摤††㨠楰ⱸつ †††††††††††ਠ††††††††††††橤穮††慰Ⱳ㨣楰汸潯⁰†††††愧潮桴牥猠来敭瑮ਿ✊䌠浯異整挠牵潳⁲潰楳楴湯ਊ††††††††††††潭⁶††獣来挬景⁦†††††††愧灰祬挠牵潳⁲散瑮牥瀭硩汥漠晦敳獴 †††††††††††愠摮††挠敳Ⱨ␣䙆 †††††††††††猠扵††挠ⱸ獣来 †††††††††††猠牨††挠景ⱦ㠣 †††††††††††愠摮††挠景ⱦ␣䙆 †††††††††††愠摤††挠ⱹ潣晦ਊ††††††††††††浣獰††硣測来ㄳ††††捷†††椧⁦⁸畯⁴景爠湡敧‬楨敤挠牵潳⁲楶⁡੹††††晩湟⁣†††††浣獰††楰數獬浟ⰱ硣††捷 †††椠彦⁣†††††渠来††挠ⱹㄣਊ††††††††††††潭⁶††獣牨⌬‰††††††††愧橤獵⁴潦⁲敬瑦攭杤⁥汣灩楰杮†††††††ਠ††††††††††††浣獰††硣⌬‰†††††捷 †††椠彦⁣†††††渠来††挠桳Ⱳ硣 †††椠彦⁣†††††洠癯††挠ⱸ〣 †††ਠ††††††††††††潭⁶††獣汨⌬‰††††††††愧橤獵⁴潦⁲楲桧⵴摥敧挠楬灰湩੧††††††††††††浣獰扵†硣瀬硩汥彳㍭′†捷 †††椠彦⁣†††††洠癯††挠桳ⱬ硣 †††椠彦⁣†††††洠癯††挠ⱸ楰數獬浟㈳ਊ††††††††††††摡⁤††硣⌬扨†††††††††戧慩⁳⁸湡⁤⁹潦⁲楤灳慬੹††††††††††††畳⁢††祣氬湩獥浟਱✊䐠⁯楶楳汢⁥楬敮⁳楷桴挠牵潳ੲ †††††††††††洠癯††瀠牡氬湩獥†††††††✠敲摡⁹潦⁲楶楳汢⁥捳湡氠湩獥ਊ氺湩⁥†††††††††湡湤††祣⌬ㄤ⁆††††穷‬牮†挧敨正椠⁦捳湡氠湩⁥湩挠牵潳⁲慲杮੥ †††椠彦⁺†††††洠癯⁳†㨠敳Ⱨ祣††††††††✠晩椠⁮慲杮ⱥ朠瑥挠牵潳⁲楰數獬 †††椠彦⁺†††††愠摤††㨠敳Ⱨ挣楰੸††††晩湟⁺†††††潭⁶††獣来⌬‰††††††††椧⁦畯⁴景爠湡敧‬獵⁥汢湡⁫楰數獬㨊敳⁧†椠彦⁺†††††洠癯††挠敳Ⱨ灣硩 †††椠彦⁺†††††爠癥††挠敳Ⱨ〣††††††††✠敲敶獲⁥楰數獬猠⁯桴祥洠灡猠湥楳汢੹††††晩穟††††††桳⁲††獣来挬桳⁲†††††††瀧牥潦浲愠祮攠杤⁥汣灩楰杮漠⁮楰數獬 †††椠彦⁺†††††猠汨††挠敳Ⱨ獣汨ਊ††††††††††††潭⁶††獶汣挬⁸††††††††搧⁯敬瑦戠慬歮瀠硩汥⁳栨⭢硣਩††††††††††††慷瑩楶⁤捣汯牯⌬ਰ†††††††††††† †††††††††††洠癯††瘠捳ⱬ獶汣损牵潳⁲†††✠潤挠牵潳⁲楰數獬⠠㈳਩††††††††††††慷瑩楶⁤捣汯牯挬敳੧†††††††††††† †††††††††††洠癯††瘠捳ⱬ獶汣江湩彥㍭′††✠潤爠杩瑨戠慬歮瀠硩汥⁳栨⭰晨栫⵳㈳挭⥸ †††††††††††猠扵††瘠捳ⱬ硣 †††††††††††眠楡癴摩挠潣潬Ⱳ〣ਊ††††††††††††摡⁤††祣⌬‱†††††††††愧潮桴牥猠慣⁮楬敮ਿ††††††††††††橤穮††慰Ⱳ㨣楬敮ਊ‧潄栠牯穩湯慴⁬慢正瀠牯档瀠硩汥⁳湡⁤潬灯ਊ††††††††††††潭⁶††獶汣⌬扨 †††††††††††眠楡癴摩挠潣潬Ⱳ〣ਊ††††††††††††潭⁶††慰Ⱳ瘣⁦‫獶⬠瘠⁢‭′†爧慥祤琠⁯潤瘠牥楴慣⁬祳据氠湩獥 †††††††††††樠灭††⌠氺潯ੰ✊䌠牵潳⁲慤慴ਊ獶汣江湩⁥†††††††潬杮††瑨†††††††††††琧瑯污瀠硩汥⁳数⁲捳湡氠湩੥獶汣瑟潷江湩獥浟扨†††潬杮††瑨⨠㈠ⴠ栠⁢††††††琧瑯污瀠硩汥⁳数⁲睴⁯捳湡氠湩獥洠湩獵栠੢獶汣江湩彥㍭′†††††潬杮††瑨ⴠ㌠′††††††††琧瑯污瀠硩汥⁳数⁲捳湡氠湩⁥業畮⁳㈳瘊捳彬畣獲牯††††††氠湯⁧†ㄠ㰠‼㈱⬠㌠′†††††✠㈳瀠硩汥⁳数⁲畣獲牯眠瑩⁨‱汣捯⁫数⁲楰數੬楬敮⁳†††††††††潬杮††灶†††††††††††瘧獩扩敬猠慣⁮楬敮ੳ楬敮彳ㅭ††††††††潬杮††灶ⴠㄠ†††††††††瘧獩扩敬猠慣⁮楬敮⁳業畮⁳਱楰數獬浟‱†††††††潬杮††灨ⴠㄠ†††††††††瘧獩扩敬瀠硩汥⁳業畮⁳਱楰數獬浟㈳†††††††潬杮††灨ⴠ㌠′††††††††瘧獩扩敬瀠硩汥⁳業畮⁳㈳渊来ㄳ†††††††††氠湯⁧†ⴠㄳ †††††††††ਠ㡨〰〰〰‰†††††††潬杮††㠤〰〰〰‰†††††††愧牲睯振潲獳慨物挠牵潳⁲慤慴栊〰㄰〰〰†††††††氠湯⁧†␠〰㄰〰〰栊〰〰䘰䘰†††††††氠湯⁧†␠〰〰䘰䘰ਊ‧湉瑩慩楬慺楴湯搠瑡੡搊猰弰†††††††††氠湯⁧†ㄠ㰠‼‹‫‱††††††✠⁤湡⁤⁳楦汥⁤湩牣浥湥獴爊来⁳†††††††††氠湯⁧†␠䘱‰‭楦汥⁤†††††✠畮扭牥漠⁦敲楧瑳牥⁳湩映敩摬氠潯⁰灳捡੥灳獲††††††††††潬杮††䐤䉆ㄹ㝅‶†††††††瀧獨⽢獶汣是煲⽢瑣扲振瑮瘯晣⽧楤扲搯物⁡楮扢敬ੳ楢ㅴ‵†††††††††潬杮††㠤〰‰†††††††††戧瑩㔱洠獡⁫獵摥琠⁯楤晦牥湥楴瑡⁥潣獧椠⁮慰ੲ㡤摟‴†††††††††潬杮††〤〰䔳〰‰†††††††戧瑩⸸戮瑩‴慭歳映牯搠映敩摬ਊ楦汥彤敢楧⁮††††††††††††††††††††††昧敩摬挠摯⁥敢楧獮愠⁴桴獩漠晦敳ੴ✊唠摮晥湩摥挠牵潳⁲慤慴ਊ硣†††††††††††敲⁳††਱祣†††††††††††敲⁳††਱捣汯牯†††††††††敲⁳††਱獣慨数†††††††††敲⁳††਱潣晦††††††††††敲⁳††਱獣来††††††††††敲⁳††਱獣牨††††††††††敲⁳††਱獣汨††††††††††敲⁳††਱灣硩††††††††††敲⁳††㈳ਊ✊貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢邔✊芔†楆汥⁤潌灯ⴠ琠牨敥挠杯⁳芔✊钔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢颔ਊ††††††††††††牯੧✊䄠汬捯瑡⁥畢晦牥ੳ瀊污瑥整⁳†††††††爠獥††㘠‴††††††††††✠慰敬瑴獥漠⁦潣潬獲ਊ楰數獬‰††††††††敲⁳††瑸汩獥†††††††††瀧硩汥⁳潦⁲楴敬爠睯氠湩⁥〫瀊硩汥ㅳ††††††††爠獥††砠楴敬⁳††††††††✠楰數獬映牯琠汩⁥潲⁷楬敮⬠਱氊湩捥摯⁥†††††††爠獥††砠楴敬⁳‪′‭‱††††✠楬敮搠獩汰祡挠摯੥楦汥⁤†††††††††潭⁶††獶汣⌬晨 †††††††††††眠楡癴摩栠彶祳据⌬ਰ楬敮潣敤獟⁣††††††畳捭††楬敮潣敤⌬瑸汩獥††††⠧楷摮⁳灵愠⁳猧浵⁣楦汥ⵤⰱ砣楴敬❳਩††††††††††††潭⁶††湩ⱡㄣ †††††††††††樠灭††⌠獨湹੣氊湩捥摯彥癷††††††眠楡癴摩瀠污瑥整ⱳ楰數獬ਰ✊䔠捡⁨潣⁧污整湲瑡汥⁹畢汩獤愠摮搠獩汰祡⁳睴⁯捳湡氠湩獥 ††††††††††††ਠ畢汩⁤†††††††††潭⁶††湣ⱴ瘣⁰ ‶††††††爧慥祤渠浵敢⁲景琠潷猭慣⵮楬敮戠極摬⽳楤灳慬獹猊慴瑲江湩⁥††††††洠癯††琠汩彥楬敮⌬‰†††††✠敲摡⁹瑳牡楴杮琠汩⁥楬敮⠠摡番瑳摥਩††††††††††††✊䈠極摬琠潷猠慣⁮楬敮⁳畤楲杮映畯⁲捳湡氠湩獥ਊ畢汩彤礲††††††††潭摶††潣ⱬ氣湩捥摯⁥†††††爧獥瑥瀠楯瑮牥⁳潦⁲捳湡氠湩⁥畢晦牥⁳ †††††††††††洠癯⁤†瀠硩ⰰ瀣硩汥び††††† †††††††††††洠癯⁤†瀠硩ⰱ瀣硩汥ㅳ†††††ਊ††††††††††††潭⁶††湩ⱡ㈣†††††††††琧潷猠慣⁮楬敮⁳敲畱物⁥睴⁯慷瑩楶❤ੳ戊極摬㑟砰†††††††洠癯††瘠捳ⱬ獶汣瑟潷江湩獥††✠畯灴瑵氠睯⁳潦⁲睴⁯捳湡氠湩獥猠⁯瑯敨⁲潣੧稺牥⁯†††††††††慷瑩楶⁤稺牥Ɐ〣††††††††⸧挮湡搠獩汰祡眠楨敬琠楨⁳潣⁧畢汩獤⠠睴捩⥥ਊ††††††††††††潭⁶††湩Ɫ砣楴敬⁳ ′††††戧極摬映畯⁲捳湡氠湩獥映牯栠污⁦⁡潲੷戊極摬ㅟ⁸†††††††爠睤牯⁤瘠捳ⱬ瑣扲†††††††✠敧⁴潷摲映潲⁭桴⁥楴敬愠牲祡 †††††††††††愠摤††挠牴Ɫ㈣††††††††† †††††††††††爠牯††瘠捳ⱬㄣ‰†††††††✠敧⁴潣潬⁲楢獴挊汯††††††††††洠癯⁤†氠湩捥摯ⱥ獶汣 †††††††††††愠摤††挠汯搬਱††††††††††††桳⁲††獶汣⌬㘱††††††††朧瑥琠汩⁥楬敮愠摤敲獳 †††††††††††愠摤††瘠捳ⱬ楴敬江湩⁥†††††††††††††††††瀊硩‰†††††††††爠汤湯⁧瀠硩汥び瘬捳⁬†††††✠敧⁴楬敮⬠‰楴敬瀠硩汥ੳ††††††††††††摡⁤††楰へ搬‰††††††††††††††††ਠ††††††††††††摡⁤††獶汣⌬‴††††††††††††††††ਠ楰ㅸ††††††††††摲潬杮†楰數獬ⰱ獶汣††††††朧瑥氠湩⁥ㄫ琠汩⁥楰數獬††††††††ਠ††††††††††††摡⁤††楰ㅸ搬‰††††††††††††††††ਠ††††††††††††橤穮††湩Ɫ戣極摬ㅟ⁸†††††氧潯⁰潦⁲敮瑸琠汩⁥ㄨ‶湩瑳氯潯⥰ਊ††††††††††††橤穮††湩ⱡ戣極摬㑟砰†††††椧⁦楦獲⁴慨晬搠湯ⱥ氠潯⁰潦⁲渲⁤慷瑩楶੤†††††††††††† †††††††††††猠扵††挠牴Ɫ砣楴敬⁳‪′†††✠慢正甠⁰潴猠慴瑲漠⁦慳敭爠睯ਊ‧楄灳慬⁹睴⁯捳湡氠湩獥ਊ††††††††††††潭⁶††湩Ɫ㈣†††††††††爧慥祤映牯琠潷猠慣⁮楬敮ੳ††††††††††††潭獶††獨湹彣敲ⱴ氣湩捥摯彥敲ੴ搊獩汰祡††††††††琠獥⁴†椠扮⌬‱††††眠੣††††††††††††潭⁶††獶汣瘬捳彬楴敬†††††猧瑥瀠硩汥爠瑡⁥潦⁲楴敬ੳ††††††††††††浪⁰††氣湩捥摯੥楬敮潣敤牟瑥††††††橤穮††湩Ɫ搣獩汰祡††††††愧潮桴牥猠慣⁮楬敮ਿ✊䄠潮桴牥琠潷猠慣⁮楬敮㽳 †††††††††††††† †††††††††††愠摤††琠汩彥楬敮⌬‶‪‴†††✠摡慶据⁥楳⁸捳湡氠湩獥眠瑩楨⁮楴敬爠睯琊汩彥祢整⁳††††††挠灭畳⁢琠汩彥楬敮⌬㘱⨠㐠眠⁣†✠楴敬爠睯搠湯㽥⠠‣潤扵敬⁤潦⁲潭敤ㄠ਩††††晩损††††††摡⁤††瑣扲⌬瑸汩獥⨠㈠††††椧⁦潤敮‬摡慶据⁥牡慲⁹潰湩整⁲潴渠硥⁴潲੷ †††††††††††搠湪⁺†挠瑮⌬畢汩彤礲†††††✠湡瑯敨⁲睴⁯捳湡氠湩獥ਿ †††††††††††猠扵††挠牴Ɫ牡慲役祢整⁳†††✠楤灳慬⁹潤敮‬敲敳⁴牡慲⁹潰湩整⁲潴琠灯爠睯†††††††††ਊ‧楖楳汢⁥敳瑣潩⁮潤敮‬慨摮敬猠湹⁣湩楤慣潴ੲ †††††††††††挠灭††挠瑮瀬獨⁢†††眠⁺††✠祳据攠慮汢摥‿挨瑮〽਩湳灯††晩湟⁺†††††牷潬杮†敮ㅧ瀬獨⁢†††††††椧⁦潳‬牷瑩⁥ㄭ琠⁯祳据椠摮捩瑡牯⠠档湡敧琠⁯潮⁰湵敬獳⌠⤳ਊ‧潄瘠牥楴慣⁬祳据氠湩獥愠摮氠潯ੰ††††††††††††瘊彦楬敮⁳†††††††洠癯††椠慮⌬晶††††††††✠潤瘠牥楴慣⁬牦湯⁴潰捲⁨楬敮⁳愨橤獵整⁤㐫⭼簲〫਩††††††††††††慣汬††戣慬歮ਊ獶湹⁣†††††††††潭⁶††湩ⱡ瘣⁳††††††††搧⁯敶瑲捩污猠湹⁣楬敮ੳ††††††††††††慣汬††戣慬歮癟祳据ਊ扶江湩獥††††††††潭⁶††湩ⱡ瘣⁢††††††††搧⁯敶瑲捩污戠捡⁫潰捲⁨楬敮⁳愨橤獵整⁤㐭⵼簲〭਩††††††††††††潭獶††汢湡彫獶湹彣敲ⱴ戣極摬†⠧潬灯琠⁯畢汩Ɽ戠慬歮癟祳据映汯潬獷਩✊匠扵潲瑵湩⁥‭潤戠慬歮氠湩獥ਊ汢湡彫獶湹⁣††††††潸⁲††癨獟湹Ᵽ␣㄰㄰†††††昧楬⁰敶瑲捩污猠湹⁣楢獴ਊ汢湡⁫†††††††††潭⁶††獶汣瘬捳彬汢湡⁫††††搧⁯潨楲潺瑮污戠慬歮瀠硩汥ੳ††††††††††††慷瑩楶⁤癨獟湹Ᵽ〣ਊ††††††††††††潭⁶††獶汣⌬晨††††††††搧⁯潨楲潺瑮污映潲瑮瀠牯档瀠硩汥ੳ††††††††††††慷瑩楶⁤癨獟湹Ᵽ〣ਊ獨湹⁣†††††††††潭⁶††獶汣⌬獨††††††††搧⁯潨楲潺瑮污猠湹⁣楰數獬 †††††††††††眠楡癴摩栠彶祳据⌬਱ †††††††††††爠汤湯⁧瘠捳ⱬ牦扱†††††††✠灵慤整愠潮桴牥瀠污瑥整 †††††††††††愠摮††瘠捳ⱬ潣潬彲慭歳㨊慰敬瑴⁥†††††††洠癯††瀠污瑥整ⱳ獶汣 †††††††††††愠摤††㨠慰敬瑴ⱥつ †††††††††††愠摤††映煲Ɫ㐣 †††††††††††愠摤††瀠牡挬畯瑮㙟‴†眠⁣††ਠ††††晩损††††††潭摶††瀺污瑥整⌬慰敬瑴獥 †††椠彦⁣†††††猠扵††映煲Ɫ㘣‴‪਴ †††††††††††洠癯††瘠捳ⱬ栣⁢†††††††✠潤栠牯穩湯慴⁬慢正瀠牯档瀠硩汥ੳ††††††††††††慷瑩楶⁤癨獟湹Ᵽ〣 †††††††††††ਠ††††††††††††橤穮††湩ⱡ戣慬歮†††††††愧潮桴牥戠慬歮氠湩㽥栊祳据牟瑥†††††ਠ汢湡彫敲ੴ汢湡彫獶湹彣敲⁴††††敲ੴ✊䘠敩摬搠瑡੡搊猰‰†††††††††氠湯⁧†ㄠ㰠‼‹‫‱††††††✠⁤湡⁤⁳楦汥⁤湩牣浥湥獴搊‰††††††††††氠湯⁧†ㄠ㰠‼‹††††††††✠⁤楦汥⁤湩牣浥湥ੴㅤ†††††††††††潬杮††‱㰼ㄠ‰††††††††搧映敩摬搠畯汢⁥湩牣浥湥ੴ愊牲祡扟瑹獥††††††氠湯⁧†砠楴敬⁳‪瑹汩獥⨠㈠††✠畮扭牥漠⁦祢整⁳湩琠汩⁥牡慲੹瘊捳彬睴彯楬敮⁳††††氠湯⁧†栠⁴‪′††††††††✠潴慴⁬楰數獬瀠牥琠潷猠慣⁮楬敮ੳ獶汣瑟汩⁥†††††††潬杮††‱㰼ㄠ′‫㘱††††††ㄧ‶楰數獬瀠牥琠汩⁥楷桴ㄠ挠潬正瀠牥瀠硩汥瘊捳彬汢湡⁫††††††氠湯⁧†栠⁰††††††††††✠楶楳汢⁥楰數獬瀠牥猠慣⁮楬敮ਊ癨獟湹⁣††††††††潬杮††〤〲‰†††††††††⬧⴯ⱈ嘭猠慴整ੳ潣湵彴㐶††††††††潬杮††〤〴〰〰‰†††††††愧摤湥⁤桴瑡猠瑥⁳慣牲⁹癥牥⁹㐶桴愠摤瑩潩੮潣潬彲慭歳†††††††潬杮††䘤䙃䙃䙃⁃†††††††洧獡⁫潴椠潳慬整删䜬䈬戠瑩⁳牦浯䠠嘬渊来‱†††††††††氠湯⁧†␠䙆䙆䙆䙆†††††††✠敮慧楴敶ㄠ琠⁯敢眠楲瑴湥琠⁯祳据椠摮捩瑡牯ਊ‧湕敤楦敮⁤楦汥⁤慤慴ਊ楴敬江湩⁥†††††††敲⁳††਱笊੻貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ铢₂†††††††††††††††††††††††††䕔䵒⁓䙏唠䕓›䥍⁔楌散獮⁥††††††††††††††††††††††††芔††††††††††††††††††††††††††††††鲔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ત铢傂牥業獳潩⁮獩栠牥扥⁹牧湡整Ɽ映敲⁥景挠慨杲ⱥ琠⁯湡⁹数獲湯漠瑢楡楮杮愠挠灯⁹景琠楨⁳潳瑦慷敲愠摮愠獳捯慩整⁤潤畣敭瑮瑡潩⁮†芔ਠ铢暂汩獥⠠桴⁥匢景睴牡≥Ⱙ琠⁯敤污椠⁮桴⁥潓瑦慷敲眠瑩潨瑵爠獥牴捩楴湯‬湩汣摵湩⁧楷桴畯⁴楬業慴楴湯琠敨爠杩瑨⁳潴甠敳‬潣祰‬†芔芔潭楤祦‬敭杲ⱥ瀠扵楬桳‬楤瑳楲畢整‬畳汢捩湥敳‬湡⽤牯猠汥⁬潣楰獥漠⁦桴⁥潓瑦慷敲‬湡⁤潴瀠牥業⁴数獲湯⁳潴眠潨⁭桴⁥潓瑦慷敲铢ં铢概⁳畦湲獩敨⁤潴搠⁯潳‬畳橢捥⁴潴琠敨映汯潬楷杮挠湯楤楴湯㩳†††††††††††††††††††††††††††††††††芔芔†††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢咂敨愠潢敶挠灯特杩瑨渠瑯捩⁥湡⁤桴獩瀠牥業獳潩⁮潮楴散猠慨汬戠⁥湩汣摵摥椠⁮污⁬潣楰獥漠⁲畳獢慴瑮慩⁬潰瑲潩獮漠⁦桴⁥潓瑦慷敲芔芔†††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢咂䕈匠䙏坔剁⁅卉倠佒䥖䕄⁄䄢⁓卉Ⱒ圠呉佈呕圠剁䅒呎⁙䙏䄠奎䬠义ⱄ䔠偘䕒卓传⁒䵉䱐䕉ⱄ䤠䍎啌䥄䝎䈠呕丠呏䰠䵉呉䑅吠⁏䡔⁅††††芔芔䅗剒乁䥔卅传⁆䕍䍒䅈呎䉁䱉呉ⱙ䘠呉䕎卓䘠剏䄠倠剁䥔啃䅌⁒啐偒协⁅乁⁄低䥎䙎䥒䝎䵅久⹔䤠⁎低䔠䕖呎匠䅈䱌吠䕈䄠呕佈卒传⁒††††铢ં铢䎂偏剙䝉呈䠠䱏䕄卒䈠⁅䥌䉁䕌䘠剏䄠奎䌠䅌䵉‬䅄䅍䕇⁓剏传䡔剅䰠䅉䥂䥌奔‬䡗呅䕈⁒义䄠⁎䍁䥔乏传⁆佃呎䅒呃‬佔呒传⁒呏䕈坒卉ⱅ†芔芔剁卉义⁇剆䵏‬問⁔䙏传⁒义䌠乏䕎呃佉⁎䥗䡔吠䕈匠䙏坔剁⁅剏吠䕈唠䕓传⁒呏䕈⁒䕄䱁义升䤠⁎䡔⁅体呆䅗䕒‮††††††††††††铢ં铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢颔紊
+{{
+┌────────────────────────────────────────┬────────────────┬───────────────────────────────────┬──────────────────┐
+│ VGA 1280x1024 Tile Driver v0.9         │ by Chip Gracey │ Copyright (c) 2006 Parallax, Inc. │ 22 November 2006 │
+├────────────────────────────────────────┴────────────────┴───────────────────────────────────┴──────────────────┤
+│                                                                                                                │
+│ This object generates a 1280x1024 VGA display from a 80x64 array of 16x16-pixel 4-color tiles.  It requires    │
+│ three cogs (or four with optional cursor enabled) and at least 80 MHz.                                         │
+│                                                                                                                │
+└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+                        
+}}
+CON
+
+' 1280 x 1024 @ 60Hz settings
+
+  hp = 1280                     'horizontal pixels
+  vp = 1024                     'vertical pixels
+  hf = 48                       'horizontal front porch pixels
+  hs = 112                      'horizontal sync pixels
+  hb = 248                      'horizontal back porch pixels
+  vf = 1                        'vertical front porch lines
+  vs = 3                        'vertical sync lines
+  vb = 38                       'vertical back porch lines
+  pr = 100                      'pixel rate in MHz at 80MHz system clock (5MHz granularity)
+
+  ht = hp + hf + hs + hb        'total scan line pixels
+
+' Tile array
+
+  xtiles = hp / 16
+  ytiles = vp / 16
+
+
+VAR
+
+  long cog[4]
+  
+  long dira_                    '9 contiguous longs
+  long dirb_
+  long vcfg_
+  long cnt_
+  long array_ptr_
+  long color_ptr_
+  long cursor_ptr_
+  long sync_ptr_
+  long mode_ 
+  
+
+PUB start(base_pin, array_ptr, color_ptr, cursor_ptr, sync_ptr, mode) : okay | i, j
+
+'' Start driver - starts two or three cogs
+'' returns false if cogs not available
+'' 
+''     base_pin = First of eight VGA pins, must be a multiple of eight (0, 8, 16, 24, etc):
+''                                           
+''                    240Ω               240Ω                 240Ω                240Ω                  
+''                +7 ───┳─ Red   +5 ───┳─ Green   +3 ───┳─ Blue   +1 ── H        
+''                    470Ω │             470Ω │               470Ω │              240Ω                  
+''                +6 ───┘         +4 ───┘           +2 ───┘          +0 ── V         
+''  
+''    array_ptr = Pointer to 5,120 long-aligned words, organized as 80 across by 64 down,
+''                which will serve as the tile array. Each word specifies a tile bitmap and
+''                a color palette for its tile area. The bottom 10 bits of each word hold
+''                the base address of a 16-long tile bitmap, while the top 6 bits select a
+''                color palette for the bitmap. For example, $B2E5 would specify the tile
+''                bitmap spanning $B940..$B97F ($2E5<<6) and color palette $2C ($B2E5>>10).
+''  
+''    color_ptr = Pointer to 64 longs which will define the 64 color palettes. The RGB data
+''                in each long is arranged as %%RGBx_RGBx_RGBx_RGBx with the sub-bytes 3..0
+''                providing the color data for pixel values %11..%00, respectively:
+''  
+''                %%3330_0110_0020_3300: %11=white, %10=dark cyan, %01=blue, %00=gold
+''  
+''   cursor_ptr = Pointer to 4 longs which will control the cursor, or 0 to disable the
+''                cursor. If a pointer is given, an extra cog will be started to generate
+''                the cursor overlay. Here are the 4 longs that control the cursor:
+'' 
+''                cursor_x      - X position of cursor: ..0..1279.. (left to right)
+''                cursor_y      - Y position of cursor: ..0..1023.. (bottom to top)
+''
+''                cursor_color  - Cursor color to be OR'd to background color as %%RGBx:
+''                                %%3330=white, %%2220 or %%1110=translucent, %%0000=off
+''
+''                cursor_shape  - 0 for arrow, 1 for crosshair, or pointer to a cursor
+''                                definition. A cursor definition consists of 32 longs
+''                                containing a 32x32 pixel cursor image, followed by two
+''                                bytes which define the X and Y center-pixel offsets
+''                                within the image.
+''
+''     sync_ptr = Pointer to a long which will be set to -1 after each refresh, or 0 to
+''                disable this function. This is useful in advanced applications where
+''                awareness of display timing is important.
+''  
+''         mode = 0 for normal 16x16 pixel tiles or 1 for taller 16x32 pixel tiles. Mode 1
+''                is useful for displaying the internal font while requiring half the array
+''                memory; however, the 3-D bevel characters will not be usable because of
+''                the larger vertical tile granularity of this mode.
+                                                                                                   
+  'If driver is already running, stop it
+  stop
+
+  'Ready i/o settings
+  i := $FF << (base_pin & %011000)
+  j := base_pin & %100000 == 0
+  dira_ := i & j
+  dirb_ := i & !j
+  vcfg_ := $300000FF + (base_pin & %111000) << 6
+
+  'Ready cnt value to sync cogs by
+  cnt_ := cnt + $100000
+
+  'Ready pointers and mode
+  longmove(@array_ptr_, @array_ptr, 5)
+
+  'Launch cogs, abort if error
+  j := mode_
+  repeat i from 0 to 3
+    mode_ := j << 2 + i
+    if i == 3                   'cursor cog?
+      ifnot cursor_ptr          'cursor enabled?
+        quit                    'if not, quit loop
+      vcfg_ ^= $10000000        'else, set two-color mode
+    ifnot cog[i] := cognew(@entry, @dira_) + 1
+      stop
+      return {false}
+    waitcnt($8000 + cnt)        'allow cog to launch before modifying variables
+
+  'Successful
+  return true
+
+
+PUB stop | i
+
+'' Stop driver - frees cogs
+
+  'If already running, stop any VGA cogs
+  repeat i from 0 to 3
+    if cog[i]
+      cogstop(cog[i]~ - 1)              
+
+
+DAT
+
+' ┌─────────────────────────────┐
+' │  Initialization - all cogs  │
+' └─────────────────────────────┘
+
+                        org
+
+' Move field loop into position
+
+entry                   mov     $1EF,$1EF - field + field_begin                                    
+                        sub     entry,d0s0_             '(reverse move to avoid overwrite)             
+                        djnz    regs,#entry
+
+' Build line display code
+
+                        mov     par,#xtiles
+:wv                     mov     linecode+0,linecode_wv
+                        add     :wv,d1
+                        add     linecode_wv,#1
+                        cmp     par,#1          wz
+:sc     if_nz           mov     linecode+1,linecode_sc
+        if_nz           add     :sc,d1
+        if_nz           add     linecode_sc,d1
+                        djnz    par,#:wv
+
+' Acquire settings
+                                                        'dira_        ─  dira
+                        mov     regs,par                'dirb_        ─  dirb
+:next                   movd    :read,sprs              'vcfg_        ─  vcfg
+                        or      :read,d8_d4             'cnt_         ─  cnt
+                        shr     sprs,#4                 'array_ptr_   ─  ctrb
+:read                   rdlong  dira,regs               'color_ptr_   ─  frqb
+                        add     regs,#4                 'cursor_ptr_  ─  vscl
+                        tjnz    sprs,#:next             'sync_ptr_    ─  phsb
+                        rdlong  regs,regs               'mode_        ─  regs
+
+                        test    regs,#%100      wc      'if mode 1, set tile size to 16 x 32 pixels
+        if_c            movs    tile_bytes,#32 * 4
+        if_c            shr     array_bytes,#1
+                                                        'adjust      cog index
+                        test    regs,#%10       wc      'settings    0   1   2
+                        test    regs,#%01       wz      '---------------------
+        if_nc           add     build,#1                'build      +1  +1  +0                    
+        if_nc_and_z     add     vf_lines,#2                                                           
+        if_c_and_z      add     vf_lines,#4             'vf_lines   +2  +0  +4                                                    
+        if_nc_and_z     sub     vb_lines,#4                                                                                          
+        if_nc_and_nz    sub     vb_lines,#2             'vb_lines   -4  -2  -0                                                    
+        if_nc_and_nz    movs    start_line,#2 * 4                                        
+        if_c_and_z      movs    start_line,#4 * 4       'start_line +0  +2  +4
+        
+        if_c_or_z       mov     snop,#0                 'sync        N   Y   N                   
+
+                        mov     regs,vscl               'save cursor pointer
+                                                                                
+' Synchronize all cogs' video circuits so that waitvid's will be pixel-locked
+                                                                                              
+                        movi    frqa,#(pr / 5) << 1     'set pixel rate (VCO runs at 1x)                     
+                        mov     vscl,#1                 'set video shifter to reload on every pixel
+                        waitcnt cnt,d8_d4               'wait for sync count, add ~3ms - cogs locked!
+                        movi    ctra,#%00001_111        'enable PLLs now - NCOs locked!
+                        waitcnt cnt,#0                  'wait ~3ms for PLLs to stabilize - PLLs locked!
+                        mov     vscl,#100               'subsequent WAITVIDs will now be pixel-locked!
+
+' Determine if this cog is to perform one of two field functions or the cursor function
+
+        if_nc_or_z      jmp     #vsync                  'if cog index 0..2, jump to field function
+                                                        'else, cursor function follows
+
+' ┌─────────────────────────┐
+' │  Cursor Loop - one cog  │
+' └─────────────────────────┘
+
+' Do vertical sync lines minus two
+
+cursor                  mov     par,#vf + vs + vb - 5
+
+:loop                   mov     vscl,vscl_line
+:vsync                  waitvid ccolor,#0
+                        djnz    par,#:vsync
+
+' Do two lines minus horizontal back porch pixels to buy a big block of time
+
+                        mov     vscl,vscl_two_lines_mhb
+                        waitvid ccolor,#0   
+
+' Get cursor data
+
+                        rdlong  cx,regs                 'get cursor x
+                        add     regs,#4
+                        rdlong  cy,regs                 'get cursor y
+                        add     regs,#4
+                        rdlong  ccolor,regs             'get cursor color
+                        add     regs,#4
+                        rdlong  cshape,regs             'get cursor shape
+                        sub     regs,#3 * 4
+
+                        and     ccolor,#$FC             'trim and justify cursor color
+                        shl     ccolor,#8
+
+' Build cursor pixels
+
+                        mov     par,#32                 'ready for 32 cursor segments
+                        movd    :pix,#cpix
+                        mov     cnt,cshape
+                        
+:pixloop                cmp     cnt,#1          wc, wz  'arrow, crosshair, or custom cursor?
+        if_a            jmp     #:custom
+        if_e            jmp     #:crosshair
+        
+                        cmp     par,#32         wz      'arrow
+                        cmp     par,#32-21      wc      
+        if_z            mov     cseg,h80000000
+        if_nz_and_nc    sar     cseg,#1
+        if_nz_and_c     shl     cseg,#2
+                        mov     coff,#0
+                        jmp     #:pix
+                        
+:crosshair              cmp     par,#32-15      wz      'crosshair
+        if_ne           mov     cseg,h00010000
+        if_e            neg     cseg,#2
+                        cmp     par,#1          wz
+        if_e            mov     cseg,#0
+                        mov     coff,h00000F0F
+                        jmp     #:pix
+                        
+:custom                 rdlong  cseg,cshape             'custom
+                        add     cshape,#4
+                        rdlong  coff,cshape
+                        
+:pix                    mov     cpix,cseg               'save segment into pixels
+                        add     :pix,d0
+                        
+                        djnz    par,#:pixloop           'another segment?
+
+' Compute cursor position
+
+                        mov     cseg,coff               'apply cursor center-pixel offsets
+                        and     cseg,#$FF
+                        sub     cx,cseg
+                        shr     coff,#8
+                        and     coff,#$FF
+                        add     cy,coff
+
+                        cmps    cx,neg31        wc      'if x out of range, hide cursor via y
+        if_nc           cmps    pixels_m1,cx    wc
+        if_c            neg     cy,#1
+
+                        mov     cshr,#0                 'adjust for left-edge clipping               
+                        cmps    cx,#0           wc
+        if_c            neg     cshr,cx
+        if_c            mov     cx,#0
+        
+                        mov     cshl,#0                 'adjust for right-edge clipping
+                        cmpsub  cx,pixels_m32   wc
+        if_c            mov     cshl,cx
+        if_c            mov     cx,pixels_m32
+
+                        add     cx,#hb                  'bias x and y for display
+                        sub     cy,lines_m1
+
+' Do visible lines with cursor
+
+                        mov     par,lines               'ready for visible scan lines
+
+:line                   andn    cy,#$1F         wz, nr  'check if scan line in cursor range
+
+        if_z            movs    :seg,cy                 'if in range, get cursor pixels
+        if_z            add     :seg,#cpix
+        if_nz           mov     cseg,#0                 'if out of range, use blank pixels
+:seg    if_z            mov     cseg,cpix
+        if_z            rev     cseg,#0                 'reverse pixels so they map sensibly
+        if_z            shr     cseg,cshr               'perform any edge clipping on pixels
+        if_z            shl     cseg,cshl
+
+                        mov     vscl,cx                 'do left blank pixels (hb+cx)
+                        waitvid ccolor,#0
+                        
+                        mov     vscl,vscl_cursor        'do cursor pixels (32)
+                        waitvid ccolor,cseg
+                        
+                        mov     vscl,vscl_line_m32      'do right blank pixels (hp+hf+hs-32-cx)
+                        sub     vscl,cx
+                        waitvid ccolor,#0
+
+                        add     cy,#1                   'another scan line?
+                        djnz    par,#:line
+
+' Do horizontal back porch pixels and loop
+
+                        mov     vscl,#hb
+                        waitvid ccolor,#0
+
+                        mov     par,#vf + vs + vb - 2   'ready to do vertical sync lines
+                        jmp     #:loop
+
+' Cursor data
+
+vscl_line               long    ht                      'total pixels per scan line
+vscl_two_lines_mhb      long    ht * 2 - hb             'total pixels per two scan lines minus hb
+vscl_line_m32           long    ht - 32                 'total pixels per scan line minus 32
+vscl_cursor             long    1 << 12 + 32            '32 pixels per cursor with 1 clock per pixel
+lines                   long    vp                      'visible scan lines
+lines_m1                long    vp - 1                  'visible scan lines minus 1
+pixels_m1               long    hp - 1                  'visible pixels minus 1
+pixels_m32              long    hp - 32                 'visible pixels minus 32
+neg31                   long    -31
+                    
+h80000000               long    $80000000               'arrow/crosshair cursor data
+h00010000               long    $00010000
+h00000F0F               long    $00000F0F
+
+' Initialization data
+
+d0s0_                   long    1 << 9 + 1              'd and s field increments
+regs                    long    $1F0 - field            'number of registers in field loop space
+sprs                    long    $DFB91E76               'phsb/vscl/frqb/ctrb/cnt/vcfg/dirb/dira nibbles
+bit15                   long    $8000                   'bit15 mask used to differentiate cogs in par
+d8_d4                   long    $0003E000               'bit8..bit4 mask for d field
+
+field_begin                                             'field code begins at this offset
+
+' Undefined cursor data
+
+cx                      res     1
+cy                      res     1
+ccolor                  res     1
+cshape                  res     1
+coff                    res     1
+cseg                    res     1
+cshr                    res     1
+cshl                    res     1
+cpix                    res     32
+
+
+' ┌───────────────────────────┐
+' │  Field Loop - three cogs  │
+' └───────────────────────────┘
+
+                        org
+
+' Allocate buffers
+
+palettes                res     64                      'palettes of colors
+
+pixels0                 res     xtiles                  'pixels for tile row line +0
+pixels1                 res     xtiles                  'pixels for tile row line +1
+
+linecode                res     xtiles * 2 - 1          'line display code
+field                   mov     vscl,#hf
+                        waitvid hv_sync,#0
+linecode_sc             sumc    linecode,#xtiles        '(winds up as 'sumc field-1,#xtiles')
+                        mov     ina,#1
+                        jmp     #hsync
+
+linecode_wv             waitvid palettes,pixels0
+
+' Each cog alternately builds and displays two scan lines
+                          
+build                   mov     cnt,#vp / 6             'ready number of two-scan-line builds/displays
+start_line              mov     tile_line,#0            'ready starting tile line (adjusted)
+                        
+' Build two scan lines during four scan lines
+
+build_2y                movd    col,#linecode           'reset pointers for scan line buffers 
+                        movd    pix0,#pixels0          
+                        movd    pix1,#pixels1          
+
+                        mov     ina,#2                  'two scan lines require two waitvid's
+
+build_40x               mov     vscl,vscl_two_lines     'output lows for two scan lines so other cog
+:zero                   waitvid :zero,#0                '..can display while this cog builds (twice)
+
+                        mov     inb,#xtiles / 2         'build four scan lines for half a row
+
+build_1x                rdword  vscl,ctrb               'get word from the tile array
+                        add     ctrb,#2                  
+                        ror     vscl,#10                'get color bits
+col                     movd    linecode,vscl
+                        add     col,d1
+                        shr     vscl,#16                'get tile line address
+                        add     vscl,tile_line                                   
+pix0                    rdlong  pixels0,vscl            'get line +0 tile pixels
+                        add     pix0,d0                                  
+                        add     vscl,#4                                  
+pix1                    rdlong  pixels1,vscl            'get line +1 tile pixels                 
+                        add     pix1,d0                                  
+                        djnz    inb,#build_1x           'loop for next tile (16 inst/loop)
+
+                        djnz    ina,#build_40x          'if first half done, loop for 2nd waitvid
+                        
+                        sub     ctrb,#xtiles * 2        'back up to start of same row
+
+' Display two scan lines
+
+                        mov     inb,#2                  'ready for two scan lines
+                        movs    hsync_ret,#linecode_ret
+
+display                 test    inb,#1          wc
+                        mov     vscl,vscl_tile          'set pixel rate for tiles
+                        jmp     #linecode
+linecode_ret            djnz    inb,#display            'another scan line?
+
+' Another two scan lines?
+                             
+                        add     tile_line,#6 * 4        'advance six scan lines within tile row
+tile_bytes              cmpsub  tile_line,#16 * 4 wc    'tile row done? (# doubled for mode 1)
+        if_c            add     ctrb,#xtiles * 2        'if done, advance array pointer to next row
+
+                        djnz    cnt,#build_2y           'another two scan lines?
+
+                        sub     ctrb,array_bytes        'display done, reset array pointer to top row                  
+
+' Visible section done, handle sync indicator
+
+                        cmp     cnt,phsb        wz      'sync enabled? (cnt=0)
+snop    if_nz           wrlong  neg1,phsb               'if so, write -1 to sync indicator (change to nop unless #3)
+
+' Do vertical sync lines and loop
+                        
+vf_lines                mov     ina,#vf                 'do vertical front porch lines (adjusted +4|+2|+0)
+                        call    #blank
+
+vsync                   mov     ina,#vs                 'do vertical sync lines
+                        call    #blank_vsync
+
+vb_lines                mov     ina,#vb                 'do vertical back porch lines (adjusted -4|-2|-0)
+                        movs    blank_vsync_ret,#build  '(loop to build, blank_vsync follows)
+
+' Subroutine - do blank lines
+
+blank_vsync             xor     hv_sync,#$0101          'flip vertical sync bits
+
+blank                   mov     vscl,vscl_blank         'do horizontal blank pixels
+                        waitvid hv_sync,#0
+
+                        mov     vscl,#hf                'do horizontal front porch pixels
+                        waitvid hv_sync,#0
+
+hsync                   mov     vscl,#hs                'do horizontal sync pixels
+                        waitvid hv_sync,#1
+
+                        rdlong  vscl,frqb               'update another palette
+                        and     vscl,color_mask
+:palette                mov     palettes,vscl
+                        add     :palette,d0
+                        add     frqb,#4
+                        add     par,count_64    wc      
+        if_c            movd    :palette,#palettes
+        if_c            sub     frqb,#64 * 4
+
+                        mov     vscl,#hb                'do horizontal back porch pixels
+                        waitvid hv_sync,#0
+                        
+                        djnz    ina,#blank              'another blank line?
+hsync_ret           
+blank_ret
+blank_vsync_ret         ret
+
+' Field data
+
+d0s0                    long    1 << 9 + 1              'd and s field increments
+d0                      long    1 << 9                  'd field increment
+d1                      long    1 << 10                 'd field double increment
+
+array_bytes             long    xtiles * ytiles * 2     'number of bytes in tile array
+
+vscl_two_lines          long    ht * 2                  'total pixels per two scan lines
+vscl_tile               long    1 << 12 + 16            '16 pixels per tile with 1 clock per pixel
+vscl_blank              long    hp                      'visible pixels per scan line
+
+hv_sync                 long    $0200                   '+/-H,-V states
+count_64                long    $04000000               'addend that sets carry every 64th addition
+color_mask              long    $FCFCFCFC               'mask to isolate R,G,B bits from H,V
+neg1                    long    $FFFFFFFF               'negative 1 to be written to sync indicator
+
+' Undefined field data
+
+tile_line               res     1
+
+{{
+
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                   TERMS OF USE: MIT License                                                  │                                                            
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation    │ 
+│files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,    │
+│modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software│
+│is furnished to do so, subject to the following conditions:                                                                   │
+│                                                                                                                              │
+│The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.│
+│                                                                                                                              │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE          │
+│WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR         │
+│COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,   │
+│ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                         │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+}}

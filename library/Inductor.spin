@@ -1,1 +1,221 @@
-筻⨊⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨊䤠摮捵楴敶匠湥潳⁲敄潭瘠⸱‰†††††⨠⨊䄠瑵潨㩲䈠慥⁵捓睨扡⁥††††††††⨠⨊䌠灯特杩瑨⠠⥣㈠〰‷慐慲汬硡†††††⨠⨊匠敥攠摮漠⁦楦敬映牯琠牥獭漠⁦獵⹥††⨠⨊⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਊ吊獥⁴楃捲極㩴ਊ†††〱䙰†ㄠ〰⁋ㄠ੍偆湩ꦂ铢ꮂ铢肔铢Ꚃ苯肔苯뺂铢뎔铢붂苯肔苯₪䑓⡆楳浧ⵡ敤瑬⁡敦摥慢正਩†††††铢₂††ꎔ铢肔铢肔苯₪䑓⡉楳浧ⵡ敤瑬⁡湩異⥴ †††䰠뚂†〱䬰苯઼†††††胯ₘ††颀††ਠ††††䜠䑎††乇⁄ਠ††††††††††††††††ਠ吊獥⁴潃汩㩳ਊ楗敲甠敳⁤慷⁳桴⁥刢摡潩匠慨正匠数楣污•則䕅⁎愨潢瑵㈠‷慧杵⥥ਊ㔲⁔䌨歯⁥慃⁮潦浲 †㴠㈠ㄮ䡍੺㔱⁔䌨歯⁥慃⁮潦浲 †㴠㌠㤮䡍੺㔠⁔䌨歯⁥慃⁮潦浲 †㴠㔠㌮䡍੺〵⁔䈨䍉瀠湥映牯⥭††㴠㌠㈮䡍੺ਊ䠊睯搠敯⁳瑩眠牯㽫ਊ潎整›桔⁥敲潰瑲摥爠獥湯瑡⁥牦煥敵据⁹獩丠呏琠敨愠瑣慵⁬敲潳慮整䰠⁃牦煥敵据⹹†湉瑳慥⁤瑩椠⁳桷牥⁥桴⁥潶瑬条⁥牰摯捵摥映潲੭†††桴⁥䍌挠物畣瑩眠獡挠楬灰摥‮ਠ ††䤠⁮桴⁥硥浡汰⁥楣捲極⁴敢潬㩷 ††ਠ††††††䌠††䰠 †††䄠ꦂ铢肔苯肔铢뎔铢肔苯뢂铢肔苯₪乇੄††††††††铢₂ †††††††䈠††††ਠ ††圠敨⁮潹⁵灡汰⁹⁡浳污⁬潶瑬条⁥瑡愠猠数楣楦⁣牦煥敵据⁹潴愠⁮䍌挠物畣瑩⠠瑡瀠楯瑮∠≁ 桴瑡椠⁳瑡漠⁲敮牡琠敨爠獥湯瑡੥†††牦煥敵据⁹景䰠ⱃ椠⁴獩渠瑯甠据浯潭⁮潴洠慥畳敲ㄠ✰⁳牯ㄠ〰猧漠⁦楴敭⁳桴⁥浡畯瑮漠⁦潶瑬条⁥愨⁴潰湩⁴䈢⤢琠慨⁴潹⁵牡੥†††灡汰楹杮琠⁯桴⁥䍌挠物畣瑩‮愨⁴潰湩⁴䄢⤢ਊ ††䤠⁮桴⁥吢獥⁴楃捲極≴愠潢敶‬潰湩⁴䈢•慰獳獥琠牨畯桧愠搠潩敤眠楨档琠敨⁮慢楳慣汬⁹敦摥⁳⁡楤楶敤戠⁹′潶瑬条⁥楤楶敤㩲ਊ†††††††〱䬰ㄠ〰ੋ††††⁂苯肔苯Ꞃ铢붂苯肔铢肔苯뺂铢ꪂ䜠䑎 ††††††††芔 ††††††††䌠ਊ†††⸮匮⁯湩漠摲牥猠敥琠敨猠杩慭搭汥慴䄠䍄∠汣灩•桴⁥牦煥敵据⁹睳敥⁰敲畳瑬‬桴⁥畯灴瑵映潲⁭桴⁥䍌挠物畣瑩漠汮⁹敮摥ੳ†††潴朠湥牥瑡⁥扡畯⁴⸶‶潖瑬⁳扡癯⁥牧畯摮‮〨㘮⁖牤灯愠牣獯⁳桴⁥楤摯ⱥ愠摮猠湩散琠敨䄠䍄椠⁳湯祬猠湥楳楴敶琠⁯扡畯ੴ†††嘳‬瑩眠牯獫漠瑵琠⁯敢愠潢瑵㘠㘮⁖晡整⁲桴⁥潶瑬条⁥楤楶敤⹲਩ਊ†††⁁祴楰慣⁬慭湧瑩摵⁥汰瑯漠⁦⁡牦煥敵据⁹睳敥⁰灡汰敩⁤潴愠⁮䍌挠物畣瑩洠杩瑨氠潯⁫潳敭桴湩⁧楬敫琠楨㩳 ††ਠ††††††††††ਪ††††††††††ਪ††††††††††ਪ††††††††††ਪ†††††††††⨠⨠ ††††††††⨠†⨠ ††††††††‪††ਪ†††††††⨠††††⨠ ††††††‪††††††ਪ†††⨠⨪⨪††††††††⨠⨪⨪ਊ †††⸮圮瑩⁨挧楬灰湩❧琠敨瀠瑡整湲氠潯獫洠牯⁥楬敫琠楨㩳ਊ†††††††††⩘⨪ਪ††††††††⨠††⨠ †††††††‪††††ਪ††††††⨠††††††⨠ †††⨪⨪‪††††††††⨪⨪ਪ †††⸮吮敨✠❘搠湥瑯獥琠敨氠捯瑡潩⁮景琠敨爠灥牯整⁤敲潳慮整映敲畱湥祣‮桔⁥敲獡湯琠楨⁳獩猠楬桧汴⁹景⁦獩映牯 †††睴⁯敲獡湯⁳敲污祬‮⤱氠穡⁹‭⁉楤湤琧眠湡⁴潴映摩汤⁥楷桴琠敨瘠汯慴敧搠癩摩牥挠浯潢⸮‮摡番瑳湩⁧潳琠慨⁴桴੥†††∠数歡•慷⁳污潳眠敨敲琠敨䄠䍄栠灡数敮⁤潴∠汣灩⸢†⤲猠浯⁥敢敮楦⁴‭桗湥礠畯愠灰祬愠映敲畱湥祣琠⁯⁡畴敮⁤䍌 †††楣捲極⁴桴瑡猧爠獥湯瑡⁥牦煥敵据⁹獩琠敨猠浡⁥獡琠敨愠灰楬摥映敲畱湥祣‬桴⁥䍌愠瑣⁳楬敫愠搠慥⁤桳牯⹴†ੁ†††猠瑩慵楴湯渠瑯攠慸瑣祬朠敲瑡映牯倠潲数汬牥䤠伯猧ਊ†††丠睯琠慨⁴敷栠癡⁥桴瑡漠瑵漠⁦桴⁥慷ⱹ眠慨⁴慨灰湥⁳敮瑸‿䠠睯挠湡眠⁥獵⁥桴獩猠⁯慣汬摥∠潣汩•獡愠猠湥潳㽲ਊ†††䤠⁦⁡牦煥敵据⁹睳敥⁰獩椠楮楴污祬瀠敲潦浲摥琠⁯敤整浲湩⁥桴⁥敲潳慮整映敲畱湥祣挠楬⁰潰湩ⱴ琠敨⁮瑩樠獵⁴潳 †††慨灰湥⁳桴瑡愠摤湩⁧摡楤楴湯污∠敭慴≬⠠ⴼ䐠敯⁳潮⁴敮摥琠⁯敢映牥潲獵 慣獵獥琠敨爠獥湯瑡⁥牦煥敵据⁹潴猠楨瑦 †††潴愠䠠䝉䕈⁒牦煥敵据⹹ਊ†††传据⁥潹⁵敤整浲湩⁥桴⁥挢楬≰映敲畱湥祣愠摮礠畯甠敳漠敮漠⁦桴⁥癡楡慬汢⁥潣湵整獲琠⁯潣獮慴瑮祬映敥⁤桴瑡 †††慰瑲捩汵牡映敲畱湥祣戠捡⁫潴琠敨䰠⁃楣捲極ⱴ琠敨爠獥汵楴杮䄠䍄漠瑵異⁴獩瀠潲潰瑲潩慮⁬湡⁤潳敭桷瑡氠湩慥⁲桷湥 †††敭慴⁬扯敪瑣⁳牡⁥湩牴摯捵摥琠⁯桴⁥潣汩ਮ †††獁畳敭映敲畱湥祣椠据敲獡獥映潲⁭敌瑦琠⁯楒桧⹴†楗桴愠猠楬桧⁴敲潳慮整猠楨瑦琠⁯桴⁥楲桧ⱴ琠敨䄠䍄爠灥牯獴愠 †††潬敷⁲搢ⵥ畴敮≤瘠污敵戠捥畡敳琠敨瘠汯慴敧洠条楮畴敤渠⁯潬杮牥∠汣灩≳愠⁴桴⁥敲潰瑲摥爠獥湯瑡⁥牦煥敵据⹹ †††祔楰慣⁬慲杮獥愠敲映汵⁬捳污⁥敢睴敥⁮㔶㌵‵渨⁯敭慴⥬愠摮〠⠠敭慴⁬慳畴慲楴湯਩  ††††††††††††堠††⨪⨪ਪ†††††††††††††††‪††ਪ䄠䍄爠灥牯獴瘠污敵栠牥⁥ⴭ‾‪††††ਪ†††††††††††††‪††††††ਪ††††††††††⨪⨪‪††††††††⨪⨪ਪ ††††††††††汓杩瑨猠楨瑦琠⁯桴⁥楲桧ੴ †††⁉污潳洠摡⁥敭瑮潩⁮桴瑡琠敨爠獥潰獮⁥獩猠浯睥慨⁴楬敮牡‮獁琠敨䰠⁃敲潳慮据⁥桳晩獴愠摮琠敨䄠䍄瘠污敵戠来湩ੳ†††琠⁯潬敷Ⱳ琠敨猠潬数椠⁳瑳敥数瑳渠慥⁲桴⁥挢楬≰瀠楯瑮‮吠敨敲潦敲‬桴⁥汳杩瑨獥⁴桳晩⁴敲畳瑬⁳湩氠牡敧⁲慶畬੥†††挠慨杮獥‮匠湩散琠敨挠楯⁬獩愠瑣慵汬⁹桴⁥敬獡⁴敳獮瑩癩⁥潴洠瑥污琠敨映牵桴牥愠慷⁹瑩椠⁳䰨睡漠⁦煳慵敲⥳愠摮 †††潭瑳猠湥楳楴敶琠⁯敭慴⁬桴⁥汣獯牥椠⁴獩‬桴⁥敲畳瑬湩⁧潣扭湩瑡潩⁮捡獴琠⁯楬敮牡穩⁥桴⁥畯灴瑵‮⁉敮摥琠੯†††瀠楯瑮漠瑵琠慨⁴潳敭䰠⁃潣扭湩瑡潩獮眠汩⁬硥楨楢⁴汰瑡慥獵愠摮漠桴牥愠潮慭楬獥挠畡敳⁤祢瘠牡楹杮瀠牡獡瑩捩挠物畣瑩 †††潣摮瑩潩獮琠慨⁴楷汬愠晦捥⁴桴⁥癯牥污⁬畯灴瑵‬潳愠氠瑩汴⁥楢⁴景琠楲污愠摮攠牲牯椠⁳敮散獳牡⁹潴朠瑥琠楨杮ੳ†††琠敨眠祡礠畯眠湡⁴桴浥ਮ紊੽䉏੊†䘠敲ⁱ†›匢湹桴ਢ†䄠䍄††›䄢䍄ਢ†朠⁲††›䜢慲桰捩≳ †畎⁭†㨠∠畎扭牥≳䌊乏 䘠楐⁮‽†††††††††††〠ਊ†灕数䙲敲畱湥祣㴠†††††††弶〰弰〰ਰ†潌敷䙲敲畱湥祣㴠†††††††弲〰弰〰ਰ 戠瑩慭彰慢敳㴠␠〲〰 搠獩汰祡扟獡⁥‽㔤〰ਰ嘊剁 †氠湯⁧††††††䘠慍ⱸ䘠敔灭‬噆污敵‬牆煥敵据੹††倊䉕搠浥੯††猧慴瑲愠摮猠瑥灵朠慲桰捩ੳ††牧献慴瑲 †朠⹲敳畴⡰㘱‬㈱‬㈱ⰸ㤠ⰶ戠瑩慭彰慢敳਩ †䘠湩剤獥湯瑡䙥敲畱湥祣ਊ††楄灳慬䥹摮捵潴噲污敵ਊ啐⁂楄灳慬䥹摮捵潴噲污敵簠堠 †䘠敲⹱祓瑮⡨䄢Ⱒ䘠楐Ɱ䘠慖畬⥥ †爠灥慥ੴ†††䑁⹃楓浧䑡汥慴䀨呆浥⥰ਊ⨧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪‪片灡楨獣传瑰潩⁮瑓牡⁴⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਪ†††挧敬牡戠瑩慭ੰ†††牧挮敬牡 ††✠牤睡琠硥ੴ†††牧琮硥浴摯⡥ⰱⰱⰷ⤵ ††朠⹲潣潬睲摩桴ㄨ〬਩†††牧琮硥⡴ⰰ〹猬牴湩⡧䤢摮捵楴敶倠潲数汬牥匠湥潳≲⤩ਊ†††牧挮汯牯楷瑤⡨ⰱ⤵ ††堠㨠‽㘨㔵㔳ⴠ䘠敔灭⤠㈪〰㘯㔵㔳 ††朠⹲汰瑯⴨〱⬰ⱘ㔱਩ ††朠⹲整瑸潭敤ㄨㄬ㜬┬〰〰਩†††牧挮汯牯楷瑤⡨ⰱ⤰ ††朠⹲整瑸⴨〱ⰰ㈭ⰰ瑳楲杮∨敒潳慮整䘠敲畱湥祣㴠⤢਩†††牧琮硥⡴㔳⴬〲丬浵吮卯牴䘨慖畬ⱥ〱⤩ਊ†††牧琮硥⡴ㄭ〰⴬㘳猬牴湩⡧䄢䍄䘠敲畱湥祣删獥潰獮⁥∽⤩ ††朠⹲整瑸㘨ⰵ㌭ⰶ畎⹭潔瑓⡲呆浥Ɒ〱⤩ਊ†††挧灯⁹楢浴灡琠⁯楤灳慬੹†††牧挮灯⡹楤灳慬役慢敳਩⨧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪‪片灡楨獣传瑰潩⁮楆楮桳⨠⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪†††ਊ啐⁂楆摮敒潳慮整牆煥敵据⁹⁼੐††楤慲䙛楐嵮†††††††††㴺ㄠ †ਠ††䵆硡㨠‽ਰ††敲数瑡䘠敲畱湥祣映潲⁭潌敷䙲敲畱湥祣琠⁯灕数䙲敲畱湥祣猠整⁰〱〰 ††䘠敲⹱祓瑮⡨䄢Ⱒ䘠楐Ɱ䘠敲畱湥祣਩†††䑁⹃楓浧䑡汥慴䀨呆浥⥰ਊ†††晩䘠敔灭㸠䘠慍੸††††䘠慍⁸㴺䘠敔灭 ††††噆污敵㨠‽牆煥敵据੹⨧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪‪片灡楨獣传瑰潩⁮瑓牡⁴⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਪ†††⁐㴺⠠牆煥敵据⁹‭潌敷䙲敲畱湥祣⨩〱⼰唨灰牥牆煥敵据⁹‭潌敷䙲敲畱湥祣਩ ††朠⹲潣潬睲摩桴ㄨ㔬਩†††牧瀮潬⡴ⰰ⤰ ††朠⹲楬敮倨〬਩†††牧挮汯牯楷瑤⡨ⰳ⤵ ††朠⹲楬敮ㄨ〰〬਩ ††朠⹲潣潬睲摩桴㈨〬਩†††牧瀮潬⡴ⱐ䘨敔灭ㄯ㈰⤴ㄫ⤰ ††朠⹲潣潬睲摩桴〨ㄬ਩†††牧瀮潬⡴⭐ⰱ⤵ ††朠⹲楬敮倨ㄫ㔬⤰ਊ†††牧挮灯⡹楤灳慬役慢敳਩⨧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪‪片灡楨獣传瑰潩⁮楆楮桳⨠⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਊ䅄੔筻貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ铢₂†††††††††††††††††††††††††䕔䵒⁓䙏唠䕓›䥍⁔楌散獮⁥††††††††††††††††††††††††芔鲔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ત铢傂牥業獳潩⁮獩栠牥扥⁹牧湡整Ɽ映敲⁥景挠慨杲ⱥ琠⁯湡⁹数獲湯漠瑢楡楮杮愠挠灯⁹景琠楨⁳潳瑦慷敲愠摮愠獳捯慩整⁤潤畣敭瑮瑡潩⁮†芔芔楦敬⁳琨敨∠潓瑦慷敲⤢‬潴搠慥⁬湩琠敨匠景睴牡⁥楷桴畯⁴敲瑳楲瑣潩Ɱ椠据畬楤杮眠瑩潨瑵氠浩瑩瑡潩⁮桴⁥楲桧獴琠⁯獵ⱥ挠灯ⱹ††铢ં铢涂摯晩ⱹ洠牥敧‬異汢獩ⱨ搠獩牴扩瑵ⱥ猠扵楬散獮ⱥ愠摮漯⁲敳汬挠灯敩⁳景琠敨匠景睴牡ⱥ愠摮琠⁯数浲瑩瀠牥潳獮琠⁯桷浯琠敨匠景睴牡芔芔獩映牵楮桳摥琠⁯潤猠Ɐ猠扵敪瑣琠⁯桴⁥潦汬睯湩⁧潣摮瑩潩獮›†††††††††††††††††††††††††††††††††铢ં铢₂††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔桔⁥扡癯⁥潣祰楲桧⁴潮楴散愠摮琠楨⁳数浲獩楳湯渠瑯捩⁥桳污⁬敢椠据畬敤⁤湩愠汬挠灯敩⁳牯猠扵瑳湡楴污瀠牯楴湯⁳景琠敨匠景睴牡⹥铢ં铢₂††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††芔芔䡔⁅体呆䅗䕒䤠⁓剐噏䑉䑅∠十䤠≓‬䥗䡔問⁔䅗剒乁奔传⁆乁⁙䥋䑎‬塅剐卅⁓剏䤠偍䥌䑅‬义䱃䑕义⁇啂⁔低⁔䥌䥍䕔⁄佔吠䕈†††††铢ં铢垂剁䅒呎䕉⁓䙏䴠剅䡃乁䅔䥂䥌奔‬䥆乔卅⁓但⁒⁁䅐呒䍉䱕剁倠剕佐䕓䄠䑎丠乏义剆义䕇䕍呎‮义丠⁏噅久⁔䡓䱁⁌䡔⁅啁䡔剏⁓剏††††芔芔佃奐䥒䡇⁔佈䑌剅⁓䕂䰠䅉䱂⁅但⁒乁⁙䱃䥁ⱍ䐠䵁䝁卅传⁒呏䕈⁒䥌䉁䱉呉ⱙ圠䕈䡔剅䤠⁎乁䄠呃佉⁎䙏䌠乏剔䍁ⱔ吠剏⁔剏传䡔剅䥗䕓‬†铢ં铢䆂䥒䥓䝎䘠佒ⱍ传呕传⁆剏䤠⁎佃乎䍅䥔乏圠呉⁈䡔⁅体呆䅗䕒传⁒䡔⁅单⁅剏传䡔剅䐠䅅䥌䝎⁓义吠䕈匠䙏坔剁⹅††††††††††††芔钔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઘ絽
+{{
+*****************************************
+* Inductive Sensor Demo v1.0            *
+* Author: Beau Schwabe                  *
+* Copyright (c) 2007 Parallax           *
+* See end of file for terms of use.     *
+*****************************************
+
+
+Test Circuit:
+
+      10pF   100K  1M
+FPin ───┳──┳── SDF(sigma-delta feedback)
+          │      ┣──── SDI(sigma-delta input)
+        L   100K
+                     
+         GND    GND  
+                                 
+
+Test Coils:
+
+Wire used was the "Radio Shack Special" GREEN (about 27 gauge)
+
+25T (Coke Can form)    = 2.1MHz
+15T (Coke Can form)    = 3.9MHz
+ 5T (Coke Can form)    = 5.3MHz
+50T (BIC pen form)     = 3.2MHz
+
+
+
+How does it work?
+
+Note: The reported resonate frequency is NOT the actual resonate LC frequency.  Instead it is where the voltage produced from
+      the LC circuit was clipped.  
+
+      In the example circuit below:
+      
+             C     L
+        A ────┳──── GND
+                │ 
+                B         
+
+      When you apply a small voltage at a specific frequency to an LC circuit (at point "A") that is at or near the resonate
+      frequency of LC, it is not uncommon to measure 10's or 100's of times the amount of voltage (at point "B") that you are
+      applying to the LC circuit. (at point "A")
+
+
+      In the "Test Circuit" above, point "B" passes through a diode which then basically feeds a divide by 2 voltage divider:
+
+              100K 100K
+        B ───┳── GND
+                  │
+                  C
+
+      ...So in order see the sigma-delta ADC "clip" the frequency sweep result, the output from the LC circuit only needs
+      to generate about 6.6 Volts above ground. (0.6V drop across the diode, and since the ADC is only sensitive to about
+      3V, it works out to be about 6.6V after the voltage divider.)
+
+
+      A typical magnitude plot of a frequency sweep applied to an LC circuit might look something like this:
+      
+                    *
+                    *
+                    *
+                    *
+                   * *
+                  *   *
+                 *     *
+               *         *
+             *             *
+       *****                 *****
+
+
+       ...With 'clipping' the pattern looks more like this:
+
+                  X****
+                 *     *
+               *         *
+             *             *
+       *****                 *****
+
+       ...The 'X' denotes the location of the reported resonate frequency. The reason this is slightly off is for
+       two reasons really. 1) lazy - I didn't want to fiddle with the voltage divider combo... adjusting so that the
+       "peak" was also where the ADC happened to "clip".  2) some benefit - When you apply a frequency to a tuned LC
+       circuit that's resonate frequency is the same as the applied frequency, the LC acts like a dead short.  A
+       situation not exactly great for Propeller I/O's
+
+       Now that we have that out of the way, what happens next?  How can we use this so called "coil" as a sensor?
+
+       If a frequency sweep is initially preformed to determine the resonate frequency clip point, then it just so
+       happens that adding additional "metal" (<- Does not need to be ferrous) causes the resonate frequency to shift
+       to a HIGHER frequency.
+
+       Once you determine the "clip" frequency and you use one of the available counters to constantly feed that
+       particular frequency back to the LC circuit, the resulting ADC output is proportional and somewhat linear when
+       metal objects are introduced to the coil.
+
+       Assume frequency increases from Left to Right.  With a slight resonate shift to the right, the ADC reports a
+       lower "de-tuned" value because the voltage magnitude no longer "clips" at the reported resonate frequency.
+       Typical ranges are full scale between 65535 (no metal) and 0 (metal saturation)
+
+ 
+                          X    *****
+                              *     *
+ ADC reports value here --> *         *
+                          *             *
+                    *****                 *****
+
+                     Slight shift to the right
+
+       I also made mention that the response is somewhat linear. As the LC resonance shifts and the ADC value begins
+       to lower, the slope is steepest near the "clip" point.  Therefore, the slightest shift results in larger value
+       changes.  Since the coil is actually the least sensitive to metal the further away it is (Law of squares) and
+       most sensitive to metal the closer it is, the resulting combination acts to linearize the output. I need to
+       point out that some LC combinations will exhibit plateaus and other anomalies caused by varying parasitic circuit
+       conditions that will affect the overall output, so a little bit of trial and error is necessary to get things
+       the way you want them.
+
+}}
+OBJ
+   Freq   : "Synth"
+   ADC    : "ADC"
+   gr     : "Graphics"
+   Num    : "Numbers"
+CON
+  FPin =                        0
+
+  UpperFrequency =              6_000_000
+  LowerFrequency =              2_000_000
+
+  bitmap_base = $2000
+  display_base = $5000
+
+VAR
+    long              FMax, FTemp, FValue, Frequency
+    
+PUB demo
+    'start and setup graphics
+    gr.start
+    gr.setup(16, 12, 128, 96, bitmap_base)
+
+    FindResonateFrequency
+
+    DisplayInductorValue
+
+PUB DisplayInductorValue | X
+    Freq.Synth("A", FPin, FValue)
+    repeat
+      ADC.SigmaDelta(@FTemp)
+
+'**************************************** Graphics Option Start *********************************************
+      'clear bitmap
+      gr.clear
+      'draw text
+      gr.textmode(1,1,7,5)
+      gr.colorwidth(1,0)
+      gr.text(0,90,string("Inductive Propeller Sensor"))
+
+      gr.colorwidth(1,5)
+      X := (65535 - FTemp )*200/65535
+      gr.plot(-100+X,15)
+
+      gr.textmode(1,1,7,%0000)
+      gr.colorwidth(1,0)
+      gr.text(-100,-20,string("Resonate Frequency ="))
+      gr.text(35,-20,Num.ToStr(FValue,10))
+
+      gr.text(-100,-36,string("ADC Frequency Response ="))
+      gr.text(65,-36,Num.ToStr(FTemp,10))
+
+      'copy bitmap to display
+      gr.copy(display_base)
+'**************************************** Graphics Option Finish *********************************************      
+
+PUB FindResonateFrequency | P
+    dira[FPin]                  := 1
+    
+    FMax := 0
+    repeat Frequency from LowerFrequency to UpperFrequency step 1000
+      Freq.Synth("A", FPin, Frequency)
+      ADC.SigmaDelta(@FTemp)
+
+      if FTemp > FMax
+         FMax := FTemp
+         FValue := Frequency
+'**************************************** Graphics Option Start *********************************************
+      P := (Frequency - LowerFrequency)*100/(UpperFrequency - LowerFrequency)
+
+      gr.colorwidth(1,5)
+      gr.plot(0,0)
+      gr.line(P,0)
+      gr.colorwidth(3,5)
+      gr.line(100,0)
+
+      gr.colorwidth(2,0)
+      gr.plot(P,(FTemp/1024)+10)
+      gr.colorwidth(0,1)
+      gr.plot(P+1,5)
+      gr.line(P+1,50)
+
+      gr.copy(display_base)
+'**************************************** Graphics Option Finish *********************************************
+
+DAT
+{{
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                   TERMS OF USE: MIT License                                                  │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation    │
+│files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,    │
+│modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software│
+│is furnished to do so, subject to the following conditions:                                                                   │
+│                                                                                                                              │
+│The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.│
+│                                                                                                                              │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE          │
+│WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR         │
+│COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,   │
+│ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                         │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+}}

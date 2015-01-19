@@ -1,1 +1,88 @@
-✧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਪ✧‪吠⁖敔浲湩污䐠浥⁯ㅶ〮ㄮ††††††ਪ✧‪䄠瑵潨㩲䌠楨⁰片捡祥††††††††ਪ✧‪䌠灯特杩瑨⠠⥣㈠〰‴慐慲汬硡‬湉⹣†ਪ✧‪匠敥攠摮漠⁦楦敬映牯琠牥獭漠⁦獵⹥†ਪ✧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪ਪ笊ⴭⴭⴭⴭⴭⴭⴭⴭ刭噅卉佉⁎䥈呓剏ⵙⴭⴭⴭⴭⴭⴭⴭⴭ ㅶ〮ㄮⴠ唠摰瑡摥㔠ㄯ⼵〲㘰琠⁯獵⁥噔呟牥業慮⁬ㅶㄮ੽ਠ佃੎ †††张汣浫摯⁥†††㴠砠慴ㅬ⬠瀠汬㘱੸††††硟湩牦煥††††‽張〰弰〰ਰ嘊剁ਊ††††潬杮††整瑳牥潲ੲ †††氠湯⁧†瘠潬杮 †††眠牯⁤†瘠潷摲 †††戠瑹⁥†瘠祢整ਊ䉏੊ †††琠牥⁭†㨠∠噔呟牥業慮≬ਊ倊䉕猠慴瑲簠椠ਊ†猧慴瑲琠敨琠⁶整浲湩污 琠牥⹭瑳牡⡴㈱਩ ✠牰湩⁴⁡瑳楲杮 琠牥⹭瑳⡲瑀瑩敬਩ ✠档湡敧琠⁯牧敥੮†整浲漮瑵㈨਩ ✠牰湩⁴潳敭猠慭汬搠捥浩污渠浵敢獲 爠灥慥⁴⁩牦浯ⴠ‶潴㘠 †琠牥⹭敤⡣⥩ †琠牥⹭畯⡴•⤢ 琠牥⹭畯⡴㌱਩ ✠牰湩⁴桴⁥硥牴浥⁥敤楣慭⁬畮扭牥ੳ†整浲搮捥␨䘷䙆䙆䙆਩†整浲漮瑵㤨਩†整浲搮捥␨〸〰〰㄰਩†整浲漮瑵ㄨ⤳ਊ†挧慨杮⁥潴爠摥 琠牥⹭畯⡴⤳ਊ†瀧楲瑮猠浯⁥敨⁸畮扭牥ੳ†敲数瑡椠映潲⁭㘭琠⁯ਸ਼††整浲栮硥椨‬⤲ †琠牥⹭畯⡴•⤢ 琠牥⹭畯⡴㌱਩ ✠牰湩⁴潳敭戠湩牡⁹畮扭牥ੳ†敲数瑡椠映潲⁭‰潴㜠 †琠牥⹭楢⡮Ⱪ㌠਩††整浲漮瑵∨∠਩ਊ䅄੔琊瑩敬†戠瑹⁥†∠噔吠牥業慮⁬敄潭Ⱒ㌱ㄬⰳਰ笊੻貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ铢₂†††††††††††††††††††††††††䕔䵒⁓䙏唠䕓›䥍⁔楌散獮⁥††††††††††††††††††††††††芔††††††††††††††††††††††††††††††鲔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ત铢傂牥業獳潩⁮獩栠牥扥⁹牧湡整Ɽ映敲⁥景挠慨杲ⱥ琠⁯湡⁹数獲湯漠瑢楡楮杮愠挠灯⁹景琠楨⁳潳瑦慷敲愠摮愠獳捯慩整⁤潤畣敭瑮瑡潩⁮†芔ਠ铢暂汩獥⠠桴⁥匢景睴牡≥Ⱙ琠⁯敤污椠⁮桴⁥潓瑦慷敲眠瑩潨瑵爠獥牴捩楴湯‬湩汣摵湩⁧楷桴畯⁴楬業慴楴湯琠敨爠杩瑨⁳潴甠敳‬潣祰‬†芔芔潭楤祦‬敭杲ⱥ瀠扵楬桳‬楤瑳楲畢整‬畳汢捩湥敳‬湡⽤牯猠汥⁬潣楰獥漠⁦桴⁥潓瑦慷敲‬湡⁤潴瀠牥業⁴数獲湯⁳潴眠潨⁭桴⁥潓瑦慷敲铢ં铢概⁳畦湲獩敨⁤潴搠⁯潳‬畳橢捥⁴潴琠敨映汯潬楷杮挠湯楤楴湯㩳†††††††††††††††††††††††††††††††††芔芔†††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢咂敨愠潢敶挠灯特杩瑨渠瑯捩⁥湡⁤桴獩瀠牥業獳潩⁮潮楴散猠慨汬戠⁥湩汣摵摥椠⁮污⁬潣楰獥漠⁲畳獢慴瑮慩⁬潰瑲潩獮漠⁦桴⁥潓瑦慷敲芔芔†††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢咂䕈匠䙏坔剁⁅卉倠佒䥖䕄⁄䄢⁓卉Ⱒ圠呉佈呕圠剁䅒呎⁙䙏䄠奎䬠义ⱄ䔠偘䕒卓传⁒䵉䱐䕉ⱄ䤠䍎啌䥄䝎䈠呕丠呏䰠䵉呉䑅吠⁏䡔⁅††††芔芔䅗剒乁䥔卅传⁆䕍䍒䅈呎䉁䱉呉ⱙ䘠呉䕎卓䘠剏䄠倠剁䥔啃䅌⁒啐偒协⁅乁⁄低䥎䙎䥒䝎䵅久⹔䤠⁎低䔠䕖呎匠䅈䱌吠䕈䄠呕佈卒传⁒††††铢ં铢䎂偏剙䝉呈䠠䱏䕄卒䈠⁅䥌䉁䕌䘠剏䄠奎䌠䅌䵉‬䅄䅍䕇⁓剏传䡔剅䰠䅉䥂䥌奔‬䡗呅䕈⁒义䄠⁎䍁䥔乏传⁆佃呎䅒呃‬佔呒传⁒呏䕈坒卉ⱅ†芔芔剁卉义⁇剆䵏‬問⁔䙏传⁒义䌠乏䕎呃佉⁎䥗䡔吠䕈匠䙏坔剁⁅剏吠䕈唠䕓传⁒呏䕈⁒䕄䱁义升䤠⁎䡔⁅体呆䅗䕒‮††††††††††††铢ં铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢颔紊
+''***************************************
+''*  TV Terminal Demo v1.0.1            *
+''*  Author: Chip Gracey                *
+''*  Copyright (c) 2004 Parallax, Inc.  *
+''*  See end of file for terms of use.  *
+''***************************************
+
+{-----------------REVISION HISTORY-----------------
+ v1.0.1 - Updated 5/15/2006 to use TV_Terminal v1.1}
+ 
+CON
+
+        _clkmode        = xtal1 + pll16x
+        _xinfreq        = 5_000_000
+
+VAR
+
+        long    testerror
+
+        long    vlong
+        word    vword
+        byte    vbyte
+
+OBJ
+
+        term    : "TV_Terminal"
+
+
+PUB start | i
+
+  'start the tv terminal
+  term.start(12)
+
+  'print a string
+  term.str(@title)
+
+  'change to green
+  term.out(2)
+
+  'print some small decimal numbers
+  repeat i from -6 to 6
+    term.dec(i)
+    term.out(" ")
+  term.out(13)
+
+  'print the extreme decimal numbers
+  term.dec($7FFFFFFF)
+  term.out(9)
+  term.dec($80000001)
+  term.out(13)
+
+  'change to red
+  term.out(3)
+
+  'print some hex numbers
+  repeat i from -6 to 6
+    term.hex(i, 2)
+    term.out(" ")
+  term.out(13)
+
+  'print some binary numbers
+  repeat i from 0 to 7
+    term.bin(i, 3)
+    term.out(" ")
+
+
+DAT
+
+title   byte    "TV Terminal Demo",13,13,0
+
+{{
+
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                   TERMS OF USE: MIT License                                                  │                                                            
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation    │ 
+│files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,    │
+│modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software│
+│is furnished to do so, subject to the following conditions:                                                                   │
+│                                                                                                                              │
+│The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.│
+│                                                                                                                              │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE          │
+│WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR         │
+│COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,   │
+│ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                         │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+}}

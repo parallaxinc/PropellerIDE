@@ -1,1 +1,84 @@
-✧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪✊⨧†敄畢彧捌⁤敔瑳⠠破〲䰠䑃 ㅶ㈮†††ਪ✧‪䄠瑵潨獲›潊⁮楗汬慩獭‬敊晦䴠牡楴⁮⨠✊⨧†潃祰楲桧⁴挨 〲㘰倠牡污慬ⱸ䤠据‮†ਪ✧‪匠敥攠摮漠⁦楦敬映牯琠牥獭漠⁦獵⹥†⨠✊⨧⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪⨪✊ਧ✧瘠⸱′‭慍捲⁨㘲‬〲㠰ⴠ唠摰瑡摥戠⁹敊晦䴠牡楴⁮潴甠敳甠摰瑡摥䐠扥杵䱟䑃ਮ✧瘠⸱‱‭灁楲⁬㤲‬〲㘰ⴠ唠摰瑡摥戠⁹潊⁮楗汬慩獭映牯挠湯楳瑳湥祣ਮ✧✊‧獕獥琠敨倠牡污慬⁸破〲猠牥慩⁬䍌⁄潴搠獩汰祡愠挠畯瑮牥椠⁮敤楣慭ⱬ栠硥‬湡⁤楢慮祲映牯慭獴ਮਊ佃੎ 张汣浫摯⁥‽瑸污‱‫汰ㅬ砶††††††††††††††✠甠敳挠祲瑳污砠ㄠਸ਼†硟湩牦煥㴠㔠た〰た〰†††††††††††††††††‧‵䡍⁺祣獲慴⁬猨獹挠潬正㴠㠠‰䡍⥺ਊ†䍌彄䥐⁎†‽‰††††††††††††††††††††‧潦⁲慐慲汬硡㐠㉸‰敳楲污䰠䑃漠⁮ぐ 䰠䑃䉟啁⁄㴠ㄠ弹〲ਰ†䍌彄䥌䕎⁓‽‴†ਠਊ䉏੊ 氠摣㨠∠敄畢彧捌≤ਊ倊䉕洠楡⁮⁼摩੸†††††††††††††††††††††††† 椠⁦捬⹤湩瑩䰨䑃偟义‬䍌彄䅂䑕‬䍌彄䥌䕎⥓††††††✠猠慴瑲氠摣 †氠摣挮牵潳⡲⤰†††††††††††††††††††✠挠牵潳⁲景੦††捬⹤慢正楌桧⡴牴敵 ††††††††††††††††‧慢正楬桧⁴湯⠠晩愠慶汩扡敬਩††捬⹤畣瑳浯〨‬䉀汵敬⥴†††††††††††††††‧牣慥整挠獵潴⁭档牡捡整⁲ਰ††捬⹤汣⁳††††††††††††††††††††††‧汣慥⁲桴⁥捬੤††捬⹤瑳⡲瑳楲杮∨䍌⁄䕄啂≇‬㌱⤩ †氠摣瀮瑵⡣⤰††††††††††††††††††††✠搠獩汰祡挠獵潴⁭畢汬瑥挠慨慲瑣牥 †氠摣献牴猨牴湩⡧•敄≣‬㌱⤩ †氠摣瀮瑵⡣⤰ †氠摣献牴猨牴湩⡧•效≸‬㌱⤩ਠ††捬⹤異捴〨਩††捬⹤瑳⡲瑳楲杮∨䈠湩⤢ ††ਊ††敲数瑡 ††爠灥慥⁴摩⁸牦浯〠琠⁯㔲ਵ††††灵慤整捌⡤摩⥸ †††眠楡捴瑮挨歬牦煥⼠㔠⬠挠瑮 ††††††††††✠瀠摡眠瑩⁨⼱‵敳੣ ††爠灥慥⁴摩⁸牦浯ⴠ㔲‵潴〠 †††甠摰瑡汥摣椨硤਩††††慷瑩湣⡴汣晫敲ⁱ ‵‫湣⥴ †††ਠ倊䥒甠摰瑡䱥摣瘨污敵਩ 氠摣朮瑯硯⡹㈱‬⤱ 氠摣搮捥⡦慶畬ⱥ㠠 †††††††††††††††††✠瀠楲瑮爠杩瑨樭獵楴楦摥搠捥浩污瘠污敵 氠摣朮瑯硯⡹ㄱ‬⤲ 氠摣椮敨⡸慶畬ⱥ㠠 †††††††††††††††††✠瀠楲瑮椠摮捩瑡摥⠠楷桴␠ 敨੸†捬⹤潧潴祸㜨‬⤳ 氠摣椮楢⡮慶畬ⱥㄠ⤲†††††††††††††††††✠瀠楲瑮椠摮捩瑡摥⠠楷桴┠ 楢慮祲†††††††† †††††††ਠ†††䐊呁ਊ†畂汬瑥†††祢整†††〤ⰰ␠㐰‬〤ⱅ␠䘱‬〤ⱅ␠㐰‬〤ⰰ␠〰ਊ筻貔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ઐ铢₂†††††††††††††††††††††††††䕔䵒⁓䙏唠䕓›䥍⁔楌散獮⁥††††††††††††††††††††††††芔††††††††††††††††††††††††††††††鲔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢ત铢傂牥業獳潩⁮獩栠牥扥⁹牧湡整Ɽ映敲⁥景挠慨杲ⱥ琠⁯湡⁹数獲湯漠瑢楡楮杮愠挠灯⁹景琠楨⁳潳瑦慷敲愠摮愠獳捯慩整⁤潤畣敭瑮瑡潩⁮†芔ਠ铢暂汩獥⠠桴⁥匢景睴牡≥Ⱙ琠⁯敤污椠⁮桴⁥潓瑦慷敲眠瑩潨瑵爠獥牴捩楴湯‬湩汣摵湩⁧楷桴畯⁴楬業慴楴湯琠敨爠杩瑨⁳潴甠敳‬潣祰‬†芔芔潭楤祦‬敭杲ⱥ瀠扵楬桳‬楤瑳楲畢整‬畳汢捩湥敳‬湡⽤牯猠汥⁬潣楰獥漠⁦桴⁥潓瑦慷敲‬湡⁤潴瀠牥業⁴数獲湯⁳潴眠潨⁭桴⁥潓瑦慷敲铢ં铢概⁳畦湲獩敨⁤潴搠⁯潳‬畳橢捥⁴潴琠敨映汯潬楷杮挠湯楤楴湯㩳†††††††††††††††††††††††††††††††††芔芔†††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢咂敨愠潢敶挠灯特杩瑨渠瑯捩⁥湡⁤桴獩瀠牥業獳潩⁮潮楴散猠慨汬戠⁥湩汣摵摥椠⁮污⁬潣楰獥漠⁲畳獢慴瑮慩⁬潰瑲潩獮漠⁦桴⁥潓瑦慷敲芔芔†††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††††铢ં铢咂䕈匠䙏坔剁⁅卉倠佒䥖䕄⁄䄢⁓卉Ⱒ圠呉佈呕圠剁䅒呎⁙䙏䄠奎䬠义ⱄ䔠偘䕒卓传⁒䵉䱐䕉ⱄ䤠䍎啌䥄䝎䈠呕丠呏䰠䵉呉䑅吠⁏䡔⁅††††芔芔䅗剒乁䥔卅传⁆䕍䍒䅈呎䉁䱉呉ⱙ䘠呉䕎卓䘠剏䄠倠剁䥔啃䅌⁒啐偒协⁅乁⁄低䥎䙎䥒䝎䵅久⹔䤠⁎低䔠䕖呎匠䅈䱌吠䕈䄠呕佈卒传⁒††††铢ં铢䎂偏剙䝉呈䠠䱏䕄卒䈠⁅䥌䉁䕌䘠剏䄠奎䌠䅌䵉‬䅄䅍䕇⁓剏传䡔剅䰠䅉䥂䥌奔‬䡗呅䕈⁒义䄠⁎䍁䥔乏传⁆佃呎䅒呃‬佔呒传⁒呏䕈坒卉ⱅ†芔芔剁卉义⁇剆䵏‬問⁔䙏传⁒义䌠乏䕎呃佉⁎䥗䡔吠䕈匠䙏坔剁⁅剏吠䕈唠䕓传⁒呏䕈⁒䕄䱁义升䤠⁎䡔⁅体呆䅗䕒‮††††††††††††铢ં铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢肔铢颔紊⁽
+''****************************************
+''*  Debug_Lcd Test (4x20 LCD) v1.2      *
+''*  Authors: Jon Williams, Jeff Martin  *
+''*  Copyright (c) 2006 Parallax, Inc.   *
+''*  See end of file for terms of use.   *
+''***************************************
+''
+'' v1.2 - March 26, 2008 - Updated by Jeff Martin to use updated Debug_LCD.
+'' v1.1 - April 29, 2006 - Updated by Jon Williams for consistency.
+''
+'' Uses the Parallax 4x20 serial LCD to display a counter in decimal, hex, and binary formats.
+
+
+CON
+
+  _clkmode = xtal1 + pll16x                             ' use crystal x 16
+  _xinfreq = 5_000_000                                  ' 5 MHz cyrstal (sys clock = 80 MHz)
+
+  LCD_PIN   = 0                                         ' for Parallax 4x20 serial LCD on P0
+  LCD_BAUD  = 19_200
+  LCD_LINES = 4    
+
+
+OBJ
+
+  lcd : "Debug_Lcd"
+
+
+PUB main | idx
+                                                
+  if lcd.init(LCD_PIN, LCD_BAUD, LCD_LINES)             ' start lcd
+    lcd.cursor(0)                                       ' cursor off
+    lcd.backLight(true)                                 ' backlight on (if available)
+    lcd.custom(0, @Bullet)                              ' create custom character 0
+    lcd.cls                                             ' clear the lcd
+    lcd.str(string("LCD DEBUG", 13))
+    lcd.putc(0)                                         ' display custom bullet character
+    lcd.str(string(" Dec", 13))
+    lcd.putc(0)
+    lcd.str(string(" Hex", 13)) 
+    lcd.putc(0)
+    lcd.str(string(" Bin"))     
+
+    repeat
+      repeat idx from 0 to 255
+        updateLcd(idx)
+        waitcnt(clkfreq / 5 + cnt)                      ' pad with 1/5 sec
+
+      repeat idx from -255 to 0
+        updatelcd(idx)
+        waitcnt(clkfreq / 5 + cnt)
+        
+
+PRI updateLcd(value)
+
+  lcd.gotoxy(12, 1)
+  lcd.decf(value, 8)                                    ' print right-justified decimal value
+  lcd.gotoxy(11, 2)
+  lcd.ihex(value, 8)                                    ' print indicated (with $) hex
+  lcd.gotoxy(7, 3)
+  lcd.ibin(value, 12)                                   ' print indicated (with %) binary                
+                
+      
+DAT
+
+  Bullet      byte      $00, $04, $0E, $1F, $0E, $04, $00, $00
+
+{{
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                   TERMS OF USE: MIT License                                                  │                                                            
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation    │ 
+│files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,    │
+│modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software│
+│is furnished to do so, subject to the following conditions:                                                                   │
+│                                                                                                                              │
+│The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.│
+│                                                                                                                              │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE          │
+│WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR         │
+│COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,   │
+│ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                         │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+}} 
