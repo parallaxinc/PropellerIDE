@@ -7,7 +7,6 @@
 #include <QKeyEvent>
 #include <QResizeEvent>
 #include <QPaintEvent>
-#include <QByteArray>
 #include <QTextCursor>
 
 
@@ -34,7 +33,18 @@ public:
     void saveContent();
     int contentChanged();
 
+public slots:
+    bool getUndo();
+    bool getRedo();
+    bool getCopy();
+    void setUndo(bool available);
+    void setRedo(bool available);
+    void setCopy(bool available);
+
 private:
+    bool canUndo;
+    bool canRedo;
+    bool canCopy;
 
     int  autoIndent();
     int  braceMatchColumn();

@@ -45,8 +45,6 @@ public:
     bool showBeginMessage(QString type);
     bool showEndMessage(QString type);
 
-    void setEditor(QPlainTextEdit *ed);
-
 public slots:
     void findChanged(QString text);
     void findClicked();
@@ -68,14 +66,6 @@ public slots:
     void printFile();
     void zipFiles();
     void openFiles(const QStringList & files);
-
-    // edit
-    void cut();
-    void copy();
-    void paste();
-    void undo();
-    void redo();
-    void selectAll();
 
     // view
     void fontBigger();

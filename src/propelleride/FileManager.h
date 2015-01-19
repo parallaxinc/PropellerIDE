@@ -16,7 +16,6 @@ public:
     explicit FileManager(QWidget *parent = 0);
 
     Editor * getEditor(int num);
-    void setEditor(int num, QString shortName, QString fileName, QString text);
 
 public slots:
     int  newFile();
@@ -40,7 +39,23 @@ public slots:
     void previousTab();
     void changeTab(int index);
 
+    void cut();
+    void copy();
+    void paste();
+    void undo();
+    void redo();
+    void selectAll();
+
+    void setUndo(bool available);
+    void setRedo(bool available);
+    void setCopy(bool available);
+
 signals:
     void fileUpdated(int index);
+    void undoAvailable(bool available);
+    void redoAvailable(bool available);
+    void saveAvailable(bool available);
+    void copyAvailable(bool available);
+    void closeAvailable(bool available);
 
 };

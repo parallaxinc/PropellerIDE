@@ -15,13 +15,18 @@ void MainWindow::setupFileMenu()
     QMenu *fileMenu = new QMenu(tr("&File"), this);
     menuBar()->addMenu(fileMenu);
 
+
+    QAction * actSave = new QAction(QIcon(":/icons/file-save.png"), tr("&Save"), this);
+    actSave->setShortcut(QKeySequence::Save);
+    actSave->setEnabled(false);
+
     fileMenu->addAction(QIcon(":/icons/file-new.png"),      tr("&New"),         editorTabs, SLOT(newFile()),    QKeySequence::New);
     fileMenu->addAction(QIcon(":/icons/file-open.png"),     tr("&Open"),        editorTabs, SLOT(open()),         QKeySequence::Open);
 
     fileMenu->addSeparator();
 
-    fileMenu->addAction(QIcon(":/icons/file-save.png"),     tr("&Save"),        editorTabs, SLOT(save()),       QKeySequence::Save);
-    fileMenu->addAction(QIcon(":/icons/file-save-as.png"),  tr("Save &As"),     editorTabs, SLOT(saveAs()),     QKeySequence::SaveAs);
+    fileMenu->addAction(actSave);
+    fileMenu->addAction(QIcon(":/icons/file-save-as.png"),  tr("Save &As..."),     editorTabs, SLOT(saveAs()),     QKeySequence::SaveAs);
     fileMenu->addAction(QIcon(),                            tr("Save All"),     editorTabs, SLOT(saveAll()),    0);
 
     fileMenu->addSeparator();
@@ -43,9 +48,19 @@ void MainWindow::setupFileMenu()
 
     fileMenu->addSeparator();
 
-    fileMenu->addAction(QIcon(":/icons/file-close.png"),    tr("&Close"),       editorTabs, SLOT(closeFile()),  QKeySequence::Close);
+    QAction * actClose = new QAction(QIcon(":/icons/file-close.png"), tr("&Close"), this);
+    actClose->setShortcut(QKeySequence::Close);
+    actClose->setEnabled(false);
+
+    fileMenu->addAction(actClose);
     fileMenu->addAction(QIcon(),                            tr("Close All"),    editorTabs, SLOT(closeAll()),   0);
     fileMenu->addAction(QIcon(":/icons/file-exit.png"),     tr("E&xit"),        this, SLOT(quitProgram()),      QKeySequence::Quit);
+
+    connect(actSave, SIGNAL(triggered()), editorTabs, SLOT(save()));
+    connect(actClose, SIGNAL(triggered()), editorTabs, SLOT(closeFile()));
+
+    connect(editorTabs,SIGNAL(saveAvailable(bool)),actSave,SLOT(setEnabled(bool)));
+    connect(editorTabs,SIGNAL(closeAvailable(bool)),actClose,SLOT(setEnabled(bool)));
 
 }
 
@@ -58,15 +73,32 @@ void MainWindow::setupEditMenu()
     QMenu * editMenu = new QMenu(tr("&Edit"), this);
     menuBar()->addMenu(editMenu);
 
-    editMenu->addAction(QIcon(":/icons/edit-undo.png"),     tr("&Undo"),        this, SLOT(undo()),             QKeySequence::Undo);
-    editMenu->addAction(QIcon(":/icons/edit-redo.png"),     tr("&Redo"),        this, SLOT(redo()),             QKeySequence::Redo);
+    QAction * actUndo = new QAction(QIcon(":/icons/edit-undo.png"), tr("&Undo"), this);
+    actUndo->setShortcut(QKeySequence::Undo);
+    actUndo->setEnabled(false);
+
+    QAction * actRedo = new QAction(QIcon(":/icons/edit-redo.png"), tr("&Redo"), this);
+    actRedo->setShortcut(QKeySequence::Redo);
+    actRedo->setEnabled(false);
+
+    QAction * actCut = new QAction(QIcon(":/icons/edit-cut.png"), tr("&Cut"), this);
+    actCut->setShortcut(QKeySequence::Cut);
+    actCut->setEnabled(false);
+
+    QAction * actCopy = new QAction(QIcon(":/icons/edit-copy.png"), tr("&Copy"), this);
+    actCopy->setShortcut(QKeySequence::Copy);
+    actCopy->setEnabled(false);
+
+    editMenu->addAction(actUndo);
+    editMenu->addAction(actRedo);
 
     editMenu->addSeparator();
 
-    editMenu->addAction(QIcon(":/icons/edit-cut.png"),      tr("&Cut"),         this, SLOT(cut()),              QKeySequence::Cut);
-    editMenu->addAction(QIcon(":/icons/edit-copy.png"),     tr("&Copy"),        this, SLOT(copy()),             QKeySequence::Copy);
-    editMenu->addAction(QIcon(":/icons/edit-paste.png"),    tr("&Paste"),       this, SLOT(paste()),            QKeySequence::Paste);
-    editMenu->addAction(QIcon(":/icons/edit-selectall.png"),tr("&Select All"),  this, SLOT(selectAll()),        QKeySequence::SelectAll);
+    editMenu->addAction(actCut);
+    editMenu->addAction(actCopy);
+
+    editMenu->addAction(QIcon(":/icons/edit-paste.png"),    tr("&Paste"),       editorTabs, SLOT(paste()),            QKeySequence::Paste);
+    editMenu->addAction(QIcon(":/icons/edit-selectall.png"),tr("&Select All"),  editorTabs, SLOT(selectAll()),        QKeySequence::SelectAll);
 
     editMenu->addSeparator();
 
@@ -77,42 +109,24 @@ void MainWindow::setupEditMenu()
     editMenu->addSeparator();
 
     editMenu->addAction(QIcon(":/icons/preferences.png"), tr("Preferences"),    this, SLOT(preferences()),      Qt::Key_F5);
-}
 
-void MainWindow::cut()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->cut();
-}
+    connect(actUndo, SIGNAL(triggered()), editorTabs, SLOT(undo()));
+    connect(actRedo, SIGNAL(triggered()), editorTabs, SLOT(redo()));
+    connect(actCut, SIGNAL(triggered()), editorTabs, SLOT(cut()));
+    connect(actCopy, SIGNAL(triggered()), editorTabs, SLOT(copy()));
 
-void MainWindow::copy()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->copy();
-}
+    connect(editorTabs,SIGNAL(undoAvailable(bool)),actUndo,SLOT(setEnabled(bool)));
+    connect(editorTabs,SIGNAL(redoAvailable(bool)),actRedo,SLOT(setEnabled(bool)));
+    connect(editorTabs,SIGNAL(copyAvailable(bool)),actCut,SLOT(setEnabled(bool)));
+    connect(editorTabs,SIGNAL(copyAvailable(bool)),actCopy,SLOT(setEnabled(bool)));
 
-void MainWindow::paste()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->paste();
-}
-
-void MainWindow::undo()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->undo();
-}
-
-void MainWindow::redo()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->redo();
-}
-
-void MainWindow::selectAll()
-{
-    editorTabs->getEditor(editorTabs->currentIndex())->selectAll();
 }
 
 void MainWindow::preferences()
 {
     propDialog->showPreferences();
 }
+
 
 void MainWindow::preferencesAccepted()
 {

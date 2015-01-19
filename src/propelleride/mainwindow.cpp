@@ -54,7 +54,6 @@ void MainWindow::init()
     /* start with an empty file if fresh install */
     editorTabs->newFile();
 
-
     sizeLabel.setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
     progress = new QProgressBar();

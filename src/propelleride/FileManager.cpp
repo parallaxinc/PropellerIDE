@@ -21,16 +21,37 @@ int FileManager::newFile()
 
     int index = addTab(editor,tr("Untitled"));
 
-    setCurrentIndex(index);
+    changeTab(index);
     setTabToolTip(index,"");
 
 //  newProjectTrees();
 
     connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
+    connect(editor,SIGNAL(undoAvailable(bool)),this,SLOT(setUndo(bool)));
+    connect(editor,SIGNAL(redoAvailable(bool)),this,SLOT(setRedo(bool)));
+    connect(editor,SIGNAL(copyAvailable(bool)),this,SLOT(setCopy(bool)));
 
-    emit fileUpdated(index);
+    emit closeAvailable(true);
 
     return index;
+}
+
+void FileManager::setUndo(bool available)
+{
+    if (sender() == currentWidget())
+        emit undoAvailable(available);
+}
+
+void FileManager::setRedo(bool available)
+{
+    if (sender() == currentWidget())
+        emit redoAvailable(available);
+}
+
+void FileManager::setCopy(bool available)
+{
+    if (sender() == currentWidget())
+        emit copyAvailable(available);
 }
 
 void FileManager::open()
@@ -221,6 +242,7 @@ void FileManager::closeFile(int index)
     if (count() == 0)
     {
         createBackgroundImage();
+        emit closeAvailable(false);
     }
 }
 
@@ -251,12 +273,18 @@ void FileManager::previousTab()
 
 }
 
+// this function is needed to set focus after changing the index
 void FileManager::changeTab(int index)
 {
     setCurrentIndex(index);
     if(index < 0) return;
 
-    getEditor(currentIndex())->setFocus();
+    Editor * editor = getEditor(currentIndex());
+    editor->setFocus();
+    
+    emit undoAvailable(editor->getUndo());
+    emit redoAvailable(editor->getRedo());
+    emit copyAvailable(editor->getCopy());
 }
 
 Editor * FileManager::getEditor(int num)
@@ -264,15 +292,7 @@ Editor * FileManager::getEditor(int num)
     return (Editor *)widget(num);
 }
 
-void FileManager::setEditor(int num, QString shortName, QString fileName, QString text)
-{
-    getEditor(num)->setPlainText(text);
-    setTabText(num,shortName);
-    setTabToolTip(num,fileName);
-    setCurrentIndex(num);
-    getEditor(num)->saveContent();
-}
-
+// this needs some rethinking a lot
 void FileManager::fileChanged()
 {
     int index = currentIndex();
@@ -283,8 +303,55 @@ void FileManager::fileChanged()
         name = tr("Untitled");
 
     if (getEditor(index)->contentChanged())
+    {
         name += '*';
+        emit saveAvailable(true);
+    }
+    else
+    {
+        emit saveAvailable(false);
+    }
 
     setTabText(index, name);
 }
 
+// does anybody have a good idea of how to
+// replace this hacky structure with something
+// more flexible?
+// -------------------------------------------
+void FileManager::cut()
+{
+    if (count() > 0)
+        getEditor(currentIndex())->cut();
+}
+
+void FileManager::copy()
+{
+    if (count() > 0)
+        getEditor(currentIndex())->copy();
+}
+
+void FileManager::paste()
+{
+    if (count() > 0)
+        getEditor(currentIndex())->paste();
+}
+
+void FileManager::undo()
+{
+    if (count() > 0)
+        getEditor(currentIndex())->undo();
+}
+
+void FileManager::redo()
+{
+    if (count() > 0)
+        getEditor(currentIndex())->redo();
+}
+
+void FileManager::selectAll()
+{
+    if (count() > 0)
+        getEditor(currentIndex())->selectAll();
+}
+// -------------------------------------------
