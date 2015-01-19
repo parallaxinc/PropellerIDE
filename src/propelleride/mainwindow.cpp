@@ -49,9 +49,8 @@ void MainWindow::init()
 
     setupToolBars();
 
-
-
     /* start with an empty file if fresh install */
+    connect(editorTabs,SIGNAL(fileUpdated(int)), this, SLOT(setProject()));
     editorTabs->newFile();
 
     sizeLabel.setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -166,7 +165,10 @@ void MainWindow::getApplicationSettings(bool complain)
     QFile file;
     QVariant compv;
 
-    compv = QSettings().value("Compiler");
+    QSettings settings;
+    settings.beginGroup("Paths");
+
+    compv = settings.value("Compiler");
     if(compv.canConvert(QVariant::String)) {
         spinCompiler = compv.toString();
         spinCompiler = dir.fromNativeSeparators(spinCompiler);
@@ -174,7 +176,7 @@ void MainWindow::getApplicationSettings(bool complain)
     if(complain && !file.exists(spinCompiler)) {
         propDialog->showPreferences();
     }
-    compv = QSettings().value("Loader");
+    compv = settings.value("Loader");
     if(compv.canConvert(QVariant::String)) {
         spinLoader = compv.toString();
         spinLoader = dir.fromNativeSeparators(spinLoader);
@@ -187,11 +189,13 @@ void MainWindow::getApplicationSettings(bool complain)
     /* get the include path and config file set by user */
     QVariant incv;
 
-    incv = QSettings().value("Library Path");
+    incv = settings.value("Library");
     if(incv.canConvert(QVariant::String)) {
         spinIncludes = incv.toString();
         spinIncludes = dir.fromNativeSeparators(spinIncludes);
     }
+
+    settings.endGroup();
 }
 
 void MainWindow::quitProgram()
@@ -223,12 +227,6 @@ void MainWindow::closeEvent(QCloseEvent *e)
     }
     if(e) e->accept();
     qApp->exit(0);
-}
-
-void MainWindow::changeTab(int index)
-{
-    editorTabs->changeTab(index);
-    setProject();
 }
 
 void MainWindow::newProjectTrees()
@@ -271,7 +269,6 @@ void MainWindow::updateRecentFileActions()
         QString estr = files.at(i);
         if(estr.length() == 0)
             continue;
-        //QString filename = QFileInfo(projects[i]).fileName();
         QString text = tr("&%1 %2").arg(i + 1).arg(estr);
         recentFileActs[i]->setText(text);
         recentFileActs[i]->setData(estr);
@@ -297,6 +294,7 @@ void MainWindow::printFile()
 void MainWindow::setProject()
 {
     int index = editorTabs->currentIndex();
+
     if(index < 0)
         return;
 
@@ -305,7 +303,12 @@ void MainWindow::setProject()
     QString fileName = editorTabs->tabToolTip(index);
     setCurrentFile(fileName);
 
-    setWindowFilePath(editorTabs->tabText(index));
+    if (editorTabs->count() > 0)
+        setWindowTitle(editorTabs->tabText(index) + " - " +
+                       QCoreApplication::applicationName());
+    else
+        setWindowTitle(QCoreApplication::applicationName());
+
     sizeLabel.setText("");
     msgLabel.setText("");
 
@@ -367,33 +370,27 @@ void MainWindow::checkAndSaveFiles()
     if(projectModel == NULL)
         return;
     QString title = projectModel->getTreeName();
-    QString modTitle = title + " *";
-    for(int tab = editorTabs->count()-1; tab > -1; tab--)
+
+    for (int i = 0; i < editorTabs->count(); i++)
     {
-        QString tabName = editorTabs->tabText(tab);
-        if(tabName == modTitle)
+        qDebug() << title;
+        if (editorTabs->getEditor(i)->contentChanged())
         {
-            editorTabs->save(tab);
-            editorTabs->setTabText(tab,title);
+            editorTabs->save(i);
         }
     }
 
     int len = projectModel->rowCount();
-    for(int n = 0; n < len; n++)
+    for (int n = 0; n < len; n++)
     {
         QModelIndex root = projectModel->index(n,0);
-        QVariant vs = projectModel->data(root, Qt::DisplayRole);
-        if(!vs.canConvert(QVariant::String))
-            continue;
-        QString name = vs.toString();
-        QString modName = name + " *";
-        for(int tab = editorTabs->count()-1; tab > -1; tab--)
+        QString name = projectModel->data(root, Qt::DisplayRole).toString();
+        qDebug() <<  name;
+        for(int i = 0; i < editorTabs->count(); i++)
         {
-            QString tabName = editorTabs->tabText(tab);
-            if(tabName == modName)
+            if (editorTabs->getEditor(i)->contentChanged())
             {
-                editorTabs->save(tab);
-                editorTabs->setTabText(tab,name);
+                editorTabs->save(i);
             }
         }
     }
@@ -1205,7 +1202,7 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     // project editor tabs
     editorTabs = new FileManager(this);
     connect(editorTabs,SIGNAL(tabCloseRequested(int)),editorTabs,SLOT(closeFile(int)));
-    connect(editorTabs,SIGNAL(currentChanged(int)),this,SLOT(changeTab(int)));
+    connect(editorTabs,SIGNAL(currentChanged(int)),editorTabs,SLOT(changeTab(int)));
     findSplit->addWidget(editorTabs);
 
     findSplit->setStretchFactor(0,1);

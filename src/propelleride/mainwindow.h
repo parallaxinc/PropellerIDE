@@ -80,7 +80,6 @@ public slots:
     void findMultilineComment(QTextCursor cur);
     void projectTreeClicked(QModelIndex index);
     void referenceTreeClicked(QModelIndex index);
-    void changeTab(int index = 0);
     void setCurrentPort(int index);
     void connectButton(bool show = true);
     void terminalClosed();

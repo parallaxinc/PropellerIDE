@@ -98,7 +98,7 @@ void FileManager::openFile(const QString & fileName)
     setTabText(index,QFileInfo(fileName).fileName());
     getEditor(index)->saveContent();
 
-    //setProject();
+    emit fileUpdated(index);
 }
 
 
@@ -170,8 +170,6 @@ void FileManager::saveFile(const QString & fileName, int index)
     setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
     setTabText(index,QFileInfo(fileName).fileName());
     getEditor(index)->saveContent();
-
-    //setProject();
 }
 
 
@@ -237,6 +235,7 @@ void FileManager::closeFile(int index)
         getEditor(index)->disconnect();
         getEditor(index)->close();
         removeTab(index);
+        emit fileUpdated(index);
     }
 
     if (count() == 0)
@@ -285,6 +284,7 @@ void FileManager::changeTab(int index)
     emit undoAvailable(editor->getUndo());
     emit redoAvailable(editor->getRedo());
     emit copyAvailable(editor->getCopy());
+    emit fileUpdated(index);
 }
 
 Editor * FileManager::getEditor(int num)

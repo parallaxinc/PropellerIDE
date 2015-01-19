@@ -29,7 +29,9 @@ PathSelector::PathSelector(
     connect(browseButton, SIGNAL(clicked()), parent, slot);
 
     lineEdit->setText(defaultpath);
-    if ( QSettings().contains(key) )
+    QSettings settings;
+    settings.beginGroup("Paths");
+    if ( settings.contains(key) )
     {
         load();
     }
@@ -37,6 +39,7 @@ PathSelector::PathSelector(
     {
         save();
     }
+    settings.endGroup();
 
     oldvalue = lineEdit->text();
 }
