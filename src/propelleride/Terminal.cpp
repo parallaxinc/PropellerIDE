@@ -19,6 +19,8 @@
 Terminal::Terminal(QWidget *parent) : QDialog(parent), portListener(NULL)
 {
     termEditor = new Console(parent);
+    setWindowTitle(QCoreApplication::applicationName()+" "+tr("Terminal"));
+
     init();
 }
 
@@ -28,6 +30,7 @@ void Terminal::init()
     termLayout->setContentsMargins(4,4,4,4);
     termEditor->setReadOnly(false);
 
+    restoreGeometry(QSettings().value("terminalSize").toByteArray());
     options = new TermPrefs(this);
 
     QAction *copyAction = new QAction(tr("Copy"),this);
@@ -201,11 +204,7 @@ void Terminal::accept()
     buttonEnable->setText("Disable");
 #endif
     // save Terminal geometry
-    QSettings *settings = new QSettings(publisherKey, PropellerIdeGuiKey, this);
-    if(settings->value(useKeys).toInt() == 1) {
-        QByteArray geo = this->saveGeometry();
-        settings->setValue(termGeometryKey,geo);
-    }
+    QSettings().setValue("terminalSize",saveGeometry());
     termEditor->setPortEnable(false);
     portLabel.setEnabled(false);
     portListener->stop();
@@ -218,9 +217,7 @@ void Terminal::reject()
     buttonEnable->setText("Disable");
 #endif
     // save Terminal geometry
-    QSettings *settings = new QSettings(publisherKey, PropellerIdeGuiKey, this);
-    QByteArray geo = this->saveGeometry();
-    settings->setValue(termGeometryKey,geo);
+    QSettings().setValue("terminalSize",saveGeometry());
     termEditor->setPortEnable(false);
     portLabel.setEnabled(false);
     portListener->stop();

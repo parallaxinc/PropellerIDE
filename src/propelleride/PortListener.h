@@ -6,6 +6,7 @@
 #include <QString>
 #include <QMutex>
 #include <QByteArray>
+#include <QTimerEvent>
 
 #include "Console.h"
 #include "StatusDialog.h"
@@ -15,6 +16,7 @@ class PortListener : public QThread
 {
 Q_OBJECT
 public:
+    using QObject::timerEvent;
     PortListener(QObject *parent, Console *term);
     void init(const QString & portName, BaudRateType baud);
     void setDtr(bool enable);
@@ -123,8 +125,6 @@ private:
      * @returns void
      */
     void hwreset(void);
-
-    QString shortFileName(QString fileName);
 
 private:
 

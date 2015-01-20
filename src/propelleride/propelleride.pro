@@ -22,7 +22,8 @@ isEmpty(VERSION):VERSION = 0.0.0
 VERSION = '\\"$${VERSION}\\"'
 DEFINES += VERSION=\"$${VERSION}\"
 
-SOURCES += main.cpp\
+SOURCES += \
+    main.cpp \
     mainwindow.cpp \
     $$files(mainwindow/*.cpp) \
     StatusDialog.cpp \
@@ -31,9 +32,11 @@ SOURCES += main.cpp\
     treeitem.cpp \
     Builder.cpp \
     SpinBuilder.cpp \
+    PathSelector.cpp \
     PortListener.cpp \
     Preferences.cpp \
     PortConnectionMonitor.cpp \
+    ReferenceTree.cpp \
     editor.cpp \
     SpinHighlighter.cpp \
     SpinParser.cpp \
@@ -41,22 +44,25 @@ SOURCES += main.cpp\
     Console.cpp \
     ColorScheme.cpp \
     ColorChooser.cpp \
-    termprefs.cpp
+    termprefs.cpp \
+    FileManager.cpp \
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
+    mainwindow.h \
     StatusDialog.h \
     Highlighter.h \
     treemodel.h \
     treeitem.h \
     Builder.h \
     SpinBuilder.h \
+    PathSelector.h \
     PortListener.h \
     Preferences.h \
     PortConnectionMonitor.h \
+    ReferenceTree.h \
     editor.h \
     SpinHighlighter.h \
     SpinParser.h \
-    colors.h \
     Sleeper.h \
     Terminal.h \
     Console.h \
@@ -64,15 +70,23 @@ HEADERS  += mainwindow.h \
     ColorChooser.h \
     ColorScheme.h \
     templates/Singleton.h \
+    FileManager.h \
 
+TRANSLATIONS += \
+    translations/propelleride_zn.ts
 
 OTHER_FILES +=
 
 FORMS += \
-    TermPrefs.ui
+    forms/TermPrefs.ui \
+    forms/finder.ui
 
 RESOURCES += \
-    icons/icons.qrc
+    icons/icons.qrc \
+    fonts/fonts.qrc \
+    themes/themes.qrc \
+
+CODECFORTR = UTF-8
 
 unix {
     LIBS            += -lz

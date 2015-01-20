@@ -2,6 +2,16 @@
 
 #include <QToolBar> 
 
+void MainWindow::addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile)
+{
+    const QSize buttonSize(24, 24);
+    btn->setIcon(QIcon(QPixmap(imgfile.toLatin1())));
+    btn->setMinimumSize(buttonSize);
+    btn->setMaximumSize(buttonSize);
+    btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    bar->addWidget(btn);
+}
+
 void MainWindow::setupToolBars()
 {
     fileToolBar = addToolBar(tr("File"));
@@ -19,10 +29,13 @@ void MainWindow::setupToolBars()
     addToolButton(fileToolBar, btnFileSaveAs, QString(":/icons/file-save-as.png"));
 
 //    connect(btnBrowser,SIGNAL(clicked()),this,SLOT(showBrowser()));
-    connect(btnFileNew,SIGNAL(clicked()),this,SLOT(newFileAction()));
-    connect(btnFileOpen,SIGNAL(clicked()),this,SLOT(openFile()));
-    connect(btnFileSave,SIGNAL(clicked()),this,SLOT(saveFile()));
-    connect(btnFileSaveAs,SIGNAL(clicked()),this,SLOT(saveAsFile()));
+    connect(btnFileNew,SIGNAL(clicked()),editorTabs,SLOT(newFile()));
+    connect(btnFileOpen,SIGNAL(clicked()),editorTabs,SLOT(open()));
+    connect(btnFileSave,SIGNAL(clicked()),editorTabs,SLOT(save()));
+    connect(btnFileSaveAs,SIGNAL(clicked()),editorTabs,SLOT(saveAs()));
+
+    btnFileSave->setEnabled(false);
+    connect(editorTabs,SIGNAL(saveAvailable(bool)),btnFileSave,SLOT(setEnabled(bool)));
 
 //    btnBrowser->setToolTip(tr("Show Browser"));
     btnFileNew->setToolTip(tr("New"));

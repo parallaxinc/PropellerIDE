@@ -1,0 +1,16 @@
+[Colors]
+Block_CON=#484848
+Block_DAT=#003951
+Block_OBJ=#3d3d3d
+Block_PRI=#15004d
+Block_PUB=#24003b
+Block_VAR=#4f002a
+Syntax_Comments=#cccccc
+Syntax_Functions=#6565ff
+Syntax_Keywords=#ffffff
+Syntax_Numbers=#ff7fff
+Syntax_Quotes=#a2b2ff
+Syntax_Text=#eeeeee
+
+[Font]
+Family=FreeMono Mono

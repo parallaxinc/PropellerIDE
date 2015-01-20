@@ -17,8 +17,6 @@ public:
     void setParameters(QString comp, QString incl, QString compPath, QString projFile, QString compstat);
     void setObjects(QLabel *stat, QLabel *progsize, QProgressBar *progbar, QComboBox *ports);
 
-    QString filePathName(QString file);
-
     virtual int  runCompiler(QString copts);
 
 signals:

@@ -13,7 +13,8 @@
 
 #include "SpinBuilder.h"
 #include "SpinParser.h"
-#include "SpinModel.h"
+
+#include "treemodel.h"
 
 #include "PortListener.h"
 #include "qext/qextserialport.h"
@@ -23,8 +24,8 @@
 #include "PortConnectionMonitor.h"
 #include "StatusDialog.h"
 #include "spinzip/zipper.h"
-
-#define untitledstr "Untitled"
+#include "ReferenceTree.h"
+#include "FileManager.h"
 
 class MainWindow : public QMainWindow
 {
@@ -34,25 +35,15 @@ public:
     MainWindow(QWidget *parent = 0);
     void init();
 
-    QString     programName;
     Preferences  *propDialog;
     QSplitter   *leftSplit;
-    ColorScheme      *currentTheme;
     QSplitter   *findSplit;
 
 public:
     QTextDocument::FindFlag getFlags(int prev = 0);
 
-    QString getFindText();
-    void    clearFindText();
-    QString getReplaceText();
-    void    clearReplaceText();
-    void    setFindText(QString text);
-
     bool showBeginMessage(QString type);
     bool showEndMessage(QString type);
-
-    void setEditor(QPlainTextEdit *ed);
 
 public slots:
     void findChanged(QString text);
@@ -69,27 +60,14 @@ signals:
     void updateBackgroundColors();
 
 public slots:
-    void newFile();
-    void newFileAction();
-    void openFile(const QString &path = QString());
-    bool saveAsCodec(QString fileName, Editor *ed);
-    void saveFile();
-    void saveFileByTabIndex(int tab);
-    QString saveAsFile(const QString &path = QString());
-    void printFile();    // not implemented
+
+    // file menu
+    void newProjectTrees();
+    void printFile();
     void zipFiles();
-
-
-    // edit
-    void cut();
-    void copy();
-    void paste();
-    void undo();
-    void redo();
-    void selectAll();
+    void openFiles(const QStringList & files);
 
     // view
-    void fontDialog();
     void fontBigger();
     void fontSmaller();
 
@@ -102,8 +80,6 @@ public slots:
     void findMultilineComment(QTextCursor cur);
     void projectTreeClicked(QModelIndex index);
     void referenceTreeClicked(QModelIndex index);
-    void closeTab(int index = 0);
-    void changeTab(int index);
     void setCurrentPort(int index);
     void connectButton(bool show = true);
     void terminalClosed();
@@ -118,10 +94,8 @@ public slots:
     void closeEvent(QCloseEvent *event);
     void quitProgram();
 
-    void fileChanged();
     void enumeratePorts();
     void enumeratePortsEvent();
-    void initBoardTypes();
     void showFindFrame();
     void hideFindFrame();
     void showBrowser();
@@ -132,18 +106,16 @@ public slots:
 
     void highlightFileLine(QString file, int line);
 
-    void tabSpacesChanged();
 
 private:
     void openLastFile();
-    bool exitSave();
     void getApplicationSettings(bool complain);
     int  checkCompilerInfo();
     QStringList getCompilerParameters(QString compilerOptions);
-    bool isFileUTF16(QFile *file);
-    void openFileName(QString fileName);
     void checkAndSaveFiles();
     Editor *createEditor();
+
+    bool eventFilter(QObject *target, QEvent *event);
 
     void setupFileMenu();
     void setupEditMenu();
@@ -154,18 +126,13 @@ private:
     void setupToolBars();
     void setupProjectTools(QSplitter *vsplit);
     void addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile);
-    int isFileOpen(QString fileName);
+    int  isFileOpen(QString fileName);
     void openTreeFile(QString fileName);
     void updateProjectTree(QString fileName);
     void updateSpinProjectTree(QString fileName);
     void updateReferenceTree(QString fileName, QString text);
     void updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level);
-    void setEditor(int num, QString shortName, QString fileName, QString text);
-    Editor *getEditor(int num);
-    void setEditorCodeType(Editor *ed, QString name);
 
-    QString shortFileName(QString fileName);
-    QString filePathName(QString fileName);
     void checkConfigSerialPort();
     QFrame *newFindFrame(QSplitter *split);
 
@@ -173,11 +140,6 @@ private:
     int  runCompiler(COMPILE_TYPE type);
     int  loadProgram(int type, QString file = QString());
 
-    int  isPackageSource(QString fileName);
-    int  extractSource(QString &fileName);
-    void buildSourceWriteError(QString fileName);
-
-    QSettings   *settings;
     QString     spinCompiler;
     QString     spinCompilerPath;
     QString     spinIncludes;
@@ -192,7 +154,6 @@ private:
     QAction *recentFileActs[MaxRecentFiles];
     QAction *separatorFileAct;
 
-    QPushButton *regexButton;
     QString     findText;
     QString     replaceText;
     bool        showFindMessage(QString type);
@@ -220,27 +181,18 @@ private:
     int         findPosition;
     int         wasClicked;
 
-    QTabWidget  *editorTabs;
-    QFont       editorFont;
-    void        adjustFontSize(float ratio);
-    bool        fileChangeDisable;
-    bool        changeTabDisable;
-
-    SpinParser  spinParser;
+    FileManager *editorTabs;
 
     QString     projectFile;
-    QTreeView   *projectTree;
-    QTreeView   *referenceTree;
-    TreeModel   *projectModel;
-    TreeModel   *referenceModel;
-    SpinModel   *spinProjectModel;
-    SpinModel   *spinReferenceModel;
+    ReferenceTree   *projectTree;
+    ReferenceTree   *referenceTree;
+    TreeModel       *projectModel;
+    TreeModel       *referenceModel;
 
     SpinBuilder     *spinBuilder;
 
     QString     basicPath;
     QString     includePath;
-    QString     lastDirectory;
 
     QComboBox   *cbBoard;
     QComboBox   *cbPort;
@@ -256,8 +208,8 @@ private:
 
     int progMax;
     int progCount;
-    QLabel *sizeLabel;
-    QLabel *msgLabel ;
+    QLabel sizeLabel;
+    QLabel msgLabel;
     QProgressBar *progress;
     QString compileResult;
 
@@ -277,4 +229,5 @@ signals:
 
 public slots:
     void setStatusDone(bool done);
+
 };

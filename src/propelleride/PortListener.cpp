@@ -10,7 +10,6 @@
 #define JUNKWAIT    (TWAIT(10))  // want about 10ms
 #define GETBITWAIT  (TWAIT(110)) // want about 110 ms (90 to 300+ at RESPWAIT=2)
 
-#define ENABLE_LOAD_ANIMATION
 #define USE_PORT_TIMER
 
 PortListener::PortListener(QObject *parent, Console *term) : QThread(parent)
@@ -50,8 +49,7 @@ void PortListener::init(const QString & portName, BaudRateType baud)
 #ifdef PORTDEBUG
     qDebug() << "RESP" << RESPWAIT
              << "JUNKWAIT" << JUNKWAIT*RESPWAIT
-             << "GETBIT" << GETBITWAIT*RESPWAIT
-;
+             << "GETBIT" << GETBITWAIT*RESPWAIT;
 #endif
 }
 
@@ -529,35 +527,4 @@ int PortListener::findprop(const char* name)
     }
 
     return version != 0 ? 1 : 0;
-}
-
-/**
- * find and load propeller with file - assumes port is already open
- * @returns non-zero on error.
-int PortListener::load(QString fileName, int type)
-{
-    int rc = 1;
-
-    if(!fileName.length())
-        return -1;
-
-    if(!port)
-        return -1;
-
-    if(port->isOpen())
-        ; // close? open shared?
-
-
-    return rc;
-}
- */
-
-QString PortListener::shortFileName(QString fileName)
-{
-    QString rets;
-    if(fileName.indexOf("/") > -1)
-        rets = fileName.mid(fileName.lastIndexOf("/")+1);
-    else
-        rets = fileName;
-    return rets;
 }

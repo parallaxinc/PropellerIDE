@@ -7,7 +7,6 @@
 #include <QKeyEvent>
 #include <QResizeEvent>
 #include <QPaintEvent>
-#include <QByteArray>
 #include <QTextCursor>
 
 
@@ -24,22 +23,29 @@ public:
     Editor(QWidget *parent);
     virtual ~Editor();
 
-    void initSpin(SpinParser *parser);
-    SpinParser *getSpinParser();
 
     void setHighlights();
     void setLineNumber(int num);
 
     void clearCtrlPressed();
 
-    typedef enum CodeTypeEnum {
-        CodeTypeUTF8, CodeTypeUTF16, CodeTypeOther
-    } CodeType;
+    SpinParser spinParser;
+    void saveContent();
+    int contentChanged();
 
-    inline CodeType getCodeType()           { return codeType; }
-    inline void setCodeType(CodeType type)  { codeType = type; }
+public slots:
+    bool getUndo();
+    bool getRedo();
+    bool getCopy();
+    void setUndo(bool available);
+    void setRedo(bool available);
+    void setCopy(bool available);
 
 private:
+    bool canUndo;
+    bool canRedo;
+    bool canCopy;
+
     int  autoIndent();
     int  braceMatchColumn();
     bool isCommentOpen(int line);
@@ -60,8 +66,10 @@ private:
     QPoint keyPopPoint(QTextCursor cursor);
 
     ColorScheme * currentTheme;
-    QMap<int, ColorScheme::color> colors;
-    QMap<int, ColorScheme::color> colorsAlt;
+    QMap<ColorScheme::Color, ColorScheme::color> colors;
+    QMap<ColorScheme::Color, ColorScheme::color> colorsAlt;
+
+    QString oldcontents;
 
 protected:
     void keyPressEvent(QKeyEvent* e);
@@ -75,13 +83,10 @@ private:
     QTextCursor lastCursor;
     QPoint  mousepos;
     bool    ctrlPressed;
-    SpinParser  *spinParser;
     bool    isSpin;
     Highlighter *highlighter;
 
     QComboBox *cbAuto;
-
-    CodeType codeType;
 
     bool expectAutoComplete;
 
@@ -91,6 +96,8 @@ private slots:
     void cbAutoSelected(int index);
     void cbAutoSelected0insert(int index);
     void updateColors();
+    void updateFonts();
+    void tabSpacesChanged();
 
 /* lineNumberArea support below this line: see Nokia Copyright below */
 public:

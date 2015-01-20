@@ -10,13 +10,8 @@ TermPrefs::TermPrefs(Terminal *term) : ui(new Ui::TermPrefs)
 
     ui->cbSwapNLCR->setVisible(false);
 
-    /* setup application registry info */
-    QCoreApplication::setOrganizationName(publisherKey);
-    QCoreApplication::setOrganizationDomain(publisherComKey);
-    QCoreApplication::setApplicationName(PropellerIdeGuiKey);
-
     /* global settings */
-    settings = new QSettings(QString(publisherKey), QString(PropellerIdeGuiKey));
+    settings = new QSettings();
 
     /* the order of these settings is critical for read/save */
     settingNames.clear();
@@ -86,15 +81,7 @@ TermPrefs::~TermPrefs()
 
 void TermPrefs::resetSettings()
 {
-    QStringList list = settings->allKeys();
-    foreach(QString s, list) {
-        if(s.indexOf(QString(PropellerIdeGuiKey)+"_term")== 0)
-            settings->remove(s);
-        if(s.indexOf(QString(PropellerIdeGuiKey)+"_enable")== 0)
-            settings->remove(s);
-    }
-
-    readSettings();
+    QSettings().clear();
 
     ui->cbClearScreen->setChecked(true);
     ui->cbHomeCursor->setChecked(true);

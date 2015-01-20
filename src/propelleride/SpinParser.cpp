@@ -77,16 +77,13 @@ QStringList SpinParser::spinFileTree(QString file, QString libpath)
         objectInfo(value, subnode, subfile);
         nodes.append(subfile);
     }
-    // Indent later. Just sort for now.
-#ifdef QT5
     nodes.sort(Qt::CaseInsensitive);
-#else
-    nodes.sort();
-#endif
+
     for(int n = 0; n < nodes.count(); n++) {
         QString ns = nodes.at(n);
         spinFiles.append(ns.mid(ns.lastIndexOf(":")+1));
     }
+    spinFiles.removeDuplicates();
     return spinFiles;
 }
 
@@ -314,8 +311,6 @@ int SpinParser::match_keyword (const char *p, KeyWord const *kw, QString &tag)
     int j;
     int rc = K_NONE;
     char *tmp = (char*)p;
-
-    /* printf ("match_keyword\n"); */
 
     for (i = 0; i < kw->token.length(); i++)
     {
@@ -698,10 +693,6 @@ void SpinParser::findSpinTags (QString fileName, QString objnode)
 
         line = line.trimmed();
 
-        if(line.indexOf(sregx) == 0) {
-            //qDebug() << shortFileName(fileName) << objnode << "Section " << ": " << line;
-        }
-
         /* In Spin, keywords always are at the start of the line. */
         SpinKind type = K_NONE;
         foreach(KeyWord kw, spin_keywords) {
@@ -720,7 +711,6 @@ void SpinParser::findSpinTags (QString fileName, QString objnode)
             }
         }
 
-        //printf ("state %d\n", state);
         switch(state) {
             case K_CONST:
                 match_constant(line, n);
@@ -746,14 +736,3 @@ void SpinParser::findSpinTags (QString fileName, QString objnode)
         }
     }
 }
-
-QString SpinParser::shortFileName(QString fileName)
-{
-    QString rets;
-    if(fileName.indexOf("/") > -1)
-        rets = fileName.mid(fileName.lastIndexOf("/")+1);
-    else
-        rets = fileName;
-    return rets;
-}
-

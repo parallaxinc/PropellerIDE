@@ -51,17 +51,3 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Fil
 [Run]
 ;Filename: {app}\{#FtdiChipApp}; Tasks: FtdiChip; Flags: RunAsCurrentUser NoWait; 
 Filename: {app}\{#MyAppExeName}; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, "&", "&&")}}"; Flags: skipifsilent NoWait PostInstall; 
-
-[Registry]
-Root: HKCU; SubKey: Software\ParallaxInc; Flags: UninsDeleteKey; 
-Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; Flags: UninsDeleteKey; 
-Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_SpinCompiler; ValueData: {app}\openspin.exe;        Flags: DeleteKey;
-Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_SpinLoader;   ValueData: {app}\p1load.exe;          Flags: DeleteKey; 
-Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_SpinIncludes; ValueData: {app}\library;             Flags: DeleteKey;
-Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_LastFileName; ValueData: {app}\library\Welcome.spin;   Flags: DeleteKey; 
-
-Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_SpinCompiler; ValueData: {app}\openspin.exe;        Flags: UninsDeleteKey;
-Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_SpinLoader;   ValueData: {app}\p1load.exe;          Flags: UninsDeleteKey; 
-Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_SpinIncludes; ValueData: {app}\library;             Flags: UninsDeleteKey;
-Root: HKCU; Subkey: "Software\ParallaxInc\PropellerIDE"; ValueType: string; ValueName: PropellerIDE_LastFileName; ValueData: {app}\library\Welcome.spin;   Flags: UninsDeleteKey; 
-

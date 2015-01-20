@@ -44,9 +44,10 @@ help:
 	@echo
 	@echo "Enter package type to build. Options:"
 	@echo
+	@echo "   win    windows installer"
+	@echo "   mac    mac bundle"
 	@echo "   deb    debian package"
-	@echo "   win    windows installer (not yet available)"
-	@echo "   mac    mac bundle        (not yet available)"
+	@echo "   rpi    debian package for Raspberry Pi"
 	@echo
 	@echo "   no parameter builds only the binaries"
 

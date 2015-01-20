@@ -126,6 +126,4 @@ private:
     int objectInfo(QString tag, QString &name, QString &file, QString &parent);
     QString checkFile(QString fileName);
     void findSpinTags (QString fileName, QString objnode);
-
-    QString shortFileName(QString fileName);
 };

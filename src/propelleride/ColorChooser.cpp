@@ -31,7 +31,8 @@
 #include <QMouseEvent>
 #include <QColorDialog>
 
-ColorChooser::ColorChooser(int newkey, QString hex, QWidget *parent) :
+
+ColorChooser::ColorChooser(ColorScheme::Color newkey, QString hex, QWidget *parent) :
     QLabel(parent)
 {
     //setFrameStyle(QFrame::Raised | QFrame::Box);
@@ -73,4 +74,9 @@ void ColorChooser::mousePressEvent(QMouseEvent *event)
             emit sendColor(key, color);
         }
     }
+}
+
+void ColorChooser::updateColor()
+{
+    setColor(Singleton<ColorScheme>::Instance().getColor(key));
 }

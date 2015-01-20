@@ -15,13 +15,19 @@ void MainWindow::setupFileMenu()
     QMenu *fileMenu = new QMenu(tr("&File"), this);
     menuBar()->addMenu(fileMenu);
 
-    fileMenu->addAction(QIcon(":/icons/file-new.png"),      tr("&New"),         this, SLOT(newFileAction()),    QKeySequence::New);
-    fileMenu->addAction(QIcon(":/icons/file-open.png"),     tr("&Open"),        this, SLOT(openFile()),         QKeySequence::Open);
+
+    QAction * actSave = new QAction(QIcon(":/icons/file-save.png"), tr("&Save"), this);
+    actSave->setShortcut(QKeySequence::Save);
+    actSave->setEnabled(false);
+
+    fileMenu->addAction(QIcon(":/icons/file-new.png"),      tr("&New"),         editorTabs, SLOT(newFile()),    QKeySequence::New);
+    fileMenu->addAction(QIcon(":/icons/file-open.png"),     tr("&Open"),        editorTabs, SLOT(open()),         QKeySequence::Open);
 
     fileMenu->addSeparator();
 
-    fileMenu->addAction(QIcon(":/icons/file-save.png"),     tr("&Save"),        this, SLOT(saveFile()),         QKeySequence::Save);
-    fileMenu->addAction(QIcon(":/icons/file-save-as.png"),  tr("Save &As"),     this, SLOT(saveAsFile()),       QKeySequence::SaveAs);
+    fileMenu->addAction(actSave);
+    fileMenu->addAction(QIcon(":/icons/file-save-as.png"),  tr("Save &As..."),     editorTabs, SLOT(saveAs()),     QKeySequence::SaveAs);
+    fileMenu->addAction(QIcon(),                            tr("Save All"),     editorTabs, SLOT(saveAll()),    0);
 
     fileMenu->addSeparator();
 
@@ -42,9 +48,24 @@ void MainWindow::setupFileMenu()
 
     fileMenu->addSeparator();
 
+    QAction * actClose = new QAction(QIcon(":/icons/file-close.png"), tr("&Close"), this);
+    actClose->setShortcut(QKeySequence::Close);
+    actClose->setEnabled(false);
+
+    fileMenu->addAction(actClose);
+    fileMenu->addAction(QIcon(),                            tr("Close All"),    editorTabs, SLOT(closeAll()),   0);
     fileMenu->addAction(QIcon(":/icons/file-exit.png"),     tr("E&xit"),        this, SLOT(quitProgram()),      QKeySequence::Quit);
 
+    connect(actSave, SIGNAL(triggered()), editorTabs, SLOT(save()));
+    connect(actClose, SIGNAL(triggered()), editorTabs, SLOT(closeFile()));
+
+    connect(editorTabs,SIGNAL(saveAvailable(bool)),actSave,SLOT(setEnabled(bool)));
+    connect(editorTabs,SIGNAL(closeAvailable(bool)),actClose,SLOT(setEnabled(bool)));
+
 }
+
+
+// edit menu
 
 void MainWindow::setupEditMenu()
 {
@@ -52,15 +73,32 @@ void MainWindow::setupEditMenu()
     QMenu * editMenu = new QMenu(tr("&Edit"), this);
     menuBar()->addMenu(editMenu);
 
-    editMenu->addAction(QIcon(":/icons/edit-undo.png"),     tr("&Undo"),        this, SLOT(undo()),             QKeySequence::Undo);
-    editMenu->addAction(QIcon(":/icons/edit-redo.png"),     tr("&Redo"),        this, SLOT(redo()),             QKeySequence::Redo);
+    QAction * actUndo = new QAction(QIcon(":/icons/edit-undo.png"), tr("&Undo"), this);
+    actUndo->setShortcut(QKeySequence::Undo);
+    actUndo->setEnabled(false);
+
+    QAction * actRedo = new QAction(QIcon(":/icons/edit-redo.png"), tr("&Redo"), this);
+    actRedo->setShortcut(QKeySequence::Redo);
+    actRedo->setEnabled(false);
+
+    QAction * actCut = new QAction(QIcon(":/icons/edit-cut.png"), tr("&Cut"), this);
+    actCut->setShortcut(QKeySequence::Cut);
+    actCut->setEnabled(false);
+
+    QAction * actCopy = new QAction(QIcon(":/icons/edit-copy.png"), tr("&Copy"), this);
+    actCopy->setShortcut(QKeySequence::Copy);
+    actCopy->setEnabled(false);
+
+    editMenu->addAction(actUndo);
+    editMenu->addAction(actRedo);
 
     editMenu->addSeparator();
 
-    editMenu->addAction(QIcon(":/icons/edit-cut.png"),      tr("&Cut"),         this, SLOT(cut()),              QKeySequence::Cut);
-    editMenu->addAction(QIcon(":/icons/edit-copy.png"),     tr("&Copy"),        this, SLOT(copy()),             QKeySequence::Copy);
-    editMenu->addAction(QIcon(":/icons/edit-paste.png"),    tr("&Paste"),       this, SLOT(paste()),            QKeySequence::Paste);
-    editMenu->addAction(QIcon(":/icons/edit-selectall.png"),tr("&Select All"),  this, SLOT(selectAll()),        QKeySequence::SelectAll);
+    editMenu->addAction(actCut);
+    editMenu->addAction(actCopy);
+
+    editMenu->addAction(QIcon(":/icons/edit-paste.png"),    tr("&Paste"),       editorTabs, SLOT(paste()),            QKeySequence::Paste);
+    editMenu->addAction(QIcon(":/icons/edit-selectall.png"),tr("&Select All"),  editorTabs, SLOT(selectAll()),        QKeySequence::SelectAll);
 
     editMenu->addSeparator();
 
@@ -71,7 +109,32 @@ void MainWindow::setupEditMenu()
     editMenu->addSeparator();
 
     editMenu->addAction(QIcon(":/icons/preferences.png"), tr("Preferences"),    this, SLOT(preferences()),      Qt::Key_F5);
+
+    connect(actUndo, SIGNAL(triggered()), editorTabs, SLOT(undo()));
+    connect(actRedo, SIGNAL(triggered()), editorTabs, SLOT(redo()));
+    connect(actCut, SIGNAL(triggered()), editorTabs, SLOT(cut()));
+    connect(actCopy, SIGNAL(triggered()), editorTabs, SLOT(copy()));
+
+    connect(editorTabs,SIGNAL(undoAvailable(bool)),actUndo,SLOT(setEnabled(bool)));
+    connect(editorTabs,SIGNAL(redoAvailable(bool)),actRedo,SLOT(setEnabled(bool)));
+    connect(editorTabs,SIGNAL(copyAvailable(bool)),actCut,SLOT(setEnabled(bool)));
+    connect(editorTabs,SIGNAL(copyAvailable(bool)),actCopy,SLOT(setEnabled(bool)));
+
 }
+
+void MainWindow::preferences()
+{
+    propDialog->showPreferences();
+}
+
+
+void MainWindow::preferencesAccepted()
+{
+    getApplicationSettings(false);
+}
+
+
+// view menu
 
 void MainWindow::setupViewMenu()
 {
@@ -87,9 +150,7 @@ void MainWindow::setupViewMenu()
 
     viewMenu->addSeparator();
 
-    viewMenu->addAction(QIcon(":/icons/preferences-font.png"),          tr("Font"),         this, SLOT(fontDialog()));
     viewMenu->addAction(QIcon(":/icons/preferences-font-smaller.png"),  tr("Smaller Font"), this, SLOT(fontSmaller()), QKeySequence::ZoomOut);
-
     QAction *bigger = new QAction(QIcon(":/icons/preferences-font-bigger.png"), tr("Bigger Font"), this);
 
     /* special provision for bigger fonts to use default ZoomIn or Ctrl+= */
@@ -107,6 +168,18 @@ void MainWindow::setupViewMenu()
 
 }
 
+void MainWindow::fontBigger()
+{
+    propDialog->adjustFontSize(1.25);
+}
+
+void MainWindow::fontSmaller()
+{
+    propDialog->adjustFontSize(0.8);
+}
+
+
+// project menu
 
 void MainWindow::setupProjectMenu()
 {
@@ -120,6 +193,8 @@ void MainWindow::setupProjectMenu()
     projectMenu->addAction(QIcon(":/icons/project-burn.png"), tr("Burn"), this, SLOT(programBurnEE()), Qt::Key_F11);
 }
 
+
+// help menu
 
 void MainWindow::setupHelpMenu()
 {
@@ -154,8 +229,10 @@ void MainWindow::propellerDatasheet()
 
 void MainWindow::about()
 {
-    QString version = QString(programName + " v" +VERSION);
-    QMessageBox::about(this, tr("About") + " " + programName,
+    QString version = QString(QCoreApplication::applicationName() 
+                     + " v" + QCoreApplication::applicationVersion()
+                     );
+    QMessageBox::about(this, tr("About") + " " + QCoreApplication::applicationName(),
            "<h2>" + version + "</h2>"
            "<p>PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.</p>"
            "<p>Use it for writing Spin code, downloading programs to your Propeller board, and debugging your applications with the built-in serial terminal.<p>"
@@ -166,36 +243,4 @@ void MainWindow::about()
            "<p>Originally developed by Steve Denson, Dennis Gately, and Roy Eltham. "
            "Now developed by LameStation LLC in collaboration with Parallax.</p>");
 }
-
-
-void MainWindow::cut()
-{
-    getEditor(editorTabs->currentIndex())->cut();
-}
-
-void MainWindow::copy()
-{
-    getEditor(editorTabs->currentIndex())->copy();
-}
-
-void MainWindow::paste()
-{
-    getEditor(editorTabs->currentIndex())->paste();
-}
-
-void MainWindow::undo()
-{
-    getEditor(editorTabs->currentIndex())->undo();
-}
-
-void MainWindow::redo()
-{
-    getEditor(editorTabs->currentIndex())->redo();
-}
-
-void MainWindow::selectAll()
-{
-    getEditor(editorTabs->currentIndex())->selectAll();
-}
-
 

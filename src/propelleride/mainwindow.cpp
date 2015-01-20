@@ -18,24 +18,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
 
 void MainWindow::init()
 {
-    /* the program name used in all windows/diaglogs */
-    programName = QString(PropellerIdeGuiKey);
-
-    /* setup application registry info */
-    QCoreApplication::setOrganizationName(publisherKey);
-    QCoreApplication::setOrganizationDomain(publisherComKey);
-    QCoreApplication::setApplicationName(PropellerIdeGuiKey);
-
-    /* global settings */
-    settings = new QSettings(publisherKey, PropellerIdeGuiKey, this);
-
-    currentTheme = &Singleton<ColorScheme>::Instance();
-
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
-    connect(propDialog,SIGNAL(openFontDialog()),this,SLOT(fontDialog()));
-    connect(propDialog->getTabSpaceLedit(),SIGNAL(textChanged(QString)), this, SLOT(tabSpacesChanged()));
 
     projectModel = NULL;
     referenceModel = NULL;
@@ -44,32 +29,16 @@ void MainWindow::init()
 
     connect(spinBuilder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
 
-    QFontDatabase::addApplicationFont(":/fonts/parallax2-bold.ttf");
+    /* main container */
+    setWindowTitle(QCoreApplication::applicationName());
+    QSplitter *vsplit = new QSplitter(this);
+    setCentralWidget(vsplit);
+    /* project tools */
+    setupProjectTools(vsplit);
 
-    /* setup user's editor font */
-    QVariant fontv = settings->value(editorFontKey);
-    if(fontv.canConvert(QVariant::Font)) {
-        QString family = fontv.toString();
-        editorFont = QFont(family);
-        qDebug() << "Settings Editor Font" << editorFont.family();
-    }
-    else {
-        int fontsz = 14;
-        QFont font("Monospace");
-        font.setStyleHint(QFont::TypeWriter);
-        editorFont = font;
-        settings->setValue(fontSizeKey,fontsz);
-        qDebug() << "Setting default font" << editorFont.family();
-    }
+    /* minimum window height */
+    this->setMinimumHeight(500);
 
-    fontv = settings->value(fontSizeKey);
-    if(fontv.canConvert(QVariant::Int)) {
-        int size = fontv.toInt();
-        editorFont.setPointSize(size);
-    }
-    else {
-        editorFont.setPointSize(10);
-    }
 
     /* setup gui components */
     setupFileMenu();
@@ -80,26 +49,11 @@ void MainWindow::init()
 
     setupToolBars();
 
-    /* main container */
-    setWindowTitle(programName);
-    QSplitter *vsplit = new QSplitter(this);
-    setCentralWidget(vsplit);
-
-    /* minimum window height */
-    this->setMinimumHeight(500);
-
-    /* project tools */
-    setupProjectTools(vsplit);
-
     /* start with an empty file if fresh install */
-    newFile();
+    connect(editorTabs,SIGNAL(fileUpdated(int)), this, SLOT(setProject()));
+    editorTabs->newFile();
 
-    /* status bar for progressbar */
-    QStatusBar *statusBar = new QStatusBar();
-
-    sizeLabel = new QLabel;
-    sizeLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    msgLabel  = new QLabel;
+    sizeLabel.setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
     progress = new QProgressBar();
     //progress->setMaximumSize(100,25);
@@ -109,15 +63,14 @@ void MainWindow::init()
     progress->setTextVisible(false);
     progress->setVisible(false);
 
-    statusBar->addPermanentWidget(msgLabel,70);
-    statusBar->addPermanentWidget(sizeLabel,15);
-    statusBar->addPermanentWidget(progress,15);
-
-    this->setStatusBar(statusBar);
+    statusBar();
+    statusBar()->addPermanentWidget(&msgLabel,70);
+    statusBar()->addPermanentWidget(&sizeLabel,15);
+    statusBar()->addPermanentWidget(progress,15);
 
     /* get last geometry. using x,y,w,h is unreliable.
     */
-    QVariant geov = settings->value(mainWindowGeometry);
+    QVariant geov = QSettings().value("windowSize");
     if(geov.canConvert(QVariant::ByteArray)) {
         // byte array convert is always possible
         QByteArray geo = geov.toByteArray();
@@ -138,16 +91,8 @@ void MainWindow::init()
      */
     getApplicationSettings(false);
 
-    initBoardTypes();
-
     /* setup the terminal dialog box */
     term = new Terminal(this);
-
-    QVariant gv = settings->value(termGeometryKey);
-    if(gv.canConvert(QVariant::ByteArray)) {
-        QByteArray geo = gv.toByteArray();
-        term->restoreGeometry(geo);
-    }
 
     /* setup the port listener */
     portListener = new PortListener(this, term->getEditor());
@@ -155,10 +100,6 @@ void MainWindow::init()
     connect(spinBuilder,SIGNAL(terminalReceived(QString)), portListener, SLOT(appendConsole(QString)));
 
     term->setPortListener(portListener);
-
-    //term->setWindowTitle(QString(ASideGuiKey)+" "+tr("Simple Terminal"));
-    // education request that the window title be SimpleIDE Terminal
-    term->setWindowTitle(QString(PropellerIdeGuiKey)+" "+tr("Terminal"));
 
     connect(term,SIGNAL(accepted()),this,SLOT(terminalClosed()));
     connect(term,SIGNAL(rejected()),this,SLOT(terminalClosed()));
@@ -175,167 +116,75 @@ void MainWindow::init()
 
     connect(this,SIGNAL(signalStatusDone(bool)),this,SLOT(setStatusDone(bool)));
 
-    // Show GUI now
-    QApplication::processEvents();
-    this->show();
-
     openLastFile();
+
+    this->installEventFilter(this);
 }
 
-int  MainWindow::isPackageSource(QString fileName)
-{
-    QString dir = QFileInfo(fileName).absolutePath();
-    QString file= dir+"/tmp_"+QString("%1").arg(QDateTime::currentDateTime().toTime_t());
 
-    bool fw = QFileInfo(fileName).isWritable();
-    bool pw = false;
-
-    QFile wf(file);
-    if(wf.open(QFile::WriteOnly)) {
-        wf.close();
-        pw = true;
-        wf.remove();
-    }
-    return fw && pw;
-}
-
-int  MainWindow::extractSource(QString &fileName)
-{
-    fileName = this->saveAsFile();
-
-    if(fileName.length() > 0) {
-        return isPackageSource(fileName);
-    }
-    return 0;
-}
-
-// call from main ?
 void MainWindow::openLastFile()
 {
     /* load the last file into the editor to make user happy */
     QString welcome = propDialog->getSpinLibraryString()+"Welcome.spin";
     QString fileName;
-    QVariant lastfilev = settings->value(lastFileNameKey, welcome);
+    QVariant lastfilev = QSettings().value("lastFile", welcome);
+
     if(!lastfilev.isNull()) {
         if(lastfilev.canConvert(QVariant::String)) {
             if(lastfilev.toString().length() > 0) {
                 fileName = lastfilev.toString();
             }
-            openFileName(fileName);
-            QApplication::processEvents();
-
-            if(fileName.compare(welcome) == 0) {
-                QMessageBox::information(this,tr("Welcome to PropellerIDE"),
-                        tr("The Welcome.spin file must be saved to a user folder where you can change it.")+" "+
-                        tr("The installed package location is not writable by most users.")+"\n\n"+
-                        tr("Please note that opening a library file from the installed package will also require saving to a user folder for compiling or modifications.")+" "+
-                        tr("Don't worry, you will be reminded if necessary.")+"\n\n"+
-                        tr("The Save As dialog will now open to let you choose a working folder."));
-                lastDirectory = QDir::homePath()+"/Documents";
-                if(!QFile::exists(lastDirectory)) {
-                    lastDirectory = QDir::homePath();
-                }
-                fileName = saveAsFile();
-            }
-        }
-    }
-
-    /* load the last directory to make user happy */
-    lastDirectory = filePathName(fileName);
-    QVariant lastdirv = settings->value(lastDirectoryKey, lastDirectory);
-    if(!lastdirv.isNull()) {
-        if(lastdirv.canConvert(QVariant::String)) {
-            if(lastdirv.toString().length() > 0) {
-                lastDirectory = lastdirv.toString();
-            }
+            //editorTabs->openFile(":/src/Welcome.spin");
         }
     }
 }
 
-/*
- * get the application settings from the registry for compile/startup
- */
+void MainWindow::openFiles(const QStringList & files)
+{
+    for (int i = 0; i < files.size(); i++)
+    {
+        qDebug() << files.at(i);
+        editorTabs->openFile(files.at(i));
+    }
+}
+
 void MainWindow::getApplicationSettings(bool complain)
 {
-    QDir dir(this->lastDirectory);
+    QDir dir;
     QFile file;
     QVariant compv;
 
-    compv = settings->value(spinCompilerKey);
+    QSettings settings;
+    settings.beginGroup("Paths");
+
+    compv = settings.value("Compiler");
     if(compv.canConvert(QVariant::String)) {
         spinCompiler = compv.toString();
         spinCompiler = dir.fromNativeSeparators(spinCompiler);
     }
     if(complain && !file.exists(spinCompiler)) {
-        propDialog->showPreferences(this->lastDirectory);
+        propDialog->showPreferences();
     }
-    compv = settings->value(spinLoaderKey);
+    compv = settings.value("Loader");
     if(compv.canConvert(QVariant::String)) {
         spinLoader = compv.toString();
         spinLoader = dir.fromNativeSeparators(spinLoader);
     }
 
     /* get the compiler path */
-    spinCompilerPath = filePathName(spinCompiler);
+    spinCompilerPath = QFileInfo(spinCompiler).path();
     spinCompilerPath = dir.fromNativeSeparators(spinCompilerPath);
 
     /* get the include path and config file set by user */
     QVariant incv;
 
-    incv = settings->value(spinIncludesKey);
+    incv = settings.value("Library");
     if(incv.canConvert(QVariant::String)) {
         spinIncludes = incv.toString();
         spinIncludes = dir.fromNativeSeparators(spinIncludes);
     }
-}
 
-/**
- * @brief MainWindow::exitSave
- * @return false to cancel exit
- */
-bool MainWindow::exitSave()
-{
-    bool saveAll = false;
-    QMessageBox mbox(QMessageBox::Question, "Save File?", "",
-            QMessageBox::Discard | QMessageBox::Save | QMessageBox::SaveAll | QMessageBox::Cancel, this);
-
-    for(int tab = editorTabs->count()-1; tab > -1; tab--)
-    {
-        QString tabName = editorTabs->tabText(tab);
-        if(tabName.at(tabName.length()-1) == '*')
-        {
-            mbox.setInformativeText(tr("Save File: ") + tabName.mid(0,tabName.indexOf(" *")) + tr(" ?"));
-            if(saveAll)
-            {
-                saveFileByTabIndex(tab);
-            }
-            else
-            {
-                int ret = mbox.exec();
-                switch (ret) {
-                    case QMessageBox::Cancel:
-                        return false;
-                        break;
-                    case QMessageBox::Discard:
-                        // Don't Save was clicked
-                        return true;
-                        break;
-                    case QMessageBox::Save:
-                        // Save was clicked
-                        saveFileByTabIndex(tab);
-                        break;
-                    case QMessageBox::SaveAll:
-                        // save all was clicked
-                        saveAll = true;
-                        break;
-                    default:
-                        // should never be reached
-                        break;
-                }
-            }
-        }
-    }
-    return true;
+    settings.endGroup();
 }
 
 void MainWindow::quitProgram()
@@ -346,7 +195,10 @@ void MainWindow::quitProgram()
 
 void MainWindow::closeEvent(QCloseEvent *e)
 {
-    if(!exitSave()) {
+    editorTabs->closeAll();
+
+    if (editorTabs->count())
+    {
         if(e) e->ignore();
         return;
     }
@@ -356,265 +208,37 @@ void MainWindow::closeEvent(QCloseEvent *e)
 
     QString filestr = editorTabs->tabToolTip(editorTabs->currentIndex());
 
-    if(settings->value(useKeys).toInt())
+    if(QSettings().value("lastUse").toInt())
     {
-        settings->setValue(lastFileNameKey,filestr);
-        settings->setValue(lastDirectoryKey, lastDirectory);
-
-        // save user's font info
-        qDebug() << "Saving Editor Font" << editorFont.family();
-        QString fontstr = editorFont.family();
-        settings->setValue(editorFontKey,fontstr);
-        int fontsize = editorFont.pointSize();
-        settings->setValue(fontSizeKey,fontsize);
-
-        // save user's width/height
-        QByteArray geo = this->saveGeometry();
-        settings->setValue(mainWindowGeometry,geo);
+        QSettings().setValue("lastFile",filestr);
+        QSettings().setValue("windowSize",saveGeometry());
     }
     if(e) e->accept();
     qApp->exit(0);
 }
 
-void MainWindow::newFileAction()
+void MainWindow::newProjectTrees()
 {
-    newFile();
-    int tab = editorTabs->count()-1;
-    setEditorCodeType(getEditor(tab), QString("UTF-16"));
-}
-
-void MainWindow::newFile()
-{
-    changeTabDisable = true;
-    fileChangeDisable = true;
-    editorTabs->addTab(createEditor(),(const QString&)untitledstr);
-    int tab = editorTabs->count()-1;
-    editorTabs->setCurrentIndex(tab);
-    editorTabs->setTabToolTip(tab, QString(""));
     delete projectModel;
     projectModel = new TreeModel("", this);
-    if(leftSplit->isVisible()) {
+    if(leftSplit->isVisible())
+    {
         delete referenceModel;
         referenceModel = new TreeModel("", this);
     }
-    spinParser.clearDB();
-    fileChangeDisable = false;
-    changeTabDisable = false;
 }
 
-void MainWindow::openFile(const QString &path)
-{
-    QString fileName = path;
 
-    if (fileName.isNull())
-        fileName = QFileDialog::getOpenFileName(this,
-                tr("Open File"), lastDirectory, "Spin Files (*.spin);;All Files (*)");
-    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-    openFileName(fileName);
-    lastDirectory = filePathName(fileName);
-    QApplication::processEvents();
-    QApplication::restoreOverrideCursor();
-}
-
-bool MainWindow::isFileUTF16(QFile *file)
-{
-    char str[2];
-    file->read(str,2);
-    file->seek(0);
-    if(str[0] == -1 && str[1] == -2) {
-        return true;
-    }
-    return false;
-}
-
-void MainWindow::openFileName(QString fileName)
-{
-    QString data;
-    if (!fileName.isEmpty()) {
-        QFile file(fileName);
-        if (file.open(QFile::ReadOnly))
-        {
-            QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-            QTextStream in(&file);
-            if(this->isFileUTF16(&file)) {
-                in.setCodec("UTF-16");
-            }
-            else {
-                in.setCodec("UTF-8");
-            }
-            data = in.readAll();
-            file.close();
-
-            QApplication::processEvents();
-            QApplication::restoreOverrideCursor();
-
-            QString sname = this->shortFileName(fileName);
-            if(editorTabs->count()>0) {
-                for(int n = editorTabs->count()-1; n > -1; n--) {
-                    if(editorTabs->tabText(n) == sname) {
-                        setEditor(n, sname, fileName, data);
-                        setEditorCodeType(getEditor(n), QString(in.codec()->name()));
-                        setProject();
-                        return;
-                    }
-                }
-            }
-            if(editorTabs->tabText(0) == untitledstr) {
-                setEditor(0, sname, fileName, data);
-                setEditorCodeType(getEditor(0), QString(in.codec()->name()));
-                setProject();
-                return;
-            }
-            newFile();
-            int tab = editorTabs->count()-1;
-            setEditor(tab, sname, fileName, data);
-            setEditorCodeType(getEditor(tab), QString(in.codec()->name()));
-            setProject();
-        }
-    }
-}
-
-bool MainWindow::saveAsCodec(QString fileName, Editor *ed)
-{
-    QFile file(fileName);
-    if (file.open(QFile::WriteOnly)) {
-        QTextStream os(&file);
-        QString data = ed->toPlainText();
-
-        setCurrentFile(fileName);
-
-        if(ed->getCodeType() == Editor::CodeTypeUTF16) {
-            os.setGenerateByteOrderMark(true);
-            os.setCodec("UTF-16");
-            os << data;
-        }
-        else {
-            os.setCodec("UTF-8");
-            os << data;
-        }
-        file.close();
-        QString tab = editorTabs->tabText(editorTabs->currentIndex());
-        if(tab.endsWith('*')) {
-            tab = tab.mid(0, tab.length()-1);
-            tab = tab.trimmed();
-            editorTabs->setTabText(editorTabs->currentIndex(),tab);
-        }
-        return true;
-    }
-    else {
-        QMessageBox::information(this, tr("Can't Save File"), tr("Can't save file ")+fileName, QMessageBox::Ok);
-    }
-    return false;
-}
-
-void MainWindow::saveFile()
-{
-    try {
-        int n = this->editorTabs->currentIndex();
-        QString fileName = editorTabs->tabToolTip(n);
-        if (fileName.isEmpty()) {
-            saveAsFile(fileName);
-            if (fileName.isEmpty())
-                return;
-        }
-        Editor *ed = getEditor(n);
-        this->editorTabs->setTabText(n,shortFileName(fileName));
-
-        if (!fileName.isEmpty()) {
-            if(saveAsCodec(fileName, ed))
-                setProject();
-        }
-    } catch(...) {
-    }
-}
-
-void MainWindow::saveFileByTabIndex(int tab)
-{
-    try {
-        QString fileName = editorTabs->tabToolTip(tab);
-
-        this->editorTabs->setTabText(tab,shortFileName(fileName));
-        if (!fileName.isEmpty()) {
-            saveAsCodec(fileName, getEditor(tab));
-        }
-    } catch(...) {
-    }
-}
-
-QString MainWindow::saveAsFile(const QString &path)
-{
-    QString fileName = path;
-    try {
-        int n = this->editorTabs->currentIndex();
-
-        if (fileName.isEmpty())
-            fileName = QFileDialog::getSaveFileName(this,
-                    tr("Save As File"), lastDirectory+"/"+this->editorTabs->tabText(n), "Spin Files (*.spin)");
-
-        if (fileName.isEmpty()) {
-            return QString();
-        }
-        lastDirectory = filePathName(fileName);
-
-        this->editorTabs->setTabText(n,shortFileName(fileName));
-        editorTabs->setTabToolTip(n,fileName);
-
-        if (!fileName.isEmpty()) {
-            if(saveAsCodec(fileName, getEditor(n)))
-                setProject();
-        }
-    } catch(...) {
-        return QString();
-    }
-    return fileName;
-}
-
-void MainWindow::fileChanged()
-{
-    if(fileChangeDisable)
-        return;
-    int index = editorTabs->currentIndex();
-    QString name = editorTabs->tabText(index);
-    QString fileName = editorTabs->tabToolTip(index);
-    if(!QFile::exists(fileName))
-        return;
-    QFile file(fileName);
-    if(file.open(QFile::ReadOnly))
-    {
-        QString curt = getEditor(index)->toPlainText();
-        QString text;
-        QTextStream in(&file);
-        if(this->isFileUTF16(&file)) {
-            in.setCodec("UTF-16");
-        }
-        else {
-            in.setCodec("UTF-8");
-        }
-        text = in.readAll();
-        file.close();
-
-        if(text == curt) {
-            if(name.at(name.length()-1) == '*')
-                editorTabs->setTabText(index, this->shortFileName(fileName));
-            return;
-        }
-    }
-    if(!name.endsWith('*')) {
-        name += tr(" *");
-        editorTabs->setTabText(index, name);
-    }
-}
 
 void MainWindow::setCurrentFile(const QString &fileName)
 {
-    QStringList files = settings->value(recentFilesKey).toStringList();
+    QStringList files = QSettings().value(recentFilesKey).toStringList();
     files.removeAll(fileName);
     files.prepend(fileName);
     while (files.size() > MaxRecentFiles)
         files.removeLast();
 
-    settings->setValue(recentFilesKey, files);
+    QSettings().setValue(recentFilesKey, files);
 
     foreach (QWidget *widget, QApplication::topLevelWidgets()) {
         MainWindow *mainWin = qobject_cast<MainWindow *>(widget);
@@ -625,7 +249,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
 
 void MainWindow::updateRecentFileActions()
 {
-    QStringList files = settings->value(recentFilesKey).toStringList();
+    QStringList files = QSettings().value(recentFilesKey).toStringList();
 
     int numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
 
@@ -633,7 +257,6 @@ void MainWindow::updateRecentFileActions()
         QString estr = files.at(i);
         if(estr.length() == 0)
             continue;
-        //QString filename = QFileInfo(projects[i]).fileName();
         QString text = tr("&%1 %2").arg(i + 1).arg(estr);
         recentFileActs[i]->setText(text);
         recentFileActs[i]->setData(estr);
@@ -649,7 +272,7 @@ void MainWindow::openRecentFile()
 {
     QAction *action = qobject_cast<QAction *>(sender());
     if (action)
-        openFile(action->data().toString());
+        editorTabs->openFile(action->data().toString());
 }
 
 void MainWindow::printFile()
@@ -659,6 +282,7 @@ void MainWindow::printFile()
 void MainWindow::setProject()
 {
     int index = editorTabs->currentIndex();
+
     if(index < 0)
         return;
 
@@ -667,17 +291,22 @@ void MainWindow::setProject()
     QString fileName = editorTabs->tabToolTip(index);
     setCurrentFile(fileName);
 
-    setWindowTitle(programName +" "+fileName);
-    sizeLabel->setText("");
-    msgLabel->setText("");
+    if (editorTabs->count() > 0)
+        setWindowTitle(editorTabs->tabText(index) + " - " +
+                       QCoreApplication::applicationName());
+    else
+        setWindowTitle(QCoreApplication::applicationName());
 
-    QString text = getEditor(index)->toPlainText();
+    sizeLabel.setText("");
+    msgLabel.setText("");
+
+    QString text = editorTabs->getEditor(index)->toPlainText();
     updateProjectTree(fileName);
+
     if(leftSplit->isVisible()) {
         updateReferenceTree(fileName,text);
     }
 
-    QApplication::processEvents();
     QApplication::restoreOverrideCursor();
 }
 
@@ -696,7 +325,7 @@ void MainWindow::showBrowser()
         if(!projectModel || !referenceModel) {
             QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
             int index = editorTabs->currentIndex();
-            text = getEditor(index)->toPlainText();
+            text = editorTabs->getEditor(index)->toPlainText();
             fileName = editorTabs->tabToolTip(index);
         }
         if(!referenceModel)
@@ -705,83 +334,6 @@ void MainWindow::showBrowser()
         QApplication::processEvents();
         QApplication::restoreOverrideCursor();
     }
-}
-
-void MainWindow::fontDialog()
-{
-    bool ok = true;
-
-    QFontDialog fd(this);
-    QFont font;
-    Editor *editor = getEditor(editorTabs->currentIndex());
-    if(editor) {
-        QFont edfont = editor->font();
-        qDebug() << "Editor Font" << editor->font().family();
-        font = fd.getFont(&ok, edfont, this);
-    }
-    else {
-        font = fd.getFont(&ok, editorFont, this);
-    }
-    qDebug() << "New Editor Font" << font.family();
-
-    if(ok) {
-        for(int n = editorTabs->count()-1; n >= 0; n--) {
-            Editor *ed = getEditor(n);
-            ed->setFont(font);
-            QString fs = QString("font: %1pt \"%2\";").arg(font.pointSize()).arg(font.family());
-            ed->setStyleSheet(fs);
-        }
-        editorFont = font;
-        qDebug() << "Ok, Editor Font" << editorFont.family();
-    }
-}
-
-void MainWindow::adjustFontSize(float ratio)
-{
-    Editor *editor = getEditor(editorTabs->currentIndex());
-    if(editor) {
-        QFont font = editor->font();
-        int size = font.pointSize();
-
-        QString fname = font.family();
-        size = (int) ((float) size*ratio);
-
-        if ((ratio < 1.0 && size > 3) ||
-            (ratio > 1.0 && size < 90))
-            font.setPointSize(size);
-
-        for(int n = editorTabs->count()-1; n >= 0; n--) {
-            Editor *ed = getEditor(n);
-            ed->setFont(font);
-            QString fs = QString("font: %1pt \"%2\";").arg(font.pointSize()).arg(font.family());
-            ed->setStyleSheet(fs);
-
-        }
-        editorFont = font;
-        QApplication::processEvents();
-    }
-}
-
-void MainWindow::fontBigger()
-{
-    adjustFontSize(1.25);
-}
-
-void MainWindow::fontSmaller()
-{
-    adjustFontSize(0.8);
-}
-
-void MainWindow::preferences()
-{
-    propDialog->showPreferences(this->lastDirectory);
-}
-
-void MainWindow::preferencesAccepted()
-{
-    /* set preferences */
-    getApplicationSettings(false);
-    initBoardTypes();
 }
 
 void MainWindow::setCurrentPort(int index)
@@ -806,33 +358,27 @@ void MainWindow::checkAndSaveFiles()
     if(projectModel == NULL)
         return;
     QString title = projectModel->getTreeName();
-    QString modTitle = title + " *";
-    for(int tab = editorTabs->count()-1; tab > -1; tab--)
+
+    for (int i = 0; i < editorTabs->count(); i++)
     {
-        QString tabName = editorTabs->tabText(tab);
-        if(tabName == modTitle)
+        qDebug() << title;
+        if (editorTabs->getEditor(i)->contentChanged())
         {
-            saveFileByTabIndex(tab);
-            editorTabs->setTabText(tab,title);
+            editorTabs->save(i);
         }
     }
 
     int len = projectModel->rowCount();
-    for(int n = 0; n < len; n++)
+    for (int n = 0; n < len; n++)
     {
         QModelIndex root = projectModel->index(n,0);
-        QVariant vs = projectModel->data(root, Qt::DisplayRole);
-        if(!vs.canConvert(QVariant::String))
-            continue;
-        QString name = vs.toString();
-        QString modName = name + " *";
-        for(int tab = editorTabs->count()-1; tab > -1; tab--)
+        QString name = projectModel->data(root, Qt::DisplayRole).toString();
+        qDebug() <<  name;
+        for(int i = 0; i < editorTabs->count(); i++)
         {
-            QString tabName = editorTabs->tabText(tab);
-            if(tabName == modName)
+            if (editorTabs->getEditor(i)->contentChanged())
             {
-                saveFileByTabIndex(tab);
-                editorTabs->setTabText(tab,name);
+                editorTabs->save(i);
             }
         }
     }
@@ -846,11 +392,11 @@ void MainWindow::highlightFileLine(QString file, int line)
     if(QFile::exists(file)) {
         name = file;
     }
-    else if(QFile::exists(filePathName(projectFile)+"/"+file)) {
-        name = filePathName(projectFile)+"/"+file;
+    else if(QFile::exists(QDir(QFileInfo(projectFile).path()).filePath(file))) {
+        name = QDir(QFileInfo(projectFile).path()).filePath(file);
     }
-    else if(QFile::exists(spinIncludes+"/"+file)) {
-        name = spinIncludes+"/"+file;
+    else if(QFile::exists(QDir(spinIncludes).filePath(file))) {
+        name = QDir(spinIncludes).filePath(file);
     }
     else {
         return;
@@ -862,14 +408,14 @@ void MainWindow::highlightFileLine(QString file, int line)
     for(int n = 0; n < len; n++) {
         QString s = editorTabs->tabToolTip(n);
         if(s.length() && s.compare(name) == 0) {
-            editor = getEditor(n);
+            editor = editorTabs->getEditor(n);
             editorTabs->setCurrentIndex(n);
             break;
         }
     }
     if(editor == NULL) {
-        openFileName(name);
-        editor = getEditor(editorTabs->currentIndex());
+        editorTabs->openFile(name);
+        editor = editorTabs->getEditor(editorTabs->currentIndex());
     }
     if(editor != NULL)
     {
@@ -881,17 +427,6 @@ void MainWindow::highlightFileLine(QString file, int line)
     }
     QApplication::processEvents();
     QApplication::restoreOverrideCursor();
-}
-
-void MainWindow::buildSourceWriteError(QString fileName)
-{
-    QMessageBox::critical(this, tr("Build Problem"),
-            "\n"+tr("Problem building:")+" "+this->shortFileName(fileName)+"\n\n"+
-            tr("Can't write the file or folder.")+" "+
-            tr("This can happen when compiling a packaged file.")+"\n\n"+
-            tr("The code must be saved to a folder with write permissions.")+" "+
-            tr("A good location would be the user's Documents folder or a folder with other sources.")+"\n\n"+
-            tr("Please save to a different file and/or folder when prompted."));
 }
 
 
@@ -906,7 +441,6 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
 
     // if find in progress, ignore request
     if(!statusDone) {
-        QMessageBox::information(this,tr("Patience Please"),tr("Can't handle more than one request at this time. Try again."));
         return -1;
     }
 
@@ -935,45 +469,29 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
         goto endRunCompiler;
     }
 
-    //setCurrentPort(cbPort->currentIndex());
-
     index = editorTabs->currentIndex();
     fileName = editorTabs->tabToolTip(index);
-    text = getEditor(index)->toPlainText();
+    text = editorTabs->getEditor(index)->toPlainText();
 
-    if(!isPackageSource(fileName)) {
-        buildSourceWriteError(fileName);
-        if(!extractSource(fileName)) {
-            buildSourceWriteError(fileName);
-            goto endRunCompiler;
-        }
-    }
-
-    // Yes, we should do this for compiles.
     updateProjectTree(fileName);
-
-    // No, we don't really need to do this for compiles.
     // updateReferenceTree(fileName,text);
 
-    sizeLabel->setText("");
-    msgLabel->setText("");
+    sizeLabel.setText("");
+    msgLabel.setText("");
 
     progress->setValue(0);
     progress->setVisible(true);
 
-    /* Ok zombieartists, you've had your fun. Now you have to answer. Good luck.
-    */
     getApplicationSettings(true);
 
     checkAndSaveFiles();
 
     if(fileName.contains(".spin")) {
-        statusDialog->init("Compiling Program", this->shortFileName(this->projectFile));
+        statusDialog->init("Compiling Program", QFileInfo(this->projectFile).fileName());
         spinBuilder->setParameters(spinCompiler, spinIncludes, spinCompilerPath, projectFile, compileResult);
-        spinBuilder->setObjects(msgLabel, sizeLabel, progress, cbPort);
+        spinBuilder->setObjects(&msgLabel, &sizeLabel, progress, cbPort);
         spinBuilder->setLoader(spinLoader);
 
-        // send stop first in case of error. later let dialog kill it on error.
         statusDialog->stop();
 
         copts = "-b";
@@ -1000,7 +518,6 @@ int  MainWindow::loadProgram(int type, QString file)
 
     // if find in progress, ignore request
     if(!statusDone) {
-        QMessageBox::information(this,tr("Patience Please"),tr("Can't handle more than one request at this time. Try again."));
         return -1;
     }
     emit signalStatusDone(false);
@@ -1025,9 +542,6 @@ int  MainWindow::loadProgram(int type, QString file)
     }
 
     portListener->setLoadEnable(true);
-#ifdef Q_OS_MAC
-    copts = "-q ";
-#endif
     switch (type) {
         case MainWindow::LoadRunHubRam:
             copts += "-r -p"+portListener->getPortName();
@@ -1175,19 +689,17 @@ void MainWindow::terminalClosed()
 
 void MainWindow::findMultilineComment(QPoint point)
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     QTextCursor cur = editor->cursorForPosition(point);
     findMultilineComment(cur);
 }
 
 void MainWindow::findMultilineComment(QTextCursor cur)
 {
-    /*  RegExpression for  multi-line Spin comment  */
     QRegExp commentStartExpression = QRegExp("{*",Qt::CaseInsensitive,QRegExp::Wildcard);
     QRegExp commentEndExpression = QRegExp("}*",Qt::CaseInsensitive,QRegExp::Wildcard);
-    /* could try /(\{\{[^\}]*\}\})|(\{[^\}]*\})/g */
 
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor)
     {
         QString text = cur.selectedText();
@@ -1197,42 +709,38 @@ void MainWindow::findMultilineComment(QTextCursor cur)
             text = cur.selectedText();
         }
 
-        //qDebug() << "Selected text: " << text;
-        int selectedWordLength = text.length();                 /* repair final cursor selection offset */
+        int selectedWordLength = text.length();
 
-        /* if the user selected the beginning of a multi-line comment, start there */
         if(text.length() > 0 && (commentStartExpression.indexIn(text, 0)!= -1 ))
         {
-            int startPos = cur.position();                      /* save start-of-comment position */
+            int startPos = cur.position();
             cur.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-            editor->setTextCursor(cur);                         /* expand cursor to doc-end */
-            text = cur.selectedText();                          /* the 'text' we'll search through */
+            editor->setTextCursor(cur);
+            text = cur.selectedText();
 
             int endIndex;
             if ((endIndex = commentEndExpression.indexIn(text, 0)) != -1 )
             {
-                cur.setPosition(startPos - selectedWordLength); /* regexp selects after, so subtract orig selection*/
+                cur.setPosition(startPos - selectedWordLength);
                 cur.setPosition(endIndex + startPos, QTextCursor::KeepAnchor);
                 editor->setTextCursor(cur);
-                editor->setFocus();                             /* highlight the selection */
+                editor->setFocus();
             }
         }
-        /* if the user selected the end of a multi-line comment, start there */
         else if(text.length() > 0 && (commentEndExpression.indexIn(text, 0)!= -1 ))
         {
-            int endPos = cur.position();                        /* save end-of-comment position */
+            int endPos = cur.position();
             cur.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
-            editor->setTextCursor(cur);                         /* expand cursor from current position to start-of-doc */
-            text = cur.selectedText();                          /* the 'text' we'll search through */
+            editor->setTextCursor(cur);
+            text = cur.selectedText();
 
             int startIndex;
-            /* from start of doc find the last occurence of "{{" before the current cursor point */
             if ((startIndex = commentStartExpression.lastIndexIn(text, -1)) != -1)
             {
                 cur.setPosition(endPos);
                 cur.setPosition(startIndex - selectedWordLength + 1, QTextCursor::KeepAnchor);
                 editor->setTextCursor(cur);
-                editor->setFocus();                             /* highlight the selection */
+                editor->setFocus();
             }
         }
     }
@@ -1243,6 +751,7 @@ int MainWindow::isFileOpen(QString fileName)
 {
     QString tabName;
     fileName = fileName.trimmed();
+
     for(int n = editorTabs->count()-1; n > -1; n--) {
         tabName = editorTabs->tabToolTip(n);
         tabName = tabName.trimmed();
@@ -1250,6 +759,7 @@ int MainWindow::isFileOpen(QString fileName)
             return n;
         }
     }
+
     return -1;
 }
 
@@ -1259,20 +769,32 @@ void MainWindow::openTreeFile(QString fileName)
     fileName = fileName.trimmed();
     qDebug() << "openTreeFile opening " << fileName;
     QString userFile = editorTabs->tabToolTip(editorTabs->currentIndex());
-    QString userPath = filePathName(userFile);
+    QString userPath = QFileInfo(userFile).path();
     QFile file;
     QString fileToOpen;
-    if(file.exists(userPath+fileName)) {
-        fileToOpen = userPath+fileName;
+
+    if (file.exists(QDir(userPath).filePath(fileName)))
+    {
+        fileToOpen = QDir(userPath).filePath(fileName);
+        qDebug() << "File in " << userPath;
     }
-    else if(file.exists(spinIncludes+fileName)) {
-        fileToOpen = spinIncludes+fileName;
+    else if (file.exists(QDir(spinIncludes).filePath(fileName)))
+    {
+        fileToOpen = QDir(spinIncludes).filePath(fileName);
+        qDebug() << "File in " << spinIncludes;
     }
+    else
+    {
+        qDebug() << "File not found!";
+    }
+
     int index = isFileOpen(fileToOpen);
-    if(index < 0)
-        openFileName(fileToOpen);
+
+    if (index < 0)
+        editorTabs->openFile(fileToOpen);
     else
         editorTabs->setCurrentIndex(index);
+
     QApplication::restoreOverrideCursor();
 }
 
@@ -1290,12 +812,6 @@ void MainWindow::projectTreeClicked(QModelIndex index)
     }
 }
 
-/**
- * @brief MainWindow::referenceTreeClicked
- * This function should only open a file and line number.
- * All the hard work should already be done.
- * @param index
- */
 void MainWindow::referenceTreeClicked(QModelIndex index)
 {
     QString method = NULL;
@@ -1331,36 +847,6 @@ void MainWindow::referenceTreeClicked(QModelIndex index)
     }
 }
 
-void MainWindow::closeTab(int index)
-{
-    fileChangeDisable = true;
-    getEditor(index)->setPlainText("");
-    if(editorTabs->count() == 1)
-        newFile();
-    editorTabs->removeTab(index);
-    fileChangeDisable = false;
-}
-
-void MainWindow::changeTab(int index)
-{
-    /* index is a QAction menu state. we don't really care about it
-    */
-    if(index < 0) return; // compiler happy now
-
-    if(!changeTabDisable)
-        setProject();
-}
-
-void MainWindow::addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile)
-{
-    const QSize buttonSize(24, 24);
-    btn->setIcon(QIcon(QPixmap(imgfile.toLatin1())));
-    btn->setMinimumSize(buttonSize);
-    btn->setMaximumSize(buttonSize);
-    btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    bar->addWidget(btn);
-}
-
 void MainWindow::zipFiles()
 {
     int n = this->editorTabs->currentIndex();
@@ -1369,7 +855,8 @@ void MainWindow::zipFiles()
         return;
     }
     QString spinLibPath     = propDialog->getSpinLibraryString();
-    QStringList fileTree    = spinParser.spinFileTree(fileName, spinLibPath);
+    QStringList fileTree    = editorTabs->getEditor(editorTabs->currentIndex()
+            )->spinParser.spinFileTree(fileName, spinLibPath);
     if(fileTree.count() > 0) {
         zipper.makeZip(fileName, fileTree, spinLibPath);
     }
@@ -1378,8 +865,7 @@ void MainWindow::zipFiles()
 void MainWindow::updateProjectTree(QString fileName)
 {
     projectFile = fileName;
-    QString s = this->shortFileName(fileName);
-    basicPath = filePathName(fileName);
+    QString s = QFileInfo(fileName).fileName();
 
     if(projectModel != NULL) {
         delete projectModel;
@@ -1400,7 +886,7 @@ void MainWindow::updateProjectTree(QString fileName)
 void MainWindow::updateSpinProjectTree(QString fileName)
 {
     /* for spin we always parse the program and stuff the file list */
-    QStringList flist = spinParser.spinFileTree(fileName, propDialog->getSpinLibraryString());
+    QStringList flist = editorTabs->getEditor(editorTabs->currentIndex())->spinParser.spinFileTree(fileName, propDialog->getSpinLibraryString());
     for(int n = 0; n < flist.count(); n ++) {
         QString s = flist[n];
         //qDebug() << s;
@@ -1410,8 +896,7 @@ void MainWindow::updateSpinProjectTree(QString fileName)
 
 void MainWindow::updateReferenceTree(QString fileName, QString text)
 {
-    QString s = this->shortFileName(fileName);
-    basicPath = filePathName(fileName);
+    QString s = QFileInfo(fileName).fileName();
 
     // our startup strategy should change so that we have a tree and it starts collapsed.
 
@@ -1435,48 +920,62 @@ void MainWindow::updateReferenceTree(QString fileName, QString text)
 
 void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level)
 {
-    QString path = filePathName(fileName);
+    QString path = QFileInfo(fileName).path();
 
-    QStringList mlist = spinParser.spinMethods(fileName, objname);
+    QStringList mlist = editorTabs->getEditor(
+            editorTabs->currentIndex())->spinParser.spinMethods(fileName,  objname);
 
     // move objects to end of the list
-    for(int n = mlist.count()-1; n > -1; n--) {
-        if(mlist[n].at(0) == 'o') {
+    for (int n = mlist.count()-1; n > -1; n--)
+    {
+        if(mlist[n].at(0) == 'o')
+        {
             mlist.insert(mlist.count(),mlist[n]);
             mlist.removeAt(n);
         }
     }
+
     // display all
-    for(int n = 0; n < mlist.count(); n ++) {
+    for (int n = 0; n < mlist.count(); n ++)
+    {
         QString s = mlist[n];
 
-        if(s.at(0) == 'o') {
+        if (s.at(0) == 'o')
+        {
 
             /* get the file name */
             QString file = s.mid(s.indexOf(":")+1);
             file = file.mid(0, file.indexOf("\t"));
             file = file.trimmed();
-            if(file.startsWith("\""))
+
+            if (file.startsWith("\""))
                 file = file.mid(1);
-            if(file.endsWith("\""))
+
+            if (file.endsWith("\""))
                 file = file.mid(0,file.length()-1);
+
             file = file.trimmed();
-            if(file.endsWith(".spin",Qt::CaseInsensitive) == false)
+
+            if (!file.endsWith(".spin",Qt::CaseInsensitive))
                 file += ".spin";
 
             /* prepend path info to new file if found*/
-            if(QFile::exists(file)) {
+            if (QFile::exists(file))
+            {
                 referenceModel->addRootItem(file, file);
             }
-            else if(QFile::exists(path+file)) {
-                referenceModel->addRootItem(file, path+file);
-                file = path+file;
+            else if(QFile::exists(QDir(path).filePath(file)))
+            {
+                referenceModel->addRootItem(file, QDir(path).filePath(file));
+                file = QDir(path).filePath(file);
             }
-            else if(QFile::exists(includes+file)) {
-                referenceModel->addRootItem(file, includes+file);
-                file = includes+file;
+            else if(QFile::exists(QDir(includes).filePath(file)))
+            {
+                referenceModel->addRootItem(file, QDir(includes).filePath(file));
+                file = QDir(includes).filePath(file);
             }
-            else {
+            else
+            {
                 qDebug() << "updateSpinReferenceTree can't find file" << file;
             }
 
@@ -1487,7 +986,8 @@ void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QSt
 
             updateSpinReferenceTree(file, includes, obj, level+1);
         }
-        else {
+        else
+        {
             int line = 0;
             QString sl = s.mid(s.lastIndexOf("\t")+1);
             line = sl.toInt();
@@ -1509,48 +1009,28 @@ void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QSt
     }
 }
 
-void MainWindow::setEditor(int num, QString shortName, QString fileName, QString text)
-{
-    fileChangeDisable = true;
-    Editor *editor = getEditor(num);
-    editor->setPlainText(text);
-    editorTabs->setTabText(num,shortName);
-    editorTabs->setTabToolTip(num,fileName);
-    editorTabs->setCurrentIndex(num);
-    QApplication::processEvents();
-    fileChangeDisable = false;
-}
-
-Editor *MainWindow::getEditor(int num)
-{
-    return (Editor *)editorTabs->widget(num);
-}
-
-void MainWindow::setEditorCodeType(Editor *ed, QString name)
-{
-    if(name.contains("UTF-16")) {
-        ed->setCodeType(Editor::CodeTypeUTF16);
-    }
-    else {
-        ed->setCodeType(Editor::CodeTypeUTF8);
-    }
-}
 
 void MainWindow::checkConfigSerialPort()
 {
-    if(!cbPort->count()) {
+    if(!cbPort->count())
+    {
         enumeratePorts();
-    } else {
+    }
+    else
+    {
         QString name = cbPort->currentText();
         QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
         int index = -1;
-        for (int i = 0; i < ports.size(); i++) {
-            if(ports.at(i).portName.contains(name, Qt::CaseInsensitive)) {
+        for (int i = 0; i < ports.size(); i++)
+        {
+            if (ports.at(i).portName.contains(name, Qt::CaseInsensitive))
+            {
                 index = i;
                 break;
             }
         }
-        if(index < 0) {
+        if(index < 0)
+        {
             enumeratePorts();
         }
     }
@@ -1564,16 +1044,21 @@ void MainWindow::enumeratePortsEvent()
     // need to check if the port we are using disappeared.
     bool notFound = true;
     QString plPortName = this->term->getPortName();
-    for(int n = this->cbPort->count()-1; n > -1; n--) {
+    for(int n = this->cbPort->count()-1; n > -1; n--)
+    {
         QString name = cbPort->itemText(n);
-        if(!name.compare(plPortName)) {
+        if(!name.compare(plPortName))
+        {
             notFound = false;
         }
     }
-    if(notFound) {
+
+    if (notFound)
+    {
         btnConnected->setChecked(false);
     }
-    else {
+    else
+    {
         btnConnected->setChecked(true);
     }
 
@@ -1658,59 +1143,6 @@ void MainWindow::connectButton(bool show)
     }
 }
 
-QString MainWindow::shortFileName(QString fileName)
-{
-    QString rets;
-    if(fileName.indexOf("/") > -1)
-        rets = fileName.mid(fileName.lastIndexOf("/")+1);
-    else
-        rets = fileName;
-    return rets;
-}
-
-QString MainWindow::filePathName(QString fileName)
-{
-    QString rets;
-    if(fileName.lastIndexOf("/") > -1)
-        rets = fileName.mid(0,fileName.lastIndexOf("/")+1);
-    else
-        rets = fileName;
-    return rets;
-}
-
-void MainWindow::initBoardTypes()
-{
-}
-
-Editor *MainWindow::createEditor()
-{
-    Editor *editor = new Editor(this);
-    editor->initSpin(&spinParser);
-
-    editor->setFont(editorFont); 
-//    QString fs = QString("font: %1pt \"%2\";").arg(editorFont.pointSize()).arg(editorFont.family());
-//    editor->setStyleSheet(fs);
-
-    //editor->setTabStopWidth(font.pointSize()*3);
-    QFontMetrics fm(editorFont);
-    int width = fm.width(QLatin1Char('9'))*propDialog->getTabSpaces();
-    editor->setTabStopWidth(width);
-    connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
-
-    return editor;
-}
-
-void MainWindow::tabSpacesChanged()
-{
-    for(int n = 0; n < editorTabs->count(); n++) {
-        Editor *ed = getEditor(n);
-        QFontMetrics fm(editorFont);
-        int spaces = propDialog->getTabSpaces();
-        int width = fm.width(QLatin1Char('9'));
-        ed->setTabStopWidth(spaces*width);
-    }
-}
-
 void MainWindow::setupProjectTools(QSplitter *vsplit)
 {
     int handlewidth = 8;
@@ -1723,33 +1155,30 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     vsplit->addWidget(leftSplit);
 
     // project tree
-    projectTree = new QTreeView(this);
+    projectTree = new ReferenceTree(tr("Current Project"),ColorScheme::ConBG);
     connect(projectTree,SIGNAL(clicked(QModelIndex)),this,SLOT(projectTreeClicked(QModelIndex)));
-    projectTree->setToolTip(tr("Current Project"));
-
-    QPalette p = projectTree->palette();
-    QColor tc(255,250,192); // CON
-    p.setColor(QPalette::Active, QPalette::Base, tc);
-    p.setColor(QPalette::Inactive, QPalette::Base, tc);
-    projectTree->setPalette(p);
 
     leftSplit->addWidget(projectTree);
 
     // project reference tree
-    referenceTree = new QTreeView(this);
-    QFont font = referenceTree->font();
-    font.setItalic(true);   // pretty and matches def name font
-    referenceTree->setFont(font);
-    referenceTree->setToolTip(tr("Project References"));
+    referenceTree = new ReferenceTree(tr("Project References"), ColorScheme::PubBG);
     connect(referenceTree,SIGNAL(clicked(QModelIndex)),this,SLOT(referenceTreeClicked(QModelIndex)));
 
-    QPalette rp = referenceTree->palette();
-    QColor rc(167,210,253); // Dark PUB
-    rp.setColor(QPalette::Active, QPalette::Base, rc);
-    rp.setColor(QPalette::Inactive, QPalette::Base, rc);
-    referenceTree->setPalette(rp);
+    connect(propDialog,SIGNAL(updateColors()),referenceTree,SLOT(updateColors()));
+    connect(propDialog,SIGNAL(updateColors()),projectTree,SLOT(updateColors()));
+
+    connect(propDialog,SIGNAL(updateFonts()),referenceTree,SLOT(updateFonts()));
+    connect(propDialog,SIGNAL(updateFonts()),projectTree,SLOT(updateFonts()));
 
     leftSplit->addWidget(referenceTree);
+
+
+    projectTree->updateColors();
+    referenceTree->updateColors();
+
+    projectTree->updateFonts();
+    referenceTree->updateFonts();
+
 
     leftSplit->setStretchFactor(0,1);
     leftSplit->setStretchFactor(1,2);
@@ -1759,11 +1188,9 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     vsplit->addWidget(findSplit);
 
     // project editor tabs
-    editorTabs = new QTabWidget(this);
-    editorTabs->setTabsClosable(true);
-    editorTabs->setMovable(true);
-    connect(editorTabs,SIGNAL(tabCloseRequested(int)),this,SLOT(closeTab(int)));
-    connect(editorTabs,SIGNAL(currentChanged(int)),this,SLOT(changeTab(int)));
+    editorTabs = new FileManager(this);
+    connect(editorTabs,SIGNAL(tabCloseRequested(int)),editorTabs,SLOT(closeFile(int)));
+    connect(editorTabs,SIGNAL(currentChanged(int)),editorTabs,SLOT(changeTab(int)));
     findSplit->addWidget(editorTabs);
 
     findSplit->setStretchFactor(0,1);
@@ -1782,4 +1209,31 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     vsplit->setHandleWidth(handlewidth);
     vsplit->setChildrenCollapsible(true);
 
+}
+
+bool MainWindow::eventFilter(QObject *target, QEvent *event)
+{
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent *e = static_cast<QKeyEvent *>(event);
+
+        if (e->modifiers() & Qt::ControlModifier)
+        {
+            switch (e->key())
+            {
+            case (Qt::Key_T):
+                editorTabs->newFile();
+                return true;
+            case (Qt::Key_W):
+                editorTabs->closeFile();
+                return true;
+            case (Qt::Key_PageUp):
+                editorTabs->previousTab();
+                return true;
+            case (Qt::Key_PageDown):
+                editorTabs->nextTab();
+                return true;
+            }
+        }
+    }
+    return QMainWindow::eventFilter(target, event);
 }

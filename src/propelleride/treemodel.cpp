@@ -273,10 +273,10 @@ void TreeModel::addRootItem(QString text, QString file)
 /*
  * this is overloaded in a child class
  */
-void TreeModel::includes(QString filePath, QString incPath, QString text, int level)
+void TreeModel::includes(QString filePath, QString incPath, QString text)
 {
     /* suppress stupid compiler warnings */
-    if(filePath.length() && incPath.length() && text.length() && level)
+    if(filePath.length() && incPath.length() && text.length())
         return;
 }
 
@@ -335,14 +335,4 @@ void TreeModel::addSymbolInfo(QString symbol, QString file, int line)
 int TreeModel::hashCount()
 {
     return symbolHash.count();
-}
-
-QString TreeModel::shortFileName(QString fileName)
-{
-    QString rets;
-    if(fileName.indexOf("/") > -1)
-        rets = fileName.mid(fileName.lastIndexOf("/")+1);
-    else
-        rets = fileName;
-    return rets;
 }

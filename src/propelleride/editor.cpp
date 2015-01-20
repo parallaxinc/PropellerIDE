@@ -16,14 +16,15 @@
 
 Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 {
-
     mainwindow = parent;
     propDialog = static_cast<MAINWINDOW*>(mainwindow)->propDialog;
-    spinParser = 0;
 
     ctrlPressed = false;
     isSpin = false;
     expectAutoComplete = false;
+    canUndo = false;
+    canRedo = false;
+    canCopy = false;
 
     lineNumberArea = new LineNumberArea(this);
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
@@ -38,9 +39,17 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 
     currentTheme = &Singleton<ColorScheme>::Instance();
     updateColors();
+    updateFonts();
+    saveContent();
 
     connect(this,SIGNAL(cursorPositionChanged()),this,SLOT(updateBackgroundColors()));
     connect(propDialog,SIGNAL(updateColors()),this,SLOT(updateColors()));
+    connect(propDialog,SIGNAL(updateFonts()),this,SLOT(updateFonts()));
+    connect(propDialog->getTabSpaceLedit(),SIGNAL(textChanged(QString)), this, SLOT(tabSpacesChanged()));
+
+    connect(this,SIGNAL(undoAvailable(bool)), this, SLOT(setUndo(bool)));
+    connect(this,SIGNAL(redoAvailable(bool)), this, SLOT(setRedo(bool)));
+    connect(this,SIGNAL(copyAvailable(bool)), this, SLOT(setCopy(bool)));
 
     // this must be a pointer otherwise we can't control the position.
     cbAuto = new QComboBox(this);
@@ -55,16 +64,6 @@ Editor::~Editor()
     delete lineNumberArea;
 }
 
-void Editor::initSpin(SpinParser *parser)
-{
-    spinParser = parser;
-}
-
-SpinParser *Editor::getSpinParser()
-{
-    return spinParser;
-}
-
 void Editor::setHighlights()
 {
     if(highlighter) {
@@ -75,6 +74,15 @@ void Editor::setHighlights()
     isSpin = true;
 }
 
+void Editor::saveContent()
+{
+    oldcontents = toPlainText();
+}
+
+int Editor::contentChanged()
+{
+    return oldcontents.compare(toPlainText());
+}
 
 
 void Editor::setLineNumber(int num)
@@ -224,7 +232,7 @@ void Editor::spinSuggest()
     QStringList toolTextList;
     if(text.length() > 2) {
         int added = 0;
-        QStringList list = spinParser->spinSymbols(fileName,"");
+        QStringList list = spinParser.spinSymbols(fileName,"");
         foreach(QString s, list) {
             s = s.mid(s.indexOf("\t")+1); // skip type field
             if(s.contains(text,Qt::CaseInsensitive)) {
@@ -791,7 +799,7 @@ int Editor::spinAutoComplete()
      */
     if(text.length() > 0) {
         qDebug() << "keyPressEvent object dot pressed" << text;
-        QStringList list = spinParser->spinSymbols(fileName,text);
+        QStringList list = spinParser.spinSymbols(fileName,text);
         if(list.count() == 0)
             return 0;
         cbAuto->clear();
@@ -834,7 +842,7 @@ int Editor::spinAutoComplete()
      */
     else {
         //qDebug() << "keyPressEvent local dot pressed";
-        QStringList list = spinParser->spinSymbols(fileName,"");
+        QStringList list = spinParser.spinSymbols(fileName,"");
         if(list.count() == 0)
             return 0;
         cbAuto->clear();
@@ -880,7 +888,7 @@ int  Editor::spinAutoCompleteCON()
     if(text.length() > 0) {
         connect(cbAuto, SIGNAL(activated(int)), this, SLOT(cbAutoSelected0insert(int)));
         qDebug() << "keyPressEvent # pressed" << text;
-        QStringList list = spinParser->spinConstants(fileName,text);
+        QStringList list = spinParser.spinConstants(fileName,text);
         if(list.count() == 0)
             return 0;
         cbAuto->clear();
@@ -906,7 +914,7 @@ int  Editor::spinAutoCompleteCON()
     else {
         connect(cbAuto, SIGNAL(activated(int)), this, SLOT(cbAutoSelected(int)));
         qDebug() << "keyPressEvent local # pressed";
-        QStringList list = spinParser->spinConstants(fileName,"");
+        QStringList list = spinParser.spinConstants(fileName,"");
         if(list.count() == 0)
             return 0;
         cbAuto->clear();
@@ -1147,7 +1155,7 @@ int Editor::lineNumberAreaWidth()
         ++digits;
     }
 
-    int space = 6 + fontMetrics().width(QLatin1Char('9')) * digits;
+    int space = fontMetrics().width(' ')*(digits+2);
 
     return space;
 }
@@ -1166,6 +1174,9 @@ void Editor::updateLineNumberArea(const QRect &rect, int dy)
 
     if (rect.contains(viewport()->rect()))
         updateLineNumberAreaWidth(0);
+
+    QPalette p = lineNumberArea->palette();
+    lineNumberArea->setPalette(p);
 }
 
 void Editor::resizeEvent(QResizeEvent *e)
@@ -1182,7 +1193,7 @@ void Editor::updateColors()
     colors = currentTheme->getColorList();
     colorsAlt = colors;
 
-    QMap<int, ColorScheme::color>::iterator i;
+    QMap<ColorScheme::Color, ColorScheme::color>::iterator i;
     for (i = colorsAlt.begin(); i != colorsAlt.end(); ++i)
     {
         // little fun formula to create two editor tones when color updated.
@@ -1197,8 +1208,14 @@ void Editor::updateColors()
     p.setColor(QPalette::Base, colors[ColorScheme::ConBG].color);
     this->setPalette(p);
 
+
     updateBackgroundColors();
 
+}
+
+void Editor::updateFonts()
+{
+    this->setFont(currentTheme->getFont());
 }
 
 void Editor::updateBackgroundColors()
@@ -1218,7 +1235,7 @@ void Editor::updateBackgroundColors()
     QTextBlock currBlock = document()->firstBlock();
     while (1)
     {
-        int newColor = -1;
+        ColorScheme::Color newColor = ColorScheme::Invalid;
 
         if ( currBlock.text().contains('{') )
         {
@@ -1257,10 +1274,10 @@ void Editor::updateBackgroundColors()
         if (nInComment > 0
         || (currBlock.text().length() > 3 && QRegExp("\\w").exactMatch(QString(currBlock.text()[3]))))
         {
-            newColor = -1;
+            newColor = ColorScheme::Invalid;
         }
 
-        if (newColor != -1)
+        if (newColor != ColorScheme::Invalid)
         {
             QColor newBlockColor = colors[newColor].color;
             if (newColor == prevColor)
@@ -1301,7 +1318,8 @@ void Editor::updateBackgroundColors()
 void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(lineNumberArea);
-    painter.fillRect(event->rect(), QColor(Qt::lightGray).lighter(120));
+    painter.fillRect(event->rect(), currentTheme->getColor(ColorScheme::ConBG).darker(105));
+    QColor pen = currentTheme->getColor(ColorScheme::SyntaxText);
 
     QTextBlock block = firstVisibleBlock();
     int blockNumber = block.blockNumber();
@@ -1311,9 +1329,9 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
     while (block.isValid() && top <= event->rect().bottom()) {
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
-            painter.setPen(QColor(Qt::darkGray).darker(160));
+            painter.setPen(pen);
             painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
-                             Qt::AlignRight, number);
+                             Qt::AlignRight, number+" ");
         }
 
         block = block.next();
@@ -1322,3 +1340,42 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
         ++blockNumber;
     }
 }
+
+
+void Editor::tabSpacesChanged()
+{
+    this->setTabStopWidth(
+            propDialog->getTabSpaces() *
+            QFontMetrics(currentTheme->getFont()).width(' ')
+            );
+}
+
+void Editor::setUndo(bool available)
+{
+    canUndo = available;
+}
+bool Editor::getUndo()
+{
+    return canUndo;
+}
+
+
+void Editor::setRedo(bool available)
+{
+    canRedo = available;
+}
+bool Editor::getRedo()
+{
+    return canRedo;
+}
+
+
+void Editor::setCopy(bool available)
+{
+    canCopy= available;
+}
+bool Editor::getCopy()
+{
+    return canCopy;
+}
+

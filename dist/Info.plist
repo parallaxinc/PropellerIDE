@@ -27,7 +27,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>10.7</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2014, Parallax Inc. PropellerIDE is released under the GPLv3 license.</string>
+	<string>Copyright © 2014-2015, Parallax Inc. PropellerIDE is released under the GPLv3 license.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSSupportsSuddenTermination</key>

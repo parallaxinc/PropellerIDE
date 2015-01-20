@@ -191,16 +191,19 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
 
 void MainWindow::showFindFrame()
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
-    if(editor->textCursor().selectedText().length() > 0) {
-        setFindText(editor->textCursor().selectedText());
+    if (editorTabs->count() > 0)
+    {
+        Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
+        if(editor->textCursor().selectedText().length() > 0) {
+            findEdit->setText(editor->textCursor().selectedText());
+        }
+        else {
+            findEdit->clear();
+        }
+    
+        findEdit->setFocus();
+        findFrame->setVisible(true);
     }
-    else {
-        clearFindText();
-    }
-
-    findEdit->setFocus();
-    findFrame->setVisible(true);
 }
 
 void MainWindow::hideFindFrame()
@@ -224,7 +227,7 @@ QTextDocument::FindFlag MainWindow::getFlags(int prev)
 
 void MainWindow::findChanged(QString text)
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
 
     if(editor == NULL)
         return;
@@ -234,25 +237,7 @@ void MainWindow::findChanged(QString text)
     editor->setTextCursor(cur);
     cur.endEditBlock();
 
-#if USE_REGEX
-    if(regexButton->isChecked()) {
-        QRegExp reg(text);
-        reg.setPatternSyntax(QRegExp::RegExp2);
-        QTextDocument *ted = const_cast<QTextDocument *>(editor->document());
-        cur.beginEditBlock();
-        cur = ted->find(reg,findPosition,getFlags());
-        editor->setTextCursor(cur);
-        cur.endEditBlock();
-    }
-    else
-    {
-        /* non regex version */
-        editor->find(text,getFlags());
-    }
-#else
     editor->find(text,getFlags());
-#endif
-
 }
 
 
@@ -271,7 +256,7 @@ void MainWindow::findClicked()
 void MainWindow::findNextClicked()
 {
 
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -281,26 +266,6 @@ void MainWindow::findNextClicked()
 
     editor->setCenterOnScroll(true);
 
-#if USE_REGEX
-    if(regexButton->isChecked()) {
-        QRegExp reg(text);
-        QTextDocument *ted = const_cast<QTextDocument *>(editor->document());
-        QTextCursor cur = ted->find(reg,findPosition,getFlags());
-        if(cur.hasSelection()) {
-            count++;
-        }
-        else {
-            if(showBeginMessage(tr("Find"))) {
-                QTextCursor cur = ted->find(reg,findPosition,getFlags());
-                if(cur.hasSelection()) {
-                    count++;
-                }
-            }
-        }
-        editor->setTextCursor(cur);
-    }
-    else
-#endif
     {
         if(editor->find(text,getFlags()) == true) {
             count++;
@@ -321,7 +286,7 @@ void MainWindow::findNextClicked()
 }
 void MainWindow::findPrevClicked()
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -331,26 +296,6 @@ void MainWindow::findPrevClicked()
 
     editor->setCenterOnScroll(true);
 
-#if USE_REGEX
-    if(regexButton->isChecked()) {
-        QRegExp reg(text);
-        QTextDocument *ted = const_cast<QTextDocument *>(editor->document());
-        QTextCursor cur = ted->find(reg,findPosition,getFlags(QTextDocument::FindBackward));
-        if(cur.hasSelection()) {
-            count++;
-        }
-        else {
-            if(showBeginMessage(tr("Find"))) {
-                QTextCursor cur = ted->find(reg,findPosition,getFlags(QTextDocument::FindBackward));
-                if(cur.hasSelection()) {
-                    count++;
-                }
-            }
-        }
-        editor->setTextCursor(cur);
-    }
-    else
-#endif
     {
         if(edtext.contains(text,Qt::CaseInsensitive)) {
             if(editor->find(text,getFlags(QTextDocument::FindBackward)) == true) {
@@ -372,19 +317,6 @@ void MainWindow::findPrevClicked()
     }
 }
 
-QString MainWindow::getFindText()
-{
-    return findText;
-}
-void MainWindow::clearFindText()
-{
-    findEdit->clear();
-}
-void MainWindow::setFindText(QString text)
-{
-    return findEdit->setText(text);
-}
-
 void MainWindow::replaceClicked()
 {
     QString text = replaceEdit->text();
@@ -399,7 +331,7 @@ void MainWindow::replaceClicked()
 
 void MainWindow::replaceNextClicked()
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -416,7 +348,7 @@ void MainWindow::replaceNextClicked()
 
 void MainWindow::replacePrevClicked()
 {
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -438,7 +370,7 @@ void MainWindow::replaceAllClicked()
 {
     int count = 0;
     QString text = findEdit->text();
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return;
 
@@ -472,16 +404,6 @@ void MainWindow::replaceAllClicked()
             tr("Replaced %1 instances of \"%2\".").arg(count).arg(text));
 }
 
-QString MainWindow::getReplaceText()
-{
-    return replaceText;
-}
-void MainWindow::clearReplaceText()
-{
-    replaceEdit->clear();
-}
-
-
 bool MainWindow::showFindMessage(QString text)
 {
     QMessageBox msgBox;
@@ -493,7 +415,7 @@ bool MainWindow::showFindMessage(QString text)
     if(ret == QMessageBox::Cancel) {
         return false;
     }
-    Editor *editor = getEditor(editorTabs->currentIndex());
+    Editor *editor = editorTabs->getEditor(editorTabs->currentIndex());
     if(editor == NULL)
         return false;
     QTextCursor cur = editor->textCursor();

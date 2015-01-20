@@ -71,14 +71,12 @@ public:
 
     bool isDuplicate(TreeItem *item, QString str);
 
-    virtual void includes(QString filePath, QString incPath, QString text, int level);
+    virtual void includes(QString filePath, QString incPath, QString text);
     virtual void addFileReferences(QString filePath, QString incPath, QString text, int level);
 
     void    clearSymbolInfo();
     void    addSymbolInfo(QString symbol, QString file, int line);
     QString getSymbolInfo(QString symbol, int *line);
-
-    QString shortFileName(QString s);
 
     int hashCount();
 

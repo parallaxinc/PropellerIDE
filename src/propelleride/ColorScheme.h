@@ -1,17 +1,19 @@
 #pragma once
 
 #include <QApplication>
-#include <QStandardPaths>
 #include <QDir>
 #include <QSettings>
 #include <QFile>
 #include <QMap>
 #include <QColor>
+#include <QFont>
 
 #include "templates/Singleton.h"
 
-class ColorScheme
+class ColorScheme : public QObject
 {
+    Q_OBJECT
+
 public:
     struct color {
         QColor color;
@@ -19,16 +21,10 @@ public:
     };
 
 
-private:
-
-    QString mName;
-    QString mFileName;
-
-    QMap<int, color> colors;
-
 public:
 
     enum Color {
+        Invalid,
         /* Block Colors */
         ConBG,
         VarBG,
@@ -41,22 +37,34 @@ public:
         SyntaxNumbers,
         SyntaxFunctions,
         SyntaxKeywords,
-        SyntaxPreprocessor,
+//        SyntaxPreprocessor,
         SyntaxQuotes,
-        SyntaxLineComments,
-        SyntaxBlockComments
+        SyntaxComments
     };
 
-    ColorScheme();
+    ColorScheme(QObject * parent = 0);
+
+private:
+
+    QMap<ColorScheme::Color, color> colors;
+    QFont font;
+
+public slots:
 
     void save();
     void load();
+    void load(const QString & filename);
+    void defaults();
+
+public:
+    void load(QSettings * settings);
+
     QColor getColor(ColorScheme::Color key);
     void setColor(ColorScheme::Color key, const QColor & newcolor);
 
-    const QMap<int, color>& getColorList() const;
+    QFont getFont();
+    void setFont(const QFont & newfont);
 
-
-private:
+    const QMap<ColorScheme::Color, color>& getColorList() const;
 
 };
