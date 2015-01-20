@@ -137,17 +137,6 @@ void MainWindow::openLastFile()
             //editorTabs->openFile(":/src/Welcome.spin");
         }
     }
-
-    /* load the last directory to make user happy */
-    lastDirectory = QFileInfo(fileName).path();
-    QVariant lastdirv = QSettings().value("lastDirectory", lastDirectory);
-    if(!lastdirv.isNull()) {
-        if(lastdirv.canConvert(QVariant::String)) {
-            if(lastdirv.toString().length() > 0) {
-                lastDirectory = lastdirv.toString();
-            }
-        }
-    }
 }
 
 void MainWindow::openFiles(const QStringList & files)
@@ -161,7 +150,7 @@ void MainWindow::openFiles(const QStringList & files)
 
 void MainWindow::getApplicationSettings(bool complain)
 {
-    QDir dir(this->lastDirectory);
+    QDir dir;
     QFile file;
     QVariant compv;
 
@@ -222,7 +211,6 @@ void MainWindow::closeEvent(QCloseEvent *e)
     if(QSettings().value("lastUse").toInt())
     {
         QSettings().setValue("lastFile",filestr);
-        QSettings().setValue("lastDirectory", lastDirectory);
         QSettings().setValue("windowSize",saveGeometry());
     }
     if(e) e->accept();

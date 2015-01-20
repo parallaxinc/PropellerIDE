@@ -193,7 +193,6 @@ private:
 
     QString     basicPath;
     QString     includePath;
-    QString     lastDirectory;
 
     QComboBox   *cbBoard;
     QComboBox   *cbPort;
