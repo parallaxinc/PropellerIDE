@@ -4,13 +4,17 @@ Builder::Builder(QObject *parent) : QObject(parent)
 {
 }
 
-void Builder::setParameters(QString comp, QString incl, QString compPath, QString projFile, QString compstat)
+void Builder::setParameters(QString comp, QString incl, QString projFile, QString compstat)
 {
     compilerStr = comp;
-    compilerPath = compPath;
     includesStr = incl;
     projectFile = projFile;
     compileResult = compstat;
+    qDebug() << "Setting build: "
+	    << compilerStr 
+	    << includesStr 
+	    << projectFile 
+	    << compileResult;
 }
 
 void Builder::setObjects(QLabel *stat, QLabel *progsize, QProgressBar *progbar, QComboBox *ports)

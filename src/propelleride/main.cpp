@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
 #if defined(Q_OS_WIN32)
     QStringList styles = QStyleFactory::keys();
     qDebug() << "Available window styles" << styles;
-    if(styles.contains("Fusion")) {
-        QApplication::setStyle("Fusion");
+    if(styles.contains("WindowsVista")) {
+        QApplication::setStyle("WindowsVista");
     }
 #endif
 

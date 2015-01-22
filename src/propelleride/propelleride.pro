@@ -13,6 +13,8 @@ win32 {
     target.path = $${PREFIX}/
 }
 
+CONFIG += console
+
 INSTALLS += target
 
 LIBS += -L$${OUT_PWD}/../qext/ -lqext

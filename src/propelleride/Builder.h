@@ -7,6 +7,7 @@
 #include <QProgressBar>
 #include <QProcess>
 #include <QMutex>
+#include <QDebug>
 
 class Builder : public QObject
 {
@@ -14,7 +15,7 @@ class Builder : public QObject
 public:
     explicit Builder(QObject *parent = 0);
 
-    void setParameters(QString comp, QString incl, QString compPath, QString projFile, QString compstat);
+    void setParameters(QString comp, QString incl, QString projFile, QString compstat);
     void setObjects(QLabel *stat, QLabel *progsize, QProgressBar *progbar, QComboBox *ports);
 
     virtual int  runCompiler(QString copts);
@@ -31,7 +32,6 @@ public slots:
 public:
     QString compilerStr;
     QString includesStr;
-    QString compilerPath;
 
     QString projectFile;
     QString portName;

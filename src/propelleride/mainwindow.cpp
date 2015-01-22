@@ -157,32 +157,9 @@ void MainWindow::getApplicationSettings(bool complain)
     QSettings settings;
     settings.beginGroup("Paths");
 
-    compv = settings.value("Compiler");
-    if(compv.canConvert(QVariant::String)) {
-        spinCompiler = compv.toString();
-        spinCompiler = dir.fromNativeSeparators(spinCompiler);
-    }
-    if(complain && !file.exists(spinCompiler)) {
-        propDialog->showPreferences();
-    }
-    compv = settings.value("Loader");
-    if(compv.canConvert(QVariant::String)) {
-        spinLoader = compv.toString();
-        spinLoader = dir.fromNativeSeparators(spinLoader);
-    }
-
-    /* get the compiler path */
-    spinCompilerPath = QFileInfo(spinCompiler).path();
-    spinCompilerPath = dir.fromNativeSeparators(spinCompilerPath);
-
-    /* get the include path and config file set by user */
-    QVariant incv;
-
-    incv = settings.value("Library");
-    if(incv.canConvert(QVariant::String)) {
-        spinIncludes = incv.toString();
-        spinIncludes = dir.fromNativeSeparators(spinIncludes);
-    }
+    spinCompiler = settings.value("Compiler").toString();
+    spinLoader = settings.value("Loader").toString();
+    spinIncludes = settings.value("Library").toString();
 
     settings.endGroup();
 }
@@ -488,7 +465,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
 
     if(fileName.contains(".spin")) {
         statusDialog->init("Compiling Program", QFileInfo(this->projectFile).fileName());
-        spinBuilder->setParameters(spinCompiler, spinIncludes, spinCompilerPath, projectFile, compileResult);
+        spinBuilder->setParameters(spinCompiler, spinIncludes, projectFile, compileResult);
         spinBuilder->setObjects(&msgLabel, &sizeLabel, progress, cbPort);
         spinBuilder->setLoader(spinLoader);
 

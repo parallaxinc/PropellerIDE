@@ -31,20 +31,12 @@ int  SpinBuilder::checkCompilerInfo()
 
 QStringList SpinBuilder::getCompilerParameters()
 {
-    QString srcpath = projectFile;
-    srcpath = QDir::fromNativeSeparators(srcpath);
-    srcpath = QFileInfo(srcpath).filePath();
-
     QStringList args;
-    if(srcpath.length()) {
-        args.append(("-L"));
-        args.append(srcpath);
-    }
     if(includesStr.length()) {
         args.append(("-L"));
-        args.append(includesStr);
+        args.append(QDir::toNativeSeparators(includesStr));
     }
-    args.append(projectFile);
+    args.append(QDir::toNativeSeparators(projectFile));
 
     return args;
 }
@@ -54,11 +46,6 @@ int  SpinBuilder::loadProgram(QString copts)
     int exitCode = 0;
     int exitStatus = 0;
 
-    // use the projectFile instead of the current tab file
-    QString srcpath = projectFile;
-    srcpath = QDir::fromNativeSeparators(srcpath);
-    srcpath = QFileInfo(srcpath).filePath();
-
     portName = cbPort->itemText(cbPort->currentIndex());    // TODO should be itemToolTip
 
     QStringList optslist = copts.split(" ");
@@ -66,7 +53,9 @@ int  SpinBuilder::loadProgram(QString copts)
     foreach (QString s, optslist) {
         args.append(s);
     }
-    args.append(projectFile.replace(".spin",".binary"));
+    args.append(QDir::toNativeSeparators(
+                            projectFile.replace(".spin",".binary")
+                            ));
     //args.append("-p");
     //args.append(portName);
 
@@ -82,11 +71,9 @@ int  SpinBuilder::loadProgram(QString copts)
     connect(this->proc, SIGNAL(finished(int,QProcess::ExitStatus)),this,SLOT(compilerFinished(int,QProcess::ExitStatus)));
     proc.setProcessChannelMode(QProcess::MergedChannels);
 
-    proc.setWorkingDirectory(QFileInfo(loader).filePath());
-
     procDone = false;
     receiving = false;
-    proc.start(loader,args);
+    proc.start(QDir::toNativeSeparators(loader),args);
 
     if(!proc.waitForStarted()) {
         mbox.setInformativeText(tr("Could not start loader. Please check Preferences."));
@@ -176,13 +163,13 @@ int  SpinBuilder::runCompiler(QString copts)
 
     proc.setProcessChannelMode(QProcess::MergedChannels);
 
-    proc.setWorkingDirectory(compilerPath);
+//    proc.setWorkingDirectory(compilerPath);
 
     msgLabel->setText("");
 
     procDone = false;
     receiving = false;
-    proc.start(compilerStr,args);
+    proc.start(QDir::toNativeSeparators(compilerStr),args);
 
     if(!proc.waitForStarted()) {
         mbox.setInformativeText(tr("Could not start compiler. Please check Preferences."));

@@ -59,31 +59,22 @@ void PathSelector::browsePath(
         )
 {
     QString folder = lineEdit->text();
-    QString pathname;
+    QString s;
 
     if (isfolder) 
-        pathname = QFileDialog::getExistingDirectory(this,
+        s = QFileDialog::getExistingDirectory(this,
                 pathlabel, folder, QFileDialog::ShowDirsOnly);
     else
-        pathname = QFileDialog::getOpenFileName(this,
+        s = QFileDialog::getOpenFileName(this,
                 pathlabel, folder, pathregex);
 
-
-    QString s = QDir::fromNativeSeparators(pathname);
+    qDebug() << "browsePath(" << pathlabel << "): " << s;
 
     if(s.length() == 0)
     {
-        qDebug() << "browsePath(" << pathlabel << "): " << "No selection";
         return;
     }
-
-    if (isfolder)
-        if(!s.endsWith("/"))
-            s += "/";
-
     lineEdit->setText(s);
-
-    qDebug() << "browsePath(" << pathlabel << "): " << s;
 }
 
 void PathSelector::restore()
@@ -105,8 +96,6 @@ void PathSelector::load()
     settings.beginGroup("Paths");
     QString s = settings.value(key, defaultpath).toString();
     settings.endGroup();
-
-    s = QDir::fromNativeSeparators(s);
 
     if(!s.isEmpty())
     {
