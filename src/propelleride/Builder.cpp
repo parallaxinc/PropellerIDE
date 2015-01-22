@@ -17,14 +17,6 @@ void Builder::setParameters(QString comp, QString incl, QString projFile, QStrin
 	    << compileResult;
 }
 
-void Builder::setObjects(QLabel *stat, QLabel *progsize, QProgressBar *progbar, QComboBox *ports)
-{
-    msgLabel = stat;
-    sizeLabel = progsize;
-    progress = progbar;
-    cbPort = ports;
-}
-
 int Builder::runCompiler(QString copts)
 {
     // satisfy warnings only
@@ -35,7 +27,7 @@ int Builder::runCompiler(QString copts)
 
 void Builder::compilerError(QProcess::ProcessError error)
 {
-    // satisfy warnings only
+    qDebug() << error;
     if(error != QProcess::Crashed) return;
 }
 

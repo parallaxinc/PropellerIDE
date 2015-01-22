@@ -109,7 +109,7 @@ public slots:
 
 private:
     void openLastFile();
-    void getApplicationSettings(bool complain);
+    void getApplicationSettings();
     int  checkCompilerInfo();
     QStringList getCompilerParameters(QString compilerOptions);
     void checkAndSaveFiles();
@@ -210,7 +210,6 @@ private:
     int progCount;
     QLabel sizeLabel;
     QLabel msgLabel;
-    QProgressBar *progress;
     QString compileResult;
 
     PortConnectionMonitor *portConnectionMonitor;

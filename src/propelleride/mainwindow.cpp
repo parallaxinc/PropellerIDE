@@ -55,18 +55,9 @@ void MainWindow::init()
 
     sizeLabel.setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-    progress = new QProgressBar();
-    //progress->setMaximumSize(100,25);
-    progress->setValue(0);
-    progress->setMinimum(0);
-    progress->setMaximum(100);
-    progress->setTextVisible(false);
-    progress->setVisible(false);
-
     statusBar();
     statusBar()->addPermanentWidget(&msgLabel,70);
     statusBar()->addPermanentWidget(&sizeLabel,15);
-    statusBar()->addPermanentWidget(progress,15);
 
     /* get last geometry. using x,y,w,h is unreliable.
     */
@@ -83,13 +74,7 @@ void MainWindow::init()
 
     QApplication::processEvents();
 
-    /* Get app settings at startup and before any compiler call.
-     * Some people want to be prepared, others just want to hack
-     * their way through life ... i guess it's fun.
-     * The latter is most common, so let's do it like that.
-     * In this case, we need the preferences if their set, but we can't complain.
-     */
-    getApplicationSettings(false);
+    getApplicationSettings();
 
     /* setup the terminal dialog box */
     term = new Terminal(this);
@@ -148,12 +133,8 @@ void MainWindow::openFiles(const QStringList & files)
     }
 }
 
-void MainWindow::getApplicationSettings(bool complain)
+void MainWindow::getApplicationSettings()
 {
-    QDir dir;
-    QFile file;
-    QVariant compv;
-
     QSettings settings;
     settings.beginGroup("Paths");
 
@@ -365,36 +346,30 @@ void MainWindow::highlightFileLine(QString file, int line)
 {
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
+    qDebug() << "Open file: " << file;
     QString name;
     if(QFile::exists(file)) {
         name = file;
     }
-    else if(QFile::exists(QDir(QFileInfo(projectFile).path()).filePath(file))) {
+    else if (QFile::exists(QDir(QFileInfo(projectFile).path()).filePath(file)))
+    {
         name = QDir(QFileInfo(projectFile).path()).filePath(file);
     }
-    else if(QFile::exists(QDir(spinIncludes).filePath(file))) {
+    else if (QFile::exists(QDir(spinIncludes).filePath(file)))
+    {
         name = QDir(spinIncludes).filePath(file);
     }
-    else {
+    else
+    {
         return;
     }
 
-    Editor *editor = NULL;
-    int len = editorTabs->count();
-    /* open file in tab if not there already */
-    for(int n = 0; n < len; n++) {
-        QString s = editorTabs->tabToolTip(n);
-        if(s.length() && s.compare(name) == 0) {
-            editor = editorTabs->getEditor(n);
-            editorTabs->setCurrentIndex(n);
-            break;
-        }
-    }
-    if(editor == NULL) {
-        editorTabs->openFile(name);
-        editor = editorTabs->getEditor(editorTabs->currentIndex());
-    }
-    if(editor != NULL)
+    qDebug() << "Open name: " << name;
+    qDebug() << "Open highlight!: " << name;
+    editorTabs->openFile(name);
+    Editor * editor = editorTabs->getEditor(editorTabs->currentIndex());
+    
+    if(editor)
     {
         QTextCursor cur = editor->textCursor();
         cur.movePosition(QTextCursor::Start);
@@ -402,6 +377,7 @@ void MainWindow::highlightFileLine(QString file, int line)
         cur.clearSelection();
         editor->setTextCursor(cur);
     }
+
     QApplication::processEvents();
     QApplication::restoreOverrideCursor();
 }
@@ -416,7 +392,6 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     QString fileName;
     QString text;
 
-    // if find in progress, ignore request
     if(!statusDone) {
         return -1;
     }
@@ -456,17 +431,14 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     sizeLabel.setText("");
     msgLabel.setText("");
 
-    progress->setValue(0);
-    progress->setVisible(true);
 
-    getApplicationSettings(true);
+    getApplicationSettings();
 
     checkAndSaveFiles();
 
     if(fileName.contains(".spin")) {
         statusDialog->init("Compiling Program", QFileInfo(this->projectFile).fileName());
         spinBuilder->setParameters(spinCompiler, spinIncludes, projectFile, compileResult);
-        spinBuilder->setObjects(&msgLabel, &sizeLabel, progress, cbPort);
         spinBuilder->setLoader(spinLoader);
 
         statusDialog->stop();
@@ -538,9 +510,6 @@ int  MainWindow::loadProgram(int type, QString file)
         portListener->open();
     }
 
-    if(rc) {
-        QMessageBox::critical(this,tr("Propeller Load Failed"), tr("Failed to load Propeller on port")+" "+cbPort->currentText(), QMessageBox::Ok);
-    }
 endLoadProgram:
     emit signalStatusDone(true);
     return rc;
@@ -1060,7 +1029,6 @@ void MainWindow::enumeratePorts()
     stringlist << "List of ports:";
 
     for (int i = 0; i < ports.size(); i++) {
-        progress->setValue(i*100/ports.size());
         stringlist << "port name:" << ports.at(i).portName;
         stringlist << "friendly name:" << ports.at(i).friendName;
         stringlist << "physical name:" << ports.at(i).physName;

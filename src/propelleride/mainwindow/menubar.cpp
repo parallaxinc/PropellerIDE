@@ -130,7 +130,7 @@ void MainWindow::preferences()
 
 void MainWindow::preferencesAccepted()
 {
-    getApplicationSettings(false);
+    getApplicationSettings();
 }
 
 

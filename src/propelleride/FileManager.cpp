@@ -82,10 +82,26 @@ void FileManager::openFile(const QString & fileName)
 
     // check if file already open before opening another instance
     for (int i = 0; i < count(); i++)
+    {
         if (fileName == tabToolTip(i))
+        {
+            changeTab(i);
             return;
+        }
+    }
 
-    int index = newFile();
+    // check if openFile should overwrite empty file
+    int index = currentIndex();
+    if (count() && (tabToolTip(index).isEmpty()
+                    && getEditor(index)->toPlainText().isEmpty()
+                    && !getEditor(index)->contentChanged()) )
+    {
+        index = currentIndex();
+    }
+    else
+    {
+        index = newFile();
+    }
 
     QTextStream in(&file);
     in.setAutoDetectUnicode(true);

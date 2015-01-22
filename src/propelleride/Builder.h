@@ -4,7 +4,6 @@
 #include <QString>
 #include <QLabel>
 #include <QComboBox>
-#include <QProgressBar>
 #include <QProcess>
 #include <QMutex>
 #include <QDebug>
@@ -16,7 +15,6 @@ public:
     explicit Builder(QObject *parent = 0);
 
     void setParameters(QString comp, QString incl, QString projFile, QString compstat);
-    void setObjects(QLabel *stat, QLabel *progsize, QProgressBar *progbar, QComboBox *ports);
 
     virtual int  runCompiler(QString copts);
 
@@ -36,16 +34,12 @@ public:
     QString projectFile;
     QString portName;
 
-    QComboBox *cbPort;
-    QProcess  *proc;
+    QProcess * proc;
 
     int progMax;
     int progCount;
 
     QString         compileResult;
-    QLabel          *sizeLabel;
-    QLabel          *msgLabel;
-    QProgressBar    *progress;
 
     QMutex      procMutex;
     bool        procDone;

@@ -3,25 +3,25 @@
 #include "Builder.h"
 
 #include <QStringList>
-#include <QProcess>
+#include <QDialog>
+#include <QPlainTextEdit>
 
 class SpinBuilder : public Builder
 {
 public:
     SpinBuilder();
-    virtual ~SpinBuilder() {}
+    virtual ~SpinBuilder();
 
     void setLoader(QString loader);
     int loadProgram(QString copts);
     int runCompiler(QString copts);
 
-    void compilerError(QProcess::ProcessError error);
     void compilerFinished(int exitCode, QProcess::ExitStatus status);
     void procReadyRead();
 
 private:
     QString loader;
-    int  checkCompilerInfo();
     QStringList getCompilerParameters();
-    bool receiving;
+    QDialog * console;
+    QPlainTextEdit * consoleEdit;
 };
