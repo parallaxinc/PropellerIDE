@@ -394,11 +394,6 @@ void Preferences::showPreferences()
     this->show();
 }
 
-QString Preferences::getSpinLibraryString()
-{
-    return librarypath->get();
-}
-
 void Preferences::adjustFontSize(float ratio)
 {
     QFont font = currentTheme->getFont();

@@ -85,7 +85,6 @@ class Preferences : public QDialog
 public:
     explicit Preferences(QWidget *parent = 0);
     void showPreferences();
-    QString getSpinLibraryString();
 
     int  getTabSpaces();
     bool getAutoCompleteEnable();

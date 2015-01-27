@@ -84,10 +84,13 @@ void FileManager::openFile(const QString & fileName)
 {
     qDebug() << "FileManager::openFile(" << fileName << ")";
 
+    if (fileName.isEmpty())
+        return;
+
     QFile file(fileName);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
-        QMessageBox::warning(this, tr("Recent Files"),
+        QMessageBox::warning(this, tr("Warning"),
                              tr("Cannot read file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));

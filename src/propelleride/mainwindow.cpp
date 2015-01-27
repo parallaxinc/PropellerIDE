@@ -35,7 +35,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     /* minimum window height */
     this->setMinimumHeight(500);
 
-
     /* setup gui components */
     setupFileMenu();
     setupEditMenu();
@@ -812,7 +811,7 @@ void MainWindow::zipFiles()
     if (fileName.isEmpty())
         return;
 
-    QString spinLibPath     = propDialog->getSpinLibraryString();
+    QString spinLibPath     = QSettings().value("Library").toString();
     QStringList fileTree    = editorTabs->getEditor(
             editorTabs->currentIndex()
             )->spinParser.spinFileTree(fileName, spinLibPath);
@@ -846,10 +845,10 @@ void MainWindow::updateProjectTree(QString fileName)
 void MainWindow::updateSpinProjectTree(QString fileName)
 {
     /* for spin we always parse the program and stuff the file list */
-    QStringList flist = editorTabs->getEditor(editorTabs->currentIndex())->spinParser.spinFileTree(fileName, propDialog->getSpinLibraryString());
-    for(int n = 0; n < flist.count(); n ++) {
-        QString s = flist[n];
-        //qDebug() << s;
+    QStringList flist = editorTabs->getEditor(editorTabs->currentIndex())->spinParser.spinFileTree(fileName, QSettings().value("Library").toString());
+
+    foreach (QString s, flist)
+    {
         projectModel->addRootItem(s);
     }
 }
