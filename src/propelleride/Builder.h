@@ -15,6 +15,7 @@
 #include <QApplication>
 #include <QThread>
 #include <QScrollBar>
+#include <QFileInfo>
 
 #include "status.h"
 

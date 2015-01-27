@@ -138,7 +138,7 @@ int Builder::runProcess(const QString & programName, const QStringList & program
 }
 
 
-int  Builder::loadProgram(QString copts)
+int Builder::loadProgram(QString copts)
 {
     QStringList optslist = copts.split(" ");
     QStringList args;
@@ -147,6 +147,9 @@ int  Builder::loadProgram(QString copts)
         args.append(s);
     }
     args.append(projectFile.replace(".spin",".binary"));
+
+    console->setStage(2);
+    console->setText(tr("Downloading %1...").arg(QFileInfo(projectFile).fileName()));
 
     return runProcess(loader,args);
 }
@@ -159,6 +162,9 @@ int Builder::runCompiler(QString copts)
         args.append(("-L"));
         args.append(includesStr);
     }
+
+    console->setStage(1);
+    console->setText(tr("Building %1...").arg(QFileInfo(projectFile).fileName()));
 
     args.append(projectFile);
     args.append(copts);

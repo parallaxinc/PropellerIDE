@@ -5,15 +5,10 @@ Status::Status(QWidget *parent)
     : QDialog(parent)
 {
     ui.setupUi(this);
-    setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+    setWindowFlags(Qt::FramelessWindowHint | 
+            Qt::WindowStaysOnTopHint | Qt::Dialog);
 
     ui.plainTextEdit->hide();
-    ui.plainTextEdit->setPlainText("Propeller Spin/PASM Compiler 'OpenSpin' (c)2012-2014 Parallax Inc. DBA Parallax Semiconductor.\n"
-"Version 1.00.71 Compiled on Nov 30 2014 07:40:47\n"
-"Compiling...\n"
-"../../../library/Graphics.spin\n"
-"Done.\n"
-"Program size is 3256 bytes\n");
 
     ui.activeText->setText(" ");
     setStage(0);
@@ -73,30 +68,12 @@ void Status::toggleDetails()
         ui.label->setText("Details -");
         ui.plainTextEdit->show();
     }
+    adjustSize();
 }
 
-
-void Status::selectStage()
+void Status::setText(const QString & text)
 {
-    setStage(stage);
-    switch (stage)
-    {
-    case 0: ui.activeText->setText(" ");
-            break;
-    case 1: ui.activeText->setText("Building file.spin...");
-            break;
-    case 2: ui.activeText->setText("Downloading to TTYUSB0...");
-            break;
-    case 3: ui.activeText->setText("Download complete!");
-            break;
-    default: stage = 0;
-    }
-
-    stage++;
-    if (stage > 3)
-        stage = 0;
-
-    adjustSize();
+    ui.activeText->setText(text);
 }
 
 void Status::keyPressEvent(QKeyEvent * event)
@@ -104,10 +81,6 @@ void Status::keyPressEvent(QKeyEvent * event)
     if(event->key() == Qt::Key_Escape)
     {
         event->ignore();
-    }
-    else if (event->key() == Qt::Key_Space)
-    {
-        selectStage();
     }
 }
 

@@ -555,7 +555,8 @@ void MainWindow::programDebug()
     if(runCompiler(COMPILE_RUN))
         return;
 
-    if(cbPort->itemText(cbPort->currentIndex()).compare(AUTOPORT) == 0) {
+    if(cbPort->itemText(cbPort->currentIndex()).compare(AUTOPORT) == 0)
+    {
         findHardware(false);
     }
     setCurrentPort(cbPort->currentIndex());
@@ -564,7 +565,9 @@ void MainWindow::programDebug()
     portListener->init(cbPort->currentText(), term->getBaud());
     setCurrentPort(cbPort->currentIndex());
     portListener->open();
-    if(!loadProgram(MainWindow::LoadRunHubRam)) {
+
+    if(!loadProgram(MainWindow::LoadRunHubRam))
+    {
         btnConnected->setChecked(true);
         connectButton(true);
     }
@@ -590,7 +593,8 @@ void MainWindow::findHardware(bool showFoundBox)
     emit signalStatusDone(false);
 
     bool stat = portListener->isOpen();
-    if(stat) {
+    if(stat)
+    {
         savePort = portListener->getPortName();
         portListener->close();
     }
@@ -598,15 +602,19 @@ void MainWindow::findHardware(bool showFoundBox)
     statusDialog->init("Searching for Propellers", "");
     portConnectionMonitor->stop();
 
-    for(int n = 0; n < this->cbPort->count(); n++) {
+    for(int n = 0; n < this->cbPort->count(); n++)
+    {
         QString portstr = cbPort->itemText(n);
-        if(portstr.compare(AUTOPORT) == 0) {
+        if(portstr.compare(AUTOPORT) == 0)
+        {
             continue;
         }
         portListener->init(portstr, term->getBaud());
-        if(portListener->isDevice(portstr)) {
+        if(portListener->isDevice(portstr))
+        {
             count++;
-            if(currentPort.compare(AUTOPORT) == 0) {
+            if(currentPort.compare(AUTOPORT) == 0)
+            {
                 cbPort->setCurrentIndex(n);
             }
         }
