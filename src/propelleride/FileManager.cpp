@@ -66,6 +66,20 @@ void FileManager::open()
 }
 
 
+int FileManager::isFileOpen(const QString & fileName)
+{
+    // check if file already open before opening another instance
+    for (int i = 0; i < count(); i++)
+    {
+        if (fileName == tabToolTip(i))
+        {
+            changeTab(i);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void FileManager::openFile(const QString & fileName)
 {
     qDebug() << "FileManager::openFile(" << fileName << ")";
@@ -80,15 +94,8 @@ void FileManager::openFile(const QString & fileName)
         return;
     }
 
-    // check if file already open before opening another instance
-    for (int i = 0; i < count(); i++)
-    {
-        if (fileName == tabToolTip(i))
-        {
-            changeTab(i);
-            return;
-        }
-    }
+    if (isFileOpen(fileName))
+        return;
 
     // check if openFile should overwrite empty file
     int index = currentIndex();

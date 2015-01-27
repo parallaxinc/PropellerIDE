@@ -33,7 +33,6 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = 0);
-    void init();
 
     Preferences  *propDialog;
     QSplitter   *leftSplit;
@@ -106,9 +105,11 @@ public slots:
 
     void highlightFileLine(QString file, int line);
 
-
 private:
-    void openLastFile();
+    void loadSession();
+    void saveSession();
+    void clearSession();
+
     void getApplicationSettings();
     int  checkCompilerInfo();
     QStringList getCompilerParameters(QString compilerOptions);

@@ -55,10 +55,7 @@ debug your applications with the built-in serial terminal.")
     parser.process(app);
 
     MainWindow w;
-    w.init();
-
     w.openFiles(parser.positionalArguments());
-
     w.show();
     return app.exec();
 }

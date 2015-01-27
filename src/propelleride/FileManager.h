@@ -16,6 +16,7 @@ public:
     explicit FileManager(QWidget *parent = 0);
 
     Editor * getEditor(int num);
+    int isFileOpen(const QString & fileName);
 
 public slots:
     int  newFile();

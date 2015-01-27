@@ -14,10 +14,6 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMutex::Recursive), statusDone(true)
 {
-}
-
-void MainWindow::init()
-{
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
@@ -101,27 +97,41 @@ void MainWindow::init()
 
     connect(this,SIGNAL(signalStatusDone(bool)),this,SLOT(setStatusDone(bool)));
 
-    openLastFile();
+    loadSession();
 
     this->installEventFilter(this);
 }
 
-
-void MainWindow::openLastFile()
+void MainWindow::loadSession()
 {
-    /* load the last file into the editor to make user happy */
-    QString welcome = propDialog->getSpinLibraryString()+"Welcome.spin";
-    QString fileName;
-    QVariant lastfilev = QSettings().value("lastFile", welcome);
-
-    if(!lastfilev.isNull()) {
-        if(lastfilev.canConvert(QVariant::String)) {
-            if(lastfilev.toString().length() > 0) {
-                fileName = lastfilev.toString();
-            }
-            //editorTabs->openFile(":/src/Welcome.spin");
-        }
+    QSettings settings;
+    int size = settings.beginReadArray("session");
+    for (int i = 0; i < size; ++i) {
+        settings.setArrayIndex(i);
+        editorTabs->openFile(settings.value("file").toString());
     }
+    settings.endArray();
+}
+
+void MainWindow::clearSession()
+{
+    QSettings settings;
+    settings.beginGroup("session");
+    settings.remove("");
+    settings.endGroup();
+}
+
+void MainWindow::saveSession()
+{
+    clearSession();
+
+    QSettings settings;
+    settings.beginWriteArray("session");
+    for (int i = 0; i < editorTabs->count(); i++) {
+        settings.setArrayIndex(i);
+        settings.setValue("file",editorTabs->tabToolTip(i));
+    }
+    settings.endArray();
 }
 
 void MainWindow::openFiles(const QStringList & files)
@@ -153,6 +163,7 @@ void MainWindow::quitProgram()
 
 void MainWindow::closeEvent(QCloseEvent *e)
 {
+    saveSession();
     editorTabs->closeAll();
 
     if (editorTabs->count())
@@ -797,13 +808,16 @@ void MainWindow::zipFiles()
 {
     int n = this->editorTabs->currentIndex();
     QString fileName = editorTabs->tabToolTip(n);
-    if (fileName.isEmpty()) {
+
+    if (fileName.isEmpty())
         return;
-    }
+
     QString spinLibPath     = propDialog->getSpinLibraryString();
-    QStringList fileTree    = editorTabs->getEditor(editorTabs->currentIndex()
+    QStringList fileTree    = editorTabs->getEditor(
+            editorTabs->currentIndex()
             )->spinParser.spinFileTree(fileName, spinLibPath);
-    if(fileTree.count() > 0) {
+    if(fileTree.count() > 0)
+    {
         zipper.makeZip(fileName, fileTree, spinLibPath);
     }
 }

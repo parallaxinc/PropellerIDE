@@ -1,6 +1,5 @@
 #include "status.h"
 #include <QDebug>
-#include <QGraphicsDropShadowEffect>
 
 StatusDialog::StatusDialog(QWidget *parent)
     : QDialog(parent)
