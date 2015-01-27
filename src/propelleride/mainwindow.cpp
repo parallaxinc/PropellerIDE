@@ -54,18 +54,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     statusBar()->addPermanentWidget(&msgLabel,70);
     statusBar()->addPermanentWidget(&sizeLabel,15);
 
-    /* get last geometry. using x,y,w,h is unreliable.
-    */
-    QVariant geov = QSettings().value("windowSize");
-    if(geov.canConvert(QVariant::ByteArray)) {
-        // byte array convert is always possible
-        QByteArray geo = geov.toByteArray();
-        // restoreGeometry makes sure the array is valid
-        this->restoreGeometry(geo);
-    }
-    else {
-        this->resize(800,600);
-    }
+    resize(800,600);
+    restoreGeometry(QSettings().value("windowSize").toByteArray());
 
     QApplication::processEvents();
 
@@ -176,11 +166,9 @@ void MainWindow::closeEvent(QCloseEvent *e)
 
     QString filestr = editorTabs->tabToolTip(editorTabs->currentIndex());
 
-    if(QSettings().value("lastUse").toInt())
-    {
-        QSettings().setValue("lastFile",filestr);
-        QSettings().setValue("windowSize",saveGeometry());
-    }
+    QSettings().setValue("lastFile",filestr);
+    QSettings().setValue("windowSize",saveGeometry());
+
     if(e) e->accept();
     qApp->exit(0);
 }
@@ -198,34 +186,29 @@ void MainWindow::newProjectTrees()
 
 
 
-void MainWindow::setCurrentFile(const QString &fileName)
+void MainWindow::addRecentFile(const QString &fileName)
 {
-    QStringList files = QSettings().value(recentFilesKey).toStringList();
+    QStringList files = QSettings().value("recentFiles").toStringList();
+
     files.removeAll(fileName);
     files.prepend(fileName);
     while (files.size() > MaxRecentFiles)
         files.removeLast();
 
-    QSettings().setValue(recentFilesKey, files);
-
-    foreach (QWidget *widget, QApplication::topLevelWidgets()) {
-        MainWindow *mainWin = qobject_cast<MainWindow *>(widget);
-        if (mainWin)
-            mainWin->updateRecentFileActions();
-    }
+    QSettings().setValue("recentFiles", files);
+    updateRecentFileActions();
 }
 
 void MainWindow::updateRecentFileActions()
 {
-    QStringList files = QSettings().value(recentFilesKey).toStringList();
-
+    QStringList files = QSettings().value("recentFiles").toStringList();
+    files.removeAll("");
     int numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
 
-    for (int i = 0; i < numRecentFiles; ++i) {
+    for (int i = 0; i < numRecentFiles; ++i)
+    {
         QString estr = files.at(i);
-        if(estr.length() == 0)
-            continue;
-        QString text = tr("&%1 %2").arg(i + 1).arg(estr);
+        QString text = tr("&%1 %2").arg(i + 1).arg(QFileInfo(estr).fileName());
         recentFileActs[i]->setText(text);
         recentFileActs[i]->setData(estr);
         recentFileActs[i]->setVisible(true);
@@ -233,7 +216,16 @@ void MainWindow::updateRecentFileActions()
     for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
         recentFileActs[j]->setVisible(false);
 
-    separatorFileAct->setVisible(numRecentFiles > 0);
+    if (!numRecentFiles)
+    {
+        recentFileActs[0]->setText("No recent files...");
+        recentFileActs[0]->setVisible(true);
+        recentFileActs[0]->setEnabled(false);
+    }
+    else
+    {
+        recentFileActs[0]->setEnabled(true);
+    }
 }
 
 void MainWindow::openRecentFile()
@@ -257,7 +249,7 @@ void MainWindow::setProject()
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
     QString fileName = editorTabs->tabToolTip(index);
-    setCurrentFile(fileName);
+    addRecentFile(fileName);
 
     if (editorTabs->count() > 0)
         setWindowTitle(editorTabs->tabText(index) + " - " +
@@ -270,10 +262,7 @@ void MainWindow::setProject()
 
     QString text = editorTabs->getEditor(index)->toPlainText();
     updateProjectTree(fileName);
-
-    if(leftSplit->isVisible()) {
-        updateReferenceTree(fileName,text);
-    }
+    updateReferenceTree(fileName,text);
 
     QApplication::restoreOverrideCursor();
 }

@@ -4,7 +4,6 @@ Builder::Builder(QWidget *parent) : QWidget(parent)
 {
     console = new Status;
     consoleEdit = console->getOutput();
-    console->show();
 }
 
 Builder::~Builder()

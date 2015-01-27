@@ -99,7 +99,7 @@ public slots:
     void hideFindFrame();
     void showBrowser();
 
-    void setCurrentFile(const QString &fileName);
+    void addRecentFile(const QString &fileName);
     void updateRecentFileActions();
     void openRecentFile();
 

@@ -17,7 +17,6 @@
 #include "PathSelector.h"
 
 #define tabSpacesKey        "TabSpacesCount"
-#define recentFilesKey      "recentFileList"
 
 #define enableKeyClearScreen        "enableClearScreen"
 #define enableKeyClearScreen16      "enableClearScreen16"
@@ -100,7 +99,6 @@ signals:
 
 public slots:
 
-    void configSettings();
     void cleanSettings();
     void fontDialog();
     void browseCompiler();
