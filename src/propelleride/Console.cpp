@@ -1,10 +1,10 @@
 #include "Console.h"
-#include "Sleeper.h"
 
 #include <QApplication>
 #include <QDebug>
 #include <QClipboard>
 #include <QTextBlock>
+#include <QThread>
 
 // It's Spinning Windows world.
 #define SPIN_RETURN     0xA
@@ -160,7 +160,7 @@ void Console::sendPortMessage(QString s)
 {
     QByteArray barry;
     foreach(QChar c, s.toUtf8()) {
-        Sleeper::ms(1);
+        QThread::msleep(1);
         barry.append(c);
         emit sendSerial(barry);
         barry.clear();

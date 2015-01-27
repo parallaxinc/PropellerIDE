@@ -28,11 +28,11 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     $$files(mainwindow/*.cpp) \
-    StatusDialog.cpp \
     Highlighter.cpp \
     treemodel.cpp \
     treeitem.cpp \
     Builder.cpp \
+    clickable.cpp \
     SpinBuilder.cpp \
     PathSelector.cpp \
     PortListener.cpp \
@@ -40,6 +40,8 @@ SOURCES += \
     PortConnectionMonitor.cpp \
     ReferenceTree.cpp \
     editor.cpp \
+    status.cpp \
+    StatusDialog.cpp \
     SpinHighlighter.cpp \
     SpinParser.cpp \
     Terminal.cpp \
@@ -51,11 +53,11 @@ SOURCES += \
 
 HEADERS  += \
     mainwindow.h \
-    StatusDialog.h \
     Highlighter.h \
     treemodel.h \
     treeitem.h \
     Builder.h \
+    clickable.h \
     SpinBuilder.h \
     PathSelector.h \
     PortListener.h \
@@ -65,7 +67,8 @@ HEADERS  += \
     editor.h \
     SpinHighlighter.h \
     SpinParser.h \
-    Sleeper.h \
+    status.h \
+    StatusDialog.h \
     Terminal.h \
     Console.h \
     termprefs.h \
@@ -81,7 +84,8 @@ OTHER_FILES +=
 
 FORMS += \
     forms/TermPrefs.ui \
-    forms/finder.ui
+    forms/finder.ui \
+    forms/status.ui
 
 RESOURCES += \
     icons/icons.qrc \

@@ -11,7 +11,7 @@
 #include <QPlainTextEdit> 
 #include <QTreeView> 
 
-#include "SpinBuilder.h"
+#include "Builder.h"
 #include "SpinParser.h"
 
 #include "treemodel.h"
@@ -190,7 +190,7 @@ private:
     TreeModel       *projectModel;
     TreeModel       *referenceModel;
 
-    SpinBuilder     *spinBuilder;
+    Builder     *spinBuilder;
 
     QString     basicPath;
     QString     includePath;

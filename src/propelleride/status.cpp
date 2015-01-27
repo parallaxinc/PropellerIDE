@@ -1,7 +1,7 @@
 #include "status.h"
 #include <QDebug>
 
-StatusDialog::StatusDialog(QWidget *parent)
+Status::Status(QWidget *parent)
     : QDialog(parent)
 {
     ui.setupUi(this);
@@ -22,20 +22,20 @@ StatusDialog::StatusDialog(QWidget *parent)
     connect(ui.label, SIGNAL(clicked()), this, SLOT(toggleDetails()));
 }
 
-void StatusDialog::setBuild(bool active)
+void Status::setBuild(bool active)
 {
     ui.iconBuild->setEnabled(active);
     ui.textBuild->setEnabled(active);
 }
 
-void StatusDialog::setDownload(bool active)
+void Status::setDownload(bool active)
 {
     ui.arrow1->setEnabled(active);
     ui.iconDownload->setEnabled(active);
     ui.textDownload->setEnabled(active);
 }
 
-void StatusDialog::setRun(bool active)
+void Status::setRun(bool active)
 {
     ui.arrow2->setEnabled(active);
     ui.iconRun->setEnabled(active);
@@ -43,7 +43,7 @@ void StatusDialog::setRun(bool active)
 
 }
 
-void StatusDialog::setStage(int newstage)
+void Status::setStage(int newstage)
 {
     if (newstage > 0)
         setBuild(true);
@@ -61,7 +61,7 @@ void StatusDialog::setStage(int newstage)
         setRun(false);
 }
 
-void StatusDialog::toggleDetails()
+void Status::toggleDetails()
 {
     if (ui.plainTextEdit->isVisible())
     {
@@ -76,7 +76,7 @@ void StatusDialog::toggleDetails()
 }
 
 
-void StatusDialog::selectStage()
+void Status::selectStage()
 {
     setStage(stage);
     switch (stage)
@@ -99,7 +99,7 @@ void StatusDialog::selectStage()
     adjustSize();
 }
 
-void StatusDialog::keyPressEvent(QKeyEvent * event)
+void Status::keyPressEvent(QKeyEvent * event)
 {
     if(event->key() == Qt::Key_Escape)
     {
@@ -109,4 +109,9 @@ void StatusDialog::keyPressEvent(QKeyEvent * event)
     {
         selectStage();
     }
+}
+
+QPlainTextEdit * Status::getOutput()
+{
+    return ui.plainTextEdit;
 }

@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     projectModel = NULL;
     referenceModel = NULL;
 
-    spinBuilder = new SpinBuilder();
+    spinBuilder = new Builder();
 
     connect(spinBuilder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
 
@@ -448,8 +448,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
 
     if(fileName.contains(".spin")) {
         statusDialog->init("Compiling Program", QFileInfo(this->projectFile).fileName());
-        spinBuilder->setParameters(spinCompiler, spinIncludes, projectFile, compileResult);
-        spinBuilder->setLoader(spinLoader);
+        spinBuilder->setParameters(spinCompiler, spinLoader, spinIncludes, projectFile, compileResult);
 
         statusDialog->stop();
 
