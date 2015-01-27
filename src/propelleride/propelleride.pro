@@ -33,7 +33,6 @@ SOURCES += \
     treeitem.cpp \
     Builder.cpp \
     clickable.cpp \
-    SpinBuilder.cpp \
     PathSelector.cpp \
     PortListener.cpp \
     Preferences.cpp \
@@ -58,7 +57,6 @@ HEADERS  += \
     treeitem.h \
     Builder.h \
     clickable.h \
-    SpinBuilder.h \
     PathSelector.h \
     PortListener.h \
     Preferences.h \
