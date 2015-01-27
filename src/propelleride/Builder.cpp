@@ -2,8 +2,9 @@
 
 Builder::Builder(QWidget *parent) : QWidget(parent)
 {
-    console = new Status;
+    console = new Status(this);
     consoleEdit = console->getOutput();
+    console->show();
 }
 
 Builder::~Builder()
@@ -150,7 +151,10 @@ int Builder::loadProgram(QString copts)
     console->setStage(2);
     console->setText(tr("Downloading %1...").arg(QFileInfo(projectFile).fileName()));
 
-    return runProcess(loader,args);
+    int rc = runProcess(loader,args);
+    if (rc)
+        console->showDetails();
+    return rc;
 }
 
 int Builder::runCompiler(QString copts)
@@ -172,6 +176,7 @@ int Builder::runCompiler(QString copts)
 
     if (rc)
     {
+        console->showDetails();
         getCompilerOutput();
         return 1;
     }

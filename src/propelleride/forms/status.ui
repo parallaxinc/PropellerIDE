@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>statusDialog</class>
- <widget class="QDialog" name="statusDialog">
+ <widget class="QFrame" name="statusDialog">
   <property name="windowModality">
    <enum>Qt::NonModal</enum>
   </property>

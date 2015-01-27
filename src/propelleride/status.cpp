@@ -2,11 +2,12 @@
 #include <QDebug>
 
 Status::Status(QWidget *parent)
-    : QDialog(parent)
+    : QFrame(parent)
 {
     ui.setupUi(this);
     setWindowFlags(Qt::FramelessWindowHint | 
             Qt::WindowStaysOnTopHint | Qt::Dialog);
+    setFrameShadow(QFrame::Raised);
 
     ui.plainTextEdit->hide();
 
@@ -56,19 +57,27 @@ void Status::setStage(int newstage)
         setRun(false);
 }
 
+
+void Status::showDetails()
+{
+    ui.label->setText("Details -");
+    ui.plainTextEdit->show();
+    adjustSize();
+}
+
+void Status::hideDetails()
+{
+    ui.label->setText("Details +");
+    ui.plainTextEdit->hide();
+    adjustSize();
+}
+
 void Status::toggleDetails()
 {
     if (ui.plainTextEdit->isVisible())
-    {
-        ui.label->setText("Details +");
-        ui.plainTextEdit->hide();
-    }
+        hideDetails();
     else
-    {
-        ui.label->setText("Details -");
-        ui.plainTextEdit->show();
-    }
-    adjustSize();
+        showDetails();
 }
 
 void Status::setText(const QString & text)

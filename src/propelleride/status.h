@@ -2,7 +2,7 @@
 #include <QKeyEvent>
 #include <Qt>
 
-class Status : public QDialog
+class Status : public QFrame
 {
     Q_OBJECT
 
@@ -13,8 +13,10 @@ public:
     void setText(const QString & text);
     void setStage(int newstage);
 
-private slots:
+public slots:
     void toggleDetails();
+    void showDetails();
+    void hideDetails();
 
 private:
     Ui::statusDialog ui;
