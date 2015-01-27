@@ -2,10 +2,6 @@
 
 #include <QMessageBox> 
 
-#ifndef QT5
-#define QStringLiteral QLatin1String
-#endif
-
 QFrame *MainWindow::newFindFrame(QSplitter *split)
 {
     findFrame = new QFrame(split);
@@ -16,25 +12,25 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     verticalLayout = new QVBoxLayout();
     verticalLayout->setSpacing(8);
     verticalLayout->setContentsMargins(11, 11, 11, 11);
-    verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+    verticalLayout->setObjectName("verticalLayout");
     verticalLayout->setContentsMargins(4, 4, 4, 0);
 
     /* layout for find feature buttons/fields */
     findLayout = new QHBoxLayout();
     findLayout->setSpacing(8);
     findLayout->setContentsMargins(11, 11, 11, 11);
-    findLayout->setObjectName(QStringLiteral("findLayout"));
+    findLayout->setObjectName("findLayout");
     findLayout->setContentsMargins(4, 4, 4, 0);
 
     /* "Find:" */
     findLabel = new QLabel();
-    findLabel->setObjectName(QStringLiteral("findLabel"));
+    findLabel->setObjectName("findLabel");
     findLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
     findLayout->addWidget(findLabel);
 
     /* find-text field */
     findEdit = new QLineEdit();
-    findEdit->setObjectName(QStringLiteral("findEdit"));
+    findEdit->setObjectName("findEdit");
     QSizePolicy sizePolicy1(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
     sizePolicy1.setHorizontalStretch(0);
     sizePolicy1.setVerticalStretch(0);
@@ -46,7 +42,7 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
 
     /* find-previous button */
     findPreviousBtn = new QToolButton();
-    findPreviousBtn->setObjectName(QStringLiteral("findPreviousBtn"));
+    findPreviousBtn->setObjectName("findPreviousBtn");
     findPreviousBtn->setStyleSheet("QToolButton {\
         background: url(:/icons/find-previous.png) center no-repeat;\
             width: 24;\
@@ -65,7 +61,7 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
 
     /* find-next button */
     findNextBtn = new QToolButton();
-    findNextBtn->setObjectName(QStringLiteral("findNextBtn"));
+    findNextBtn->setObjectName("findNextBtn");
     findNextBtn->setStyleSheet("QToolButton {\
         background: url(:/icons/find-next.png) center no-repeat;\
             width: 24;\
@@ -85,7 +81,7 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     /* whole-word search button */
     /* dgately 03/17/2014 - need pressed icon mods */
     wholeWordFilterBtn = new QToolButton();
-    wholeWordFilterBtn->setObjectName(QStringLiteral("wholeWordFilterBtn"));
+    wholeWordFilterBtn->setObjectName("wholeWordFilterBtn");
     wholeWordFilterBtn->setIcon(QIcon(":/icons/find-toggle-wholeword.png"));
     wholeWordFilterBtn->setCheckable(true);
     wholeWordFilterBtn->setStyleSheet("background-color: white");
@@ -94,7 +90,7 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     /* case-sensitive search button */
     /* dgately 03/17/2014 - need pressed icon mods */
     caseSensitiveFilterBtn = new QToolButton();
-    caseSensitiveFilterBtn->setObjectName(QStringLiteral("caseSensitiveFilterBtn"));
+    caseSensitiveFilterBtn->setObjectName("caseSensitiveFilterBtn");
     caseSensitiveFilterBtn->setIcon(QIcon(":/icons/find-toggle-case.png"));
     caseSensitiveFilterBtn->setCheckable(true);
     caseSensitiveFilterBtn->setStyleSheet("background-color: white");
@@ -102,7 +98,7 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
 
     /* done-searching button */
     doneFindBtn = new QToolButton();
-    doneFindBtn->setObjectName(QStringLiteral("doneFindBtn"));
+    doneFindBtn->setObjectName("doneFindBtn");
     findLayout->addWidget(doneFindBtn);
     connect(doneFindBtn,SIGNAL(clicked()),this,SLOT(hideFindFrame()));
     /* Find menu command will also hide the Find frame if currently visible */
@@ -114,18 +110,18 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
     replaceLayout = new QHBoxLayout();
     replaceLayout->setSpacing(8);
     replaceLayout->setContentsMargins(11, 11, 11, 11);
-    replaceLayout->setObjectName(QStringLiteral("replaceLayout"));
+    replaceLayout->setObjectName("replaceLayout");
     replaceLayout->setContentsMargins(4, 0, 4, 4);
 
     /* "Replace:" */
     replaceLabel = new QLabel();
-    replaceLabel->setObjectName(QStringLiteral("replaceLabel"));
+    replaceLabel->setObjectName("replaceLabel");
     replaceLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
     replaceLayout->addWidget(replaceLabel);
 
     /* replace-text field */
     replaceEdit = new QLineEdit("");
-    replaceEdit->setObjectName(QStringLiteral("replaceEdit"));
+    replaceEdit->setObjectName("replaceEdit");
     sizePolicy1.setHeightForWidth(replaceEdit->sizePolicy().hasHeightForWidth());
     replaceEdit->setSizePolicy(sizePolicy1);
     replaceEdit->setMinimumSize(QSize(105, 0));
@@ -135,19 +131,19 @@ QFrame *MainWindow::newFindFrame(QSplitter *split)
 
     /* replace-previous button */
     replacePreviousBtn = new QToolButton();
-    replacePreviousBtn->setObjectName(QStringLiteral("replacePreviousBtn"));
+    replacePreviousBtn->setObjectName("replacePreviousBtn");
     replaceLayout->addWidget(replacePreviousBtn);
     connect(replacePreviousBtn,SIGNAL(clicked()),this,SLOT(replacePrevClicked()));
 
     /* replace-next button */
     replaceNextBtn = new QToolButton();
-    replaceNextBtn->setObjectName(QStringLiteral("replaceNextBtn"));
+    replaceNextBtn->setObjectName("replaceNextBtn");
     replaceLayout->addWidget(replaceNextBtn);
     connect(replaceNextBtn,SIGNAL(clicked()),this,SLOT(replaceNextClicked()));
 
     /* replace-all button */
     replaceAllBtn = new QToolButton();
-    replaceAllBtn->setObjectName(QStringLiteral("replaceAllBtn"));
+    replaceAllBtn->setObjectName("replaceAllBtn");
     replaceLayout->addWidget(replaceAllBtn);
     connect(replaceAllBtn,SIGNAL(clicked()),this,SLOT(replaceAllClicked()));
 
