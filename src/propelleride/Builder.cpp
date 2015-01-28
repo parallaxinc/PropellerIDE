@@ -4,7 +4,6 @@ Builder::Builder(QWidget *parent) : QWidget(parent)
 {
     console = new Status(this);
     consoleEdit = console->getOutput();
-    console->show();
 }
 
 Builder::~Builder()
@@ -12,6 +11,12 @@ Builder::~Builder()
     delete console;
 }
 
+void Builder::show()
+{
+    console->setStage(0);
+    consoleEdit->clear();
+    console->show();
+}
 
 void Builder::setParameters(
         QString comp,
@@ -153,7 +158,14 @@ int Builder::loadProgram(QString copts)
 
     int rc = runProcess(loader,args);
     if (rc)
+    {
         console->showDetails();
+    }
+    else
+    {
+        console->setStage(3);
+        console->setText(tr("Download complete!"));
+    }
     return rc;
 }
 

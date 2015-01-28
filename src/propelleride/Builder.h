@@ -25,6 +25,7 @@ class Builder : public QWidget
 public:
     explicit Builder(QWidget *parent = 0);
     ~Builder();
+    void show();
 
     void setParameters(
             QString comp,

@@ -5,15 +5,17 @@ Status::Status(QWidget *parent)
     : QFrame(parent)
 {
     ui.setupUi(this);
-    setWindowFlags(Qt::FramelessWindowHint | 
-            Qt::WindowStaysOnTopHint | Qt::Dialog);
+    setWindowFlags( Qt::Dialog);
     setFrameShadow(QFrame::Raised);
 
     ui.plainTextEdit->hide();
+    adjustSize();
 
     ui.activeText->setText(" ");
     setStage(0);
-    stage = 0;
+
+    currentTheme = &Singleton<ColorScheme>::Instance();
+    updateColors();
 
     connect(ui.label, SIGNAL(clicked()), this, SLOT(toggleDetails()));
 }
@@ -36,22 +38,21 @@ void Status::setRun(bool active)
     ui.arrow2->setEnabled(active);
     ui.iconRun->setEnabled(active);
     ui.textRun->setEnabled(active);
-
 }
 
-void Status::setStage(int newstage)
+void Status::setStage(int stage)
 {
-    if (newstage > 0)
+    if (stage > 0)
         setBuild(true);
     else
         setBuild(false);
 
-    if (newstage > 1)
+    if (stage > 1)
         setDownload(true);
     else
         setDownload(false);
 
-    if (newstage > 2)
+    if (stage > 2)
         setRun(true);
     else
         setRun(false);
@@ -96,4 +97,9 @@ void Status::keyPressEvent(QKeyEvent * event)
 QPlainTextEdit * Status::getOutput()
 {
     return ui.plainTextEdit;
+}
+
+void Status::updateColors()
+{
+    ui.plainTextEdit->setFont(currentTheme->getFont());
 }

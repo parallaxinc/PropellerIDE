@@ -80,6 +80,16 @@ int FileManager::isFileOpen(const QString & fileName)
     return 0;
 }
 
+int FileManager::isFileEmpty(int index)
+{
+    if (count() && (tabToolTip(index).isEmpty()
+                    && getEditor(index)->toPlainText().isEmpty()
+                    && !getEditor(index)->contentChanged()) )
+        return 1;
+    else
+        return 0;
+}
+
 void FileManager::openFile(const QString & fileName)
 {
     qDebug() << "FileManager::openFile(" << fileName << ")";
@@ -101,17 +111,11 @@ void FileManager::openFile(const QString & fileName)
         return;
 
     // check if openFile should overwrite empty file
-    int index = currentIndex();
-    if (count() && (tabToolTip(index).isEmpty()
-                    && getEditor(index)->toPlainText().isEmpty()
-                    && !getEditor(index)->contentChanged()) )
-    {
+    int index;
+    if (isFileEmpty(currentIndex()))
         index = currentIndex();
-    }
     else
-    {
         index = newFile();
-    }
 
     QTextStream in(&file);
     in.setAutoDetectUnicode(true);

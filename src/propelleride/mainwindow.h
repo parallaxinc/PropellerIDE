@@ -127,7 +127,6 @@ private:
     void setupToolBars();
     void setupProjectTools(QSplitter *vsplit);
     void addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile);
-    int  isFileOpen(QString fileName);
     void openTreeFile(QString fileName);
     void updateProjectTree(QString fileName);
     void updateSpinProjectTree(QString fileName);
@@ -139,10 +138,9 @@ private:
 
     typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
     int  runCompiler(COMPILE_TYPE type);
-    int  loadProgram(int type, QString file = QString());
+    int  loadProgram(int type);
 
     QString     spinCompiler;
-    QString     spinCompilerPath;
     QString     spinIncludes;
     QString     spinLoader;
 
@@ -190,10 +188,8 @@ private:
     TreeModel       *projectModel;
     TreeModel       *referenceModel;
 
-    Builder     *spinBuilder;
-
-    QString     basicPath;
-    QString     includePath;
+    Builder     builder;
+    QStatusBar  statusbar;
 
     QComboBox   *cbBoard;
     QComboBox   *cbPort;
@@ -203,14 +199,8 @@ private:
     int         termXpos;
     int         termYpos;
 
-    QString     boardName;
-
     QProcess    *proc;
 
-    int progMax;
-    int progCount;
-    QLabel sizeLabel;
-    QLabel msgLabel;
     QString compileResult;
 
     PortConnectionMonitor *portConnectionMonitor;
