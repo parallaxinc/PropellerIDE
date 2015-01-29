@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
 #if defined(Q_OS_WIN32)
     QStringList styles = QStyleFactory::keys();
     qDebug() << "Available window styles" << styles;
-    if(styles.contains("Fusion")) {
-        QApplication::setStyle("Fusion");
+    if(styles.contains("WindowsVista")) {
+        QApplication::setStyle("WindowsVista");
     }
 #endif
 
@@ -55,10 +55,7 @@ debug your applications with the built-in serial terminal.")
     parser.process(app);
 
     MainWindow w;
-    w.init();
-
     w.openFiles(parser.positionalArguments());
-
     w.show();
     return app.exec();
 }

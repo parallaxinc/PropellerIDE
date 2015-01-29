@@ -66,26 +66,56 @@ void FileManager::open()
 }
 
 
+int FileManager::isFileOpen(const QString & fileName)
+{
+    // check if file already open before opening another instance
+    for (int i = 0; i < count(); i++)
+    {
+        if (fileName == tabToolTip(i))
+        {
+            changeTab(i);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int FileManager::isFileEmpty(int index)
+{
+    if (count() && (tabToolTip(index).isEmpty()
+                    && getEditor(index)->toPlainText().isEmpty()
+                    && !getEditor(index)->contentChanged()) )
+        return 1;
+    else
+        return 0;
+}
+
 void FileManager::openFile(const QString & fileName)
 {
     qDebug() << "FileManager::openFile(" << fileName << ")";
 
+    if (fileName.isEmpty())
+        return;
+
     QFile file(fileName);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
-        QMessageBox::warning(this, tr("Recent Files"),
+        QMessageBox::warning(this, tr("Warning"),
                              tr("Cannot read file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
         return;
     }
 
-    // check if file already open before opening another instance
-    for (int i = 0; i < count(); i++)
-        if (fileName == tabToolTip(i))
-            return;
+    if (isFileOpen(fileName))
+        return;
 
-    int index = newFile();
+    // check if openFile should overwrite empty file
+    int index;
+    if (isFileEmpty(currentIndex()))
+        index = currentIndex();
+    else
+        index = newFile();
 
     QTextStream in(&file);
     in.setAutoDetectUnicode(true);

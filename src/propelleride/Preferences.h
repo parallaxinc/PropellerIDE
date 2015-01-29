@@ -17,7 +17,6 @@
 #include "PathSelector.h"
 
 #define tabSpacesKey        "TabSpacesCount"
-#define recentFilesKey      "recentFileList"
 
 #define enableKeyClearScreen        "enableClearScreen"
 #define enableKeyClearScreen16      "enableClearScreen16"
@@ -85,7 +84,6 @@ class Preferences : public QDialog
 public:
     explicit Preferences(QWidget *parent = 0);
     void showPreferences();
-    QString getSpinLibraryString();
 
     int  getTabSpaces();
     bool getAutoCompleteEnable();
@@ -101,7 +99,6 @@ signals:
 
 public slots:
 
-    void configSettings();
     void cleanSettings();
     void fontDialog();
     void browseCompiler();

@@ -21,14 +21,6 @@ ifeq ($(VERSION),)
 	VERSION := 0.0.0-phony
 endif
 
-# Windows C run-time strips quotes from arguments unless manually escaped.
-# So we have to prepare the version string in advance to work in PowerShell
-VERSION_ARG		:= "VERSION=$(VERSION)"
-ifneq (,$(findstring MINGW32_NT, $(shell uname -s)))
-	VERSION_ARG := $(subst ",\",$(VERSION_ARG))
-endif
-
-
 ifeq ($(shell uname -m),i686)			# if i686
 	CPU := i386
 else ifeq ($(shell uname -m),x86_64)	# if x64
@@ -56,7 +48,7 @@ checkout:
 	git submodule update
 
 build:
-	cd $(DIR_SRC); $(QMAKE) $(VERSION_ARG) PREFIX=$(DIR_OUT); $(MAKE)
+	cd $(DIR_SRC); $(QMAKE) VERSION_ARG=$(VERSION) PREFIX=$(DIR_OUT); $(MAKE)
 
 copy: build
 	cd $(DIR_SRC); $(MAKE) install

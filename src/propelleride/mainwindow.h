@@ -11,7 +11,7 @@
 #include <QPlainTextEdit> 
 #include <QTreeView> 
 
-#include "SpinBuilder.h"
+#include "Builder.h"
 #include "SpinParser.h"
 
 #include "treemodel.h"
@@ -33,7 +33,6 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = 0);
-    void init();
 
     Preferences  *propDialog;
     QSplitter   *leftSplit;
@@ -100,16 +99,18 @@ public slots:
     void hideFindFrame();
     void showBrowser();
 
-    void setCurrentFile(const QString &fileName);
+    void addRecentFile(const QString &fileName);
     void updateRecentFileActions();
     void openRecentFile();
 
     void highlightFileLine(QString file, int line);
 
-
 private:
-    void openLastFile();
-    void getApplicationSettings(bool complain);
+    void loadSession();
+    void saveSession();
+    void clearSession();
+
+    void getApplicationSettings();
     int  checkCompilerInfo();
     QStringList getCompilerParameters(QString compilerOptions);
     void checkAndSaveFiles();
@@ -126,7 +127,6 @@ private:
     void setupToolBars();
     void setupProjectTools(QSplitter *vsplit);
     void addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile);
-    int  isFileOpen(QString fileName);
     void openTreeFile(QString fileName);
     void updateProjectTree(QString fileName);
     void updateSpinProjectTree(QString fileName);
@@ -138,10 +138,9 @@ private:
 
     typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
     int  runCompiler(COMPILE_TYPE type);
-    int  loadProgram(int type, QString file = QString());
+    int  loadProgram(int type);
 
     QString     spinCompiler;
-    QString     spinCompilerPath;
     QString     spinIncludes;
     QString     spinLoader;
 
@@ -189,10 +188,8 @@ private:
     TreeModel       *projectModel;
     TreeModel       *referenceModel;
 
-    SpinBuilder     *spinBuilder;
-
-    QString     basicPath;
-    QString     includePath;
+    Builder     builder;
+    QStatusBar  statusbar;
 
     QComboBox   *cbBoard;
     QComboBox   *cbPort;
@@ -202,15 +199,8 @@ private:
     int         termXpos;
     int         termYpos;
 
-    QString     boardName;
-
     QProcess    *proc;
 
-    int progMax;
-    int progCount;
-    QLabel sizeLabel;
-    QLabel msgLabel;
-    QProgressBar *progress;
     QString compileResult;
 
     PortConnectionMonitor *portConnectionMonitor;

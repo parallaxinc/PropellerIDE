@@ -29,7 +29,7 @@ void ColorScheme::defaults()
     colors[SyntaxComments]      = (color) { Qt::darkGreen         , "Syntax_Comments"      };
 
     setFont(QFont("Monospace"));
-    font.setPointSize(14);
+    font.setPointSize(12);
 }
 
 

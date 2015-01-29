@@ -26,8 +26,6 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
 
     currentTheme = &Singleton<ColorScheme>::Instance();
 
-    configSettings();
-
     setupFolders();
     setupOptions();
     setupHighlight();
@@ -46,23 +44,6 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
 
     setWindowFlags(Qt::Tool);
     resize(500,260);
-}
-
-void Preferences::configSettings()
-{
-    // if new app installed, remove old config file
-    QSettings settings;
-    QString app = QApplication::applicationFilePath();
-
-    int keyday = settings.value("lastUse").toInt();
-    int appday = QFileInfo(app).lastModified().date().toJulianDay();
-
-    if(appday > keyday)
-    {
-        cleanSettings();
-        settings.setValue("lastUse",appday);
-    }
-    return;
 }
 
 void Preferences::cleanSettings()
@@ -392,11 +373,6 @@ void Preferences::showPreferences()
     spinSuggestEnableSaved = spinSuggestEnable.isChecked();
 
     this->show();
-}
-
-QString Preferences::getSpinLibraryString()
-{
-    return librarypath->get();
 }
 
 void Preferences::adjustFontSize(float ratio)

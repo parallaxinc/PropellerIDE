@@ -4,20 +4,35 @@
 #include <QString>
 #include <QLabel>
 #include <QComboBox>
-#include <QProgressBar>
 #include <QProcess>
 #include <QMutex>
+#include <QDebug>
+#include <QPlainTextEdit>
+#include <QDialog>
+#include <QHBoxLayout>
+#include <QDir>
+#include <QMessageBox>
+#include <QApplication>
+#include <QThread>
+#include <QScrollBar>
+#include <QFileInfo>
 
-class Builder : public QObject
+#include "status.h"
+
+class Builder : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Builder(QObject *parent = 0);
+    explicit Builder(QWidget *parent = 0);
+    ~Builder();
+    void show();
 
-    void setParameters(QString comp, QString incl, QString compPath, QString projFile, QString compstat);
-    void setObjects(QLabel *stat, QLabel *progsize, QProgressBar *progbar, QComboBox *ports);
-
-    virtual int  runCompiler(QString copts);
+    void setParameters(
+            QString comp,
+            QString load,
+            QString incl,
+            QString projFile,
+            QString compstat);
 
 signals:
     void compilerErrorInfo(QString file, int line);
@@ -27,26 +42,26 @@ public slots:
     virtual void compilerError(QProcess::ProcessError error);
     virtual void compilerFinished(int exitCode, QProcess::ExitStatus status);
     virtual void procReadyRead();
+    int runProcess(const QString & programName, const QStringList & programArgs);
 
 public:
     QString compilerStr;
     QString includesStr;
-    QString compilerPath;
-
     QString projectFile;
-    QString portName;
+    QString compileResult;
+    QString loader;
 
-    QComboBox *cbPort;
-    QProcess  *proc;
+    int loadProgram(QString copts);
+    int runCompiler(QString copts);
+    void getCompilerOutput();
 
-    int progMax;
-    int progCount;
-
-    QString         compileResult;
-    QLabel          *sizeLabel;
-    QLabel          *msgLabel;
-    QProgressBar    *progress;
+private:
+    QProcess * proc;
 
     QMutex      procMutex;
     bool        procDone;
+
+    Status * console;
+    QPlainTextEdit * consoleEdit;
+
 };

@@ -1,10 +1,13 @@
 isEmpty(PREFIX):PREFIX = /usr/local
 
-QT += gui
+QT += gui widgets
 
-greaterThan(QT_MAJOR_VERSION, 4): {
-    QT += widgets
-    DEFINES += QT5
+!greaterThan(QT_MAJOR_VERSION, 4): {
+    error("PropellerIDE requires Qt5.2 or greater")
+}
+
+!greaterThan(QT_MINOR_VERSION, 1): {
+    error("PropellerIDE requires Qt5.2 or greater")
 }
 
 INCLUDEPATH += . ..

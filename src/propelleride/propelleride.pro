@@ -13,31 +13,34 @@ win32 {
     target.path = $${PREFIX}/
 }
 
+CONFIG += console
+
 INSTALLS += target
 
 LIBS += -L$${OUT_PWD}/../qext/ -lqext
 LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
 
-isEmpty(VERSION):VERSION = 0.0.0
-VERSION = '\\"$${VERSION}\\"'
-DEFINES += VERSION=\"$${VERSION}\"
+isEmpty(VERSION_ARG):VERSION_ARG = 0.0.0
+VERSION_ARG = '\\"$${VERSION_ARG}\\"'
+DEFINES += VERSION=\"$${VERSION_ARG}\"
 
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
     $$files(mainwindow/*.cpp) \
-    StatusDialog.cpp \
     Highlighter.cpp \
     treemodel.cpp \
     treeitem.cpp \
     Builder.cpp \
-    SpinBuilder.cpp \
+    clickable.cpp \
     PathSelector.cpp \
     PortListener.cpp \
     Preferences.cpp \
     PortConnectionMonitor.cpp \
     ReferenceTree.cpp \
     editor.cpp \
+    status.cpp \
+    StatusDialog.cpp \
     SpinHighlighter.cpp \
     SpinParser.cpp \
     Terminal.cpp \
@@ -49,12 +52,11 @@ SOURCES += \
 
 HEADERS  += \
     mainwindow.h \
-    StatusDialog.h \
     Highlighter.h \
     treemodel.h \
     treeitem.h \
     Builder.h \
-    SpinBuilder.h \
+    clickable.h \
     PathSelector.h \
     PortListener.h \
     Preferences.h \
@@ -63,7 +65,8 @@ HEADERS  += \
     editor.h \
     SpinHighlighter.h \
     SpinParser.h \
-    Sleeper.h \
+    status.h \
+    StatusDialog.h \
     Terminal.h \
     Console.h \
     termprefs.h \
@@ -79,7 +82,8 @@ OTHER_FILES +=
 
 FORMS += \
     forms/TermPrefs.ui \
-    forms/finder.ui
+    forms/finder.ui \
+    forms/status.ui
 
 RESOURCES += \
     icons/icons.qrc \
