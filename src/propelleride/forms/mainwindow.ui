@@ -664,6 +664,9 @@
    </property>
   </action>
   <action name="actionHelp_Contents">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../icons/icons.qrc">
      <normaloff>:/icons/help-contents2.png</normaloff>:/icons/help-contents2.png</iconset>

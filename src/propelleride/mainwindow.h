@@ -6,7 +6,6 @@
 #include <QPlainTextEdit> 
 #include <QTreeView> 
 
-#include "Builder.h"
 #include "SpinParser.h"
 
 #include "treemodel.h"
@@ -20,7 +19,9 @@
 #include "StatusDialog.h"
 #include "spinzip/zipper.h"
 #include "ReferenceTree.h"
+
 #include "FileManager.h"
+#include "BuildManager.h"
 
 #include "ui_mainwindow.h"
 
@@ -54,6 +55,7 @@ public slots:
     void replaceNextClicked();
     void replacePrevClicked();
     void replaceAllClicked();
+    void showMessage(const QString & message);
 
 signals:
     void doPortEnumerate();
@@ -72,6 +74,7 @@ public slots:
     void fontSmaller();
 
     // help
+    void openFileResource(QString const & resource);
     void propellerManual();
     void propellerDatasheet();
     void about();
@@ -177,7 +180,8 @@ private:
     int         findPosition;
     int         wasClicked;
 
-    FileManager *editorTabs;
+    FileManager     *editorTabs;
+    BuildManager    builder;
 
     QString         projectFile;
     ReferenceTree   *projectTree;
@@ -185,7 +189,6 @@ private:
     TreeModel       *projectModel;
     TreeModel       *referenceModel;
 
-    Builder     builder;
     QStatusBar  statusbar;
 
     QComboBox   *cbPort;

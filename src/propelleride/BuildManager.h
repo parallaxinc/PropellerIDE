@@ -19,12 +19,12 @@
 
 #include "status.h"
 
-class Builder : public QWidget
+class BuildManager : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Builder(QWidget *parent = 0);
-    ~Builder();
+    explicit BuildManager(QWidget *parent = 0);
+    ~BuildManager();
     void show();
 
     void setParameters(

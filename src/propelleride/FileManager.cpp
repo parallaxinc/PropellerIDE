@@ -74,6 +74,7 @@ int FileManager::isFileOpen(const QString & fileName)
         if (fileName == tabToolTip(i))
         {
             changeTab(i);
+            emit sendMessage(tr("File already open: %1").arg(fileName));
             return 1;
         }
     }
@@ -129,6 +130,7 @@ void FileManager::openFile(const QString & fileName)
     fileChanged();
 
     emit fileUpdated(index);
+    emit sendMessage(tr("File opened successfully: %1").arg(fileName));
 }
 
 
@@ -202,6 +204,7 @@ void FileManager::saveFile(const QString & fileName, int index)
     setTabText(index,QFileInfo(fileName).fileName());
     getEditor(index)->saveContent();
     fileChanged();
+    emit sendMessage(tr("File saved successfully: %1").arg(fileName));
 }
 
 

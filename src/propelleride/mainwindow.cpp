@@ -79,6 +79,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     connect(ui.actionBigger_Font,  SIGNAL(triggered()), this, SLOT(fontBigger()));
     connect(ui.actionSmaller_Font, SIGNAL(triggered()), this, SLOT(fontSmaller()));
 
+    ui.actionBigger_Font->setShortcuts(QList<QKeySequence>() << QKeySequence::ZoomIn
+                                                             << Qt::CTRL+Qt::Key_Equal);
+
 
     // Project Menu
     connect(ui.actionIdentify,  SIGNAL(triggered()), this, SLOT(findHardware()));
@@ -112,6 +115,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
 
     /* start with an empty file if fresh install */
     connect(editorTabs,SIGNAL(fileUpdated(int)), this, SLOT(setProject()));
+    connect(editorTabs,SIGNAL(sendMessage(const QString &)),this,SLOT(showMessage(const QString &)));
     editorTabs->newFile();
 
     resize(800,600);
@@ -1242,12 +1246,15 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     return QMainWindow::eventFilter(target, event);
 }
 
-void openFileResource(QString const & resource)
+void MainWindow::openFileResource(QString const & resource)
 {
     QString path = QApplication::applicationDirPath()
             + QString(APP_RESOURCES_PATH)
             + resource;
-    QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    if (QFileInfo(path).exists() && QFileInfo(path).isFile())
+        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    else
+        showMessage(tr("File %1 not found...").arg(path));
 }
 
 void MainWindow::propellerManual()
@@ -1272,8 +1279,13 @@ void MainWindow::about()
            "<p>PropellerIDE is built in Qt and is fully cross-platform.</p>"
 
            "<h3>Credits</h3>"
-           "<p>Copyright &copy; 2014 by Parallax, Inc.</p>"
-           "<p>Originally developed by Steve Denson, Dennis Gately, and Roy Eltham. "
-           "Now developed by LameStation LLC in collaboration with Parallax.</p>");
+           "<p>Copyright &copy; 2014-2015 by Parallax, Inc. "
+           "Developed by LameStation LLC in collaboration with Parallax. Originally created by Steve Denson.</p>"
+           "<p>PropellerIDE is free software, released under the GPLv3 license.</p>"
+           );
 }
 
+void MainWindow::showMessage(const QString & message)
+{
+    statusBar()->showMessage(message, 2000);
+}

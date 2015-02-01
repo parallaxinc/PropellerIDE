@@ -31,7 +31,6 @@ SOURCES += \
     Highlighter.cpp \
     treemodel.cpp \
     treeitem.cpp \
-    Builder.cpp \
     clickable.cpp \
     PathSelector.cpp \
     PortListener.cpp \
@@ -49,13 +48,13 @@ SOURCES += \
     ColorChooser.cpp \
     termprefs.cpp \
     FileManager.cpp \
+    BuildManager.cpp \
 
 HEADERS  += \
     mainwindow.h \
     Highlighter.h \
     treemodel.h \
     treeitem.h \
-    Builder.h \
     clickable.h \
     PathSelector.h \
     PortListener.h \
@@ -74,6 +73,7 @@ HEADERS  += \
     ColorScheme.h \
     templates/Singleton.h \
     FileManager.h \
+    BuildManager.h \
 
 TRANSLATIONS += \
     translations/propelleride_zn.ts

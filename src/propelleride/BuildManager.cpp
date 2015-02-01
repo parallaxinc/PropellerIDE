@@ -1,24 +1,24 @@
-#include "Builder.h"
+#include "BuildManager.h"
 
-Builder::Builder(QWidget *parent) : QWidget(parent)
+BuildManager::BuildManager(QWidget *parent) : QWidget(parent)
 {
     console = new Status(this);
     consoleEdit = console->getOutput();
 }
 
-Builder::~Builder()
+BuildManager::~BuildManager()
 {
     delete console;
 }
 
-void Builder::show()
+void BuildManager::show()
 {
     console->setStage(0);
     consoleEdit->clear();
     console->show();
 }
 
-void Builder::setParameters(
+void BuildManager::setParameters(
         QString comp,
         QString load,
         QString incl,
@@ -37,13 +37,13 @@ void Builder::setParameters(
 	    << compileResult;
 }
 
-void Builder::compilerError(QProcess::ProcessError error)
+void BuildManager::compilerError(QProcess::ProcessError error)
 {
     qDebug() << error;
     if(error != QProcess::Crashed) return;
 }
 
-void Builder::compilerFinished(int exitCode, QProcess::ExitStatus status)
+void BuildManager::compilerFinished(int exitCode, QProcess::ExitStatus status)
 {
     if(procDone == true)
         return;
@@ -55,7 +55,7 @@ void Builder::compilerFinished(int exitCode, QProcess::ExitStatus status)
     qDebug() << exitCode << status;
 }
 
-void Builder::procReadyRead()
+void BuildManager::procReadyRead()
 {
     QByteArray bytes = proc->readAllStandardOutput();
     if(bytes.length() == 0)
@@ -87,7 +87,7 @@ void Builder::procReadyRead()
     sb->setValue(sb->maximum());
 }
 
-int Builder::runProcess(const QString & programName, const QStringList & programArgs)
+int BuildManager::runProcess(const QString & programName, const QStringList & programArgs)
 {
     QStringList args;
     QString program = QDir::toNativeSeparators(programName);
@@ -143,7 +143,7 @@ int Builder::runProcess(const QString & programName, const QStringList & program
 }
 
 
-int Builder::loadProgram(QString copts)
+int BuildManager::loadProgram(QString copts)
 {
     QStringList optslist = copts.split(" ");
     QStringList args;
@@ -169,7 +169,7 @@ int Builder::loadProgram(QString copts)
     return rc;
 }
 
-int Builder::runCompiler(QString copts)
+int BuildManager::runCompiler(QString copts)
 {
     QStringList args;
 
@@ -195,7 +195,7 @@ int Builder::runCompiler(QString copts)
     return 0;
 }
 
-void Builder::getCompilerOutput()
+void BuildManager::getCompilerOutput()
 {
     QChar c;
     // filter non-chars for the moment
