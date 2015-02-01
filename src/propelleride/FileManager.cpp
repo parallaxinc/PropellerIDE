@@ -110,7 +110,6 @@ void FileManager::openFile(const QString & fileName)
     if (isFileOpen(fileName))
         return;
 
-    // check if openFile should overwrite empty file
     int index;
     if (isFileEmpty(currentIndex()))
         index = currentIndex();
@@ -127,6 +126,7 @@ void FileManager::openFile(const QString & fileName)
     setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
     setTabText(index,QFileInfo(fileName).fileName());
     getEditor(index)->saveContent();
+    fileChanged();
 
     emit fileUpdated(index);
 }
@@ -181,6 +181,7 @@ void FileManager::saveAll()
 
 void FileManager::saveFile(const QString & fileName, int index)
 {
+    qDebug() << "FileManager::saveFile(" << fileName << ")";
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {
@@ -200,6 +201,7 @@ void FileManager::saveFile(const QString & fileName, int index)
     setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
     setTabText(index,QFileInfo(fileName).fileName());
     getEditor(index)->saveContent();
+    fileChanged();
 }
 
 

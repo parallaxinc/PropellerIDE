@@ -27,7 +27,7 @@ DEFINES += VERSION=\"$${VERSION_ARG}\"
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    $$files(mainwindow/*.cpp) \
+    find.cpp \
     Highlighter.cpp \
     treemodel.cpp \
     treeitem.cpp \
@@ -81,6 +81,7 @@ TRANSLATIONS += \
 OTHER_FILES +=
 
 FORMS += \
+    forms/mainwindow.ui \
     forms/TermPrefs.ui \
     forms/finder.ui \
     forms/status.ui
