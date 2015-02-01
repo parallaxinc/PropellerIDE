@@ -48,7 +48,7 @@ checkout:
 	git submodule update
 
 build:
-	cd $(DIR_SRC); $(QMAKE) VERSION_ARG=$(VERSION) PREFIX=$(DIR_OUT); $(MAKE)
+	cd $(DIR_SRC); $(QMAKE) CPU=$(CPU) VERSION_ARG=$(VERSION) PREFIX=$(DIR_OUT); $(MAKE)
 
 copy: build
 	cd $(DIR_SRC); $(MAKE) install
