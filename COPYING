@@ -5,9 +5,13 @@ are listed here for reference:
 Software        
 ---------------------------------------------------------------
 PropellerIDE        src/propelleride            GPLv3
-OpenSpin            openspin                    MIT
+OpenSpin            src/openspin                MIT
 Spin library        library                     MIT unless otherwise noted
 qextserialport      src/qext                    MIT
 zLib                src/spinzip                 zLib
 
 The full license texts are provided in the files LICENSE.GPL and LICENSE.MIT.
+
+PropellerIDE uses icons from the 24x24 Free Application Icons set licensed
+under a Creative Commons Attribution-Share Alike license by Aha-Soft.
+http://www.aha-soft.com

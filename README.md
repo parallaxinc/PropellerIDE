@@ -5,6 +5,8 @@ PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax
 
 Write Spin code, download programs to your Propeller board, and debug your applications with the built-in serial terminal.
 
+PropellerIDE is written in C++ with Qt.
+
 - [Download PropellerIDE](http://www.lamestation.com/propelleride)
 
 ## Features
@@ -14,29 +16,52 @@ Write Spin code, download programs to your Propeller board, and debug your appli
 - Auto-detection of connected Propeller hardware
 - Collapsible sidebar with function and program views
 - Integrated serial terminal
+- Customizable theming
+- Slick browser-style tab controls
+- Runs on Windows, Mac, Linux, and Raspberry Pi!
 
-### Planned Features
+## Project Roadmap
 
-- Unified tree view showing hierarchy of objects and functinos
-- Integrated Spin and Assembly help manual
-- Plugin interface for extending the application
+#### Immediate focus
 
-PropellerIDE was created using C++ and Qt.
+* Improve overall code maintainability
+* Refactor components for better separation of concerns
+* Replace qextserialport with QSerialPort
+* Refactor widgets to use UI forms
 
-### Screenshots
+#### Long-term focus
+
+* Translation support
+* Multiple Propeller languages
+* Serial and wireless code download
+* New platforms: Android, ChromeBook, HTML5, iOS
+ 
+#### Requested features (short list)
+
+* PropTool-style View Info widget
+* Alt-Drag to select text blocks
+* Colorful serial console formatting
+* Indent guides
+
+#### Features to support LameStation
+
+* Separate packaging tools from PropellerIDE repo and make standalone packaging toolchain
+* Clean up compiler output and add directory support
+* Integrated web help
+
+## Screenshots
 
 ![classic theme](gfx/screenshots/classic.png "Classic theme")
 
 ![ice theme](gfx/screenshots/ice.png "Ice theme")
 
-
 ## Building
 
 ### Dependencies
 
-PropellerIDE requires Qt5 to be installed on all platform. Windows packaging
-requires Inno Setup 5 to be installed with preprocessor support. The build
-and release tools require Python 2.7 to be installed.
+PropellerIDE requires at least Qt5.2. Windows packaging
+requires Inno Setup 5 with preprocessor support. Build
+and release tools require Python 2.7.
 
 ### Targets
 
