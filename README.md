@@ -28,6 +28,13 @@ PropellerIDE is written in C++ with Qt.
 * Refactor components for better separation of concerns
 * Replace qextserialport with QSerialPort
 * Refactor widgets to use UI forms
+
+#### Long-term focus
+
+* Translation support
+* Multiple Propeller languages
+* Serial and wireless code download
+* New platforms: Android, ChromeBook, HTML5, iOS
  
 #### Requested features (short list)
 
@@ -41,13 +48,6 @@ PropellerIDE is written in C++ with Qt.
 * Separate packaging tools from PropellerIDE repo and make standalone packaging toolchain
 * Clean up compiler output and add directory support
 * Integrated web help
-
-#### Long-term focus
-
-* Translation support
-* Multiple Propeller languages
-* Serial and wireless code download
-* New platforms: Android, ChromeBook, HTML5, iOS
 
 ## Screenshots
 
