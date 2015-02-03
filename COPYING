@@ -5,7 +5,7 @@ are listed here for reference:
 Software        
 ---------------------------------------------------------------
 PropellerIDE        src/propelleride            GPLv3
-OpenSpin            openspin                    MIT
+OpenSpin            src/openspin                MIT
 Spin library        library                     MIT unless otherwise noted
 qextserialport      src/qext                    MIT
 zLib                src/spinzip                 zLib
