@@ -75,7 +75,6 @@ Checkout the project.
 ```
 git clone https://github.com/lamestation/PropellerIDE.git PropellerIDE
 cd PropellerIDE
-make checkout
 ```
 
 Type `make deb` in the project root to build a Debian package.
@@ -109,14 +108,7 @@ C:\Qt\Tools\mingw482_32\bin;C:\Qt\5.3\mingw482_32\bin;C:\Program Files (x86)\Inn
 Open the PowerShell. The `make` command on Windows is `mingw32-make.exe`. Add the `win` parameter to build a Windows installer.
 
 ```
-mingw32-make.exe checkout
 mingw32-make.exe win
-```
-
-Add `clean` to clean up old build files.
-
-```
-mingw32-make.exe clean
 ```
 
 PropellerIDE has been built on Windows 7 and 8.
@@ -134,7 +126,6 @@ xcode-select --install
 Type `make mac` to create an app bundle and DMG package for distribution.
 
 ```
-make checkout
 make mac
 ```
 
@@ -164,12 +155,20 @@ sudo apt-get update
 sudo apt-get install qt5-default qt5-qmake libegl1-mesa libgles2-mesa
 ```
 
-Finally, build a deb file as you would on Linux:
+Finally, use the build the `rpi` target to create a Debian package for Raspberry Pi.
 
 ```
-make checkout
 make rpi
 ```
+
+## Cleaning
+
+Use the `clean` on all platforms to clean up old build files.
+
+## Installing
+
+All build targets output packages in the `staging/` directory.
+
 
 And install:
 

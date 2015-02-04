@@ -43,10 +43,6 @@ help:
 	@echo
 	@echo "   no parameter builds only the binaries"
 
-checkout:
-	git submodule init
-	git submodule update
-
 build:
 	cd $(DIR_SRC); $(QMAKE) CPU=$(CPU) VERSION_ARG=$(VERSION) PREFIX=$(DIR_OUT); $(MAKE)
 
