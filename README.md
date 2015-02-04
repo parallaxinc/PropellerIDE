@@ -46,12 +46,14 @@ Type `make help` to see a list of available package targets.
 $ make help
 Usage:    make [TYPE]
 
-Enter package type to build. Options:
+Enter target type to build. Options:
 
-   win    windows installer
-   mac    mac bundle
-   deb    debian package
-   rpi    debian package for Raspberry Pi
+   checkout     initialize child repositories
+
+   win          windows installer
+   mac          mac bundle
+   deb          debian package
+   rpi          debian package for Raspberry Pi
 
    no parameter builds only the binaries
 ```

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project>
+    <repo
+        name="Openspin"
+        path="src/openspin/repo" 
+        url="https://github.com/bweir/OpenSpin.git"
+        branch="master"
+        />
+    <repo
+        name="p1load"
+        path="src/p1load/repo" 
+        url="https://github.com/dbetz/p1load.git"
+        branch="master"
+        />
+    <gfx 
+        path="src/propelleride/gfx"
+        />
+</project>
