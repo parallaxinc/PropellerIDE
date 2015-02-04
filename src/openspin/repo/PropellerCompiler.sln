@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PropellerCompiler", "PropellerCompiler\PropellerCompiler.vcproj", "{DE0E4A74-1C7F-4479-918D-9040BB599F90}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE0E4A74-1C7F-4479-918D-9040BB599F90}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DE0E4A74-1C7F-4479-918D-9040BB599F90}.Debug|Win32.Build.0 = Debug|Win32
+		{DE0E4A74-1C7F-4479-918D-9040BB599F90}.Release|Win32.ActiveCfg = Release|Win32
+		{DE0E4A74-1C7F-4479-918D-9040BB599F90}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
