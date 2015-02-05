@@ -1,6 +1,0 @@
-[submodule "src/openspin/repo"]
-	path = src/openspin/repo
-	url = https://github.com/bweir/OpenSpin.git
-[submodule "src/p1load/repo"]
-	path = src/p1load/repo
-	url = https://github.com/dbetz/p1load.git
