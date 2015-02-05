@@ -24,6 +24,7 @@
 #include <QCommandLineParser>
 #include <QDebug>
 #include <QObject>
+#include <QDir>
 
 #define ObjFileStackLimit   16
 
@@ -469,7 +470,7 @@ int main(int argc, char* argv[])
     bool bDATonly = false;
     bool bBinary  = true;
     unsigned int  eeprom_size = 32768;
-    s_bUsePreprocessor = true;
+    s_bUsePreprocessor = false;
     s_bAlternatePreprocessorMode = false;
     s_nObjStackPtr = 0;
     s_nFilesAccessed = 0;
@@ -491,7 +492,7 @@ int main(int argc, char* argv[])
 
     parser.setApplicationDescription(
             "\n"+QCoreApplication::applicationName()
-            + QObject::tr("- An open-source compiler for the Spin language.\n"
+            + QObject::tr(" - An open-source compiler for Propeller Spin\n"
                 "Copyright © 2012-2015 Parallax, Inc."));
 
     QCommandLineOption includeDirectory(    QStringList() << "I" << "L",            QObject::tr("Add a directory to the include path"),             QObject::tr("DIR"));
@@ -512,7 +513,7 @@ int main(int argc, char* argv[])
     QCommandLineOption outputFilenameList(  QStringList() << "f" << "files",        QObject::tr("Output list of filenames"));
     QCommandLineOption quietMode(           QStringList() << "q" << "quiet",        QObject::tr("Quiet mode (suppress any non-error text)"));
     QCommandLineOption verboseMode(         QStringList() << "v" << "verbose",      QObject::tr("Verbose output"));
-    QCommandLineOption disablePreprocessor( QStringList() << "p" << "preprocessor", QObject::tr("Disable preprocessor"));
+    QCommandLineOption usePreprocessor(     QStringList() << "p" << "preprocessor", QObject::tr("Use preprocessor"));
     QCommandLineOption useAlternatePP(      QStringList() << "a" << "alternate",    QObject::tr("Use alternate preprocessor rules"));
     QCommandLineOption symbolInformation(   QStringList() << "s" << "symbol",       QObject::tr("Dump PUB & CON symbol information for top object"));
 
@@ -524,7 +525,7 @@ int main(int argc, char* argv[])
     parser.addOption(outputFilenameList);
     parser.addOption(quietMode);
     parser.addOption(verboseMode);
-    parser.addOption(disablePreprocessor);
+    parser.addOption(usePreprocessor);
     parser.addOption(useAlternatePP);
     parser.addOption(symbolInformation);
 
@@ -541,7 +542,7 @@ int main(int argc, char* argv[])
     if (parser.isSet(outputFilenameList))   bFileListOutputOnly = true;
     if (parser.isSet(quietMode))            bQuiet = true;
     if (parser.isSet(verboseMode))          bVerbose = true;
-    if (parser.isSet(disablePreprocessor))  s_bUsePreprocessor = false;
+    if (parser.isSet(usePreprocessor))      s_bUsePreprocessor = true;
     if (parser.isSet(useAlternatePP))       s_bAlternatePreprocessorMode = true;
     if (parser.isSet(symbolInformation))    bDumpSymbols = true;
 
@@ -555,19 +556,6 @@ int main(int argc, char* argv[])
         eeprom_size = parser.value(EEPROMSize).toInt();
         if (eeprom_size > 16777216)
             return 1;
-    }
-
-    QByteArray bb = parser.value(addDefine).toLocal8Bit();
-    if (!parser.value(addDefine).isEmpty())
-    {
-        if (s_bUsePreprocessor)
-        {
-            p = bb.data();
-        }
-        else
-        {
-            return 1;
-        }
     }
 
     QList<QByteArray> defines;
@@ -593,9 +581,12 @@ int main(int argc, char* argv[])
     }
     else
     {
-        QTextStream(stderr) << "Can't use preprocessor macros; preprocessor not enabled." << endl;
-        parser.showHelp();
-        return 1;
+        if (!parser.values(addDefine).isEmpty())
+        {
+            QTextStream(stderr) << "Can't use preprocessor macros; preprocessor not enabled." << endl;
+            parser.showHelp();
+            return 1;
+        }
     }
 
     QList<QByteArray> includes;
@@ -603,7 +594,7 @@ int main(int argc, char* argv[])
     {
         foreach(QString dir, parser.values(includeDirectory))
         {
-            includes.append(parser.value(includeDirectory).toLocal8Bit());
+            includes.append(dir.toLocal8Bit());
             p = includes.last().data();
             AddPath(p);
         }
@@ -672,8 +663,8 @@ int main(int argc, char* argv[])
 
     if (!bQuiet)
     {
-        QTextStream(stdout) << parser.applicationDescription();
-        QTextStream(stdout) << "\nCompiling " << infile;
+        QTextStream(stdout) << parser.applicationDescription() << "\n";
+        QTextStream(stdout) << "\nCompiling " << infile << "\n";
     }
 
     if (bFileTreeOutputOnly)
