@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import os, sys, re
 import argparse
@@ -29,16 +30,13 @@ def run_git(gitargs):
 
 for child in root.findall('repo'):
 
-    if not 'name' in child.attrib:
-        raise KeyError("Repository not named")
-
     if not 'path' in child.attrib:
         raise KeyError("No path specified in repo")
 
     if not 'url' in child.attrib:
         raise KeyError("No URL specified in repo")
 
-    print "Checking out "+child.attrib['name']+" to "+child.attrib['path']+"..."
+    print "--- "+child.attrib['path']+" ---"
 
     if os.path.exists(child.attrib['path']):
         if child.attrib['path'] == '.':

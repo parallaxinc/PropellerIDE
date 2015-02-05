@@ -1,18 +1,29 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
-    <repo
-        name="Openspin"
-        path="src/openspin/repo" 
-        url="https://github.com/bweir/OpenSpin.git"
-        branch="master"
-        />
-    <repo
-        name="p1load"
-        path="src/p1load/repo" 
-        url="https://github.com/dbetz/p1load.git"
-        branch="master"
-        />
-    <gfx 
-        path="src/propelleride/gfx"
-        />
+  <info
+    organization="Parallax Inc."
+    application="PropellerIDE"
+    url="www.parallax.com"
+    copyright="2014-2015"
+    license="GPLv3">
+  </info>
+
+  <target>
+    <win AppID="FFFE6E20-C961-487B-B55B-510E4BCE479B" />
+    <mac category="public.app-category.developer-tools" />
+  </target>
+
+  <gfx path="src/propelleride/gfx" />
+  <version path="src/propelleride" />
+
+  <repo
+    path="src/openspin/repo" 
+    url="https://github.com/bweir/OpenSpin.git"
+    branch="master"
+    />
+  <repo
+    path="src/p1load/repo" 
+    url="https://github.com/dbetz/p1load.git"
+    branch="master"
+    />
 </project>

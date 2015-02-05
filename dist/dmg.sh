@@ -14,7 +14,7 @@ hdiutil create -srcfolder "${source}" -volname "${title}" -fs HFS+ \
 device=$(hdiutil attach -readwrite -noverify -noautoopen "${tmpdevice}" | \
          egrep '^/dev/' | sed 1q | awk '{print $1}')
 
-background="newspin.png"
+background="../gfx/newspin.png" # this needs a more robust mechanism
 applicationName="PropellerIDE.app"
 
 VOLUME_DIR="/Volumes/${title}/.background/"

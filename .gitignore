@@ -21,6 +21,8 @@ staging/
 *~
 Makefile
 *.binary
+*.plist
+*.iss
 
 .DS_Store
 .qmake.stash

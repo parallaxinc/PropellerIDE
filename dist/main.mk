@@ -84,5 +84,5 @@ mac: DIR_OUT := "$(DIR_STAGING)/$(NAME).app/Contents"
 mac: clean_staging copy
 	cd $(DIR_STAGING) ; \
 	macdeployqt $(DIR_STAGING)/$(TITLE).app ; \
-	cp -f $(DIR_DIST)/Info.plist $(DIR_OUT)
+	$(DIR_DIST)/plist.py $(DIR)/repo.xml -o $(DIR_OUT)/Info.plist ; \
 	$(DIR_DIST)/dmg.sh $(DIR_STAGING)/$(TITLE).app $(TITLE) $(DIR_STAGING)/$(NAME)-$(VERSION)-$(CPU).dmg
