@@ -77,7 +77,7 @@ win: DIR_OUT := "$(DIR_STAGING)/$(NAME)"
 win: clean_staging copy
 	cd $(DIR_OUT); \
 	windeployqt $(NAME).exe; \
-	$(ISCC) //dMyAppVersion=$(VERSION) "$(DIR_DIST)/installer.iss"
+	$(DIR_DIST)/iss.py $(DIR)/repo.xml -s | $(ISCC) -
 
 
 mac: DIR_OUT := "$(DIR_STAGING)/$(NAME).app/Contents"
