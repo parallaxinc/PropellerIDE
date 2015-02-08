@@ -16,7 +16,7 @@ ISCC			:=	iscc
 QMAKE_OPTS		+=  -r
 QMAKE			:=	qmake $(QMAKE_OPTS)
 
-VERSION := $(shell git describe --tags --long 2>/dev/null)
+VERSION := $(shell git describe --tags --long 2>/dev/null | cut -d'-' -f 1 )
 ifeq ($(VERSION),)
 	VERSION := 0.0.0-phony
 endif
@@ -61,13 +61,15 @@ clean: clean_staging
 	cd $(DIR_SRC); $(QMAKE); $(MAKE) clean
 
 deb: DIR_OUT := $(DIR_STAGING)/$(NAME)/usr
+deb: DIR_DEBIAN := $(DIR_STAGING)/$(NAME)/DEBIAN
 deb: clean_staging copy
-	mkdir -p $(DIR_STAGING)/$(NAME)/DEBIAN/ ; \
-	cp -f $(shell ldd $(DIR_OUT)/bin/$(NAME) | grep "libQt" | awk '{print $$3}') $(DIR_OUT)/share/$(NAME)/bin/; \
-	cp -f $(DIR_DIST)/control $(DIR_STAGING)/$(NAME)/DEBIAN/control ; \
+	mkdir -p $(DIR_DEBIAN)
+	cp -f $(shell ldd $(DIR_OUT)/bin/$(NAME) | grep "libQt" | awk '{print $$3}') $(DIR_OUT)/share/$(NAME)/bin/
+	cp -f $(DIR_DIST)/control $(DIR_DEBIAN) 
+	echo 9 > $(DIR_DEBIAN)/compat
 	sed -e "s/VERSION/$(VERSION)/" \
 		-e "s/CPU/$(CPU)/" \
-		-i $(DIR_STAGING)/$(NAME)/DEBIAN/control ; \
+		-i $(DIR_DEBIAN)/control
 	dpkg-deb -b $(DIR_STAGING)/$(NAME) $(DIR_STAGING)/$(NAME)-$(VERSION)-$(CPU).deb
 
 rpi: CPU := armhf

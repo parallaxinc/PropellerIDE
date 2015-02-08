@@ -31,7 +31,7 @@ UsePreviousUserInfo=no
 DisableDirPage=yes
 DisableProgramGroupPage=yes
 DisableReadyPage=no
-WizardImageFile="..\gfx\propellerbanner.bmp"
+WizardImageFile="${GRAPHICSPATH}/win-banner.bmp"
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -40,10 +40,10 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Source: "../staging/${SHORTNAME}/*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\\${NAME}"; Filename: "{app}\\${SHORTNAME}.exe" ; IconFilename: "{app}\propellerhat.ico";
+Name: "{group}\\${NAME}"; Filename: "{app}\\${SHORTNAME}.exe" ; IconFilename: "{app}\win.ico";
 Name: "{group}\{cm:UninstallProgram,{NAME}}"; Filename: "{uninstallexe}";
-Name: "{commondesktop}\\${NAME}"; Filename: "{app}\\${SHORTNAME}.exe"; IconFilename: "{app}\propellerhat.ico";
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\\${NAME}"; Filename: "{app}\\${SHORTNAME}.exe"; IconFilename: "{app}\propellerhat.ico";
+Name: "{commondesktop}\\${NAME}"; Filename: "{app}\\${SHORTNAME}.exe"; IconFilename: "{app}\win.ico";
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\\${NAME}"; Filename: "{app}\\${SHORTNAME}.exe"; IconFilename: "{app}\win.ico";
 
 [Run]
 Filename: {app}\\${SHORTNAME}.exe; Description: "{cm:LaunchProgram,${NAME}}"; Flags: skipifsilent NoWait PostInstall; 
@@ -59,6 +59,11 @@ if __name__ == '__main__':
     tree = etree.parse(args.project[0])
     root = tree.getroot()
     target = root.find('target/win')
+
+    gfx = root.find('gfx')
+    if gfx == None:
+        raise Exception("Graphics not found!")
+    
     info = root.find('info')
     versionnode = root.find('version')
 
@@ -70,8 +75,12 @@ if __name__ == '__main__':
                     NAME            = info.attrib['application'],
                     SHORTNAME       = info.attrib['application'].lower(),
                     WEBSITE         = info.attrib['url'],
-                    VERSION         = version.get_version(versionnode)
+                    VERSION         = version.get_version(versionnode),
+                    GRAPHICSPATH    = gfx.attrib['path'],
                 )
+
+    if not args.out and not args.show:
+        print "Command will not produce any output without -o or -s"
 
     if args.out:
         f = open(args.out[0], 'w')
