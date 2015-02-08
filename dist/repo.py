@@ -6,6 +6,7 @@ import argparse
 import subprocess
 import xml.etree.ElementTree as etree
 import logging
+import tarfile
 
 class Repo:
     def __init__(self, repofile):
@@ -91,8 +92,6 @@ class Repo:
         if not 'url' in repo.attrib:
             raise KeyError("No URL specified in repo")
 
-        print repo.attrib['path'], repo.attrib['url']
-
     def git_checkout(self, repo):
         print "--- "+repo.attrib['path']+" ---"
         self.validate_repo(repo)
@@ -108,9 +107,26 @@ class Repo:
         for child in self.root.findall('repo'):
             self.validate_repo(child)
             out, err = self.run_git(['ls-files'], child)
-            output += out
+            out = out.split('\n')
+            out.pop() # remove empty last element
+
+            for o in out:
+                o = os.path.join(child.attrib['path'],o)
+                output += o+'\n'
         return output
-        
+
+    def build_archive(self, archivename):
+        files = self.build_filelist().split('\n')
+        files.pop() # remove empty last element
+
+        shortname = os.path.basename(archivename)
+
+        tar = tarfile.open(name=archivename, mode='w:gz')
+        for f in files:
+            tar.add(name=f, arcname=os.path.join(os.path.splitext(shortname)[0],f), recursive=False)
+
+        tar.close()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='repo.py - make checking out your Git project more complicated\n\nNo parameters builds the project repository')
@@ -118,7 +134,8 @@ if __name__ == "__main__":
     parser.add_argument('-l','--log', nargs=1, metavar="LEVEL", help="Log level of debug output (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
     parser.add_argument('-v','--version', action='store_true', help="Get the project version")
     parser.add_argument('-g','--gfx', action='store_true', help="Get the graphics path")
-    parser.add_argument('--list-files', action='store_true', help="List all files in super-repository")
+    parser.add_argument('-f','--list-files', action='store_true', help="List all files in super-repository")
+    parser.add_argument('-a','--archive', nargs=1, metavar="NAME", help="Create tar archive from super-repository")
 
     args = parser.parse_args()
 
@@ -133,6 +150,8 @@ if __name__ == "__main__":
         print repo.gfx()
     elif args.list_files:
         print repo.build_filelist()
+    elif args.archive:
+        repo.build_archive(args.archive[0])
     else:
         repo.build_tree()
 

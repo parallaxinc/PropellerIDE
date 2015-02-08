@@ -16,7 +16,10 @@ ISCC			:=	iscc
 QMAKE_OPTS		+=  -r
 QMAKE			:=	qmake $(QMAKE_OPTS)
 
-VERSION := $(shell ./dist/repo.py repo.xml -v)
+XML				:=	$(DIR)/repo.xml
+REPO			:=	$(DIR_DIST)/repo.py $(XML)
+
+VERSION 		:=	$(shell $(REPO) -v)
 
 ifeq ($(shell uname -m),i686)			# if i686
 	CPU := i386
@@ -43,7 +46,7 @@ help:
 
 
 checkout:
-	./dist/repo.py repo.xml
+	$(REPO)
 
 build:
 	cd $(DIR_SRC); $(QMAKE) CPU=$(CPU) VERSION_ARG=$(VERSION) PREFIX=$(DIR_OUT); $(MAKE)
@@ -59,6 +62,10 @@ clean: clean_staging
 
 distclean: clean_staging
 	cd $(DIR_SRC); $(QMAKE); $(MAKE) distclean
+
+archive:
+	mkdir -p $(DIR_STAGING)
+	$(REPO) --archive $(DIR_STAGING)/$(NAME)-$(VERSION).tgz
 
 deb: DIR_OUT := $(DIR_STAGING)/$(NAME)/usr
 deb: DIR_DEBIAN := $(DIR_STAGING)/$(NAME)/DEBIAN
@@ -89,16 +96,16 @@ win: DIR_OUT := "$(DIR_STAGING)/$(NAME)"
 win: clean_staging copy
 	cd $(DIR_OUT); \
 	windeployqt $(NAME).exe; \
-	$(DIR_DIST)/iss.py $(DIR)/repo.xml -s | $(ISCC) -
+	$(DIR_DIST)/iss.py $(XML) -s | $(ISCC) -
 
 
 mac: DIR_OUT := "$(DIR_STAGING)/$(NAME).app/Contents"
 mac: clean_staging copy
 	cd $(DIR_STAGING) ; \
 	macdeployqt $(DIR_STAGING)/$(TITLE).app ; \
-	$(DIR_DIST)/plist.py $(DIR)/repo.xml -o $(DIR_OUT)/Info.plist ; \
+	$(DIR_DIST)/plist.py $(XML) -o $(DIR_OUT)/Info.plist ; \
 	$(DIR_DIST)/dmg.sh \
 			$(DIR_STAGING)/$(TITLE).app \
 			$(TITLE) \
 			$(DIR_STAGING)/$(NAME)-$(VERSION)-$(CPU).dmg \
-			$(shell $(DIR_DIST)/repo.py -g repo.xml)
+			$(shell $(REPO) --gfx)
