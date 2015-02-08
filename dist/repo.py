@@ -62,35 +62,55 @@ class Repo:
         gitargs = ['pull']
         self.run_git(gitargs, repo)
 
+    def git_update(self, repo):
+        if os.path.exists(repo.attrib['path']):
+            if repo.attrib['path'] == '.':
+                self.git_clone(repo)
+            else:
+                self.git_pull(repo)
+        else:
+            self.git_clone(repo)
+
+        self.run_git(['submodule','init'], repo)
+        self.run_git(['submodule','update'], repo)
+
+
+    def git_switch(self, repo):
+        if 'branch' in repo.attrib:
+            self.run_git(['checkout',repo.attrib['branch']], repo)
+        elif 'tag' in repo.attrib:
+            self.run_git(['checkout',repo.attrib['tag']], repo)
+        else:
+            self.run_git(['checkout','master'], repo)
+
+
+    def validate_repo(self, repo):
+        if not 'path' in repo.attrib:
+            raise KeyError("No path specified in repo")
+    
+        if not 'url' in repo.attrib:
+            raise KeyError("No URL specified in repo")
+
+        print repo.attrib['path'], repo.attrib['url']
+
+    def git_checkout(self, repo):
+        print "--- "+repo.attrib['path']+" ---"
+        self.validate_repo(repo)
+        self.git_update(repo)
+        self.git_switch(repo)
+
     def build_tree(self):
         for child in self.root.findall('repo'):
-        
-            if not 'path' in child.attrib:
-                raise KeyError("No path specified in repo")
-        
-            if not 'url' in child.attrib:
-                raise KeyError("No URL specified in repo")
-        
-            print "--- "+child.attrib['path']+" ---"
-        
-            if os.path.exists(child.attrib['path']):
-                if child.attrib['path'] == '.':
-                    self.git_clone(child)
-                else:
-                    self.git_pull(child)
-            else:
-                self.git_clone(child)
-        
-            self.run_git(['submodule','init'], child)
-            self.run_git(['submodule','update'], child)
-        
-            if 'branch' in child.attrib:
-                self.run_git(['checkout',child.attrib['branch']], child)
-            elif 'tag' in child.attrib:
-                self.run_git(['checkout',child.attrib['tag']], child)
-            else:
-                self.run_git(['checkout','master'], child)
+            self.git_checkout(child)
 
+    def build_filelist(self):
+        output = ""
+        for child in self.root.findall('repo'):
+            self.validate_repo(child)
+            out, err = self.run_git(['ls-files'], child)
+            output += out
+        return output
+        
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='repo.py - make checking out your Git project more complicated\n\nNo parameters builds the project repository')
@@ -98,6 +118,7 @@ if __name__ == "__main__":
     parser.add_argument('-l','--log', nargs=1, metavar="LEVEL", help="Log level of debug output (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
     parser.add_argument('-v','--version', action='store_true', help="Get the project version")
     parser.add_argument('-g','--gfx', action='store_true', help="Get the graphics path")
+    parser.add_argument('--list-files', action='store_true', help="List all files in super-repository")
 
     args = parser.parse_args()
 
@@ -110,6 +131,8 @@ if __name__ == "__main__":
         print repo.version()
     elif args.gfx:
         print repo.gfx()
+    elif args.list_files:
+        print repo.build_filelist()
     else:
         repo.build_tree()
 

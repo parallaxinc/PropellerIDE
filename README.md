@@ -59,9 +59,9 @@ PropellerIDE is written in C++ with Qt.
 
 ### Dependencies
 
-PropellerIDE requires at least Qt5.2. Windows packaging
-requires Inno Setup 5 with preprocessor support. Build
-and release tools require Python 2.7.
+* PropellerIDE requires at least Qt5.2.
+* Windows packaging requires Inno Setup 5 with preprocessor support. 
+* Build and release tools require Python 2.7.
 
 ### Targets
 
