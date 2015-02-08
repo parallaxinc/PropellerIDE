@@ -57,6 +57,9 @@ clean_staging:
 clean: clean_staging
 	cd $(DIR_SRC); $(QMAKE); $(MAKE) clean
 
+distclean: clean_staging
+	cd $(DIR_SRC); $(QMAKE); $(MAKE) distclean
+
 deb: DIR_OUT := $(DIR_STAGING)/$(NAME)/usr
 deb: DIR_DEBIAN := $(DIR_STAGING)/$(NAME)/DEBIAN
 deb: DIR_MAN := $(DIR_OUT)/share/man/man1/
