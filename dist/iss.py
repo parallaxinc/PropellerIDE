@@ -2,10 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import string
-
 import argparse
-import xml.etree.ElementTree as etree
-import version
+from repo import Repo
 
 def get_template():
     return string.Template("""\
@@ -56,16 +54,10 @@ if __name__ == '__main__':
     parser.add_argument('-s','--show', action='store_true', help="Dump output to stdout")
     args = parser.parse_args()
 
-    tree = etree.parse(args.project[0])
-    root = tree.getroot()
-    target = root.find('target/win')
+    repo = Repo(args.project[0])
+    target = repo.node('target/win')
 
-    gfx = root.find('gfx')
-    if gfx == None:
-        raise Exception("Graphics not found!")
-    
-    info = root.find('info')
-    versionnode = root.find('version')
+    info = repo.info()
 
     script = get_template()
 
@@ -75,8 +67,8 @@ if __name__ == '__main__':
                     NAME            = info.attrib['application'],
                     SHORTNAME       = info.attrib['application'].lower(),
                     WEBSITE         = info.attrib['url'],
-                    VERSION         = version.get_version(versionnode),
-                    GRAPHICSPATH    = gfx.attrib['path'],
+                    VERSION         = repo.version(),
+                    GRAPHICSPATH    = repo.gfx(),
                 )
 
     if not args.out and not args.show:

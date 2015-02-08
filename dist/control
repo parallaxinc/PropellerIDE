@@ -1,10 +1,10 @@
 Source: propelleride
-Maintainer: Brett Weir <brett@lamestation.com>
-
+Maintainer: LameStation <contact@lamestation.com>
 Package: propelleride
 Priority: optional
-Architecture: amd64
-Depends: ${shlibs:Depends}, zlib1g, libftdi1
+Version: VERSION
+Architecture: CPU
+Depends: zlib1g, libftdi1
 Description: Cross-Platform Spin IDE
  An easy-to-use cross-platform development tool 
  for the Parallax Propeller microcontroller.

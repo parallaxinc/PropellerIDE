@@ -16,10 +16,7 @@ ISCC			:=	iscc
 QMAKE_OPTS		+=  -r
 QMAKE			:=	qmake $(QMAKE_OPTS)
 
-VERSION := $(shell git describe --tags --long 2>/dev/null | cut -d'-' -f 1 )
-ifeq ($(VERSION),)
-	VERSION := 0.0.0-phony
-endif
+VERSION := $(shell ./dist/repo.py repo.xml -v)
 
 ifeq ($(shell uname -m),i686)			# if i686
 	CPU := i386
@@ -62,9 +59,19 @@ clean: clean_staging
 
 deb: DIR_OUT := $(DIR_STAGING)/$(NAME)/usr
 deb: DIR_DEBIAN := $(DIR_STAGING)/$(NAME)/DEBIAN
+deb: DIR_MAN := $(DIR_OUT)/share/man/man1/
 deb: clean_staging copy
+	mkdir -p $(DIR_MAN)
+	for f in $(DIR_OUT)/share/$(NAME)/bin/* ; \
+		do \
+			echo $$f ; \
+			help2man --no-info $$f > $(DIR_MAN)/`basename $$f`.1 ; \
+			gzip $(DIR_MAN)/`basename $$f`.1 ; \
+	   	done
 	mkdir -p $(DIR_DEBIAN)
-	cp -f $(shell ldd $(DIR_OUT)/bin/$(NAME) | grep "libQt" | awk '{print $$3}') $(DIR_OUT)/share/$(NAME)/bin/
+	cp -f $(shell ldd $(DIR_OUT)/bin/$(NAME) \
+		| grep "libQt" \
+		| awk '{print $$3}') $(DIR_OUT)/share/$(NAME)/bin/
 	cp -f $(DIR_DIST)/control $(DIR_DEBIAN) 
 	echo 9 > $(DIR_DEBIAN)/compat
 	sed -e "s/VERSION/$(VERSION)/" \
@@ -87,4 +94,8 @@ mac: clean_staging copy
 	cd $(DIR_STAGING) ; \
 	macdeployqt $(DIR_STAGING)/$(TITLE).app ; \
 	$(DIR_DIST)/plist.py $(DIR)/repo.xml -o $(DIR_OUT)/Info.plist ; \
-	$(DIR_DIST)/dmg.sh $(DIR_STAGING)/$(TITLE).app $(TITLE) $(DIR_STAGING)/$(NAME)-$(VERSION)-$(CPU).dmg
+	$(DIR_DIST)/dmg.sh \
+			$(DIR_STAGING)/$(TITLE).app \
+			$(TITLE) \
+			$(DIR_STAGING)/$(NAME)-$(VERSION)-$(CPU).dmg \
+			$(shell $(DIR_DIST)/repo.py -g repo.xml)

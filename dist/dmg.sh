@@ -3,6 +3,7 @@
 source="$1"
 title="$2"
 target="$3"
+background="$4"
 size=$(echo "$((`du -s ${source} | awk '{print $1}'`+1000))")
 echo ${size}
 
