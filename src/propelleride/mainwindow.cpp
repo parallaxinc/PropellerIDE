@@ -6,18 +6,12 @@
 #include <QFileDialog> 
 #include <QMenu> 
 
-
 #include "StatusDialog.h"
 #include "qext/qextserialenumerator.h"
 
-#define AUTOPORT "AUTO"
-
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMutex::Recursive), statusDone(true)
 {
-}
-
-void MainWindow::init()
-{
+    ui.setupUi(this);
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
@@ -25,9 +19,7 @@ void MainWindow::init()
     projectModel = NULL;
     referenceModel = NULL;
 
-    spinBuilder = new SpinBuilder();
-
-    connect(spinBuilder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
+    connect(&builder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
 
     /* main container */
     setWindowTitle(QCoreApplication::applicationName());
@@ -39,75 +31,107 @@ void MainWindow::init()
     /* minimum window height */
     this->setMinimumHeight(500);
 
-
     /* setup gui components */
-    setupFileMenu();
-    setupEditMenu();
-    setupViewMenu();
-    setupProjectMenu();
-    setupHelpMenu();
 
-    setupToolBars();
+    // File Menu
+    connect(ui.action_New,SIGNAL(triggered()),editorTabs,SLOT(newFile()));
+    connect(ui.action_Open,SIGNAL(triggered()),editorTabs,SLOT(open()));
 
+    connect(ui.action_Save,SIGNAL(triggered()),editorTabs,SLOT(save()));
+    connect(ui.actionSave_As,SIGNAL(triggered()),editorTabs,SLOT(saveAs()));
+    connect(ui.actionSave_All,SIGNAL(triggered()),editorTabs,SLOT(saveAll()));
+
+    connect(ui.action_Zip_Project,SIGNAL(triggered()),this,SLOT(zipFiles()));
+
+    recentFiles = findChildren<QAction *>(QRegExp("action_[0-9]+_File"));
+    for (int i = 0; i < recentFiles.size(); i++)
+        connect(recentFiles.at(i), SIGNAL(triggered()),this, SLOT(openRecentFile()));
+    
+    connect(ui.action_Close,SIGNAL(triggered()),editorTabs,SLOT(closeFile()));
+
+    connect(editorTabs, SIGNAL(saveAvailable(bool)),ui.action_Save,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(closeAvailable(bool)),ui.action_Close,SLOT(setEnabled(bool)));
+
+
+    // Edit Menu
+    connect(ui.action_Undo,        SIGNAL(triggered()), editorTabs, SLOT(undo()));
+    connect(ui.action_Redo,        SIGNAL(triggered()), editorTabs, SLOT(redo()));
+
+    connect(ui.action_Cut,         SIGNAL(triggered()), editorTabs, SLOT(cut()));
+    connect(ui.action_Copy,        SIGNAL(triggered()), editorTabs, SLOT(copy()));
+    connect(ui.action_Paste,       SIGNAL(triggered()), editorTabs, SLOT(paste()));
+    connect(ui.actionSelect_All,   SIGNAL(triggered()), editorTabs, SLOT(selectAll()));
+
+    connect(ui.action_Find,        SIGNAL(triggered()), this, SLOT(showFindFrame()));
+    connect(ui.actionFind_Next,    SIGNAL(triggered()), this, SLOT(findNextClicked()));
+    connect(ui.actionFind_Previous,SIGNAL(triggered()), this, SLOT(findPrevClicked()));
+
+    connect(ui.actionPreferences,  SIGNAL(triggered()), this, SLOT(preferences()));
+
+    connect(editorTabs, SIGNAL(undoAvailable(bool)), ui.action_Undo,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(redoAvailable(bool)), ui.action_Redo,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(copyAvailable(bool)), ui.action_Cut,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(copyAvailable(bool)), ui.action_Copy,SLOT(setEnabled(bool)));
+
+
+    // View Menu
+    connect(ui.actionShow_Browser, SIGNAL(triggered()), this, SLOT(showBrowser()));
+    connect(ui.actionBigger_Font,  SIGNAL(triggered()), this, SLOT(fontBigger()));
+    connect(ui.actionSmaller_Font, SIGNAL(triggered()), this, SLOT(fontSmaller()));
+
+    ui.actionBigger_Font->setShortcuts(QList<QKeySequence>() << QKeySequence::ZoomIn
+                                                             << Qt::CTRL+Qt::Key_Equal);
+
+
+    // Project Menu
+    connect(ui.actionIdentify,  SIGNAL(triggered()), this, SLOT(findHardware()));
+    connect(ui.actionView_Info, SIGNAL(triggered()), this, SLOT(viewInfo()));
+    connect(ui.actionBuild,     SIGNAL(triggered()), this, SLOT(programBuild()));
+    connect(ui.actionRun,       SIGNAL(triggered()), this, SLOT(programRun()));
+    connect(ui.actionBurn,      SIGNAL(triggered()), this, SLOT(programBurnEE()));
+    connect(ui.actionTerminal,  SIGNAL(triggered()), this, SLOT(connectButton()));
+
+    // Help Menu
+    connect(ui.actionPropeller_Datasheet,   SIGNAL(triggered()), this, SLOT(propellerDatasheet()));
+    connect(ui.actionPropeller_Manual,      SIGNAL(triggered()), this, SLOT(propellerManual()));
+    connect(ui.action_About,                SIGNAL(triggered()), this, SLOT(about()));
+
+    // Toolbar Extras
+    cbPort = new QComboBox(this);
+    cbPort->setLayoutDirection(Qt::LeftToRight);
+    cbPort->setToolTip(tr("Select Serial Port"));
+    cbPort->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    connect(cbPort,SIGNAL(currentIndexChanged(int)),this,SLOT(setCurrentPort(int)));
+    ui.toolBar->addWidget(cbPort);
+
+//    ctrlToolBar = addToolBar(tr("Control"));
+//    ctrlToolBar->setLayoutDirection(Qt::RightToLeft);
+//    ctrlToolBar->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
+//    ctrlToolBar->addWidget(cbPort);
+
+//    setStatusBar(ui.statusbar);
+
+    updateRecentFileActions();
 
     /* start with an empty file if fresh install */
-    newFile();
+    connect(editorTabs,SIGNAL(fileUpdated(int)), this, SLOT(setProject()));
+    connect(editorTabs,SIGNAL(sendMessage(const QString &)),this,SLOT(showMessage(const QString &)));
+    editorTabs->newFile();
 
-    /* status bar for progressbar */
-    QStatusBar *statusBar = new QStatusBar();
-
-    sizeLabel.setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-
-    progress = new QProgressBar();
-    //progress->setMaximumSize(100,25);
-    progress->setValue(0);
-    progress->setMinimum(0);
-    progress->setMaximum(100);
-    progress->setTextVisible(false);
-    progress->setVisible(false);
-
-    statusBar->addPermanentWidget(&msgLabel,70);
-    statusBar->addPermanentWidget(&sizeLabel,15);
-    statusBar->addPermanentWidget(progress,15);
-
-    this->setStatusBar(statusBar);
-
-    /* get last geometry. using x,y,w,h is unreliable.
-    */
-    QVariant geov = QSettings().value(mainWindowGeometry);
-    if(geov.canConvert(QVariant::ByteArray)) {
-        // byte array convert is always possible
-        QByteArray geo = geov.toByteArray();
-        // restoreGeometry makes sure the array is valid
-        this->restoreGeometry(geo);
-    }
-    else {
-        this->resize(800,600);
-    }
+    resize(800,600);
+    restoreGeometry(QSettings().value("windowSize").toByteArray());
 
     QApplication::processEvents();
 
-    /* Get app settings at startup and before any compiler call.
-     * Some people want to be prepared, others just want to hack
-     * their way through life ... i guess it's fun.
-     * The latter is most common, so let's do it like that.
-     * In this case, we need the preferences if their set, but we can't complain.
-     */
-    getApplicationSettings(false);
+    getApplicationSettings();
 
     /* setup the terminal dialog box */
     term = new Terminal(this);
 
-    QVariant gv = QSettings().value(termGeometryKey);
-    if(gv.canConvert(QVariant::ByteArray)) {
-        QByteArray geo = gv.toByteArray();
-        term->restoreGeometry(geo);
-    }
-
     /* setup the port listener */
     portListener = new PortListener(this, term->getEditor());
     portListener->setTerminalWindow(term->getEditor());
-    connect(spinBuilder,SIGNAL(terminalReceived(QString)), portListener, SLOT(appendConsole(QString)));
+    connect(&builder,SIGNAL(terminalReceived(QString)), portListener, SLOT(appendConsole(QString)));
 
     term->setPortListener(portListener);
 
@@ -126,163 +150,86 @@ void MainWindow::init()
 
     connect(this,SIGNAL(signalStatusDone(bool)),this,SLOT(setStatusDone(bool)));
 
-    // Show GUI now
-    QApplication::processEvents();
-    this->show();
+    loadSession();
 
-    openLastFile();
-
-    this->installEventFilter(this);
+    installEventFilter(this);
 }
 
-int  MainWindow::isPackageSource(QString fileName)
+void MainWindow::loadSession()
 {
-    QString dir = QFileInfo(fileName).absolutePath();
-    QString file= dir+"/tmp_"+QString("%1").arg(QDateTime::currentDateTime().toTime_t());
-
-    bool fw = QFileInfo(fileName).isWritable();
-    bool pw = false;
-
-    QFile wf(file);
-    if(wf.open(QFile::WriteOnly)) {
-        wf.close();
-        pw = true;
-        wf.remove();
+    QSettings settings;
+    int size = settings.beginReadArray("session");
+    for (int i = 0; i < size; ++i) {
+        settings.setArrayIndex(i);
+        editorTabs->openFile(settings.value("file").toString());
     }
-    return fw && pw;
+    settings.endArray();
 }
 
-int  MainWindow::extractSource(QString &fileName)
+void MainWindow::clearSession()
 {
-    fileName = this->saveFileAs();
-
-    if(fileName.length() > 0) {
-        return isPackageSource(fileName);
-    }
-    return 0;
+    QSettings settings;
+    settings.beginGroup("session");
+    settings.remove("");
+    settings.endGroup();
 }
 
-void MainWindow::openLastFile()
+void MainWindow::saveSession()
 {
-    /* load the last file into the editor to make user happy */
-    QString welcome = propDialog->getSpinLibraryString()+"Welcome.spin";
-    QString fileName;
-    QVariant lastfilev = QSettings().value(lastFileNameKey, welcome);
+    clearSession();
 
-    if(!lastfilev.isNull()) {
-        if(lastfilev.canConvert(QVariant::String)) {
-            if(lastfilev.toString().length() > 0) {
-                fileName = lastfilev.toString();
-            }
-            openFileName(fileName);
-            QApplication::processEvents();
-
-            if(fileName.compare(welcome) == 0) {
-                QMessageBox::information(this,tr("Welcome to PropellerIDE"),
-                        tr("The Welcome.spin file must be saved to a user folder where you can change it.")+" "+
-                        tr("The installed package location is not writable by most users.")+"\n\n"+
-                        tr("Please note that opening a library file from the installed package will also require saving to a user folder for compiling or modifications.")+" "+
-                        tr("Don't worry, you will be reminded if necessary.")+"\n\n"+
-                        tr("The Save As dialog will now open to let you choose a working folder."));
-                lastDirectory = QDir::homePath()+"/Documents";
-                if(!QFile::exists(lastDirectory)) {
-                    lastDirectory = QDir::homePath();
-                }
-                fileName = saveFileAs();
-            }
-        }
+    QSettings settings;
+    settings.beginWriteArray("session");
+    for (int i = 0; i < editorTabs->count(); i++) {
+        settings.setArrayIndex(i);
+        settings.setValue("file",editorTabs->tabToolTip(i));
     }
-
-    /* load the last directory to make user happy */
-    lastDirectory = QFileInfo(fileName).path();
-    QVariant lastdirv = QSettings().value(lastDirectoryKey, lastDirectory);
-    if(!lastdirv.isNull()) {
-        if(lastdirv.canConvert(QVariant::String)) {
-            if(lastdirv.toString().length() > 0) {
-                lastDirectory = lastdirv.toString();
-            }
-        }
-    }
+    settings.endArray();
 }
 
-void MainWindow::getApplicationSettings(bool complain)
+void MainWindow::openFiles(const QStringList & files)
 {
-    QDir dir(this->lastDirectory);
-    QFile file;
-    QVariant compv;
-
-    compv = QSettings().value("Compiler");
-    if(compv.canConvert(QVariant::String)) {
-        spinCompiler = compv.toString();
-        spinCompiler = dir.fromNativeSeparators(spinCompiler);
-    }
-    if(complain && !file.exists(spinCompiler)) {
-        propDialog->showPreferences();
-    }
-    compv = QSettings().value("Loader");
-    if(compv.canConvert(QVariant::String)) {
-        spinLoader = compv.toString();
-        spinLoader = dir.fromNativeSeparators(spinLoader);
-    }
-
-    /* get the compiler path */
-    spinCompilerPath = QFileInfo(spinCompiler).path();
-    spinCompilerPath = dir.fromNativeSeparators(spinCompilerPath);
-
-    /* get the include path and config file set by user */
-    QVariant incv;
-
-    incv = QSettings().value("Library Path");
-    if(incv.canConvert(QVariant::String)) {
-        spinIncludes = incv.toString();
-        spinIncludes = dir.fromNativeSeparators(spinIncludes);
-    }
-}
-
-bool MainWindow::exitSave()
-{
-    bool saveAll = false;
-    QMessageBox mbox(QMessageBox::Question, "Save File?", "",
-            QMessageBox::Discard | QMessageBox::Save | QMessageBox::SaveAll | QMessageBox::Cancel, this);
-
-    for(int tab = editorTabs->count()-1; tab > -1; tab--)
+    for (int i = 0; i < files.size(); i++)
     {
-        QString tabName = editorTabs->tabText(tab);
-        if(tabName.at(tabName.length()-1) == '*')
-        {
-            mbox.setInformativeText(tr("Save File: ") + tabName.mid(0,tabName.indexOf(" *")) + tr(" ?"));
-            if(saveAll)
-            {
-                saveFile(tab);
-            }
-            else
-            {
-                int ret = mbox.exec();
-                switch (ret) {
-                    case QMessageBox::Cancel:
-                        return false;
-                        break;
-                    case QMessageBox::Discard:
-                        // Don't Save was clicked
-                        return true;
-                        break;
-                    case QMessageBox::Save:
-                        // Save was clicked
-                        saveFile(tab);
-                        break;
-                    case QMessageBox::SaveAll:
-                        // save all was clicked
-                        saveAll = true;
-                        break;
-                    default:
-                        // should never be reached
-                        break;
-                }
-            }
-        }
+        qDebug() << files.at(i);
+        editorTabs->openFile(files.at(i));
     }
-    return true;
 }
+
+void MainWindow::getApplicationSettings()
+{
+    QSettings settings;
+    settings.beginGroup("Paths");
+
+    spinCompiler = settings.value("Compiler").toString();
+    spinLoader = settings.value("Loader").toString();
+    spinIncludes = settings.value("Library").toString();
+
+    settings.endGroup();
+}
+
+void MainWindow::preferences()
+{
+    propDialog->showPreferences();
+}
+
+
+void MainWindow::preferencesAccepted()
+{
+    getApplicationSettings();
+}
+
+
+void MainWindow::fontBigger()
+{
+    propDialog->adjustFontSize(1.25);
+}
+
+void MainWindow::fontSmaller()
+{
+    propDialog->adjustFontSize(0.8);
+}
+
 
 void MainWindow::quitProgram()
 {
@@ -292,7 +239,11 @@ void MainWindow::quitProgram()
 
 void MainWindow::closeEvent(QCloseEvent *e)
 {
-    if(!exitSave()) {
+    saveSession();
+    editorTabs->closeAll();
+
+    if (editorTabs->count())
+    {
         if(e) e->ignore();
         return;
     }
@@ -300,238 +251,73 @@ void MainWindow::closeEvent(QCloseEvent *e)
     portListener->close();
     portConnectionMonitor->stop();
 
-    QString filestr = editorTabs->tabToolTip(editorTabs->currentIndex());
+    QSettings().setValue("windowSize",saveGeometry());
 
-    if(QSettings().value(useKeys).toInt())
-    {
-        QSettings().setValue(lastFileNameKey,filestr);
-        QSettings().setValue(lastDirectoryKey, lastDirectory);
-
-        // save user's width/height
-        QByteArray geo = this->saveGeometry();
-        QSettings().setValue(mainWindowGeometry,geo);
-    }
     if(e) e->accept();
     qApp->exit(0);
 }
 
-void MainWindow::changeTab(int index)
+
+void MainWindow::newProjectTrees()
 {
-    editorTabs->changeTab(index);
-    setProject();
-}
-
-void MainWindow::newFile()
-{
-    editorTabs->setStyleSheet("");
-
-    Editor *editor = new Editor(this);
-    editor->setAttribute(Qt::WA_DeleteOnClose);
-
-    connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
-
-    editorTabs->addTab(editor,tr("Untitled"));
-    int tab = editorTabs->count()-1;
-    editorTabs->setCurrentIndex(tab);
-    editorTabs->setTabToolTip(tab, QString(""));
-
-    editorTabs->getEditor(editorTabs->currentIndex())->installEventFilter(this);
-
     delete projectModel;
     projectModel = new TreeModel("", this);
-    if(leftSplit->isVisible()) {
+    if(leftSplit->isVisible())
+    {
         delete referenceModel;
         referenceModel = new TreeModel("", this);
     }
 }
 
-void MainWindow::openFile(const QString &path)
+
+void MainWindow::addRecentFile(const QString &fileName)
 {
-    QString fileName = path;
+    QStringList files = QSettings().value("recentFiles").toStringList();
 
-    if (fileName.isNull())
-        fileName = QFileDialog::getOpenFileName(this,
-                tr("Open File"), lastDirectory, "Spin Files (*.spin);;All Files (*)");
-    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-    openFileName(fileName);
-    lastDirectory = QFileInfo(fileName).path();
-    QApplication::processEvents();
-    QApplication::restoreOverrideCursor();
-}
-
-void MainWindow::openFileName(QString fileName)
-{
-    QString data;
-    qDebug() << "Attempting to open file " << fileName;
-    if (!fileName.isEmpty()) {
-        QFile file(fileName);
-        if (file.open(QFile::ReadOnly))
-        {
-            QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-            QTextStream in(&file);
-            in.setAutoDetectUnicode(true);
-            in.setCodec("UTF-8");
-            data = in.readAll();
-            file.close();
-
-            QApplication::processEvents();
-            QApplication::restoreOverrideCursor();
-
-            QString sname = QFileInfo(fileName).fileName();
-            if(editorTabs->count()>0) {
-                for(int n = editorTabs->count()-1; n > -1; n--) {
-                    if(editorTabs->tabText(n) == sname) {
-                        editorTabs->setEditor(n, sname, fileName, data);
-                        setProject();
-                        return;
-                    }
-                }
-            }
-            if(editorTabs->tabText(0) == tr("Untitled")) {
-                editorTabs->setEditor(0, sname, fileName, data);
-                setProject();
-                return;
-            }
-            newFile();
-            int tab = editorTabs->count()-1;
-            editorTabs->setEditor(tab, sname, fileName, data);
-            setProject();
-        }
-    }
-}
-
-void MainWindow::saveFile()
-{
-    saveFile(editorTabs->currentIndex());
-    setProject();
-}
-
-void MainWindow::saveFile(int index)
-{
-    try 
-    {
-        QString fileName = editorTabs->tabToolTip(index);
-
-        if (fileName.isEmpty()) {
-            saveFileAs(fileName);
-            if (fileName.isEmpty())
-                return;
-        }
-        editorTabs->setTabText(index,QFileInfo(fileName).fileName());
-        editorTabs->saveFile(fileName, index);
-    } 
-    catch(...)
-    {
-
-    }
-}
-
-QString MainWindow::saveFileAs(const QString &path)
-{
-    QString fileName = path;
-    try
-    {
-        int n = editorTabs->currentIndex();
-
-        if (fileName.isEmpty())
-            fileName = QFileDialog::getSaveFileName(this,
-                    tr("Save File As..."), QDir(lastDirectory).filePath(editorTabs->tabText(n)), "Spin Files (*.spin)");
-
-        if (fileName.isEmpty()) {
-            return QString();
-        }
-        lastDirectory = QFileInfo(fileName).path();
-
-        editorTabs->setTabText(n,QFileInfo(fileName).fileName());
-        editorTabs->setTabToolTip(n,fileName);
-
-        if (!fileName.isEmpty()) {
-            if(editorTabs->saveFile(fileName, n))
-                setProject();
-        }
-    }
-    catch(...)
-    {
-        return QString();
-    }
-    return fileName;
-}
-
-void MainWindow::fileChanged()
-{
-    int index = editorTabs->currentIndex();
-    QString name = editorTabs->tabText(index);
-    QString fileName = editorTabs->tabToolTip(index);
-    if(!QFile::exists(fileName))
-        return;
-    QFile file(fileName);
-    if(file.open(QFile::ReadOnly))
-    {
-        QString curt = editorTabs->getEditor(index)->toPlainText();
-        QString text;
-        QTextStream in(&file);
-        in.setAutoDetectUnicode(true);
-        in.setCodec("UTF-8");
-        text = in.readAll();
-        file.close();
-
-        if(text == curt) {
-            if(name.at(name.length()-1) == '*')
-                editorTabs->setTabText(index, QFileInfo(fileName).fileName());
-            return;
-        }
-    }
-    if(!name.endsWith('*')) {
-        name += tr(" *");
-        editorTabs->setTabText(index, name);
-    }
-}
-
-void MainWindow::setCurrentFile(const QString &fileName)
-{
-    QStringList files = QSettings().value(recentFilesKey).toStringList();
     files.removeAll(fileName);
     files.prepend(fileName);
-    while (files.size() > MaxRecentFiles)
+    while (files.size() > recentFiles.size())
         files.removeLast();
 
-    QSettings().setValue(recentFilesKey, files);
-
-    foreach (QWidget *widget, QApplication::topLevelWidgets()) {
-        MainWindow *mainWin = qobject_cast<MainWindow *>(widget);
-        if (mainWin)
-            mainWin->updateRecentFileActions();
-    }
+    QSettings().setValue("recentFiles", files);
+    updateRecentFileActions();
 }
+
 
 void MainWindow::updateRecentFileActions()
 {
-    QStringList files = QSettings().value(recentFilesKey).toStringList();
+    QStringList files = QSettings().value("recentFiles").toStringList();
+    files.removeAll("");
+    int numRecentFiles = qMin(files.size(), recentFiles.size());
 
-    int numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
-
-    for (int i = 0; i < numRecentFiles; ++i) {
+    for (int i = 0; i < numRecentFiles; ++i)
+    {
         QString estr = files.at(i);
-        if(estr.length() == 0)
-            continue;
-        //QString filename = QFileInfo(projects[i]).fileName();
-        QString text = tr("&%1 %2").arg(i + 1).arg(estr);
-        recentFileActs[i]->setText(text);
-        recentFileActs[i]->setData(estr);
-        recentFileActs[i]->setVisible(true);
+        QString text = tr("&%1 %2").arg(i + 1).arg(QFileInfo(estr).fileName());
+        recentFiles.at(i)->setText(text);
+        recentFiles.at(i)->setData(estr);
+        recentFiles.at(i)->setVisible(true);
     }
-    for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
-        recentFileActs[j]->setVisible(false);
+    for (int j = numRecentFiles; j < recentFiles.size(); ++j)
+        recentFiles.at(j)->setVisible(false);
 
-    separatorFileAct->setVisible(numRecentFiles > 0);
+    if (!numRecentFiles)
+    {
+        recentFiles.at(0)->setText("No recent files...");
+        recentFiles.at(0)->setVisible(true);
+        recentFiles.at(0)->setEnabled(false);
+    }
+    else
+    {
+        recentFiles.at(0)->setEnabled(true);
+    }
 }
 
 void MainWindow::openRecentFile()
 {
     QAction *action = qobject_cast<QAction *>(sender());
     if (action)
-        openFile(action->data().toString());
+        editorTabs->openFile(action->data().toString());
 }
 
 void MainWindow::printFile()
@@ -541,29 +327,25 @@ void MainWindow::printFile()
 void MainWindow::setProject()
 {
     int index = editorTabs->currentIndex();
+
     if(index < 0)
         return;
 
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
     QString fileName = editorTabs->tabToolTip(index);
-    setCurrentFile(fileName);
+    addRecentFile(fileName);
 
-    QStringList pathpieces = fileName.split("/");
-    setWindowTitle( pathpieces.value( pathpieces.length()-1) + " - " +
-                    QCoreApplication::applicationName()
-                    );
-    sizeLabel.setText("");
-    msgLabel.setText("");
+    if (editorTabs->count() > 0)
+        setWindowTitle(editorTabs->tabText(index) + " - " +
+                       QCoreApplication::applicationName());
+    else
+        setWindowTitle(QCoreApplication::applicationName());
 
     QString text = editorTabs->getEditor(index)->toPlainText();
     updateProjectTree(fileName);
+    updateReferenceTree(fileName,text);
 
-    if(leftSplit->isVisible()) {
-        updateReferenceTree(fileName,text);
-    }
-
-    QApplication::processEvents();
     QApplication::restoreOverrideCursor();
 }
 
@@ -614,34 +396,29 @@ void MainWindow::checkAndSaveFiles()
 {
     if(projectModel == NULL)
         return;
+
     QString title = projectModel->getTreeName();
-    QString modTitle = title + " *";
-    for(int tab = editorTabs->count()-1; tab > -1; tab--)
+
+    for (int i = 0; i < editorTabs->count(); i++)
     {
-        QString tabName = editorTabs->tabText(tab);
-        if(tabName == modTitle)
+        qDebug() << title;
+        if (editorTabs->getEditor(i)->contentChanged())
         {
-            saveFile(tab);
-            editorTabs->setTabText(tab,title);
+            editorTabs->save(i);
         }
     }
 
     int len = projectModel->rowCount();
-    for(int n = 0; n < len; n++)
+    for (int n = 0; n < len; n++)
     {
         QModelIndex root = projectModel->index(n,0);
-        QVariant vs = projectModel->data(root, Qt::DisplayRole);
-        if(!vs.canConvert(QVariant::String))
-            continue;
-        QString name = vs.toString();
-        QString modName = name + " *";
-        for(int tab = editorTabs->count()-1; tab > -1; tab--)
+        QString name = projectModel->data(root, Qt::DisplayRole).toString();
+        qDebug() <<  name;
+        for(int i = 0; i < editorTabs->count(); i++)
         {
-            QString tabName = editorTabs->tabText(tab);
-            if(tabName == modName)
+            if (editorTabs->getEditor(i)->contentChanged())
             {
-                saveFile(tab);
-                editorTabs->setTabText(tab,name);
+                editorTabs->save(i);
             }
         }
     }
@@ -651,36 +428,30 @@ void MainWindow::highlightFileLine(QString file, int line)
 {
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
+    qDebug() << "Open file: " << file;
     QString name;
     if(QFile::exists(file)) {
         name = file;
     }
-    else if(QFile::exists(QDir(QFileInfo(projectFile).path()).filePath(file))) {
+    else if (QFile::exists(QDir(QFileInfo(projectFile).path()).filePath(file)))
+    {
         name = QDir(QFileInfo(projectFile).path()).filePath(file);
     }
-    else if(QFile::exists(QDir(spinIncludes).filePath(file))) {
+    else if (QFile::exists(QDir(spinIncludes).filePath(file)))
+    {
         name = QDir(spinIncludes).filePath(file);
     }
-    else {
+    else
+    {
         return;
     }
 
-    Editor *editor = NULL;
-    int len = editorTabs->count();
-    /* open file in tab if not there already */
-    for(int n = 0; n < len; n++) {
-        QString s = editorTabs->tabToolTip(n);
-        if(s.length() && s.compare(name) == 0) {
-            editor = editorTabs->getEditor(n);
-            editorTabs->setCurrentIndex(n);
-            break;
-        }
-    }
-    if(editor == NULL) {
-        openFileName(name);
-        editor = editorTabs->getEditor(editorTabs->currentIndex());
-    }
-    if(editor != NULL)
+    qDebug() << "Open name: " << name;
+    qDebug() << "Open highlight!: " << name;
+    editorTabs->openFile(name);
+    Editor * editor = editorTabs->getEditor(editorTabs->currentIndex());
+    
+    if(editor)
     {
         QTextCursor cur = editor->textCursor();
         cur.movePosition(QTextCursor::Start);
@@ -688,24 +459,16 @@ void MainWindow::highlightFileLine(QString file, int line)
         cur.clearSelection();
         editor->setTextCursor(cur);
     }
+
     QApplication::processEvents();
     QApplication::restoreOverrideCursor();
-}
-
-void MainWindow::buildSourceWriteError(QString fileName)
-{
-    QMessageBox::critical(this, tr("Build Problem"),
-            "\n"+tr("Problem building:")+" "+QFileInfo(fileName).fileName()+"\n\n"+
-            tr("Can't write the file or folder.")+" "+
-            tr("This can happen when compiling a packaged file.")+"\n\n"+
-            tr("The code must be saved to a folder with write permissions.")+" "+
-            tr("A good location would be the user's Documents folder or a folder with other sources.")+"\n\n"+
-            tr("Please save to a different file and/or folder when prompted."));
 }
 
 
 int  MainWindow::runCompiler(COMPILE_TYPE type)
 {
+    builder.show();
+
     QString copts;
     int rc = -1;
 
@@ -713,26 +476,17 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     QString fileName;
     QString text;
 
-    // if find in progress, ignore request
     if(!statusDone) {
         return -1;
     }
 
     emit signalStatusDone(false);
 
-    if(projectModel == NULL) {
-        QMessageBox mbox(QMessageBox::Critical, "No File",
-                "Please create or load a file.", QMessageBox::Ok);
-        mbox.exec();
-        goto endRunCompiler;
-    }
+    if(!projectModel)
+        return 1;
 
-    if(this->editorTabs->currentIndex() < 0) {
-        QMessageBox mbox(QMessageBox::Critical, "Error No Source",
-                "Please open a source file.", QMessageBox::Ok);
-        mbox.exec();
-        goto endRunCompiler;
-    }
+    if(!editorTabs->count())
+        return 1;
 
     // don't allow if no port available
     if(type != COMPILE_ONLY && cbPort->count() < 1) {
@@ -740,50 +494,34 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
                 tr("Serial port not available.")+" "+tr("Connect a USB Propeller board, turn it on, and try again."),
                 QMessageBox::Ok);
         mbox.exec();
-        goto endRunCompiler;
+        return 1;
     }
 
     index = editorTabs->currentIndex();
     fileName = editorTabs->tabToolTip(index);
     text = editorTabs->getEditor(index)->toPlainText();
 
-    if(!isPackageSource(fileName)) {
-        buildSourceWriteError(fileName);
-        if(!extractSource(fileName)) {
-            buildSourceWriteError(fileName);
-            goto endRunCompiler;
-        }
-    }
-
     updateProjectTree(fileName);
-    // updateReferenceTree(fileName,text);
+    updateReferenceTree(fileName,text);
 
-    sizeLabel.setText("");
-    msgLabel.setText("");
-
-    progress->setValue(0);
-    progress->setVisible(true);
-
-    getApplicationSettings(true);
+    getApplicationSettings();
 
     checkAndSaveFiles();
 
     if(fileName.contains(".spin")) {
         statusDialog->init("Compiling Program", QFileInfo(this->projectFile).fileName());
-        spinBuilder->setParameters(spinCompiler, spinIncludes, spinCompilerPath, projectFile, compileResult);
-        spinBuilder->setObjects(&msgLabel, &sizeLabel, progress, cbPort);
-        spinBuilder->setLoader(spinLoader);
+        builder.setParameters(spinCompiler, spinLoader, spinIncludes, projectFile, compileResult);
 
         statusDialog->stop();
 
         copts = "-b";
-        rc = spinBuilder->runCompiler(copts);
-        goto endRunCompiler;
+        rc = builder.runCompiler(copts);
     }
-    else {
+    else 
+    {
         QMessageBox::critical(this,tr("Can't compile unknown file type"), tr("Files must be of type '.spin'"));
     }
-endRunCompiler:
+
     emit signalStatusDone(true);
     return rc;
 }
@@ -793,7 +531,7 @@ void MainWindow::programBuild()
     runCompiler(COMPILE_ONLY);
 }
 
-int  MainWindow::loadProgram(int type, QString file)
+int  MainWindow::loadProgram(int type)
 {
     int rc = -1;
     QString copts;
@@ -804,12 +542,9 @@ int  MainWindow::loadProgram(int type, QString file)
     }
     emit signalStatusDone(false);
 
-    if(!file.length()) {
-        file = projectFile.replace(".spin",".binary",Qt::CaseInsensitive);
-    }
-
     bool stat = portListener->isOpen();
-    if(cbPort->currentText().length() == 0) {
+    if(cbPort->currentText().length() == 0)
+    {
         QMessageBox::critical(this,tr("Propeller Load"), tr("Port not available. Please connect Propeller board."), QMessageBox::Ok);
         goto endLoadProgram;
     }
@@ -827,11 +562,11 @@ int  MainWindow::loadProgram(int type, QString file)
     switch (type) {
         case MainWindow::LoadRunHubRam:
             copts += "-r -p"+portListener->getPortName();
-            rc = spinBuilder->loadProgram(copts);
+            rc = builder.loadProgram(copts);
             break;
         case MainWindow::LoadRunEeprom:
             copts += "-e -p"+portListener->getPortName();
-            rc = spinBuilder->loadProgram(copts);
+            rc = builder.loadProgram(copts);
             break;
         default:
             break;
@@ -843,9 +578,6 @@ int  MainWindow::loadProgram(int type, QString file)
         portListener->open();
     }
 
-    if(rc) {
-        QMessageBox::critical(this,tr("Propeller Load Failed"), tr("Failed to load Propeller on port")+" "+cbPort->currentText(), QMessageBox::Ok);
-    }
 endLoadProgram:
     emit signalStatusDone(true);
     return rc;
@@ -856,7 +588,7 @@ void MainWindow::programBurnEE()
     if(runCompiler(COMPILE_BURN))
         return;
 
-    if(cbPort->itemText(cbPort->currentIndex()).compare(AUTOPORT) == 0) {
+    if(cbPort->itemText(cbPort->currentIndex()).compare("AUTO") == 0) {
         findHardware(false);
     }
     setCurrentPort(cbPort->currentIndex());
@@ -869,7 +601,7 @@ void MainWindow::programRun()
     if(runCompiler(COMPILE_RUN))
         return;
 
-    if(cbPort->itemText(cbPort->currentIndex()).compare(AUTOPORT) == 0) {
+    if(cbPort->itemText(cbPort->currentIndex()).compare("AUTO") == 0) {
         findHardware(false);
     }
     setCurrentPort(cbPort->currentIndex());
@@ -882,7 +614,8 @@ void MainWindow::programDebug()
     if(runCompiler(COMPILE_RUN))
         return;
 
-    if(cbPort->itemText(cbPort->currentIndex()).compare(AUTOPORT) == 0) {
+    if(cbPort->itemText(cbPort->currentIndex()).compare("AUTO") == 0)
+    {
         findHardware(false);
     }
     setCurrentPort(cbPort->currentIndex());
@@ -891,8 +624,10 @@ void MainWindow::programDebug()
     portListener->init(cbPort->currentText(), term->getBaud());
     setCurrentPort(cbPort->currentIndex());
     portListener->open();
-    if(!loadProgram(MainWindow::LoadRunHubRam)) {
-        btnConnected->setChecked(true);
+
+    if(!loadProgram(MainWindow::LoadRunHubRam))
+    {
+        ui.actionTerminal->setChecked(true);
         connectButton(true);
     }
 }
@@ -903,6 +638,12 @@ void MainWindow::setStatusDone(bool done)
     statusMutex.lock();
     statusDone = done;
     statusMutex.unlock();
+}
+
+void MainWindow::viewInfo()
+{
+
+
 }
 
 void MainWindow::findHardware(bool showFoundBox)
@@ -917,7 +658,8 @@ void MainWindow::findHardware(bool showFoundBox)
     emit signalStatusDone(false);
 
     bool stat = portListener->isOpen();
-    if(stat) {
+    if(stat)
+    {
         savePort = portListener->getPortName();
         portListener->close();
     }
@@ -925,15 +667,19 @@ void MainWindow::findHardware(bool showFoundBox)
     statusDialog->init("Searching for Propellers", "");
     portConnectionMonitor->stop();
 
-    for(int n = 0; n < this->cbPort->count(); n++) {
+    for(int n = 0; n < this->cbPort->count(); n++)
+    {
         QString portstr = cbPort->itemText(n);
-        if(portstr.compare(AUTOPORT) == 0) {
+        if(portstr.compare("AUTO") == 0)
+        {
             continue;
         }
         portListener->init(portstr, term->getBaud());
-        if(portListener->isDevice(portstr)) {
+        if(portListener->isDevice(portstr))
+        {
             count++;
-            if(currentPort.compare(AUTOPORT) == 0) {
+            if(currentPort.compare("AUTO") == 0)
+            {
                 cbPort->setCurrentIndex(n);
             }
         }
@@ -964,7 +710,7 @@ void MainWindow::findHardware(bool showFoundBox)
 
 void MainWindow::terminalClosed()
 {
-    btnConnected->setChecked(false);
+    ui.actionTerminal->setChecked(false);
     connectButton(false);
 }
 
@@ -1029,22 +775,6 @@ void MainWindow::findMultilineComment(QTextCursor cur)
     return;
 }
 
-int MainWindow::isFileOpen(QString fileName)
-{
-    QString tabName;
-    fileName = fileName.trimmed();
-
-    for(int n = editorTabs->count()-1; n > -1; n--) {
-        tabName = editorTabs->tabToolTip(n);
-        tabName = tabName.trimmed();
-        if(fileName.compare(tabName) == 0) {
-            return n;
-        }
-    }
-
-    return -1;
-}
-
 void MainWindow::openTreeFile(QString fileName)
 {
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -1070,12 +800,7 @@ void MainWindow::openTreeFile(QString fileName)
         qDebug() << "File not found!";
     }
 
-    int index = isFileOpen(fileToOpen);
-
-    if (index < 0)
-        openFileName(fileToOpen);
-    else
-        editorTabs->setCurrentIndex(index);
+    editorTabs->openFile(fileToOpen);
 
     QApplication::restoreOverrideCursor();
 }
@@ -1133,13 +858,16 @@ void MainWindow::zipFiles()
 {
     int n = this->editorTabs->currentIndex();
     QString fileName = editorTabs->tabToolTip(n);
-    if (fileName.isEmpty()) {
+
+    if (fileName.isEmpty())
         return;
-    }
-    QString spinLibPath     = propDialog->getSpinLibraryString();
-    QStringList fileTree    = editorTabs->getEditor(editorTabs->currentIndex()
+
+    QString spinLibPath     = QSettings().value("Library").toString();
+    QStringList fileTree    = editorTabs->getEditor(
+            editorTabs->currentIndex()
             )->spinParser.spinFileTree(fileName, spinLibPath);
-    if(fileTree.count() > 0) {
+    if(fileTree.count() > 0)
+    {
         zipper.makeZip(fileName, fileTree, spinLibPath);
     }
 }
@@ -1168,10 +896,10 @@ void MainWindow::updateProjectTree(QString fileName)
 void MainWindow::updateSpinProjectTree(QString fileName)
 {
     /* for spin we always parse the program and stuff the file list */
-    QStringList flist = editorTabs->getEditor(editorTabs->currentIndex())->spinParser.spinFileTree(fileName, propDialog->getSpinLibraryString());
-    for(int n = 0; n < flist.count(); n ++) {
-        QString s = flist[n];
-        //qDebug() << s;
+    QStringList flist = editorTabs->getEditor(editorTabs->currentIndex())->spinParser.spinFileTree(fileName, QSettings().value("Library").toString());
+
+    foreach (QString s, flist)
+    {
         projectModel->addRootItem(s);
     }
 }
@@ -1321,7 +1049,6 @@ void MainWindow::checkConfigSerialPort()
 void MainWindow::enumeratePortsEvent()
 {
     enumeratePorts();
-    int len = this->cbPort->count();
 
     // need to check if the port we are using disappeared.
     bool notFound = true;
@@ -1337,16 +1064,16 @@ void MainWindow::enumeratePortsEvent()
 
     if (notFound)
     {
-        btnConnected->setChecked(false);
+        ui.actionTerminal->setChecked(false);
     }
     else
     {
-        btnConnected->setChecked(true);
+        ui.actionTerminal->setChecked(true);
     }
 
-    if(len > 1) {
-        if(this->isActiveWindow())
-            this->cbPort->showPopup();
+    if(cbPort->count() > 1) {
+        if(isActiveWindow())
+            cbPort->showPopup();
     }
 
 }
@@ -1357,7 +1084,7 @@ void MainWindow::enumeratePorts()
         return;
 
     cbPort->clear();
-    cbPort->addItem(AUTOPORT);
+    cbPort->addItem("AUTO");
 
     QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
     QStringList stringlist;
@@ -1365,7 +1092,6 @@ void MainWindow::enumeratePorts()
     stringlist << "List of ports:";
 
     for (int i = 0; i < ports.size(); i++) {
-        progress->setValue(i*100/ports.size());
         stringlist << "port name:" << ports.at(i).portName;
         stringlist << "friendly name:" << ports.at(i).friendName;
         stringlist << "physical name:" << ports.at(i).physName;
@@ -1391,25 +1117,25 @@ void MainWindow::enumeratePorts()
 #endif
     }
     if(!cbPort->count()) {
-        btnConnected->setCheckable(false);
+        ui.actionTerminal->setCheckable(false);
     }
     else {
-        btnConnected->setCheckable(true);
+        ui.actionTerminal->setCheckable(true);
     }
     QApplication::processEvents();
 }
 
 void MainWindow::connectButton(bool show)
 {
-    if(btnConnected->isChecked()) {
-        btnConnected->setDisabled(true);
+    if(ui.actionTerminal->isChecked()) {
+        ui.actionTerminal->setDisabled(true);
         if(!portListener->isOpen()) {
             qDebug() << "connect enable port";
             portListener->init(cbPort->currentText(), term->getBaud());
             setCurrentPort(cbPort->currentIndex());
             portListener->open();
         }
-        btnConnected->setDisabled(false);
+        ui.actionTerminal->setDisabled(false);
         term->setPortEnabled(true);
         term->setPortName(portListener->getPort()->portName());
         if(show) {
@@ -1440,7 +1166,6 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     projectTree = new ReferenceTree(tr("Current Project"),ColorScheme::ConBG);
     connect(projectTree,SIGNAL(clicked(QModelIndex)),this,SLOT(projectTreeClicked(QModelIndex)));
 
-
     leftSplit->addWidget(projectTree);
 
     // project reference tree
@@ -1453,13 +1178,15 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     connect(propDialog,SIGNAL(updateFonts()),referenceTree,SLOT(updateFonts()));
     connect(propDialog,SIGNAL(updateFonts()),projectTree,SLOT(updateFonts()));
 
+    leftSplit->addWidget(referenceTree);
+
+
     projectTree->updateColors();
     referenceTree->updateColors();
 
     projectTree->updateFonts();
     referenceTree->updateFonts();
 
-    leftSplit->addWidget(referenceTree);
 
     leftSplit->setStretchFactor(0,1);
     leftSplit->setStretchFactor(1,2);
@@ -1470,8 +1197,8 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
 
     // project editor tabs
     editorTabs = new FileManager(this);
-    connect(editorTabs,SIGNAL(tabCloseRequested(int)),editorTabs,SLOT(closeTab(int)));
-    connect(editorTabs,SIGNAL(currentChanged(int)),this,SLOT(changeTab(int)));
+    connect(editorTabs,SIGNAL(tabCloseRequested(int)),editorTabs,SLOT(closeFile(int)));
+    connect(editorTabs,SIGNAL(currentChanged(int)),editorTabs,SLOT(changeTab(int)));
     findSplit->addWidget(editorTabs);
 
     findSplit->setStretchFactor(0,1);
@@ -1502,7 +1229,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
             switch (e->key())
             {
             case (Qt::Key_T):
-                newFile();
+                editorTabs->newFile();
                 return true;
             case (Qt::Key_W):
                 editorTabs->closeFile();
@@ -1517,4 +1244,48 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
         }
     }
     return QMainWindow::eventFilter(target, event);
+}
+
+void MainWindow::openFileResource(QString const & resource)
+{
+    QString path = QApplication::applicationDirPath()
+            + QString(APP_RESOURCES_PATH)
+            + resource;
+    if (QFileInfo(path).exists() && QFileInfo(path).isFile())
+        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    else
+        showMessage(tr("File %1 not found...").arg(path));
+}
+
+void MainWindow::propellerManual()
+{
+    openFileResource("/doc/pdf/P8X32A-Web-PropellerManual-v1.2_0.pdf");
+}
+
+void MainWindow::propellerDatasheet()
+{
+    openFileResource("/doc/pdf/P8X32A-Propeller-Datasheet-v1.4.0_0.pdf");
+}
+
+void MainWindow::about()
+{
+    QString version = QString(QCoreApplication::applicationName() 
+                     + " v" + QCoreApplication::applicationVersion()
+                     );
+    QMessageBox::about(this, tr("About") + " " + QCoreApplication::applicationName(),
+           "<h2>" + version + "</h2>"
+           "<p>PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.</p>"
+           "<p>Use it for writing Spin code, downloading programs to your Propeller board, and debugging your applications with the built-in serial terminal.<p>"
+           "<p>PropellerIDE is built in Qt and is fully cross-platform.</p>"
+
+           "<h3>Credits</h3>"
+           "<p>Copyright &copy; 2014-2015 by Parallax, Inc. "
+           "Developed by LameStation LLC in collaboration with Parallax. Originally created by Steve Denson.</p>"
+           "<p>PropellerIDE is free software, released under the GPLv3 license.</p>"
+           );
+}
+
+void MainWindow::showMessage(const QString & message)
+{
+    statusBar()->showMessage(message, 2000);
 }

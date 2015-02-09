@@ -1,9 +1,11 @@
-include( ../../propelleride.pri )
-
 TEMPLATE = lib
 TARGET = qext
 target.path = $${PREFIX}/bin
+
 CONFIG += staticlib
+CONFIG -= debug_and_release app_bundle
+
+QT += gui widgets
 
 SOURCES += qextserialport.cpp \
     qextserialenumerator.cpp

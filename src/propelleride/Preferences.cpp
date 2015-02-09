@@ -26,8 +26,6 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
 
     currentTheme = &Singleton<ColorScheme>::Instance();
 
-    configSettings();
-
     setupFolders();
     setupOptions();
     setupHighlight();
@@ -46,22 +44,6 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
 
     setWindowFlags(Qt::Tool);
     resize(500,260);
-}
-
-void Preferences::configSettings()
-{
-    bool ok;
-    QSettings settings;
-    QString app = QApplication::applicationFilePath();
-    QVariant keyv = settings.value(useKeys);
-    int keyday = keyv.toInt(&ok);
-    QDateTime appinfo = QFileInfo(app).lastModified();
-    int appday = appinfo.date().toJulianDay();
-    if(appday > keyday) {
-        cleanSettings();
-        settings.setValue(useKeys,appday);
-    }
-    return;
 }
 
 void Preferences::cleanSettings()
@@ -185,7 +167,7 @@ void Preferences::setupFolders()
             );
 
     librarypath = new PathSelector(
-            tr("Library Path"),
+            tr("Library"),
             QApplication::applicationDirPath() +
                     QString(APP_RESOURCES_PATH) +
                     QString("/library"),
@@ -391,11 +373,6 @@ void Preferences::showPreferences()
     spinSuggestEnableSaved = spinSuggestEnable.isChecked();
 
     this->show();
-}
-
-QString Preferences::getSpinLibraryString()
-{
-    return librarypath->get();
 }
 
 void Preferences::adjustFontSize(float ratio)

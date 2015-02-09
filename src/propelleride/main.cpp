@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    app.setWindowIcon(QIcon(":/icons/PropHatAlpha.png"));
+    app.setWindowIcon(QIcon(":/icons/project-identify.png"));
     QCoreApplication::setOrganizationName("Parallax");
     QCoreApplication::setOrganizationDomain("www.parallax.com");
     QCoreApplication::setApplicationVersion(VERSION);
@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
 #if defined(Q_OS_WIN32)
     QStringList styles = QStyleFactory::keys();
     qDebug() << "Available window styles" << styles;
-    if(styles.contains("Fusion")) {
-        QApplication::setStyle("Fusion");
+    if(styles.contains("WindowsVista")) {
+        QApplication::setStyle("WindowsVista");
     }
 #endif
 
@@ -55,15 +55,7 @@ debug your applications with the built-in serial terminal.")
     parser.process(app);
 
     MainWindow w;
-    w.init();
-
-    const QStringList args = parser.positionalArguments();
-    for (int i = 0; i < args.size(); i++)
-    {
-        qDebug() << args.at(i);
-        w.openFile(args.at(i));
-    }
-
+    w.openFiles(parser.positionalArguments());
     w.show();
     return app.exec();
 }

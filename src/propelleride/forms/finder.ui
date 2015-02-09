@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
-    <height>105</height>
+    <width>303</width>
+    <height>145</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,150 +18,120 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>482</width>
-    <height>105</height>
+    <width>303</width>
+    <height>145</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>482</width>
-    <height>105</height>
+    <width>303</width>
+    <height>145</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Find &amp; Replace</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="icons/icons.qrc">
+   <iconset resource="../icons/icons.qrc">
     <normaloff>:/icons/edit-find.png</normaloff>:/icons/edit-find.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="1">
+      <widget class="QPushButton" name="findNext">
+       <property name="text">
+        <string>Find</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLineEdit" name="replaceEdit"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="findEdit">
+       <property name="minimumSize">
+        <size>
+         <width>192</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="replaceNext">
+       <property name="text">
+        <string>Replace</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="2">
-        <widget class="QPushButton" name="replacePrevious">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="icons/icons.qrc">
-           <normaloff>:/icons/find-previous.png</normaloff>:/icons/find-previous.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QPushButton" name="replaceNext">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="icons/icons.qrc">
-           <normaloff>:/icons/find-next.png</normaloff>:/icons/find-next.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="replaceEdit"/>
-       </item>
-       <item row="0" column="2">
-        <widget class="QPushButton" name="findPrevious">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="icons/icons.qrc">
-           <normaloff>:/icons/find-previous.png</normaloff>:/icons/find-previous.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QPushButton" name="findNext">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="icons/icons.qrc">
-           <normaloff>:/icons/find-next.png</normaloff>:/icons/find-next.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="replaceLabel">
-         <property name="text">
-          <string>Replace:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="findEdit">
-         <property name="minimumSize">
-          <size>
-           <width>192</width>
-           <height>0</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="findLabel">
-         <property name="text">
-          <string>Find:</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QCheckBox" name="wholeWord">
+       <property name="text">
+        <string>Whole Word</string>
+       </property>
+      </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QCheckBox" name="matchCase">
-         <property name="text">
-          <string>Match Case</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="wholeWord">
-         <property name="text">
-          <string>Whole Word</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="doneButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Done</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QCheckBox" name="matchCase">
+       <property name="text">
+        <string>Match Case</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="doneButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Done</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>
   </layout>
-  <zorder>findLabel</zorder>
-  <zorder>findEdit</zorder>
-  <zorder>findPrevious</zorder>
-  <zorder>matchCase</zorder>
-  <zorder>wholeWord</zorder>
-  <zorder>replaceEdit</zorder>
-  <zorder>replaceLabel</zorder>
-  <zorder>replacePrevious</zorder>
-  <zorder>replaceNext</zorder>
-  <zorder>findNext</zorder>
-  <zorder>findNext</zorder>
-  <zorder>findLabel</zorder>
  </widget>
  <resources>
-  <include location="icons/icons.qrc"/>
+  <include location="../icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

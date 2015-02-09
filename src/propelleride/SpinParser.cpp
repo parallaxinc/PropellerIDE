@@ -83,6 +83,7 @@ QStringList SpinParser::spinFileTree(QString file, QString libpath)
         QString ns = nodes.at(n);
         spinFiles.append(ns.mid(ns.lastIndexOf(":")+1));
     }
+    spinFiles.removeDuplicates();
     return spinFiles;
 }
 

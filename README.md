@@ -1,35 +1,87 @@
-![the hat](gfx/propellerhat.png) PropellerIDE [![Build Status](https://travis-ci.org/parallaxinc/PropellerIDE.svg?branch=master)](https://travis-ci.org/bweir/PropellerIDE)
+![the hat](gfx/propellerhat.png) PropellerIDE [![Build Status](https://travis-ci.org/parallaxinc/PropellerIDE.svg?branch=master)](https://travis-ci.org/parallaxinc/PropellerIDE)
 ============
-
-![the interface](gfx/interface.png "The PropellerIDE interface")
 
 PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.
 
 Write Spin code, download programs to your Propeller board, and debug your applications with the built-in serial terminal.
 
-- [Download PropellerIDE](https://lamestation.atlassian.net/wiki/display/PI/Downloads)
+PropellerIDE is written in C++ with Qt.
 
-### Features
+- [Download PropellerIDE](http://www.lamestation.com/propelleride)
+
+## Features
 
 - Spin syntax highlighting, auto-complete, code suggestion, and auto-indent
 - Unicode editing support
 - Auto-detection of connected Propeller hardware
 - Collapsible sidebar with function and program views
 - Integrated serial terminal
+- Customizable theming
+- Slick browser-style tab controls
+- Runs on Windows, Mac, Linux, and Raspberry Pi!
 
-### Planned Features
+## Project Roadmap
 
-- Unified tree view showing hierarchy of objects and functinos
-- Integrated Spin and Assembly help manual
-- Plugin interface for extending the application
+#### Immediate focus
 
-PropellerIDE was created using C++ and Qt.
+* Improve overall code maintainability
+* Refactor components for better separation of concerns
+* Replace qextserialport with QSerialPort
+* Refactor widgets to use UI forms
+
+#### Long-term focus
+
+* Translation support
+* Multiple Propeller languages
+* Serial and wireless code download
+* New platforms: Android, ChromeBook, HTML5, iOS
+ 
+#### Requested features (short list)
+
+* PropTool-style View Info widget
+* Alt-Drag to select text blocks
+* Colorful serial console formatting
+* Indent guides
+
+#### Features to support LameStation
+
+* Separate packaging tools from PropellerIDE repo and make standalone packaging toolchain
+* Clean up compiler output and add directory support
+* Integrated web help
+
+## Screenshots
+
+![classic theme](gfx/screenshots/classic.png "Classic theme")
+
+![ice theme](gfx/screenshots/ice.png "Ice theme")
 
 ## Building
 
 ### Dependencies
 
-PropellerIDE can be built against Qt4 or Qt5.
+* PropellerIDE requires at least Qt5.2.
+* Windows packaging requires Inno Setup 5 with preprocessor support. 
+* Build and release tools require Python 2.7.
+
+### Targets
+
+Type `make help` to see a list of available package targets.
+
+```
+$ make help
+Usage:    make [TYPE]
+
+Enter target type to build. Options:
+
+   checkout     initialize child repositories
+
+   win          windows installer
+   mac          mac bundle
+   deb          debian package
+   rpi          debian package for Raspberry Pi
+
+   no parameter builds only the binaries
+```
 
 ### Linux
 
@@ -50,7 +102,6 @@ Checkout the project.
 ```
 git clone https://github.com/lamestation/PropellerIDE.git PropellerIDE
 cd PropellerIDE
-make checkout
 ```
 
 Type `make deb` in the project root to build a Debian package.
@@ -87,12 +138,6 @@ Open the PowerShell. The `make` command on Windows is `mingw32-make.exe`. Add th
 mingw32-make.exe win
 ```
 
-Add `clean` to clean up old build files.
-
-```
-mingw32-make.exe clean
-```
-
 PropellerIDE has been built on Windows 7 and 8.
 
 *Note: QtCreator and command-line builds generate build files that are incompatible with each other, so you will need to call `make distclean` in the `src/` directory before you can switch from one to the other.*
@@ -115,34 +160,42 @@ The Qt version used must match the XCode version. The easiest solution is to use
 
 ### Raspberry Pi - Raspbian Wheezy
 
-You will need Qt5 to build PropellerIDE, it can be obtained from backports.
+Qt5 is not available in the standard repository, but you can obtain it from Debian backports.
 
-Edit /etc/apt/sources.list and add:
+Add the following entries to `/etc/apt/sources.list`.
 
 ```
 deb http://twolife.be/raspbian/ wheezy main backports
 deb-src http://twolife.be/raspbian/ wheezy main backports
 ```
 
-And add the repository key:
+Add the repository key.
 
 ```
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key 2578B775
 ```
 
-Then update and install Qt and dependencies:
+Update and install Qt5 and its dependencies.
 
 ```
 sudo apt-get update
 sudo apt-get install qt5-default qt5-qmake libegl1-mesa libgles2-mesa
 ```
 
-Finally, build a deb file as you would on Linux:
+Finally, use the build the `rpi` target to create a Debian package for Raspberry Pi.
 
 ```
-make checkout
-make deb
+make rpi
 ```
+
+## Cleaning
+
+Use the `clean` on all platforms to clean up old build files.
+
+## Installing
+
+All build targets output packages in the `staging/` directory.
+
 
 And install:
 

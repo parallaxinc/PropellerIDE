@@ -4,6 +4,9 @@ src/propelleride/propelleride
 src/openspin/openspin
 src/p1load/p1load
 
+src/openspin/repo
+src/p1load/repo
+
 propelleride.exe
 openspin.exe
 p1load.exe
@@ -18,6 +21,9 @@ staging/
 *~
 Makefile
 *.binary
+*.plist
+*.iss
 
 .DS_Store
 .qmake.stash
+*.pyc

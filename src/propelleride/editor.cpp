@@ -22,6 +22,9 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     ctrlPressed = false;
     isSpin = false;
     expectAutoComplete = false;
+    canUndo = false;
+    canRedo = false;
+    canCopy = false;
 
     lineNumberArea = new LineNumberArea(this);
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
@@ -37,11 +40,16 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     currentTheme = &Singleton<ColorScheme>::Instance();
     updateColors();
     updateFonts();
+    saveContent();
 
     connect(this,SIGNAL(cursorPositionChanged()),this,SLOT(updateBackgroundColors()));
     connect(propDialog,SIGNAL(updateColors()),this,SLOT(updateColors()));
     connect(propDialog,SIGNAL(updateFonts()),this,SLOT(updateFonts()));
     connect(propDialog->getTabSpaceLedit(),SIGNAL(textChanged(QString)), this, SLOT(tabSpacesChanged()));
+
+    connect(this,SIGNAL(undoAvailable(bool)), this, SLOT(setUndo(bool)));
+    connect(this,SIGNAL(redoAvailable(bool)), this, SLOT(setRedo(bool)));
+    connect(this,SIGNAL(copyAvailable(bool)), this, SLOT(setCopy(bool)));
 
     // this must be a pointer otherwise we can't control the position.
     cbAuto = new QComboBox(this);
@@ -66,6 +74,15 @@ void Editor::setHighlights()
     isSpin = true;
 }
 
+void Editor::saveContent()
+{
+    oldcontents = toPlainText();
+}
+
+int Editor::contentChanged()
+{
+    return oldcontents.compare(toPlainText());
+}
 
 
 void Editor::setLineNumber(int num)
@@ -1138,7 +1155,7 @@ int Editor::lineNumberAreaWidth()
         ++digits;
     }
 
-    int space = 6 + fontMetrics().width(QLatin1Char('9')) * digits;
+    int space = fontMetrics().width(' ')*(digits+2);
 
     return space;
 }
@@ -1157,6 +1174,9 @@ void Editor::updateLineNumberArea(const QRect &rect, int dy)
 
     if (rect.contains(viewport()->rect()))
         updateLineNumberAreaWidth(0);
+
+    QPalette p = lineNumberArea->palette();
+    lineNumberArea->setPalette(p);
 }
 
 void Editor::resizeEvent(QResizeEvent *e)
@@ -1251,7 +1271,8 @@ void Editor::updateBackgroundColors()
             newColor = ColorScheme::DatBG;
         }
 
-        if ( ( nInComment > 0 ) || ( currBlock.text().length() > 3 && currBlock.text().at(3).isLetterOrNumber() ) )
+        if (nInComment > 0
+        || (currBlock.text().length() > 3 && QRegExp("\\w").exactMatch(QString(currBlock.text()[3]))))
         {
             newColor = ColorScheme::Invalid;
         }
@@ -1297,7 +1318,8 @@ void Editor::updateBackgroundColors()
 void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(lineNumberArea);
-    painter.fillRect(event->rect(), QColor(Qt::lightGray).lighter(120));
+    painter.fillRect(event->rect(), currentTheme->getColor(ColorScheme::ConBG).darker(105));
+    QColor pen = currentTheme->getColor(ColorScheme::SyntaxText);
 
     QTextBlock block = firstVisibleBlock();
     int blockNumber = block.blockNumber();
@@ -1307,9 +1329,9 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
     while (block.isValid() && top <= event->rect().bottom()) {
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
-            painter.setPen(QColor(Qt::darkGray).darker(160));
+            painter.setPen(pen);
             painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
-                             Qt::AlignRight, number);
+                             Qt::AlignRight, number+" ");
         }
 
         block = block.next();
@@ -1328,4 +1350,32 @@ void Editor::tabSpacesChanged()
             );
 }
 
+void Editor::setUndo(bool available)
+{
+    canUndo = available;
+}
+bool Editor::getUndo()
+{
+    return canUndo;
+}
+
+
+void Editor::setRedo(bool available)
+{
+    canRedo = available;
+}
+bool Editor::getRedo()
+{
+    return canRedo;
+}
+
+
+void Editor::setCopy(bool available)
+{
+    canCopy= available;
+}
+bool Editor::getCopy()
+{
+    return canCopy;
+}
 

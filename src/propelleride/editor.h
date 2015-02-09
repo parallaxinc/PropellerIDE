@@ -7,7 +7,6 @@
 #include <QKeyEvent>
 #include <QResizeEvent>
 #include <QPaintEvent>
-#include <QByteArray>
 #include <QTextCursor>
 
 
@@ -31,8 +30,21 @@ public:
     void clearCtrlPressed();
 
     SpinParser spinParser;
+    void saveContent();
+    int contentChanged();
+
+public slots:
+    bool getUndo();
+    bool getRedo();
+    bool getCopy();
+    void setUndo(bool available);
+    void setRedo(bool available);
+    void setCopy(bool available);
 
 private:
+    bool canUndo;
+    bool canRedo;
+    bool canCopy;
 
     int  autoIndent();
     int  braceMatchColumn();
@@ -56,6 +68,8 @@ private:
     ColorScheme * currentTheme;
     QMap<ColorScheme::Color, ColorScheme::color> colors;
     QMap<ColorScheme::Color, ColorScheme::color> colorsAlt;
+
+    QString oldcontents;
 
 protected:
     void keyPressEvent(QKeyEvent* e);

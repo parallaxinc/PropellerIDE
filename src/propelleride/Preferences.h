@@ -16,15 +16,7 @@
 #include "ColorScheme.h"
 #include "PathSelector.h"
 
-#define useKeys             "UseKeys"
-#define lastFileNameKey     "LastFileName"
-#define lastTermXposKey     "LastTermXposition"
-#define lastTermYposKey     "LastTermYposition"
-#define termGeometryKey     "TermGeometry"
-#define lastDirectoryKey    "LastDirectory"
-#define mainWindowGeometry  "WindowGeometry"
 #define tabSpacesKey        "TabSpacesCount"
-#define recentFilesKey      "recentFileList"
 
 #define enableKeyClearScreen        "enableClearScreen"
 #define enableKeyClearScreen16      "enableClearScreen16"
@@ -92,7 +84,6 @@ class Preferences : public QDialog
 public:
     explicit Preferences(QWidget *parent = 0);
     void showPreferences();
-    QString getSpinLibraryString();
 
     int  getTabSpaces();
     bool getAutoCompleteEnable();
@@ -108,7 +99,6 @@ signals:
 
 public slots:
 
-    void configSettings();
     void cleanSettings();
     void fontDialog();
     void browseCompiler();

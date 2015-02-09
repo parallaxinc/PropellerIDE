@@ -1,3 +1,5 @@
+isEmpty(PREFIX):PREFIX = /usr/local
+
 TEMPLATE = aux
 CONFIG -= debug_and_release
 

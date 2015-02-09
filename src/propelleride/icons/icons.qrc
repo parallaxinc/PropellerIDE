@@ -54,6 +54,9 @@
     <file>project-run.png</file>
     <file>project-terminal.png</file>
     <file>status.png</file>
+    <file>status-build.png</file>
+    <file>status-load.png</file>
+    <file>status-run.png</file>
     <file>propellerhat.png</file>
 </qresource>
 </RCC>

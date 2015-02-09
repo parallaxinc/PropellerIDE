@@ -29,7 +29,9 @@ PathSelector::PathSelector(
     connect(browseButton, SIGNAL(clicked()), parent, slot);
 
     lineEdit->setText(defaultpath);
-    if ( QSettings().contains(key) )
+    QSettings settings;
+    settings.beginGroup("Paths");
+    if ( settings.contains(key) )
     {
         load();
     }
@@ -37,6 +39,7 @@ PathSelector::PathSelector(
     {
         save();
     }
+    settings.endGroup();
 
     oldvalue = lineEdit->text();
 }
@@ -56,31 +59,22 @@ void PathSelector::browsePath(
         )
 {
     QString folder = lineEdit->text();
-    QString pathname;
+    QString s;
 
     if (isfolder) 
-        pathname = QFileDialog::getExistingDirectory(this,
+        s = QFileDialog::getExistingDirectory(this,
                 pathlabel, folder, QFileDialog::ShowDirsOnly);
     else
-        pathname = QFileDialog::getOpenFileName(this,
+        s = QFileDialog::getOpenFileName(this,
                 pathlabel, folder, pathregex);
 
-
-    QString s = QDir::fromNativeSeparators(pathname);
+    qDebug() << "browsePath(" << pathlabel << "): " << s;
 
     if(s.length() == 0)
     {
-        qDebug() << "browsePath(" << pathlabel << "): " << "No selection";
         return;
     }
-
-    if (isfolder)
-        if(!s.endsWith("/"))
-            s += "/";
-
     lineEdit->setText(s);
-
-    qDebug() << "browsePath(" << pathlabel << "): " << s;
 }
 
 void PathSelector::restore()
@@ -90,24 +84,22 @@ void PathSelector::restore()
 
 void PathSelector::save()
 {
-    QSettings().setValue(key,lineEdit->text());
+    QSettings settings;
+    settings.beginGroup("Paths");
+    settings.setValue(key,lineEdit->text());
+    settings.endGroup();
 }
 
 void PathSelector::load()
 {
-    QVariant compv = QSettings().value(key, defaultpath);
-    if(compv.canConvert(QVariant::String))
-    {
-        QString s = compv.toString();
-        s = QDir::fromNativeSeparators(s);
+    QSettings settings;
+    settings.beginGroup("Paths");
+    QString s = settings.value(key, defaultpath).toString();
+    settings.endGroup();
 
-        if(s.length() > 0) {
-            lineEdit->setText(s);
-        }
-        else
-        {
-            lineEdit->setText(defaultpath);
-        }
+    if(!s.isEmpty())
+    {
+        lineEdit->setText(s);
     }
     else
     {
