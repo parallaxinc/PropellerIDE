@@ -1111,9 +1111,7 @@ void MainWindow::enumeratePorts()
             cbPort->addItem(name);
 #else
         name = ports.at(i).physName;
-        if(name.indexOf("usb",0,Qt::CaseInsensitive) > -1 || name.indexOf("ama",0,Qt::CaseInsensitive) > -1) {
-            cbPort->addItem(name);
-        }
+        cbPort->addItem(name);
 #endif
     }
     if(!cbPort->count()) {
