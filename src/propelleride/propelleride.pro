@@ -2,6 +2,7 @@ isEmpty(PREFIX):PREFIX = /usr/local
 
 TEMPLATE = app
 TARGET = propelleride
+QT += gui widgets serialport
 
 macx {
     target.path = $${PREFIX}/MacOS
@@ -19,7 +20,6 @@ win32 {
 !greaterThan(QT_MINOR_VERSION, 1): {
     error("PropellerIDE requires Qt5.2 or greater")
 }
-QT += gui widgets
 
 CONFIG += console
 CONFIG -= debug_and_release app_bundle
@@ -28,7 +28,6 @@ INSTALLS += target
 
 INCLUDEPATH += . ..
 
-LIBS += -L$${OUT_PWD}/../qext/ -lqext
 LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
 
 isEmpty(VERSION_ARG):VERSION_ARG = 0.0.0

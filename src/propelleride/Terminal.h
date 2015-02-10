@@ -27,7 +27,7 @@ public:
     void accept();
     void reject();
 
-    BaudRateType getBaud();
+    QSerialPort::BaudRate getBaud();
     int  getBaudRate();
     bool setBaudRate(int baud);
     void setEchoOn(bool echoOn);

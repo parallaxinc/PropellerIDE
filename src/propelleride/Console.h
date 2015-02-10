@@ -7,9 +7,7 @@
 #include <QKeyEvent>
 #include <QResizeEvent>
 #include <QByteArray>
-
-
-#include "qext/qextserialport.h"
+#include "QSerialPort"
 
 class Console : public QPlainTextEdit
 {
@@ -152,7 +150,7 @@ signals:
     void sendSerial(QByteArray bytes);
 
 public slots:
-    void updateReady(QextSerialPort*);
+    void updateReady(QSerialPort *);
     void dumphex(int ch);
     void update(char ch);
 

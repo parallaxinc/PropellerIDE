@@ -23,54 +23,35 @@ PortListener::PortListener(QObject *parent, Console *term) : QThread(parent)
     connect(term, SIGNAL(sendSerial(QByteArray)), this, SLOT(send(QByteArray)));
 
     timer = new QTimer(this);
-#ifdef USE_PORT_TIMER
-    connect(timer,SIGNAL(timeout()), this, SLOT(timerEvent()));
-#endif
-
-#ifdef EVENT_DRIVEN
-    this->port = new QextSerialPort(QextSerialPort::EventDriven);
-    connect(port, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
-#else
-    this->port = new QextSerialPort(QextSerialPort::Polling);
+    this->port = new QSerialPort();
     connect(this, SIGNAL(readyRead(QByteArray)), this, SLOT(onReadyRead(QByteArray)));
-#endif
     port->setPortName(""); // empty for now
 }
 
-void PortListener::init(const QString & portName, BaudRateType baud)
+void PortListener::init(const QString & portName, QSerialPort::BaudRate baud)
 {
     port->setPortName(portName);
     port->setBaudRate(baud);
-    port->setFlowControl(FLOW_OFF);
-    port->setParity(PAR_NONE);
-    port->setDataBits(DATA_8);
-    port->setStopBits(STOP_1);
-    port->setTimeout(10);
-#ifdef PORTDEBUG
-    qDebug() << "RESP" << RESPWAIT
-             << "JUNKWAIT" << JUNKWAIT*RESPWAIT
-             << "GETBIT" << GETBITWAIT*RESPWAIT;
-#endif
 }
 
 QString PortListener::getPortName()
 {
-    return port->portName();
+    return QSerialPortInfo(port->portName()).systemLocation();
 }
 
-BaudRateType PortListener::getBaudRate()
+int PortListener::getBaudRate()
 {
     return port->baudRate();
 }
 
-QextSerialPort *PortListener::getPort()
+QSerialPort *PortListener::getPort()
 {
     return port;
 }
 
 void PortListener::setDtr(bool enable)
 {
-    this->port->setDtr(enable);
+    this->port->setDataTerminalReady(enable);
 }
 
 bool PortListener::open()
@@ -98,11 +79,6 @@ void PortListener::close()
 
     if(port->isOpen())
         port->close();
-}
-
-int  PortListener::getFileHandle()
-{
-    return port->fileHandle();
 }
 
 bool PortListener::isOpen()
@@ -168,20 +144,6 @@ void PortListener::onReadyRead(QByteArray arr)
         return;
     }
     size = arr.count(); // buffer size
-
-#ifdef PORTDEBUG
-    QDebug dbg(QtDebugMsg); // don't print newline
-    unsigned char *bytes = (unsigned char*)arr.data();
-    qDebug() << "Queued#" << size;
-    for(int n = 0; !findReceiveEnabled && n < size; n++) {
-        if(!(n % 16))
-            dbg << "\n";
-        else
-            dbg << qPrintable(QString("%1").arg(bytes[n], 2, 16));
-    }
-    qDebug() << "FRE" << findReceiveEnabled;
-    fflush(stdout);
-#endif
 
     if(findReceiveEnabled) {
         char *bytes = arr.data();
@@ -331,14 +293,14 @@ void PortListener::hwreset(void)
     this->flushPort();
     this->port->flush();
     if(this->resetType == RESET_BY_DTR) {
-        port->setDtr(true);
+        port->setDataTerminalReady(true);
         msleep(10);
-        port->setDtr(false);
+        port->setDataTerminalReady(false);
     }
     else {
-        port->setRts(true);
+        port->setRequestToSend(true);
         msleep(10);
-        port->setRts(false);
+        port->setRequestToSend(false);
     }
     msleep(90);
     this->flushPort();
@@ -496,7 +458,7 @@ int PortListener::findprop(const char* name)
     int version = 0;
 
     if (pload_verbose)
-        qDebug("\nChecking for Propeller on port %s", name);
+        qDebug() << "Checking for Propeller on port " << name;
 
     if(!port)
         return -1;

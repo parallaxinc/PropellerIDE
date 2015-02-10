@@ -625,11 +625,11 @@ void TermPrefs::reject()
 
 int  TermPrefs::getBaudRate()
 {
-    QVariant v = settings->value(termKeyBaudRate,QVariant(BAUD115200));
+    QVariant v = settings->value(termKeyBaudRate,QSerialPort::Baud115200);
     if(v != 0 && v.canConvert(QVariant::Int)) {
         return v.toInt();
     }
-    return BAUD115200;
+    return QSerialPort::Baud115200;
 }
 
 void TermPrefs::saveBaudRate(int baud)

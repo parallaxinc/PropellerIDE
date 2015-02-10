@@ -7,10 +7,11 @@
 #include <QMutex>
 #include <QByteArray>
 #include <QTimerEvent>
+#include <QSerialPort>
+#include <QSerialPortInfo>
 
 #include "Console.h"
 #include "StatusDialog.h"
-#include "qext/qextserialport.h"
 
 class PortListener : public QThread
 {
@@ -18,7 +19,7 @@ Q_OBJECT
 public:
     using QObject::timerEvent;
     PortListener(QObject *parent, Console *term);
-    void init(const QString & portName, BaudRateType baud);
+    void init(const QString & portName, QSerialPort::BaudRate baud);
     void setDtr(bool enable);
     bool open();
     void close();
@@ -32,14 +33,13 @@ public:
     void setTerminalWindow(Console *editor);
 
     QString         getPortName();
-    BaudRateType    getBaudRate();
-    QextSerialPort  *getPort();
-    int             getFileHandle();
+    int             getBaudRate();
+    QSerialPort     *getPort();
 
 private:
     QMutex          rxqMutex;
     Console         *textEditor;
-    QextSerialPort  *port;
+    QSerialPort     *port;
     QTimer          *timer;
 
 public slots:

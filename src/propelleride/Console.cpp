@@ -324,7 +324,7 @@ enum { BUFFERSIZE = 64 };
 #endif
 #endif
 
-void Console::updateReady(QextSerialPort* port)
+void Console::updateReady(QSerialPort * port)
 {
     char buf[BUFFERSIZE];
     if(isEnabled == false)

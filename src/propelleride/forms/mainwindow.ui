@@ -17,9 +17,6 @@
    <iconset resource="../icons/icons.qrc">
     <normaloff>:/icons/project-identify.png</normaloff>:/icons/project-identify.png</iconset>
   </property>
-  <property name="windowOpacity">
-   <double>0.300000000000000</double>
-  </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

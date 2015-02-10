@@ -51,14 +51,15 @@ void Terminal::init()
 
     comboBoxBaud = new QComboBox(this);
     comboBoxBaud->setMinimumContentsLength(7);
-    comboBoxBaud->addItem("115200", QVariant(BAUD115200));
-    comboBoxBaud->addItem("57600", QVariant(BAUD57600));
-    comboBoxBaud->addItem("38400", QVariant(BAUD38400));
-    comboBoxBaud->addItem("19200", QVariant(BAUD19200));
-    comboBoxBaud->addItem("9600", QVariant(BAUD9600));
-    comboBoxBaud->addItem("4800", QVariant(BAUD4800));
-    comboBoxBaud->addItem("2400", QVariant(BAUD2400));
-    comboBoxBaud->addItem("1200", QVariant(BAUD1200));
+    // you can't really iterate over an enum...
+    comboBoxBaud->addItem("115200", QSerialPort::Baud115200);
+    comboBoxBaud->addItem("57600",  QSerialPort::Baud57600);
+    comboBoxBaud->addItem("38400",  QSerialPort::Baud38400);
+    comboBoxBaud->addItem("19200",  QSerialPort::Baud19200);
+    comboBoxBaud->addItem("9600",   QSerialPort::Baud9600);
+    comboBoxBaud->addItem("4800",   QSerialPort::Baud4800);
+    comboBoxBaud->addItem("2400",   QSerialPort::Baud2400);
+    comboBoxBaud->addItem("1200",   QSerialPort::Baud1200);
 
     int baud = getBaudRate();
     for(int n = comboBoxBaud->count()-1; n > -1; n--) {
@@ -152,21 +153,21 @@ void Terminal::baudRateChange(int index)
     QVariant var = comboBoxBaud->itemData(index);
     bool ok;
     int baud = var.toInt(&ok);
-    portListener->init(portListener->getPortName(), (BaudRateType) baud);
+    portListener->init(portListener->getPortName(), (QSerialPort::BaudRate) baud);
     options->saveBaudRate(baud);
 }
 
-BaudRateType Terminal::getBaud()
+QSerialPort::BaudRate Terminal::getBaud()
 {
     int index = comboBoxBaud->currentIndex();
     QVariant var = comboBoxBaud->itemData(index);
     bool ok;
     int baud = var.toInt(&ok);
     if(ok) {
-        return (BaudRateType) baud;
+        return (QSerialPort::BaudRate) baud;
     }
     else {
-        return BAUD115200;
+        return QSerialPort::Baud115200;
     }
 }
 

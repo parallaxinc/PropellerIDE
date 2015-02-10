@@ -94,7 +94,7 @@ sudo apt-get update
 Install the required dependencies.
 
 ```
-sudo apt-get install git make g++ qt5-default zlib1g-dev
+sudo apt-get install git make g++ qt5-default libqt5serialport5 zlib1g-dev libudev-dev
 ```
 
 Checkout the project.

@@ -5,9 +5,9 @@
 #include <QToolBar> 
 #include <QFileDialog> 
 #include <QMenu> 
+#include <QSerialPortInfo>
 
 #include "StatusDialog.h"
-#include "qext/qextserialenumerator.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMutex::Recursive), statusDone(true)
 {
@@ -142,7 +142,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     enumeratePorts();
 
     portConnectionMonitor = new PortConnectionMonitor();
-    connect(portConnectionMonitor, SIGNAL(portChanged()), this, SLOT(enumeratePortsEvent()));
+    connect(portConnectionMonitor, SIGNAL(portChanged()), this, SLOT(enumeratePorts()));
 
     /* Do this before using the dialog. */
     statusDialog = new StatusDialog(this);
@@ -378,6 +378,7 @@ void MainWindow::showBrowser()
 void MainWindow::setCurrentPort(int index)
 {
     QString portName = cbPort->itemText(index);
+    qDebug() << "Item text: " << portName;
     term->setPortName(portName);
     cbPort->setCurrentIndex(index);
     if(portName.length()) {
@@ -1029,11 +1030,11 @@ void MainWindow::checkConfigSerialPort()
     else
     {
         QString name = cbPort->currentText();
-        QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
+        QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
         int index = -1;
         for (int i = 0; i < ports.size(); i++)
         {
-            if (ports.at(i).portName.contains(name, Qt::CaseInsensitive))
+            if (ports.at(i).portName().contains(name, Qt::CaseInsensitive))
             {
                 index = i;
                 break;
@@ -1046,90 +1047,48 @@ void MainWindow::checkConfigSerialPort()
     }
 }
 
-void MainWindow::enumeratePortsEvent()
-{
-    enumeratePorts();
-
-    // need to check if the port we are using disappeared.
-    bool notFound = true;
-    QString plPortName = this->term->getPortName();
-    for(int n = this->cbPort->count()-1; n > -1; n--)
-    {
-        QString name = cbPort->itemText(n);
-        if(!name.compare(plPortName))
-        {
-            notFound = false;
-        }
-    }
-
-    if (notFound)
-    {
-        ui.actionTerminal->setChecked(false);
-    }
-    else
-    {
-        ui.actionTerminal->setChecked(true);
-    }
-
-    if(cbPort->count() > 1) {
-        if(isActiveWindow())
-            cbPort->showPopup();
-    }
-
-}
-
 void MainWindow::enumeratePorts()
 {
     if(cbPort == NULL)
         return;
 
     cbPort->clear();
-    cbPort->addItem("AUTO");
 
-    QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
-    QStringList stringlist;
-    QString name;
-    stringlist << "List of ports:";
-
-    for (int i = 0; i < ports.size(); i++) {
-        stringlist << "port name:" << ports.at(i).portName;
-        stringlist << "friendly name:" << ports.at(i).friendName;
-        stringlist << "physical name:" << ports.at(i).physName;
-        stringlist << "enumerator name:" << ports.at(i).enumName;
-        stringlist << "vendor ID:" << QString::number(ports.at(i).vendorID, 16);
-        stringlist << "product ID:" << QString::number(ports.at(i).productID, 16);
-        stringlist << "===================================";
-#if defined(Q_OS_WIN32)
-        name = ports.at(i).portName;
-        if(name.contains(QString("COM"),Qt::CaseInsensitive)) {
-            //cbPort->addItem(name, QVariant(ports.at(i).physName));
-            cbPort->addItem(name);
-        }
-#elif defined(Q_OS_MAC)
-        name = ports.at(i).portName;
-        if(name.indexOf("cu.usbserial",0,Qt::CaseInsensitive) > -1)
-            cbPort->addItem(name);
-#else
-        name = ports.at(i).physName;
-        if(name.indexOf("usb",0,Qt::CaseInsensitive) > -1) {
-            cbPort->addItem(name);
-        }
-#endif
+    QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
+//    for (int i = 0; i < ports.size(); i++)
+//    {
+//        if (ports.at(i).portName().contains("ttyS"),Qt::CaseInsensitive)
+//            qDebug() << "CONTAINS" << ports.at(i).portName();
+//            ports.removeAt(i);
+//    }
+    foreach(QSerialPortInfo port, ports)
+    {
+        qDebug() << port.systemLocation();
+        cbPort->addItem(port.systemLocation());
     }
-    if(!cbPort->count()) {
-        ui.actionTerminal->setCheckable(false);
-    }
-    else {
+    if(cbPort->count())
+    {
         ui.actionTerminal->setCheckable(true);
+        ui.actionTerminal->setEnabled(true);
+        cbPort->setEnabled(true);
     }
-    QApplication::processEvents();
+    else
+    {
+        ui.actionTerminal->setCheckable(false);
+        ui.actionTerminal->setEnabled(false);
+        cbPort->setEnabled(false);
+    }
+
+    cbPort->addItem("AUTO");
 }
 
 void MainWindow::connectButton(bool show)
 {
-    if(ui.actionTerminal->isChecked()) {
+    if(ui.actionTerminal->isChecked())
+    {
         ui.actionTerminal->setDisabled(true);
-        if(!portListener->isOpen()) {
+        if(!portListener->isOpen())
+        {
             qDebug() << "connect enable port";
             portListener->init(cbPort->currentText(), term->getBaud());
             setCurrentPort(cbPort->currentIndex());

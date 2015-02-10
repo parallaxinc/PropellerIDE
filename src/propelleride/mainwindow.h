@@ -11,7 +11,6 @@
 #include "treemodel.h"
 
 #include "PortListener.h"
-#include "qext/qextserialport.h"
 #include "Terminal.h"
 #include "Preferences.h"
 #include "editor.h"
@@ -57,12 +56,6 @@ public slots:
     void replaceAllClicked();
     void showMessage(const QString & message);
 
-signals:
-    void doPortEnumerate();
-    void updateBackgroundColors();
-
-public slots:
-
     // file menu
     void newProjectTrees();
     void printFile();
@@ -99,7 +92,6 @@ public slots:
     void quitProgram();
 
     void enumeratePorts();
-    void enumeratePortsEvent();
     void showFindFrame();
     void hideFindFrame();
     void showBrowser();
