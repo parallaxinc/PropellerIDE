@@ -12,7 +12,6 @@ class Terminal;
 #include <QTabWidget>
 
 #include "Console.h"
-#include "PortListener.h"
 #include "TermPrefs.h"
 
 class Terminal : public QDialog
@@ -20,7 +19,6 @@ class Terminal : public QDialog
     Q_OBJECT
 public:
     explicit Terminal(QWidget *parent);
-    void setPortListener(PortListener *listener);
     QString getPortName();
     void setPortName(QString name);
     void setPosition(int x, int y);
@@ -62,5 +60,4 @@ private:
 
 private:
     QPushButton     *buttonEnable;
-    PortListener    *portListener;
 };

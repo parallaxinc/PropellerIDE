@@ -43,13 +43,11 @@ SOURCES += \
     treeitem.cpp \
     clickable.cpp \
     PathSelector.cpp \
-    PortListener.cpp \
     Preferences.cpp \
     PortConnectionMonitor.cpp \
     ReferenceTree.cpp \
     editor.cpp \
     status.cpp \
-    StatusDialog.cpp \
     SpinHighlighter.cpp \
     SpinParser.cpp \
     Terminal.cpp \
@@ -67,7 +65,6 @@ HEADERS  += \
     treeitem.h \
     clickable.h \
     PathSelector.h \
-    PortListener.h \
     Preferences.h \
     PortConnectionMonitor.h \
     ReferenceTree.h \
@@ -75,7 +72,6 @@ HEADERS  += \
     SpinHighlighter.h \
     SpinParser.h \
     status.h \
-    StatusDialog.h \
     Terminal.h \
     Console.h \
     termprefs.h \

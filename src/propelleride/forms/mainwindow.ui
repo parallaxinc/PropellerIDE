@@ -86,7 +86,6 @@
     <property name="title">
      <string>&amp;Project</string>
     </property>
-    <addaction name="actionIdentify"/>
     <addaction name="actionView_Info"/>
     <addaction name="actionBuild"/>
     <addaction name="actionRun"/>
@@ -145,7 +144,6 @@
    <addaction name="action_Save"/>
    <addaction name="actionSave_As"/>
    <addaction name="separator"/>
-   <addaction name="actionIdentify"/>
    <addaction name="actionBuild"/>
    <addaction name="actionRun"/>
    <addaction name="actionBurn"/>

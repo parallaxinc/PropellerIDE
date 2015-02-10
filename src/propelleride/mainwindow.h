@@ -10,12 +10,10 @@
 
 #include "treemodel.h"
 
-#include "PortListener.h"
 #include "Terminal.h"
 #include "Preferences.h"
 #include "editor.h"
 #include "PortConnectionMonitor.h"
-#include "StatusDialog.h"
 #include "spinzip/zipper.h"
 #include "ReferenceTree.h"
 
@@ -87,7 +85,6 @@ public slots:
     void programRun();
     void programDebug();
     void viewInfo();
-    void findHardware(bool showFoundBox = true);
     void closeEvent(QCloseEvent *event);
     void quitProgram();
 
@@ -184,7 +181,6 @@ private:
     QStatusBar  statusbar;
 
     QComboBox   *cbPort;
-    PortListener *portListener;
     Terminal    *term;
     int         termXpos;
     int         termYpos;
@@ -200,7 +196,6 @@ private:
     enum { LoadRunHubRam = 1 };
     enum { LoadRunEeprom = 2 };
 
-    StatusDialog *statusDialog;
     QMutex      statusMutex;
     bool        statusDone;
 

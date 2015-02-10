@@ -16,7 +16,7 @@
 #define TERM_ENABLE_BUTTON
 //#endif
 
-Terminal::Terminal(QWidget *parent) : QDialog(parent), portListener(NULL)
+Terminal::Terminal(QWidget *parent) : QDialog(parent)
 {
     termEditor = new Console(parent);
     setWindowTitle(QCoreApplication::applicationName()+" "+tr("Terminal"));
@@ -121,16 +121,6 @@ Console *Terminal::getEditor()
     return termEditor;
 }
 
-void Terminal::setPortListener(PortListener *listener)
-{
-    portListener = listener;
-    QString portName = portListener->getPortName();
-    if(portName.length())
-        portLabel.setText(portListener->getPortName());
-    else
-        portLabel.setText("");
-}
-
 QString Terminal::getPortName()
 {
     return portLabel.text();
@@ -153,7 +143,6 @@ void Terminal::baudRateChange(int index)
     QVariant var = comboBoxBaud->itemData(index);
     bool ok;
     int baud = var.toInt(&ok);
-    portListener->init(portListener->getPortName(), (QSerialPort::BaudRate) baud);
     options->saveBaudRate(baud);
 }
 
@@ -208,7 +197,6 @@ void Terminal::accept()
     QSettings().setValue("terminalSize",saveGeometry());
     termEditor->setPortEnable(false);
     portLabel.setEnabled(false);
-    portListener->stop();
     done(QDialog::Accepted);
 }
 
@@ -221,7 +209,6 @@ void Terminal::reject()
     QSettings().setValue("terminalSize",saveGeometry());
     termEditor->setPortEnable(false);
     portLabel.setEnabled(false);
-    portListener->stop();
     done(QDialog::Rejected);
 }
 
@@ -236,8 +223,6 @@ void Terminal::toggleEnable()
     if(buttonEnable->text().contains("Enable",Qt::CaseInsensitive)) {
         buttonEnable->setText("Disable");
         termEditor->setPortEnable(true);
-        //portListener->open(); don't change port status
-        portLabel.setText(portListener->getPortName());
         portLabel.setEnabled(true);
         termEditor->setFocus(Qt::OtherFocusReason);
         emit disablePortCombo();
@@ -247,7 +232,6 @@ void Terminal::toggleEnable()
         termEditor->setPortEnable(false);
         //portLabel.setText("");
         portLabel.setEnabled(false);
-        //portListener->close(); don't change port status
         emit enablePortCombo();
     }
     QApplication::processEvents();
@@ -262,7 +246,6 @@ void Terminal::setPortEnabled(bool value)
 #endif
         termEditor->setPortEnable(true);
         portLabel.setEnabled(true);
-        this->portLabel.setText(portListener->getPortName());
     }
     else {
 #ifdef TERM_ENABLE_BUTTON
