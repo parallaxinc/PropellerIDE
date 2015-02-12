@@ -20,7 +20,7 @@
   <gfx      path="gfx" />
   <version  path="src/propelleride" />
 
-  <repo path="src/openspin/repo"    url="https://github.com/bweir/OpenSpin.git"             branch="master" />
-  <repo path="src/p1load/repo"      url="https://github.com/dbetz/p1load.git"               branch="master" />
-  <!--<repo path="library"              url="https://github.com/parallaxinc/spin-library.git"   branch="master" />-->
+  <repo path="src/openspin/repo"    url="https://github.com/bweir/OpenSpin.git"                     branch="master" />
+  <repo path="src/p1load/repo"      url="https://github.com/dbetz/p1load.git"                       branch="master" />
+  <repo path="library"              url="https://github.com/parallaxinc/spin-standard-library.git"  branch="master" />
 </project>

@@ -6,6 +6,7 @@ src/p1load/p1load
 
 src/openspin/repo
 src/p1load/repo
+library/
 
 propelleride.exe
 openspin.exe
