@@ -1,7 +1,10 @@
 language: cpp
 matrix:
   include:
-  - compiler: gcc
+  - compiler: 
+      - gcc
+      - clang
+
 before_install:
 - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty universe"
 - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty main"
@@ -12,12 +15,10 @@ before_install:
 - sudo apt-get install zlib1g-dev libudev-dev cppcheck 
 - qmake -v
 script:
-- make checkout
-- make deb -j4
-after_script:
 - pushd src
-- cppcheck --enable=all -q `git ls-files *.cpp *.c`
-- pushd openspin/repo
+- qmake
+- make -j4
+after_script:
 - cppcheck --enable=all -q `git ls-files *.cpp`
 deploy:
   provider: releases
