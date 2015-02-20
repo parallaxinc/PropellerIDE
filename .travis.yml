@@ -1,9 +1,9 @@
 language: cpp
 matrix:
   include:
-  - compiler: 
-      - gcc
-      - clang
+  - compiler: gcc
+  - compiler: clang
+    env: QMAKESPEC=linux-clang
 
 before_install:
 - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty universe"
