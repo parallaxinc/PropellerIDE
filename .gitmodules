@@ -1,3 +1,0 @@
-[submodule "packman"]
-	path = dist
-	url = https://github.com/lamestation/packman
