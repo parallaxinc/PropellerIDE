@@ -21,36 +21,38 @@
     },
     "repo": [
         {
-            "type": "qmake",
             "path": "propelleride",
             "url": "https://github.com/bweir/PropellerIDE.git",
             "branch": "master",
+            "type": "qmake",
             "root": "src",
             "master": true
         },
         {
-            "path": "propelleride/src/openspin/repo",
+            "path": "openspin",
             "url": "https://github.com/bweir/OpenSpin.git",
             "branch": "master"
-        },
-        {
             "type": "qmake",
-            "path": "p1load",
-            "url": "https://github.com/bweir/p1load.git",
-            "branch": "master",
             "root": "qmake"
         },
         {
-            "type": "dir",
-            "path": "library",
-            "url": "https://github.com/parallaxinc/spin-standard-library.git",
-            "branch": "master"
+            "path": "p1load",
+            "url": "https://github.com/bweir/p1load.git",
+            "branch": "master",
+            "type": "qmake",
+            "root": "qmake"
         },
         {
-            "type": "dir",
+            "path": "library",
+            "url": "https://github.com/parallaxinc/spin-standard-library.git",
+            "branch": "master",
+            "type": "dir"
+        },
+        {
             "path": "doc",
             "url": "https://github.com/parallaxinc/spin-docs.git",
-            "branch": "master"
+            "branch": "master",
+            "type": "dir"
         }
     ]
 }
