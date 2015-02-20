@@ -13,7 +13,9 @@
     },
     "target": {
         "deb": {
-            "depends": "libftdi1"
+            "depends": "libftdi1",
+            "categories": "Development;IDE",
+            "section": "Applications/Editors"
         },
         "mac": {
             "category": "public.app-category.developer-tools"
@@ -31,7 +33,7 @@
         {
             "path": "openspin",
             "url": "https://github.com/bweir/OpenSpin.git",
-            "branch": "master"
+            "branch": "master",
             "type": "qmake",
             "root": "qmake"
         },
@@ -41,6 +43,12 @@
             "branch": "master",
             "type": "qmake",
             "root": "qmake"
+        },
+        {
+            "path": "propterm",
+            "url": "https://github.com/bweir/propterm.git",
+            "branch": "master",
+            "type": "qmake"
         },
         {
             "path": "library",
