@@ -36,8 +36,9 @@
         {
             "type": "qmake",
             "path": "p1load",
-            "url": "https://github.com/dbetz/p1load.git",
-            "branch": "master"
+            "url": "https://github.com/bweir/p1load.git",
+            "branch": "master",
+            "root": "qmake"
         },
         {
             "type": "dir",
