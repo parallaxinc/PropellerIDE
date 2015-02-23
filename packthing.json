@@ -46,7 +46,7 @@
         },
         {
             "path": "propterm",
-            "url": "https://github.com/bweir/propterm.git",
+            "url": "https://github.com/parallaxinc/propterm.git",
             "branch": "master",
             "type": "qmake"
         },
