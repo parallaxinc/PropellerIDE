@@ -28,7 +28,8 @@
             "branch": "master",
             "type": "qmake",
             "root": "src",
-            "master": true
+            "master": true,
+            "icon": "icons/propellerhat.png"
         },
         {
             "path": "openspin",
