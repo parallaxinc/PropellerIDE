@@ -12,8 +12,6 @@ QT += gui widgets serialport
 CONFIG += console
 CONFIG -= debug_and_release app_bundle
 
-INSTALLS += target
-
 INCLUDEPATH += . ..
 
 LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
