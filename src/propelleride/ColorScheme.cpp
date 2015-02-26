@@ -12,21 +12,20 @@ ColorScheme::ColorScheme(QObject * parent) :
 void ColorScheme::defaults()
 {
     // Background Colors
-    colors[ConBG]               = (color) { QColor(255,248,192)   , "Block_CON"  };
-    colors[VarBG]               = (color) { QColor(255,223,191)   , "Block_VAR"  };
-    colors[ObjBG]               = (color) { QColor(255,191,191)   , "Block_OBJ"  };
-    colors[PubBG]               = (color) { QColor(191,223,255)   , "Block_PUB"  };
-    colors[PriBG]               = (color) { QColor(191,248,255)   , "Block_PRI"  };
-    colors[DatBG]               = (color) { QColor(191,255,200)   , "Block_DAT"  };
+    colors[ConBG]               = (color) { QColor("#484848") , "Block_CON"  };
+    colors[VarBG]               = (color) { QColor("#4f002a") , "Block_VAR"  };
+    colors[ObjBG]               = (color) { QColor("#3d3d3d") , "Block_OBJ"  };
+    colors[PubBG]               = (color) { QColor("#24003b") , "Block_PUB"  };
+    colors[PriBG]               = (color) { QColor("#15004d") , "Block_PRI"  };
+    colors[DatBG]               = (color) { QColor("#003951") , "Block_DAT"  };
 
     // Syntax Highlighting
-    colors[SyntaxText]          = (color) { Qt::black             , "Syntax_Text"          };
-    colors[SyntaxNumbers]       = (color) { Qt::magenta           , "Syntax_Numbers"       };
-    colors[SyntaxFunctions]     = (color) { Qt::blue              , "Syntax_Functions"     };
-    colors[SyntaxKeywords]      = (color) { Qt::darkBlue          , "Syntax_Keywords"      };
-//    colors[SyntaxPreprocessor]  = (color) { Qt::darkYellow        , "Syntax_Preprocessor"  };
-    colors[SyntaxQuotes]        = (color) { Qt::red               , "Syntax_Quotes"        };
-    colors[SyntaxComments]      = (color) { Qt::darkGreen         , "Syntax_Comments"      };
+    colors[SyntaxText]          = (color) { QColor("#eeeeee") , "Syntax_Text"          };
+    colors[SyntaxNumbers]       = (color) { QColor("#ff7fff") , "Syntax_Numbers"       };
+    colors[SyntaxFunctions]     = (color) { QColor("#6565ff") , "Syntax_Functions"     };
+    colors[SyntaxKeywords]      = (color) { QColor("#ffffff") , "Syntax_Keywords"      };
+    colors[SyntaxQuotes]        = (color) { QColor("#a2b2ff") , "Syntax_Quotes"        };
+    colors[SyntaxComments]      = (color) { QColor("#cccccc") , "Syntax_Comments"      };
 
     setFont(QFont("Monospace"));
     font.setPointSize(12);
