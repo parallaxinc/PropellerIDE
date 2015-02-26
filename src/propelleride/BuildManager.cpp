@@ -22,19 +22,16 @@ void BuildManager::setParameters(
         QString comp,
         QString load,
         QString incl,
-        QString projFile,
-        QString compstat)
+        QString projFile)
 {
     compilerStr = comp;
     loader = load;
     includesStr = incl;
     projectFile = projFile;
-    compileResult = compstat;
     qDebug() << "Setting build: "
 	    << compilerStr 
 	    << includesStr 
-	    << projectFile 
-	    << compileResult;
+	    << projectFile;
 }
 
 void BuildManager::compilerError(QProcess::ProcessError error)

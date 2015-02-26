@@ -31,8 +31,7 @@ public:
             QString comp,
             QString load,
             QString incl,
-            QString projFile,
-            QString compstat);
+            QString projFile);
 
 signals:
     void compilerErrorInfo(QString file, int line);

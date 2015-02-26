@@ -104,10 +104,7 @@ private:
     void clearSession();
 
     void getApplicationSettings();
-    int  checkCompilerInfo();
-    QStringList getCompilerParameters(QString compilerOptions);
     void checkAndSaveFiles();
-    Editor *createEditor();
 
     bool eventFilter(QObject *target, QEvent *event);
 
@@ -117,16 +114,13 @@ private:
     void setupProjectMenu();
     void setupHelpMenu();
 
-    void setupToolBars();
     void setupProjectTools(QSplitter *vsplit);
-    void addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile);
     void openTreeFile(QString fileName);
     void updateProjectTree(QString fileName);
     void updateSpinProjectTree(QString fileName);
     void updateReferenceTree(QString fileName, QString text);
     void updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level);
 
-    void checkConfigSerialPort();
     QFrame *newFindFrame(QSplitter *split);
 
     typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
@@ -178,13 +172,7 @@ private:
     TreeModel       *projectModel;
     TreeModel       *referenceModel;
 
-    QStatusBar  statusbar;
-
     QComboBox   *cbPort;
-
-    QProcess    *proc;
-
-    QString compileResult;
 
     PortConnectionMonitor *portConnectionMonitor;
 

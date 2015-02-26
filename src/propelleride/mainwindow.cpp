@@ -109,8 +109,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
 //    ctrlToolBar->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
 //    ctrlToolBar->addWidget(cbPort);
 
-//    setStatusBar(ui.statusbar);
-
     updateRecentFileActions();
 
     /* start with an empty file if fresh install */
@@ -483,7 +481,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     checkAndSaveFiles();
 
     if(fileName.contains(".spin")) {
-        builder.setParameters(spinCompiler, spinLoader, spinIncludes, projectFile, compileResult);
+        builder.setParameters(spinCompiler, spinLoader, spinIncludes, projectFile);
 
         copts = "-b";
         rc = builder.runCompiler(copts);
@@ -884,33 +882,6 @@ void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QSt
                 s = "    "+s;
             //methods.append(s);
             referenceModel->addRootItem(s, fileName);
-        }
-    }
-}
-
-
-void MainWindow::checkConfigSerialPort()
-{
-    if(!cbPort->count())
-    {
-        enumeratePorts();
-    }
-    else
-    {
-        QString name = cbPort->currentText();
-        QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
-        int index = -1;
-        for (int i = 0; i < ports.size(); i++)
-        {
-            if (ports.at(i).portName().contains(name, Qt::CaseInsensitive))
-            {
-                index = i;
-                break;
-            }
-        }
-        if(index < 0)
-        {
-            enumeratePorts();
         }
     }
 }
