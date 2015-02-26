@@ -29,7 +29,7 @@
             "type": "qmake",
             "root": "src",
             "master": true,
-            "icon": "icons/propellerhat.png"
+            "icon": "icons/icon-new.png"
         },
         {
             "path": "openspin",
