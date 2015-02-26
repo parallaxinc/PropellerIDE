@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
     // init translations
 //    QTranslator translator;
-//    translator.load("translations/propelleride_zn");
+//    translator.load("translations/propelleride_fake");
 //    app.installTranslator(&translator);
 
     // init styles

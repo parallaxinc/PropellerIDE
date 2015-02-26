@@ -63,11 +63,6 @@ HEADERS  += \
     FileManager.h \
     BuildManager.h \
 
-TRANSLATIONS += \
-    translations/propelleride.ts
-    translations/propelleride_es.ts
-    translations/propelleride_zn.ts
-
 OTHER_FILES +=
 
 FORMS += \
@@ -94,3 +89,10 @@ win32 {
     LIBS            += -L$$PWD -lz
     RC_FILE         = propelleride.rc
 }
+
+TRANSLATIONS += \
+    translations/propelleride.ts \ 
+    translations/propelleride_es.ts \
+    translations/propelleride_zn.ts \
+    translations/propelleride_fake.ts \
+
