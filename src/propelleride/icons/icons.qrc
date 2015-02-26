@@ -58,5 +58,6 @@
     <file>status-load.png</file>
     <file>status-run.png</file>
     <file>propellerhat.png</file>
+    <file>icon.png</file>
 </qresource>
 </RCC>
