@@ -64,6 +64,8 @@ HEADERS  += \
     BuildManager.h \
 
 TRANSLATIONS += \
+    translations/propelleride.ts
+    translations/propelleride_es.ts
     translations/propelleride_zn.ts
 
 OTHER_FILES +=
