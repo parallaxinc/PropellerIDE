@@ -176,9 +176,19 @@ void Preferences::setupFolders()
             this
             );
 
+    terminalpath = new PathSelector(
+            tr("Terminal"),
+            QApplication::applicationDirPath() +
+                    QString(DEFAULT_TERMINAL),
+            tr("Must add a terminal path."),
+            SLOT(browseTerminal()),
+            this
+            );
+
     pathlayout->addWidget(compilerpath);
     pathlayout->addWidget(loaderpath);
     pathlayout->addWidget(librarypath);
+    pathlayout->addWidget(terminalpath);
     vlayout->addWidget(paths);
 
 }
@@ -320,11 +330,22 @@ void Preferences::browseLibrary()
         );
 }
 
+void Preferences::browseTerminal()
+{
+    terminalpath->browsePath(
+            tr("Select terminal path"),
+            NULL,
+            false 
+        );
+}
+
+
 void Preferences::accept()
 {
     compilerpath->save();
     loaderpath->save();
     librarypath->save();
+    terminalpath->save();
 
     QSettings settings;
 
@@ -346,6 +367,7 @@ void Preferences::reject()
     compilerpath->restore();
     loaderpath->restore();
     librarypath->restore();
+    terminalpath->restore();
 
 
     tabspaceLedit.setText(tabSpacesStr);

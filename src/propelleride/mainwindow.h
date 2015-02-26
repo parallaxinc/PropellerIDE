@@ -5,12 +5,12 @@
 #include <QSplitter>
 #include <QPlainTextEdit> 
 #include <QTreeView> 
+#include <QDesktopServices> 
+#include <QDirIterator> 
 
 #include "SpinParser.h"
-
 #include "treemodel.h"
 
-#include "Terminal.h"
 #include "Preferences.h"
 #include "editor.h"
 #include "PortConnectionMonitor.h"
@@ -75,8 +75,7 @@ public slots:
     void projectTreeClicked(QModelIndex index);
     void referenceTreeClicked(QModelIndex index);
     void setCurrentPort(int index);
-    void connectButton(bool show = true);
-    void terminalClosed();
+    void spawnTerminal();
     void setProject();
     void preferences();
     void preferencesAccepted();
@@ -136,6 +135,7 @@ private:
 
     QString     spinCompiler;
     QString     spinIncludes;
+    QString     spinTerminal;
     QString     spinLoader;
 
     QToolBar    *ctrlToolBar;
@@ -181,9 +181,6 @@ private:
     QStatusBar  statusbar;
 
     QComboBox   *cbPort;
-    Terminal    *term;
-    int         termXpos;
-    int         termYpos;
 
     QProcess    *proc;
 

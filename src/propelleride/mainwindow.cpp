@@ -6,6 +6,7 @@
 #include <QFileDialog> 
 #include <QMenu> 
 #include <QSerialPortInfo>
+#include <QProcess>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMutex::Recursive), statusDone(true)
 {
@@ -48,7 +49,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     connect(ui.action_Close,SIGNAL(triggered()),editorTabs,SLOT(closeFile()));
 
     connect(editorTabs, SIGNAL(saveAvailable(bool)),ui.action_Save,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(saveAvailable(bool)),ui.actionSave_All,SLOT(setEnabled(bool)));
     connect(editorTabs, SIGNAL(closeAvailable(bool)),ui.action_Close,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(closeAvailable(bool)),ui.actionClose_All,SLOT(setEnabled(bool)));
 
 
     // Edit Menu
@@ -86,7 +89,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     connect(ui.actionBuild,     SIGNAL(triggered()), this, SLOT(programBuild()));
     connect(ui.actionRun,       SIGNAL(triggered()), this, SLOT(programRun()));
     connect(ui.actionBurn,      SIGNAL(triggered()), this, SLOT(programBurnEE()));
-    connect(ui.actionTerminal,  SIGNAL(triggered()), this, SLOT(connectButton()));
+    connect(ui.actionTerminal,  SIGNAL(triggered()), this, SLOT(spawnTerminal()));
 
     // Help Menu
     connect(ui.actionPropeller_Datasheet,   SIGNAL(triggered()), this, SLOT(propellerDatasheet()));
@@ -122,12 +125,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
 
     getApplicationSettings();
 
-    /* setup the terminal dialog box */
-    term = new Terminal(this);
-
-    connect(term,SIGNAL(accepted()),this,SLOT(terminalClosed()));
-    connect(term,SIGNAL(rejected()),this,SLOT(terminalClosed()));
-
     /* get available ports at startup */
     enumeratePorts();
 
@@ -139,6 +136,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     loadSession();
 
     installEventFilter(this);
+
 }
 
 void MainWindow::loadSession()
@@ -190,6 +188,7 @@ void MainWindow::getApplicationSettings()
     spinCompiler = settings.value("Compiler").toString();
     spinLoader = settings.value("Loader").toString();
     spinIncludes = settings.value("Library").toString();
+    spinTerminal = settings.value("Terminal").toString();
 
     settings.endGroup();
 }
@@ -364,7 +363,6 @@ void MainWindow::setCurrentPort(int index)
 {
     QString portName = cbPort->itemText(index);
     qDebug() << "Item text: " << portName;
-    term->setPortName(portName);
     cbPort->setCurrentIndex(index);
 }
 
@@ -566,12 +564,9 @@ void MainWindow::programDebug()
 
     setCurrentPort(cbPort->currentIndex());
 
-    term->getEditor()->clear();
-
     if(!loadProgram(MainWindow::LoadRunHubRam))
     {
-        ui.actionTerminal->setChecked(true);
-        connectButton(true);
+        spawnTerminal();
     }
 }
 
@@ -588,13 +583,6 @@ void MainWindow::viewInfo()
 
 
 }
-
-void MainWindow::terminalClosed()
-{
-    ui.actionTerminal->setChecked(false);
-    connectButton(false);
-}
-
 
 void MainWindow::findMultilineComment(QPoint point)
 {
@@ -937,40 +925,26 @@ void MainWindow::enumeratePorts()
     QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
     foreach(QSerialPortInfo port, ports)
     {
-        qDebug() << port.systemLocation();
-        cbPort->addItem(port.systemLocation());
+//        qDebug() << port.systemLocation();
+        if (!port.systemLocation().contains("ttyS"))
+            cbPort->addItem(port.systemLocation());
     }
     if(cbPort->count())
     {
-        ui.actionTerminal->setCheckable(true);
-        ui.actionTerminal->setEnabled(true);
         cbPort->setEnabled(true);
+        ui.actionTerminal->setEnabled(true);
     }
     else
     {
-        ui.actionTerminal->setCheckable(false);
-        ui.actionTerminal->setEnabled(false);
         cbPort->setEnabled(false);
+        ui.actionTerminal->setEnabled(false);
     }
 }
 
-void MainWindow::connectButton(bool show)
+void MainWindow::spawnTerminal()
 {
-    if(ui.actionTerminal->isChecked())
-    {
-        ui.actionTerminal->setDisabled(true);
-        ui.actionTerminal->setDisabled(false);
-        term->setPortEnabled(true);
-        if(show) {
-            term->show();
-            term->activateWindow();
-            term->getEditor()->setFocus();
-        }
-    }
-    else {
-        term->setPortEnabled(false);
-        term->hide();
-    }
+    QProcess * termtime = new QProcess();
+    termtime->start(spinTerminal);
 }
 
 void MainWindow::setupProjectTools(QSplitter *vsplit)

@@ -641,9 +641,6 @@
    </property>
   </action>
   <action name="actionTerminal">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../icons/icons.qrc">
      <normaloff>:/icons/project-terminal.png</normaloff>:/icons/project-terminal.png</iconset>

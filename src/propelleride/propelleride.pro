@@ -32,11 +32,8 @@ SOURCES += \
     status.cpp \
     SpinHighlighter.cpp \
     SpinParser.cpp \
-    Terminal.cpp \
-    Console.cpp \
     ColorScheme.cpp \
     ColorChooser.cpp \
-    termprefs.cpp \
     FileManager.cpp \
     BuildManager.cpp \
 
@@ -54,9 +51,6 @@ HEADERS  += \
     SpinHighlighter.h \
     SpinParser.h \
     status.h \
-    Terminal.h \
-    Console.h \
-    termprefs.h \
     ColorChooser.h \
     ColorScheme.h \
     templates/Singleton.h \
