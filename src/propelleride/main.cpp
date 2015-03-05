@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    app.setWindowIcon(QIcon(":/icons/PropHatAlpha.png"));
+    app.setWindowIcon(QIcon(":/icons/project-identify.png"));
     QCoreApplication::setOrganizationName("Parallax");
     QCoreApplication::setOrganizationDomain("www.parallax.com");
     QCoreApplication::setApplicationVersion(VERSION);

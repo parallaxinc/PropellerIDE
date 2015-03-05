@@ -1,17 +1,11 @@
 #pragma once
 
-#include <iostream>
-#include <exception>
-
-#include <stdio.h>
-
 #include <QIcon>
 #include <QMainWindow>
 #include <QSplitter>
 #include <QPlainTextEdit> 
 #include <QTreeView> 
 
-#include "Builder.h"
 #include "SpinParser.h"
 
 #include "treemodel.h"
@@ -25,11 +19,19 @@
 #include "StatusDialog.h"
 #include "spinzip/zipper.h"
 #include "ReferenceTree.h"
+
 #include "FileManager.h"
+#include "BuildManager.h"
+
+#include "ui_mainwindow.h"
+
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+
+private:
+    Ui::MainWindow ui;
 
 public:
     MainWindow(QWidget *parent = 0);
@@ -53,6 +55,7 @@ public slots:
     void replaceNextClicked();
     void replacePrevClicked();
     void replaceAllClicked();
+    void showMessage(const QString & message);
 
 signals:
     void doPortEnumerate();
@@ -71,6 +74,7 @@ public slots:
     void fontSmaller();
 
     // help
+    void openFileResource(QString const & resource);
     void propellerManual();
     void propellerDatasheet();
     void about();
@@ -89,6 +93,7 @@ public slots:
     void programBurnEE();
     void programRun();
     void programDebug();
+    void viewInfo();
     void findHardware(bool showFoundBox = true);
     void closeEvent(QCloseEvent *event);
     void quitProgram();
@@ -144,14 +149,9 @@ private:
     QString     spinIncludes;
     QString     spinLoader;
 
-    QToolBar    *fileToolBar;
-    QToolBar    *propToolBar;
-    QToolBar    *debugToolBar;
     QToolBar    *ctrlToolBar;
 
-    enum { MaxRecentFiles = 10 };
-    QAction *recentFileActs[MaxRecentFiles];
-    QAction *separatorFileAct;
+    QList<QAction *> recentFiles;
 
     QString     findText;
     QString     replaceText;
@@ -180,20 +180,18 @@ private:
     int         findPosition;
     int         wasClicked;
 
-    FileManager *editorTabs;
+    FileManager     *editorTabs;
+    BuildManager    builder;
 
-    QString     projectFile;
+    QString         projectFile;
     ReferenceTree   *projectTree;
     ReferenceTree   *referenceTree;
     TreeModel       *projectModel;
     TreeModel       *referenceModel;
 
-    Builder     builder;
     QStatusBar  statusbar;
 
-    QComboBox   *cbBoard;
     QComboBox   *cbPort;
-    QToolButton *btnConnected;
     PortListener *portListener;
     Terminal    *term;
     int         termXpos;

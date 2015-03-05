@@ -11,6 +11,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMutex::Recursive), statusDone(true)
 {
+    ui.setupUi(this);
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
@@ -31,18 +32,90 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     this->setMinimumHeight(500);
 
     /* setup gui components */
-    setupFileMenu();
-    setupEditMenu();
-    setupViewMenu();
-    setupProjectMenu();
-    setupHelpMenu();
 
-    setupToolBars();
-    setStatusBar(&statusbar);
+    // File Menu
+    connect(ui.action_New,SIGNAL(triggered()),editorTabs,SLOT(newFile()));
+    connect(ui.action_Open,SIGNAL(triggered()),editorTabs,SLOT(open()));
 
+    connect(ui.action_Save,SIGNAL(triggered()),editorTabs,SLOT(save()));
+    connect(ui.actionSave_As,SIGNAL(triggered()),editorTabs,SLOT(saveAs()));
+    connect(ui.actionSave_All,SIGNAL(triggered()),editorTabs,SLOT(saveAll()));
+
+    connect(ui.action_Zip_Project,SIGNAL(triggered()),this,SLOT(zipFiles()));
+
+    recentFiles = findChildren<QAction *>(QRegExp("action_[0-9]+_File"));
+    for (int i = 0; i < recentFiles.size(); i++)
+        connect(recentFiles.at(i), SIGNAL(triggered()),this, SLOT(openRecentFile()));
+    
+    connect(ui.action_Close,SIGNAL(triggered()),editorTabs,SLOT(closeFile()));
+
+    connect(editorTabs, SIGNAL(saveAvailable(bool)),ui.action_Save,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(closeAvailable(bool)),ui.action_Close,SLOT(setEnabled(bool)));
+
+
+    // Edit Menu
+    connect(ui.action_Undo,        SIGNAL(triggered()), editorTabs, SLOT(undo()));
+    connect(ui.action_Redo,        SIGNAL(triggered()), editorTabs, SLOT(redo()));
+
+    connect(ui.action_Cut,         SIGNAL(triggered()), editorTabs, SLOT(cut()));
+    connect(ui.action_Copy,        SIGNAL(triggered()), editorTabs, SLOT(copy()));
+    connect(ui.action_Paste,       SIGNAL(triggered()), editorTabs, SLOT(paste()));
+    connect(ui.actionSelect_All,   SIGNAL(triggered()), editorTabs, SLOT(selectAll()));
+
+    connect(ui.action_Find,        SIGNAL(triggered()), this, SLOT(showFindFrame()));
+    connect(ui.actionFind_Next,    SIGNAL(triggered()), this, SLOT(findNextClicked()));
+    connect(ui.actionFind_Previous,SIGNAL(triggered()), this, SLOT(findPrevClicked()));
+
+    connect(ui.actionPreferences,  SIGNAL(triggered()), this, SLOT(preferences()));
+
+    connect(editorTabs, SIGNAL(undoAvailable(bool)), ui.action_Undo,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(redoAvailable(bool)), ui.action_Redo,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(copyAvailable(bool)), ui.action_Cut,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(copyAvailable(bool)), ui.action_Copy,SLOT(setEnabled(bool)));
+
+
+    // View Menu
+    connect(ui.actionShow_Browser, SIGNAL(triggered()), this, SLOT(showBrowser()));
+    connect(ui.actionBigger_Font,  SIGNAL(triggered()), this, SLOT(fontBigger()));
+    connect(ui.actionSmaller_Font, SIGNAL(triggered()), this, SLOT(fontSmaller()));
+
+    ui.actionBigger_Font->setShortcuts(QList<QKeySequence>() << QKeySequence::ZoomIn
+                                                             << Qt::CTRL+Qt::Key_Equal);
+
+
+    // Project Menu
+    connect(ui.actionIdentify,  SIGNAL(triggered()), this, SLOT(findHardware()));
+    connect(ui.actionView_Info, SIGNAL(triggered()), this, SLOT(viewInfo()));
+    connect(ui.actionBuild,     SIGNAL(triggered()), this, SLOT(programBuild()));
+    connect(ui.actionRun,       SIGNAL(triggered()), this, SLOT(programRun()));
+    connect(ui.actionBurn,      SIGNAL(triggered()), this, SLOT(programBurnEE()));
+    connect(ui.actionTerminal,  SIGNAL(triggered()), this, SLOT(connectButton()));
+
+    // Help Menu
+    connect(ui.actionPropeller_Datasheet,   SIGNAL(triggered()), this, SLOT(propellerDatasheet()));
+    connect(ui.actionPropeller_Manual,      SIGNAL(triggered()), this, SLOT(propellerManual()));
+    connect(ui.action_About,                SIGNAL(triggered()), this, SLOT(about()));
+
+    // Toolbar Extras
+    cbPort = new QComboBox(this);
+    cbPort->setLayoutDirection(Qt::LeftToRight);
+    cbPort->setToolTip(tr("Select Serial Port"));
+    cbPort->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    connect(cbPort,SIGNAL(currentIndexChanged(int)),this,SLOT(setCurrentPort(int)));
+    ui.toolBar->addWidget(cbPort);
+
+//    ctrlToolBar = addToolBar(tr("Control"));
+//    ctrlToolBar->setLayoutDirection(Qt::RightToLeft);
+//    ctrlToolBar->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
+//    ctrlToolBar->addWidget(cbPort);
+
+//    setStatusBar(ui.statusbar);
+
+    updateRecentFileActions();
 
     /* start with an empty file if fresh install */
     connect(editorTabs,SIGNAL(fileUpdated(int)), this, SLOT(setProject()));
+    connect(editorTabs,SIGNAL(sendMessage(const QString &)),this,SLOT(showMessage(const QString &)));
     editorTabs->newFile();
 
     resize(800,600);
@@ -135,6 +208,29 @@ void MainWindow::getApplicationSettings()
     settings.endGroup();
 }
 
+void MainWindow::preferences()
+{
+    propDialog->showPreferences();
+}
+
+
+void MainWindow::preferencesAccepted()
+{
+    getApplicationSettings();
+}
+
+
+void MainWindow::fontBigger()
+{
+    propDialog->adjustFontSize(1.25);
+}
+
+void MainWindow::fontSmaller()
+{
+    propDialog->adjustFontSize(0.8);
+}
+
+
 void MainWindow::quitProgram()
 {
     QCloseEvent e;
@@ -180,7 +276,7 @@ void MainWindow::addRecentFile(const QString &fileName)
 
     files.removeAll(fileName);
     files.prepend(fileName);
-    while (files.size() > MaxRecentFiles)
+    while (files.size() > recentFiles.size())
         files.removeLast();
 
     QSettings().setValue("recentFiles", files);
@@ -192,28 +288,28 @@ void MainWindow::updateRecentFileActions()
 {
     QStringList files = QSettings().value("recentFiles").toStringList();
     files.removeAll("");
-    int numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
+    int numRecentFiles = qMin(files.size(), recentFiles.size());
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
         QString estr = files.at(i);
         QString text = tr("&%1 %2").arg(i + 1).arg(QFileInfo(estr).fileName());
-        recentFileActs[i]->setText(text);
-        recentFileActs[i]->setData(estr);
-        recentFileActs[i]->setVisible(true);
+        recentFiles.at(i)->setText(text);
+        recentFiles.at(i)->setData(estr);
+        recentFiles.at(i)->setVisible(true);
     }
-    for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
-        recentFileActs[j]->setVisible(false);
+    for (int j = numRecentFiles; j < recentFiles.size(); ++j)
+        recentFiles.at(j)->setVisible(false);
 
     if (!numRecentFiles)
     {
-        recentFileActs[0]->setText("No recent files...");
-        recentFileActs[0]->setVisible(true);
-        recentFileActs[0]->setEnabled(false);
+        recentFiles.at(0)->setText("No recent files...");
+        recentFiles.at(0)->setVisible(true);
+        recentFiles.at(0)->setEnabled(false);
     }
     else
     {
-        recentFileActs[0]->setEnabled(true);
+        recentFiles.at(0)->setEnabled(true);
     }
 }
 
@@ -531,7 +627,7 @@ void MainWindow::programDebug()
 
     if(!loadProgram(MainWindow::LoadRunHubRam))
     {
-        btnConnected->setChecked(true);
+        ui.actionTerminal->setChecked(true);
         connectButton(true);
     }
 }
@@ -542,6 +638,12 @@ void MainWindow::setStatusDone(bool done)
     statusMutex.lock();
     statusDone = done;
     statusMutex.unlock();
+}
+
+void MainWindow::viewInfo()
+{
+
+
 }
 
 void MainWindow::findHardware(bool showFoundBox)
@@ -608,7 +710,7 @@ void MainWindow::findHardware(bool showFoundBox)
 
 void MainWindow::terminalClosed()
 {
-    btnConnected->setChecked(false);
+    ui.actionTerminal->setChecked(false);
     connectButton(false);
 }
 
@@ -962,11 +1064,11 @@ void MainWindow::enumeratePortsEvent()
 
     if (notFound)
     {
-        btnConnected->setChecked(false);
+        ui.actionTerminal->setChecked(false);
     }
     else
     {
-        btnConnected->setChecked(true);
+        ui.actionTerminal->setChecked(true);
     }
 
     if(cbPort->count() > 1) {
@@ -1009,31 +1111,29 @@ void MainWindow::enumeratePorts()
             cbPort->addItem(name);
 #else
         name = ports.at(i).physName;
-        if(name.indexOf("usb",0,Qt::CaseInsensitive) > -1) {
-            cbPort->addItem(name);
-        }
+        cbPort->addItem(name);
 #endif
     }
     if(!cbPort->count()) {
-        btnConnected->setCheckable(false);
+        ui.actionTerminal->setCheckable(false);
     }
     else {
-        btnConnected->setCheckable(true);
+        ui.actionTerminal->setCheckable(true);
     }
     QApplication::processEvents();
 }
 
 void MainWindow::connectButton(bool show)
 {
-    if(btnConnected->isChecked()) {
-        btnConnected->setDisabled(true);
+    if(ui.actionTerminal->isChecked()) {
+        ui.actionTerminal->setDisabled(true);
         if(!portListener->isOpen()) {
             qDebug() << "connect enable port";
             portListener->init(cbPort->currentText(), term->getBaud());
             setCurrentPort(cbPort->currentIndex());
             portListener->open();
         }
-        btnConnected->setDisabled(false);
+        ui.actionTerminal->setDisabled(false);
         term->setPortEnabled(true);
         term->setPortName(portListener->getPort()->portName());
         if(show) {
@@ -1142,4 +1242,48 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
         }
     }
     return QMainWindow::eventFilter(target, event);
+}
+
+void MainWindow::openFileResource(QString const & resource)
+{
+    QString path = QApplication::applicationDirPath()
+            + QString(APP_RESOURCES_PATH)
+            + resource;
+    if (QFileInfo(path).exists() && QFileInfo(path).isFile())
+        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    else
+        showMessage(tr("File %1 not found...").arg(path));
+}
+
+void MainWindow::propellerManual()
+{
+    openFileResource("/doc/pdf/P8X32A-Web-PropellerManual-v1.2_0.pdf");
+}
+
+void MainWindow::propellerDatasheet()
+{
+    openFileResource("/doc/pdf/P8X32A-Propeller-Datasheet-v1.4.0_0.pdf");
+}
+
+void MainWindow::about()
+{
+    QString version = QString(QCoreApplication::applicationName() 
+                     + " v" + QCoreApplication::applicationVersion()
+                     );
+    QMessageBox::about(this, tr("About") + " " + QCoreApplication::applicationName(),
+           "<h2>" + version + "</h2>"
+           "<p>PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.</p>"
+           "<p>Use it for writing Spin code, downloading programs to your Propeller board, and debugging your applications with the built-in serial terminal.<p>"
+           "<p>PropellerIDE is built in Qt and is fully cross-platform.</p>"
+
+           "<h3>Credits</h3>"
+           "<p>Copyright &copy; 2014-2015 by Parallax, Inc. "
+           "Developed by LameStation LLC in collaboration with Parallax. Originally created by Steve Denson.</p>"
+           "<p>PropellerIDE is free software, released under the GPLv3 license.</p>"
+           );
+}
+
+void MainWindow::showMessage(const QString & message)
+{
+    statusBar()->showMessage(message, 2000);
 }

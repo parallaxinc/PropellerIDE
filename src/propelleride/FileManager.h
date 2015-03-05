@@ -59,5 +59,6 @@ signals:
     void saveAvailable(bool available);
     void copyAvailable(bool available);
     void closeAvailable(bool available);
+    void sendMessage(const QString & message);
 
 };

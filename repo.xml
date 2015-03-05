@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <info
+    organization="Parallax Inc."
+    application="PropellerIDE"
+    url="www.parallax.com"
+    maintainer="LameStation"
+    email="contact@lamestation.com"
+    copyright="2014-2015"
+    license="GPLv3"
+    tagline="The fun Spin editor"
+    description="An easy-to-use cross-platform development tool for the Parallax Propeller microcontroller."
+    />
+
+  <target>
+    <win AppID="FFFE6E20-C961-487B-B55B-510E4BCE479B" />
+    <mac category="public.app-category.developer-tools" />
+  </target>
+
+  <gfx      path="gfx" />
+  <version  path="src/propelleride" />
+
+  <repo path="src/openspin/repo"    url="https://github.com/bweir/OpenSpin.git"   branch="master" />
+  <repo path="src/p1load/repo"      url="https://github.com/dbetz/p1load.git"     branch="master" />
+</project>
