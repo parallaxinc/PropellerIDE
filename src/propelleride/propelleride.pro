@@ -9,7 +9,6 @@ QT += gui widgets serialport
     error("PropellerIDE requires Qt5.2 or greater")
 }
 
-CONFIG += console
 CONFIG -= debug_and_release app_bundle
 
 INCLUDEPATH += . ..
