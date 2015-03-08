@@ -914,8 +914,10 @@ void MainWindow::enumeratePorts()
 
 void MainWindow::spawnTerminal()
 {
-    QProcess * termtime = new QProcess();
-    termtime->start(spinTerminal);
+    QString term = QDir::toNativeSeparators(spinTerminal);
+    qDebug() << "Running" << term;
+    if (!QProcess::startDetached(term, QStringList()))
+        qDebug() << "Failed to detach" << term;
 }
 
 void MainWindow::setupProjectTools(QSplitter *vsplit)
