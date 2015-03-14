@@ -18,11 +18,7 @@ public:
 signals:
     void portChanged();
 
-public slots:
-
 private:
-    QString pathPrefix;
-    QStringList portList;
     bool running;
 
 };

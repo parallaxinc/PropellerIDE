@@ -1,29 +1,12 @@
-dist/propelleride-*
-
 src/propelleride/propelleride
-src/openspin/openspin
-src/p1load/p1load
-
-src/openspin/repo
-src/p1load/repo
-library/
-
 propelleride.exe
-openspin.exe
-p1load.exe
 
-propelleride.app
-openspin.app
-p1load.app
-
-staging/
+build/
 *.swp
 *.pro.user
 *~
 Makefile
 *.binary
-*.plist
-*.iss
 
 .DS_Store
 .qmake.stash

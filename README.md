@@ -83,7 +83,20 @@ Enter target type to build. Options:
    no parameter builds only the binaries
 ```
 
-### Linux
+### Debian
+
+These instructions assume that you are building on an Ubuntu variant.
+
+There is a bug in QSerialPortInfo that results in a memory leak in Qt5.2.1 on POSIX
+systems. You will need a minimum of Qt5.3 which is only available on Ubuntu as of
+14.10.
+
+Add the Utopic Unicorn sources to your `/etc/apt/sources.list` if you are on 14.04
+or earlier.
+
+```
+deb http://cz.archive.ubuntu.com/ubuntu utopic main 
+```
 
 Run an update to ensure your apt repositories are up-to-date.
 

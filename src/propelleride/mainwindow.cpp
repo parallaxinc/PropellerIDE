@@ -896,10 +896,10 @@ void MainWindow::enumeratePorts()
     QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
     foreach(QSerialPortInfo port, ports)
     {
-//        qDebug() << port.systemLocation();
         if (!port.systemLocation().contains("ttyS"))
             cbPort->addItem(port.systemLocation());
     }
+
     if(cbPort->count())
     {
         cbPort->setEnabled(true);
