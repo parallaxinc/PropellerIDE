@@ -6,10 +6,7 @@ matrix:
     env: QMAKESPEC=linux-clang
 
 before_install:
-- sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty universe"
-- sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty main"
-- sudo apt-get install debian-keyring debian-archive-keyring
-- sudo apt-key update
+- sudo add-apt-repository "deb http://cz.archive.ubuntu.com/ubuntu utopic main"
 - sudo apt-get update
 - sudo apt-get install qt5-default qt5-qmake qtbase5-dev-tools qtchooser qttools5-dev qtbase5-dev libgles2-mesa-dev libqt5gui5 libqt5serialport5-dev libqt5printsupport5 libqt5widgets5 libgles2-mesa libgl1-mesa-dev libgl1-mesa-glx libglapi-mesa libegl1-mesa-dev libpango-1.0-0
 - sudo apt-get install zlib1g-dev libudev-dev cppcheck 
