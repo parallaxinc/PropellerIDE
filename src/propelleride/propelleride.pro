@@ -35,6 +35,7 @@ SOURCES += \
     ColorChooser.cpp \
     FileManager.cpp \
     BuildManager.cpp \
+    Language.cpp \
 
 HEADERS  += \
     mainwindow.h \
@@ -55,6 +56,7 @@ HEADERS  += \
     templates/Singleton.h \
     FileManager.h \
     BuildManager.h \
+    Language.h \
 
 OTHER_FILES +=
 

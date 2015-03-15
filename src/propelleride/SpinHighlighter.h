@@ -2,9 +2,6 @@
 
 #include "Highlighter.h"
 
-#include <QHash>
-#include <QTextCharFormat>
-
 #include "Preferences.h"
 #include "ColorScheme.h"
 
@@ -16,6 +13,8 @@ private:
 
 public:
     SpinHighlighter(QTextDocument *parent);
+    void addRules(QStringList rules,
+            QTextCharFormat format);
     void highlight();
 
 };
