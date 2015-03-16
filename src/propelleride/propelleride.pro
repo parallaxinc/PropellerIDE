@@ -18,7 +18,6 @@ LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    find.cpp \
     Highlighter.cpp \
     treemodel.cpp \
     treeitem.cpp \
@@ -36,6 +35,7 @@ SOURCES += \
     FileManager.cpp \
     BuildManager.cpp \
     Language.cpp \
+    Finder.cpp \
 
 HEADERS  += \
     mainwindow.h \
@@ -57,6 +57,7 @@ HEADERS  += \
     FileManager.h \
     BuildManager.h \
     Language.h \
+    Finder.h \
 
 OTHER_FILES +=
 
@@ -64,6 +65,7 @@ FORMS += \
     forms/mainwindow.ui \
     forms/TermPrefs.ui \
     forms/finder.ui \
+    forms/finder_flat.ui \
     forms/status.ui
 
 RESOURCES += \

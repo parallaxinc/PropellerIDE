@@ -19,6 +19,7 @@
 
 #include "FileManager.h"
 #include "BuildManager.h"
+#include "Finder.h"
 
 #include "ui_mainwindow.h"
 
@@ -37,21 +38,7 @@ public:
     QSplitter   *leftSplit;
     QSplitter   *findSplit;
 
-public:
-    QTextDocument::FindFlag getFlags(int prev = 0);
-
-    bool showBeginMessage(QString type);
-    bool showEndMessage(QString type);
-
 public slots:
-    void findChanged(QString text);
-    void findClicked();
-    void findNextClicked();
-    void findPrevClicked();
-    void replaceClicked();
-    void replaceNextClicked();
-    void replacePrevClicked();
-    void replaceAllClicked();
     void showMessage(const QString & message);
 
     // file menu
@@ -88,8 +75,6 @@ public slots:
     void quitProgram();
 
     void enumeratePorts();
-    void showFindFrame();
-    void hideFindFrame();
     void showBrowser();
 
     void addRecentFile(const QString &fileName);
@@ -121,8 +106,6 @@ private:
     void updateReferenceTree(QString fileName, QString text);
     void updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level);
 
-    QFrame *newFindFrame(QSplitter *split);
-
     typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
     int  runCompiler(COMPILE_TYPE type);
     int  loadProgram(int type);
@@ -136,33 +119,10 @@ private:
 
     QList<QAction *> recentFiles;
 
-    QString     findText;
-    QString     replaceText;
-    bool        showFindMessage(QString type);
-    
-    QHBoxLayout *findLayout;
-    QLineEdit   *findEdit;
-    QLabel      *findLabel;
-    QToolButton *findPreviousBtn;
-    QToolButton *findNextBtn;
-    QToolButton *wholeWordFilterBtn;
-    QToolButton *caseSensitiveFilterBtn;
-    QToolButton *doneFindBtn;
-    
-    QHBoxLayout *replaceLayout;
-    QLineEdit   *replaceEdit;
-    QLabel      *replaceLabel;
-    QToolButton *replacePreviousBtn;
-    QToolButton *replaceNextBtn;
-    QToolButton *replaceAllBtn;
-
     QVBoxLayout *verticalLayout;
     QFrame      *findFrame;
 
-    /* last find position */
-    int         findPosition;
-    int         wasClicked;
-
+    Finder * finder;
     FileManager     *editorTabs;
     BuildManager    builder;
 

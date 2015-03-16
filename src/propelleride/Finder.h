@@ -1,0 +1,30 @@
+#include "ui_finder_flat.h"
+#include "FileManager.h"
+
+class Finder : public QFrame
+{
+    Q_OBJECT
+
+private:
+    Ui::Finder ui;
+    FileManager * fileManager;
+    QTextDocument::FindFlag getFlags(int prev = 0);
+
+    int findPosition;
+
+public:
+    Finder(FileManager * fileManager, QWidget *parent = 0);
+
+signals:
+    void sendMessage(const QString & message);
+
+public slots:
+    void findChanged(QString text);
+    void find(int prev = 0);
+    void findPrevious();
+    void findNext();
+    void replacePrevious();
+    void replaceNext();
+    void replaceAll();
+    void showFinder();
+};

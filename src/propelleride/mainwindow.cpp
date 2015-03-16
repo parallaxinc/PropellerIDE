@@ -63,9 +63,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     connect(ui.action_Paste,       SIGNAL(triggered()), editorTabs, SLOT(paste()));
     connect(ui.actionSelect_All,   SIGNAL(triggered()), editorTabs, SLOT(selectAll()));
 
-    connect(ui.action_Find,        SIGNAL(triggered()), this, SLOT(showFindFrame()));
-    connect(ui.actionFind_Next,    SIGNAL(triggered()), this, SLOT(findNextClicked()));
-    connect(ui.actionFind_Previous,SIGNAL(triggered()), this, SLOT(findPrevClicked()));
+    connect(ui.action_Find,        SIGNAL(triggered()), finder, SLOT(showFinder()));
+    connect(ui.actionFind_Next,    SIGNAL(triggered()), finder, SLOT(findNext()));
+    connect(ui.actionFind_Previous,SIGNAL(triggered()), finder, SLOT(findPrevious()));
 
     connect(ui.actionPreferences,  SIGNAL(triggered()), this, SLOT(preferences()));
 
@@ -111,9 +111,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
 
     updateRecentFileActions();
 
-    /* start with an empty file if fresh install */
-    connect(editorTabs,SIGNAL(fileUpdated(int)), this, SLOT(setProject()));
-    connect(editorTabs,SIGNAL(sendMessage(const QString &)),this,SLOT(showMessage(const QString &)));
+    connect(editorTabs, SIGNAL(fileUpdated(int)),               this,SLOT(setProject()));
+
+    connect(editorTabs, SIGNAL(sendMessage(const QString &)),   this,SLOT(showMessage(const QString &)));
+    connect(finder,     SIGNAL(sendMessage(const QString &)),   this,SLOT(showMessage(const QString &)));
     editorTabs->newFile();
 
     resize(800,600);
@@ -973,7 +974,9 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     findSplit->setStretchFactor(0,1);
     findSplit->setStretchFactor(1,0);
     findSplit->setContentsMargins(0,0,handlewidth,0);
-    findSplit->addWidget(newFindFrame(findSplit));
+
+    finder = new Finder(editorTabs, this);
+    findSplit->addWidget(finder);//newFindFrame(findSplit));
     QSplitterHandle *hndl = findSplit->handle(1);
     hndl->setEnabled(false);
 
