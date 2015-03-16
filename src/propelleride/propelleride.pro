@@ -28,7 +28,6 @@ SOURCES += \
     ReferenceTree.cpp \
     editor.cpp \
     status.cpp \
-    SpinHighlighter.cpp \
     SpinParser.cpp \
     ColorScheme.cpp \
     ColorChooser.cpp \
@@ -48,7 +47,6 @@ HEADERS  += \
     PortConnectionMonitor.h \
     ReferenceTree.h \
     editor.h \
-    SpinHighlighter.h \
     SpinParser.h \
     status.h \
     ColorChooser.h \

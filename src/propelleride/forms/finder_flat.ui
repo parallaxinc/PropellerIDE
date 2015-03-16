@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>965</width>
+    <width>1071</width>
     <height>82</height>
    </rect>
   </property>
@@ -34,7 +34,7 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
+     <item row="0" column="1">
       <widget class="QLineEdit" name="findEdit">
        <property name="minimumSize">
         <size>
@@ -44,59 +44,59 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
+     <item row="0" column="2">
       <widget class="QPushButton" name="findPrevious">
        <property name="text">
         <string>Find Previous</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
+     <item row="0" column="3">
       <widget class="QPushButton" name="findNext">
        <property name="text">
         <string>Find Next</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="3">
+     <item row="0" column="4">
       <widget class="QCheckBox" name="wholeWord">
        <property name="text">
         <string>Whole Word</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="4">
+     <item row="0" column="5">
       <widget class="QCheckBox" name="matchCase">
        <property name="text">
         <string>Match Case</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item row="1" column="1">
       <widget class="QLineEdit" name="replaceEdit"/>
      </item>
-     <item row="1" column="1">
+     <item row="1" column="2">
       <widget class="QPushButton" name="replacePrevious">
        <property name="text">
         <string>Replace Previous</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="2">
+     <item row="1" column="3">
       <widget class="QPushButton" name="replaceNext">
        <property name="text">
         <string>Replace Next</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="3">
+     <item row="1" column="4">
       <widget class="QPushButton" name="replaceAll">
        <property name="text">
         <string>Replace All</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="4">
+     <item row="1" column="5">
       <widget class="QPushButton" name="doneButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -106,6 +106,20 @@
        </property>
        <property name="text">
         <string>Done</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="findLabel">
+       <property name="text">
+        <string>Find:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="replaceLabel">
+       <property name="text">
+        <string>Replace:</string>
        </property>
       </widget>
      </item>

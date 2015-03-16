@@ -9,7 +9,6 @@
 #include <QPaintEvent>
 #include <QTextCursor>
 
-
 #include "Highlighter.h"
 #include "SpinParser.h"
 
