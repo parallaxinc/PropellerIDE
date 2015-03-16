@@ -1,0 +1,46 @@
+{
+    "name": "Propeller C",
+    "ext": [ "c", "h" ],
+    "syntax": {
+        "case_sensitive": true,
+        "enable_blocks": [ false ],
+        "escape": "\\\\[\\s\\S]",
+        "string": [
+            "\".*\"",
+            "\\'.?\\'",
+            "#[^\n]*"
+        ],
+        "number": [
+            "\\b[0-9_]+\\b",
+            "\\b0x[0-9_]+\\b"
+        ],
+        "function": [
+            "\\b[A-Za-z0-9_]+(?=\\()\\b"
+        ],
+        "comment": [
+            "//[^\n]*",
+            "/\\*.*/\\*"
+        ],
+        "mode": {
+            "default":
+            {
+                "keywords":
+                [
+                    "auto break case char const continue default do double else enum",
+                    "extern float for goto if int long register return short signed",
+                    "sizeof static struct switch typedef union unsigned",
+                    "void volatile while"
+                ],
+                "operators":
+                [
+                    "+ - * / % ++ --",
+                    "== != > < >= <=",
+                    "&& || ! & | ^ ~ << >>",
+                    "= += -= *= /= %= <<= >>= &= ^= |=",
+                    "\\bsizeof(?=\\()\\b",
+                    "& * ? :"
+                ]
+            }
+        }
+    }
+}
