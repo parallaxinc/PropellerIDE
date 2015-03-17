@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QSyntaxHighlighter>
-
 #include <QTextCharFormat>
 #include <QString>
 #include <QStringList>

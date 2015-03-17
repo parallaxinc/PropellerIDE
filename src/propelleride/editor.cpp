@@ -1,13 +1,10 @@
 #include "editor.h"
-#include "Preferences.h"
 
 #include <QToolTip>
 #include <QRect>
 #include <QColor>
 #include <QPainter>
 #include <QApplication>
-
-#include "Highlighter.h"
 
 #include "mainwindow.h"
 #define MAINWINDOW MainWindow

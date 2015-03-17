@@ -11,6 +11,7 @@
 
 #include "Highlighter.h"
 #include "SpinParser.h"
+#include "Preferences.h"
 
 class LineNumberArea;
 

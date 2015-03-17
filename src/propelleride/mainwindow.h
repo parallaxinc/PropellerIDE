@@ -8,21 +8,18 @@
 #include <QDesktopServices> 
 #include <QDirIterator> 
 
+#include "ui_mainwindow.h"
+
 #include "SpinParser.h"
 #include "treemodel.h"
-
 #include "Preferences.h"
 #include "editor.h"
 #include "PortConnectionMonitor.h"
 #include "spinzip/zipper.h"
 #include "ReferenceTree.h"
-
 #include "FileManager.h"
 #include "BuildManager.h"
 #include "Finder.h"
-
-#include "ui_mainwindow.h"
-
 
 class MainWindow : public QMainWindow
 {

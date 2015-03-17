@@ -1,12 +1,12 @@
 #include <QApplication>
 #include <QDebug>
-#include "mainwindow.h"
-
 #include <QMessageBox>
 #include <QStyleFactory>
 #include <QTranslator>
 #include <QCommandLineParser>
 #include <QObject>
+
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {

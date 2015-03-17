@@ -1,3 +1,5 @@
+#include "Preferences.h"
+
 #include <QApplication>
 #include <QDialog>
 #include <QFileInfo>
@@ -16,9 +18,7 @@
 #include <QDebug>
 #include <QDirIterator>
 
-#include "Preferences.h"
 #include "ColorChooser.h"
-
 
 Preferences::Preferences(QWidget *parent) : QDialog(parent)
 {
@@ -80,7 +80,7 @@ void Preferences::setupOptions()
     spinSuggestEnable.setChecked(enss.toBool());
     edlayout->addRow(new QLabel(tr("Enable Code Suggestion")), &spinSuggestEnable);
 
-    QVariant tabsv = settings.value(tabSpacesKey,"4");
+    QVariant tabsv = settings.value("tabSpaces","4");
     if(tabsv.canConvert(QVariant::String)) {
         tabspaceLedit.setText(tabsv.toString());
     }
@@ -349,7 +349,7 @@ void Preferences::accept()
 
     QSettings settings;
 
-    settings.setValue(tabSpacesKey,tabspaceLedit.text());
+    settings.setValue("tabSpaces",tabspaceLedit.text());
 
     settings.setValue(enableAutoComplete,autoCompleteEnable.isChecked());
     settings.setValue(enableSpinSuggest,spinSuggestEnable.isChecked());

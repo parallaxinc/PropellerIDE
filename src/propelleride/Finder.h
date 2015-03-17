@@ -1,4 +1,7 @@
+#pragma once
+
 #include "ui_finder_flat.h"
+
 #include "FileManager.h"
 
 class Finder : public QFrame
