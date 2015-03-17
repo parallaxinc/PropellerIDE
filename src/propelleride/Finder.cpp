@@ -30,6 +30,8 @@ void Finder::showFinder()
     
         show();
         ui.findEdit->setFocus();
+        findPosition = editor->textCursor().position();
+        qDebug() << findPosition;
     }
 }
     
@@ -58,7 +60,11 @@ void Finder::findChanged(QString text)
     editor->setTextCursor(cur);
     cur.endEditBlock();
 
-    editor->find(text,getFlags());
+    // search forward, and then backward if not found
+    if (!editor->find(text,getFlags()))
+    {
+        editor->find(text,getFlags(QTextDocument::FindBackward));
+    }
 }
 
 void Finder::find(int prev)

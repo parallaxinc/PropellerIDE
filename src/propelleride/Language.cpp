@@ -66,9 +66,6 @@ QJsonObject Language::loadLanguage(QString filename)
     case_sensitive = syntax["case_sensitive"].toBool();
     escape_char = syntax["escape"].toString();
 
-    qDebug() << enable_blocks << case_sensitive << escape_char;
-
-
     modes = syntax["mode"].toObject();
     foreach(QJsonValue m, modes)
     {

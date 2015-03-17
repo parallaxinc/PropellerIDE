@@ -1012,8 +1012,31 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
             case (Qt::Key_PageDown):
                 editorTabs->nextTab();
                 return true;
+            case (Qt::Key_Enter):
+                if (QApplication::focusWidget() == finder)
+                    finder->findNext();
+                return true;
+            case (Qt::Key_Escape):
+                if (QApplication::focusWidget() == finder)
+                    finder->hide();
+                return true;
+            }
+        } else {
+            if (QApplication::focusWidget()->parent() == finder)
+            {
+                switch (e->key())
+                {
+                case (Qt::Key_Enter):
+                case (Qt::Key_Return):
+                    finder->findNext();
+                    return true;
+                case (Qt::Key_Escape):
+                    finder->hide();
+                    return true;
+                }
             }
         }
+        
     }
     return QMainWindow::eventFilter(target, event);
 }
