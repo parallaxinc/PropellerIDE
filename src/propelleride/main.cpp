@@ -1,27 +1,28 @@
 #include <QApplication>
 #include <QDebug>
-#include "mainwindow.h"
-
 #include <QMessageBox>
 #include <QStyleFactory>
 #include <QTranslator>
 #include <QCommandLineParser>
 #include <QObject>
 
+#include "mainwindow.h"
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    app.setWindowIcon(QIcon(":/icons/PropHatAlpha.png"));
     QCoreApplication::setOrganizationName("Parallax");
     QCoreApplication::setOrganizationDomain("www.parallax.com");
+#ifdef VERSION
     QCoreApplication::setApplicationVersion(VERSION);
+#endif
     QCoreApplication::setApplicationName("PropellerIDE");
 
 
     // init translations
 //    QTranslator translator;
-//    translator.load("translations/propelleride_zn");
+//    translator.load("translations/propelleride_fake");
 //    app.installTranslator(&translator);
 
     // init styles

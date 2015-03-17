@@ -129,10 +129,6 @@
     </layout>
    </item>
   </layout>
-  <zorder>doneButton</zorder>
-  <zorder>doneButton</zorder>
-  <zorder>horizontalSpacer</zorder>
-  <zorder>horizontalSpacer_2</zorder>
  </widget>
  <resources>
   <include location="../icons/icons.qrc"/>

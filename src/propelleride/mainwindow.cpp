@@ -5,12 +5,12 @@
 #include <QToolBar> 
 #include <QFileDialog> 
 #include <QMenu> 
-
-#include "StatusDialog.h"
-#include "qext/qextserialenumerator.h"
+#include <QSerialPortInfo>
+#include <QProcess>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMutex::Recursive), statusDone(true)
 {
+    ui.setupUi(this);
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
@@ -31,18 +31,90 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     this->setMinimumHeight(500);
 
     /* setup gui components */
-    setupFileMenu();
-    setupEditMenu();
-    setupViewMenu();
-    setupProjectMenu();
-    setupHelpMenu();
 
-    setupToolBars();
-    setStatusBar(&statusbar);
+    // File Menu
+    connect(ui.action_New,SIGNAL(triggered()),editorTabs,SLOT(newFile()));
+    connect(ui.action_Open,SIGNAL(triggered()),editorTabs,SLOT(open()));
+
+    connect(ui.action_Save,SIGNAL(triggered()),editorTabs,SLOT(save()));
+    connect(ui.actionSave_As,SIGNAL(triggered()),editorTabs,SLOT(saveAs()));
+    connect(ui.actionSave_All,SIGNAL(triggered()),editorTabs,SLOT(saveAll()));
+
+    connect(ui.action_Zip_Project,SIGNAL(triggered()),this,SLOT(zipFiles()));
+
+    recentFiles = findChildren<QAction *>(QRegExp("action_[0-9]+_File"));
+    for (int i = 0; i < recentFiles.size(); i++)
+        connect(recentFiles.at(i), SIGNAL(triggered()),this, SLOT(openRecentFile()));
+    
+    connect(ui.action_Close,SIGNAL(triggered()),editorTabs,SLOT(closeFile()));
+
+    connect(editorTabs, SIGNAL(saveAvailable(bool)),ui.action_Save,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(saveAvailable(bool)),ui.actionSave_All,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(closeAvailable(bool)),ui.action_Close,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(closeAvailable(bool)),ui.actionClose_All,SLOT(setEnabled(bool)));
 
 
-    /* start with an empty file if fresh install */
-    connect(editorTabs,SIGNAL(fileUpdated(int)), this, SLOT(setProject()));
+    // Edit Menu
+    connect(ui.action_Undo,        SIGNAL(triggered()), editorTabs, SLOT(undo()));
+    connect(ui.action_Redo,        SIGNAL(triggered()), editorTabs, SLOT(redo()));
+
+    connect(ui.action_Cut,         SIGNAL(triggered()), editorTabs, SLOT(cut()));
+    connect(ui.action_Copy,        SIGNAL(triggered()), editorTabs, SLOT(copy()));
+    connect(ui.action_Paste,       SIGNAL(triggered()), editorTabs, SLOT(paste()));
+    connect(ui.actionSelect_All,   SIGNAL(triggered()), editorTabs, SLOT(selectAll()));
+
+    connect(ui.action_Find,        SIGNAL(triggered()), finder, SLOT(showFinder()));
+    connect(ui.actionFind_Next,    SIGNAL(triggered()), finder, SLOT(findNext()));
+    connect(ui.actionFind_Previous,SIGNAL(triggered()), finder, SLOT(findPrevious()));
+
+    connect(ui.actionPreferences,  SIGNAL(triggered()), this, SLOT(preferences()));
+
+    connect(editorTabs, SIGNAL(undoAvailable(bool)), ui.action_Undo,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(redoAvailable(bool)), ui.action_Redo,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(copyAvailable(bool)), ui.action_Cut,SLOT(setEnabled(bool)));
+    connect(editorTabs, SIGNAL(copyAvailable(bool)), ui.action_Copy,SLOT(setEnabled(bool)));
+
+
+    // View Menu
+    connect(ui.actionShow_Browser, SIGNAL(triggered()), this, SLOT(showBrowser()));
+    connect(ui.actionBigger_Font,  SIGNAL(triggered()), this, SLOT(fontBigger()));
+    connect(ui.actionSmaller_Font, SIGNAL(triggered()), this, SLOT(fontSmaller()));
+
+    ui.actionBigger_Font->setShortcuts(QList<QKeySequence>() << QKeySequence::ZoomIn
+                                                             << Qt::CTRL+Qt::Key_Equal);
+
+
+    // Project Menu
+    connect(ui.actionView_Info, SIGNAL(triggered()), this, SLOT(viewInfo()));
+    connect(ui.actionBuild,     SIGNAL(triggered()), this, SLOT(programBuild()));
+    connect(ui.actionRun,       SIGNAL(triggered()), this, SLOT(programRun()));
+    connect(ui.actionBurn,      SIGNAL(triggered()), this, SLOT(programBurnEE()));
+    connect(ui.actionTerminal,  SIGNAL(triggered()), this, SLOT(spawnTerminal()));
+
+    // Help Menu
+    connect(ui.actionPropeller_Datasheet,   SIGNAL(triggered()), this, SLOT(propellerDatasheet()));
+    connect(ui.actionPropeller_Manual,      SIGNAL(triggered()), this, SLOT(propellerManual()));
+    connect(ui.action_About,                SIGNAL(triggered()), this, SLOT(about()));
+
+    // Toolbar Extras
+    cbPort = new QComboBox(this);
+    cbPort->setLayoutDirection(Qt::LeftToRight);
+    cbPort->setToolTip(tr("Select Serial Port"));
+    cbPort->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    connect(cbPort,SIGNAL(currentIndexChanged(int)),this,SLOT(setCurrentPort(int)));
+    ui.toolBar->addWidget(cbPort);
+
+//    ctrlToolBar = addToolBar(tr("Control"));
+//    ctrlToolBar->setLayoutDirection(Qt::RightToLeft);
+//    ctrlToolBar->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
+//    ctrlToolBar->addWidget(cbPort);
+
+    updateRecentFileActions();
+
+    connect(editorTabs, SIGNAL(fileUpdated(int)),               this,SLOT(setProject()));
+
+    connect(editorTabs, SIGNAL(sendMessage(const QString &)),   this,SLOT(showMessage(const QString &)));
+    connect(finder,     SIGNAL(sendMessage(const QString &)),   this,SLOT(showMessage(const QString &)));
     editorTabs->newFile();
 
     resize(800,600);
@@ -52,34 +124,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
 
     getApplicationSettings();
 
-    /* setup the terminal dialog box */
-    term = new Terminal(this);
-
-    /* setup the port listener */
-    portListener = new PortListener(this, term->getEditor());
-    portListener->setTerminalWindow(term->getEditor());
-    connect(&builder,SIGNAL(terminalReceived(QString)), portListener, SLOT(appendConsole(QString)));
-
-    term->setPortListener(portListener);
-
-    connect(term,SIGNAL(accepted()),this,SLOT(terminalClosed()));
-    connect(term,SIGNAL(rejected()),this,SLOT(terminalClosed()));
-
     /* get available ports at startup */
     enumeratePorts();
 
     portConnectionMonitor = new PortConnectionMonitor();
-    connect(portConnectionMonitor, SIGNAL(portChanged()), this, SLOT(enumeratePortsEvent()));
-
-    /* Do this before using the dialog. */
-    statusDialog = new StatusDialog(this);
-    portListener->setStatusDialog(statusDialog);
+    connect(portConnectionMonitor, SIGNAL(portChanged()), this, SLOT(enumeratePorts()));
 
     connect(this,SIGNAL(signalStatusDone(bool)),this,SLOT(setStatusDone(bool)));
 
     loadSession();
 
     installEventFilter(this);
+
 }
 
 void MainWindow::loadSession()
@@ -131,9 +187,33 @@ void MainWindow::getApplicationSettings()
     spinCompiler = settings.value("Compiler").toString();
     spinLoader = settings.value("Loader").toString();
     spinIncludes = settings.value("Library").toString();
+    spinTerminal = settings.value("Terminal").toString();
 
     settings.endGroup();
 }
+
+void MainWindow::preferences()
+{
+    propDialog->showPreferences();
+}
+
+
+void MainWindow::preferencesAccepted()
+{
+    getApplicationSettings();
+}
+
+
+void MainWindow::fontBigger()
+{
+    propDialog->adjustFontSize(1.25);
+}
+
+void MainWindow::fontSmaller()
+{
+    propDialog->adjustFontSize(0.8);
+}
+
 
 void MainWindow::quitProgram()
 {
@@ -152,7 +232,6 @@ void MainWindow::closeEvent(QCloseEvent *e)
         return;
     }
 
-    portListener->close();
     portConnectionMonitor->stop();
 
     QSettings().setValue("windowSize",saveGeometry());
@@ -180,7 +259,7 @@ void MainWindow::addRecentFile(const QString &fileName)
 
     files.removeAll(fileName);
     files.prepend(fileName);
-    while (files.size() > MaxRecentFiles)
+    while (files.size() > recentFiles.size())
         files.removeLast();
 
     QSettings().setValue("recentFiles", files);
@@ -192,28 +271,28 @@ void MainWindow::updateRecentFileActions()
 {
     QStringList files = QSettings().value("recentFiles").toStringList();
     files.removeAll("");
-    int numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
+    int numRecentFiles = qMin(files.size(), recentFiles.size());
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
         QString estr = files.at(i);
         QString text = tr("&%1 %2").arg(i + 1).arg(QFileInfo(estr).fileName());
-        recentFileActs[i]->setText(text);
-        recentFileActs[i]->setData(estr);
-        recentFileActs[i]->setVisible(true);
+        recentFiles.at(i)->setText(text);
+        recentFiles.at(i)->setData(estr);
+        recentFiles.at(i)->setVisible(true);
     }
-    for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
-        recentFileActs[j]->setVisible(false);
+    for (int j = numRecentFiles; j < recentFiles.size(); ++j)
+        recentFiles.at(j)->setVisible(false);
 
     if (!numRecentFiles)
     {
-        recentFileActs[0]->setText("No recent files...");
-        recentFileActs[0]->setVisible(true);
-        recentFileActs[0]->setEnabled(false);
+        recentFiles.at(0)->setText("No recent files...");
+        recentFiles.at(0)->setVisible(true);
+        recentFiles.at(0)->setEnabled(false);
     }
     else
     {
-        recentFileActs[0]->setEnabled(true);
+        recentFiles.at(0)->setEnabled(true);
     }
 }
 
@@ -282,18 +361,8 @@ void MainWindow::showBrowser()
 void MainWindow::setCurrentPort(int index)
 {
     QString portName = cbPort->itemText(index);
-    term->setPortName(portName);
+    qDebug() << "Item text: " << portName;
     cbPort->setCurrentIndex(index);
-    if(portName.length()) {
-        portListener->init(portName, term->getBaud());  // signals get hooked up internally
-#ifdef Q_OS_WIN
-        // do this so that the handle will change for windows
-        if(portListener->isOpen()) {
-            portListener->close();
-            portListener->open();
-        }
-#endif
-    }
 }
 
 void MainWindow::checkAndSaveFiles()
@@ -413,10 +482,7 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
     checkAndSaveFiles();
 
     if(fileName.contains(".spin")) {
-        statusDialog->init("Compiling Program", QFileInfo(this->projectFile).fileName());
-        builder.setParameters(spinCompiler, spinLoader, spinIncludes, projectFile, compileResult);
-
-        statusDialog->stop();
+        builder.setParameters(spinCompiler, spinLoader, spinIncludes, projectFile);
 
         copts = "-b";
         rc = builder.runCompiler(copts);
@@ -446,40 +512,23 @@ int  MainWindow::loadProgram(int type)
     }
     emit signalStatusDone(false);
 
-    bool stat = portListener->isOpen();
     if(cbPort->currentText().length() == 0)
     {
         QMessageBox::critical(this,tr("Propeller Load"), tr("Port not available. Please connect Propeller board."), QMessageBox::Ok);
         goto endLoadProgram;
     }
 
-    // changing selected port now changes terminal port
-    if(cbPort->currentText().compare(portListener->getPortName()) != 0) {
-        setCurrentPort(cbPort->currentIndex());
-        term->setPortName(cbPort->currentText());
-    }
-    if(stat) {
-        portListener->close();
-    }
-
-    portListener->setLoadEnable(true);
     switch (type) {
         case MainWindow::LoadRunHubRam:
-            copts += "-r -p"+portListener->getPortName();
+            copts += "-r -p"+cbPort->currentText();
             rc = builder.loadProgram(copts);
             break;
         case MainWindow::LoadRunEeprom:
-            copts += "-e -p"+portListener->getPortName();
+            copts += "-e -p"+cbPort->currentText();
             rc = builder.loadProgram(copts);
             break;
         default:
             break;
-    }
-    portListener->setLoadEnable(false);
-
-    if(stat) {
-        portListener->init(cbPort->currentText(),term->getBaud());
-        portListener->open();
     }
 
 endLoadProgram:
@@ -492,9 +541,6 @@ void MainWindow::programBurnEE()
     if(runCompiler(COMPILE_BURN))
         return;
 
-    if(cbPort->itemText(cbPort->currentIndex()).compare("AUTO") == 0) {
-        findHardware(false);
-    }
     setCurrentPort(cbPort->currentIndex());
 
     loadProgram(MainWindow::LoadRunEeprom);
@@ -505,9 +551,6 @@ void MainWindow::programRun()
     if(runCompiler(COMPILE_RUN))
         return;
 
-    if(cbPort->itemText(cbPort->currentIndex()).compare("AUTO") == 0) {
-        findHardware(false);
-    }
     setCurrentPort(cbPort->currentIndex());
 
     loadProgram(MainWindow::LoadRunHubRam);
@@ -518,21 +561,11 @@ void MainWindow::programDebug()
     if(runCompiler(COMPILE_RUN))
         return;
 
-    if(cbPort->itemText(cbPort->currentIndex()).compare("AUTO") == 0)
-    {
-        findHardware(false);
-    }
     setCurrentPort(cbPort->currentIndex());
-
-    term->getEditor()->clear();
-    portListener->init(cbPort->currentText(), term->getBaud());
-    setCurrentPort(cbPort->currentIndex());
-    portListener->open();
 
     if(!loadProgram(MainWindow::LoadRunHubRam))
     {
-        btnConnected->setChecked(true);
-        connectButton(true);
+        spawnTerminal();
     }
 }
 
@@ -544,74 +577,11 @@ void MainWindow::setStatusDone(bool done)
     statusMutex.unlock();
 }
 
-void MainWindow::findHardware(bool showFoundBox)
+void MainWindow::viewInfo()
 {
-    int count = 0;
-    QString savePort;
-    QString currentPort = cbPort->itemText(cbPort->currentIndex());
 
-    // if find in progress, ignore request
-    if(!statusDone) return;
 
-    emit signalStatusDone(false);
-
-    bool stat = portListener->isOpen();
-    if(stat)
-    {
-        savePort = portListener->getPortName();
-        portListener->close();
-    }
-
-    statusDialog->init("Searching for Propellers", "");
-    portConnectionMonitor->stop();
-
-    for(int n = 0; n < this->cbPort->count(); n++)
-    {
-        QString portstr = cbPort->itemText(n);
-        if(portstr.compare("AUTO") == 0)
-        {
-            continue;
-        }
-        portListener->init(portstr, term->getBaud());
-        if(portListener->isDevice(portstr))
-        {
-            count++;
-            if(currentPort.compare("AUTO") == 0)
-            {
-                cbPort->setCurrentIndex(n);
-            }
-        }
-    }
-    portConnectionMonitor->start();
-
-    if(!count) {
-        if(this->cbPort->count())
-            statusDialog->addMessage("\nPropeller not found on any port.");
-        else
-            statusDialog->addMessage("Please connect a serial port.");
-        statusDialog->stop();
-    }
-    else {
-        statusDialog->stop();
-        if(showFoundBox) {
-            QMessageBox::information(this,tr("Propeller found"), statusDialog->getMessage());
-        }
-    }
-
-    if(stat) {
-        portListener->init(savePort, term->getBaud());
-        portListener->open();
-    }
-
-    emit signalStatusDone(true);
 }
-
-void MainWindow::terminalClosed()
-{
-    btnConnected->setChecked(false);
-    connectButton(false);
-}
-
 
 void MainWindow::findMultilineComment(QPoint point)
 {
@@ -917,136 +887,38 @@ void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QSt
     }
 }
 
-
-void MainWindow::checkConfigSerialPort()
-{
-    if(!cbPort->count())
-    {
-        enumeratePorts();
-    }
-    else
-    {
-        QString name = cbPort->currentText();
-        QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
-        int index = -1;
-        for (int i = 0; i < ports.size(); i++)
-        {
-            if (ports.at(i).portName.contains(name, Qt::CaseInsensitive))
-            {
-                index = i;
-                break;
-            }
-        }
-        if(index < 0)
-        {
-            enumeratePorts();
-        }
-    }
-}
-
-void MainWindow::enumeratePortsEvent()
-{
-    enumeratePorts();
-
-    // need to check if the port we are using disappeared.
-    bool notFound = true;
-    QString plPortName = this->term->getPortName();
-    for(int n = this->cbPort->count()-1; n > -1; n--)
-    {
-        QString name = cbPort->itemText(n);
-        if(!name.compare(plPortName))
-        {
-            notFound = false;
-        }
-    }
-
-    if (notFound)
-    {
-        btnConnected->setChecked(false);
-    }
-    else
-    {
-        btnConnected->setChecked(true);
-    }
-
-    if(cbPort->count() > 1) {
-        if(isActiveWindow())
-            cbPort->showPopup();
-    }
-
-}
-
 void MainWindow::enumeratePorts()
 {
     if(cbPort == NULL)
         return;
 
     cbPort->clear();
-    cbPort->addItem("AUTO");
 
-    QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
-    QStringList stringlist;
-    QString name;
-    stringlist << "List of ports:";
+    QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
+    foreach(QSerialPortInfo port, ports)
+    {
+        if (!port.systemLocation().contains("ttyS"))
+            cbPort->addItem(port.systemLocation());
+    }
 
-    for (int i = 0; i < ports.size(); i++) {
-        stringlist << "port name:" << ports.at(i).portName;
-        stringlist << "friendly name:" << ports.at(i).friendName;
-        stringlist << "physical name:" << ports.at(i).physName;
-        stringlist << "enumerator name:" << ports.at(i).enumName;
-        stringlist << "vendor ID:" << QString::number(ports.at(i).vendorID, 16);
-        stringlist << "product ID:" << QString::number(ports.at(i).productID, 16);
-        stringlist << "===================================";
-#if defined(Q_OS_WIN32)
-        name = ports.at(i).portName;
-        if(name.contains(QString("COM"),Qt::CaseInsensitive)) {
-            //cbPort->addItem(name, QVariant(ports.at(i).physName));
-            cbPort->addItem(name);
-        }
-#elif defined(Q_OS_MAC)
-        name = ports.at(i).portName;
-        if(name.indexOf("cu.usbserial",0,Qt::CaseInsensitive) > -1)
-            cbPort->addItem(name);
-#else
-        name = ports.at(i).physName;
-        if(name.indexOf("usb",0,Qt::CaseInsensitive) > -1) {
-            cbPort->addItem(name);
-        }
-#endif
+    if(cbPort->count())
+    {
+        cbPort->setEnabled(true);
+        ui.actionTerminal->setEnabled(true);
     }
-    if(!cbPort->count()) {
-        btnConnected->setCheckable(false);
+    else
+    {
+        cbPort->setEnabled(false);
+        ui.actionTerminal->setEnabled(false);
     }
-    else {
-        btnConnected->setCheckable(true);
-    }
-    QApplication::processEvents();
 }
 
-void MainWindow::connectButton(bool show)
+void MainWindow::spawnTerminal()
 {
-    if(btnConnected->isChecked()) {
-        btnConnected->setDisabled(true);
-        if(!portListener->isOpen()) {
-            qDebug() << "connect enable port";
-            portListener->init(cbPort->currentText(), term->getBaud());
-            setCurrentPort(cbPort->currentIndex());
-            portListener->open();
-        }
-        btnConnected->setDisabled(false);
-        term->setPortEnabled(true);
-        term->setPortName(portListener->getPort()->portName());
-        if(show) {
-            term->show();
-            term->activateWindow();
-            term->getEditor()->setFocus();
-        }
-    }
-    else {
-        term->setPortEnabled(false);
-        portListener->close();
-        term->hide();
-    }
+    QString term = QDir::toNativeSeparators(spinTerminal);
+    qDebug() << "Running" << term;
+    if (!QProcess::startDetached(term, QStringList()))
+        qDebug() << "Failed to detach" << term;
 }
 
 void MainWindow::setupProjectTools(QSplitter *vsplit)
@@ -1102,7 +974,9 @@ void MainWindow::setupProjectTools(QSplitter *vsplit)
     findSplit->setStretchFactor(0,1);
     findSplit->setStretchFactor(1,0);
     findSplit->setContentsMargins(0,0,handlewidth,0);
-    findSplit->addWidget(newFindFrame(findSplit));
+
+    finder = new Finder(editorTabs, this);
+    findSplit->addWidget(finder);//newFindFrame(findSplit));
     QSplitterHandle *hndl = findSplit->handle(1);
     hndl->setEnabled(false);
 
@@ -1138,8 +1012,75 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
             case (Qt::Key_PageDown):
                 editorTabs->nextTab();
                 return true;
+            case (Qt::Key_Enter):
+                if (QApplication::focusWidget() == finder)
+                    finder->findNext();
+                return true;
+            case (Qt::Key_Escape):
+                if (QApplication::focusWidget() == finder)
+                    finder->hide();
+                return true;
+            }
+        } else {
+            if (QApplication::focusWidget()->parent() == finder)
+            {
+                switch (e->key())
+                {
+                case (Qt::Key_Enter):
+                case (Qt::Key_Return):
+                    finder->findNext();
+                    return true;
+                case (Qt::Key_Escape):
+                    finder->hide();
+                    return true;
+                }
             }
         }
+        
     }
     return QMainWindow::eventFilter(target, event);
+}
+
+void MainWindow::openFileResource(QString const & resource)
+{
+    QString path = QApplication::applicationDirPath()
+            + QString(APP_RESOURCES_PATH)
+            + resource;
+    if (QFileInfo(path).exists() && QFileInfo(path).isFile())
+        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    else
+        showMessage(tr("File %1 not found...").arg(path));
+}
+
+void MainWindow::propellerManual()
+{
+    openFileResource("/doc/pdf/P8X32A-Web-PropellerManual-v1.2_0.pdf");
+}
+
+void MainWindow::propellerDatasheet()
+{
+    openFileResource("/doc/pdf/P8X32A-Propeller-Datasheet-v1.4.0_0.pdf");
+}
+
+void MainWindow::about()
+{
+    QString version = QString(QCoreApplication::applicationName() 
+                     + " v" + QCoreApplication::applicationVersion()
+                     );
+    QMessageBox::about(this, tr("About") + " " + QCoreApplication::applicationName(),
+           "<h2>" + version + "</h2>"
+           "<p>PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.</p>"
+           "<p>Use it for writing Spin code, downloading programs to your Propeller board, and debugging your applications with the built-in serial terminal.<p>"
+           "<p>PropellerIDE is built in Qt and is fully cross-platform.</p>"
+
+           "<h3>Credits</h3>"
+           "<p>Copyright &copy; 2014-2015 by Parallax, Inc. "
+           "Developed by LameStation LLC in collaboration with Parallax. Originally created by Steve Denson.</p>"
+           "<p>PropellerIDE is free software, released under the GPLv3 license.</p>"
+           );
+}
+
+void MainWindow::showMessage(const QString & message)
+{
+    statusBar()->showMessage(message, 2000);
 }

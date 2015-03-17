@@ -1,4 +1,4 @@
-![the hat](gfx/propellerhat.png) PropellerIDE [![Build Status](https://travis-ci.org/parallaxinc/PropellerIDE.svg?branch=master)](https://travis-ci.org/parallaxinc/PropellerIDE)
+![the hat](icons/propellerhat.png) PropellerIDE [![Build Status](https://travis-ci.org/parallaxinc/PropellerIDE.svg?branch=master)](https://travis-ci.org/parallaxinc/PropellerIDE)
 ============
 
 PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.
@@ -52,17 +52,17 @@ PropellerIDE is written in C++ with Qt.
 
 ## Screenshots
 
-![classic theme](gfx/screenshots/classic.png "Classic theme")
+![classic theme](icons/screenshots/classic.png "Classic theme")
 
-![ice theme](gfx/screenshots/ice.png "Ice theme")
+![ice theme](icons/screenshots/ice.png "Ice theme")
 
 ## Building
 
 ### Dependencies
 
-PropellerIDE requires at least Qt5.2. Windows packaging
-requires Inno Setup 5 with preprocessor support. Build
-and release tools require Python 2.7.
+* PropellerIDE requires at least Qt5.2.
+* Windows packaging requires Inno Setup 5 with preprocessor support. 
+* Build and release tools require Python 2.7.
 
 ### Targets
 
@@ -72,17 +72,32 @@ Type `make help` to see a list of available package targets.
 $ make help
 Usage:    make [TYPE]
 
-Enter package type to build. Options:
+Enter target type to build. Options:
 
-   win    windows installer
-   mac    mac bundle
-   deb    debian package
-   rpi    debian package for Raspberry Pi
+   checkout     initialize child repositories
+
+   win          windows installer
+   mac          mac bundle
+   deb          debian package
+   rpi          debian package for Raspberry Pi
 
    no parameter builds only the binaries
 ```
 
-### Linux
+### Debian
+
+These instructions assume that you are building on an Ubuntu variant.
+
+There is a bug in QSerialPortInfo that results in a memory leak in Qt5.2.1 on POSIX
+systems. You will need a minimum of Qt5.3 which is only available on Ubuntu as of
+14.10.
+
+Add the Utopic Unicorn sources to your `/etc/apt/sources.list` if you are on 14.04
+or earlier.
+
+```
+deb http://cz.archive.ubuntu.com/ubuntu utopic main 
+```
 
 Run an update to ensure your apt repositories are up-to-date.
 
@@ -93,7 +108,7 @@ sudo apt-get update
 Install the required dependencies.
 
 ```
-sudo apt-get install git make g++ qt5-default zlib1g-dev
+sudo apt-get install git make g++ qt5-default libqt5serialport5 zlib1g-dev libudev-dev
 ```
 
 Checkout the project.
@@ -101,7 +116,6 @@ Checkout the project.
 ```
 git clone https://github.com/lamestation/PropellerIDE.git PropellerIDE
 cd PropellerIDE
-make checkout
 ```
 
 Type `make deb` in the project root to build a Debian package.
@@ -135,14 +149,7 @@ C:\Qt\Tools\mingw482_32\bin;C:\Qt\5.3\mingw482_32\bin;C:\Program Files (x86)\Inn
 Open the PowerShell. The `make` command on Windows is `mingw32-make.exe`. Add the `win` parameter to build a Windows installer.
 
 ```
-mingw32-make.exe checkout
 mingw32-make.exe win
-```
-
-Add `clean` to clean up old build files.
-
-```
-mingw32-make.exe clean
 ```
 
 PropellerIDE has been built on Windows 7 and 8.
@@ -160,7 +167,6 @@ xcode-select --install
 Type `make mac` to create an app bundle and DMG package for distribution.
 
 ```
-make checkout
 make mac
 ```
 
@@ -190,12 +196,20 @@ sudo apt-get update
 sudo apt-get install qt5-default qt5-qmake libegl1-mesa libgles2-mesa
 ```
 
-Finally, build a deb file as you would on Linux:
+Finally, use the build the `rpi` target to create a Debian package for Raspberry Pi.
 
 ```
-make checkout
 make rpi
 ```
+
+## Cleaning
+
+Use the `clean` on all platforms to clean up old build files.
+
+## Installing
+
+All build targets output packages in the `staging/` directory.
+
 
 And install:
 

@@ -1,6 +1,5 @@
 #include "ReferenceTree.h"
 
-
 ReferenceTree::ReferenceTree(
         const QString & name,
         ColorScheme::Color colorkey,

@@ -1,35 +1,32 @@
 #pragma once
 
-#include <iostream>
-#include <exception>
-
-#include <stdio.h>
-
 #include <QIcon>
 #include <QMainWindow>
 #include <QSplitter>
 #include <QPlainTextEdit> 
 #include <QTreeView> 
+#include <QDesktopServices> 
+#include <QDirIterator> 
 
-#include "Builder.h"
+#include "ui_mainwindow.h"
+
 #include "SpinParser.h"
-
 #include "treemodel.h"
-
-#include "PortListener.h"
-#include "qext/qextserialport.h"
-#include "Terminal.h"
 #include "Preferences.h"
 #include "editor.h"
 #include "PortConnectionMonitor.h"
-#include "StatusDialog.h"
 #include "spinzip/zipper.h"
 #include "ReferenceTree.h"
 #include "FileManager.h"
+#include "BuildManager.h"
+#include "Finder.h"
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+
+private:
+    Ui::MainWindow ui;
 
 public:
     MainWindow(QWidget *parent = 0);
@@ -38,27 +35,8 @@ public:
     QSplitter   *leftSplit;
     QSplitter   *findSplit;
 
-public:
-    QTextDocument::FindFlag getFlags(int prev = 0);
-
-    bool showBeginMessage(QString type);
-    bool showEndMessage(QString type);
-
 public slots:
-    void findChanged(QString text);
-    void findClicked();
-    void findNextClicked();
-    void findPrevClicked();
-    void replaceClicked();
-    void replaceNextClicked();
-    void replacePrevClicked();
-    void replaceAllClicked();
-
-signals:
-    void doPortEnumerate();
-    void updateBackgroundColors();
-
-public slots:
+    void showMessage(const QString & message);
 
     // file menu
     void newProjectTrees();
@@ -71,6 +49,7 @@ public slots:
     void fontSmaller();
 
     // help
+    void openFileResource(QString const & resource);
     void propellerManual();
     void propellerDatasheet();
     void about();
@@ -80,8 +59,7 @@ public slots:
     void projectTreeClicked(QModelIndex index);
     void referenceTreeClicked(QModelIndex index);
     void setCurrentPort(int index);
-    void connectButton(bool show = true);
-    void terminalClosed();
+    void spawnTerminal();
     void setProject();
     void preferences();
     void preferencesAccepted();
@@ -89,14 +67,11 @@ public slots:
     void programBurnEE();
     void programRun();
     void programDebug();
-    void findHardware(bool showFoundBox = true);
+    void viewInfo();
     void closeEvent(QCloseEvent *event);
     void quitProgram();
 
     void enumeratePorts();
-    void enumeratePortsEvent();
-    void showFindFrame();
-    void hideFindFrame();
     void showBrowser();
 
     void addRecentFile(const QString &fileName);
@@ -111,10 +86,7 @@ private:
     void clearSession();
 
     void getApplicationSettings();
-    int  checkCompilerInfo();
-    QStringList getCompilerParameters(QString compilerOptions);
     void checkAndSaveFiles();
-    Editor *createEditor();
 
     bool eventFilter(QObject *target, QEvent *event);
 
@@ -124,17 +96,12 @@ private:
     void setupProjectMenu();
     void setupHelpMenu();
 
-    void setupToolBars();
     void setupProjectTools(QSplitter *vsplit);
-    void addToolButton(QToolBar *bar, QToolButton *btn, QString imgfile);
     void openTreeFile(QString fileName);
     void updateProjectTree(QString fileName);
     void updateSpinProjectTree(QString fileName);
     void updateReferenceTree(QString fileName, QString text);
     void updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level);
-
-    void checkConfigSerialPort();
-    QFrame *newFindFrame(QSplitter *split);
 
     typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
     int  runCompiler(COMPILE_TYPE type);
@@ -142,66 +109,27 @@ private:
 
     QString     spinCompiler;
     QString     spinIncludes;
+    QString     spinTerminal;
     QString     spinLoader;
 
-    QToolBar    *fileToolBar;
-    QToolBar    *propToolBar;
-    QToolBar    *debugToolBar;
     QToolBar    *ctrlToolBar;
 
-    enum { MaxRecentFiles = 10 };
-    QAction *recentFileActs[MaxRecentFiles];
-    QAction *separatorFileAct;
-
-    QString     findText;
-    QString     replaceText;
-    bool        showFindMessage(QString type);
-    
-    QHBoxLayout *findLayout;
-    QLineEdit   *findEdit;
-    QLabel      *findLabel;
-    QToolButton *findPreviousBtn;
-    QToolButton *findNextBtn;
-    QToolButton *wholeWordFilterBtn;
-    QToolButton *caseSensitiveFilterBtn;
-    QToolButton *doneFindBtn;
-    
-    QHBoxLayout *replaceLayout;
-    QLineEdit   *replaceEdit;
-    QLabel      *replaceLabel;
-    QToolButton *replacePreviousBtn;
-    QToolButton *replaceNextBtn;
-    QToolButton *replaceAllBtn;
+    QList<QAction *> recentFiles;
 
     QVBoxLayout *verticalLayout;
     QFrame      *findFrame;
 
-    /* last find position */
-    int         findPosition;
-    int         wasClicked;
+    Finder * finder;
+    FileManager     *editorTabs;
+    BuildManager    builder;
 
-    FileManager *editorTabs;
-
-    QString     projectFile;
+    QString         projectFile;
     ReferenceTree   *projectTree;
     ReferenceTree   *referenceTree;
     TreeModel       *projectModel;
     TreeModel       *referenceModel;
 
-    Builder     builder;
-    QStatusBar  statusbar;
-
-    QComboBox   *cbBoard;
     QComboBox   *cbPort;
-    QToolButton *btnConnected;
-    PortListener *portListener;
-    Terminal    *term;
-    int         termXpos;
-    int         termYpos;
-
-    QProcess    *proc;
-
-    QString compileResult;
 
     PortConnectionMonitor *portConnectionMonitor;
 
@@ -210,7 +138,6 @@ private:
     enum { LoadRunHubRam = 1 };
     enum { LoadRunEeprom = 2 };
 
-    StatusDialog *statusDialog;
     QMutex      statusMutex;
     bool        statusDone;
 

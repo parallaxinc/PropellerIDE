@@ -1,15 +1,10 @@
 #include "editor.h"
-#include "Preferences.h"
 
 #include <QToolTip>
 #include <QRect>
 #include <QColor>
 #include <QPainter>
 #include <QApplication>
-
-/* C and Spin highlighters prove more languages can be added easily.
- */
-#include "SpinHighlighter.h"
 
 #include "mainwindow.h"
 #define MAINWINDOW MainWindow
@@ -70,7 +65,7 @@ void Editor::setHighlights()
         delete highlighter;
         highlighter = 0;
     }
-    highlighter = new SpinHighlighter(this->document());
+    highlighter = new Highlighter(this->document());
     isSpin = true;
 }
 

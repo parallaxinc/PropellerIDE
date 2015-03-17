@@ -25,9 +25,10 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <QLabel>
+
 #include "ColorScheme.h"
 
-#include <QLabel>
 
 class ColorChooser : public QLabel
 {

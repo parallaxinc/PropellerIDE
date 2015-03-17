@@ -1,0 +1,67 @@
+{
+    "info": {
+        "org": "Parallax Inc.",
+        "name": "PropellerIDE",
+        "package": "propelleride",
+        "url": "http://developer.parallax.com/projects/propelleride/",
+        "maintainer": "LameStation",
+        "email": "contact@lamestation.com",
+        "copyright": "2014-2015",
+        "license": "GPLv3",
+        "tagline": "The fun Spin editor",
+        "description": "An easy-to-use cross-platform development tool for the Parallax Propeller microcontroller."
+    },
+    "target": {
+        "deb": {
+            "depends": "libftdi1",
+            "categories": "Development;IDE",
+            "section": "Applications/Editors"
+        },
+        "mac": {
+            "category": "public.app-category.developer-tools"
+        }
+    },
+    "repo": [
+        {
+            "path": "propelleride",
+            "url": "https://github.com/bweir/PropellerIDE.git",
+            "branch": "master",
+            "type": "qmake",
+            "root": "src",
+            "master": true,
+            "icon": "icons/icon-new.png"
+        },
+        {
+            "path": "openspin",
+            "url": "https://github.com/bweir/OpenSpin.git",
+            "branch": "master",
+            "type": "qmake",
+            "root": "qmake"
+        },
+        {
+            "path": "p1load",
+            "url": "https://github.com/bweir/p1load.git",
+            "branch": "master",
+            "type": "qmake",
+            "root": "qmake"
+        },
+        {
+            "path": "propterm",
+            "url": "https://github.com/parallaxinc/propterm.git",
+            "branch": "master",
+            "type": "qmake"
+        },
+        {
+            "path": "library",
+            "url": "https://github.com/parallaxinc/spin-standard-library.git",
+            "branch": "master",
+            "type": "dir"
+        },
+        {
+            "path": "doc",
+            "url": "https://github.com/parallaxinc/spin-docs.git",
+            "branch": "master",
+            "type": "dir"
+        }
+    ]
+}

@@ -1,7 +1,11 @@
-#include "ui_status.h"
-#include "ColorScheme.h"
+#pragma once
+
 #include <QKeyEvent>
 #include <Qt>
+
+#include "ui_status.h"
+
+#include "ColorScheme.h"
 
 class Status : public QFrame
 {

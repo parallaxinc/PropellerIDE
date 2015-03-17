@@ -1,3 +1,11 @@
+#include "ColorChooser.h"
+
+#include <QColor>
+#include <QPixmap>
+#include <QPainter>
+#include <QMouseEvent>
+#include <QColorDialog>
+
 /*
  * This source file is part of EasyPaint.
  *
@@ -22,15 +30,6 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
-#include "ColorChooser.h"
-
-#include <QColor>
-#include <QPixmap>
-#include <QPainter>
-#include <QMouseEvent>
-#include <QColorDialog>
-
 
 ColorChooser::ColorChooser(ColorScheme::Color newkey, QString hex, QWidget *parent) :
     QLabel(parent)

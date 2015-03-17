@@ -1,3 +1,5 @@
+#pragma once
+
 #include <QLabel>
 #include <QMouseEvent>
 #include <QString>
