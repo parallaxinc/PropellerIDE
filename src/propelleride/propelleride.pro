@@ -72,8 +72,9 @@ FORMS += \
     forms/status.ui \
 
 RESOURCES += \
-    icons/icons.qrc \
     fonts/fonts.qrc \
+    icons/icons.qrc \
+    languages/languages.qrc \
     themes/themes.qrc \
 
 CODECFORTR = UTF-8
