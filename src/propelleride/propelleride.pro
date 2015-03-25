@@ -10,61 +10,66 @@ QT += gui widgets serialport
 }
 
 CONFIG -= debug_and_release app_bundle
+CONFIG += debug
 
-INCLUDEPATH += . ..
 
 LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
+INCLUDEPATH += . ..
+
+LIBS += -L../memorymap/memorymap/  -lmemorymap
+LIBS += -L../memorymap/QHexEdit -lQHexEdit
+INCLUDEPATH += ../memorymap/memorymap/ ../memorymap/
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp \
-    Highlighter.cpp \
-    treemodel.cpp \
-    treeitem.cpp \
+    BuildManager.cpp \
     clickable.cpp \
-    PathSelector.cpp \
-    Preferences.cpp \
-    PortConnectionMonitor.cpp \
-    ReferenceTree.cpp \
-    editor.cpp \
-    status.cpp \
-    SpinParser.cpp \
     ColorScheme.cpp \
     ColorChooser.cpp \
+    editor.cpp \
     FileManager.cpp \
-    BuildManager.cpp \
-    Language.cpp \
     Finder.cpp \
+    Highlighter.cpp \
+    Language.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    PathSelector.cpp \
+    PortConnectionMonitor.cpp \
+    Preferences.cpp \
+    ReferenceTree.cpp \
+    SpinParser.cpp \
+    status.cpp \
+    treemodel.cpp \
+    treeitem.cpp \
 
 HEADERS  += \
-    mainwindow.h \
-    Highlighter.h \
-    treemodel.h \
-    treeitem.h \
+    BuildManager.h \
     clickable.h \
-    PathSelector.h \
-    Preferences.h \
-    PortConnectionMonitor.h \
-    ReferenceTree.h \
-    editor.h \
-    SpinParser.h \
-    status.h \
     ColorChooser.h \
     ColorScheme.h \
-    templates/Singleton.h \
+    editor.h \
     FileManager.h \
-    BuildManager.h \
-    Language.h \
     Finder.h \
+    Highlighter.h \
+    Language.h \
+    mainwindow.h \
+    PathSelector.h \
+    PortConnectionMonitor.h \
+    Preferences.h \
+    ReferenceTree.h \
+    SpinParser.h \
+    status.h \
+    treeitem.h \
+    treemodel.h \
+    templates/Singleton.h \
 
 OTHER_FILES +=
 
 FORMS += \
+    forms/about.ui \
     forms/mainwindow.ui \
-    forms/TermPrefs.ui \
     forms/finder.ui \
     forms/finder_flat.ui \
-    forms/status.ui
+    forms/status.ui \
 
 RESOURCES += \
     icons/icons.qrc \

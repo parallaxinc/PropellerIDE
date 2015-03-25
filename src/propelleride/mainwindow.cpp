@@ -8,6 +8,10 @@
 #include <QSerialPortInfo>
 #include <QProcess>
 
+#include "ui_about.h"
+
+#include "memorymap.h"
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMutex::Recursive), statusDone(true)
 {
     ui.setupUi(this);
@@ -92,9 +96,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     connect(ui.actionTerminal,  SIGNAL(triggered()), this, SLOT(spawnTerminal()));
 
     // Help Menu
-    connect(ui.actionPropeller_Datasheet,   SIGNAL(triggered()), this, SLOT(propellerDatasheet()));
-    connect(ui.actionPropeller_Manual,      SIGNAL(triggered()), this, SLOT(propellerManual()));
-    connect(ui.action_About,                SIGNAL(triggered()), this, SLOT(about()));
+    connect(ui.actionPropeller_Quick_Reference, SIGNAL(triggered()), this, SLOT(propellerQuickReference()));
+    connect(ui.actionPropeller_Datasheet,       SIGNAL(triggered()), this, SLOT(propellerDatasheet()));
+    connect(ui.actionPropeller_Manual,          SIGNAL(triggered()), this, SLOT(propellerManual()));
+    connect(ui.action_About,                    SIGNAL(triggered()), this, SLOT(about()));
 
     // Toolbar Extras
     cbPort = new QComboBox(this);
@@ -579,8 +584,43 @@ void MainWindow::setStatusDone(bool done)
 
 void MainWindow::viewInfo()
 {
+    MemoryMap * map = new MemoryMap();
+    map->setAttribute(Qt::WA_DeleteOnClose, true);
+    connect(propDialog,SIGNAL(updateColors()),map,SLOT(updateColors()));
+    connect(propDialog,SIGNAL(updateFonts()),map,SLOT(updateColors()));
+    connect(map,SIGNAL(getRecolor(QWidget *)),this,SLOT(recolorInfo(QWidget *)));
 
+    connect(map,SIGNAL(run(QByteArray)), this, SLOT(programRun()));
+    connect(map,SIGNAL(write(QByteArray)), this, SLOT(programBurnEE()));
 
+    recolorInfo(map);
+
+    QString filename = editorTabs->tabToolTip(editorTabs->currentIndex());
+    programBuild();
+    QFileInfo fi(filename);
+    QString binaryname = fi.completeBaseName()+".binary";
+    binaryname = fi.dir().filePath(binaryname);
+    qDebug() << binaryname;
+
+    map->loadFile(binaryname);
+
+    map->show();
+}
+
+void MainWindow::recolorInfo(QWidget * widget)
+{
+    ColorScheme * theme = &Singleton<ColorScheme>::Instance();
+    MemoryMap * map = (MemoryMap *) widget;
+    map->recolor(
+            theme->getColor(ColorScheme::PubBG),
+            theme->getColor(ColorScheme::DatBG),
+            theme->getColor(ColorScheme::SyntaxFunctions),
+            theme->getColor(ColorScheme::SyntaxFunctions),
+            theme->getColor(ColorScheme::ConBG),
+            theme->getColor(ColorScheme::SyntaxComments),
+            theme->getColor(ColorScheme::SyntaxText)
+           );
+    map->setFont(theme->getFont());
 }
 
 void MainWindow::findMultilineComment(QPoint point)
@@ -1062,22 +1102,17 @@ void MainWindow::propellerDatasheet()
     openFileResource("/doc/pdf/P8X32A-Propeller-Datasheet-v1.4.0_0.pdf");
 }
 
+void MainWindow::propellerQuickReference()
+{
+    openFileResource("/doc/pdf/QuickReference-v15.pdf");
+}
+
 void MainWindow::about()
 {
-    QString version = QString(QCoreApplication::applicationName() 
-                     + " v" + QCoreApplication::applicationVersion()
-                     );
-    QMessageBox::about(this, tr("About") + " " + QCoreApplication::applicationName(),
-           "<h2>" + version + "</h2>"
-           "<p>PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.</p>"
-           "<p>Use it for writing Spin code, downloading programs to your Propeller board, and debugging your applications with the built-in serial terminal.<p>"
-           "<p>PropellerIDE is built in Qt and is fully cross-platform.</p>"
-
-           "<h3>Credits</h3>"
-           "<p>Copyright &copy; 2014-2015 by Parallax, Inc. "
-           "Developed by LameStation LLC in collaboration with Parallax. Originally created by Steve Denson.</p>"
-           "<p>PropellerIDE is free software, released under the GPLv3 license.</p>"
-           );
+    QDialog * about = new QDialog();
+    Ui::About ui;
+    ui.setupUi(about);
+    about->show();
 }
 
 void MainWindow::showMessage(const QString & message)

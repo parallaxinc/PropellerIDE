@@ -91,12 +91,12 @@ int FileManager::isFileEmpty(int index)
         return 0;
 }
 
-void FileManager::openFile(const QString & fileName)
+int FileManager::openFile(const QString & fileName)
 {
     qDebug() << "FileManager::openFile(" << fileName << ")";
 
     if (fileName.isEmpty())
-        return;
+        return 1;
 
     QFile file(fileName);
     if (!file.open(QFile::ReadOnly | QFile::Text))
@@ -105,11 +105,11 @@ void FileManager::openFile(const QString & fileName)
                              tr("Cannot read file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
-        return;
+        return 1;
     }
 
     if (isFileOpen(fileName))
-        return;
+        return 1;
 
     int index;
     if (isFileEmpty(currentIndex()))
@@ -131,6 +131,7 @@ void FileManager::openFile(const QString & fileName)
 
     emit fileUpdated(index);
     emit sendMessage(tr("File opened successfully: %1").arg(fileName));
+    return 0;
 }
 
 

@@ -1,0 +1,3 @@
+[submodule "src/memorymap"]
+	path = src/memorymap
+	url = https://github.com/parallaxinc/memorymap.git

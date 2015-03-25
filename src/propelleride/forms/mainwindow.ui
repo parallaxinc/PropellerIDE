@@ -98,8 +98,9 @@
     </property>
     <addaction name="actionHelp_Contents"/>
     <addaction name="separator"/>
-    <addaction name="actionPropeller_Datasheet"/>
     <addaction name="actionPropeller_Manual"/>
+    <addaction name="actionPropeller_Datasheet"/>
+    <addaction name="actionPropeller_Quick_Reference"/>
     <addaction name="separator"/>
     <addaction name="action_About"/>
    </widget>
@@ -579,7 +580,7 @@
   </action>
   <action name="actionView_Info">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset resource="../icons/icons.qrc">
@@ -707,6 +708,18 @@
    </property>
    <property name="statusTip">
     <string>View information about this program</string>
+   </property>
+  </action>
+  <action name="actionPropeller_Quick_Reference">
+   <property name="icon">
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/help-datasheet.png</normaloff>:/icons/help-datasheet.png</iconset>
+   </property>
+   <property name="text">
+    <string>Propeller &amp;Quick Reference</string>
+   </property>
+   <property name="statusTip">
+    <string>View the Propeller quick reference chart</string>
    </property>
   </action>
  </widget>

@@ -2,6 +2,7 @@ TEMPLATE  = subdirs
 
 SUBDIRS = \
     spinzip \
+    memorymap \
     propelleride
 
-propelleride.depends = spinzip
+propelleride.depends = spinzip memorymap

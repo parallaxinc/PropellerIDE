@@ -52,6 +52,7 @@ public slots:
     void openFileResource(QString const & resource);
     void propellerManual();
     void propellerDatasheet();
+    void propellerQuickReference();
     void about();
 
     void findMultilineComment(QPoint point);
@@ -68,6 +69,7 @@ public slots:
     void programRun();
     void programDebug();
     void viewInfo();
+    void recolorInfo(QWidget * widget);
     void closeEvent(QCloseEvent *event);
     void quitProgram();
 
