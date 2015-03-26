@@ -12,7 +12,7 @@ before_install:
 - sudo apt-get install zlib1g-dev libudev-dev cppcheck 
 - qmake -v
 script:
-- pushd src
+- git submodule update --init --recursive
 - qmake
 - make -j4
 after_script:
