@@ -10,9 +10,9 @@ before_install:
 - sudo apt-get update
 - sudo apt-get install qt5-default qt5-qmake qtbase5-dev-tools qtchooser qttools5-dev qtbase5-dev libgles2-mesa-dev libqt5gui5 libqt5serialport5-dev libqt5printsupport5 libqt5widgets5 libgles2-mesa libgl1-mesa-dev libgl1-mesa-glx libglapi-mesa libegl1-mesa-dev libpango-1.0-0
 - sudo apt-get install zlib1g-dev libudev-dev cppcheck 
+- git submodule update --init --recursive
 - qmake -v
 script:
-- git submodule update --init --recursive
 - qmake
 - make -j4
 after_script:
@@ -22,7 +22,7 @@ deploy:
   api_key:
     secure: pXTKmYwykeSD1FSVFvkfR4q91X9AVkNPS2/FKDs+CnWDgFJyDrxsD8D596fLKA3OwbLD7QkXTBj4alhmj7OmcIf56ZZXlKy/O47OfC4JgHjkWYGIbE6CR/UpLRnGS251/zs8NjypnLSk+puiw1lHUqeIBqYGGCzkBN19uaGiyUc=
   file_glob: true
-  file: staging/propelleride-*.deb
+  file: build/staging/propelleride-*.deb
   skip_cleanup: true
   on:
     repo: parallaxinc/PropellerIDE
