@@ -40,7 +40,7 @@
         },
         {
             "path": "propman",
-            "url": "https://github.com/parallaxinc/propman.git",
+            "url": "https://github.com/parallaxinc/PropellerManager.git",
             "branch": "master",
             "type": "qmake"
         },
