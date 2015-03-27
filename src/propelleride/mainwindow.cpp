@@ -525,11 +525,11 @@ int  MainWindow::loadProgram(int type)
 
     switch (type) {
         case MainWindow::LoadRunHubRam:
-            copts += "-r -p"+cbPort->currentText();
+            copts += "-d"+cbPort->currentText();
             rc = builder.loadProgram(copts);
             break;
         case MainWindow::LoadRunEeprom:
-            copts += "-e -p"+cbPort->currentText();
+            copts += "-w -d"+cbPort->currentText();
             rc = builder.loadProgram(copts);
             break;
         default:
@@ -586,6 +586,7 @@ void MainWindow::viewInfo()
 {
     MemoryMap * map = new MemoryMap();
     map->setAttribute(Qt::WA_DeleteOnClose, true);
+
     connect(propDialog,SIGNAL(updateColors()),map,SLOT(updateColors()));
     connect(propDialog,SIGNAL(updateFonts()),map,SLOT(updateColors()));
     connect(map,SIGNAL(getRecolor(QWidget *)),this,SLOT(recolorInfo(QWidget *)));
@@ -595,10 +596,14 @@ void MainWindow::viewInfo()
 
     recolorInfo(map);
 
-    QString filename = editorTabs->tabToolTip(editorTabs->currentIndex());
+    int index = editorTabs->currentIndex();
+    QString filename = editorTabs->tabToolTip(index);
     programBuild();
     QFileInfo fi(filename);
+
     QString binaryname = fi.completeBaseName()+".binary";
+    map->setWindowTitle(binaryname + " - " + tr("Memory Map"));
+
     binaryname = fi.dir().filePath(binaryname);
     qDebug() << binaryname;
 

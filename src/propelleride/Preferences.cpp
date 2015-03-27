@@ -316,7 +316,7 @@ void Preferences::browseLoader()
 {
     loaderpath->browsePath(
             tr("Select Loader"),
-            "Loader (p1load* p2load*);;BST Loader (bstl*)",
+            "propman (propman*);;p1load (p1load* p2load*);;BST Loader (bstl*)",
             false
         );
 }

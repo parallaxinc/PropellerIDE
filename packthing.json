@@ -39,11 +39,10 @@
             "root": "qmake"
         },
         {
-            "path": "p1load",
-            "url": "https://github.com/bweir/p1load.git",
+            "path": "propman",
+            "url": "https://github.com/parallaxinc/propman.git",
             "branch": "master",
-            "type": "qmake",
-            "root": "qmake"
+            "type": "qmake"
         },
         {
             "path": "propterm",
