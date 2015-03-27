@@ -9,6 +9,9 @@
 #include "mainwindow.h"
 #define MAINWINDOW MainWindow
 
+#include <QLinearGradient>
+#include <QPlainTextEdit>
+
 Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 {
     mainwindow = parent;
@@ -29,7 +32,7 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     highlighter = 0;
     setHighlights();
     setMouseTracking(true);
-    setCenterOnScroll(true);
+    //    setCenterOnScroll(true);
     setWordWrapMode(QTextOption::NoWrap);
 
     currentTheme = &Singleton<ColorScheme>::Instance();
@@ -597,23 +600,6 @@ int Editor::braceMatchColumn()
     return 1;
 }
 
-
-/**
- * This is the beginning of the AUTO_COMPLETE section of the editor.
- * It will only be enabled if SPIN_AUTOCOMPLETE is defined in the .pro file.
- * SPIN_AUTOCOMPLETE is also known as "spinny-sense", thank you Peter Parker.
- *
- * SPIN_AUTOCOMPLETE works like this:
- * - Press dot (.) in any non-comment area of the source to show
- *   OBJ, CON, PUB, PRI, VAR, and DAT references.
- *   If SPIN_AUTOCON is defined, press # in the editor to show CON values.
- * - Press escape to not add any item listed.
- * - Press dot (.) to add a dot.
- * - Scroll to the item you want and press enter to add that item.
- *   Tab to select is not available at the moment. Later, "tab" may be used
- *   instead of enter if the cbAuto is a sub-class of QComboBox.
- */
-
 QString Editor::spinPrune(QString s)
 {
     QRegExp re("\\b(byte|long|word|org)\\b");
@@ -711,14 +697,9 @@ int Editor::addAutoItem(QString type, QString s)
 void Editor::spinAutoShow(int width)
 {
     QPoint pt = keyPopPoint(textCursor());
-    /*
-     * Can't seem to control width without some strange after-effect.
-     * This is how it would be done though.
-     */
     int fw = cbAuto->fontMetrics().width(QLatin1Char('9'));
     int fh = cbAuto->fontMetrics().height();
     cbAuto->setGeometry(pt.x(), pt.y(), (width+10)*fw, fh*10);
-     //
 
     expectAutoComplete = true;
     cbAuto->move(pt.x(), pt.y());
@@ -1023,11 +1004,11 @@ int Editor::tabBlockShift()
 
         /* indent list */
         QString text;
-        
+
         for(int n = 1; n <= mylist.length(); n++) {
             QString s = mylist[n-1];
             int size = s.length();
-            
+
             /* ignore empty last line */
             if (size == 0 && n == mylist.length()) break;
 
@@ -1036,7 +1017,7 @@ int Editor::tabBlockShift()
             else s.replace(QRegExp("^ *"), "");                     // remove leading spaces
 
             size -= s.length();                                     // size is now delta
-                                                                    // inc/dec indent -ve/+ve
+            // inc/dec indent -ve/+ve
             /* rebuild block */
             text += s;
             if (n < mylist.length()) {
@@ -1096,51 +1077,6 @@ int Editor::tabBlockShift()
     return 1;
 }
 
-
-/* Code below here is taken from the Nokia CodeEditor example */
-
-/****************************************************************************
-**
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
-** This file is part of the examples of the Qt Toolkit.
-**
-** $QT_BEGIN_LICENSE:BSD$
-** You may use this file under the terms of the BSD license as follows:
-**
-** "Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**   * Redistributions of source code must retain the above copyright
-**     notice, this list of conditions and the following disclaimer.
-**   * Redistributions in binary form must reproduce the above copyright
-**     notice, this list of conditions and the following disclaimer in
-**     the documentation and/or other materials provided with the
-**     distribution.
-**   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
-**     the names of its contributors may be used to endorse or promote
-**     products derived from this software without specific prior written
-**     permission.
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-** $QT_END_LICENSE$
-**
-****************************************************************************/
-
-//![extraAreaWidth]
-
 int Editor::lineNumberAreaWidth()
 {
     int digits = 1;
@@ -1150,7 +1086,7 @@ int Editor::lineNumberAreaWidth()
         ++digits;
     }
 
-    int space = fontMetrics().width(' ')*(digits+2);
+    int space = fontMetrics().width(' ')*(digits+3);
 
     return space;
 }
@@ -1213,10 +1149,33 @@ void Editor::updateFonts()
     this->setFont(currentTheme->getFont());
 }
 
+void Editor::paintEvent(QPaintEvent *event) {
+    QPlainTextEdit::paintEvent(event);
+//    const QRect rect = event->rect();
+//    qDebug() << "RECT" << rect;
+//
+//    QPainter p(viewport());
+//    p.setPen(QPen("gray"));
+//    p.drawLine(30, rect.top(), 30, rect.bottom());
+//
+//
+//    QFontMetrics font_metrics = QFontMetrics(currentTheme->getFont());
+//    int fw = font_metrics.width('X');
+//    int fh = font_metrics.height();
+//
+//    int longest_line = 20;
+//    int from_top = 0;
+//
+//    for (int i = 0; i < longest_line; i++)
+//    {
+//        int the_x = (i * 4 * fw);
+//        p.drawLine(the_x, from_top, the_x, from_top + fh);
+//    }
+}
+
 void Editor::updateBackgroundColors()
 {
     QList<QTextEdit::ExtraSelection> OurExtraSelections;
-
     QTextEdit::ExtraSelection selection;
     selection.format.setBackground(colors[ColorScheme::ConBG].color);
     selection.format.setProperty(QTextFormat::FullWidthSelection, true);
@@ -1226,20 +1185,13 @@ void Editor::updateBackgroundColors()
 
     int prevColor = 0;
     bool bAlt = false;
-    int nInComment = 0;
     QTextBlock currBlock = document()->firstBlock();
+
+    QColor newBlockColor = colors[ColorScheme::ConBG].color;
+
     while (1)
     {
         ColorScheme::Color newColor = ColorScheme::Invalid;
-
-        if ( currBlock.text().contains('{') )
-        {
-            nInComment++;
-        }
-        if ( currBlock.text().contains('}') && nInComment > 0 )
-        {
-            nInComment--;
-        }
 
         if ( currBlock.text().startsWith("CON", Qt::CaseInsensitive) )
         {
@@ -1266,15 +1218,9 @@ void Editor::updateBackgroundColors()
             newColor = ColorScheme::DatBG;
         }
 
-        if (nInComment > 0
-        || (currBlock.text().length() > 3 && QRegExp("\\w").exactMatch(QString(currBlock.text()[3]))))
-        {
-            newColor = ColorScheme::Invalid;
-        }
-
         if (newColor != ColorScheme::Invalid)
         {
-            QColor newBlockColor = colors[newColor].color;
+            newBlockColor = colors[newColor].color;
             if (newColor == prevColor)
             {
                 if (!bAlt)
@@ -1287,13 +1233,28 @@ void Editor::updateBackgroundColors()
             {
                 bAlt = false;
             }
-            OurExtraSelections.append(selection);
             selection.format.setBackground(newBlockColor);
-            selection.cursor.movePosition(QTextCursor::StartOfBlock, QTextCursor::MoveAnchor);
             prevColor = newColor;
         }
 
+        selection.cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
         selection.cursor.movePosition(QTextCursor::NextBlock, QTextCursor::KeepAnchor);
+        OurExtraSelections.append(selection);
+
+        if (currBlock == textCursor().block())
+        {
+            QTextEdit::ExtraSelection line;
+            line.cursor = textCursor();
+            line.cursor.clearSelection();
+            line.cursor.movePosition(QTextCursor::StartOfLine);
+            line.cursor.movePosition(QTextCursor::NextBlock,QTextCursor::KeepAnchor);
+            if (newBlockColor.lightness() < 128)
+                line.format.setBackground(newBlockColor.lighter(125));
+            else
+                line.format.setBackground(newBlockColor.darker(105));
+            line.format.setProperty(QTextFormat::FullWidthSelection, true);
+            OurExtraSelections.append(line);
+        }
 
         if (currBlock == document()->lastBlock())
         {
@@ -1302,10 +1263,6 @@ void Editor::updateBackgroundColors()
 
         currBlock = currBlock.next();
     }
-
-    selection.cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-    OurExtraSelections.append(selection);
-
     setExtraSelections(OurExtraSelections);
 }
 
@@ -1313,8 +1270,32 @@ void Editor::updateBackgroundColors()
 void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(lineNumberArea);
-    painter.fillRect(event->rect(), currentTheme->getColor(ColorScheme::ConBG).darker(105));
-    QColor pen = currentTheme->getColor(ColorScheme::SyntaxText);
+
+    QColor bgcolor = currentTheme->getColor(ColorScheme::ConBG);
+    painter.fillRect(event->rect(), bgcolor.darker(105));
+
+    int x1 = event->rect().left();
+    int x2 = x1 + 15;
+    int y = event->rect().top();
+
+    QLinearGradient gradient(x1, y, x2, y);
+    gradient.setColorAt(0, bgcolor.darker(115));
+    gradient.setColorAt(1, bgcolor.darker(105));
+    painter.fillRect(event->rect(), gradient);
+
+    QColor pen;
+    int light = bgcolor.lightness();
+    if (light < 30)
+    {
+        pen = currentTheme->getColor(ColorScheme::SyntaxText).darker(150);
+    }
+    else
+    {
+        if (bgcolor.lightness() < 128)
+            pen = bgcolor.lighter(170);
+        else
+            pen = bgcolor.darker(170);
+    }
 
     QTextBlock block = firstVisibleBlock();
     int blockNumber = block.blockNumber();
@@ -1326,7 +1307,7 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
             QString number = QString::number(blockNumber + 1);
             painter.setPen(pen);
             painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
-                             Qt::AlignRight, number+" ");
+                    Qt::AlignRight, number+" ");
         }
 
         block = block.next();

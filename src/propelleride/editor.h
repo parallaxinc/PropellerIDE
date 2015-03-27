@@ -41,6 +41,10 @@ public slots:
     void setRedo(bool available);
     void setCopy(bool available);
 
+protected:
+    void paintEvent(QPaintEvent *event);
+
+
 private:
     bool canUndo;
     bool canRedo;
