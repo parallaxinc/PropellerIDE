@@ -119,5 +119,5 @@ QStringList Language::listFunctions()
 
 Language::Language() 
 {
-    loadLanguage("languages/spin.json");
+    loadLanguage(":/languages/spin.json");
 }

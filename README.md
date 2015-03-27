@@ -5,47 +5,49 @@ PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax
 
 Write Spin code, download programs to your Propeller board, and debug your applications with the built-in serial terminal.
 
-PropellerIDE is written in C++ with Qt.
-
 - [Download PropellerIDE](http://www.lamestation.com/propelleride)
 
-## Features
+## About
+
+PropellerIDE is designed to be more than just a code editor; it is a toolkit for building custom Propeller development environments that can be tailored to specific applications. Written in C++ with Qt, PropellerIDE can be configured to support specific programming languages, toolchains, or features as first-class components that feel built-in and well-integrated to the customer, but are really standalone components.
+
+### Features
 
 - Spin syntax highlighting, auto-complete, code suggestion, and auto-indent
 - Unicode editing support
-- Auto-detection of connected Propeller hardware
 - Collapsible sidebar with function and program views
-- Integrated serial terminal
+- Integrated serial terminal and memory map
+- Deeply integrated Propeller hardware tools
 - Customizable theming
 - Slick browser-style tab controls
 - Runs on Windows, Mac, Linux, and Raspberry Pi!
+- Built from standalone components can be embedded in custom applications using `packthing`
+- Easy to create custom distributions using [`packthing`
 
-## Project Roadmap
+### Project Roadmap
 
 #### Immediate focus
 
 * Improve overall code maintainability
 * Refactor components for better separation of concerns
-* Replace qextserialport with QSerialPort
 * Refactor widgets to use UI forms
 
 #### Long-term focus
 
-* Translation support
-* Multiple Propeller languages
+* Multiple Propeller languages: Spin, C, PropBasic, xBasic, Forth,...
 * Serial and wireless code download
 * New platforms: Android, ChromeBook, HTML5, iOS
+* Internationalization and Unicode support
+* Package management for deploying extensions
  
 #### Requested features (short list)
 
-* PropTool-style View Info widget
 * Alt-Drag to select text blocks
 * Colorful serial console formatting
 * Indent guides
 
 #### Features to support LameStation
 
-* Separate packaging tools from PropellerIDE repo and make standalone packaging toolchain
 * Clean up compiler output and add directory support
 * Integrated web help
 
@@ -55,37 +57,16 @@ PropellerIDE is written in C++ with Qt.
 
 ![ice theme](icons/screenshots/ice.png "Ice theme")
 
-## Building
-
-### Dependencies
+## Dependencies
 
 * PropellerIDE requires at least Qt5.2.
 * Windows packaging requires Inno Setup 5 with preprocessor support. 
 * Build and release tools require Python 2.7.
+* You will need Git; on Windows, download Git Shell from GitHub.
 
-### Targets
+## Build Environment
 
-Type `make help` to see a list of available package targets.
-
-```
-$ make help
-Usage:    make [TYPE]
-
-Enter target type to build. Options:
-
-   checkout     initialize child repositories
-
-   win          windows installer
-   mac          mac bundle
-   deb          debian package
-   rpi          debian package for Raspberry Pi
-
-   no parameter builds only the binaries
-```
-
-### Debian
-
-These instructions assume that you are building on an Ubuntu variant.
+### Ubuntu
 
 There is a bug in QSerialPortInfo that results in a memory leak in Qt5.2.1 on POSIX
 systems. You will need a minimum of Qt5.3 which is only available on Ubuntu as of
@@ -110,50 +91,19 @@ Install the required dependencies.
 sudo apt-get install git make g++ qt5-default libqt5serialport5 zlib1g-dev libudev-dev
 ```
 
-Checkout the project.
-
-```
-git clone https://github.com/lamestation/PropellerIDE.git PropellerIDE
-cd PropellerIDE
-```
-
-Type `make deb` in the project root to build a Debian package.
-
-```
-make deb
-```
-
-Type `make clean` to remove old build files.
-
-```
-make clean
-```
-
-PropellerIDE is known to build on Ubuntu as far back as 12.04.
+PropellerIDE release versions are made in Travis CI, which runs on Ubuntu 12.04. See the `.travis.yml` in this project to see how to build for that version of Ubuntu.
 
 ### Windows
 
 PropellerIDE on Windows is built using the Qt5 MinGW distribution from Qt's website:
 
-* http://qt-project.org/downloads
-
-For development, the easiest way to get started building the project is through QtCreator. Open the `src/src.pro` file as a project in the editor and build. Shadowed builds are not currently supported.
-
-PropellerIDE can also be built from the Windows PowerShell. This is how release builds and installers are produced. You will need to set the system path correctly.
+* https://www.qt.io/download/
 
 ```
 C:\Qt\Tools\mingw482_32\bin;C:\Qt\5.3\mingw482_32\bin;C:\Program Files (x86)\Inno Setup 5
 ```
 
-Open the PowerShell. The `make` command on Windows is `mingw32-make.exe`. Add the `win` parameter to build a Windows installer.
-
-```
-mingw32-make.exe win
-```
-
-PropellerIDE has been built on Windows 7 and 8.
-
-*Note: QtCreator and command-line builds generate build files that are incompatible with each other, so you will need to call `make distclean` in the `src/` directory before you can switch from one to the other.*
+To build from the command line, and for release, use PowerShell. The `make` command on Windows is `mingw32-make.exe`. PropellerIDE has been built on Windows 7 and 8.
 
 ### OS X
 
@@ -163,13 +113,7 @@ Install XCode through the App Store, then install the command-line tools through
 xcode-select --install
 ```
 
-Type `make mac` to create an app bundle and DMG package for distribution.
-
-```
-make mac
-```
-
-The Qt version used must match the XCode version. The easiest solution is to use the latest version of xcode and Qt.
+The Qt version used must match the XCode version. The easiest solution is to use the latest version of XCode and Qt.
 
 ### Raspberry Pi - Raspbian Wheezy
 
@@ -195,26 +139,49 @@ sudo apt-get update
 sudo apt-get install qt5-default qt5-qmake libegl1-mesa libgles2-mesa
 ```
 
-Finally, use the build the `rpi` target to create a Debian package for Raspberry Pi.
+## Building
+
+PropellerIDE can be built from the command-line using `qmake` or from QtCreator. Shadowed builds are not currently supported.
+
+*Note: QtCreator and command-line builds generate build files that are incompatible with each other, so you will need to call `make distclean` in the `src/` directory before you can switch from one to the other.*
+
+First, checkout the project.
 
 ```
-make rpi
+git clone https://github.com/lamestation/PropellerIDE.git PropellerIDE
+cd PropellerIDE
 ```
 
-## Cleaning
+Retrieve any dependencies.
 
-Use the `clean` on all platforms to clean up old build files.
+``` 
+git submodule update --init --recursive
+```
 
-## Installing
-
-All build targets output packages in the `staging/` directory.
-
-
-And install:
+Change to the source root and generate the makefiles.
 
 ```
-sudo dpkg -i staging/*armhf.deb
+cd src/
+qmake -r
 ```
+
+Then build the project.
+
+```
+make
+```
+
+Or on Windows,
+
+```
+mingw32-make
+```
+
+`make clean` to clean the project; `make distclean` to *really* clean it.
+
+## Packaging For Release
+
+Whereas old versions of PropellerIDE used a custom makefile, the current software is built using [`packthing`](https://github.com/lamestation/packthing), which is a free multi-source packaging tool by LameStation. Follow the link to learn more.
 
 ## Credits
 

@@ -1,0 +1,16 @@
+os: MinGW
+clone_depth: 200
+
+environment:
+    QTDIR: C:\Qt\5.4\mingw491_32
+    MINGW: C:\Qt\Tools\mingw491_32
+
+configuration: Release
+
+install:
+- git submodule update --init --recursive
+- set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin;C:\Qt\Tools\QtCreator\bin
+
+build_script:
+- qmake -r
+- mingw32-make -j4
