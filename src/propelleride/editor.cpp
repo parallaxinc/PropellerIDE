@@ -1192,28 +1192,29 @@ void Editor::updateBackgroundColors()
     while (1)
     {
         ColorScheme::Color newColor = ColorScheme::Invalid;
+        QString text = currBlock.text();
 
-        if ( currBlock.text().startsWith("CON", Qt::CaseInsensitive) )
+        if (text.contains(QRegExp("^CON\\b", Qt::CaseInsensitive)))
         {
             newColor = ColorScheme::ConBG;
         }
-        else if ( currBlock.text().startsWith("VAR", Qt::CaseInsensitive) )
+        else if (text.contains(QRegExp("^VAR\\b", Qt::CaseInsensitive)))
         {
             newColor = ColorScheme::VarBG;
         }
-        else if ( currBlock.text().startsWith("OBJ", Qt::CaseInsensitive) )
+        else if (text.contains(QRegExp("^OBJ\\b", Qt::CaseInsensitive)))
         {
             newColor = ColorScheme::ObjBG;
         }
-        else if ( currBlock.text().startsWith("PUB", Qt::CaseInsensitive) )
+        else if (text.contains(QRegExp("^PUB\\b", Qt::CaseInsensitive)))
         {
             newColor = ColorScheme::PubBG;
         }
-        else if ( currBlock.text().startsWith("PRI", Qt::CaseInsensitive) )
+        else if (text.contains(QRegExp("^PRI\\b", Qt::CaseInsensitive)))
         {
             newColor = ColorScheme::PriBG;
         }
-        else if ( currBlock.text().startsWith("DAT", Qt::CaseInsensitive) )
+        else if (text.contains(QRegExp("^DAT\\b", Qt::CaseInsensitive)))
         {
             newColor = ColorScheme::DatBG;
         }
