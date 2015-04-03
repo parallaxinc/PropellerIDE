@@ -1306,7 +1306,17 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
     while (block.isValid() && top <= event->rect().bottom()) {
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
-            painter.setPen(pen);
+
+            if (block == textCursor().block())
+            {
+                if (bgcolor.lightness() < 128)
+                    painter.setPen(pen.lighter(140));
+                else
+                    painter.setPen(pen.darker(140));
+            }
+            else
+                painter.setPen(pen);
+
             painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
                     Qt::AlignRight, number+" ");
         }

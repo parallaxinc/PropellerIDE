@@ -10,7 +10,6 @@
 
 #include "ui_mainwindow.h"
 
-#include "SpinParser.h"
 #include "treemodel.h"
 #include "Preferences.h"
 #include "editor.h"
