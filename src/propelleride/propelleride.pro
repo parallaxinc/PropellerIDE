@@ -20,6 +20,8 @@ LIBS += -L../memorymap/memorymap/  -lmemorymap
 LIBS += -L../memorymap/QHexEdit -lQHexEdit
 INCLUDEPATH += ../memorymap/memorymap/ ../memorymap/
 
+INCLUDEPATH += ../projectview/
+
 SOURCES += \
     BuildManager.cpp \
     clickable.cpp \
@@ -76,6 +78,24 @@ RESOURCES += \
     icons/icons.qrc \
     languages/languages.qrc \
     themes/themes.qrc \
+
+
+
+
+SOURCES += \
+    ../projectview/parser.cpp \
+    ../projectview/projectview.cpp \
+
+HEADERS += \
+    ../projectview/parser.h \
+    ../projectview/projectview.h \
+
+FORMS += \
+    ../projectview/projectview.ui \
+
+RESOURCES += \
+    ../projectview/icons/projectview/projectview.qrc \
+
 
 CODECFORTR = UTF-8
 

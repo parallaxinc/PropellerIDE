@@ -14,37 +14,41 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMutex::Recursive), statusDone(true)
 {
+    setWindowTitle(QCoreApplication::applicationName());
     ui.setupUi(this);
+
     /* setup preferences dialog */
     propDialog = new Preferences(this);
     connect(propDialog,SIGNAL(accepted()),this,SLOT(preferencesAccepted()));
 
-    projectModel = NULL;
-    referenceModel = NULL;
-
     connect(&builder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
 
-    /* main container */
-    setWindowTitle(QCoreApplication::applicationName());
-    QSplitter *vsplit = new QSplitter(this);
-    setCentralWidget(vsplit);
-    /* project tools */
-    setupProjectTools(vsplit);
+    parser = language.getParser();
 
-    /* minimum window height */
-    this->setMinimumHeight(500);
 
-    /* setup gui components */
+    // project editor tabs
+    editorTabs = ui.editorTabs;
+    finder = ui.finder;
+    finder->connectFileManager(ui.editorTabs);
+    QSplitterHandle *hndl = ui.splitter->handle(1);
+    hndl->setEnabled(false);
+
+
+
+    connect(editorTabs,SIGNAL(tabCloseRequested(int)),editorTabs,SLOT(closeFile(int)));
+    connect(editorTabs,SIGNAL(currentChanged(int)),editorTabs,SLOT(changeTab(int)));
 
     // File Menu
     connect(ui.action_New,SIGNAL(triggered()),editorTabs,SLOT(newFile()));
     connect(ui.action_Open,SIGNAL(triggered()),editorTabs,SLOT(open()));
+
 
     connect(ui.action_Save,SIGNAL(triggered()),editorTabs,SLOT(save()));
     connect(ui.actionSave_As,SIGNAL(triggered()),editorTabs,SLOT(saveAs()));
     connect(ui.actionSave_All,SIGNAL(triggered()),editorTabs,SLOT(saveAll()));
 
     connect(ui.action_Zip_Project,SIGNAL(triggered()),this,SLOT(zipFiles()));
+
 
     recentFiles = findChildren<QAction *>(QRegExp("action_[0-9]+_File"));
     for (int i = 0; i < recentFiles.size(); i++)
@@ -58,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     connect(editorTabs, SIGNAL(closeAvailable(bool)),ui.actionClose_All,SLOT(setEnabled(bool)));
 
 
+
     // Edit Menu
     connect(ui.action_Undo,        SIGNAL(triggered()), editorTabs, SLOT(undo()));
     connect(ui.action_Redo,        SIGNAL(triggered()), editorTabs, SLOT(redo()));
@@ -66,6 +71,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     connect(ui.action_Copy,        SIGNAL(triggered()), editorTabs, SLOT(copy()));
     connect(ui.action_Paste,       SIGNAL(triggered()), editorTabs, SLOT(paste()));
     connect(ui.actionSelect_All,   SIGNAL(triggered()), editorTabs, SLOT(selectAll()));
+
+    qDebug() << "BACON";
 
     connect(ui.action_Find,        SIGNAL(triggered()), finder, SLOT(showFinder()));
     connect(ui.actionFind_Next,    SIGNAL(triggered()), finder, SLOT(findNext()));
@@ -109,10 +116,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     connect(cbPort,SIGNAL(currentIndexChanged(int)),this,SLOT(setCurrentPort(int)));
     ui.toolBar->addWidget(cbPort);
 
-//    ctrlToolBar = addToolBar(tr("Control"));
-//    ctrlToolBar->setLayoutDirection(Qt::RightToLeft);
-//    ctrlToolBar->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
-//    ctrlToolBar->addWidget(cbPort);
+
+    connect(ui.projectview,SIGNAL(clicked(QModelIndex)),this,SLOT(referenceTreeClicked(QModelIndex)));
 
     updateRecentFileActions();
 
@@ -136,6 +141,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     connect(portConnectionMonitor, SIGNAL(portChanged()), this, SLOT(enumeratePorts()));
 
     connect(this,SIGNAL(signalStatusDone(bool)),this,SLOT(setStatusDone(bool)));
+
+    ui.splitter_main->setSizes(QList<int>()
+            << ui.projectview->minimumSizeHint().width()
+            << (this->width() - ui.projectview->minimumSizeHint().width()));
 
     loadSession();
 
@@ -245,19 +254,6 @@ void MainWindow::closeEvent(QCloseEvent *e)
     qApp->exit(0);
 }
 
-
-void MainWindow::newProjectTrees()
-{
-    delete projectModel;
-    projectModel = new TreeModel("", this);
-    if(leftSplit->isVisible())
-    {
-        delete referenceModel;
-        referenceModel = new TreeModel("", this);
-    }
-}
-
-
 void MainWindow::addRecentFile(const QString &fileName)
 {
     QStringList files = QSettings().value("recentFiles").toStringList();
@@ -331,35 +327,26 @@ void MainWindow::setProject()
         setWindowTitle(QCoreApplication::applicationName());
 
     QString text = editorTabs->getEditor(index)->toPlainText();
-    updateProjectTree(fileName);
-    updateReferenceTree(fileName,text);
 
+    parser->setLibraryPaths(QStringList() << spinIncludes);
+//    qDebug() << "DIRNAMES" << spinIncludes;
+//    qDebug() << "FILENAME" << fileName;
+    parser->setFile(fileName);
+    parser->buildModel();
+    ui.projectview->setModel(parser->treeModel());
+    
     QApplication::restoreOverrideCursor();
 }
 
 void MainWindow::showBrowser()
 {
-    if(leftSplit->isVisible()) {
-        if(referenceModel) {
-            delete referenceModel;
-            referenceModel = NULL;
-        }
-        leftSplit->hide();
+    if (ui.projectview->isVisible())
+    {
+        ui.projectview->hide();
     }
-    else {
-        QString text;
-        QString fileName;
-        if(!projectModel || !referenceModel) {
-            QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-            int index = editorTabs->currentIndex();
-            text = editorTabs->getEditor(index)->toPlainText();
-            fileName = editorTabs->tabToolTip(index);
-        }
-        if(!referenceModel)
-            updateReferenceTree(fileName,text);
-        leftSplit->show();
-        QApplication::processEvents();
-        QApplication::restoreOverrideCursor();
+    else
+    {
+        ui.projectview->show();
     }
 }
 
@@ -372,32 +359,11 @@ void MainWindow::setCurrentPort(int index)
 
 void MainWindow::checkAndSaveFiles()
 {
-    if(projectModel == NULL)
-        return;
-
-    QString title = projectModel->getTreeName();
-
     for (int i = 0; i < editorTabs->count(); i++)
     {
-        qDebug() << title;
         if (editorTabs->getEditor(i)->contentChanged())
         {
             editorTabs->save(i);
-        }
-    }
-
-    int len = projectModel->rowCount();
-    for (int n = 0; n < len; n++)
-    {
-        QModelIndex root = projectModel->index(n,0);
-        QString name = projectModel->data(root, Qt::DisplayRole).toString();
-        qDebug() <<  name;
-        for(int i = 0; i < editorTabs->count(); i++)
-        {
-            if (editorTabs->getEditor(i)->contentChanged())
-            {
-                editorTabs->save(i);
-            }
         }
     }
 }
@@ -460,34 +426,19 @@ int  MainWindow::runCompiler(COMPILE_TYPE type)
 
     emit signalStatusDone(false);
 
-    if(!projectModel)
-        return 1;
-
     if(!editorTabs->count())
         return 1;
-
-    // don't allow if no port available
-    if(type != COMPILE_ONLY && cbPort->count() < 1) {
-        QMessageBox mbox(QMessageBox::Critical, tr("No Serial Port"),
-                tr("Serial port not available.")+" "+tr("Connect a USB Propeller board, turn it on, and try again."),
-                QMessageBox::Ok);
-        mbox.exec();
-        return 1;
-    }
 
     index = editorTabs->currentIndex();
     fileName = editorTabs->tabToolTip(index);
     text = editorTabs->getEditor(index)->toPlainText();
-
-    updateProjectTree(fileName);
-    updateReferenceTree(fileName,text);
 
     getApplicationSettings();
 
     checkAndSaveFiles();
 
     if(fileName.contains(".spin")) {
-        builder.setParameters(spinCompiler, spinLoader, spinIncludes, projectFile);
+        builder.setParameters(spinCompiler, spinLoader, spinIncludes, fileName);
 
         copts = "-b";
         rc = builder.runCompiler(copts);
@@ -690,81 +641,80 @@ void MainWindow::findMultilineComment(QTextCursor cur)
 
 void MainWindow::openTreeFile(QString fileName)
 {
-    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-    fileName = fileName.trimmed();
-    qDebug() << "openTreeFile opening " << fileName;
-    QString userFile = editorTabs->tabToolTip(editorTabs->currentIndex());
-    QString userPath = QFileInfo(userFile).path();
-    QFile file;
-    QString fileToOpen;
-
-    if (file.exists(QDir(userPath).filePath(fileName)))
-    {
-        fileToOpen = QDir(userPath).filePath(fileName);
-        qDebug() << "File in " << userPath;
-    }
-    else if (file.exists(QDir(spinIncludes).filePath(fileName)))
-    {
-        fileToOpen = QDir(spinIncludes).filePath(fileName);
-        qDebug() << "File in " << spinIncludes;
-    }
-    else
-    {
-        qDebug() << "File not found!";
-    }
-
-    editorTabs->openFile(fileToOpen);
-
-    QApplication::restoreOverrideCursor();
+//    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+//    fileName = fileName.trimmed();
+//    qDebug() << "openTreeFile opening " << fileName;
+//    QString userFile = editorTabs->tabToolTip(editorTabs->currentIndex());
+//    QString userPath = QFileInfo(userFile).path();
+//    QFile file;
+//    QString fileToOpen;
+//
+//    if (file.exists(QDir(userPath).filePath(fileName)))
+//    {
+//        fileToOpen = QDir(userPath).filePath(fileName);
+//        qDebug() << "File in " << userPath;
+//    }
+//    else if (file.exists(QDir(spinIncludes).filePath(fileName)))
+//    {
+//        fileToOpen = QDir(spinIncludes).filePath(fileName);
+//        qDebug() << "File in " << spinIncludes;
+//    }
+//    else
+//    {
+//        qDebug() << "File not found!";
+//    }
+//
+//    editorTabs->openFile(fileToOpen);
+//
+//    QApplication::restoreOverrideCursor();
 }
 
 void MainWindow::projectTreeClicked(QModelIndex index)
 {
-    if(projectModel == NULL)
-        return;
-    QString fileName;
-    QVariant vs = projectModel->data(index, Qt::DisplayRole);
-    if(vs.canConvert(QVariant::String)){
-        fileName = vs.toString();
-    }
-    if(fileName.length() > 0) {
-        openTreeFile(fileName);
-    }
+//    QString fileName;
+//    QVariant vs = projectModel->data(index, Qt::DisplayRole);
+//    if(vs.canConvert(QVariant::String)){
+//        fileName = vs.toString();
+//    }
+//    if(fileName.length() > 0) {
+//        openTreeFile(fileName);
+//    }
 }
 
 void MainWindow::referenceTreeClicked(QModelIndex index)
 {
-    QString method = NULL;
-    QString myFile;
 
-    QVariant vs = referenceModel->data(index, Qt::DisplayRole);
-    if(vs.canConvert(QVariant::String)) {
-        method = QString(vs.toString());
-        method = method.trimmed();
-    }
-
-    myFile = referenceModel->file(index);
-    if(myFile.length() < 1) {
-        qDebug() << "referenceModel did not have a file.";
-        return;
-    }
-    if(referenceModel->hashCount() == 0) {
-        qDebug() << "referenceModel did not find any symbols.";
-        return;
-    }
-    if(method.length() > 0 && method.indexOf(QRegExp("pub|pri",Qt::CaseInsensitive)) < 0) {
-        openTreeFile(method);
-    }
-    else {
-        int num;
-        QString file = referenceModel->getSymbolInfo(myFile+"::"+method.trimmed(), &num);
-        if(file.length() > 0) {
-            qDebug() << "referenceTreeClicked looks for " << method << "on line #" << num;
-            qDebug() << "referenceTreeClicked opening " << file;
-
-            highlightFileLine(file, num);
-        }
-    }
+//    QString method = NULL;
+//    QString myFile;
+//
+    qDebug() << parser->treeModel()->data(index).toString();
+//    if(vs.canConvert(QVariant::String)) {
+//        method = QString(vs.toString());
+//        method = method.trimmed();
+//    }
+//
+//    myFile = referenceModel->file(index);
+//    if(myFile.length() < 1) {
+//        qDebug() << "referenceModel did not have a file.";
+//        return;
+//    }
+//    if(referenceModel->hashCount() == 0) {
+//        qDebug() << "referenceModel did not find any symbols.";
+//        return;
+//    }
+//    if(method.length() > 0 && method.indexOf(QRegExp("pub|pri",Qt::CaseInsensitive)) < 0) {
+//        openTreeFile(method);
+//    }
+//    else {
+//        int num;
+//        QString file = referenceModel->getSymbolInfo(myFile+"::"+method.trimmed(), &num);
+//        if(file.length() > 0) {
+//            qDebug() << "referenceTreeClicked looks for " << method << "on line #" << num;
+//            qDebug() << "referenceTreeClicked opening " << file;
+//
+//            highlightFileLine(file, num);
+//        }
+//    }
 }
 
 void MainWindow::zipFiles()
@@ -782,153 +732,6 @@ void MainWindow::zipFiles()
     if(fileTree.count() > 0)
     {
         zipper.makeZip(fileName, fileTree, spinLibPath);
-    }
-}
-
-void MainWindow::updateProjectTree(QString fileName)
-{
-    projectFile = fileName;
-    QString s = QFileInfo(fileName).fileName();
-
-    if(projectModel != NULL) {
-        delete projectModel;
-    }
-    if(fileName.endsWith(".spin",Qt::CaseInsensitive)) {
-        projectModel = new TreeModel(s, this);
-        updateSpinProjectTree(fileName);
-    }
-    else {
-        projectModel = new TreeModel(s, this);
-    }
-    projectTree->setWindowTitle(s);
-    projectTree->setModel(projectModel);
-    projectTree->show();
-
-}
-
-void MainWindow::updateSpinProjectTree(QString fileName)
-{
-    /* for spin we always parse the program and stuff the file list */
-    QStringList flist = editorTabs->getEditor(editorTabs->currentIndex())->spinParser.spinFileTree(fileName, QSettings().value("Library").toString());
-
-    foreach (QString s, flist)
-    {
-        projectModel->addRootItem(s);
-    }
-}
-
-void MainWindow::updateReferenceTree(QString fileName, QString text)
-{
-    QString s = QFileInfo(fileName).fileName();
-
-    // our startup strategy should change so that we have a tree and it starts collapsed.
-
-    if(referenceModel != NULL) {
-        delete referenceModel;
-    }
-    if(fileName.endsWith(".spin",Qt::CaseInsensitive)) {
-        referenceModel = new TreeModel(s, this);
-        if(text.length() > 0) {
-            updateSpinReferenceTree(fileName, spinIncludes, "", 0); // start at top object
-        }
-    }
-    else {
-        referenceModel = new TreeModel(s, this);
-    }
-
-    referenceTree->setWindowTitle(s);
-    referenceTree->setModel(referenceModel);
-    referenceTree->show();
-}
-
-void MainWindow::updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level)
-{
-    QString path = QFileInfo(fileName).path();
-
-    QStringList mlist = editorTabs->getEditor(
-            editorTabs->currentIndex())->spinParser.spinMethods(fileName,  objname);
-
-    // move objects to end of the list
-    for (int n = mlist.count()-1; n > -1; n--)
-    {
-        if(mlist[n].at(0) == 'o')
-        {
-            mlist.insert(mlist.count(),mlist[n]);
-            mlist.removeAt(n);
-        }
-    }
-
-    // display all
-    for (int n = 0; n < mlist.count(); n ++)
-    {
-        QString s = mlist[n];
-
-        if (s.at(0) == 'o')
-        {
-
-            /* get the file name */
-            QString file = s.mid(s.indexOf(":")+1);
-            file = file.mid(0, file.indexOf("\t"));
-            file = file.trimmed();
-
-            if (file.startsWith("\""))
-                file = file.mid(1);
-
-            if (file.endsWith("\""))
-                file = file.mid(0,file.length()-1);
-
-            file = file.trimmed();
-
-            if (!file.endsWith(".spin",Qt::CaseInsensitive))
-                file += ".spin";
-
-            /* prepend path info to new file if found*/
-            if (QFile::exists(file))
-            {
-                referenceModel->addRootItem(file, file);
-            }
-            else if(QFile::exists(QDir(path).filePath(file)))
-            {
-                referenceModel->addRootItem(file, QDir(path).filePath(file));
-                file = QDir(path).filePath(file);
-            }
-            else if(QFile::exists(QDir(includes).filePath(file)))
-            {
-                referenceModel->addRootItem(file, QDir(includes).filePath(file));
-                file = QDir(includes).filePath(file);
-            }
-            else
-            {
-                qDebug() << "updateSpinReferenceTree can't find file" << file;
-            }
-
-            /* get the object name */
-            QString obj = s.mid(s.indexOf("\t")+1);
-            obj = obj.mid(0,obj.indexOf(":"));
-            obj = obj.trimmed();
-
-            updateSpinReferenceTree(file, includes, obj, level+1);
-        }
-        else
-        {
-            int line = 0;
-            QString sl = s.mid(s.lastIndexOf("\t")+1);
-            line = sl.toInt();
-            s = s.mid(s.indexOf("\t")+1);
-            s = s.mid(0,s.indexOf("\t"));
-            if(s.indexOf(":") != -1)
-                s = s.mid(0, s.indexOf(":"));
-            if(s.indexOf("|") != -1)
-                s = s.mid(0, s.indexOf("|"));
-            s = s.trimmed();
-
-            referenceModel->addSymbolInfo(s, fileName, line);
-
-            for(int n = 0; n < level; n++)
-                s = "    "+s;
-            //methods.append(s);
-            referenceModel->addRootItem(s, fileName);
-        }
     }
 }
 
@@ -965,76 +768,6 @@ void MainWindow::spawnTerminal()
     qDebug() << "Running" << term;
     if (!QProcess::startDetached(term, QStringList()))
         qDebug() << "Failed to detach" << term;
-}
-
-void MainWindow::setupProjectTools(QSplitter *vsplit)
-{
-    int handlewidth = 8;
-
-    // container for project, etc...
-    leftSplit = new QSplitter(this);
-    leftSplit->setOrientation(Qt::Vertical);
-    leftSplit->setChildrenCollapsible(false);
-    leftSplit->setHandleWidth(handlewidth);
-    vsplit->addWidget(leftSplit);
-
-    // project tree
-    projectTree = new ReferenceTree(tr("Current Project"),ColorScheme::ConBG);
-    connect(projectTree,SIGNAL(clicked(QModelIndex)),this,SLOT(projectTreeClicked(QModelIndex)));
-
-    leftSplit->addWidget(projectTree);
-
-    // project reference tree
-    referenceTree = new ReferenceTree(tr("Project References"), ColorScheme::PubBG);
-    connect(referenceTree,SIGNAL(clicked(QModelIndex)),this,SLOT(referenceTreeClicked(QModelIndex)));
-
-    connect(propDialog,SIGNAL(updateColors()),referenceTree,SLOT(updateColors()));
-    connect(propDialog,SIGNAL(updateColors()),projectTree,SLOT(updateColors()));
-
-    connect(propDialog,SIGNAL(updateFonts()),referenceTree,SLOT(updateFonts()));
-    connect(propDialog,SIGNAL(updateFonts()),projectTree,SLOT(updateFonts()));
-
-    leftSplit->addWidget(referenceTree);
-
-
-    projectTree->updateColors();
-    referenceTree->updateColors();
-
-    projectTree->updateFonts();
-    referenceTree->updateFonts();
-
-
-    leftSplit->setStretchFactor(0,1);
-    leftSplit->setStretchFactor(1,2);
-
-    findSplit = new QSplitter(this);
-    findSplit->setOrientation(Qt::Vertical);
-    vsplit->addWidget(findSplit);
-
-    // project editor tabs
-    editorTabs = new FileManager(this);
-    connect(editorTabs,SIGNAL(tabCloseRequested(int)),editorTabs,SLOT(closeFile(int)));
-    connect(editorTabs,SIGNAL(currentChanged(int)),editorTabs,SLOT(changeTab(int)));
-    findSplit->addWidget(editorTabs);
-
-    findSplit->setStretchFactor(0,1);
-    findSplit->setStretchFactor(1,0);
-    findSplit->setContentsMargins(0,0,handlewidth,0);
-
-    finder = new Finder(editorTabs, this);
-    findSplit->addWidget(finder);//newFindFrame(findSplit));
-    QSplitterHandle *hndl = findSplit->handle(1);
-    hndl->setEnabled(false);
-
-
-    QList<int> vsizes;
-    vsizes.append(130);
-    vsizes.append(550);
-    vsplit->setSizes(vsizes);
-    vsplit->setLineWidth(handlewidth*1/2);
-    vsplit->setHandleWidth(handlewidth);
-    vsplit->setChildrenCollapsible(true);
-
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)

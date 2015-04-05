@@ -10,6 +10,13 @@
 #include <QFile>
 #include <QString>
 #include <QRegExp>
+#include <QColor>
+#include <QIcon>
+
+Language::Language() 
+{
+    loadLanguage(":/languages/spin.json");
+}
 
 QStringList Language::matchWholeWord(QStringList list)
 {
@@ -84,6 +91,41 @@ QJsonObject Language::loadLanguage(QString filename)
         operators.append(slist);
     }
 
+    parser.clearRules();
+    parser.setCaseInsensitive(true);
+
+    foreach (QJsonValue r, lang["project"].toArray())
+    {
+        QList<Parser::Pattern> patterns;
+
+        foreach (QJsonValue pattern, r.toObject()["pattern"].toArray())
+        {
+            Parser::Pattern p;
+            p.regex = pattern.toObject()["regex"].toString();
+            foreach (QVariant v, pattern.toObject()["capture"].toArray().toVariantList())
+            {
+                QMetaType::Type t = (QMetaType::Type) v.type();
+                if (t == QMetaType::Double)
+                {
+                    p.capture << v.toInt();
+                }
+                else if (t == QMetaType::QString)
+                {
+                    p.capture << v.toString();
+                }
+            }
+
+//            qDebug() << p.regex;
+//            qDebug() << p.capture;
+            patterns.append(p);
+        }
+
+        parser.addRule(r.toObject()["name"].toString(), patterns,
+            QIcon(r.toObject()["icon"].toString()),
+            QColor(r.toObject()["color"].toString()));
+
+    }
+
     return lang;
 }
 
@@ -117,7 +159,7 @@ QStringList Language::listFunctions()
     return functions;
 }
 
-Language::Language() 
+Parser * Language::getParser()
 {
-    loadLanguage(":/languages/spin.json");
+    return &parser;
 }

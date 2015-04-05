@@ -24,8 +24,6 @@ int FileManager::newFile()
     changeTab(index);
     setTabToolTip(index,"");
 
-//  newProjectTrees();
-
     connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
     connect(editor,SIGNAL(undoAvailable(bool)),this,SLOT(setUndo(bool)));
     connect(editor,SIGNAL(redoAvailable(bool)),this,SLOT(setRedo(bool)));

@@ -5,6 +5,8 @@
 #include <QStringList>
 #include <QString>
 
+#include "parser.h"
+
 class Language
 {
 private:
@@ -15,6 +17,8 @@ private:
     bool case_sensitive;
     bool enable_blocks;
     QString escape_char;
+    
+    Parser parser;
 
     QStringList keywords;
     QStringList operators;
@@ -36,4 +40,5 @@ public:
     QStringList listComments();
     QStringList listFunctions();
     Language();
+    Parser * getParser();
 };

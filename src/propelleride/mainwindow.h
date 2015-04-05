@@ -19,6 +19,8 @@
 #include "FileManager.h"
 #include "BuildManager.h"
 #include "Finder.h"
+#include "parser.h"
+#include "projectview.h"
 
 class MainWindow : public QMainWindow
 {
@@ -31,14 +33,11 @@ public:
     MainWindow(QWidget *parent = 0);
 
     Preferences  *propDialog;
-    QSplitter   *leftSplit;
-    QSplitter   *findSplit;
 
 public slots:
     void showMessage(const QString & message);
 
     // file menu
-    void newProjectTrees();
     void printFile();
     void zipFiles();
     void openFiles(const QStringList & files);
@@ -91,18 +90,7 @@ private:
 
     bool eventFilter(QObject *target, QEvent *event);
 
-    void setupFileMenu();
-    void setupEditMenu();
-    void setupViewMenu();
-    void setupProjectMenu();
-    void setupHelpMenu();
-
-    void setupProjectTools(QSplitter *vsplit);
     void openTreeFile(QString fileName);
-    void updateProjectTree(QString fileName);
-    void updateSpinProjectTree(QString fileName);
-    void updateReferenceTree(QString fileName, QString text);
-    void updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level);
 
     typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
     int  runCompiler(COMPILE_TYPE type);
@@ -113,22 +101,15 @@ private:
     QString     spinTerminal;
     QString     spinLoader;
 
-    QToolBar    *ctrlToolBar;
-
     QList<QAction *> recentFiles;
-
-    QVBoxLayout *verticalLayout;
-    QFrame      *findFrame;
 
     Finder * finder;
     FileManager     *editorTabs;
     BuildManager    builder;
+    Language        language;
+    Parser          * parser;
 
     QString         projectFile;
-    ReferenceTree   *projectTree;
-    ReferenceTree   *referenceTree;
-    TreeModel       *projectModel;
-    TreeModel       *referenceModel;
 
     QComboBox   *cbPort;
 

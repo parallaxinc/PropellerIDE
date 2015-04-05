@@ -122,5 +122,54 @@
                 ]
             }
         }
-    }
+    },
+    "project":
+    [
+        {
+            "name": "public",
+            "pattern": [
+                {
+                    "regex": "^(PUB)[ \t]+([a-zA-Z_]+[a-zA-Z0-9_]*)[ \t]*(\\(.*\\))?(\\|.*|:.*)?.*$",
+                    "capture": [ 2, " ", 3 ]
+                }
+            ],
+            "icon": ":/icons/block-pub.png",
+            "color": "#0000FF"
+        },
+        {
+            "name": "private",
+            "pattern": [
+                {
+                    "regex": "^(PRI)[ \t]+([a-zA-Z_]+[a-zA-Z0-9_]*)[ \t]*(\\(.*\\))?(\\|.*|:.*)?.*$",
+                    "capture": [ 2, " ", 3 ]
+                }
+            ],
+            "icon": ":/icons/block-pri.png",
+            "color": "#007FFF"
+        },
+        {
+            "name": "constants",
+            "pattern": [
+                {
+                    "regex": "^[ \t]*([a-zA-Z_]+[a-zA-Z0-9_]*)[ \t]*=[ \t]*(.+?)('.*?)?[ \t]*$",
+                    "capture": [ 1 ]
+                },
+                {
+                    "regex": "^[ \t]*#[0-9_]+[ \t]*,(([ \t]*[a-zA-Z_]+[a-zA-Z0-9_]*[ \t]*,[ \t]*)*([ \t]*[a-zA-Z_]+[a-zA-Z0-9_]*[ \t]*)+).*$",
+                    "capture": [ 1 ]
+                }
+            ],
+            "icon": ":/icons/block-con.png",
+            "color": "#7F7F00"
+        },
+        {
+            "name": "_includes_",
+            "pattern": [
+                {
+                    "regex": "^[ \t]*([a-zA-Z_]+[a-zA-Z0-9_]*)[ \t]*:[ \t]*\"(.*?)(.spin)?\"$",
+                    "capture": [ 2, ".spin" ]
+                }
+            ]
+        }
+    ]
 }

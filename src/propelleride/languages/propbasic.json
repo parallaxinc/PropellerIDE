@@ -9,20 +9,15 @@
     "build": {
         "cmd": [
             [
-                "propbasic",
-                "%1"
+                "propbasic","%1"
             ],
             [
-                "openspin",
-                "-L",
-                "%1",
-                "%2"
+                "openspin","-L","%1","%2"
             ]
         ],
         "call": [
             [
-                "propbasic",
-                "compile"
+                "propbasic","compile"
             ]
         ]
     },
