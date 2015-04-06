@@ -13,14 +13,21 @@ CONFIG -= debug_and_release app_bundle
 CONFIG += debug
 
 
-LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
-INCLUDEPATH += . ..
+INCLUDEPATH += ../spinzip/
+LIBS += -L../spinzip/ -lspinzip
+PRE_TARGETDEPS += ../spinzip/libspinzip.a
 
+INCLUDEPATH += ../memorymap/memorymap/
 LIBS += -L../memorymap/memorymap/  -lmemorymap
-LIBS += -L../memorymap/QHexEdit -lQHexEdit
-INCLUDEPATH += ../memorymap/memorymap/ ../memorymap/
+PRE_TARGETDEPS += ../memorymap/QHexEdit/libQHexEdit.a
+
+INCLUDEPATH += ../memorymap/
+LIBS += -L../memorymap/QHexEdit/ -lQHexEdit
+PRE_TARGETDEPS += ../memorymap/memorymap/libmemorymap.a
 
 INCLUDEPATH += ../projectview/
+LIBS += -L../projectview/  -lprojectview
+PRE_TARGETDEPS += ../projectview/libprojectview.a
 
 SOURCES += \
     BuildManager.cpp \
@@ -79,24 +86,6 @@ RESOURCES += \
     languages/languages.qrc \
     themes/themes.qrc \
 
-
-
-
-SOURCES += \
-    ../projectview/parser.cpp \
-    ../projectview/projectview.cpp \
-
-HEADERS += \
-    ../projectview/parser.h \
-    ../projectview/projectview.h \
-
-FORMS += \
-    ../projectview/projectview.ui \
-
-RESOURCES += \
-    ../projectview/icons/projectview/projectview.qrc \
-
-
 CODECFORTR = UTF-8
 
 unix {
@@ -106,7 +95,6 @@ macx {
     LIBS            += -framework IOKit -framework CoreFoundation
 }
 win32 {
-    LIBS            += -lsetupapi
     LIBS            += -L$$PWD -lz
     RC_FILE         = propelleride.rc
 }

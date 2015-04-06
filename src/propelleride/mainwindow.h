@@ -14,7 +14,7 @@
 #include "Preferences.h"
 #include "editor.h"
 #include "PortConnectionMonitor.h"
-#include "spinzip/zipper.h"
+#include "zipper.h"
 #include "ReferenceTree.h"
 #include "FileManager.h"
 #include "BuildManager.h"
