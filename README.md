@@ -3,6 +3,8 @@
 
 PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.
 
+![](screenshots/ide.png)
+
 Write Spin code, download programs to your Propeller board, and debug your applications with the built-in serial terminal.
 
 - [Download PropellerIDE](http://www.lamestation.com/propelleride)
@@ -50,12 +52,6 @@ PropellerIDE is designed to be more than just a code editor; it is a toolkit for
 
 * Clean up compiler output and add directory support
 * Integrated web help
-
-## Screenshots
-
-![classic theme](icons/screenshots/classic.png "Classic theme")
-
-![ice theme](icons/screenshots/ice.png "Ice theme")
 
 ## Dependencies
 
