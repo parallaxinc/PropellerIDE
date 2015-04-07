@@ -24,6 +24,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     connect(&builder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
 
     parser = language.getParser();
+    connect(propDialog,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
+    connect(propDialog,SIGNAL(updateFonts()),this,SLOT(recolorProjectView()));
+    recolorProjectView();
 
 
     // project editor tabs
@@ -335,9 +338,7 @@ void MainWindow::setProject()
     parser->setFile(filename);
     parser->setLibraryPaths(QStringList() << spinIncludes);
 
-    parser->buildModel();
-    ui.projectview->setModel(parser->treeModel());
-    
+    recolorProjectView();
     QApplication::restoreOverrideCursor();
 }
 
@@ -508,6 +509,19 @@ void MainWindow::setStatusDone(bool done)
     statusMutex.lock();
     statusDone = done;
     statusMutex.unlock();
+}
+
+void MainWindow::recolorProjectView()
+{
+    ColorScheme * theme = &Singleton<ColorScheme>::Instance();
+    ui.projectview->updateColors(theme->getColor(ColorScheme::PubBG));
+    parser->styleRule("public",QIcon(),theme->getColor(ColorScheme::SyntaxFunctions));
+    parser->styleRule("private",QIcon(),theme->getColor(ColorScheme::SyntaxFunctions));
+    parser->styleRule("constants",QIcon(),theme->getColor(ColorScheme::SyntaxComments));
+    parser->styleRule("_includes_",QIcon(),theme->getColor(ColorScheme::SyntaxText));
+    parser->setFont(theme->getFont());
+    parser->buildModel();
+    ui.projectview->setModel(parser->treeModel());
 }
 
 void MainWindow::viewInfo()

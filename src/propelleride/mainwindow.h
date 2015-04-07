@@ -68,6 +68,7 @@ public slots:
     void programDebug();
     void viewInfo();
     void recolorInfo(QWidget * widget);
+    void recolorProjectView();
     void closeEvent(QCloseEvent *event);
     void quitProgram();
 
