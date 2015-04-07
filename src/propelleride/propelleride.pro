@@ -85,6 +85,7 @@ RESOURCES += \
     icons/icons.qrc \
     languages/languages.qrc \
     themes/themes.qrc \
+    ../projectview/icons/projectview/projectview.qrc \
 
 CODECFORTR = UTF-8
 

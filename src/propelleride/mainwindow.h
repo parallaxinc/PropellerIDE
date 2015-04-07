@@ -19,7 +19,7 @@
 #include "FileManager.h"
 #include "BuildManager.h"
 #include "Finder.h"
-#include "parser.h"
+#include "projectparser.h"
 #include "projectview.h"
 
 class MainWindow : public QMainWindow
@@ -107,7 +107,7 @@ private:
     FileManager     *editorTabs;
     BuildManager    builder;
     Language        language;
-    Parser          * parser;
+    ProjectParser   * parser;
 
     QString         projectFile;
 

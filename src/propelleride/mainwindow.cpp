@@ -117,11 +117,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     ui.toolBar->addWidget(cbPort);
 
 
-    connect(ui.projectview,SIGNAL(clicked(QModelIndex)),this,SLOT(referenceTreeClicked(QModelIndex)));
+    connect(ui.projectview,SIGNAL(showFileLine(QString, int)),this,SLOT(highlightFileLine(QString, int)));
 
     updateRecentFileActions();
 
     connect(editorTabs, SIGNAL(fileUpdated(int)),               this,SLOT(setProject()));
+    connect(editorTabs, SIGNAL(closeAvailable(bool)),           this,SLOT(setProject()));
 
     connect(editorTabs, SIGNAL(sendMessage(const QString &)),   this,SLOT(showMessage(const QString &)));
     connect(finder,     SIGNAL(sendMessage(const QString &)),   this,SLOT(showMessage(const QString &)));
@@ -310,28 +311,30 @@ void MainWindow::printFile()
 
 void MainWindow::setProject()
 {
-    int index = editorTabs->currentIndex();
-
-    if(index < 0)
-        return;
-
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-    QString fileName = editorTabs->tabToolTip(index);
-    addRecentFile(fileName);
+    int index = editorTabs->currentIndex();
+    QString shortname, filename;
+    if (index > -1)
+    {
+        shortname = editorTabs->tabText(index);
+        filename =  editorTabs->tabToolTip(index);
+    }
+    else
+    {
+        shortname = "Untitled";
+    }
 
     if (editorTabs->count() > 0)
-        setWindowTitle(editorTabs->tabText(index) + " - " +
+        setWindowTitle(shortname + " - " +
                        QCoreApplication::applicationName());
     else
         setWindowTitle(QCoreApplication::applicationName());
 
-    QString text = editorTabs->getEditor(index)->toPlainText();
-
+    addRecentFile(filename);
+    parser->setFile(filename);
     parser->setLibraryPaths(QStringList() << spinIncludes);
-//    qDebug() << "DIRNAMES" << spinIncludes;
-//    qDebug() << "FILENAME" << fileName;
-    parser->setFile(fileName);
+
     parser->buildModel();
     ui.projectview->setModel(parser->treeModel());
     
@@ -368,33 +371,16 @@ void MainWindow::checkAndSaveFiles()
     }
 }
 
-void MainWindow::highlightFileLine(QString file, int line)
+void MainWindow::highlightFileLine(QString filename, int line)
 {
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-    qDebug() << "Open file: " << file;
-    QString name;
-    if(QFile::exists(file)) {
-        name = file;
-    }
-    else if (QFile::exists(QDir(QFileInfo(projectFile).path()).filePath(file)))
-    {
-        name = QDir(QFileInfo(projectFile).path()).filePath(file);
-    }
-    else if (QFile::exists(QDir(spinIncludes).filePath(file)))
-    {
-        name = QDir(spinIncludes).filePath(file);
-    }
-    else
-    {
+    QFileInfo fi(filename);
+    if (!fi.exists(filename) || !fi.isFile())
         return;
-    }
 
-    qDebug() << "Open name: " << name;
-    qDebug() << "Open highlight!: " << name;
-    editorTabs->openFile(name);
+    editorTabs->openFile(filename);
+
     Editor * editor = editorTabs->getEditor(editorTabs->currentIndex());
-    
     if(editor)
     {
         QTextCursor cur = editor->textCursor();
@@ -403,8 +389,6 @@ void MainWindow::highlightFileLine(QString file, int line)
         cur.clearSelection();
         editor->setTextCursor(cur);
     }
-
-    QApplication::processEvents();
     QApplication::restoreOverrideCursor();
 }
 
@@ -468,12 +452,6 @@ int  MainWindow::loadProgram(int type)
     }
     emit signalStatusDone(false);
 
-    if(cbPort->currentText().length() == 0)
-    {
-        QMessageBox::critical(this,tr("Propeller Load"), tr("Port not available. Please connect Propeller board."), QMessageBox::Ok);
-        goto endLoadProgram;
-    }
-
     switch (type) {
         case MainWindow::LoadRunHubRam:
             copts += "-d"+cbPort->currentText();
@@ -487,7 +465,6 @@ int  MainWindow::loadProgram(int type)
             break;
     }
 
-endLoadProgram:
     emit signalStatusDone(true);
     return rc;
 }
@@ -754,11 +731,15 @@ void MainWindow::enumeratePorts()
     {
         cbPort->setEnabled(true);
         ui.actionTerminal->setEnabled(true);
+        ui.actionRun->setEnabled(true);
+        ui.actionBurn->setEnabled(true);
     }
     else
     {
         cbPort->setEnabled(false);
         ui.actionTerminal->setEnabled(false);
+        ui.actionRun->setEnabled(false);
+        ui.actionBurn->setEnabled(false);
     }
 }
 

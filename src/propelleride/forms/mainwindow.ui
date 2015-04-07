@@ -193,7 +193,6 @@
    <addaction name="actionBuild"/>
    <addaction name="actionRun"/>
    <addaction name="actionBurn"/>
-   <addaction name="separator"/>
    <addaction name="actionTerminal"/>
   </widget>
   <action name="action_New">

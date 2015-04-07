@@ -203,6 +203,7 @@ void FileManager::saveFile(const QString & fileName, int index)
     setTabText(index,QFileInfo(fileName).fileName());
     getEditor(index)->saveContent();
     fileChanged();
+    emit fileUpdated(index);
     emit sendMessage(tr("File saved successfully: %1").arg(fileName));
 }
 

@@ -5,20 +5,16 @@
 #include <QStringList>
 #include <QString>
 
-#include "parser.h"
+#include "projectparser.h"
 
 class Language
 {
 private:
-    QJsonObject lang;
-    QJsonObject syntax;
-    QJsonObject modes;
-
     bool case_sensitive;
     bool enable_blocks;
     QString escape_char;
     
-    Parser parser;
+    ProjectParser parser;
 
     QStringList keywords;
     QStringList operators;
@@ -32,7 +28,8 @@ private:
     QStringList mergeList(QStringList list);
 
 public:
-    QJsonObject loadLanguage(QString filename);
+    void buildParser(QJsonArray projectparser);
+    void loadLanguage(QString filename);
     QStringList listKeywords();
     QStringList listOperators();
     QStringList listNumbers();
@@ -40,5 +37,5 @@ public:
     QStringList listComments();
     QStringList listFunctions();
     Language();
-    Parser * getParser();
+    ProjectParser * getParser(QString language = QString("spin"));
 };

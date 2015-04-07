@@ -32,7 +32,7 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     highlighter = 0;
     setHighlights();
     setMouseTracking(true);
-    //    setCenterOnScroll(true);
+    setCenterOnScroll(true);
     setWordWrapMode(QTextOption::NoWrap);
 
     currentTheme = &Singleton<ColorScheme>::Instance();
