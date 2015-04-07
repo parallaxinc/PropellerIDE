@@ -517,7 +517,7 @@ void MainWindow::recolorProjectView()
     ui.projectview->updateColors(theme->getColor(ColorScheme::PubBG));
     parser->styleRule("public",QIcon(),theme->getColor(ColorScheme::SyntaxFunctions));
     parser->styleRule("private",QIcon(),theme->getColor(ColorScheme::SyntaxFunctions));
-    parser->styleRule("constants",QIcon(),theme->getColor(ColorScheme::SyntaxComments));
+    parser->styleRule("constants",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
     parser->styleRule("_includes_",QIcon(),theme->getColor(ColorScheme::SyntaxText));
     parser->setFont(theme->getFont());
     parser->buildModel();
@@ -774,6 +774,13 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
         {
             switch (e->key())
             {
+            // project controls
+            case (Qt::Key_K):
+            case (Qt::Key_L):
+                ui.projectview->setFocus();
+                return true;
+
+            // tab controls
             case (Qt::Key_T):
                 editorTabs->newFile();
                 return true;
@@ -785,14 +792,6 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
                 return true;
             case (Qt::Key_PageDown):
                 editorTabs->nextTab();
-                return true;
-            case (Qt::Key_Enter):
-                if (QApplication::focusWidget() == finder)
-                    finder->findNext();
-                return true;
-            case (Qt::Key_Escape):
-                if (QApplication::focusWidget() == finder)
-                    finder->hide();
                 return true;
             }
         } else {
@@ -806,11 +805,21 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
                     return true;
                 case (Qt::Key_Escape):
                     finder->hide();
+                    editorTabs->currentWidget()->setFocus();
+                    return true;
+                }
+            }
+            else if (QApplication::focusWidget()->parent() == ui.projectview)
+            {
+                switch (e->key())
+                {
+                case (Qt::Key_Escape):
+                    ui.projectview->clearSearch();
+                    editorTabs->currentWidget()->setFocus();
                     return true;
                 }
             }
         }
-        
     }
     return QMainWindow::eventFilter(target, event);
 }
