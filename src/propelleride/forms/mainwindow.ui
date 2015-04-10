@@ -190,6 +190,9 @@
    <addaction name="action_Save"/>
    <addaction name="actionSave_As"/>
    <addaction name="separator"/>
+   <addaction name="action_Zip_Project"/>
+   <addaction name="separator"/>
+   <addaction name="actionView_Info"/>
    <addaction name="actionBuild"/>
    <addaction name="actionRun"/>
    <addaction name="actionBurn"/>

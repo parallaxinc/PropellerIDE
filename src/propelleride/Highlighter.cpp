@@ -63,8 +63,6 @@ void Highlighter::highlight()
 {
     HighlightingRule rule;
 
-    Language lang = Language();
-
     // numbers
     numberFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxNumbers));
     numberFormat.setFontWeight(QFont::Normal);

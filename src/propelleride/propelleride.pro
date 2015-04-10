@@ -43,10 +43,7 @@ SOURCES += \
     PathSelector.cpp \
     Preferences.cpp \
     ReferenceTree.cpp \
-    SpinParser.cpp \
     status.cpp \
-    treemodel.cpp \
-    treeitem.cpp \
 
 HEADERS  += \
     BuildManager.h \
@@ -63,10 +60,7 @@ HEADERS  += \
     portmonitor.h \
     Preferences.h \
     ReferenceTree.h \
-    SpinParser.h \
     status.h \
-    treeitem.h \
-    treemodel.h \
     templates/Singleton.h \
 
 OTHER_FILES +=

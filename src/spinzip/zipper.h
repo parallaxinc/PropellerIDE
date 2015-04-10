@@ -1,5 +1,4 @@
-#ifndef ZIPPER_H
-#define ZIPPER_H
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -13,23 +12,11 @@ extern "C" {
 class Zipper : public QObject
 {
     Q_OBJECT
+
+    QString getZipDestination(QString fileName);
+
 public:
     explicit Zipper(QObject *parent = 0);
-    bool makeZip(QString fileName, QStringList fileTree, QString libPath);
-
-private:
-    QString getZipDestination(QString fileName);
-    void    zipSpinProjectTree(QString fileName, QStringList fileTree);
-    QStringList directoryTreeList(QString folder);
-    bool    createFolderZip(QString source, QString dstZipFile);
-    QString filePathName(QString fileName);
-    QString shortFileName(QString fileName);
-
-    QString spinLibPath;
-signals:
-
-public slots:
+    bool makeZip(QString fileName, QStringList files);
 
 };
-
-#endif // ZIPPER_H

@@ -10,7 +10,6 @@
 
 #include "ui_mainwindow.h"
 
-#include "treemodel.h"
 #include "Preferences.h"
 #include "editor.h"
 #include "portmonitor.h"
@@ -55,8 +54,6 @@ public slots:
 
     void findMultilineComment(QPoint point);
     void findMultilineComment(QTextCursor cur);
-    void projectTreeClicked(QModelIndex index);
-    void referenceTreeClicked(QModelIndex index);
     void setCurrentPort(int index);
     void spawnTerminal();
     void setProject();
@@ -90,8 +87,6 @@ private:
     void checkAndSaveFiles();
 
     bool eventFilter(QObject *target, QEvent *event);
-
-    void openTreeFile(QString fileName);
 
     typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
     int  runCompiler(COMPILE_TYPE type);

@@ -10,7 +10,6 @@
 #include <QTextCursor>
 
 #include "Highlighter.h"
-#include "SpinParser.h"
 #include "Preferences.h"
 
 class LineNumberArea;
@@ -22,14 +21,13 @@ class Editor : public QPlainTextEdit
 public:
     Editor(QWidget *parent);
     virtual ~Editor();
-
+    
+    Language lang;
 
     void setHighlights();
-    void setLineNumber(int num);
 
     void clearCtrlPressed();
 
-    SpinParser spinParser;
     void saveContent();
     int contentChanged();
 
@@ -51,22 +49,11 @@ private:
     bool canCopy;
 
     int  autoIndent();
-    int  braceMatchColumn();
-    bool isCommentOpen(int line);
-    bool isSpinCommentOpen(int line);
-    QString spinPrune(QString s);
     int addAutoItem(QString type, QString s);
     void spinAutoShow(int width);
     int  spinAutoComplete();
-    int  spinAutoCompleteCON();
-    int  contextHelp();
     int  tabBlockShift();
-    bool isNotAutoComplete();
     QString selectAutoComplete();
-    QString deletePrefix(QString s);
-    void spinSuggest();
-    void selectSpinSuggestion(int key);
-    void useSpinSuggestion(int key);
     QPoint keyPopPoint(QTextCursor cursor);
 
     ColorScheme * currentTheme;
@@ -78,12 +65,8 @@ private:
 protected:
     void keyPressEvent(QKeyEvent* e);
     void keyReleaseEvent(QKeyEvent* e);
-    void mousePressEvent(QMouseEvent* e);
-    void mouseMoveEvent(QMouseEvent* e);
-    void mouseDoubleClickEvent (QMouseEvent *e);
 
 private:
-    QWidget *mainwindow;
     QTextCursor lastCursor;
     QPoint  mousepos;
     bool    ctrlPressed;
@@ -112,16 +95,13 @@ protected:
     void resizeEvent(QResizeEvent *event);
 
 private slots:
-    void updateLineNumberAreaWidth(int newBlockCount);
+    void updateLineNumberAreaWidth();
     void updateBackgroundColors();
     void updateLineNumberArea(const QRect &, int);
 
 private:
     QWidget *lineNumberArea;
     QString fileName;
-
-signals:
-    void saveEditorFile();
 };
 
 

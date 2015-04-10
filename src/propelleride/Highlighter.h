@@ -19,6 +19,7 @@ class Highlighter : public QSyntaxHighlighter
 
 private:
     ColorScheme * currentTheme;
+    Language lang;
 
 public:
     Highlighter(QTextDocument *parent);

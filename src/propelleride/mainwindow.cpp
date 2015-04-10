@@ -50,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     connect(ui.actionSave_As,SIGNAL(triggered()),editorTabs,SLOT(saveAs()));
     connect(ui.actionSave_All,SIGNAL(triggered()),editorTabs,SLOT(saveAll()));
 
+    ui.action_Zip_Project->setEnabled(true);
     connect(ui.action_Zip_Project,SIGNAL(triggered()),this,SLOT(zipFiles()));
 
 
@@ -627,84 +628,6 @@ void MainWindow::findMultilineComment(QTextCursor cur)
     return;
 }
 
-void MainWindow::openTreeFile(QString fileName)
-{
-//    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-//    fileName = fileName.trimmed();
-//    qDebug() << "openTreeFile opening " << fileName;
-//    QString userFile = editorTabs->tabToolTip(editorTabs->currentIndex());
-//    QString userPath = QFileInfo(userFile).path();
-//    QFile file;
-//    QString fileToOpen;
-//
-//    if (file.exists(QDir(userPath).filePath(fileName)))
-//    {
-//        fileToOpen = QDir(userPath).filePath(fileName);
-//        qDebug() << "File in " << userPath;
-//    }
-//    else if (file.exists(QDir(spinIncludes).filePath(fileName)))
-//    {
-//        fileToOpen = QDir(spinIncludes).filePath(fileName);
-//        qDebug() << "File in " << spinIncludes;
-//    }
-//    else
-//    {
-//        qDebug() << "File not found!";
-//    }
-//
-//    editorTabs->openFile(fileToOpen);
-//
-//    QApplication::restoreOverrideCursor();
-}
-
-void MainWindow::projectTreeClicked(QModelIndex index)
-{
-//    QString fileName;
-//    QVariant vs = projectModel->data(index, Qt::DisplayRole);
-//    if(vs.canConvert(QVariant::String)){
-//        fileName = vs.toString();
-//    }
-//    if(fileName.length() > 0) {
-//        openTreeFile(fileName);
-//    }
-}
-
-void MainWindow::referenceTreeClicked(QModelIndex index)
-{
-
-//    QString method = NULL;
-//    QString myFile;
-//
-    qDebug() << parser->treeModel()->data(index).toString();
-//    if(vs.canConvert(QVariant::String)) {
-//        method = QString(vs.toString());
-//        method = method.trimmed();
-//    }
-//
-//    myFile = referenceModel->file(index);
-//    if(myFile.length() < 1) {
-//        qDebug() << "referenceModel did not have a file.";
-//        return;
-//    }
-//    if(referenceModel->hashCount() == 0) {
-//        qDebug() << "referenceModel did not find any symbols.";
-//        return;
-//    }
-//    if(method.length() > 0 && method.indexOf(QRegExp("pub|pri",Qt::CaseInsensitive)) < 0) {
-//        openTreeFile(method);
-//    }
-//    else {
-//        int num;
-//        QString file = referenceModel->getSymbolInfo(myFile+"::"+method.trimmed(), &num);
-//        if(file.length() > 0) {
-//            qDebug() << "referenceTreeClicked looks for " << method << "on line #" << num;
-//            qDebug() << "referenceTreeClicked opening " << file;
-//
-//            highlightFileLine(file, num);
-//        }
-//    }
-}
-
 void MainWindow::zipFiles()
 {
     int n = this->editorTabs->currentIndex();
@@ -713,13 +636,13 @@ void MainWindow::zipFiles()
     if (fileName.isEmpty())
         return;
 
-    QString spinLibPath     = QSettings().value("Library").toString();
-    QStringList fileTree    = editorTabs->getEditor(
-            editorTabs->currentIndex()
-            )->spinParser.spinFileTree(fileName, spinLibPath);
-    if(fileTree.count() > 0)
+    QString spinLibPath  = QSettings().value("Library").toString();
+    QStringList files = parser->getFileList();
+    qDebug() << files;
+
+    if(files.count() > 0)
     {
-        zipper.makeZip(fileName, fileTree, spinLibPath);
+        zipper.makeZip(fileName, files);
     }
 }
 

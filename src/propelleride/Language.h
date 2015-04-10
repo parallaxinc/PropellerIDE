@@ -14,7 +14,6 @@ private:
     bool enable_blocks;
     QString escape_char;
     
-    ProjectParser parser;
 
     QStringList keywords;
     QStringList operators;
@@ -28,6 +27,8 @@ private:
     QStringList mergeList(QStringList list);
 
 public:
+    ProjectParser parser;
+
     void buildParser(QJsonArray projectparser);
     void loadLanguage(QString filename);
     QStringList listKeywords();
