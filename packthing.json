@@ -34,9 +34,15 @@
         {
             "path": "openspin",
             "url": "https://github.com/bweir/OpenSpin.git",
-            "branch": "master",
+            "tag": "qt-0.1.0",
             "type": "qmake",
             "root": "qmake"
+        },
+        {
+            "path": "ide-prebuilts",
+            "url": "https://github.com/bweir/ide-prebuilts.git",
+            "branch": "master",
+            "type": "prebuilt"
         },
         {
             "path": "propman",
