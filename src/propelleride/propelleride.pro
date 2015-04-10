@@ -31,7 +31,6 @@ PRE_TARGETDEPS += ../projectview/libprojectview.a
 
 SOURCES += \
     BuildManager.cpp \
-    clickable.cpp \
     ColorScheme.cpp \
     ColorChooser.cpp \
     editor.cpp \
