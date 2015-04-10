@@ -15,16 +15,14 @@ PropellerIDE is designed to be more than just a code editor; it is a toolkit for
 
 ### Features
 
-- Spin syntax highlighting, auto-complete, code suggestion, and auto-indent
+- Spin syntax highlighting, auto-complete, and auto-indent
 - Unicode editing support
-- Collapsible sidebar with function and program views
-- Integrated serial terminal and memory map
-- Deeply integrated Propeller hardware tools
+- Searchable project view
+- Serial terminal, memory map,
+- Deep integration with Propeller hardware
 - Customizable theming
-- Slick browser-style tab controls
 - Runs on Windows, Mac, Linux, and Raspberry Pi!
-- Built from standalone components can be embedded in custom applications using `packthing`
-- Easy to create custom distributions using [`packthing`
+- Easy to deploy for custom applications using `packthing`
 
 ### Project Roadmap
 
@@ -39,8 +37,6 @@ PropellerIDE is designed to be more than just a code editor; it is a toolkit for
 * Multiple Propeller languages: Spin, C, PropBasic, xBasic, Forth,...
 * Serial and wireless code download
 * New platforms: Android, ChromeBook, HTML5, iOS
-* Internationalization and Unicode support
-* Package management for deploying extensions
  
 #### Requested features (short list)
 
