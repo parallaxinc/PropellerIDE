@@ -42,7 +42,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     PathSelector.cpp \
-    PortConnectionMonitor.cpp \
     Preferences.cpp \
     ReferenceTree.cpp \
     SpinParser.cpp \
@@ -62,7 +61,7 @@ HEADERS  += \
     Language.h \
     mainwindow.h \
     PathSelector.h \
-    PortConnectionMonitor.h \
+    portmonitor.h \
     Preferences.h \
     ReferenceTree.h \
     SpinParser.h \

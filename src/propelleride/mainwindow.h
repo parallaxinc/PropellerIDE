@@ -13,7 +13,7 @@
 #include "treemodel.h"
 #include "Preferences.h"
 #include "editor.h"
-#include "PortConnectionMonitor.h"
+#include "portmonitor.h"
 #include "zipper.h"
 #include "ReferenceTree.h"
 #include "FileManager.h"
@@ -114,7 +114,7 @@ private:
 
     QComboBox   *cbPort;
 
-    PortConnectionMonitor *portConnectionMonitor;
+    PortMonitor portMonitor;
 
     Zipper      zipper;
 

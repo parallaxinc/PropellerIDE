@@ -141,8 +141,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     /* get available ports at startup */
     enumeratePorts();
 
-    portConnectionMonitor = new PortConnectionMonitor();
-    connect(portConnectionMonitor, SIGNAL(portChanged()), this, SLOT(enumeratePorts()));
+    connect(&portMonitor, SIGNAL(portChanged()), this, SLOT(enumeratePorts()));
 
     connect(this,SIGNAL(signalStatusDone(bool)),this,SLOT(setStatusDone(bool)));
 
@@ -249,8 +248,6 @@ void MainWindow::closeEvent(QCloseEvent *e)
         if(e) e->ignore();
         return;
     }
-
-    portConnectionMonitor->stop();
 
     QSettings().setValue("windowSize",saveGeometry());
 
