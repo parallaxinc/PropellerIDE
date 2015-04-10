@@ -12,11 +12,14 @@ before_install:
 - sudo apt-get install zlib1g-dev libudev-dev cppcheck 
 - git submodule update --init --recursive
 - qmake -v
+- pip install packthing
 script:
 - qmake
 - make -j4
+- packthing -j4 --refresh deb
 after_script:
 - cppcheck --enable=all -q `git ls-files *.cpp`
+- ls build/staging/
 deploy:
   provider: releases
   api_key:
