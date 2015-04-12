@@ -1,6 +1,7 @@
 #include "ColorScheme.h"
 
 #include <QDebug>
+#include <QFontDatabase>
 
 ColorScheme::ColorScheme(QObject * parent) :
     QObject(parent)
@@ -27,8 +28,6 @@ void ColorScheme::defaults()
     colors[SyntaxQuotes]        = (color) { QColor("#a2b2ff") , "Syntax_Quotes"        };
     colors[SyntaxComments]      = (color) { QColor("#cccccc") , "Syntax_Comments"      };
 
-    setFont(QFont("Monospace"));
-    font.setPointSize(12);
 }
 
 
@@ -89,14 +88,24 @@ void ColorScheme::load(QSettings * settings)
 
     settings->beginGroup("Font");
 
-    if (! settings->contains("Family"))
+    qDebug() << "FONT" << settings->value("Family").toString();
+    if (!settings->contains("Family") || settings->value("Family").toString().isEmpty())
+    {
+        font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+        font.setPointSize(12);
+        font.setStyleHint(QFont::TypeWriter);
         settings->setValue("Family", font.family());
-    if (! settings->contains("Size"))
-        settings->setValue("Size", font.pointSize());
-
-    font.setFamily(
+    }
+    else
+    {
+        font.setFamily(
             settings->value("Family", font.family()).toString()
             );
+    }
+
+    if (!settings->contains("Size"))
+        settings->setValue("Size", font.pointSize());
+
     font.setPointSize(
             settings->value("Size", font.pointSize()).toInt()
             );
