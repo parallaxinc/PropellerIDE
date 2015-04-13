@@ -146,10 +146,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
 
     connect(this,SIGNAL(signalStatusDone(bool)),this,SLOT(setStatusDone(bool)));
 
-    ui.splitter_main->setSizes(QList<int>()
-            << ui.projectview->minimumSizeHint().width()
-            << (this->width() - ui.projectview->minimumSizeHint().width()));
-
     loadSession();
 
     installEventFilter(this);
