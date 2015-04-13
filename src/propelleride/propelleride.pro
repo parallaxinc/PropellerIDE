@@ -68,7 +68,6 @@ OTHER_FILES +=
 FORMS += \
     forms/about.ui \
     forms/mainwindow.ui \
-    forms/finder.ui \
     forms/finder_flat.ui \
     forms/status.ui \
 
