@@ -60,5 +60,6 @@
     <file>propellerhat.png</file>
     <file>icon.png</file>
     <file>icon-big.png</file>
+    <file>splash.png</file>
 </qresource>
 </RCC>
