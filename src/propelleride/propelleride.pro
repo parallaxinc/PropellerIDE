@@ -10,7 +10,6 @@ QT += gui widgets serialport
 }
 
 CONFIG -= debug_and_release app_bundle
-CONFIG += debug
 
 
 INCLUDEPATH += ../spinzip/
