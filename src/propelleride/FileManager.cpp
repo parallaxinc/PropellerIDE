@@ -197,6 +197,7 @@ void FileManager::saveFile(const QString & fileName, int index)
     QApplication::setOverrideCursor(Qt::WaitCursor);
     os.setCodec("UTF-8");
     os << getEditor(index)->toPlainText();
+    os.flush();
     QApplication::restoreOverrideCursor();
 
     setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
