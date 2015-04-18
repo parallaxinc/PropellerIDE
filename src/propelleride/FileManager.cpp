@@ -24,8 +24,6 @@ int FileManager::newFile()
     changeTab(index);
     setTabToolTip(index,"");
 
-//  newProjectTrees();
-
     connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
     connect(editor,SIGNAL(undoAvailable(bool)),this,SLOT(setUndo(bool)));
     connect(editor,SIGNAL(redoAvailable(bool)),this,SLOT(setRedo(bool)));
@@ -91,12 +89,12 @@ int FileManager::isFileEmpty(int index)
         return 0;
 }
 
-void FileManager::openFile(const QString & fileName)
+int FileManager::openFile(const QString & fileName)
 {
     qDebug() << "FileManager::openFile(" << fileName << ")";
 
     if (fileName.isEmpty())
-        return;
+        return 1;
 
     QFile file(fileName);
     if (!file.open(QFile::ReadOnly | QFile::Text))
@@ -105,11 +103,11 @@ void FileManager::openFile(const QString & fileName)
                              tr("Cannot read file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
-        return;
+        return 1;
     }
 
     if (isFileOpen(fileName))
-        return;
+        return 1;
 
     int index;
     if (isFileEmpty(currentIndex()))
@@ -131,6 +129,7 @@ void FileManager::openFile(const QString & fileName)
 
     emit fileUpdated(index);
     emit sendMessage(tr("File opened successfully: %1").arg(fileName));
+    return 0;
 }
 
 
@@ -198,12 +197,14 @@ void FileManager::saveFile(const QString & fileName, int index)
     QApplication::setOverrideCursor(Qt::WaitCursor);
     os.setCodec("UTF-8");
     os << getEditor(index)->toPlainText();
+    os.flush();
     QApplication::restoreOverrideCursor();
 
     setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
     setTabText(index,QFileInfo(fileName).fileName());
     getEditor(index)->saveContent();
     fileChanged();
+    emit fileUpdated(index);
     emit sendMessage(tr("File saved successfully: %1").arg(fileName));
 }
 

@@ -242,7 +242,7 @@ void Preferences::setupHighlight()
     QSettings settings;
 
     // this routine is repeated often and needs to be abstracted
-    int themeindex = themeEdit.findData(settings.value("Theme", ":/themes/Dusk_Ocean.theme").toString());
+    int themeindex = themeEdit.findData(settings.value("Theme", ":/themes/Midnight_Grace.theme").toString());
     themeEdit.setCurrentIndex(themeindex);
     loadTheme(themeindex);
     settings.setValue("Theme",themeEdit.itemData(themeEdit.currentIndex()));
@@ -316,7 +316,7 @@ void Preferences::browseLoader()
 {
     loaderpath->browsePath(
             tr("Select Loader"),
-            "Loader (p1load* p2load*);;BST Loader (bstl*)",
+            "propman (propman*);;p1load (p1load* p2load*);;BST Loader (bstl*)",
             false
         );
 }

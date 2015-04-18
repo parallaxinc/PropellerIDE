@@ -1,0 +1,7 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/languages">
+    <file>c.json</file>
+    <file>spin.json</file>
+    <file>propbasic.json</file>
+</qresource>
+</RCC>

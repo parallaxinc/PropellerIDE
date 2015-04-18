@@ -1,0 +1,6 @@
+[submodule "src/memorymap"]
+	path = src/memorymap
+	url = https://github.com/parallaxinc/memorymap.git
+[submodule "src/projectview"]
+	path = src/projectview
+	url = https://github.com/parallaxinc/projectview.git

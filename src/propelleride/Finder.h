@@ -16,7 +16,8 @@ private:
     int findPosition;
 
 public:
-    Finder(FileManager * fileManager, QWidget *parent = 0);
+    Finder(QWidget *parent = 0);
+    void connectFileManager(FileManager * fileManager);
 
 signals:
     void sendMessage(const QString & message);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>741</width>
-    <height>679</height>
+    <width>717</width>
+    <height>443</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,13 +17,70 @@
    <iconset resource="../icons/icons.qrc">
     <normaloff>:/icons/icon.png</normaloff>:/icons/icon.png</iconset>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QSplitter" name="splitter_main">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="opaqueResize">
+       <bool>true</bool>
+      </property>
+      <property name="childrenCollapsible">
+       <bool>true</bool>
+      </property>
+      <widget class="ProjectView" name="projectview" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+      <widget class="QSplitter" name="splitter">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+         <horstretch>5</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="FileManager" name="editorTabs">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>2</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+       <widget class="Finder" name="finder">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>741</width>
+     <width>717</width>
      <height>27</height>
     </rect>
    </property>
@@ -98,8 +155,9 @@
     </property>
     <addaction name="actionHelp_Contents"/>
     <addaction name="separator"/>
-    <addaction name="actionPropeller_Datasheet"/>
     <addaction name="actionPropeller_Manual"/>
+    <addaction name="actionPropeller_Datasheet"/>
+    <addaction name="actionPropeller_Quick_Reference"/>
     <addaction name="separator"/>
     <addaction name="action_About"/>
    </widget>
@@ -144,10 +202,12 @@
    <addaction name="action_Save"/>
    <addaction name="actionSave_As"/>
    <addaction name="separator"/>
+   <addaction name="action_Zip_Project"/>
+   <addaction name="separator"/>
+   <addaction name="actionView_Info"/>
    <addaction name="actionBuild"/>
    <addaction name="actionRun"/>
    <addaction name="actionBurn"/>
-   <addaction name="separator"/>
    <addaction name="actionTerminal"/>
   </widget>
   <action name="action_New">
@@ -579,7 +639,7 @@
   </action>
   <action name="actionView_Info">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset resource="../icons/icons.qrc">
@@ -709,7 +769,39 @@
     <string>View information about this program</string>
    </property>
   </action>
+  <action name="actionPropeller_Quick_Reference">
+   <property name="icon">
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/help-datasheet.png</normaloff>:/icons/help-datasheet.png</iconset>
+   </property>
+   <property name="text">
+    <string>Propeller &amp;Quick Reference</string>
+   </property>
+   <property name="statusTip">
+    <string>View the Propeller quick reference chart</string>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ProjectView</class>
+   <extends>QWidget</extends>
+   <header>../projectview/projectview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FileManager</class>
+   <extends>QTabWidget</extends>
+   <header>FileManager.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Finder</class>
+   <extends>QFrame</extends>
+   <header>Finder.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../icons/icons.qrc"/>
  </resources>

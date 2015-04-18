@@ -1,9 +1,8 @@
 #include "Finder.h"
 
-Finder::Finder(FileManager * fileManager, QWidget *parent)
+Finder::Finder(QWidget *parent)
     : QFrame(parent)
 {
-    this->fileManager = fileManager;
     findPosition = 0;
     ui.setupUi(this);
     hide();
@@ -16,8 +15,16 @@ Finder::Finder(FileManager * fileManager, QWidget *parent)
     connect(ui.findEdit,        SIGNAL(textChanged(QString)), this,   SLOT(findChanged(QString)));
 }
 
+void Finder::connectFileManager(FileManager * fileManager)
+{
+    this->fileManager = fileManager;
+}
+
 void Finder::showFinder()
 {
+    if (!fileManager)
+        return; 
+
     if (fileManager->count() > 0)
     {
         Editor *editor = fileManager->getEditor(fileManager->currentIndex());
@@ -50,6 +57,8 @@ QTextDocument::FindFlag Finder::getFlags(int prev)
 
 void Finder::findChanged(QString text)
 {
+    if (!fileManager)
+        return; 
     Editor *editor = fileManager->getEditor(fileManager->currentIndex());
     if(editor == NULL)
         return;
@@ -69,6 +78,8 @@ void Finder::findChanged(QString text)
 
 void Finder::find(int prev)
 {
+    if (!fileManager)
+        return; 
     Editor *editor = fileManager->getEditor(fileManager->currentIndex());
     if(editor == NULL)
         return;
@@ -119,6 +130,9 @@ void Finder::findPrevious()
 
 void Finder::replaceNext()
 {
+    if (!fileManager)
+        return; 
+
     Editor *editor = fileManager->getEditor(fileManager->currentIndex());
     if(editor == NULL)
         return;
@@ -136,6 +150,9 @@ void Finder::replaceNext()
 
 void Finder::replacePrevious()
 {
+    if (!fileManager)
+        return; 
+
     Editor *editor = fileManager->getEditor(fileManager->currentIndex());
     if(editor == NULL)
         return;
@@ -158,6 +175,8 @@ void Finder::replaceAll()
 {
     int count = 0;
     QString text = ui.findEdit->text();
+    if (!fileManager)
+        return; 
     Editor *editor = fileManager->getEditor(fileManager->currentIndex());
     if(editor == NULL)
         return;

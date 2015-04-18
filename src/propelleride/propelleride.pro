@@ -11,65 +11,71 @@ QT += gui widgets serialport
 
 CONFIG -= debug_and_release app_bundle
 
-INCLUDEPATH += . ..
 
-LIBS += -L$${OUT_PWD}/../spinzip/ -lspinzip
+INCLUDEPATH += ../spinzip/
+LIBS += -L../spinzip/ -lspinzip
+PRE_TARGETDEPS += ../spinzip/libspinzip.a
+
+INCLUDEPATH += ../memorymap/memorymap/
+LIBS += -L../memorymap/memorymap/  -lmemorymap
+PRE_TARGETDEPS += ../memorymap/QHexEdit/libQHexEdit.a
+
+INCLUDEPATH += ../memorymap/
+LIBS += -L../memorymap/QHexEdit/ -lQHexEdit
+PRE_TARGETDEPS += ../memorymap/memorymap/libmemorymap.a
+
+INCLUDEPATH += ../projectview/
+LIBS += -L../projectview/  -lprojectview
+PRE_TARGETDEPS += ../projectview/libprojectview.a
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp \
-    Highlighter.cpp \
-    treemodel.cpp \
-    treeitem.cpp \
-    clickable.cpp \
-    PathSelector.cpp \
-    Preferences.cpp \
-    PortConnectionMonitor.cpp \
-    ReferenceTree.cpp \
-    editor.cpp \
-    status.cpp \
-    SpinParser.cpp \
+    BuildManager.cpp \
     ColorScheme.cpp \
     ColorChooser.cpp \
+    editor.cpp \
     FileManager.cpp \
-    BuildManager.cpp \
-    Language.cpp \
     Finder.cpp \
+    Highlighter.cpp \
+    Language.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    PathSelector.cpp \
+    Preferences.cpp \
+    ReferenceTree.cpp \
+    status.cpp \
 
 HEADERS  += \
-    mainwindow.h \
-    Highlighter.h \
-    treemodel.h \
-    treeitem.h \
+    BuildManager.h \
     clickable.h \
-    PathSelector.h \
-    Preferences.h \
-    PortConnectionMonitor.h \
-    ReferenceTree.h \
-    editor.h \
-    SpinParser.h \
-    status.h \
     ColorChooser.h \
     ColorScheme.h \
-    templates/Singleton.h \
+    editor.h \
     FileManager.h \
-    BuildManager.h \
-    Language.h \
     Finder.h \
+    Highlighter.h \
+    Language.h \
+    mainwindow.h \
+    PathSelector.h \
+    portmonitor.h \
+    Preferences.h \
+    ReferenceTree.h \
+    status.h \
+    templates/Singleton.h \
 
 OTHER_FILES +=
 
 FORMS += \
+    forms/about.ui \
     forms/mainwindow.ui \
-    forms/TermPrefs.ui \
-    forms/finder.ui \
     forms/finder_flat.ui \
-    forms/status.ui
+    forms/status.ui \
 
 RESOURCES += \
-    icons/icons.qrc \
     fonts/fonts.qrc \
+    icons/icons.qrc \
+    languages/languages.qrc \
     themes/themes.qrc \
+    ../projectview/icons/projectview/projectview.qrc \
 
 CODECFORTR = UTF-8
 
@@ -80,7 +86,6 @@ macx {
     LIBS            += -framework IOKit -framework CoreFoundation
 }
 win32 {
-    LIBS            += -lsetupapi
     LIBS            += -L$$PWD -lz
     RC_FILE         = propelleride.rc
 }

@@ -10,6 +10,13 @@
 #include <QFile>
 #include <QString>
 #include <QRegExp>
+#include <QColor>
+#include <QIcon>
+
+Language::Language() 
+{
+    loadLanguage(":/languages/spin.json");
+}
 
 QStringList Language::matchWholeWord(QStringList list)
 {
@@ -41,7 +48,44 @@ QStringList Language::mergeList(QStringList list)
     return list.join(" ").split(QRegExp("\\s"));
 }
 
-QJsonObject Language::loadLanguage(QString filename)
+void Language::buildParser(QJsonArray projectparser)
+{
+    parser.clearRules();
+    parser.setCaseInsensitive(true);
+
+    foreach (QJsonValue r, projectparser)
+    {
+        QList<ProjectParser::Pattern> patterns;
+
+        foreach (QJsonValue pattern, r.toObject()["pattern"].toArray())
+        {
+            ProjectParser::Pattern p;
+            p.regex = pattern.toObject()["regex"].toString();
+            foreach (QVariant v, pattern.toObject()["capture"].toArray().toVariantList())
+            {
+                QMetaType::Type t = (QMetaType::Type) v.type();
+                if (t == QMetaType::Double)
+                {
+                    p.capture << v.toInt();
+                }
+                else if (t == QMetaType::QString)
+                {
+                    p.capture << v.toString();
+                }
+            }
+
+//            qDebug() << p.regex;
+//            qDebug() << p.capture;
+            patterns.append(p);
+        }
+
+        parser.addRule(r.toObject()["name"].toString(), patterns,
+            QIcon(r.toObject()["icon"].toString()),
+            QColor(r.toObject()["color"].toString()));
+    }
+}
+
+void Language::loadLanguage(QString filename)
 { 
     QString val;
     QFile file;
@@ -51,8 +95,8 @@ QJsonObject Language::loadLanguage(QString filename)
     file.close();
 
     QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
-    lang = d.object();
-    syntax = lang["syntax"].toObject();
+    QJsonObject lang = d.object();
+    QJsonObject syntax = lang["syntax"].toObject();
 
     case_sensitive = false;
     enable_blocks = false;
@@ -66,8 +110,7 @@ QJsonObject Language::loadLanguage(QString filename)
     case_sensitive = syntax["case_sensitive"].toBool();
     escape_char = syntax["escape"].toString();
 
-    modes = syntax["mode"].toObject();
-    foreach(QJsonValue m, modes)
+    foreach(QJsonValue m, syntax["mode"].toObject())
     {
         QStringList slist = buildWordList(
                 m.toObject()["keywords"].toArray());
@@ -84,7 +127,7 @@ QJsonObject Language::loadLanguage(QString filename)
         operators.append(slist);
     }
 
-    return lang;
+    buildParser(lang["project"].toArray());
 }
 
 QStringList Language::listKeywords()
@@ -117,7 +160,7 @@ QStringList Language::listFunctions()
     return functions;
 }
 
-Language::Language() 
+ProjectParser * Language::getParser(QString language)
 {
-    loadLanguage("languages/spin.json");
+    return &parser;
 }

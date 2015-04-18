@@ -34,16 +34,21 @@
         {
             "path": "openspin",
             "url": "https://github.com/bweir/OpenSpin.git",
-            "branch": "master",
+            "tag": "qt-0.1.0",
             "type": "qmake",
             "root": "qmake"
         },
         {
-            "path": "p1load",
-            "url": "https://github.com/bweir/p1load.git",
+            "path": "ide-prebuilts",
+            "url": "https://github.com/bweir/ide-prebuilts.git",
             "branch": "master",
-            "type": "qmake",
-            "root": "qmake"
+            "type": "prebuilt"
+        },
+        {
+            "path": "propman",
+            "url": "https://github.com/parallaxinc/PropellerManager.git",
+            "branch": "master",
+            "type": "qmake"
         },
         {
             "path": "propterm",

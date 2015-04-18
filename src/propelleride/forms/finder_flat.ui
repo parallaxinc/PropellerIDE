@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Finder</class>
- <widget class="QFrame" name="Finder">
+ <widget class="QWidget" name="Finder">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>564</width>
-    <height>62</height>
+    <width>866</width>
+    <height>60</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,10 @@
   <property name="windowTitle">
    <string>Frame</string>
   </property>
-  <property name="frameShape">
-   <enum>QFrame::StyledPanel</enum>
-  </property>
-  <property name="frameShadow">
-   <enum>QFrame::Raised</enum>
-  </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMinimumSize</enum>
+   </property>
    <item>
     <widget class="QLineEdit" name="findEdit">
      <property name="minimumSize">

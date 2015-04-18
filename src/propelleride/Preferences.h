@@ -36,7 +36,7 @@
 #endif
 
 #define DEFAULT_COMPILER            "/openspin"  APP_EXTENSION 
-#define DEFAULT_LOADER              "/p1load"    APP_EXTENSION
+#define DEFAULT_LOADER              "/propman"   APP_EXTENSION
 #define DEFAULT_TERMINAL            "/propterm"  APP_EXTENSION
 
 class Preferences : public QDialog

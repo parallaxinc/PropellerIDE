@@ -10,16 +10,16 @@
 
 #include "ui_mainwindow.h"
 
-#include "SpinParser.h"
-#include "treemodel.h"
 #include "Preferences.h"
 #include "editor.h"
-#include "PortConnectionMonitor.h"
-#include "spinzip/zipper.h"
+#include "portmonitor.h"
+#include "zipper.h"
 #include "ReferenceTree.h"
 #include "FileManager.h"
 #include "BuildManager.h"
 #include "Finder.h"
+#include "projectparser.h"
+#include "projectview.h"
 
 class MainWindow : public QMainWindow
 {
@@ -32,14 +32,11 @@ public:
     MainWindow(QWidget *parent = 0);
 
     Preferences  *propDialog;
-    QSplitter   *leftSplit;
-    QSplitter   *findSplit;
 
 public slots:
     void showMessage(const QString & message);
 
     // file menu
-    void newProjectTrees();
     void printFile();
     void zipFiles();
     void openFiles(const QStringList & files);
@@ -52,12 +49,11 @@ public slots:
     void openFileResource(QString const & resource);
     void propellerManual();
     void propellerDatasheet();
+    void propellerQuickReference();
     void about();
 
     void findMultilineComment(QPoint point);
     void findMultilineComment(QTextCursor cur);
-    void projectTreeClicked(QModelIndex index);
-    void referenceTreeClicked(QModelIndex index);
     void setCurrentPort(int index);
     void spawnTerminal();
     void setProject();
@@ -68,6 +64,8 @@ public slots:
     void programRun();
     void programDebug();
     void viewInfo();
+    void recolorInfo(QWidget * widget);
+    void recolorProjectView();
     void closeEvent(QCloseEvent *event);
     void quitProgram();
 
@@ -90,19 +88,6 @@ private:
 
     bool eventFilter(QObject *target, QEvent *event);
 
-    void setupFileMenu();
-    void setupEditMenu();
-    void setupViewMenu();
-    void setupProjectMenu();
-    void setupHelpMenu();
-
-    void setupProjectTools(QSplitter *vsplit);
-    void openTreeFile(QString fileName);
-    void updateProjectTree(QString fileName);
-    void updateSpinProjectTree(QString fileName);
-    void updateReferenceTree(QString fileName, QString text);
-    void updateSpinReferenceTree(QString fileName, QString includes, QString objname, int level);
-
     typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
     int  runCompiler(COMPILE_TYPE type);
     int  loadProgram(int type);
@@ -112,26 +97,19 @@ private:
     QString     spinTerminal;
     QString     spinLoader;
 
-    QToolBar    *ctrlToolBar;
-
     QList<QAction *> recentFiles;
-
-    QVBoxLayout *verticalLayout;
-    QFrame      *findFrame;
 
     Finder * finder;
     FileManager     *editorTabs;
     BuildManager    builder;
+    Language        language;
+    ProjectParser   * parser;
 
     QString         projectFile;
-    ReferenceTree   *projectTree;
-    ReferenceTree   *referenceTree;
-    TreeModel       *projectModel;
-    TreeModel       *referenceModel;
 
     QComboBox   *cbPort;
 
-    PortConnectionMonitor *portConnectionMonitor;
+    PortMonitor portMonitor;
 
     Zipper      zipper;
 

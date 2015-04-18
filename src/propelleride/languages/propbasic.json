@@ -1,0 +1,114 @@
+{
+    "name": "PropBASIC",
+    "ext": [
+        "pbas"
+    ],
+    "template": [
+        "Quickstart.pbas"
+    ],
+    "build": {
+        "cmd": [
+            [
+                "propbasic","%1"
+            ],
+            [
+                "openspin","-L","%1","%2"
+            ]
+        ],
+        "call": [
+            [
+                "propbasic","compile"
+            ]
+        ]
+    },
+    "syntax": {
+        "case_sensitive": false,
+        "enable_blocks": [
+            true,
+            [
+                "sub func task data wdata ldata"
+            ]
+        ],
+        "escape": "\\\\[\\s\\S]",
+        "string": [
+            "[\"].*[\"]"
+        ],
+        "number": [
+            "\\b[0-9_]+\\b",
+            "\\$[0-9a-f_]*",
+            "(%[0-3_]+|%%[0-1_]+)"
+        ],
+        "function": [
+            "\\b[A-Za-z0-9_.]+(?=\\()\\b"
+        ],
+        "comment": [
+            "'[^\n]*"
+        ],
+        "mode": {
+            "propbasic": {
+                "keywords": [
+                    "program device data wdata ldata hub con var pin",
+                    "func endfunc sub endsub asm endasm rem",
+                    "program include load end",
+                    "branch pause pauseus inc dec high low toggle goto gosub return",
+                    "let print if else elseif endif do loop for to step next",
+                    "address random freq xin serout serin shiftout shiftin rctime",
+                    "pulsin pulsout input output reverse djnz",
+                    "i2cstart i2cstop i2cwrite i2cread i2cspeed",
+                    "owreset owread owwrite",
+                    "exit on nop",
+                    "rdlong rdword rdbyte rdsbyte rdsword wrlong wrword wrbyte",
+                    "waitcnt waitvid waitpeq waitpne countera counterb",
+                    "locknew lockret lockset lockclr",
+                    "clkset stack task endtask cogstart coginit cogstop cogid",
+                    "break watch unwatch update vpconfig vpvideo vpwait file",
+                    "rcfast rcslow xinput xtal1 xtal2 xtal3 pll1x pll2x pll4x pll8x pll16x",
+                    "cnt ctra ctrb dira dirb ina inb outa outb frqa frqb phsa phsb vcfg vscl par spr",
+                    "__param1 __param2 __param3 __param4 __param5 __paramcnt",
+                    "__temp1 __temp2 __temp3 __temp4",
+                    "abs sgn len val addr"
+                ],
+                "operators": [
+                    "- + * / // ** */ & ! ^ ~ &~",
+                    "< <= > >= = <> >> << ",
+                    "\\bmin\\b \\bmax\\b \\bshr\\b \\bshl\\b",
+                    "\\bnot\\b",
+                    "\\band\\b \\bor\\b",
+                    "\\bandn\\b  \\bxor\\b"
+                ]
+            },
+            "pasm": {
+                "keywords": [
+                    "org fit res",
+                    "clkset",
+                    "cogid coginit cogstop",
+                    "locknew lockret lockclr lockset waitcnt waitpeq waitpne waitvid",
+                    "if_always if_never if_e if_ne if_a if_b if_ae if_be if_c if_nc if_z if_nz",
+                    "if_c_eq_z if_c_ne_z if_c_and_z if_c_and_nz if_nc_and_z if_nc_and_z if_nc_and_nz",
+                    "if_z_eq_c if_z_ne_c if_z_and_c if_z_and_nc if_nz_and_c if_nz_and_nc",
+                    "if_z_or_c if_z_or_nc if_nz_or_c if_nz_or_nc",
+                    "call djnz jmp jmpret tjnz tjz ret",
+                    "nr wr wc wz",
+                    "rdbyte rdword rdlong wrbyte wrword wrlong",
+                    "abs absneg neg negc negnc negz negnz min mins max maxs",
+                    "add addabs adds addx addsx",
+                    "sub subabs subs subx subsx",
+                    "sumc sumnc sumz sumnz mul muls",
+                    "and andn or xor ones enc rcl rcr rev rol ror shl shr sar",
+                    "cmp cmps cmpx cmpsx cmpsub test testn mov movs movd movi",
+                    "muxc muxnc muxz muxnz hubop nop",
+                    "true false posx negx pi",
+                    "dira dirb ina inb outa outb",
+                    "cnt ctra ctrb frqa frqb phsa phsb vcfg vscl par"
+                ],
+                "operators": [
+                    "+ - * ** / // #> <# ^^ || ~> < > << >> <- -> >< & | ^ !",
+                    "== <> < > =< => @",
+                    "\\bnot\\b",
+                    "\\band\\b",
+                    "\\bor\\b"
+                ]
+            }
+        }
+    }
+}

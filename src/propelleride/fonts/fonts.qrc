@@ -1,7 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/fonts">
     <file>Parallax.ttf</file>
-    <file>FreeMono.ttf</file>
     <file>LCD_Solid.ttf</file>
 </qresource>
 </RCC>
