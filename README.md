@@ -31,6 +31,7 @@ PropellerIDE is designed to be more than just a code editor; it is a toolkit for
 * Improve overall code maintainability
 * Refactor components for better separation of concerns
 * Refactor widgets to use UI forms
+* Auto-select newly attached serial devices
 
 #### Long-term focus
 
@@ -43,6 +44,7 @@ PropellerIDE is designed to be more than just a code editor; it is a toolkit for
 * Alt-Drag to select text blocks
 * Colorful serial console formatting
 * Indent guides
+* More Propeller documentation
 
 #### Features to support LameStation
 
