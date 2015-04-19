@@ -401,7 +401,7 @@ int MainWindow::loadProgram(int type)
             rc = builder.loadProgram(options);
             break;
         case MainWindow::LoadRunEeprom:
-            options += "-w";
+            options += " -w";
             rc = builder.loadProgram(options);
             break;
         default:
