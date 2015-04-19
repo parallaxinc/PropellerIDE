@@ -50,8 +50,8 @@ public:
     QString compileResult;
     QString loader;
 
-    int loadProgram(QString copts);
-    int runCompiler(QString copts);
+    int loadProgram(QString options = QString());
+    int runCompiler(QString options = QString());
     void getCompilerOutput();
 
 private:

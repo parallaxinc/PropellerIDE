@@ -140,13 +140,16 @@ int BuildManager::runProcess(const QString & programName, const QStringList & pr
 }
 
 
-int BuildManager::loadProgram(QString copts)
+int BuildManager::loadProgram(QString options)
 {
-    QStringList optslist = copts.split(" ");
-    QStringList args;
-    foreach (QString s, optslist)
+    QStringList optslist, args;
+    if (!options.isNull())
     {
-        args.append(s);
+        optslist = options.split(" ");
+        foreach (QString s, optslist)
+        {
+            args.append(s);
+        }
     }
     args.append(projectFile.replace(".spin",".binary"));
 
@@ -166,7 +169,7 @@ int BuildManager::loadProgram(QString copts)
     return rc;
 }
 
-int BuildManager::runCompiler(QString copts)
+int BuildManager::runCompiler(QString options)
 {
     QStringList args;
 
@@ -179,7 +182,9 @@ int BuildManager::runCompiler(QString copts)
     console->setText(tr("Building %1...").arg(QFileInfo(projectFile).fileName()));
 
     args.append(projectFile);
-    args.append(copts);
+
+    if (!options.isNull())
+        args.append(options);
 
     int rc = runProcess(compilerStr,args);
 

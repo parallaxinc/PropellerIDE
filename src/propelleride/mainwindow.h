@@ -14,7 +14,6 @@
 #include "editor.h"
 #include "portmonitor.h"
 #include "zipper.h"
-#include "ReferenceTree.h"
 #include "FileManager.h"
 #include "BuildManager.h"
 #include "Finder.h"
@@ -54,11 +53,8 @@ public slots:
 
     void findMultilineComment(QPoint point);
     void findMultilineComment(QTextCursor cur);
-    void setCurrentPort(int index);
     void spawnTerminal();
     void setProject();
-    void preferences();
-    void preferencesAccepted();
     void programBuild();
     void programBurnEE();
     void programRun();
@@ -77,19 +73,19 @@ public slots:
     void openRecentFile();
 
     void highlightFileLine(QString file, int line);
+    void getApplicationSettings();
+    void setEnableBuild(bool enabled);
 
 private:
     void loadSession();
     void saveSession();
     void clearSession();
 
-    void getApplicationSettings();
     void checkAndSaveFiles();
 
     bool eventFilter(QObject *target, QEvent *event);
 
-    typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
-    int  runCompiler(COMPILE_TYPE type);
+    int  runCompiler();
     int  loadProgram(int type);
 
     QString     spinCompiler;
@@ -99,8 +95,6 @@ private:
 
     QList<QAction *> recentFiles;
 
-    Finder * finder;
-    FileManager     *editorTabs;
     BuildManager    builder;
     Language        language;
     ProjectParser   * parser;

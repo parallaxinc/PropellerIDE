@@ -44,7 +44,6 @@ class Preferences : public QDialog
     Q_OBJECT
 public:
     explicit Preferences(QWidget *parent = 0);
-    void showPreferences();
 
     int  getTabSpaces();
     bool getAutoCompleteEnable();
@@ -69,6 +68,7 @@ public slots:
     void accept();
     void reject();
     void updateColor(int key, const QColor & color);
+    void showPreferences();
 
 private slots:
     void loadTheme(int index);
