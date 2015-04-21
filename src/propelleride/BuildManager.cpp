@@ -4,6 +4,7 @@ BuildManager::BuildManager(QWidget *parent) : QWidget(parent)
 {
     console = new Status(this);
     consoleEdit = console->getOutput();
+    connect(&timer,SIGNAL(timeout()),console,SLOT(hide()));
 }
 
 BuildManager::~BuildManager()
@@ -13,9 +14,26 @@ BuildManager::~BuildManager()
 
 void BuildManager::show()
 {
+    timer.stop();
     console->setStage(0);
     consoleEdit->clear();
     console->show();
+}
+
+void BuildManager::hide()
+{
+    console->hide();
+}
+
+void BuildManager::waitClose()
+{
+    timer.setSingleShot(true);
+    timer.start(500);
+}
+
+void BuildManager::setFont(const QFont & font)
+{
+    consoleEdit->setFont(font);
 }
 
 void BuildManager::setParameters(
@@ -165,12 +183,15 @@ int BuildManager::loadProgram(QString options)
     {
         console->setStage(3);
         console->setText(tr("Download complete!"));
+        waitClose();
     }
+
     return rc;
 }
 
 int BuildManager::runCompiler(QString options)
 {
+    console->raise();
     QStringList args;
 
     if(includesStr.length()) {

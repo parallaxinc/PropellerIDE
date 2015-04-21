@@ -5,7 +5,7 @@ Status::Status(QWidget *parent)
     : QFrame(parent)
 {
     ui.setupUi(this);
-    setWindowFlags( Qt::Dialog);
+    setWindowFlags(Qt::Dialog);
     setFrameShadow(QFrame::Raised);
 
     ui.plainTextEdit->hide();
@@ -23,21 +23,18 @@ Status::Status(QWidget *parent)
 void Status::setBuild(bool active)
 {
     ui.iconBuild->setEnabled(active);
-    ui.textBuild->setEnabled(active);
 }
 
 void Status::setDownload(bool active)
 {
     ui.arrow1->setEnabled(active);
     ui.iconDownload->setEnabled(active);
-    ui.textDownload->setEnabled(active);
 }
 
 void Status::setRun(bool active)
 {
     ui.arrow2->setEnabled(active);
     ui.iconRun->setEnabled(active);
-    ui.textRun->setEnabled(active);
 }
 
 void Status::setStage(int stage)

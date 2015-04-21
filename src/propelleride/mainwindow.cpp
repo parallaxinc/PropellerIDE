@@ -12,7 +12,8 @@
 
 #include "memorymap.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMutex::Recursive), statusDone(true)
+MainWindow::MainWindow(QWidget *parent)
+: QMainWindow(parent)
 {
     setWindowTitle(QCoreApplication::applicationName());
     ui.setupUi(this);
@@ -26,7 +27,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     parser = language.getParser();
     connect(propDialog,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
     connect(propDialog,SIGNAL(updateFonts()),this,SLOT(recolorProjectView()));
+
+    connect(propDialog,SIGNAL(updateFonts()),this,SLOT(recolorBuildManager()));
+
     recolorProjectView();
+    recolorBuildManager();
+
 
     // project editor tabs
     ui.finder->connectFileManager(ui.editorTabs);
@@ -124,7 +130,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), statusMutex(QMute
     // get available ports at startup
     enumeratePorts();
     connect(&portMonitor, SIGNAL(portChanged()), this, SLOT(enumeratePorts()));
-    connect(this,SIGNAL(signalStatusDone(bool)),this,SLOT(setStatusDone(bool)));
 
     ui.editorTabs->newFile();
     loadSession();
@@ -286,7 +291,7 @@ void MainWindow::setProject()
     }
     else
     {
-        shortname = "Untitled";
+        shortname = tr("Untitled");
     }
 
     if (ui.editorTabs->count() > 0)
@@ -352,39 +357,22 @@ int MainWindow::runCompiler()
 {
     builder.show();
 
-    QString copts;
-    int rc = -1;
-
     int index;
     QString fileName;
-    QString text;
-
-    if(!statusDone) {
-        return -1;
-    }
-
-    emit signalStatusDone(false);
 
     if(!ui.editorTabs->count())
         return 1;
 
     index = ui.editorTabs->currentIndex();
     fileName = ui.editorTabs->tabToolTip(index);
-    text = ui.editorTabs->getEditor(index)->toPlainText();
 
     getApplicationSettings();
 
     checkAndSaveFiles();
 
-    if(!fileName.contains(".spin"))
-    {
-        QMessageBox::critical(this,tr("Can't compile unknown file type"), tr("Files must be of type '.spin'"));
-    }
-
     builder.setParameters(spinCompiler, spinLoader, spinIncludes, fileName);
-    rc = builder.runCompiler();
+    int rc = builder.runCompiler();
 
-    emit signalStatusDone(true);
     return rc;
 }
 
@@ -393,8 +381,6 @@ int MainWindow::loadProgram(int type)
     int rc = -1;
     QString options;
     options += "-d"+cbPort->currentText();
-
-    emit signalStatusDone(false);
 
     switch (type) {
         case MainWindow::LoadRunHubRam:
@@ -408,17 +394,17 @@ int MainWindow::loadProgram(int type)
             break;
     }
 
-    if (!rc)
-        builder.hide();
-
-    emit signalStatusDone(true);
     return rc;
 }
 
 void MainWindow::programBuild()
 {
-    runCompiler();
+    if(runCompiler())
+        return;
+
+    builder.waitClose();
 }
+
 
 void MainWindow::programRun()
 {
@@ -447,12 +433,10 @@ void MainWindow::programDebug()
     }
 }
 
-
-void MainWindow::setStatusDone(bool done)
+void MainWindow::recolorBuildManager()
 {
-    statusMutex.lock();
-    statusDone = done;
-    statusMutex.unlock();
+    ColorScheme * theme = &Singleton<ColorScheme>::Instance();
+    builder.setFont(theme->getFont());
 }
 
 void MainWindow::recolorProjectView()
@@ -484,7 +468,11 @@ void MainWindow::viewInfo()
 
     int index = ui.editorTabs->currentIndex();
     QString filename = ui.editorTabs->tabToolTip(index);
-    programBuild();
+
+    if(runCompiler())
+        return;
+
+    builder.hide();
     QFileInfo fi(filename);
 
     QString binaryname = fi.completeBaseName()+".binary";

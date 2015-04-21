@@ -16,6 +16,7 @@
 #include <QThread>
 #include <QScrollBar>
 #include <QFileInfo>
+#include <QTimer>
 
 #include "status.h"
 
@@ -26,6 +27,9 @@ public:
     explicit BuildManager(QWidget *parent = 0);
     ~BuildManager();
     void show();
+    void hide();
+    void waitClose();
+    void setFont(const QFont & font);
 
     void setParameters(
             QString comp,
@@ -63,4 +67,5 @@ private:
     Status * console;
     QPlainTextEdit * consoleEdit;
 
+    QTimer timer;
 };

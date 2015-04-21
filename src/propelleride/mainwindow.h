@@ -62,6 +62,7 @@ public slots:
     void viewInfo();
     void recolorInfo(QWidget * widget);
     void recolorProjectView();
+    void recolorBuildManager();
     void closeEvent(QCloseEvent *event);
     void quitProgram();
 
@@ -85,8 +86,8 @@ private:
 
     bool eventFilter(QObject *target, QEvent *event);
 
-    int  runCompiler();
     int  loadProgram(int type);
+    int  runCompiler();
 
     QString     spinCompiler;
     QString     spinIncludes;
@@ -109,14 +110,5 @@ private:
 
     enum { LoadRunHubRam = 1 };
     enum { LoadRunEeprom = 2 };
-
-    QMutex      statusMutex;
-    bool        statusDone;
-
-signals:
-    void signalStatusDone(bool done);
-
-public slots:
-    void setStatusDone(bool done);
 
 };
