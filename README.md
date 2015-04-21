@@ -1,5 +1,4 @@
-<img src="icons/icon-new.png" align="left" height="192" width="192" >
-PropellerIDE 
+<img src="icons/icon-new.png" height="192" width="192" > PropellerIDE 
 ============
 PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.
 
