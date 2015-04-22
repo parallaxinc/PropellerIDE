@@ -14,7 +14,6 @@
 #include "editor.h"
 #include "portmonitor.h"
 #include "zipper.h"
-#include "ReferenceTree.h"
 #include "FileManager.h"
 #include "BuildManager.h"
 #include "Finder.h"
@@ -54,11 +53,8 @@ public slots:
 
     void findMultilineComment(QPoint point);
     void findMultilineComment(QTextCursor cur);
-    void setCurrentPort(int index);
     void spawnTerminal();
     void setProject();
-    void preferences();
-    void preferencesAccepted();
     void programBuild();
     void programBurnEE();
     void programRun();
@@ -66,6 +62,7 @@ public slots:
     void viewInfo();
     void recolorInfo(QWidget * widget);
     void recolorProjectView();
+    void recolorBuildManager();
     void closeEvent(QCloseEvent *event);
     void quitProgram();
 
@@ -77,20 +74,20 @@ public slots:
     void openRecentFile();
 
     void highlightFileLine(QString file, int line);
+    void getApplicationSettings();
+    void setEnableBuild(bool enabled);
 
 private:
     void loadSession();
     void saveSession();
     void clearSession();
 
-    void getApplicationSettings();
     void checkAndSaveFiles();
 
     bool eventFilter(QObject *target, QEvent *event);
 
-    typedef enum COMPILE_TYPE { COMPILE_ONLY, COMPILE_RUN, COMPILE_BURN } COMPILE_TYPE_T;
-    int  runCompiler(COMPILE_TYPE type);
     int  loadProgram(int type);
+    int  runCompiler();
 
     QString     spinCompiler;
     QString     spinIncludes;
@@ -99,8 +96,6 @@ private:
 
     QList<QAction *> recentFiles;
 
-    Finder * finder;
-    FileManager     *editorTabs;
     BuildManager    builder;
     Language        language;
     ProjectParser   * parser;
@@ -115,14 +110,5 @@ private:
 
     enum { LoadRunHubRam = 1 };
     enum { LoadRunEeprom = 2 };
-
-    QMutex      statusMutex;
-    bool        statusDone;
-
-signals:
-    void signalStatusDone(bool done);
-
-public slots:
-    void setStatusDone(bool done);
 
 };

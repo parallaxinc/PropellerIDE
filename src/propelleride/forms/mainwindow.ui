@@ -95,7 +95,7 @@
     <addaction name="actionSave_As"/>
     <addaction name="actionSave_All"/>
     <addaction name="separator"/>
-    <addaction name="action_Zip_Project"/>
+    <addaction name="action_Zip"/>
     <addaction name="separator"/>
     <addaction name="action_1_File"/>
     <addaction name="action_2_File"/>
@@ -202,7 +202,7 @@
    <addaction name="action_Save"/>
    <addaction name="actionSave_As"/>
    <addaction name="separator"/>
-   <addaction name="action_Zip_Project"/>
+   <addaction name="action_Zip"/>
    <addaction name="separator"/>
    <addaction name="actionView_Info"/>
    <addaction name="actionBuild"/>
@@ -281,7 +281,7 @@
     <string>Save all open files</string>
    </property>
   </action>
-  <action name="action_Zip_Project">
+  <action name="action_Zip">
    <property name="enabled">
     <bool>false</bool>
    </property>

@@ -41,7 +41,6 @@ SOURCES += \
     mainwindow.cpp \
     PathSelector.cpp \
     Preferences.cpp \
-    ReferenceTree.cpp \
     status.cpp \
 
 HEADERS  += \
@@ -58,7 +57,6 @@ HEADERS  += \
     PathSelector.h \
     portmonitor.h \
     Preferences.h \
-    ReferenceTree.h \
     status.h \
     templates/Singleton.h \
 

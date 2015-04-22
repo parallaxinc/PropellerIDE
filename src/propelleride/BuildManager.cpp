@@ -4,6 +4,7 @@ BuildManager::BuildManager(QWidget *parent) : QWidget(parent)
 {
     console = new Status(this);
     consoleEdit = console->getOutput();
+    connect(&timer,SIGNAL(timeout()),console,SLOT(hide()));
 }
 
 BuildManager::~BuildManager()
@@ -13,9 +14,26 @@ BuildManager::~BuildManager()
 
 void BuildManager::show()
 {
+    timer.stop();
     console->setStage(0);
     consoleEdit->clear();
     console->show();
+}
+
+void BuildManager::hide()
+{
+    console->hide();
+}
+
+void BuildManager::waitClose()
+{
+    timer.setSingleShot(true);
+    timer.start(500);
+}
+
+void BuildManager::setFont(const QFont & font)
+{
+    consoleEdit->setFont(font);
 }
 
 void BuildManager::setParameters(
@@ -140,13 +158,16 @@ int BuildManager::runProcess(const QString & programName, const QStringList & pr
 }
 
 
-int BuildManager::loadProgram(QString copts)
+int BuildManager::loadProgram(QString options)
 {
-    QStringList optslist = copts.split(" ");
-    QStringList args;
-    foreach (QString s, optslist)
+    QStringList optslist, args;
+    if (!options.isNull())
     {
-        args.append(s);
+        optslist = options.split(" ");
+        foreach (QString s, optslist)
+        {
+            args.append(s);
+        }
     }
     args.append(projectFile.replace(".spin",".binary"));
 
@@ -162,12 +183,15 @@ int BuildManager::loadProgram(QString copts)
     {
         console->setStage(3);
         console->setText(tr("Download complete!"));
+        waitClose();
     }
+
     return rc;
 }
 
-int BuildManager::runCompiler(QString copts)
+int BuildManager::runCompiler(QString options)
 {
+    console->raise();
     QStringList args;
 
     if(includesStr.length()) {
@@ -179,7 +203,9 @@ int BuildManager::runCompiler(QString copts)
     console->setText(tr("Building %1...").arg(QFileInfo(projectFile).fileName()));
 
     args.append(projectFile);
-    args.append(copts);
+
+    if (!options.isNull())
+        args.append(options);
 
     int rc = runProcess(compilerStr,args);
 
