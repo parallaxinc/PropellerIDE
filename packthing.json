@@ -24,8 +24,8 @@
     "repo": [
         {
             "path": "propelleride",
-            "url": "https://github.com/bweir/PropellerIDE.git",
-            "branch": "master",
+            "url": "https://github.com/parallaxinc/PropellerIDE.git",
+            "tag": "0.30.0",
             "type": "qmake",
             "root": "src",
             "master": true,
@@ -47,13 +47,13 @@
         {
             "path": "propman",
             "url": "https://github.com/parallaxinc/PropellerManager.git",
-            "branch": "master",
+            "branch": "0.1.0",
             "type": "qmake"
         },
         {
             "path": "propterm",
             "url": "https://github.com/parallaxinc/propterm.git",
-            "branch": "master",
+            "branch": "0.1.0",
             "type": "qmake"
         },
         {
