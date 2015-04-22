@@ -711,6 +711,7 @@ void MainWindow::about()
     QDialog * about = new QDialog();
     Ui::About ui;
     ui.setupUi(about);
+    ui.label_4->setText(tr("Version %1").arg(qApp->applicationVersion()));
     about->show();
 }
 
