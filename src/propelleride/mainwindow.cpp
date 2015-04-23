@@ -59,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent)
     
     connect(ui.action_Close,       SIGNAL(triggered()), ui.editorTabs, SLOT(closeFile()));
     connect(ui.actionClose_All,    SIGNAL(triggered()), ui.editorTabs, SLOT(closeAll()));
+    connect(ui.action_Quit,        SIGNAL(triggered()), this,          SLOT(quitProgram()));
 
     connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    ui.action_Save,     SLOT(setEnabled(bool)));
     connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    ui.actionSave_All,  SLOT(setEnabled(bool)));
