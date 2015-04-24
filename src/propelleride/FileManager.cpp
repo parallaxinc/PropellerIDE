@@ -1,5 +1,7 @@
 #include "FileManager.h"
 
+#include <QRegularExpression>
+
 FileManager::FileManager(QWidget *parent) :
     QTabWidget(parent)
 {
@@ -89,6 +91,13 @@ int FileManager::isFileEmpty(int index)
         return 0;
 }
 
+QString FileManager::reformatText(QString text)
+{
+    QRegularExpression newlines("\r\n|\r|\n",QRegularExpression::DotMatchesEverythingOption);
+    text.replace(newlines,"\n");
+    return text;
+}
+
 int FileManager::openFile(const QString & fileName)
 {
     qDebug() << "FileManager::openFile(" << fileName << ")";
@@ -97,7 +106,7 @@ int FileManager::openFile(const QString & fileName)
         return 1;
 
     QFile file(fileName);
-    if (!file.open(QFile::ReadOnly | QFile::Text))
+    if (!file.open(QFile::ReadOnly))
     {
         QMessageBox::warning(this, tr("Warning"),
                              tr("Cannot read file %1:\n%2.")
@@ -109,6 +118,8 @@ int FileManager::openFile(const QString & fileName)
     if (isFileOpen(fileName))
         return 1;
 
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
     int index;
     if (isFileEmpty(currentIndex()))
         index = currentIndex();
@@ -118,9 +129,7 @@ int FileManager::openFile(const QString & fileName)
     QTextStream in(&file);
     in.setAutoDetectUnicode(true);
     in.setCodec("UTF-8");
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    getEditor(index)->setPlainText(in.readAll());
-    QApplication::restoreOverrideCursor();
+    getEditor(index)->setPlainText(reformatText(in.readAll()));
 
     setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
     setTabText(index,QFileInfo(fileName).fileName());
@@ -129,6 +138,8 @@ int FileManager::openFile(const QString & fileName)
 
     emit fileUpdated(index);
     emit sendMessage(tr("File opened successfully: %1").arg(fileName));
+
+    QApplication::restoreOverrideCursor();
     return 0;
 }
 
