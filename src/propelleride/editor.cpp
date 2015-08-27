@@ -312,7 +312,7 @@ int Editor::spinAutoComplete()
                 filenames << lang.parser.findFileName(m.pretty);
         }
 
-        if (!filenames.count() > 0)
+        if (!(filenames.count() > 0))
             return 0;
 
         lang.parser.setFile(filenames[0]);
@@ -323,7 +323,7 @@ int Editor::spinAutoComplete()
     {
         matches = lang.parser.matchRule("public",toPlainText());
 
-        if (!matches.count() > 0)
+        if (!(matches.count() > 0))
             return 0;
     }
 
@@ -540,7 +540,7 @@ void Editor::updateColors()
     colors = currentTheme->getColorList();
     colorsAlt = colors;
 
-    QMap<ColorScheme::Color, ColorScheme::color>::iterator i;
+    QMap<ColorScheme::Color, ColorScheme::colorcontainer>::iterator i;
     for (i = colorsAlt.begin(); i != colorsAlt.end(); ++i)
     {
         // little fun formula to create two editor tones when color updated.

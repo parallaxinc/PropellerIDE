@@ -57,8 +57,8 @@ private:
     QPoint keyPopPoint(QTextCursor cursor);
 
     ColorScheme * currentTheme;
-    QMap<ColorScheme::Color, ColorScheme::color> colors;
-    QMap<ColorScheme::Color, ColorScheme::color> colorsAlt;
+    QMap<ColorScheme::Color, ColorScheme::colorcontainer> colors;
+    QMap<ColorScheme::Color, ColorScheme::colorcontainer> colorsAlt;
 
     QString oldcontents;
 

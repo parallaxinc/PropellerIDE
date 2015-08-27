@@ -3,10 +3,10 @@ TARGET = propelleride
 QT += gui widgets serialport
 
 !greaterThan(QT_MAJOR_VERSION, 4): {
-    error("PropellerIDE requires Qt5.2 or greater")
+    error("PropellerIDE requires Qt5.3 or greater")
 }
-!greaterThan(QT_MINOR_VERSION, 1): {
-    error("PropellerIDE requires Qt5.2 or greater")
+!greaterThan(QT_MINOR_VERSION, 2): {
+    error("PropellerIDE requires Qt5.3 or greater")
 }
 
 CONFIG -= debug_and_release app_bundle
@@ -14,19 +14,27 @@ CONFIG -= debug_and_release app_bundle
 
 INCLUDEPATH += ../spinzip/
 LIBS += -L../spinzip/ -lspinzip
-PRE_TARGETDEPS += ../spinzip/libspinzip.a
 
 INCLUDEPATH += ../memorymap/memorymap/
 LIBS += -L../memorymap/memorymap/  -lmemorymap
-PRE_TARGETDEPS += ../memorymap/QHexEdit/libQHexEdit.a
 
 INCLUDEPATH += ../memorymap/
 LIBS += -L../memorymap/QHexEdit/ -lQHexEdit
-PRE_TARGETDEPS += ../memorymap/memorymap/libmemorymap.a
 
 INCLUDEPATH += ../projectview/
 LIBS += -L../projectview/  -lprojectview
-PRE_TARGETDEPS += ../projectview/libprojectview.a
+
+win32-msvc* {
+	PRE_TARGETDEPS += ../spinzip/spinzip.lib
+	PRE_TARGETDEPS += ../memorymap/QHexEdit/QHexEdit.lib
+	PRE_TARGETDEPS += ../memorymap/memorymap/memorymap.lib
+	PRE_TARGETDEPS += ../projectview/projectview.lib
+} else {
+	PRE_TARGETDEPS += ../spinzip/libspinzip.a
+	PRE_TARGETDEPS += ../memorymap/QHexEdit/libQHexEdit.a
+	PRE_TARGETDEPS += ../memorymap/memorymap/libmemorymap.a
+	PRE_TARGETDEPS += ../projectview/libprojectview.a
+}
 
 SOURCES += \
     BuildManager.cpp \
