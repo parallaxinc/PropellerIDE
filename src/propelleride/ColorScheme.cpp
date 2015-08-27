@@ -6,30 +6,30 @@
 ColorScheme::ColorScheme(QObject * parent) :
     QObject(parent)
 {
-    defaults();
+ //   defaults();
     load();
 }
-
+/*
 void ColorScheme::defaults()
 {
     // Background Colors
-    colors[ConBG]               = (color) { QColor("#484848") , "Block_CON"  };
-    colors[VarBG]               = (color) { QColor("#4f002a") , "Block_VAR"  };
-    colors[ObjBG]               = (color) { QColor("#3d3d3d") , "Block_OBJ"  };
-    colors[PubBG]               = (color) { QColor("#24003b") , "Block_PUB"  };
-    colors[PriBG]               = (color) { QColor("#15004d") , "Block_PRI"  };
-    colors[DatBG]               = (color) { QColor("#003951") , "Block_DAT"  };
+    colors[ConBG]               = (colorcontainer) { QColor("#484848") , "Block_CON"  };
+    colors[VarBG]               = (colorcontainer) { QColor("#4f002a") , "Block_VAR"  };
+    colors[ObjBG]               = (colorcontainer) { QColor("#3d3d3d") , "Block_OBJ"  };
+    colors[PubBG]               = (colorcontainer) { QColor("#24003b") , "Block_PUB"  };
+    colors[PriBG]               = (colorcontainer) { QColor("#15004d") , "Block_PRI"  };
+    colors[DatBG]               = (colorcontainer) { QColor("#003951") , "Block_DAT"  };
 
     // Syntax Highlighting
-    colors[SyntaxText]          = (color) { QColor("#eeeeee") , "Syntax_Text"          };
-    colors[SyntaxNumbers]       = (color) { QColor("#ff7fff") , "Syntax_Numbers"       };
-    colors[SyntaxFunctions]     = (color) { QColor("#6565ff") , "Syntax_Functions"     };
-    colors[SyntaxKeywords]      = (color) { QColor("#ffffff") , "Syntax_Keywords"      };
-    colors[SyntaxQuotes]        = (color) { QColor("#a2b2ff") , "Syntax_Quotes"        };
-    colors[SyntaxComments]      = (color) { QColor("#cccccc") , "Syntax_Comments"      };
+    colors[SyntaxText]          = (colorcontainer) { QColor("#eeeeee") , "Syntax_Text"          };
+    colors[SyntaxNumbers]       = (colorcontainer) { QColor("#ff7fff") , "Syntax_Numbers"       };
+    colors[SyntaxFunctions]     = (colorcontainer) { QColor("#6565ff") , "Syntax_Functions"     };
+    colors[SyntaxKeywords]      = (colorcontainer) { QColor("#ffffff") , "Syntax_Keywords"      };
+    colors[SyntaxQuotes]        = (colorcontainer) { QColor("#a2b2ff") , "Syntax_Quotes"        };
+    colors[SyntaxComments]      = (colorcontainer) { QColor("#cccccc") , "Syntax_Comments"      };
 
 }
-
+*/
 
 void ColorScheme::save()
 {
@@ -37,7 +37,7 @@ void ColorScheme::save()
 
     settings.beginGroup("Colors");
 
-    QMap<ColorScheme::Color, color>::iterator i;
+    QMap<ColorScheme::Color, colorcontainer>::iterator i;
     for (i = colors.begin(); i != colors.end(); ++i)
     {
         settings.setValue(i.value().key,i.value().color.name());
@@ -70,7 +70,7 @@ void ColorScheme::load(QSettings * settings)
 {
     settings->beginGroup("Colors");
 
-    QMap<ColorScheme::Color, color>::iterator i;
+    QMap<ColorScheme::Color, colorcontainer>::iterator i;
     for (i = colors.begin(); i != colors.end(); ++i)
     {
         if (! settings->contains(i.value().key))
@@ -124,7 +124,7 @@ QColor ColorScheme::getColor(ColorScheme::Color key)
     return colors[key].color;
 };
 
-const QMap<ColorScheme::Color, ColorScheme::color>& ColorScheme::getColorList() const
+const QMap<ColorScheme::Color, ColorScheme::colorcontainer>& ColorScheme::getColorList() const
 {
     return colors;
 }

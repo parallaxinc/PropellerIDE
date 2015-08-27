@@ -15,7 +15,7 @@ class ColorScheme : public QObject
     Q_OBJECT
 
 public:
-    struct color {
+    struct colorcontainer {
         QColor color;
         QString key;
     };
@@ -46,7 +46,7 @@ public:
 
 private:
 
-    QMap<ColorScheme::Color, color> colors;
+    QMap<ColorScheme::Color, colorcontainer> colors;
     QFont font;
 
 public slots:
@@ -54,7 +54,7 @@ public slots:
     void save();
     void load();
     void load(const QString & filename);
-    void defaults();
+//    void defaults();
 
 public:
     void load(QSettings * settings);
@@ -65,6 +65,6 @@ public:
     QFont getFont();
     void setFont(const QFont & newfont);
 
-    const QMap<ColorScheme::Color, color>& getColorList() const;
+    const QMap<ColorScheme::Color, colorcontainer>& getColorList() const;
 
 };

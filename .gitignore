@@ -11,3 +11,7 @@ Makefile
 .DS_Store
 .qmake.stash
 *.pyc
+*.obj
+*.res
+*.lib
+

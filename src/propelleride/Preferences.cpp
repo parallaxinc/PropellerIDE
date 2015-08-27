@@ -273,10 +273,10 @@ void Preferences::setupHighlight()
 
     box->setLayout(vlayout);
 
-    QMap<ColorScheme::Color, ColorScheme::color> colors = 
+    QMap<ColorScheme::Color, ColorScheme::colorcontainer> colors = 
         currentTheme->getColorList();
 
-    QMap<ColorScheme::Color, ColorScheme::color>::const_iterator i;
+    QMap<ColorScheme::Color, ColorScheme::colorcontainer>::const_iterator i;
     for (i = colors.constBegin(); i != colors.constEnd(); ++i)
     {
         QString prettyname = QString(i.value().key);
