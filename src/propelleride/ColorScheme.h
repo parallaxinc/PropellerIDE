@@ -54,7 +54,7 @@ public slots:
     void save();
     void load();
     void load(const QString & filename);
-//    void defaults();
+    void defaults();
 
 public:
     void load(QSettings * settings);
