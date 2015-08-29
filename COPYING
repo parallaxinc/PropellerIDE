@@ -2,14 +2,10 @@ Several independent works are distributed along with
 PropellerIDE that fall under different licenses. These licenses
 are listed here for reference:
 
-Software        
+Software
 ---------------------------------------------------------------
 PropellerIDE        src/propelleride            GPLv3
-OpenSpin            src/openspin                MIT
-Spin library        library                     MIT unless otherwise noted
 zLib                src/spinzip                 zLib
-
-The full license texts are provided in the files LICENSE.GPL and LICENSE.MIT.
 
 PropellerIDE uses icons from the 24x24 Free Application Icons set licensed
 under a Creative Commons Attribution-Share Alike license by Aha-Soft.

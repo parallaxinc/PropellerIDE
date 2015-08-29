@@ -11,6 +11,7 @@ class FileManager : public QTabWidget
     Q_OBJECT
 private:
     void createBackgroundImage();
+    QString reformatText(QString text);
 
 public:
     explicit FileManager(QWidget *parent = 0);

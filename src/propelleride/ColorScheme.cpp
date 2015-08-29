@@ -6,30 +6,30 @@
 ColorScheme::ColorScheme(QObject * parent) :
     QObject(parent)
 {
- //   defaults();
+    defaults();
     load();
 }
-/*
+
 void ColorScheme::defaults()
 {
     // Background Colors
-    colors[ConBG]               = (colorcontainer) { QColor("#484848") , "Block_CON"  };
-    colors[VarBG]               = (colorcontainer) { QColor("#4f002a") , "Block_VAR"  };
-    colors[ObjBG]               = (colorcontainer) { QColor("#3d3d3d") , "Block_OBJ"  };
-    colors[PubBG]               = (colorcontainer) { QColor("#24003b") , "Block_PUB"  };
-    colors[PriBG]               = (colorcontainer) { QColor("#15004d") , "Block_PRI"  };
-    colors[DatBG]               = (colorcontainer) { QColor("#003951") , "Block_DAT"  };
+    colors[ConBG]               = (struct colorcontainer) { QColor("#484848") , "Block_CON"  };
+    colors[VarBG]               = (struct colorcontainer) { QColor("#4f002a") , "Block_VAR"  };
+    colors[ObjBG]               = (struct colorcontainer) { QColor("#3d3d3d") , "Block_OBJ"  };
+    colors[PubBG]               = (struct colorcontainer) { QColor("#24003b") , "Block_PUB"  };
+    colors[PriBG]               = (struct colorcontainer) { QColor("#15004d") , "Block_PRI"  };
+    colors[DatBG]               = (struct colorcontainer) { QColor("#003951") , "Block_DAT"  };
 
     // Syntax Highlighting
-    colors[SyntaxText]          = (colorcontainer) { QColor("#eeeeee") , "Syntax_Text"          };
-    colors[SyntaxNumbers]       = (colorcontainer) { QColor("#ff7fff") , "Syntax_Numbers"       };
-    colors[SyntaxFunctions]     = (colorcontainer) { QColor("#6565ff") , "Syntax_Functions"     };
-    colors[SyntaxKeywords]      = (colorcontainer) { QColor("#ffffff") , "Syntax_Keywords"      };
-    colors[SyntaxQuotes]        = (colorcontainer) { QColor("#a2b2ff") , "Syntax_Quotes"        };
-    colors[SyntaxComments]      = (colorcontainer) { QColor("#cccccc") , "Syntax_Comments"      };
+    colors[SyntaxText]          = (struct colorcontainer) { QColor("#eeeeee") , "Syntax_Text"          };
+    colors[SyntaxNumbers]       = (struct colorcontainer) { QColor("#ff7fff") , "Syntax_Numbers"       };
+    colors[SyntaxFunctions]     = (struct colorcontainer) { QColor("#6565ff") , "Syntax_Functions"     };
+    colors[SyntaxKeywords]      = (struct colorcontainer) { QColor("#ffffff") , "Syntax_Keywords"      };
+    colors[SyntaxQuotes]        = (struct colorcontainer) { QColor("#a2b2ff") , "Syntax_Quotes"        };
+    colors[SyntaxComments]      = (struct colorcontainer) { QColor("#cccccc") , "Syntax_Comments"      };
 
 }
-*/
+
 
 void ColorScheme::save()
 {
