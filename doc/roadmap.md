@@ -10,7 +10,7 @@ All features are ordered roughly chronologically in terms of what will be done a
 
 The template is as follows:
 
-> [system] - [description] ([hours])
+> **system** - description (hours)
 
 *Note: Time estimates are quite generous.*
 
