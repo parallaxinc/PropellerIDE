@@ -58,4 +58,5 @@ The template is as follows:
 * **Compiler (54)**
 * **Platform support (120)**
 
-* ***PropellerIDE (572)***
+
+***PropellerIDE (572)***
