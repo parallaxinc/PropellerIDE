@@ -7,7 +7,7 @@ PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax
 
 PropellerIDE rocks your socks with tons of awesome features:
 
-* Totally cross-platform, running on Windows, Mac, Linux, even Raspberry Pi!
+* Cross-platform, running on Windows, Mac, Linux, even Raspberry Pi!
 * Deeply integrated Propeller tools are your best friend
 * Clean, uncluttered user interface with redesigned searchable project view
 * Modular components can be used in new applications
