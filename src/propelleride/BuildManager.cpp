@@ -28,7 +28,7 @@ void BuildManager::hide()
 void BuildManager::waitClose()
 {
     timer.setSingleShot(true);
-    timer.start(500);
+    timer.start(1000);
 }
 
 void BuildManager::setFont(const QFont & font)
@@ -84,7 +84,7 @@ void BuildManager::procReadyRead()
 
     foreach (QString line, lines)
     {
-        if (line.contains("Program size is") || line.contains("Bit fe"))
+        if (line.contains("Program size is") || line.contains("Bit fe") || line.contains("DOWNLOAD COMPLETE"))
         {
             tf.setForeground(Qt::darkGreen);
             consoleEdit->setCurrentCharFormat(tf);
@@ -174,12 +174,9 @@ int BuildManager::loadProgram(QString options)
     console->setStage(2);
     console->setText(tr("Downloading %1...").arg(QFileInfo(projectFile).fileName()));
 
+    console->showDetails();
     int rc = runProcess(loader,args);
-    if (rc)
-    {
-        console->showDetails();
-    }
-    else
+    if (!rc)
     {
         console->setStage(3);
         console->setText(tr("Download complete!"));
