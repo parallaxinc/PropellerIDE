@@ -8,7 +8,7 @@
 Console::Console(QWidget *parent)
     : QPlainTextEdit(parent)
 {
-    setEchoEnabled(false);
+    setEchoEnabled(true);
     document()->setMaximumBlockCount(100);
     enable(false);
 
@@ -224,19 +224,39 @@ void Console::setPstMode(bool enable)
 void Console::keyPressEvent(QKeyEvent *e)
 {
     paused = true;
-    setTextCursor(lastCursor);
 
-    switch (e->key()) {
-    case Qt::Key_Backspace:
-    case Qt::Key_Left:
-    case Qt::Key_Right:
-    case Qt::Key_Up:
-    case Qt::Key_Down:
-        break;
-    default:
-        if (echoEnabled)
-            QPlainTextEdit::keyPressEvent(e);
-        emit getData(e->text().toLocal8Bit());
+    if (e->modifiers() & Qt::ControlModifier)
+    {
+        switch (e->key())
+        {
+            case Qt::Key_C:
+            case Qt::Key_Copy:
+                copy();
+                break;
+            case Qt::Key_V:
+            case Qt::Key_Paste:
+                paste();
+                break;
+        }
+    }
+    else
+    {
+        switch (e->key())
+        {
+            case Qt::Key_Backspace:
+            case Qt::Key_Left:
+            case Qt::Key_Right:
+            case Qt::Key_Up:
+            case Qt::Key_Down:
+                break;
+            default:
+                if (echoEnabled)
+                {
+                    setTextCursor(lastCursor);
+                    QPlainTextEdit::keyPressEvent(e);
+                }
+                emit getData(e->text().toLocal8Bit());
+        }
     }
 
     paused = false;

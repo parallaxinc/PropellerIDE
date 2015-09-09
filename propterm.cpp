@@ -22,6 +22,7 @@ PropTerm::PropTerm(QWidget *parent) :
     connect(ui.enable, SIGNAL(toggled(bool)), ui.console, SLOT(enable(bool)));
 
     connect(ui.echo, SIGNAL(clicked(bool)), ui.console, SLOT(setEchoEnabled(bool)));
+    ui.echo->setChecked(true);
 
     foreach (QString s, PropellerDevice::list())
     {
