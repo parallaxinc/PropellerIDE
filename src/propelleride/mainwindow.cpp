@@ -599,9 +599,9 @@ void MainWindow::enumeratePorts()
     QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
     foreach(QSerialPortInfo port, ports)
     {
-        if (!port.systemLocation().contains("ttyS") &&
-            !port.systemLocation().contains("Bluetooth"))
-            cbPort->addItem(port.systemLocation());
+        if (!port.portName().contains("ttyS") &&
+            !port.portName().contains("Bluetooth"))
+            cbPort->addItem(port.portName());
     }
 
     if(cbPort->count())
