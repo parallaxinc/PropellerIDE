@@ -1,0 +1,6 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/icons/propterm">
+    <file>term-bg-blue.png</file>
+    <file>term-bg-grey.png</file>
+</qresource>
+</RCC>
