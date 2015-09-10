@@ -25,9 +25,8 @@
         {
             "path": "propelleride",
             "url": "https://github.com/parallaxinc/PropellerIDE.git",
-            "tag": "0.30.1",
+            "tag": "0.31.0",
             "type": "qmake",
-            "root": "src",
             "master": true,
             "icon": "icons/icon-new.png"
         },
@@ -39,24 +38,19 @@
             "root": "qmake"
         },
         {
+            "path": "propman",
+            "url": "https://github.com/parallaxinc/PropellerManager.git",
+            "tag": "0.2.0",
+            "type": "qmake"
+        },
+        {
             "path": "ide-prebuilts",
             "url": "https://github.com/bweir/ide-prebuilts.git",
             "branch": "master",
             "type": "prebuilt"
         },
         {
-            "path": "propman",
-            "url": "https://github.com/parallaxinc/PropellerManager.git",
-            "branch": "0.1.1",
-            "type": "qmake"
-        },
-        {
-            "path": "propterm",
-            "url": "https://github.com/parallaxinc/propterm.git",
-            "branch": "0.1.0",
-            "type": "qmake"
-        },
-        {
+
             "path": "library",
             "url": "https://github.com/parallaxinc/spin-standard-library.git",
             "branch": "master",
