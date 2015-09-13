@@ -1,5 +1,6 @@
 sudo: false
 language: cpp
+env: PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages PATH=$PATH:$HOME/local/bin
 matrix:
   include:
   - compiler: gcc
