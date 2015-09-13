@@ -19,7 +19,6 @@ script:
 - make -j4
 - packthing -j4 $PACKTHING
 after_script:
-- cppcheck --enable=all -q `git ls-files *.cpp`
 - ls build/staging/
 deploy:
   provider: releases

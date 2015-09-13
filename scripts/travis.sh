@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+git submodule update --init --recursive
+
 # install Qt
 
 case "$PLATFORM" in
@@ -30,5 +32,11 @@ qmake -v
 mkdir -p $HOME/local/lib/python2.7/site-packages
 export PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
 export PATH=$PATH:$HOME/local/bin
-easy_install --prefix=$HOME/local packthing
+
+if type pip 2>/dev/null; then
+    pip install --install-option="--prefix=$HOME/local" packthing
+else
+    easy_install --prefix=$HOME/local packthing
+fi
+
 packthing -h
