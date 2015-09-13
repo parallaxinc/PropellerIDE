@@ -17,14 +17,16 @@ install:
 - set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5";
 - python --version
 - qmake -v
-- pip install packthing
 - pip install Pillow
+- git clone https://github.com/lamestation/packthing
+- cd packthing
+- python setup.py develop
+- cd ..
+- packthing -h
 - choco install -y InnoSetup
 
 build_script:
-- qmake -r
-- mingw32-make -j4
-- packthing -j4 win
+- packthing win
 
 deploy:
   provider: GitHub
