@@ -20,7 +20,6 @@ install:
 - pip install packthing
 - pip install Pillow
 - choco install -y InnoSetup
-- iscc -v
 
 build_script:
 - qmake -r
