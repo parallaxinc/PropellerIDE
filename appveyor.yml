@@ -16,9 +16,11 @@ install:
 - set PATH=%PATH%;%PYTHON%;%PYTHON%\Scripts;
 - set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5";
 - python --version
+- qmake -v
 - pip install packthing
 - pip install Pillow
 - choco install -y InnoSetup
+- iscc -v
 
 build_script:
 - qmake -r
