@@ -1,6 +1,5 @@
 sudo: false
 language: cpp
-env: PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages PATH=$PATH:$HOME/local/bin
 matrix:
   include:
   - compiler: gcc
@@ -10,10 +9,14 @@ matrix:
   include:
   - os: osx
     compiler: clang
-    env: PLATFORM=osx PACKTHING=mac
+    env:
+        PLATFORM=osx PACKTHING=mac
+        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages PATH=$PATH:$HOME/local/bin
   - os: linux
     compiler: g++
-    env: PLATFORM=linux PACKTHING=deb PATH=/home/travis/local/bin:$PATH LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
+    env:
+        PLATFORM=linux PACKTHING=deb PATH=/home/travis/local/bin:$PATH LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
+        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages PATH=$PATH:$HOME/local/bin
 before_install: "./scripts/travis.sh"
 script:
 - qmake
