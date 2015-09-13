@@ -10,7 +10,23 @@ configuration: Release
 install:
 - git submodule update --init --recursive
 - set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin;C:\Qt\Tools\QtCreator\bin
+- choco install -y InnoSetup
+- pip install packthing
+- pip install Pillow
 
 build_script:
 - qmake -r
 - mingw32-make -j4
+- packthing -j4 win
+
+deploy:
+  release: $(appveyor_build_version)
+  provider: GitHub
+  auth_token:
+    secure: GXCflmAAS74HVbfY3BV+6wN9HZ6qzYgrcINy3I4KBrUqsRQZUmoa+APbJbt4NzXb
+  artifact: build\staging\propelleride-*.exe
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    appveyor_repo_tag: true
