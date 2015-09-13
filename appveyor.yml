@@ -9,7 +9,7 @@ configuration: Release
 
 install:
 - git submodule update --init --recursive
-- set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin;C:\Qt\Tools\QtCreator\bin
+- set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin;C:\Qt\Tools\QtCreator\bin;%PYTHON%;%PYTHON%\Scripts;
 - choco install -y InnoSetup
 - pip install packthing
 - pip install Pillow
