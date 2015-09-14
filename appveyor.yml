@@ -1,4 +1,3 @@
-os: MinGW
 clone_depth: 200
 
 environment:
@@ -29,14 +28,13 @@ build_script:
 - packthing win
 
 artifacts:
-  - path: build\\staging\\propelleride-\*.exe
+  - path: build\staging\propelleride-*.exe
     name: propelleride
 
 deploy:
   provider: GitHub
   auth_token:
     secure: GXCflmAAS74HVbfY3BV+6wN9HZ6qzYgrcINy3I4KBrUqsRQZUmoa+APbJbt4NzXb
-  artifact: propelleride
   draft: false
   prerelease: false
   on:
