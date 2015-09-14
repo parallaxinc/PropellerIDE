@@ -32,7 +32,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: GXCflmAAS74HVbfY3BV+6wN9HZ6qzYgrcINy3I4KBrUqsRQZUmoa+APbJbt4NzXb
-  artifact: build\staging\propelleride-*.exe
+  artifact: build\staging\propelleride-\*
   draft: false
   prerelease: false
   on:
