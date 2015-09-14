@@ -29,7 +29,7 @@ build_script:
 - packthing win
 
 artifacts:
-  - path: build\staging\propelleride-\*.exe
+  - path: build\\staging\\propelleride-\*.exe
     name: propelleride
 
 deploy:
