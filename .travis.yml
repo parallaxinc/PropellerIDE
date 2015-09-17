@@ -15,15 +15,21 @@ matrix:
   - os: linux
     compiler: g++
     env:
-        PLATFORM=linux PACKTHING=deb PATH=/home/travis/local/bin:$PATH LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
-        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages PATH=$PATH:$HOME/local/bin
-before_install: "./scripts/travis.sh"
-script:
-- qmake
-- make -j4
-- packthing -j4 $PACKTHING
-after_script:
-- ls build/staging/
+        PLATFORM=linux PACKTHING=deb
+        PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
+        LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
+        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
+  - os: linux
+    compiler: clang
+    env:
+        PLATFORM=linux PACKTHING=deb
+        PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
+        LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
+        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
+        QMAKESPEC=linux-clang
+install: "./scripts/travis/install.sh"
+script: packthing -j4 $PACKTHING
+after_script: "./scripts/travis/after_script.sh"
 deploy:
   provider: releases
   api_key:
