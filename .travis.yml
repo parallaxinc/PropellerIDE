@@ -31,7 +31,7 @@ matrix:
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
         QMAKESPEC=linux-clang
 install: "./scripts/travis/install.sh"
-script: packthing -j4 $PACKTHING
+script: fakeroot packthing -j4 $PACKTHING
 after_script: "./scripts/travis/after_script.sh"
 deploy:
   provider: releases
