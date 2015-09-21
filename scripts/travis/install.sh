@@ -5,8 +5,7 @@ git submodule update --init --recursive
 
 case "$PLATFORM" in
 "osx")
-    brew install tree qt5 fakeroot
-    brew link --force fakeroot
+    brew install tree qt5
     ;;
 "linux")
     wget -4 http://lamestation.net/downloads/travis/qt5.5.0-linux-g++.tgz
