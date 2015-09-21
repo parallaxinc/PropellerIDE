@@ -27,7 +27,7 @@ matrix:
         LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
         QMAKESPEC=linux-clang
 install: "./scripts/travis/install.sh"
-script: sudo packthing -j $PACKTHING
+script: sudo -E packthing -j $PACKTHING
 after_script: "./scripts/travis/after_script.sh"
 deploy:
   provider: releases
