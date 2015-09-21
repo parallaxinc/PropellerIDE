@@ -1,10 +1,11 @@
 sudo: false
 language: cpp
-matrix:
-  include:
-  - compiler: gcc
-  - compiler: clang
-    env: QMAKESPEC=linux-clang
+addons:
+  apt:
+    packages:
+      - help2man
+      - lintian
+      - cppcheck
 matrix:
   include:
   - os: osx
