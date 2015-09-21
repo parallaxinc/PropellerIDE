@@ -1,4 +1,4 @@
-sudo: required
+sudo: false
 language: cpp
 matrix:
   include:
@@ -11,26 +11,26 @@ matrix:
     compiler: clang
     env:
         PLATFORM=osx PACKTHING=mac
-        QT_BIN=/usr/local/opt/qt5/bin:$HOME/local/bin
-        QT_LIB=/usr/local/opt/qt5/lib
+        PATH=/usr/local/opt/qt5/bin:$HOME/local/bin:$PATH
+        LD_LIBRARY_PATH=/usr/local/opt/qt5/lib:$LD_LIBRARY_PATH
+        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages 
   - os: linux
     compiler: g++
     env:
         PLATFORM=linux PACKTHING=deb
-        QT_BIN=/home/travis/local/bin:$HOME/local/bin
-        QT_LIB=/home/travis/local/lib
+        PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
+        LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
+        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
   - os: linux
     compiler: clang
     env:
         PLATFORM=linux PACKTHING=deb
-        QT_BIN=/home/travis/local/bin:$HOME/local/bin
-        QT_LIB=/home/travis/local/lib
+        PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
+        LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
+        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
         QMAKESPEC=linux-clang
 install: "./scripts/travis/install.sh"
-script:
-- export PATH=$QT_BIN:$PATH
-- export LD_LIBRARY_PATH=$QT_LIB:$LD_LIBRARY_PATH
-- sudo -E packthing -j $PACKTHING
+script: packthing -j4 $PACKTHING
 after_script: "./scripts/travis/after_script.sh"
 deploy:
   provider: releases
