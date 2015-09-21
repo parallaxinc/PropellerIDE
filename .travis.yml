@@ -11,23 +11,26 @@ matrix:
     compiler: clang
     env:
         PLATFORM=osx PACKTHING=mac
-        PATH=/usr/local/opt/qt5/bin:$HOME/local/bin:$PATH
-        LD_LIBRARY_PATH=/usr/local/opt/qt5/lib:$LD_LIBRARY_PATH
+        QT_BIN=/usr/local/opt/qt5/bin:$HOME/local/bin
+        QT_LIB=/usr/local/opt/qt5/lib
   - os: linux
     compiler: g++
     env:
         PLATFORM=linux PACKTHING=deb
-        PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
-        LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
+        QT_BIN=/home/travis/local/bin:$HOME/local/bin
+        QT_LIB=/home/travis/local/lib
   - os: linux
     compiler: clang
     env:
         PLATFORM=linux PACKTHING=deb
-        PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
-        LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
+        QT_BIN=/home/travis/local/bin:$HOME/local/bin
+        QT_LIB=/home/travis/local/lib
         QMAKESPEC=linux-clang
 install: "./scripts/travis/install.sh"
-script: sudo -E packthing -j $PACKTHING
+script:
+- export PATH=$QT_BIN:$PATH
+- export LD_LIBRARY_PATH=$QT_LIB:$LD_LIBRARY_PATH
+- sudo -E packthing -j $PACKTHING
 after_script: "./scripts/travis/after_script.sh"
 deploy:
   provider: releases
