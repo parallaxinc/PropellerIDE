@@ -18,6 +18,7 @@ case "$PLATFORM" in
     ;;
 esac
 
+mkdir -p $HOME/local/lib/python2.7/site-packages
 pushd $HOME
 git clone https://github.com/lamestation/packthing
 pushd packthing
