@@ -10,6 +10,7 @@ case "$PLATFORM" in
 "linux")
     ls -R build/staging/
     for f in build/staging/debian/propelleride/usr/bin/*; do echo $f; ldd $f; done
+    lintian build/staging/propelleride*.deb
     ;;
 *)
     echo "Invalid PLATFORM"
