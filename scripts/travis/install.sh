@@ -3,6 +3,7 @@ set -e
 
 git submodule update --init --recursive
 
+
 case "$PLATFORM" in
 "osx")
     brew install tree qt5
@@ -18,8 +19,12 @@ case "$PLATFORM" in
     ;;
 esac
 
-mkdir -p $HOME/local/lib/python2.7/site-packages
-easy_install --prefix=$HOME/local packthing
+pushd $HOME
+git clone https://github.com/lamestation/packthing
+pushd packthing
+sudo python setup.py install
+popd
+popd
 
 qmake -v
 packthing -h

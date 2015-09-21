@@ -13,21 +13,18 @@ matrix:
         PLATFORM=osx PACKTHING=mac
         PATH=/usr/local/opt/qt5/bin:$HOME/local/bin:$PATH
         LD_LIBRARY_PATH=/usr/local/opt/qt5/lib:$LD_LIBRARY_PATH
-        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages 
   - os: linux
     compiler: g++
     env:
         PLATFORM=linux PACKTHING=deb
         PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
         LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
-        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
   - os: linux
     compiler: clang
     env:
         PLATFORM=linux PACKTHING=deb
         PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
         LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
-        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
         QMAKESPEC=linux-clang
 install: "./scripts/travis/install.sh"
 script: sudo packthing -j $PACKTHING
