@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 language: cpp
 matrix:
   include:
@@ -30,7 +30,7 @@ matrix:
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
         QMAKESPEC=linux-clang
 install: "./scripts/travis/install.sh"
-script: packthing -j4 $PACKTHING
+script: sudo packthing -j $PACKTHING
 after_script: "./scripts/travis/after_script.sh"
 deploy:
   provider: releases
