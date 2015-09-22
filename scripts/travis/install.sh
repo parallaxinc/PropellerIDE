@@ -23,15 +23,24 @@ case "$PLATFORM" in
     ;;
 esac
 
-mkdir -p $HOME/local/lib/python2.7/site-packages
-pushd $HOME
-git clone https://github.com/lamestation/packthing
-pushd packthing
-python setup.py install --prefix=$HOME/local
-popd
-popd
-#mkdir -p $HOME/local/lib/python2.7/site-packages
-#easy_install --prefix=$HOME/local packthing
-
-qmake -v
-packthing -h
+case "$PLATFORM" in
+"linux-apt")
+    pushd $HOME
+    git clone https://github.com/lamestation/packthing
+    pushd packthing
+    sudo python setup.py install
+    popd
+    popd
+    ;;
+*)
+    mkdir -p $HOME/local/lib/python2.7/site-packages
+    pushd $HOME
+    git clone https://github.com/lamestation/packthing
+    pushd packthing
+    python setup.py install --prefix=$HOME/local
+    popd
+    popd
+    #mkdir -p $HOME/local/lib/python2.7/site-packages
+    #easy_install --prefix=$HOME/local packthing
+    ;;
+esac
