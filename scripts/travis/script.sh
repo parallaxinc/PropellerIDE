@@ -11,9 +11,6 @@ case "$PLATFORM" in
 "linux")
     fakeroot packthing -j4 $PACKTHING
     ;;
-"linux-apt")
-    sudo packthing -j4 $PACKTHING
-    ;;
 *)
     echo "Invalid PLATFORM"
     exit 1

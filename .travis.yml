@@ -20,14 +20,14 @@ matrix:
   - os: linux
     compiler: g++
     env:
-        PLATFORM=linux-apt PACKTHING=deb
+        PLATFORM=linux PACKTHING=deb
         PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
         LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
   - os: linux
     compiler: clang
     env:
-        PLATFORM=linux-apt PACKTHING=deb
+        PLATFORM=linux PACKTHING=deb
         PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
         LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
