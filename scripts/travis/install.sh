@@ -41,6 +41,7 @@ case "$PLATFORM" in
     python setup.py install --prefix=$HOME/local
     popd
     popd
+    ;;
 *)
     echo "Invalid PLATFORM"
     exit 1
