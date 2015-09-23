@@ -1,0 +1,50 @@
+name: "PropellerIDE"
+package: "propelleride"
+org: "Parallax Inc."
+url: "http://developer.parallax.com/projects/propelleride/"
+maintainer: "LameStation"
+email: "contact@lamestation.com"
+copyright: "2014-2015"
+license: "GPLv3"
+tagline: "The fun Spin editor"
+description: "An easy-to-use cross-platform development tool for the Parallax Propeller microcontroller."
+
+target: 
+  deb: 
+    depends: "libftdi1"
+    categories: "Development;IDE"
+    section: "Applications/Editors"
+  mac: 
+    category: "public.app-category.developer-tools"
+
+repo: 
+  - path: "propelleride"
+    url: "https://github.com/parallaxinc/PropellerIDE.git"
+    tag: "0.31.12"
+    type: "qmake"
+    master: true
+    icon: "icons/icon-new.png"
+
+  - path: "openspin"
+    url: "https://github.com/bweir/OpenSpin.git"
+    tag: "qt-0.1.0"
+    type: "qmake"
+    root: "qmake"
+
+  - path: "propman"
+    url: "https://github.com/parallaxinc/PropellerManager.git"
+    tag: "0.2.0"
+    type: "qmake"
+
+  - path: "ide-prebuilts"
+    url: "https://github.com/bweir/ide-prebuilts.git"
+    branch: "master"
+    type: "prebuilt"
+
+  - path: "library"
+    url: "https://github.com/parallaxinc/spin-standard-library.git"
+    type: "dir"
+
+  - path: "doc"
+    url: "https://github.com/parallaxinc/spin-docs.git"
+    type: "dir"
