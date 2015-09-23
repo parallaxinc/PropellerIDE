@@ -37,7 +37,7 @@ case "$PLATFORM" in
     pushd $HOME
     git clone https://github.com/lamestation/packthing
     pushd packthing
-    pip install -r requirements.txt --prefix=$HOME/local
+    pip install -r requirements.txt
     python setup.py install --prefix=$HOME/local
     popd
     popd
