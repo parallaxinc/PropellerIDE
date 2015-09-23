@@ -13,21 +13,21 @@ matrix:
   - os: osx
     compiler: clang
     env:
-        PLATFORM=osx PACKTHING=dmg
+        PLATFORM=osx
         PATH=/usr/local/opt/qt5/bin:$HOME/local/bin:$PATH
         LD_LIBRARY_PATH=/usr/local/opt/qt5/lib:$LD_LIBRARY_PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages 
   - os: linux
     compiler: g++
     env:
-        PLATFORM=linux PACKTHING=deb
+        PLATFORM=linux
         PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
         LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
   - os: linux
     compiler: clang
     env:
-        PLATFORM=linux PACKTHING=deb
+        PLATFORM=linux
         PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
         LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
@@ -40,7 +40,7 @@ deploy:
   api_key:
     secure: pXTKmYwykeSD1FSVFvkfR4q91X9AVkNPS2/FKDs+CnWDgFJyDrxsD8D596fLKA3OwbLD7QkXTBj4alhmj7OmcIf56ZZXlKy/O47OfC4JgHjkWYGIbE6CR/UpLRnGS251/zs8NjypnLSk+puiw1lHUqeIBqYGGCzkBN19uaGiyUc=
   file_glob: true
-  file: build/staging/propelleride-*
+  file: propelleride-*
   skip_cleanup: true
   on:
     repo: parallaxinc/PropellerIDE
