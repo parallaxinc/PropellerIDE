@@ -23,7 +23,7 @@ case "$PLATFORM" in
 esac
 
 case "$PLATFORM" in
-"linux-apt")
+"linux")
     pushd $HOME
     git clone https://github.com/lamestation/packthing
     pushd packthing
