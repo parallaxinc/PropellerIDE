@@ -32,16 +32,17 @@ case "$PLATFORM" in
     popd
     popd
     ;;
-*)
+"osx")
     mkdir -p $HOME/local/lib/python2.7/site-packages
+    easy_install --prefix=$HOME/local pyyaml
     pushd $HOME
     git clone https://github.com/lamestation/packthing
     pushd packthing
-    pip install -r requirements.txt
     python setup.py install --prefix=$HOME/local
     popd
     popd
-    #mkdir -p $HOME/local/lib/python2.7/site-packages
-    #easy_install --prefix=$HOME/local packthing
+*)
+    echo "Invalid PLATFORM"
+    exit 1
     ;;
 esac
