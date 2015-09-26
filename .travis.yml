@@ -14,22 +14,19 @@ matrix:
     compiler: clang
     env:
         PLATFORM=osx
-        PATH=/usr/local/opt/qt5/bin:$HOME/local/bin:$PATH
-        LD_LIBRARY_PATH=/usr/local/opt/qt5/lib:$LD_LIBRARY_PATH
+        PATH=/Users/travis/local/bin:$PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages 
   - os: linux
     compiler: g++
     env:
         PLATFORM=linux
-        PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
-        LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
+        PATH=/home/travis/local/bin:$PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
   - os: linux
     compiler: clang
     env:
         PLATFORM=linux
-        PATH=/home/travis/local/bin:$HOME/local/bin:$PATH
-        LD_LIBRARY_PATH=/home/travis/local/lib:$LD_LIBRARY_PATH
+        PATH=/home/travis/local/bin:$PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
         QMAKESPEC=linux-clang
 install: "./scripts/travis/install.sh"

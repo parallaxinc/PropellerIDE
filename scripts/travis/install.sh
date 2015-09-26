@@ -5,7 +5,10 @@ git submodule update --init --recursive
 
 case "$PLATFORM" in
 "osx")
-    brew install tree qt5
+    brew install tree
+    wget -4 http://lamestation.net/downloads/travis/qt5.5.0-mac-clang.tgz
+    tar xzf qt5.5.0-mac-clang.tgz
+    mv local/ /Users/travis/local/
     ;;
 "linux")
 #    wget -4 http://lamestation.net/downloads/travis/qt5.5.0-linux-g++.tgz
