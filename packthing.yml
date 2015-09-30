@@ -33,7 +33,7 @@ repo:
 
   - path: "propman"
     url: "https://github.com/parallaxinc/PropellerManager.git"
-    tag: "0.2.0"
+    tag: "0.3.0"
     type: "qmake"
 
   - path: "ide-prebuilts"
