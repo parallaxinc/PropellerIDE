@@ -20,7 +20,7 @@ target:
 repo: 
   - path: "propelleride"
     url: "https://github.com/parallaxinc/PropellerIDE.git"
-    tag: "0.31.16"
+    tag: "0.32.0"
     type: "qmake"
     master: true
     icon: "icons/icon-new.png"
