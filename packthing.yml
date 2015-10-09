@@ -15,7 +15,7 @@ target:
     depends: libftdi1
     categories: Development;IDE
     section: Applications/Editors
-  mac: 
+  dmg: 
     category: public.app-category.developer-tools
 
 repo: 
