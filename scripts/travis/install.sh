@@ -20,6 +20,7 @@ case "$PLATFORM" in
 #    sudo apt-get update
 #    sudo apt-get install qt5-default qt5-qmake qtbase5-dev-tools qttools5-dev qtchooser qtbase5-dev libgles2-mesa-dev libqt5gui5 libqt5serialport5-dev libqt5widgets5 libgles2-mesa libgl1-mesa-dev libgl1-mesa-glx libglapi-mesa libegl1-mesa-dev libpango-1.0-0
 
+    sudo add-apt-repository "deb mirror://mirrors.ubuntu.com/mirrors.txt utopic main"
     sudo apt-get update
     sudo apt-get install qt5-default libqt5serialport5-dev
     ;;
