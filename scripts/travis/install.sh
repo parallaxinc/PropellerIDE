@@ -12,7 +12,7 @@ case "$PLATFORM" in
     ;;
 "linux")
     # refresh apt sources
-    sudo rm /var/lib/apt/lists/* -vf
+    sudo rm /var/lib/apt/lists/* -vrf
 #    wget -4 http://lamestation.net/downloads/travis/qt5.5.0-linux-g++.tgz
 #    tar xzf qt5.5.0-linux-g++.tgz
 #    mv local/ /home/travis/local/
