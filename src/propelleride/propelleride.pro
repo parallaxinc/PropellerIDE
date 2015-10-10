@@ -3,10 +3,10 @@ TARGET = propelleride
 QT += gui widgets serialport
 
 !greaterThan(QT_MAJOR_VERSION, 4): {
-    error("PropellerIDE requires Qt5.3 or greater")
+    error("PropellerIDE requires Qt5.2 or greater")
 }
-!greaterThan(QT_MINOR_VERSION, 2): {
-    error("PropellerIDE requires Qt5.3 or greater")
+!greaterThan(QT_MINOR_VERSION, 1): {
+    error("PropellerIDE requires Qt5.2 or greater")
 }
 
 CONFIG -= debug_and_release app_bundle
