@@ -10,6 +10,8 @@ addons:
       - lintian
       - cppcheck
       - tree
+      - qt5-default
+      - libqt5serialport5-dev
 matrix:
   include:
   - os: osx

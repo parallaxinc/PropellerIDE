@@ -14,10 +14,6 @@ case "$PLATFORM" in
 #    wget -4 http://lamestation.net/downloads/travis/qt5.5.0-linux-g++.tgz
 #    tar xzf qt5.5.0-linux-g++.tgz
 #    mv local/ /home/travis/local/
-
-    sudo add-apt-repository "deb mirror://mirrors.ubuntu.com/mirrors.txt vivid main"
-    sudo apt-get update
-    sudo apt-get install qt5-default libqt5serialport5-dev
     ;;
 *)
     echo "Invalid PLATFORM"
