@@ -15,7 +15,7 @@ case "$PLATFORM" in
 #    tar xzf qt5.5.0-linux-g++.tgz
 #    mv local/ /home/travis/local/
 
-    sudo apt-get install qt5-default libqt5serialport5-dev libudev-dev
+    sudo apt-get install qt5-default libqt5serialport5-dev
     ;;
 *)
     echo "Invalid PLATFORM"
