@@ -53,7 +53,6 @@ case "$PLATFORM" in
 
     mkdir -p $MNT/usr/bin
     sudo cp -vf ./inside-chroot.sh $MNT/
-    sudo cp -vf ./inside-chroot-script.sh $MNT/
     sudo cp -vf /usr/bin/qemu-arm-static $MNT/usr/bin/
     sudo mount -o bind /dev  $MNT/dev
     sudo mount -o bind /proc $MNT/proc
