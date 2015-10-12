@@ -52,15 +52,15 @@ case "$PLATFORM" in
     pushd scripts/travis/rpi
 
     mkdir -p $MNT/usr/bin
-    sudo cp -f ./inside-chroot.sh $MNT/
-    sudo cp -f ./inside-chroot-script.sh $MNT/
-    sudo cp -f /usr/bin/qemu-arm-static $MNT/usr/bin/
+    sudo cp -vf ./inside-chroot.sh $MNT/
+    sudo cp -vf ./inside-chroot-script.sh $MNT/
+    sudo cp -vf /usr/bin/qemu-arm-static $MNT/usr/bin/
     sudo mount -o bind /dev  $MNT/dev
     sudo mount -o bind /proc $MNT/proc
     sudo mount -o bind /sys  $MNT/sys
     sudo mount --bind /home  $MNT/home
-    sudo cp -f /etc/network/interfaces $MNT/etc/network/interfaces
-    sudo cp -f /etc/resolv.conf $MNT/etc/resolv.conf 
+    sudo cp -vf /etc/network/interfaces $MNT/etc/network/interfaces
+    sudo cp -vf /etc/resolv.conf $MNT/etc/resolv.conf 
     #sudo sed -e's/^/#/g' -i $MNT/etc/ld.so.preload
     #sudo echo 'deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi' >> $MNT/etc/apt/sources.list
 
@@ -103,6 +103,9 @@ case "$PLATFORM" in
 "rpi")
     pushd scripts/travis/rpi
     echo "Entering chroot (install.sh)"
+    pwd
+    ls -l $MNT/
+    tree
     sudo chroot $MNT/ /bin/bash -c "./inside-chroot.sh"
     popd
     ;;
