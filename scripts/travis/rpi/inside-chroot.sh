@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#sudo apt-get update
-#sudo apt-get install qt5-default
+sudo apt-get update
+sudo apt-get install qt5-default libqt5serialport5-dev
 
 pushd /home/travis/packthing
 python setup.py install
