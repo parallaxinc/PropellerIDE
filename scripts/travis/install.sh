@@ -56,8 +56,6 @@ case "$PLATFORM" in
     pushd scripts/travis/rpi
 
     mkdir -p $MNT/usr/bin
-    sudo cp -vf ./inside-chroot.sh $MNT/
-    sudo cp -vf ./inside-chroot-script.sh $MNT/
     sudo cp -vf /usr/bin/qemu-arm-static $MNT/usr/bin/
     sudo cp -vf /etc/network/interfaces $MNT/etc/network/interfaces
     sudo cp -vf /etc/resolv.conf $MNT/etc/resolv.conf 
@@ -92,25 +90,6 @@ case "$PLATFORM" in
     python setup.py install --prefix=$HOME/local
     popd
     popd
-    ;;
-*)
-    echo "Invalid PLATFORM"
-    exit 1
-    ;;
-esac
-
-case "$PLATFORM" in
-"rpi")
-    pushd scripts/travis/rpi
-    echo "Entering chroot (install.sh)"
-    pwd
-    ls -l $MNT/
-    tree
-    sudo chroot $MNT/ /bin/bash -c "./inside-chroot.sh"
-
-    popd
-    ;;
-"linux"|"osx")
     ;;
 *)
     echo "Invalid PLATFORM"
