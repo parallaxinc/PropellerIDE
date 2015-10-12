@@ -52,7 +52,8 @@ case "$PLATFORM" in
     pushd scripts/travis/rpi
 
     mkdir -p $MNT/usr/bin
-    sudo cp -f ./inside-chroot*.sh $MNT/
+    sudo cp -f ./inside-chroot.sh $MNT/
+    sudo cp -f ./inside-chroot-script.sh $MNT/
     sudo cp -f /usr/bin/qemu-arm-static $MNT/usr/bin/
     sudo mount -o bind /dev  $MNT/dev
     sudo mount -o bind /proc $MNT/proc
