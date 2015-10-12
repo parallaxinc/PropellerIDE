@@ -41,8 +41,6 @@ matrix:
   - os: linux
     env:
         PLATFORM=rpi
-        PROJECTHOME=/home/travis/$TRAVIS_REPO_SLUG
-        RPISCRIPTS=$PROJECTHOME/scripts/travis/rpi
 install: "./scripts/travis/install.sh"
 script:  "./scripts/travis/script.sh"
 after_script: "./scripts/travis/after_script.sh"

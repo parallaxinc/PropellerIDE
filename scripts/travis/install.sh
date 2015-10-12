@@ -25,10 +25,7 @@ case "$PLATFORM" in
     ZIP=${IMAGENAME}.zip
 
     RPIHOME=$MNT/home/pi
-    MNT=~/rpi/mnt
-
-    mkdir -p /home/travis/rpi
-    pushd /home/travis/rpi
+    MNT=~/mnt
 
     # install dependencies
 
@@ -52,7 +49,7 @@ case "$PLATFORM" in
 
     # set up arch chroot
 
-    pushd $PROJECTHOME/scripts/travis/rpi
+    pushd scripts/travis/rpi
 
     mkdir -p $MNT/usr/bin
     sudo cp -f ./inside-chroot.sh $MNT/
@@ -67,6 +64,7 @@ case "$PLATFORM" in
     #sudo echo 'deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi' >> $MNT/etc/apt/sources.list
 
     sudo su -c ./register-interpreter.sh root
+    popd
     ;;
 *)
     echo "Invalid PLATFORM"
@@ -102,7 +100,7 @@ esac
 
 case "$PLATFORM" in
 "rpi")
-    pushd $RPISCRIPTS
+    pushd scripts/travis/rpi
     sudo chroot $MNT/ /bin/bash -c "./inside-chroot.sh"
     popd
     ;;
