@@ -41,8 +41,6 @@ case "$PLATFORM" in
     wget -4 http://lamestation.net/downloads/travis/$ZIP
     unzip -o $ZIP
 
-    sudo ./arch-mount.sh $IMAGE
-
     popd
     ;;
 *)
