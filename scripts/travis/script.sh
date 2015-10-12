@@ -16,6 +16,13 @@ case "$PLATFORM" in
     fakeroot packthing -j4 deb
     mv build/staging/propelleride-*.deb .
     ;;
+"rpi")
+    packthing rpi --checkout-only
+
+    pushd $RPISCRIPTS
+    sudo chroot $MNT/ /bin/bash -c "./inside-chroot-script.sh"
+    popd
+    ;;
 *)
     echo "Invalid PLATFORM"
     exit 1

@@ -15,18 +15,21 @@ addons:
       - imagemagick
 matrix:
   include:
+
   - os: osx
     compiler: clang
     env:
         PLATFORM=osx
         PATH=/Users/travis/local/bin:$PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages 
+
   - os: linux
     compiler: g++
     env:
         PLATFORM=linux
         PATH=/home/travis/local/bin:$PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
+
   - os: linux
     compiler: clang
     env:
@@ -34,6 +37,12 @@ matrix:
         PATH=/home/travis/local/bin:$PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
         QMAKESPEC=linux-clang
+
+  - os: linux
+    env:
+        PLATFORM=rpi
+        PROJECTHOME=/home/travis/$TRAVIS_REPO_SLUG
+        RPISCRIPTS=$PROJECTHOME/scripts/travis/rpi
 install: "./scripts/travis/install.sh"
 script:  "./scripts/travis/script.sh"
 after_script: "./scripts/travis/after_script.sh"
