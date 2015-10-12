@@ -1,15 +1,19 @@
 #!/bin/bash
 set -e
 
-qmake -v
-packthing -h
 
 case "$PLATFORM" in
 "osx")
+    qmake -v
+    packthing -h
+
     packthing -j4 dmg
     mv build/staging/propelleride-*.dmg .
     ;;
 "linux")
+    qmake -v
+    packthing -h
+
     packthing -j4 run
     mv build/staging/propelleride-*.run .
 
