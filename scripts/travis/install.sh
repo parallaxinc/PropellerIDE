@@ -40,8 +40,6 @@ case "$PLATFORM" in
 
     wget -4 http://lamestation.net/downloads/travis/$ZIP
     unzip -o $ZIP
-
-    popd
     ;;
 *)
     echo "Invalid PLATFORM"
