@@ -21,7 +21,7 @@ case "$PLATFORM" in
     mv build/staging/propelleride-*.deb .
     ;;
 "rpi")
-    packthing rpi --checkout-only
+    sudo packthing rpi --checkout-only
     pushd $RPISCRIPTS
     echo "Entering chroot"
     sudo chroot $MNT/ /bin/bash -c "./inside-chroot-script.sh"
