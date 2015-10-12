@@ -101,6 +101,7 @@ esac
 case "$PLATFORM" in
 "rpi")
     pushd scripts/travis/rpi
+    echo "Entering chroot (install.sh)"
     sudo chroot $MNT/ /bin/bash -c "./inside-chroot.sh"
     popd
     ;;

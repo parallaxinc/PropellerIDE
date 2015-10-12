@@ -22,8 +22,8 @@ case "$PLATFORM" in
     ;;
 "rpi")
     sudo packthing rpi --checkout-only
-    pushd $RPISCRIPTS
-    echo "Entering chroot"
+    pushd scripts/travis/rpi
+    echo "Entering chroot (script.sh)"
     sudo chroot $MNT/ /bin/bash -c "./inside-chroot-script.sh"
     popd
     ;;
