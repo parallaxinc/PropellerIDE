@@ -45,7 +45,11 @@ case "$PLATFORM" in
 
     mkdir -p $MNT 
     sudo kpartx -a -v $IMAGE
-    sudo mount /dev/mapper/loop0p2 $MNT
+    sudo mount -o rw /dev/mapper/loop0p2 $MNT/
+    sudo mount -o bind /dev  $MNT/dev
+    sudo mount -o bind /proc $MNT/proc
+    sudo mount -o bind /sys  $MNT/sys
+    sudo mount --bind  /home  $MNT/home
 
     # set up arch chroot
 
@@ -53,11 +57,8 @@ case "$PLATFORM" in
 
     mkdir -p $MNT/usr/bin
     sudo cp -vf ./inside-chroot.sh $MNT/
+    sudo cp -vf ./inside-chroot-script.sh $MNT/
     sudo cp -vf /usr/bin/qemu-arm-static $MNT/usr/bin/
-    sudo mount -o bind /dev  $MNT/dev
-    sudo mount -o bind /proc $MNT/proc
-    sudo mount -o bind /sys  $MNT/sys
-    sudo mount --bind /home  $MNT/home
     sudo cp -vf /etc/network/interfaces $MNT/etc/network/interfaces
     sudo cp -vf /etc/resolv.conf $MNT/etc/resolv.conf 
     #sudo sed -e's/^/#/g' -i $MNT/etc/ld.so.preload
@@ -106,6 +107,7 @@ case "$PLATFORM" in
     ls -l $MNT/
     tree
     sudo chroot $MNT/ /bin/bash -c "./inside-chroot.sh"
+
     popd
     ;;
 "linux"|"osx")

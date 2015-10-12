@@ -1,11 +1,7 @@
 #!/bin/bash -x
 
-IMAGENAME=$1
-#IMAGENAME=2015-05-05-raspbian-wheezy
-IMAGE=${IMAGENAME}.img
-ZIP=${IMAGENAME}.zip
+IMAGE=${1}
 MNT=mnt
-
 
 sudo umount $MNT/dev
 sudo umount $MNT/proc
@@ -14,3 +10,4 @@ sudo umount $MNT/home
 sudo umount $MNT/
 
 sudo kpartx -d -v $IMAGE
+rmdir $MNT
