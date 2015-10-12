@@ -24,7 +24,7 @@ case "$PLATFORM" in
     sudo packthing rpi --checkout-only
 
     pushd scripts/travis/rpi
-    sudo ./arch-mount.sh *.img
+    sudo ./arch-mount.sh
     popd
     ;;
 *)

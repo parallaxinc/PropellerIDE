@@ -1,6 +1,8 @@
 #!/bin/bash -x
 
-IMAGE=${1}
+set -e
+
+IMAGE=2015-05-05-raspbian-wheezy.img
 MNT=mnt
 
 # mount image
