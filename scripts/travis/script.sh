@@ -23,7 +23,9 @@ case "$PLATFORM" in
 "rpi")
     sudo packthing rpi --checkout-only
 
+    pushd scripts/travis/rpi
     sudo ./arch-mount.sh *.img
+    popd
     ;;
 *)
     echo "Invalid PLATFORM"

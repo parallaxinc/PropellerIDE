@@ -18,8 +18,6 @@ sudo mount --bind /home  $MNT/home
 
 mkdir -p $MNT/usr/bin
 
-pushd scripts/travis/rpi
-
 sudo cp -vf ./inside-chroot.sh $MNT/
 sudo cp -vf /usr/bin/qemu-arm-static $MNT/usr/bin/
 sudo cp -vf /etc/network/interfaces $MNT/etc/network/interfaces
@@ -34,5 +32,3 @@ pwd
 ls -l $MNT/
 tree
 sudo chroot $MNT/ /bin/bash -c "./inside-chroot.sh"
-
-popd
