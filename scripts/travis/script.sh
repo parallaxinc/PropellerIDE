@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-
 case "$PLATFORM" in
 "osx")
     qmake -v
@@ -21,14 +20,17 @@ case "$PLATFORM" in
     mv build/staging/propelleride-*.deb .
     ;;
 "rpi")
+    sudo chroot $MNT uname -a
+    sudo chroot $MNT qmake -v
+    sudo chroot $MNT packthing -h
+
     sudo packthing rpi --checkout-only
 
-    pushd scripts/travis/rpi
-    sudo ./arch-mount.sh
-    popd
-    USER=`whoami`
-    GROUP=`groups | sed -r 's/ .*//g'`
-    sudo chown $USER:$GROUP propelleride-*.deb
+    sudo chroot $MNT bash -c "cd /home/travis/build/parallaxinc/PropellerIDE/ \
+                                        && packthing -j4 rpi \
+                                        mv build/staging/propelleride-*.deb ."
+
+    sudo chown `whoami`:`groups | sed -r 's/ .*//g'` propelleride-*.deb
     ;;
 *)
     echo "Invalid PLATFORM"

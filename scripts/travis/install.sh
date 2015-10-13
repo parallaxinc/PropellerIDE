@@ -18,12 +18,23 @@ case "$PLATFORM" in
     sudo apt-get install qt5-default libqt5serialport5-dev
     ;;
 "rpi")
-    sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ vivid main restricted"
-    sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ vivid-updates main restricted"
     sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ vivid universe"
     sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ vivid-updates universe"
     sudo apt-get update
-    sudo apt-get install qemu-user-static qemu-kvm kpartx
+    sudo apt-get install qemu-user-static
+
+    FOLDER=travis-debian-jessie-armhf
+    TAR=${FOLDER}.tgz
+    wget -4 http://lamestation.net/downloads/travis/$TAR
+    tar xvzf $TAR
+    mv $TAR $MNT
+    sudo mount --bind /home  $MNT/home
+
+    sudo cp -vf /usr/bin/qemu-arm-static $MNT/usr/bin/
+    sudo chroot $MNT apt-get update
+    sudo chroot $MNT apt-get install qt5-default libqt5serialport5-dev
+
+
     ;;
 *)
     echo "Invalid PLATFORM"
@@ -31,8 +42,18 @@ case "$PLATFORM" in
     ;;
 esac
 
+# packthing installation
+
 case "$PLATFORM" in
-"linux"|"rpi")
+"rpi")
+    pushd $HOME
+    git clone https://github.com/lamestation/packthing
+    popd
+    sudo chroot $MNT bash -c "cd /home/travis/packthing && \
+                                sudo pip install -r requirements.txt && \
+                                sudo python setup.py install"
+    ;;
+"linux")
     pushd $HOME
     git clone https://github.com/lamestation/packthing
     pushd packthing
