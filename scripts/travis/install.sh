@@ -26,15 +26,13 @@ case "$PLATFORM" in
     FOLDER=travis-debian-jessie-armhf
     TAR=${FOLDER}.tgz
     wget -4 http://lamestation.net/downloads/travis/$TAR
-    tar xzf $TAR
-    mv $TAR $MNT
+    sudo tar xzf $TAR
+    sudo mv $TAR $MNT
     sudo mount --bind /home  $MNT/home
 
     sudo cp -vf /usr/bin/qemu-arm-static $MNT/usr/bin/
     sudo chroot $MNT apt-get update
     sudo chroot $MNT apt-get install qt5-default libqt5serialport5-dev
-
-
     ;;
 *)
     echo "Invalid PLATFORM"
