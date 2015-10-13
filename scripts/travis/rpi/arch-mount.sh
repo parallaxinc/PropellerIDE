@@ -5,7 +5,7 @@ set -e
 IMAGENAME=2015-05-05-raspbian-wheezy
 IMAGE=${IMAGENAME}.img
 ZIP=${IMAGENAME}.zip
-MNT=mnt
+MNT=~/mnt
 
 # download image
 
@@ -39,5 +39,4 @@ sudo su -c ./register-interpreter.sh root
 echo "Entering chroot"
 pwd
 ls -l $MNT/
-tree
 sudo chroot $MNT/ /bin/bash -c "./inside-chroot.sh"
