@@ -26,6 +26,9 @@ case "$PLATFORM" in
     pushd scripts/travis/rpi
     sudo ./arch-mount.sh
     popd
+    USER=`whoami`
+    GROUP=`groups | sed -r 's/ .*//g'`
+    sudo chown $USER:$GROUP propelleride-*.deb
     ;;
 *)
     echo "Invalid PLATFORM"
