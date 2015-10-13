@@ -27,7 +27,7 @@ case "$PLATFORM" in
     TAR=${FOLDER}.tgz
     wget -4 http://lamestation.net/downloads/travis/$TAR
     sudo tar xzf $TAR
-    sudo mv $TAR $MNT
+    sudo mv -v $FOLDER $MNT
     sudo mount --bind /home  $MNT/home
 
     sudo cp -vf /usr/bin/qemu-arm-static $MNT/usr/bin/
