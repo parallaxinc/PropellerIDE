@@ -26,7 +26,7 @@ case "$PLATFORM" in
     FOLDER=travis-debian-jessie-armhf
     TAR=${FOLDER}.tgz
     wget -4 http://lamestation.net/downloads/travis/$TAR
-    tar xvzf $TAR
+    tar xzf $TAR
     mv $TAR $MNT
     sudo mount --bind /home  $MNT/home
 
