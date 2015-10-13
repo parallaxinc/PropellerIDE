@@ -2,8 +2,15 @@
 
 set -e
 
-IMAGE=2015-05-05-raspbian-wheezy.img
+IMAGENAME=2015-05-05-raspbian-wheezy
+IMAGE=${IMAGENAME}.img
+ZIP=${IMAGENAME}.zip
 MNT=mnt
+
+# download image
+
+wget -4 http://lamestation.net/downloads/travis/$ZIP
+unzip -o $ZIP
 
 # mount image
 

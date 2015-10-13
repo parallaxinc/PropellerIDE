@@ -18,28 +18,12 @@ case "$PLATFORM" in
     sudo apt-get install qt5-default libqt5serialport5-dev
     ;;
 "rpi")
-    # initial setup
-
-    IMAGENAME=2015-05-05-raspbian-wheezy
-    IMAGE=${IMAGENAME}.img
-    ZIP=${IMAGENAME}.zip
-
-    RPIHOME=$MNT/home/pi
-    MNT=~/mnt
-
-    # install dependencies
-
     sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ vivid main restricted"
     sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ vivid-updates main restricted"
     sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ vivid universe"
     sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ vivid-updates universe"
     sudo apt-get update
     sudo apt-get install qemu-user-static qemu-kvm kpartx
-
-    # get and prepare Raspbian image
-
-    wget -4 http://lamestation.net/downloads/travis/$ZIP
-    unzip -o $ZIP
     ;;
 *)
     echo "Invalid PLATFORM"
