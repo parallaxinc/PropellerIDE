@@ -30,6 +30,8 @@ case "$PLATFORM" in
     sudo mv -v $FOLDER $MNT
     sudo mount --bind /home  $MNT/home
 
+    sudo cp -vf /etc/network/interfaces $MNT/etc/network/interfaces
+    sudo cp -vf /etc/resolv.conf $MNT/etc/resolv.conf 
     sudo cp -vf /usr/bin/qemu-arm-static $MNT/usr/bin/
     sudo chroot $MNT apt-get update
     sudo chroot $MNT apt-get install qt5-default libqt5serialport5-dev
@@ -48,8 +50,8 @@ case "$PLATFORM" in
     git clone https://github.com/lamestation/packthing
     popd
     sudo chroot $MNT bash -c "cd /home/travis/packthing && \
-                                sudo pip install -r requirements.txt && \
-                                sudo python setup.py install"
+                                pip install -r requirements.txt && \
+                                python setup.py install"
     ;;
 "linux")
     pushd $HOME
