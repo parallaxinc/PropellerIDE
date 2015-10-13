@@ -48,6 +48,10 @@ case "$PLATFORM" in
 "rpi")
     pushd $HOME
     git clone https://github.com/lamestation/packthing
+    pushd packthing
+    sudo pip install -r requirements.txt
+    sudo python setup.py install
+    popd
     popd
     sudo chroot $MNT bash -c "cd /home/travis/packthing && \
                                 pip install -r requirements.txt && \
