@@ -26,8 +26,8 @@ case "$PLATFORM" in
 
     sudo packthing rpi --checkout-only
 
-    sudo chroot $MNT bash -c "cd /home/travis/build/parallaxinc/PropellerIDE/ \
-                                        && packthing -j4 rpi \
+    sudo chroot $MNT bash -c "cd /home/travis/build/parallaxinc/PropellerIDE/ && \
+                                        packthing -j4 rpi && \
                                         mv build/staging/propelleride-*.deb ."
 
     sudo chown `whoami`:`groups | sed -r 's/ .*//g'` propelleride-*.deb
