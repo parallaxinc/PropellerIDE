@@ -24,10 +24,10 @@ case "$PLATFORM" in
     sudo chroot $MNT qmake -v
     sudo chroot $MNT packthing -h
 
-    sudo packthing rpi --checkout
+    sudo packthing --checkout
 
     sudo chroot $MNT bash -c "cd /home/travis/build/parallaxinc/PropellerIDE/ && \
-                                        packthing -j4 rpi && \
+                                        packthing -j4 deb && \
                                         mv build/staging/propelleride-*.deb ."
 
     sudo chown `whoami`:`groups | sed -r 's/ .*//g'` propelleride-*.deb
