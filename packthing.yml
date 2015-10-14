@@ -23,32 +23,32 @@ target:
     category: public.app-category.developer-tools
 
 repo: 
-  - path: propelleride
-    url: https://github.com/parallaxinc/PropellerIDE.git
-    tag: 0.32.1
-    type: qmake
-    icon: icons/icon-new.png
+    propelleride:
+        url: https://github.com/parallaxinc/PropellerIDE.git
+        tag: 0.32.1
+        type: qmake
+        icon: icons/icon-new.png
 
-  - path: openspin
-    url: https://github.com/bweir/OpenSpin.git
-    tag: qt-0.1.0
-    type: qmake
-    root: qmake
+    openspin:
+        url: https://github.com/bweir/OpenSpin.git
+        tag: qt-0.1.0
+        type: qmake
+        root: qmake
 
-  - path: propman
-    url: https://github.com/parallaxinc/PropellerManager.git
-    tag: 0.3.0
-    type: qmake
+    propman:
+        url: https://github.com/parallaxinc/PropellerManager.git
+        tag: 0.3.0
+        type: qmake
 
-  - path: ide-prebuilts
-    url: https://github.com/bweir/ide-prebuilts.git
-    branch: master
-    type: prebuilt
+    ide-prebuilts:
+        url: https://github.com/bweir/ide-prebuilts.git
+        branch: master
+        type: prebuilt
 
-  - path: library
-    url: https://github.com/parallaxinc/spin-standard-library.git
-    type: dir
+    library:
+        url: https://github.com/parallaxinc/spin-standard-library.git
+        type: dir
 
-  - path: doc
-    url: https://github.com/parallaxinc/spin-docs.git
-    type: dir
+    doc:
+        url: https://github.com/parallaxinc/spin-docs.git
+        type: dir
