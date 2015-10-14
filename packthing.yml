@@ -23,7 +23,14 @@ repo:
         url: https://github.com/parallaxinc/PropellerIDE.git
         tag: 0.32.1
         type: qmake
-        icon: icons/icon-new.png
+        icon: 
+            propelleride: icons/icon-new.png
+            propterm: icons/icon-propterm.png
+        target:
+            inno:
+                banner: icons/win-banner.bmp
+            dmg:
+                background: icons/mac-dmg.png
 
     openspin:
         url: https://github.com/bweir/OpenSpin.git
