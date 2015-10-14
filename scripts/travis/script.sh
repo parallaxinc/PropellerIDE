@@ -24,7 +24,7 @@ case "$PLATFORM" in
     sudo chroot $MNT qmake -v
     sudo chroot $MNT packthing -h
 
-    sudo packthing rpi --checkout-only
+    sudo packthing rpi --checkout
 
     sudo chroot $MNT bash -c "cd /home/travis/build/parallaxinc/PropellerIDE/ && \
                                         packthing -j4 rpi && \
