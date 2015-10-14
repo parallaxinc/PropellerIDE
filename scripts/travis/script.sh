@@ -27,7 +27,7 @@ case "$PLATFORM" in
     sudo packthing --checkout
 
     sudo chroot $MNT bash -c "cd /home/travis/build/parallaxinc/PropellerIDE/ && \
-                                        packthing -j4 deb && \
+                                        packthing -j4 deb --arch armhf && \
                                         mv build/staging/propelleride-*.deb ."
 
     sudo chown `whoami`:`groups | sed -r 's/ .*//g'` propelleride-*.deb
