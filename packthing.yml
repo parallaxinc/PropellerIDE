@@ -15,10 +15,6 @@ target:
     depends: libftdi1
     categories: Development;IDE
     section: Applications/Editors
-  rpi: 
-    depends: libftdi1
-    categories: Development;IDE
-    section: Applications/Editors
   dmg: 
     category: public.app-category.developer-tools
 
