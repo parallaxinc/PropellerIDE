@@ -15,13 +15,13 @@ case "$PLATFORM" in
 #    tar xzf qt5.5.0-linux-g++.tgz
 #    mv local/ /home/travis/local/
 
-    sudo apt-get install qt5-default libqt5serialport5-dev
+    sudo -E apt-get -yq --no-install-suggests --no-install-recommends --force-yes install qt5-default libqt5serialport5-dev
     ;;
 "rpi")
     sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ vivid universe"
     sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ vivid-updates universe"
     sudo apt-get update
-    sudo apt-get install qemu-user-static
+    sudo -E apt-get -yq --no-install-suggests --no-install-recommends --force-yes install qemu-user-static
 
     FOLDER=travis-debian-jessie-armhf
     TAR=${FOLDER}.tgz
