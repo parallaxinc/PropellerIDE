@@ -8,9 +8,28 @@
 #include <QSplashScreen>
 #include <Qt>
 #include <QString>
+#include <QtGlobal>
 
 #include "mainwindow.h"
 
+void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    QByteArray localMsg = msg.toLocal8Bit();
+    switch (type) {
+        case QtDebugMsg:
+            fprintf(stderr, "[%s]: %s\n", context.function, localMsg.constData());
+            break;
+        case QtWarningMsg:
+            fprintf(stderr, "[WARNING]: (%s:%u, %s): %s\n", context.file, context.line, context.function, localMsg.constData());
+            break;
+        case QtCriticalMsg:
+            fprintf(stderr, "[CRITICAL]: (%s:%u, %s): %s\n", context.file, context.line, context.function, localMsg.constData());
+            break;
+        case QtFatalMsg:
+            fprintf(stderr, "[FATAL]: (%s:%u, %s): %s\n", context.file, context.line, context.function, localMsg.constData());
+            abort();
+    }
+}
 
 void updateSplash(QSplashScreen * splash, const QString & text)
 {
@@ -23,6 +42,7 @@ void updateSplash(QSplashScreen * splash, const QString & text)
 
 int main(int argc, char *argv[])
 {
+    qInstallMessageHandler(myMessageOutput);
     QApplication app(argc, argv);
 
     QCoreApplication::setOrganizationName("Parallax");

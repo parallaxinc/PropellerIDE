@@ -15,6 +15,9 @@ target:
     depends: libftdi1
     categories: Development;IDE
     section: Applications/Editors
+    help2man:
+        - propman
+        - openspin
   dmg: 
     category: public.app-category.developer-tools
 
