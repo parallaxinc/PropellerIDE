@@ -21,6 +21,7 @@ target:
     dmg: 
         category: public.app-category.developer-tools
         background: icons/mac-dmg.png
+        bundle: propelleride
     inno:
         banner: icons/win-banner.bmp
         run: propelleride
@@ -34,7 +35,7 @@ repos:
                 name: PropellerIDE
                 icon: icons/icon-new.png
             propterm: 
-                name: PropTerm
+                name: Propeller Terminal
                 icon: icons/icon-propterm.png
 
     openspin:
