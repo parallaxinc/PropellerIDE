@@ -11,15 +11,18 @@ description: An easy-to-use cross-platform development tool for the Parallax Pro
 master: propelleride
 
 target: 
-  deb: 
-    depends: libftdi1
-    categories: Development;IDE
-    section: Applications/Editors
-    help2man:
-        - propman
-        - openspin
-  dmg: 
-    category: public.app-category.developer-tools
+    deb: 
+        depends: libftdi1
+        categories: Development;IDE
+        section: Applications/Editors
+        help2man:
+            - propman
+            - openspin
+    dmg: 
+        category: public.app-category.developer-tools
+        background: icons/mac-dmg.png
+    inno:
+        banner: icons/win-banner.bmp
 
 repos: 
     propelleride:
@@ -32,11 +35,6 @@ repos:
             propterm: 
                 name: PropTerm
                 icon: icons/icon-propterm.png
-        target:
-            inno:
-                banner: icons/win-banner.bmp
-            dmg:
-                background: icons/mac-dmg.png
 
     openspin:
         url: https://github.com/bweir/OpenSpin.git
