@@ -23,6 +23,7 @@ target:
         background: icons/mac-dmg.png
     inno:
         banner: icons/win-banner.bmp
+        run: propelleride
 
 repos: 
     propelleride:
