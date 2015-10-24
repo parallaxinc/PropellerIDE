@@ -24,16 +24,21 @@ LIBS += -L../memorymap/QHexEdit/ -lQHexEdit
 INCLUDEPATH += ../projectview/
 LIBS += -L../projectview/  -lprojectview
 
+INCLUDEPATH += ../propellermanager/src/lib/
+LIBS += -L../propellermanager/src/lib/  -lpropellermanager
+
 win32-msvc* {
 	PRE_TARGETDEPS += ../spinzip/spinzip.lib
 	PRE_TARGETDEPS += ../memorymap/QHexEdit/QHexEdit.lib
 	PRE_TARGETDEPS += ../memorymap/memorymap/memorymap.lib
 	PRE_TARGETDEPS += ../projectview/projectview.lib
+	PRE_TARGETDEPS += ../propellermanager/src/lib/propellermanager.lib
 } else {
 	PRE_TARGETDEPS += ../spinzip/libspinzip.a
 	PRE_TARGETDEPS += ../memorymap/QHexEdit/libQHexEdit.a
 	PRE_TARGETDEPS += ../memorymap/memorymap/libmemorymap.a
 	PRE_TARGETDEPS += ../projectview/libprojectview.a
+	PRE_TARGETDEPS += ../propellermanager/src/lib/libpropellermanager.a
 }
 
 SOURCES += \
@@ -63,7 +68,6 @@ HEADERS  += \
     language.h \
     mainwindow.h \
     pathselector.h \
-    portmonitor.h \
     preferences.h \
     buildstatus.h \
     templates/Singleton.h \

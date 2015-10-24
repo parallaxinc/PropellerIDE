@@ -36,7 +36,6 @@
 #endif
 
 #define DEFAULT_COMPILER            "/openspin"  APP_EXTENSION 
-#define DEFAULT_LOADER              "/propman"   APP_EXTENSION
 #define DEFAULT_TERMINAL            "/propterm"  APP_EXTENSION
 
 class Preferences : public QDialog
@@ -63,7 +62,6 @@ public slots:
     void fontDialog();
     void browseCompiler();
     void browseLibrary();
-    void browseLoader();
     void browseTerminal();
     void accept();
     void reject();
@@ -84,7 +82,6 @@ private:
     QTabWidget  tabWidget;
 
     PathSelector * compilerpath;
-    PathSelector * loaderpath;
     PathSelector * librarypath;
     PathSelector * terminalpath;
 

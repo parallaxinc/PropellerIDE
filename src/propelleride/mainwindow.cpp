@@ -12,6 +12,11 @@
 
 #include "memorymap.h"
 
+#include "propellersession.h"
+#include "propellerimage.h"
+#include "propellerdevice.h"
+
+
 MainWindow::MainWindow(QWidget *parent)
 : QMainWindow(parent)
 {
@@ -128,9 +133,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     getApplicationSettings();
 
-    // get available ports at startup
-    enumeratePorts();
-    connect(&portMonitor, SIGNAL(portChanged()), this, SLOT(enumeratePorts()));
+    connect(&portMonitor, SIGNAL(portChanged(const QStringList &)), this, SLOT(updatePortWidget(const QStringList &)));
 
     ui.editorTabs->newFile();
     loadSession();
@@ -377,25 +380,39 @@ int MainWindow::runCompiler()
     return rc;
 }
 
-int MainWindow::loadProgram(int type)
+int MainWindow::loadProgram(bool write)
 {
-    int rc = -1;
-    QString options;
-    options += "-d"+cbPort->currentText();
+    PropellerSession session(cbPort->currentText());
 
-    switch (type) {
-        case MainWindow::LoadRunHubRam:
-            rc = builder.loadProgram(options);
-            break;
-        case MainWindow::LoadRunEeprom:
-            options += " -w";
-            rc = builder.loadProgram(options);
-            break;
-        default:
-            break;
+    if (!session.open())
+    {
+        qDebug() << "Failed to open" << cbPort->currentText() << "!";
+        return 1;
     }
 
-    return rc;
+    int index;
+    QString fileName;
+
+    if(!ui.editorTabs->count())
+        return 1;
+
+    index = ui.editorTabs->currentIndex();
+    QString filename = ui.editorTabs->tabToolTip(index);
+    QFile file(filename.replace(".spin",".binary"));
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Couldn't open file";
+        return 1;
+    }
+
+    PropellerImage image = PropellerImage(file.readAll(),filename);
+
+    if (session.upload(image, write))
+    {
+        session.close();
+        return 1;
+    }
+    return 0;
 }
 
 void MainWindow::programBuild()
@@ -412,7 +429,7 @@ void MainWindow::programRun()
     if(runCompiler())
         return;
 
-    loadProgram(LoadRunHubRam);
+    loadProgram(false);
 }
 
 void MainWindow::programBurnEE()
@@ -420,7 +437,7 @@ void MainWindow::programBurnEE()
     if(runCompiler())
         return;
 
-    loadProgram(MainWindow::LoadRunEeprom);
+    loadProgram(true);
 }
 
 void MainWindow::programDebug()
@@ -428,7 +445,7 @@ void MainWindow::programDebug()
     if(runCompiler())
         return;
 
-    if(!loadProgram(LoadRunHubRam))
+    if(loadProgram(false))
     {
         spawnTerminal();
     }
@@ -589,7 +606,7 @@ void MainWindow::setEnableBuild(bool enabled)
     ui.actionBurn->setEnabled(enabled);
 }
 
-void MainWindow::enumeratePorts()
+void MainWindow::updatePortWidget(const QStringList &)
 {
     if(cbPort == NULL)
         return;

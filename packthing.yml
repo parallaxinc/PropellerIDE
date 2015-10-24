@@ -44,11 +44,6 @@ repos:
         builder: qmake
         root: qmake
 
-    propman:
-        url: https://github.com/parallaxinc/PropellerManager.git
-        tag: 0.3.0
-        builder: qmake
-
     ide-prebuilts:
         url: https://github.com/bweir/ide-prebuilts.git
         branch: master

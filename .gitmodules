@@ -4,3 +4,6 @@
 [submodule "src/projectview"]
 	path = src/projectview
 	url = https://github.com/parallaxinc/projectview.git
+[submodule "src/propman"]
+	path = src/propellermanager
+	url = https://github.com/parallaxinc/PropellerManager

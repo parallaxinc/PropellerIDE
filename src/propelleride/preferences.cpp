@@ -157,15 +157,6 @@ void Preferences::setupFolders()
             this
             );
 
-    loaderpath = new PathSelector(
-            tr("Loader"),
-            QApplication::applicationDirPath() +
-                    QString(DEFAULT_LOADER),
-            tr("Must add a loader program."),
-            SLOT(browseLoader()),
-            this
-            );
-
     librarypath = new PathSelector(
             tr("Library"),
             QApplication::applicationDirPath() +
@@ -186,7 +177,6 @@ void Preferences::setupFolders()
             );
 
     pathlayout->addWidget(compilerpath);
-    pathlayout->addWidget(loaderpath);
     pathlayout->addWidget(librarypath);
     pathlayout->addWidget(terminalpath);
     vlayout->addWidget(paths);
@@ -312,15 +302,6 @@ void Preferences::browseCompiler()
         );
 }
 
-void Preferences::browseLoader()
-{
-    loaderpath->browsePath(
-            tr("Select Loader"),
-            "propman (propman*);;p1load (p1load* p2load*);;BST Loader (bstl*)",
-            false
-        );
-}
-
 void Preferences::browseLibrary()
 {
     librarypath->browsePath(
@@ -343,7 +324,6 @@ void Preferences::browseTerminal()
 void Preferences::accept()
 {
     compilerpath->save();
-    loaderpath->save();
     librarypath->save();
     terminalpath->save();
 
@@ -365,7 +345,6 @@ void Preferences::accept()
 void Preferences::reject()
 {
     compilerpath->restore();
-    loaderpath->restore();
     librarypath->restore();
     terminalpath->restore();
 

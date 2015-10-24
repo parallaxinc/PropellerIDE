@@ -30,7 +30,7 @@ private:
 public:
     MainWindow(QWidget *parent = 0);
 
-    Preferences  *propDialog;
+    Preferences     *propDialog;
 
 public slots:
     void showMessage(const QString & message);
@@ -66,7 +66,7 @@ public slots:
     void closeEvent(QCloseEvent *event);
     void quitProgram();
 
-    void enumeratePorts();
+    void updatePortWidget(const QStringList &);
     void showBrowser();
 
     void addRecentFile(const QString &fileName);
@@ -86,7 +86,7 @@ private:
 
     bool eventFilter(QObject *target, QEvent *event);
 
-    int  loadProgram(int type);
+    int  loadProgram(bool write);
     int  runCompiler();
 
     QString     spinCompiler;
@@ -102,13 +102,9 @@ private:
 
     QString         projectFile;
 
-    QComboBox   *cbPort;
+    QComboBox   * cbPort;
 
     PortMonitor portMonitor;
 
     Zipper      zipper;
-
-    enum { LoadRunHubRam = 1 };
-    enum { LoadRunEeprom = 2 };
-
 };
