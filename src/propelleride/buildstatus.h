@@ -3,16 +3,16 @@
 #include <QKeyEvent>
 #include <Qt>
 
-#include "ui_status.h"
+#include "ui_buildstatus.h"
 
-#include "ColorScheme.h"
+#include "colorscheme.h"
 
-class Status : public QFrame
+class BuildStatus : public QFrame
 {
     Q_OBJECT
 
 public:
-    Status(QWidget *parent = 0);
+    BuildStatus(QWidget *parent = 0);
     void keyPressEvent(QKeyEvent * event);
     QPlainTextEdit * getOutput();
     void setText(const QString & text);

@@ -1,4 +1,4 @@
-#include "Finder.h"
+#include "finder.h"
 
 Finder::Finder(QWidget *parent)
     : QFrame(parent)

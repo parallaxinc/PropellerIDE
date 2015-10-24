@@ -9,8 +9,8 @@
 #include <QPaintEvent>
 #include <QTextCursor>
 
-#include "Highlighter.h"
-#include "Preferences.h"
+#include "highlighter.h"
+#include "preferences.h"
 
 class LineNumberArea;
 

@@ -1,4 +1,4 @@
-#include "Preferences.h"
+#include "preferences.h"
 
 #include <QApplication>
 #include <QDialog>
@@ -18,7 +18,7 @@
 #include <QDebug>
 #include <QDirIterator>
 
-#include "ColorChooser.h"
+#include "colorchooser.h"
 
 Preferences::Preferences(QWidget *parent) : QDialog(parent)
 {

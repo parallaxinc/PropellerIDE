@@ -1,8 +1,8 @@
-#include "BuildManager.h"
+#include "buildmanager.h"
 
 BuildManager::BuildManager(QWidget *parent) : QWidget(parent)
 {
-    console = new Status(this);
+    console = new BuildStatus(this);
     consoleEdit = console->getOutput();
     connect(&timer,SIGNAL(timeout()),console,SLOT(hide()));
 }

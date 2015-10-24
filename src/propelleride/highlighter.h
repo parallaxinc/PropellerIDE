@@ -9,9 +9,9 @@
 #include <QFont>
 #include <Qt>
 
-#include "Language.h"
-#include "Preferences.h"
-#include "ColorScheme.h"
+#include "language.h"
+#include "preferences.h"
+#include "colorscheme.h"
 
 class Highlighter : public QSyntaxHighlighter
 {

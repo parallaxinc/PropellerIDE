@@ -1,7 +1,8 @@
-#include "status.h"
+#include "buildstatus.h"
+
 #include <QDebug>
 
-Status::Status(QWidget *parent)
+BuildStatus::BuildStatus(QWidget *parent)
     : QFrame(parent)
 {
     ui.setupUi(this);
@@ -20,24 +21,24 @@ Status::Status(QWidget *parent)
     connect(ui.label, SIGNAL(clicked()), this, SLOT(toggleDetails()));
 }
 
-void Status::setBuild(bool active)
+void BuildStatus::setBuild(bool active)
 {
     ui.iconBuild->setEnabled(active);
 }
 
-void Status::setDownload(bool active)
+void BuildStatus::setDownload(bool active)
 {
     ui.arrow1->setEnabled(active);
     ui.iconDownload->setEnabled(active);
 }
 
-void Status::setRun(bool active)
+void BuildStatus::setRun(bool active)
 {
     ui.arrow2->setEnabled(active);
     ui.iconRun->setEnabled(active);
 }
 
-void Status::setStage(int stage)
+void BuildStatus::setStage(int stage)
 {
     if (stage > 0)
         setBuild(true);
@@ -56,21 +57,21 @@ void Status::setStage(int stage)
 }
 
 
-void Status::showDetails()
+void BuildStatus::showDetails()
 {
     ui.label->setText("Details -");
     ui.plainTextEdit->show();
     adjustSize();
 }
 
-void Status::hideDetails()
+void BuildStatus::hideDetails()
 {
     ui.label->setText("Details +");
     ui.plainTextEdit->hide();
     adjustSize();
 }
 
-void Status::toggleDetails()
+void BuildStatus::toggleDetails()
 {
     if (ui.plainTextEdit->isVisible())
         hideDetails();
@@ -78,12 +79,12 @@ void Status::toggleDetails()
         showDetails();
 }
 
-void Status::setText(const QString & text)
+void BuildStatus::setText(const QString & text)
 {
     ui.activeText->setText(text);
 }
 
-void Status::keyPressEvent(QKeyEvent * event)
+void BuildStatus::keyPressEvent(QKeyEvent * event)
 {
     if(event->key() == Qt::Key_Escape)
     {
@@ -91,12 +92,12 @@ void Status::keyPressEvent(QKeyEvent * event)
     }
 }
 
-QPlainTextEdit * Status::getOutput()
+QPlainTextEdit * BuildStatus::getOutput()
 {
     return ui.plainTextEdit;
 }
 
-void Status::updateColors()
+void BuildStatus::updateColors()
 {
     ui.plainTextEdit->setFont(currentTheme->getFont());
 }

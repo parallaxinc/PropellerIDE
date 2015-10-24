@@ -1,4 +1,4 @@
-#include "Language.h"
+#include "language.h"
 
 #include <QDebug>
 #include <QJsonDocument>

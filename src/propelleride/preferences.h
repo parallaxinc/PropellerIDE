@@ -13,8 +13,8 @@
 #include <QToolButton>
 #include <QHBoxLayout>
 
-#include "ColorScheme.h"
-#include "PathSelector.h"
+#include "colorscheme.h"
+#include "pathselector.h"
 
 #define enableAutoComplete          "enableAutoComplete"
 #define enableSpinSuggest           "enableSpinSuggest"

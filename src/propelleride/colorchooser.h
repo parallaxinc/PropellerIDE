@@ -27,7 +27,7 @@
 
 #include <QLabel>
 
-#include "ColorScheme.h"
+#include "colorscheme.h"
 
 
 class ColorChooser : public QLabel

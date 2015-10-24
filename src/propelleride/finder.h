@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ui_finder_flat.h"
+#include "ui_finder.h"
 
-#include "FileManager.h"
+#include "filemanager.h"
 
 class Finder : public QFrame
 {

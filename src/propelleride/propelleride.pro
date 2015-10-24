@@ -37,35 +37,35 @@ win32-msvc* {
 }
 
 SOURCES += \
-    BuildManager.cpp \
-    ColorScheme.cpp \
-    ColorChooser.cpp \
+    buildmanager.cpp \
+    colorscheme.cpp \
+    colorchooser.cpp \
     editor.cpp \
-    FileManager.cpp \
-    Finder.cpp \
-    Highlighter.cpp \
-    Language.cpp \
+    filemanager.cpp \
+    finder.cpp \
+    highlighter.cpp \
+    language.cpp \
     main.cpp \
     mainwindow.cpp \
-    PathSelector.cpp \
-    Preferences.cpp \
-    status.cpp \
+    pathselector.cpp \
+    preferences.cpp \
+    buildstatus.cpp \
 
 HEADERS  += \
-    BuildManager.h \
+    buildmanager.h \
     clickable.h \
-    ColorChooser.h \
-    ColorScheme.h \
+    colorchooser.h \
+    colorscheme.h \
     editor.h \
-    FileManager.h \
-    Finder.h \
-    Highlighter.h \
-    Language.h \
+    filemanager.h \
+    finder.h \
+    highlighter.h \
+    language.h \
     mainwindow.h \
-    PathSelector.h \
+    pathselector.h \
     portmonitor.h \
-    Preferences.h \
-    status.h \
+    preferences.h \
+    buildstatus.h \
     templates/Singleton.h \
 
 OTHER_FILES +=
@@ -73,8 +73,8 @@ OTHER_FILES +=
 FORMS += \
     forms/about.ui \
     forms/mainwindow.ui \
-    forms/finder_flat.ui \
-    forms/status.ui \
+    forms/finder.ui \
+    forms/buildstatus.ui \
 
 RESOURCES += \
     fonts/fonts.qrc \

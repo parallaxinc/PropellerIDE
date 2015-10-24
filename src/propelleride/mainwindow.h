@@ -10,13 +10,13 @@
 
 #include "ui_mainwindow.h"
 
-#include "Preferences.h"
+#include "preferences.h"
 #include "editor.h"
 #include "portmonitor.h"
 #include "zipper.h"
-#include "FileManager.h"
-#include "BuildManager.h"
-#include "Finder.h"
+#include "filemanager.h"
+#include "buildmanager.h"
+#include "finder.h"
 #include "projectparser.h"
 #include "projectview.h"
 

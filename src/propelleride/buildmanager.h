@@ -18,7 +18,7 @@
 #include <QFileInfo>
 #include <QTimer>
 
-#include "status.h"
+#include "buildstatus.h"
 
 class BuildManager : public QWidget
 {
@@ -64,7 +64,7 @@ private:
     QMutex      procMutex;
     bool        procDone;
 
-    Status * console;
+    BuildStatus * console;
     QPlainTextEdit * consoleEdit;
 
     QTimer timer;

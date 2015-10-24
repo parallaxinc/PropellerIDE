@@ -1,4 +1,4 @@
-#include "ColorChooser.h"
+#include "colorchooser.h"
 
 #include <QColor>
 #include <QPixmap>

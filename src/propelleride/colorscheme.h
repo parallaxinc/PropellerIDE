@@ -8,7 +8,7 @@
 #include <QColor>
 #include <QFont>
 
-#include "templates/Singleton.h"
+#include "templates/singleton.h"
 
 class ColorScheme : public QObject
 {

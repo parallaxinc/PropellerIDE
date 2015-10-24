@@ -1,4 +1,4 @@
-#include "PathSelector.h"
+#include "pathselector.h"
 
 PathSelector::PathSelector(
         QString const & labelname,

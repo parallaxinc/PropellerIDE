@@ -1,4 +1,4 @@
-#include "ColorScheme.h"
+#include "colorscheme.h"
 
 #include <QDebug>
 #include <QFontDatabase>
