@@ -35,6 +35,8 @@ PropTerm::PropTerm(QWidget *parent) :
 
     ui.checkEcho->setChecked(true);
 
+    setWindowTitle(tr("Propeller Terminal"));
+
     foreach (QString s, PropellerDevice::list())
     {
         ui.port->addItem(s);
@@ -109,13 +111,15 @@ void PropTerm::openSerialPort()
     message("Port: "+ui.port->currentText());
     ui.console->setEnabled(true);
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-green.png"));
-
     device.setPortName(ui.port->currentText());
     if (!device.open())
     {
         error("Failed to open device");
         return;
     }
+
+
+    setWindowTitle(tr("%1 - Propeller Terminal").arg(device.portName()));
 
     device.reset();
     baudRateChanged(ui.baudRate->currentText());
