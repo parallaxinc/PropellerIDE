@@ -8,7 +8,6 @@
 Console::Console(QWidget *parent)
     : QPlainTextEdit(parent)
 {
-    setEchoEnabled(true);
     document()->setMaximumBlockCount(100);
     enable(false);
 
@@ -211,11 +210,6 @@ void Console::enable(bool set)
     }
 }
 
-void Console::setEchoEnabled(bool set)
-{
-    echoEnabled = set;
-}
-
 void Console::setPstMode(bool enable)
 {
     pstMode = enable;
@@ -250,11 +244,6 @@ void Console::keyPressEvent(QKeyEvent *e)
             case Qt::Key_Down:
                 break;
             default:
-                if (echoEnabled)
-                {
-                    setTextCursor(lastCursor);
-                    QPlainTextEdit::keyPressEvent(e);
-                }
                 emit getData(e->text().toLocal8Bit());
         }
     }

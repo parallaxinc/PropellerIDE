@@ -18,6 +18,9 @@ private:
     Console console;
     PropellerDevice device;
 
+    void message(QString text);
+    void error(QString text);
+
 public:
     explicit PropTerm(QWidget *parent = 0);
     ~PropTerm();
@@ -29,12 +32,10 @@ private slots:
     void readData();
 
     void handleError();
-    void handleToggle(bool checked);
+    void handleEnable(bool checked);
     void portChanged(const QString & text);
     void baudRateChanged(const QString & text);
 
-private slots:
-    void message(QString text);
-    void error(QString text);
+    void sendDataLine();
 
 };

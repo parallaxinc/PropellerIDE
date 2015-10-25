@@ -21,7 +21,6 @@ public:
     void putData(const QByteArray &data);
 
 public slots:
-    void setEchoEnabled(bool set);
     void setPstMode(bool enable);
     void enable(bool set);
 
@@ -30,7 +29,6 @@ protected:
     virtual void mousePressEvent(QMouseEvent *e);
 
 private:
-    bool echoEnabled;
     bool pstMode;
 
     int cursorX(QTextCursor cursor);

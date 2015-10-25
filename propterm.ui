@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>759</width>
-    <height>465</height>
+    <width>569</width>
+    <height>384</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,6 +16,16 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="activeLight">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="icons/propterm/propterm.qrc">:/icons/propterm/led-green.png</pixmap>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QToolButton" name="enable">
        <property name="font">
@@ -31,10 +41,26 @@
         <string>Enable terminal</string>
        </property>
        <property name="text">
-        <string>Go</string>
+        <string>Active</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="clear">
+       <property name="toolTip">
+        <string>Clear all terminal text</string>
+       </property>
+       <property name="statusTip">
+        <string>Clear all terminal text</string>
+       </property>
+       <property name="text">
+        <string>Clear</string>
        </property>
       </widget>
      </item>
@@ -59,6 +85,12 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="toolTip">
         <string>Select baud rate</string>
        </property>
@@ -66,13 +98,13 @@
         <string>Select baud rate</string>
        </property>
        <property name="editable">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="currentIndex">
         <number>3</number>
        </property>
        <property name="insertPolicy">
-        <enum>QComboBox::NoInsert</enum>
+        <enum>QComboBox::InsertAtBottom</enum>
        </property>
        <item>
         <property name="text">
@@ -117,7 +149,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="echo">
+      <widget class="QCheckBox" name="checkEcho">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="toolTip">
         <string>Enable terminal input echo</string>
        </property>
@@ -146,15 +183,49 @@
       </spacer>
      </item>
      <item>
-      <widget class="QToolButton" name="clear">
-       <property name="toolTip">
-        <string>Clear all terminal text</string>
-       </property>
-       <property name="statusTip">
-        <string>Clear all terminal text</string>
+      <widget class="QLabel" name="rxText">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="text">
-        <string>Clear</string>
+        <string>Rx / Tx:</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::AutoText</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="rxLight">
+       <property name="toolTip">
+        <string>Data received indicator</string>
+       </property>
+       <property name="statusTip">
+        <string>Data received indicator</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="icons/propterm/propterm.qrc">:/icons/propterm/led-red.png</pixmap>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="txLight">
+       <property name="toolTip">
+        <string>Data transmitted indicator</string>
+       </property>
+       <property name="statusTip">
+        <string>Data transmitted indicator</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="icons/propterm/propterm.qrc">:/icons/propterm/led-blue.png</pixmap>
        </property>
       </widget>
      </item>
@@ -607,6 +678,29 @@
      </property>
     </widget>
    </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLineEdit" name="sendLineEdit">
+       <property name="font">
+        <font>
+         <family>Droid Sans Mono</family>
+        </font>
+       </property>
+       <property name="placeholderText">
+        <string>Enter text to send...</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="sendButton">
+       <property name="text">
+        <string>Send</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -616,6 +710,8 @@
    <header>console.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="icons/propterm/propterm.qrc"/>
+ </resources>
  <connections/>
 </ui>
