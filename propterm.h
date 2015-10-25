@@ -19,6 +19,8 @@ private:
     Console console;
     PropellerDevice device;
 
+    QString title;
+
     void message(QString text);
     void error(QString text);
 
@@ -40,7 +42,7 @@ private slots:
 
     void handleError();
     void handleEnable(bool checked);
-    void portChanged(const QString & text);
+    void portChanged();
     void baudRateChanged(const QString & text);
 
     void sendDataLine();

@@ -30,12 +30,13 @@ PropTerm::PropTerm(QWidget *parent) :
     connect(ui.baudRate, SIGNAL(currentIndexChanged(const QString &)), this, SLOT(baudRateChanged(const QString &)));
 
     connect(ui.clear, SIGNAL(clicked()), ui.console, SLOT(clear()));
-    connect(ui.enable, SIGNAL(toggled(bool)), this, SLOT(handleEnable(bool)));
-    connect(ui.enable, SIGNAL(toggled(bool)), ui.console, SLOT(enable(bool)));
+    connect(ui.activeButton, SIGNAL(toggled(bool)), this, SLOT(handleEnable(bool)));
+    connect(ui.activeButton, SIGNAL(toggled(bool)), ui.console, SLOT(enable(bool)));
 
-    ui.checkEcho->setChecked(true);
+    ui.echo->setChecked(true);
 
-    setWindowTitle(tr("Propeller Terminal"));
+    title = tr("Propeller Debugger");
+    setWindowTitle(title);
 
     foreach (QString s, PropellerDevice::list())
     {
@@ -110,6 +111,8 @@ void PropTerm::openSerialPort()
 {
     message("Port: "+ui.port->currentText());
     ui.console->setEnabled(true);
+    ui.sendButton->setEnabled(true);
+    ui.sendLineEdit->setEnabled(true);
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-green.png"));
     device.setPortName(ui.port->currentText());
     if (!device.open())
@@ -118,8 +121,7 @@ void PropTerm::openSerialPort()
         return;
     }
 
-
-    setWindowTitle(tr("%1 - Propeller Terminal").arg(device.portName()));
+    setWindowTitle(tr("%1 - %2").arg(device.portName()).arg(title));
 
     device.reset();
     baudRateChanged(ui.baudRate->currentText());
@@ -129,12 +131,14 @@ void PropTerm::closeSerialPort()
 {
     device.close();
     ui.console->setEnabled(false);
+    ui.sendButton->setEnabled(false);
+    ui.sendLineEdit->setEnabled(false);
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-off.png"));
 }
 
-void PropTerm::portChanged(const QString & text)
+void PropTerm::portChanged()
 {
-    if (ui.enable->isChecked())
+    if (ui.activeButton->isChecked())
     {
         closeSerialPort();
         openSerialPort();
@@ -168,7 +172,7 @@ void PropTerm::writeData(const QByteArray &data)
     toggleTxLight(true);
 
     device.write(data);
-    if (ui.checkEcho->isChecked())
+    if (ui.echo->isChecked())
         ui.console->putData(data);
 }
 

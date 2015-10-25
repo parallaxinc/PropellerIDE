@@ -27,7 +27,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="enable">
+      <widget class="QToolButton" name="activeButton">
        <property name="font">
         <font>
          <weight>75</weight>
@@ -149,7 +149,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkEcho">
+      <widget class="QCheckBox" name="echo">
        <property name="font">
         <font>
          <pointsize>9</pointsize>
