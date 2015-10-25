@@ -43,12 +43,15 @@ PropTerm::PropTerm(QWidget *parent) :
     ui.console->clear();
 }
 
-
-
-
 PropTerm::~PropTerm()
 {
     closeSerialPort();
+}
+
+void PropTerm::setFont(QFont font)
+{
+    ui.console->setFont(font);
+    ui.sendLineEdit->setFont(font);
 }
 
 void PropTerm::turnOffRxLight()

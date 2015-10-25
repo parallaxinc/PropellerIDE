@@ -9,7 +9,7 @@ Console::Console(QWidget *parent)
     : QPlainTextEdit(parent)
 {
     document()->setMaximumBlockCount(100);
-    enable(false);
+    enable(true);
 
     paused = false;
     pstMode = true;

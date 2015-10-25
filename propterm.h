@@ -22,7 +22,6 @@ private:
     void message(QString text);
     void error(QString text);
 
-
     int timeout;
     QTimer rxTimeout;
     QTimer txTimeout;
@@ -30,6 +29,8 @@ private:
 public:
     explicit PropTerm(QWidget *parent = 0);
     ~PropTerm();
+
+    void setFont(QFont font);
 
 private slots:
     void openSerialPort();
