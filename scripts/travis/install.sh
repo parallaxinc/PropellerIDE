@@ -33,8 +33,8 @@ case "$PLATFORM" in
     sudo cp -vf /etc/network/interfaces $MNT/etc/network/interfaces
     sudo cp -vf /etc/resolv.conf $MNT/etc/resolv.conf 
     sudo cp -vf /usr/bin/qemu-arm-static $MNT/usr/bin/
-    sudo chroot $MNT apt-get update
-    sudo chroot $MNT apt-get install qt5-default libqt5serialport5-dev
+#    sudo chroot $MNT apt-get update
+#    sudo chroot $MNT apt-get install qt5-default libqt5serialport5-dev
     ;;
 *)
     echo "Invalid PLATFORM"
