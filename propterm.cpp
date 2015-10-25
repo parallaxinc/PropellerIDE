@@ -9,6 +9,17 @@ PropTerm::PropTerm(QWidget *parent) :
 {
     ui.setupUi(this);
 
+    timeout = 100;
+
+    rxTimeout.setSingleShot(true);
+    txTimeout.setSingleShot(true);
+
+    toggleRxLight(false);
+    toggleTxLight(false);
+
+    connect(&rxTimeout, SIGNAL(timeout()), this, SLOT(turnOffRxLight()));
+    connect(&txTimeout, SIGNAL(timeout()), this, SLOT(turnOffTxLight()));
+
     connect(&device, SIGNAL(readyRead()), this, SLOT(readData()));
     connect(ui.console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
 
@@ -22,12 +33,10 @@ PropTerm::PropTerm(QWidget *parent) :
     connect(ui.enable, SIGNAL(toggled(bool)), this, SLOT(handleEnable(bool)));
     connect(ui.enable, SIGNAL(toggled(bool)), ui.console, SLOT(enable(bool)));
 
-    connect(ui.checkEcho, SIGNAL(clicked(bool)), ui.console, SLOT(setEchoEnabled(bool)));
     ui.checkEcho->setChecked(true);
 
     foreach (QString s, PropellerDevice::list())
     {
-        qDebug() << s;
         ui.port->addItem(s);
     }
 
@@ -42,6 +51,43 @@ PropTerm::~PropTerm()
     closeSerialPort();
 }
 
+void PropTerm::turnOffRxLight()
+{
+    toggleRxLight(false);
+}
+
+void PropTerm::turnOffTxLight()
+{
+    toggleTxLight(false);
+}
+
+void PropTerm::toggleRxLight(bool enabled)
+{
+    if (enabled)
+    {
+        rxTimeout.start(timeout);
+        ui.rxLight->setPixmap(QPixmap(":/icons/propterm/led-red.png"));
+    }
+    else
+    {
+        rxTimeout.stop();
+        ui.rxLight->setPixmap(QPixmap(":/icons/propterm/led-off.png"));
+    }
+}
+
+void PropTerm::toggleTxLight(bool enabled)
+{
+    if (enabled)
+    {
+        txTimeout.start(timeout);
+        ui.txLight->setPixmap(QPixmap(":/icons/propterm/led-blue.png"));
+    }
+    else
+    {
+        txTimeout.stop();
+        ui.txLight->setPixmap(QPixmap(":/icons/propterm/led-off.png"));
+    }
+}
 
 void PropTerm::message(QString text)
 {
@@ -57,27 +103,26 @@ void PropTerm::error(QString text)
 
 void PropTerm::openSerialPort()
 {
-    message("Opening port "+ui.port->currentText());
+    message("Port: "+ui.port->currentText());
     ui.console->setEnabled(true);
+    ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-green.png"));
 
     device.setPortName(ui.port->currentText());
-    device.setBaudRate(115200);
     if (!device.open())
     {
-        error("ERROR: Failed to open device");
+        error("Failed to open device");
         return;
     }
 
     device.reset();
-//    device.setBaudRate(ui.baudRate->currentText().toInt());
-
-    message(QString("Port open: %1, %2").arg(device.baudRate()).arg(device.portName()));
+    baudRateChanged(ui.baudRate->currentText());
 }
 
 void PropTerm::closeSerialPort()
 {
     device.close();
     ui.console->setEnabled(false);
+    ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-off.png"));
 }
 
 void PropTerm::portChanged(const QString & text)
@@ -100,7 +145,7 @@ void PropTerm::baudRateChanged(const QString & text)
     }
 
     device.setBaudRate(baud);
-    message(QString("Baud rate changed to '%1'").arg(baud));
+    message(QString("Baud rate: %1").arg(baud));
 }
 
 void PropTerm::sendDataLine()
@@ -113,6 +158,8 @@ void PropTerm::sendDataLine()
 
 void PropTerm::writeData(const QByteArray &data)
 {
+    toggleTxLight(true);
+
     device.write(data);
     if (ui.checkEcho->isChecked())
         ui.console->putData(data);
@@ -120,6 +167,8 @@ void PropTerm::writeData(const QByteArray &data)
 
 void PropTerm::readData()
 {
+    toggleRxLight(true);
+
     QByteArray data = device.readAll();
     ui.console->putData(data);
 }

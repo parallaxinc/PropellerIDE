@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include <QTimer>
 
 #include "propellersession.h"
 #include "propellerdevice.h"
@@ -21,6 +22,11 @@ private:
     void message(QString text);
     void error(QString text);
 
+
+    int timeout;
+    QTimer rxTimeout;
+    QTimer txTimeout;
+
 public:
     explicit PropTerm(QWidget *parent = 0);
     ~PropTerm();
@@ -37,5 +43,11 @@ private slots:
     void baudRateChanged(const QString & text);
 
     void sendDataLine();
+
+    void toggleTxLight(bool enabled);
+    void toggleRxLight(bool enabled);
+
+    void turnOffTxLight();
+    void turnOffRxLight();
 
 };
