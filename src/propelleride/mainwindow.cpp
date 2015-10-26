@@ -133,7 +133,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     getApplicationSettings();
 
-    connect(&portMonitor, SIGNAL(portChanged(const QStringList &)), this, SLOT(updatePortWidget(const QStringList &)));
+    connect(&propellerManager, SIGNAL(portsChanged()), this, SLOT(updatePorts()));
 
     ui.editorTabs->newFile();
     loadSession();
@@ -606,21 +606,17 @@ void MainWindow::setEnableBuild(bool enabled)
     ui.actionBurn->setEnabled(enabled);
 }
 
-void MainWindow::updatePortWidget(const QStringList &)
+void MainWindow::updatePorts()
 {
     if(cbPort == NULL)
         return;
 
     cbPort->clear();
 
-    QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
-    foreach(QSerialPortInfo port, ports)
+    foreach(QString port, propellerManager.ports())
     {
-        if (!port.portName().contains("ttyS") &&
-            !port.portName().contains("Bluetooth"))
-            cbPort->addItem(port.portName());
+        cbPort->addItem(port);
     }
-
     if(cbPort->count())
     {
         setEnableBuild(true);

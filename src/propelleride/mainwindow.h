@@ -12,9 +12,9 @@
 
 #include "preferences.h"
 #include "editor.h"
-#include "portmonitor.h"
 #include "zipper.h"
 #include "filemanager.h"
+#include "propellermanager.h"
 #include "buildmanager.h"
 #include "finder.h"
 #include "projectparser.h"
@@ -66,7 +66,7 @@ public slots:
     void closeEvent(QCloseEvent *event);
     void quitProgram();
 
-    void updatePortWidget(const QStringList &);
+    void updatePorts();
     void showBrowser();
 
     void addRecentFile(const QString &fileName);
@@ -104,7 +104,7 @@ private:
 
     QComboBox   * cbPort;
 
-    PortMonitor portMonitor;
+    PropellerManager propellerManager;
 
     Zipper      zipper;
 };

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>407</width>
-    <height>457</height>
+    <height>462</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -81,7 +81,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Write Spin code, download to the Propeller, and debug your applications from the same editor on Windows, Mac, Linux, and Raspberry Pi.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Copyright © 2014-2015 by Parallax, Inc. &lt;br/&gt;PropellerIDE is released under the GPLv3 license.&lt;br/&gt;Developed by LameStation LLC; originally developed by Steve Denson.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Write Spin code, download to the Propeller, and debug your applications from the same editor on Windows, Mac, Linux, and Raspberry Pi.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Copyright © 2014-2015 by Parallax, Inc. &lt;br/&gt;PropellerIDE is released under the GPLv3 license.&lt;br/&gt;Developed by LameStation LLC; originally developed by Steve Denson.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textFormat">
         <enum>Qt::AutoText</enum>
