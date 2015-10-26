@@ -3,8 +3,12 @@ TEMPLATE  = subdirs
 SUBDIRS = \
     spinzip \
     memorymap \
+    terminal \
     projectview \
     propellermanager \
     propelleride
 
-propelleride.depends = spinzip memorymap projectview propellermanager
+terminal.depends = propellermanager
+memorymap.depends = propellermanager
+
+propelleride.depends = spinzip memorymap terminal projectview propellermanager

@@ -236,7 +236,7 @@ void Preferences::setupHighlight()
     themeEdit.setCurrentIndex(themeindex);
     loadTheme(themeindex);
     settings.setValue("Theme",themeEdit.itemData(themeEdit.currentIndex()));
-    qDebug() << "themeEdit" << themeEdit.currentText();
+    qDebug() << "Setting theme:" << themeEdit.currentText();
 
 
     themelayout->addWidget(&themeEdit);

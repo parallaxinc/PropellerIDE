@@ -88,7 +88,6 @@ void ColorScheme::load(QSettings * settings)
 
     settings->beginGroup("Font");
 
-    qDebug() << "FONT" << settings->value("Family").toString();
     if (!settings->contains("Family") || settings->value("Family").toString().isEmpty())
     {
         font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
@@ -112,6 +111,7 @@ void ColorScheme::load(QSettings * settings)
 
     settings->endGroup();
 
+    qDebug() << "Setting font:" << font.family();
 }
 
 void ColorScheme::setColor(ColorScheme::Color key, const QColor & color)
