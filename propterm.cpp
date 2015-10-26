@@ -26,7 +26,7 @@ PropTerm::PropTerm(QWidget *parent) :
     connect(ui.sendLineEdit, SIGNAL(returnPressed()), this, SLOT(sendDataLine()));
     connect(ui.sendButton, SIGNAL(pressed()), this, SLOT(sendDataLine()));
 
-    connect(ui.port, SIGNAL(currentIndexChanged(const QString &)), this, SLOT(portChanged(const QString &)));
+    connect(ui.port, SIGNAL(currentIndexChanged(const QString &)), this, SLOT(portChanged()));
     connect(ui.baudRate, SIGNAL(currentIndexChanged(const QString &)), this, SLOT(baudRateChanged(const QString &)));
 
     connect(ui.clear, SIGNAL(clicked()), ui.console, SLOT(clear()));
