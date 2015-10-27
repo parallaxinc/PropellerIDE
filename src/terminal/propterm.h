@@ -3,7 +3,6 @@
 #include <QWidget>
 #include <QTimer>
 
-#include "propellersession.h"
 #include "propellerdevice.h"
 
 #include "ui_propterm.h"

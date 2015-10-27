@@ -16,6 +16,7 @@ target:
         categories: Development;IDE
         section: Applications/Editors
         help2man:
+            - propelleride
             - propman
             - openspin
     dmg: 
@@ -34,9 +35,6 @@ repos:
             propelleride:
                 name: PropellerIDE
                 icon: icons/icon-new.png
-            propterm: 
-                name: Propeller Terminal
-                icon: icons/icon-propterm.png
 
     openspin:
         url: https://github.com/bweir/OpenSpin.git

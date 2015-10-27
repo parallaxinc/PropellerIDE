@@ -12,7 +12,7 @@
 
 #include "memorymap.h"
 
-#include "propellersession.h"
+#include "propellerloader.h"
 #include "propellerimage.h"
 #include "propellerdevice.h"
 
@@ -133,7 +133,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     getApplicationSettings();
 
-    connect(&propellerManager, SIGNAL(portsChanged()), this, SLOT(updatePorts()));
+    connect(&propellerManager, SIGNAL(portListChanged()), this, SLOT(updatePorts()));
+    propellerManager.enablePortMonitor(true);
 
     ui.editorTabs->newFile();
     loadSession();
@@ -382,9 +383,9 @@ int MainWindow::runCompiler()
 
 int MainWindow::loadProgram(bool write)
 {
-    PropellerSession session(cbPort->currentText());
+    PropellerLoader loader(cbPort->currentText());
 
-    if (!session.open())
+    if (!loader.open())
     {
         qDebug() << "Failed to open" << cbPort->currentText() << "!";
         return 1;
@@ -407,9 +408,9 @@ int MainWindow::loadProgram(bool write)
 
     PropellerImage image = PropellerImage(file.readAll(),filename);
 
-    if (session.upload(image, write))
+    if (loader.upload(image, write))
     {
-        session.close();
+        loader.close();
         return 1;
     }
     return 0;
@@ -613,7 +614,7 @@ void MainWindow::updatePorts()
 
     cbPort->clear();
 
-    foreach(QString port, propellerManager.ports())
+    foreach(QString port, propellerManager.listPorts())
     {
         cbPort->addItem(port);
     }
