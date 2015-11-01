@@ -135,6 +135,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(&propellerManager, SIGNAL(portListChanged()), this, SLOT(updatePorts()));
     propellerManager.enablePortMonitor(true);
+    updatePorts();
 
     ui.editorTabs->newFile();
     loadSession();
@@ -383,13 +384,8 @@ int MainWindow::runCompiler()
 
 int MainWindow::loadProgram(bool write)
 {
-    PropellerLoader loader(cbPort->currentText());
-
-    if (!loader.open())
-    {
-        qDebug() << "Failed to open" << cbPort->currentText() << "!";
-        return 1;
-    }
+    PropellerSession * session = propellerManager.session(cbPort->currentText());
+    PropellerLoader loader(session);
 
     int index;
     QString fileName;
@@ -408,11 +404,8 @@ int MainWindow::loadProgram(bool write)
 
     PropellerImage image = PropellerImage(file.readAll(),filename);
 
-    if (loader.upload(image, write))
-    {
-        loader.close();
-        return 1;
-    }
+    loader.upload(image, write);
+    propellerManager.endSession(session);
     return 0;
 }
 
@@ -626,6 +619,7 @@ void MainWindow::updatePorts()
     {
         setEnableBuild(false);
     }
+    qDebug() << propellerManager.listPorts();
 }
 
 void MainWindow::spawnTerminal()

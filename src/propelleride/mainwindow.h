@@ -30,7 +30,24 @@ private:
 public:
     MainWindow(QWidget *parent = 0);
 
+    PropellerManager propellerManager;
+    Zipper          zipper;
+
+    BuildManager    builder;
+    Language        language;
+
+    ProjectParser   *parser;
     Preferences     *propDialog;
+
+    QString         spinCompiler;
+    QString         spinIncludes;
+    QString         spinTerminal;
+    QString         spinLoader;
+    QString         projectFile;
+
+    QList<QAction *>    recentFiles;
+    QComboBox   * cbPort;
+
 
 public slots:
     void showMessage(const QString & message);
@@ -89,22 +106,4 @@ private:
     int  loadProgram(bool write);
     int  runCompiler();
 
-    QString     spinCompiler;
-    QString     spinIncludes;
-    QString     spinTerminal;
-    QString     spinLoader;
-
-    QList<QAction *> recentFiles;
-
-    BuildManager    builder;
-    Language        language;
-    ProjectParser   * parser;
-
-    QString         projectFile;
-
-    QComboBox   * cbPort;
-
-    PropellerManager propellerManager;
-
-    Zipper      zipper;
 };
