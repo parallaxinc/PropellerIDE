@@ -56,13 +56,23 @@ void FileManager::setCopy(bool available)
 
 void FileManager::open()
 {
-    QString dir = QDir(tabToolTip(currentIndex())).path();
+    QSettings settings;
+    settings.beginGroup("Paths");
+
+    QString lastDir = settings.value("lastDirectory",
+                QDir(tabToolTip(currentIndex())).path()).toString();
+
     QStringList fileNames = QFileDialog::getOpenFileNames(this,
-                tr("Open File"), dir, "Spin Files (*.spin);;All Files (*)");
+                tr("Open File"), lastDir, "Spin Files (*.spin);;All Files (*)");
+
+    if (fileNames.size())
+        settings.setValue("lastDirectory",QDir(fileNames[0]).path());
 
     for (int i = 0; i < fileNames.size(); i++)
         if (!fileNames.at(i).isEmpty())
             openFile(fileNames.at(i));
+
+    settings.endGroup();
 }
 
 
@@ -118,8 +128,6 @@ int FileManager::openFile(const QString & fileName)
     if (isFileOpen(fileName))
         return 1;
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-
     int index;
     if (isFileEmpty(currentIndex()))
         index = currentIndex();
@@ -139,7 +147,6 @@ int FileManager::openFile(const QString & fileName)
     emit fileUpdated(index);
     emit sendMessage(tr("File opened successfully: %1").arg(fileName));
 
-    QApplication::restoreOverrideCursor();
     return 0;
 }
 
