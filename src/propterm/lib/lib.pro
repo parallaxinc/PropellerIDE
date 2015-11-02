@@ -1,7 +1,7 @@
 include("../propterm.pri")
 
 CONFIG -= app_bundle debug_and_release
-CONFIG += static
+CONFIG += staticlib
 
 TARGET = propterm
 TEMPLATE = lib
