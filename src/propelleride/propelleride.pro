@@ -11,34 +11,34 @@ QT += gui widgets serialport
 
 CONFIG -= debug_and_release app_bundle
 
-
 INCLUDEPATH += ../spinzip/
-LIBS += -L../spinzip/ -lspinzip
-
-INCLUDEPATH += ../memorymap/memorymap/
-LIBS += -L../memorymap/memorymap/  -lmemorymap
-
-INCLUDEPATH += ../memorymap/
-LIBS += -L../memorymap/QHexEdit/ -lQHexEdit
-
 INCLUDEPATH += ../projectview/
-LIBS += -L../projectview/  -lprojectview
-
 INCLUDEPATH += ../propellermanager/src/lib/
+INCLUDEPATH += ../propterm/lib/
+INCLUDEPATH += ../memorymap/memorymap/
+INCLUDEPATH += ../memorymap/
+
+LIBS += -L../spinzip/ -lspinzip
+LIBS += -L../projectview/  -lprojectview
 LIBS += -L../propellermanager/src/lib/  -lpropellermanager
+LIBS += -L../propterm/lib/  -lpropterm
+LIBS += -L../memorymap/memorymap/  -lmemorymap
+LIBS += -L../memorymap/QHexEdit/ -lQHexEdit
 
 win32-msvc* {
 	PRE_TARGETDEPS += ../spinzip/spinzip.lib
-	PRE_TARGETDEPS += ../memorymap/QHexEdit/QHexEdit.lib
-	PRE_TARGETDEPS += ../memorymap/memorymap/memorymap.lib
 	PRE_TARGETDEPS += ../projectview/projectview.lib
 	PRE_TARGETDEPS += ../propellermanager/src/lib/propellermanager.lib
+	PRE_TARGETDEPS += ../propterm/lib/propterm.lib
+	PRE_TARGETDEPS += ../memorymap/QHexEdit/QHexEdit.lib
+	PRE_TARGETDEPS += ../memorymap/memorymap/memorymap.lib
 } else {
 	PRE_TARGETDEPS += ../spinzip/libspinzip.a
-	PRE_TARGETDEPS += ../memorymap/QHexEdit/libQHexEdit.a
-	PRE_TARGETDEPS += ../memorymap/memorymap/libmemorymap.a
 	PRE_TARGETDEPS += ../projectview/libprojectview.a
 	PRE_TARGETDEPS += ../propellermanager/src/lib/libpropellermanager.a
+	PRE_TARGETDEPS += ../propterm/lib/libpropterm.a
+	PRE_TARGETDEPS += ../memorymap/QHexEdit/libQHexEdit.a
+	PRE_TARGETDEPS += ../memorymap/memorymap/libmemorymap.a
 }
 
 SOURCES += \
@@ -86,6 +86,7 @@ RESOURCES += \
     languages/languages.qrc \
     themes/themes.qrc \
     ../projectview/icons/projectview/projectview.qrc \
+    ../propterm/icons/propterm/propterm.qrc \
 
 CODECFORTR = UTF-8
 

@@ -110,7 +110,7 @@ void Preferences::fontDialog()
 
     if(ok) {
         currentTheme->setFont(font);
-        emit updateFonts();
+        emit updateFonts(font);
     }
 }
 
@@ -167,18 +167,8 @@ void Preferences::setupFolders()
             this
             );
 
-    terminalpath = new PathSelector(
-            tr("Terminal"),
-            QApplication::applicationDirPath() +
-                    QString(DEFAULT_TERMINAL),
-            tr("Must add a terminal path."),
-            SLOT(browseTerminal()),
-            this
-            );
-
     pathlayout->addWidget(compilerpath);
     pathlayout->addWidget(librarypath);
-    pathlayout->addWidget(terminalpath);
     vlayout->addWidget(paths);
 
 }
@@ -197,7 +187,7 @@ void Preferences::loadTheme(int index)
     currentTheme->load(themeEdit.itemData(index).toString());
 
     emit updateColors();
-    emit updateFonts();
+    emit updateFonts(currentTheme->getFont());
 }
 
 
@@ -311,21 +301,10 @@ void Preferences::browseLibrary()
         );
 }
 
-void Preferences::browseTerminal()
-{
-    terminalpath->browsePath(
-            tr("Select terminal path"),
-            NULL,
-            false 
-        );
-}
-
-
 void Preferences::accept()
 {
     compilerpath->save();
     librarypath->save();
-    terminalpath->save();
 
     QSettings settings;
 
@@ -337,7 +316,7 @@ void Preferences::accept()
 
     currentTheme->save();
     emit updateColors();
-    emit updateFonts();
+    emit updateFonts(currentTheme->getFont());
 
     done(QDialog::Accepted);
 }
@@ -346,8 +325,6 @@ void Preferences::reject()
 {
     compilerpath->restore();
     librarypath->restore();
-    terminalpath->restore();
-
 
     tabspaceLedit.setText(tabSpacesStr);
 
@@ -361,7 +338,7 @@ void Preferences::reject()
 
     currentTheme->load();
     emit updateColors();
-    emit updateFonts();
+    emit updateFonts(currentTheme->getFont());
 
     done(QDialog::Rejected);
 }
@@ -391,5 +368,5 @@ void Preferences::adjustFontSize(float ratio)
     currentTheme->setFont(font);
     currentTheme->save();
 
-    emit updateFonts();
+    emit updateFonts(font);
 }

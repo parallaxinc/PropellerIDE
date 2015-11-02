@@ -41,7 +41,7 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 
     connect(this,SIGNAL(cursorPositionChanged()),this,SLOT(updateBackgroundColors()));
     connect(propDialog,SIGNAL(updateColors()),this,SLOT(updateColors()));
-    connect(propDialog,SIGNAL(updateFonts()),this,SLOT(updateFonts()));
+    connect(propDialog,SIGNAL(updateFonts(const QFont &)),this,SLOT(updateFonts()));
     connect(propDialog->getTabSpaceLedit(),SIGNAL(textChanged(QString)), this, SLOT(tabSpacesChanged()));
 
     connect(this,SIGNAL(undoAvailable(bool)), this, SLOT(setUndo(bool)));

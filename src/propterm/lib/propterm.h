@@ -3,7 +3,7 @@
 #include <QWidget>
 #include <QTimer>
 
-#include "propellerdevice.h"
+#include "propellersession.h"
 
 #include "ui_propterm.h"
 
@@ -16,7 +16,8 @@ class PropTerm : public QWidget
 private:
     Ui::PropTerm ui;
     Console console;
-    PropellerDevice device;
+    PropellerManager * manager;
+    PropellerSession * session;
 
     QString title;
 
@@ -28,10 +29,11 @@ private:
     QTimer txTimeout;
 
 public:
-    explicit PropTerm(QWidget *parent = 0);
+    explicit PropTerm(PropellerManager * manager, QWidget *parent = 0);
     ~PropTerm();
 
-    void setFont(QFont font);
+public slots:
+    void setFont(const QFont & font);
 
 private slots:
     void openSerialPort();
@@ -51,5 +53,7 @@ private slots:
 
     void turnOffTxLight();
     void turnOffRxLight();
+
+    void updatePorts();
 
 };

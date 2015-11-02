@@ -36,7 +36,6 @@
 #endif
 
 #define DEFAULT_COMPILER            "/openspin"  APP_EXTENSION 
-#define DEFAULT_TERMINAL            "/propterm"  APP_EXTENSION
 
 class Preferences : public QDialog
 {
@@ -54,7 +53,7 @@ public:
 
 signals:
     void updateColors();
-    void updateFonts();
+    void updateFonts(const QFont &);
 
 public slots:
 
@@ -62,7 +61,6 @@ public slots:
     void fontDialog();
     void browseCompiler();
     void browseLibrary();
-    void browseTerminal();
     void accept();
     void reject();
     void updateColor(int key, const QColor & color);
@@ -83,7 +81,6 @@ private:
 
     PathSelector * compilerpath;
     PathSelector * librarypath;
-    PathSelector * terminalpath;
 
     QString     tabSpacesStr;
     QCheckBox   autoCompleteEnable;

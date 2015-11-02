@@ -6,12 +6,12 @@
 #include <QFileDialog> 
 #include <QMenu> 
 #include <QSerialPortInfo>
-#include <QProcess>
 
 #include "ui_about.h"
 
 #include "memorymap.h"
 
+#include "propterm.h"
 #include "propellerloader.h"
 #include "propellerimage.h"
 #include "propellerdevice.h"
@@ -31,9 +31,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     parser = language.getParser();
     connect(propDialog,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
-    connect(propDialog,SIGNAL(updateFonts()),this,SLOT(recolorProjectView()));
+    connect(propDialog,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorProjectView()));
 
-    connect(propDialog,SIGNAL(updateFonts()),this,SLOT(recolorBuildManager()));
+    connect(propDialog,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorBuildManager()));
 
     recolorProjectView();
     recolorBuildManager();
@@ -470,7 +470,7 @@ void MainWindow::viewInfo()
     map->setAttribute(Qt::WA_DeleteOnClose, true);
 
     connect(propDialog,SIGNAL(updateColors()),map,SLOT(updateColors()));
-    connect(propDialog,SIGNAL(updateFonts()),map,SLOT(updateColors()));
+    connect(propDialog,SIGNAL(updateFonts(const QFont &)),map,SLOT(updateColors()));
     connect(map,SIGNAL(getRecolor(QWidget *)),this,SLOT(recolorInfo(QWidget *)));
 
     connect(map,SIGNAL(run(QByteArray)), this, SLOT(programRun()));
@@ -624,10 +624,11 @@ void MainWindow::updatePorts()
 
 void MainWindow::spawnTerminal()
 {
-    QString term = QDir::toNativeSeparators(spinTerminal);
-    qDebug() << "Running" << term;
-    if (!QProcess::startDetached(term, QStringList()))
-        qDebug() << "Failed to detach" << term;
+    PropTerm * term = new PropTerm(&propellerManager, this);
+    ColorScheme * theme = &Singleton<ColorScheme>::Instance();
+    term->setFont(theme->getFont());
+    connect(propDialog,SIGNAL(updateFonts(const QFont &)),term,SLOT(setFont(const QFont &)));
+    term->show();
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)

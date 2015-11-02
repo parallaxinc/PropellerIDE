@@ -4,10 +4,14 @@
 #include <QDebug>
 
 
-PropTerm::PropTerm(QWidget *parent) :
-    QWidget(parent)
+PropTerm::PropTerm(PropellerManager * manager,
+                   QWidget *parent)
+: QWidget(parent)
 {
     ui.setupUi(this);
+
+    this->manager = manager;
+    this->session = manager->session();
 
     timeout = 100;
 
@@ -20,7 +24,8 @@ PropTerm::PropTerm(QWidget *parent) :
     connect(&rxTimeout, SIGNAL(timeout()), this, SLOT(turnOffRxLight()));
     connect(&txTimeout, SIGNAL(timeout()), this, SLOT(turnOffTxLight()));
 
-    connect(&device, SIGNAL(readyRead()), this, SLOT(readData()));
+    connect(manager, SIGNAL(portListChanged()), this, SLOT(updatePorts()));
+    connect(session, SIGNAL(readyRead()), this, SLOT(readData()));
     connect(ui.console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
 
     connect(ui.sendLineEdit, SIGNAL(returnPressed()), this, SLOT(sendDataLine()));
@@ -38,11 +43,7 @@ PropTerm::PropTerm(QWidget *parent) :
     title = tr("Propeller Terminal");
     setWindowTitle(title);
 
-    foreach (QString s, PropellerDevice::list())
-    {
-        ui.port->addItem(s);
-    }
-
+    updatePorts();
     ui.console->clear();
 }
 
@@ -51,10 +52,19 @@ PropTerm::~PropTerm()
     closeSerialPort();
 }
 
-void PropTerm::setFont(QFont font)
+void PropTerm::setFont(const QFont & font)
 {
     ui.console->setFont(font);
     ui.sendLineEdit->setFont(font);
+}
+
+void PropTerm::updatePorts()
+{
+    ui.port->clear();
+    foreach(QString s, manager->listPorts())
+    {
+        ui.port->addItem(s);
+    }
 }
 
 void PropTerm::turnOffRxLight()
@@ -114,22 +124,15 @@ void PropTerm::openSerialPort()
     ui.sendButton->setEnabled(true);
     ui.sendLineEdit->setEnabled(true);
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-green.png"));
-    device.setPortName(ui.port->currentText());
-    if (!device.open())
-    {
-        error("Failed to open device");
-        return;
-    }
+    session->setPortName(ui.port->currentText());
+    setWindowTitle(tr("%1 - %2").arg(session->portName()).arg(title));
 
-    setWindowTitle(tr("%1 - %2").arg(device.portName()).arg(title));
-
-    device.reset();
+    session->reset();
     baudRateChanged(ui.baudRate->currentText());
 }
 
 void PropTerm::closeSerialPort()
 {
-    device.close();
     ui.console->setEnabled(false);
     ui.sendButton->setEnabled(false);
     ui.sendLineEdit->setEnabled(false);
@@ -138,11 +141,7 @@ void PropTerm::closeSerialPort()
 
 void PropTerm::portChanged()
 {
-    if (ui.activeButton->isChecked())
-    {
-        closeSerialPort();
-        openSerialPort();
-    }
+    session->setPortName(ui.port->currentText());
 }
 
 void PropTerm::baudRateChanged(const QString & text)
@@ -155,7 +154,7 @@ void PropTerm::baudRateChanged(const QString & text)
         return;
     }
 
-    device.setBaudRate(baud);
+    session->setBaudRate(baud);
     message(QString("Baud rate: %1").arg(baud));
 }
 
@@ -171,7 +170,7 @@ void PropTerm::writeData(const QByteArray &data)
 {
     toggleTxLight(true);
 
-    device.write(data);
+    session->write(data);
     if (ui.echo->isChecked())
         ui.console->putData(data);
 }
@@ -180,7 +179,7 @@ void PropTerm::readData()
 {
     toggleRxLight(true);
 
-    QByteArray data = device.readAll();
+    QByteArray data = session->readAll();
     ui.console->putData(data);
 }
 
