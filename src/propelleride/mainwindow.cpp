@@ -189,7 +189,6 @@ void MainWindow::getApplicationSettings()
     settings.beginGroup("Paths");
 
     spinCompiler = settings.value("Compiler").toString();
-    spinLoader = settings.value("Loader").toString();
     spinIncludes = settings.value("Library").toString();
     spinTerminal = settings.value("Terminal").toString();
 
@@ -376,7 +375,7 @@ int MainWindow::runCompiler()
 
     checkAndSaveFiles();
 
-    builder.setParameters(spinCompiler, spinLoader, spinIncludes, fileName);
+    builder.setParameters(spinCompiler, spinIncludes, fileName);
     int rc = builder.runCompiler();
 
     return rc;
@@ -384,8 +383,7 @@ int MainWindow::runCompiler()
 
 int MainWindow::loadProgram(bool write)
 {
-    PropellerSession * session = propellerManager.session(cbPort->currentText());
-    PropellerLoader loader(session);
+    QString port = cbPort->currentText();
 
     int index;
     QString fileName;
@@ -395,17 +393,11 @@ int MainWindow::loadProgram(bool write)
 
     index = ui.editorTabs->currentIndex();
     QString filename = ui.editorTabs->tabToolTip(index);
-    QFile file(filename.replace(".spin",".binary"));
-    if (!file.open(QIODevice::ReadOnly))
-    {
-        qDebug() << "Couldn't open file";
-        return 1;
-    }
+    builder.loadProgram(&propellerManager,
+                        filename.replace(".spin",".binary"),
+                        port,
+                        write);
 
-    PropellerImage image = PropellerImage(file.readAll(),filename);
-
-    loader.upload(image, write);
-    propellerManager.endSession(session);
     return 0;
 }
 

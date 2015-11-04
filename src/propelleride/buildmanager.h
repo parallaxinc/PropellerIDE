@@ -19,6 +19,7 @@
 #include <QTimer>
 
 #include "buildstatus.h"
+#include "propellerloader.h"
 
 class BuildManager : public QWidget
 {
@@ -33,7 +34,6 @@ public:
 
     void setParameters(
             QString comp,
-            QString load,
             QString incl,
             QString projFile);
 
@@ -52,9 +52,12 @@ public:
     QString includesStr;
     QString projectFile;
     QString compileResult;
-    QString loader;
 
-    int loadProgram(QString options = QString());
+    int loadProgram(PropellerManager * manager,
+                    const QString & filename,
+                    const QString & port,
+                    bool write);
+
     int runCompiler(QString options = QString());
     void getCompilerOutput();
 

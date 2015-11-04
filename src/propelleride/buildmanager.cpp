@@ -38,12 +38,10 @@ void BuildManager::setFont(const QFont & font)
 
 void BuildManager::setParameters(
         QString comp,
-        QString load,
         QString incl,
         QString projFile)
 {
     compilerStr = comp;
-    loader = load;
     includesStr = incl;
     projectFile = projFile;
     qDebug() << "Setting build: "
@@ -158,32 +156,40 @@ int BuildManager::runProcess(const QString & programName, const QStringList & pr
 }
 
 
-int BuildManager::loadProgram(QString options)
+int BuildManager::loadProgram(PropellerManager * manager,
+                              const QString & filename,
+                              const QString & port,
+                              bool write)
 {
-    QStringList optslist, args;
-    if (!options.isNull())
-    {
-        optslist = options.split(" ");
-        foreach (QString s, optslist)
-        {
-            args.append(s);
-        }
-    }
-    args.append(projectFile.replace(".spin",".binary"));
-
     console->setStage(2);
     console->setText(tr("Downloading %1...").arg(QFileInfo(projectFile).fileName()));
 
-    console->showDetails();
-    int rc = runProcess(loader,args);
-    if (!rc)
+    PropellerSession * session = manager->session(port);
+    PropellerLoader loader(session);
+
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Couldn't open file";
+        return 1;
+    }
+
+    PropellerImage image = PropellerImage(file.readAll(),filename);
+
+    if (loader.upload(image, write))
+    {
+        console->setText(tr("Download failed!"));
+    }
+    else
     {
         console->setStage(3);
         console->setText(tr("Download complete!"));
-        waitClose();
     }
 
-    return rc;
+    waitClose();
+    manager->endSession(session);
+
+    return 0;
 }
 
 int BuildManager::runCompiler(QString options)
