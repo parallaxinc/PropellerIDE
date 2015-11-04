@@ -607,6 +607,7 @@ void MainWindow::updatePorts()
 void MainWindow::spawnTerminal()
 {
     PropTerm * term = new PropTerm(&propellerManager);
+    term->setAttribute(Qt::WA_DeleteOnClose);
     ColorScheme * theme = &Singleton<ColorScheme>::Instance();
     term->setFont(theme->getFont());
     connect(propDialog,SIGNAL(updateFonts(const QFont &)),term,SLOT(setFont(const QFont &)));

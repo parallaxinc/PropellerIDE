@@ -2,6 +2,9 @@
 
 #include <QWidget>
 #include <QTimer>
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(terminal)
 
 #include "propellersession.h"
 

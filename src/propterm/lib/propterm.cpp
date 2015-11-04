@@ -3,13 +3,13 @@
 
 #include <QDebug>
 
+Q_LOGGING_CATEGORY(terminal, "ide.terminal")
 
 PropTerm::PropTerm(PropellerManager * manager,
                    QWidget *parent)
 : QWidget(parent)
 {
     ui.setupUi(this);
-    this->setAttribute(Qt::WA_DeleteOnClose);
 
     this->manager = manager;
     this->session = manager->session();
@@ -123,7 +123,6 @@ void PropTerm::error(QString text)
 
 void PropTerm::open()
 {
-    message("Port: "+ui.port->currentText());
     ui.console->enable(true);
     ui.console->setEnabled(true);
     ui.sendButton->setEnabled(true);
@@ -148,6 +147,7 @@ void PropTerm::close()
 
 void PropTerm::portChanged()
 {
+    qCDebug(terminal) << "port" << ui.port->currentText();
     session->setPortName(ui.port->currentText());
     setWindowTitle(tr("%1 - %2").arg(session->portName()).arg(title));
 }
@@ -158,12 +158,12 @@ void PropTerm::baudRateChanged(const QString & text)
     int baud = text.toInt(&ok);
     if (!ok)
     {
-        error(QString("Failed to set baud rate: '%1'").arg(baud));
+        qCCritical(terminal) << "Baud rate invalid:" << baud;
         return;
     }
 
     session->setBaudRate(baud);
-    message(QString("Baud rate: %1").arg(baud));
+    qCDebug(terminal) << "new baud rate:" << baud;
 }
 
 void PropTerm::sendDataLine()
