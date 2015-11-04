@@ -100,7 +100,7 @@ MainWindow::MainWindow(QWidget *parent)
                                                              << Qt::CTRL+Qt::Key_Equal);
 
     // Project Menu
-    connect(ui.actionView_Info, SIGNAL(triggered()), this, SLOT(viewInfo()));
+    connect(ui.actionView_Info, SIGNAL(triggered()), this, SLOT(spawnMemoryMap()));
     connect(ui.actionBuild,     SIGNAL(triggered()), this, SLOT(programBuild()));
     connect(ui.actionRun,       SIGNAL(triggered()), this, SLOT(programRun()));
     connect(ui.actionBurn,      SIGNAL(triggered()), this, SLOT(programBurnEE()));
@@ -464,7 +464,7 @@ void MainWindow::recolorProjectView()
     ui.projectview->setModel(parser->treeModel());
 }
 
-void MainWindow::viewInfo()
+void MainWindow::spawnMemoryMap()
 {
     MemoryMap * map = new MemoryMap();
     map->setAttribute(Qt::WA_DeleteOnClose, true);
@@ -624,7 +624,7 @@ void MainWindow::updatePorts()
 
 void MainWindow::spawnTerminal()
 {
-    PropTerm * term = new PropTerm(&propellerManager, this);
+    PropTerm * term = new PropTerm(&propellerManager);
     ColorScheme * theme = &Singleton<ColorScheme>::Instance();
     term->setFont(theme->getFont());
     connect(propDialog,SIGNAL(updateFonts(const QFont &)),term,SLOT(setFont(const QFont &)));

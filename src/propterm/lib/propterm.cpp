@@ -9,6 +9,7 @@ PropTerm::PropTerm(PropellerManager * manager,
 : QWidget(parent)
 {
     ui.setupUi(this);
+    this->setAttribute(Qt::WA_DeleteOnClose);
 
     this->manager = manager;
     this->session = manager->session();
@@ -45,11 +46,13 @@ PropTerm::PropTerm(PropellerManager * manager,
 
     updatePorts();
     ui.console->clear();
+    openSerialPort();
 }
 
 PropTerm::~PropTerm()
 {
     closeSerialPort();
+    manager->endSession(session);
 }
 
 void PropTerm::setFont(const QFont & font)

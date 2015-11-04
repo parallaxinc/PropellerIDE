@@ -76,7 +76,7 @@ public slots:
     void programBurnEE();
     void programRun();
     void programDebug();
-    void viewInfo();
+    void spawnMemoryMap();
     void recolorInfo(QWidget * widget);
     void recolorProjectView();
     void recolorBuildManager();
