@@ -31,6 +31,7 @@ repos:
     propelleride:
         url: https://github.com/parallaxinc/PropellerIDE.git
         builder: qmake
+        tag: 0.33.1
         files:
             propelleride:
                 name: PropellerIDE
