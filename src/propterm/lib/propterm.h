@@ -36,8 +36,8 @@ public slots:
     void setFont(const QFont & font);
 
 private slots:
-    void openSerialPort();
-    void closeSerialPort();
+    void open();
+    void close();
     void writeData(const QByteArray &data);
     void readData();
 

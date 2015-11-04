@@ -100,10 +100,10 @@ MainWindow::MainWindow(QWidget *parent)
                                                              << Qt::CTRL+Qt::Key_Equal);
 
     // Project Menu
-    connect(ui.actionView_Info, SIGNAL(triggered()), this, SLOT(spawnMemoryMap()));
+    connect(ui.actionMemory_Map,SIGNAL(triggered()), this, SLOT(spawnMemoryMap()));
     connect(ui.actionBuild,     SIGNAL(triggered()), this, SLOT(programBuild()));
     connect(ui.actionRun,       SIGNAL(triggered()), this, SLOT(programRun()));
-    connect(ui.actionBurn,      SIGNAL(triggered()), this, SLOT(programBurnEE()));
+    connect(ui.actionWrite,     SIGNAL(triggered()), this, SLOT(programWrite()));
     connect(ui.actionTerminal,  SIGNAL(triggered()), this, SLOT(spawnTerminal()));
 
     // Help Menu
@@ -426,23 +426,12 @@ void MainWindow::programRun()
     loadProgram(false);
 }
 
-void MainWindow::programBurnEE()
+void MainWindow::programWrite()
 {
     if(runCompiler())
         return;
 
     loadProgram(true);
-}
-
-void MainWindow::programDebug()
-{
-    if(runCompiler())
-        return;
-
-    if(loadProgram(false))
-    {
-        spawnTerminal();
-    }
 }
 
 void MainWindow::recolorBuildManager()
@@ -595,9 +584,10 @@ void MainWindow::zipFiles()
 void MainWindow::setEnableBuild(bool enabled)
 {
     cbPort->setEnabled(enabled);
-    ui.actionTerminal->setEnabled(enabled);
     ui.actionRun->setEnabled(enabled);
-    ui.actionBurn->setEnabled(enabled);
+    ui.actionWrite->setEnabled(enabled);
+    ui.actionMemory_Map->setEnabled(enabled);
+    ui.actionTerminal->setEnabled(enabled);
 }
 
 void MainWindow::updatePorts()

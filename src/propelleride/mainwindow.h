@@ -70,13 +70,14 @@ public slots:
 
     void findMultilineComment(QPoint point);
     void findMultilineComment(QTextCursor cur);
-    void spawnTerminal();
     void setProject();
+
     void programBuild();
-    void programBurnEE();
     void programRun();
-    void programDebug();
+    void programWrite();
     void spawnMemoryMap();
+    void spawnTerminal();
+
     void recolorInfo(QWidget * widget);
     void recolorProjectView();
     void recolorBuildManager();

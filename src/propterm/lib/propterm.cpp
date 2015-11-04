@@ -27,6 +27,8 @@ PropTerm::PropTerm(PropellerManager * manager,
 
     connect(manager, SIGNAL(portListChanged()), this, SLOT(updatePorts()));
     connect(session, SIGNAL(readyRead()), this, SLOT(readData()));
+    connect(session, SIGNAL(deviceFree()), this, SLOT(open()));
+    connect(session, SIGNAL(deviceBusy()), this, SLOT(close()));
     connect(ui.console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
 
     connect(ui.sendLineEdit, SIGNAL(returnPressed()), this, SLOT(sendDataLine()));
@@ -37,7 +39,6 @@ PropTerm::PropTerm(PropellerManager * manager,
 
     connect(ui.clear, SIGNAL(clicked()), ui.console, SLOT(clear()));
     connect(ui.activeButton, SIGNAL(toggled(bool)), this, SLOT(handleEnable(bool)));
-    connect(ui.activeButton, SIGNAL(toggled(bool)), ui.console, SLOT(enable(bool)));
 
     ui.echo->setChecked(true);
 
@@ -46,12 +47,12 @@ PropTerm::PropTerm(PropellerManager * manager,
 
     updatePorts();
     ui.console->clear();
-    openSerialPort();
+    open();
 }
 
 PropTerm::~PropTerm()
 {
-    closeSerialPort();
+    close();
     manager->endSession(session);
 }
 
@@ -120,31 +121,35 @@ void PropTerm::error(QString text)
     message("ERROR: "+text);
 }
 
-void PropTerm::openSerialPort()
+void PropTerm::open()
 {
     message("Port: "+ui.port->currentText());
+    ui.console->enable(true);
     ui.console->setEnabled(true);
     ui.sendButton->setEnabled(true);
     ui.sendLineEdit->setEnabled(true);
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-green.png"));
-    session->setPortName(ui.port->currentText());
-    setWindowTitle(tr("%1 - %2").arg(session->portName()).arg(title));
 
-    session->reset();
+    portChanged();
+    session->unpause();
     baudRateChanged(ui.baudRate->currentText());
 }
 
-void PropTerm::closeSerialPort()
+void PropTerm::close()
 {
+    ui.console->enable(false);
     ui.console->setEnabled(false);
     ui.sendButton->setEnabled(false);
     ui.sendLineEdit->setEnabled(false);
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-off.png"));
+
+    session->pause();
 }
 
 void PropTerm::portChanged()
 {
     session->setPortName(ui.port->currentText());
+    setWindowTitle(tr("%1 - %2").arg(session->portName()).arg(title));
 }
 
 void PropTerm::baudRateChanged(const QString & text)
@@ -188,13 +193,13 @@ void PropTerm::readData()
 
 void PropTerm::handleError()
 {
-    closeSerialPort();
+    close();
 }
 
 void PropTerm::handleEnable(bool checked)
 {
     if (checked)
-        openSerialPort();
+        open();
     else
-        closeSerialPort();
+        close();
 }

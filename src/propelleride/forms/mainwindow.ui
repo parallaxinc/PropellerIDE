@@ -81,7 +81,7 @@
      <x>0</x>
      <y>0</y>
      <width>717</width>
-     <height>27</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -143,10 +143,10 @@
     <property name="title">
      <string>&amp;Project</string>
     </property>
-    <addaction name="actionView_Info"/>
     <addaction name="actionBuild"/>
     <addaction name="actionRun"/>
-    <addaction name="actionBurn"/>
+    <addaction name="actionWrite"/>
+    <addaction name="actionMemory_Map"/>
     <addaction name="actionTerminal"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
@@ -204,10 +204,11 @@
    <addaction name="separator"/>
    <addaction name="action_Zip"/>
    <addaction name="separator"/>
-   <addaction name="actionView_Info"/>
    <addaction name="actionBuild"/>
    <addaction name="actionRun"/>
-   <addaction name="actionBurn"/>
+   <addaction name="actionWrite"/>
+   <addaction name="separator"/>
+   <addaction name="actionMemory_Map"/>
    <addaction name="actionTerminal"/>
   </widget>
   <action name="action_New">
@@ -637,7 +638,7 @@
     <string>F7</string>
    </property>
   </action>
-  <action name="actionView_Info">
+  <action name="actionMemory_Map">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -646,7 +647,7 @@
      <normaloff>:/icons/project-info3.png</normaloff>:/icons/project-info3.png</iconset>
    </property>
    <property name="text">
-    <string>View Info</string>
+    <string>Memory &amp;Map</string>
    </property>
    <property name="statusTip">
     <string>View memory layout of current file</string>
@@ -661,7 +662,7 @@
      <normaloff>:/icons/project-build.png</normaloff>:/icons/project-build.png</iconset>
    </property>
    <property name="text">
-    <string>Build</string>
+    <string>&amp;Build</string>
    </property>
    <property name="statusTip">
     <string>Compile program but don't run</string>
@@ -676,7 +677,7 @@
      <normaloff>:/icons/project-run.png</normaloff>:/icons/project-run.png</iconset>
    </property>
    <property name="text">
-    <string>Run</string>
+    <string>&amp;Run</string>
    </property>
    <property name="statusTip">
     <string>Compile and run current program</string>
@@ -685,13 +686,13 @@
     <string>F10</string>
    </property>
   </action>
-  <action name="actionBurn">
+  <action name="actionWrite">
    <property name="icon">
     <iconset resource="../icons/icons.qrc">
      <normaloff>:/icons/project-burn.png</normaloff>:/icons/project-burn.png</iconset>
    </property>
    <property name="text">
-    <string>Burn</string>
+    <string>&amp;Write</string>
    </property>
    <property name="statusTip">
     <string>Compile program and download to EEPROM</string>
@@ -706,7 +707,7 @@
      <normaloff>:/icons/project-terminal.png</normaloff>:/icons/project-terminal.png</iconset>
    </property>
    <property name="text">
-    <string>Terminal</string>
+    <string>&amp;Terminal</string>
    </property>
    <property name="statusTip">
     <string>Open a new serial terminal</string>
