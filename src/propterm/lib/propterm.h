@@ -4,11 +4,10 @@
 #include <QTimer>
 #include <QLoggingCategory>
 
-Q_DECLARE_LOGGING_CATEGORY(terminal)
-
 #include "propellersession.h"
-
 #include "ui_propterm.h"
+
+Q_DECLARE_LOGGING_CATEGORY(terminal)
 
 class Console;
 
@@ -24,12 +23,11 @@ private:
 
     QString title;
 
-    void message(QString text);
-    void error(QString text);
-
     int timeout;
     QTimer rxTimeout;
     QTimer txTimeout;
+    QTimer busyTimeout;
+    bool busytoggle;
 
 public:
     explicit PropTerm(PropellerManager * manager, QWidget *parent = 0);
@@ -40,12 +38,17 @@ public slots:
 
 private slots:
     void open();
-    void close();
+    void closed();
+    void free();
+    void busy();
+    void reset();
     void writeData(const QByteArray &data);
     void readData();
 
     void handleError();
     void handleEnable(bool checked);
+    void handleBusy();
+
     void portChanged();
     void baudRateChanged(const QString & text);
 

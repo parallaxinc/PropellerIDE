@@ -15,6 +15,7 @@
 #include "propellerloader.h"
 #include "propellerimage.h"
 #include "propellerdevice.h"
+#include "logging_ide.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -681,7 +682,7 @@ void MainWindow::openFileResource(QString const & resource)
     if (QFileInfo(path).exists() && QFileInfo(path).isFile())
         QDesktopServices::openUrl(QUrl::fromLocalFile(path));
     else
-        showMessage(tr("File %1 not found...").arg(path));
+        qCDebug(mainwindow) << "File not found:" << path;
 }
 
 void MainWindow::propellerManual()

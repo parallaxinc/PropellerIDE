@@ -164,8 +164,7 @@ int BuildManager::loadProgram(PropellerManager * manager,
     console->setStage(2);
     console->setText(tr("Downloading %1...").arg(QFileInfo(projectFile).fileName()));
 
-    PropellerSession * session = manager->session(port);
-    PropellerLoader loader(session);
+    PropellerLoader loader(manager, port);
 
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly))
@@ -187,8 +186,6 @@ int BuildManager::loadProgram(PropellerManager * manager,
     }
 
     waitClose();
-    manager->endSession(session);
-
     return 0;
 }
 

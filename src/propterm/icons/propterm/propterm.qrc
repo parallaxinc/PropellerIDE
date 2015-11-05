@@ -4,7 +4,8 @@
     <file>term-bg-grey.png</file>
     <file>led-blue.png</file>
     <file>led-green.png</file>
-    <file>led-off.png</file>
     <file>led-red.png</file>
+    <file>led-yellow.png</file>
+    <file>led-off.png</file>
 </qresource>
 </RCC>

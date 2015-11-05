@@ -12,7 +12,7 @@ PropTerm::PropTerm(PropellerManager * manager,
     ui.setupUi(this);
 
     this->manager = manager;
-    this->session = manager->session();
+    session = new PropellerSession(manager);
 
     timeout = 100;
 
@@ -22,13 +22,14 @@ PropTerm::PropTerm(PropellerManager * manager,
     toggleRxLight(false);
     toggleTxLight(false);
 
-    connect(&rxTimeout, SIGNAL(timeout()), this, SLOT(turnOffRxLight()));
-    connect(&txTimeout, SIGNAL(timeout()), this, SLOT(turnOffTxLight()));
+    connect(&rxTimeout,   SIGNAL(timeout()),   this, SLOT(turnOffRxLight()));
+    connect(&txTimeout,   SIGNAL(timeout()),   this, SLOT(turnOffTxLight()));
+    connect(&busyTimeout, SIGNAL(timeout()), this, SLOT(handleBusy()));
 
     connect(manager, SIGNAL(portListChanged()), this, SLOT(updatePorts()));
-    connect(session, SIGNAL(readyRead()), this, SLOT(readData()));
-    connect(session, SIGNAL(deviceFree()), this, SLOT(open()));
-    connect(session, SIGNAL(deviceBusy()), this, SLOT(close()));
+    connect(session, SIGNAL(deviceFree()), this, SLOT(free()));
+    connect(session, SIGNAL(deviceBusy()), this, SLOT(busy()));
+    connect(session, SIGNAL(sendError(const QString &)), this, SLOT(handleError()));
     connect(ui.console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
 
     connect(ui.sendLineEdit, SIGNAL(returnPressed()), this, SLOT(sendDataLine()));
@@ -38,12 +39,10 @@ PropTerm::PropTerm(PropellerManager * manager,
     connect(ui.baudRate, SIGNAL(currentIndexChanged(const QString &)), this, SLOT(baudRateChanged(const QString &)));
 
     connect(ui.clear, SIGNAL(clicked()), ui.console, SLOT(clear()));
+    connect(ui.reset, SIGNAL(clicked()), this, SLOT(reset()));
     connect(ui.activeButton, SIGNAL(toggled(bool)), this, SLOT(handleEnable(bool)));
 
-    ui.echo->setChecked(true);
-
-    title = tr("Propeller Terminal");
-    setWindowTitle(title);
+    title = tr("Terminal");
 
     updatePorts();
     ui.console->clear();
@@ -53,7 +52,7 @@ PropTerm::PropTerm(PropellerManager * manager,
 PropTerm::~PropTerm()
 {
     close();
-    manager->endSession(session);
+    delete session;
 }
 
 void PropTerm::setFont(const QFont & font)
@@ -109,18 +108,6 @@ void PropTerm::toggleTxLight(bool enabled)
     }
 }
 
-void PropTerm::message(QString text)
-{
-    text = "[PropellerTerminal]: "+text;
-    fprintf(stderr, "%s\n", qPrintable(text));
-    fflush(stderr);
-}
-
-void PropTerm::error(QString text)
-{
-    message("ERROR: "+text);
-}
-
 void PropTerm::open()
 {
     ui.console->enable(true);
@@ -132,9 +119,11 @@ void PropTerm::open()
     portChanged();
     session->unpause();
     baudRateChanged(ui.baudRate->currentText());
+
+    connect(session, SIGNAL(readyRead()), this, SLOT(readData()));
 }
 
-void PropTerm::close()
+void PropTerm::closed()
 {
     ui.console->enable(false);
     ui.console->setEnabled(false);
@@ -143,6 +132,27 @@ void PropTerm::close()
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-off.png"));
 
     session->pause();
+
+    disconnect(session, SIGNAL(readyRead()), this, SLOT(readData()));
+}
+
+void PropTerm::busy()
+{
+    closed();
+    ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-yellow.png"));
+    busyTimeout.start(125);
+}
+
+void PropTerm::free()
+{
+    busyTimeout.stop();
+    open();
+}
+
+void PropTerm::reset()
+{
+    toggleTxLight(true);
+    session->reset();
 }
 
 void PropTerm::portChanged()
@@ -193,7 +203,8 @@ void PropTerm::readData()
 
 void PropTerm::handleError()
 {
-    close();
+    qCDebug(terminal) << "THERE WAS AN ERROR";
+    closed();
 }
 
 void PropTerm::handleEnable(bool checked)
@@ -201,5 +212,19 @@ void PropTerm::handleEnable(bool checked)
     if (checked)
         open();
     else
-        close();
+        closed();
+}
+
+void PropTerm::handleBusy()
+{
+    if (busytoggle)
+    {
+        ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-yellow.png"));
+        busytoggle = false;
+    }
+    else
+    {
+        ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-off.png"));
+        busytoggle = true;
+    }
 }
