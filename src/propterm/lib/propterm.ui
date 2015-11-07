@@ -22,7 +22,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/icons/propterm/led-green.png</pixmap>
+        <pixmap resource="../icons/propterm/propterm.qrc">:/icons/propterm/led-green.png</pixmap>
        </property>
       </widget>
      </item>
@@ -216,7 +216,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/icons/propterm/led-red.png</pixmap>
+        <pixmap resource="../icons/propterm/propterm.qrc">:/icons/propterm/led-red.png</pixmap>
        </property>
       </widget>
      </item>
@@ -232,7 +232,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/icons/propterm/led-blue.png</pixmap>
+        <pixmap resource="../icons/propterm/propterm.qrc">:/icons/propterm/led-blue.png</pixmap>
        </property>
       </widget>
      </item>
@@ -694,9 +694,6 @@
          <family>Droid Sans Mono</family>
         </font>
        </property>
-       <property name="placeholderText">
-        <string>Enter text to send...</string>
-       </property>
       </widget>
      </item>
      <item>
@@ -718,7 +715,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="icons/propterm/propterm.qrc"/>
+  <include location="../icons/propterm/propterm.qrc"/>
  </resources>
  <connections/>
 </ui>
