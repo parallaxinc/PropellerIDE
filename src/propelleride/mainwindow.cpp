@@ -10,11 +10,11 @@
 #include <PropellerImage>
 #include <PropellerDevice>
 
+#include <MemoryMap>
+#include <PropTerm>
+
 #include "ui_about.h"
 
-#include <MemoryMap>
-
-#include "propterm.h"
 #include "logging_ide.h"
 
 
