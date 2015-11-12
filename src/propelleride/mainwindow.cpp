@@ -5,16 +5,16 @@
 #include <QToolBar> 
 #include <QFileDialog> 
 #include <QMenu> 
-#include <QSerialPortInfo>
+
+#include <PropellerLoader>
+#include <PropellerImage>
+#include <PropellerDevice>
 
 #include "ui_about.h"
 
-#include "memorymap.h"
+#include <MemoryMap>
 
 #include "propterm.h"
-#include "propellerloader.h"
-#include "propellerimage.h"
-#include "propellerdevice.h"
 #include "logging_ide.h"
 
 
@@ -134,8 +134,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     getApplicationSettings();
 
-    connect(&propellerManager, SIGNAL(portListChanged()), this, SLOT(updatePorts()));
-    propellerManager.enablePortMonitor(true);
+    connect(&manager, SIGNAL(portListChanged()), this, SLOT(updatePorts()));
+    manager.enablePortMonitor(true);
     updatePorts();
 
     ui.editorTabs->newFile();
@@ -394,7 +394,7 @@ int MainWindow::loadProgram(bool write)
 
     index = ui.editorTabs->currentIndex();
     QString filename = ui.editorTabs->tabToolTip(index);
-    builder.loadProgram(&propellerManager,
+    builder.loadProgram(&manager,
                         filename.replace(".spin",".binary"),
                         port,
                         write);
@@ -590,7 +590,7 @@ void MainWindow::updatePorts()
 
     cbPort->clear();
 
-    foreach(QString port, propellerManager.listPorts())
+    foreach(QString port, manager.listPorts())
     {
         cbPort->addItem(port);
     }
@@ -602,12 +602,12 @@ void MainWindow::updatePorts()
     {
         setEnableBuild(false);
     }
-    qDebug() << propellerManager.listPorts();
+    qDebug() << manager.listPorts();
 }
 
 void MainWindow::spawnTerminal()
 {
-    PropTerm * term = new PropTerm(&propellerManager);
+    PropTerm * term = new PropTerm(&manager);
     term->setAttribute(Qt::WA_DeleteOnClose);
     ColorScheme * theme = &Singleton<ColorScheme>::Instance();
     term->setFont(theme->getFont());

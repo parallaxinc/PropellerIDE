@@ -5,7 +5,7 @@
 #include <QStringList>
 #include <QString>
 
-#include "projectparser.h"
+#include <ProjectParser>
 
 class Language
 {

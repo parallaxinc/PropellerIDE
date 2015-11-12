@@ -1,14 +1,18 @@
 TEMPLATE  = subdirs
 
 SUBDIRS = \
-    spinzip \
-    memorymap \
+    zipper \
+    memorymap/src \
     propterm \
-    projectview \
+    projectview/src \
     propellermanager \
     propelleride
 
 propterm.depends = propellermanager
-memorymap.depends = propellermanager
+memorymap/src.depends = propellermanager
 
-propelleride.depends = spinzip memorymap propterm projectview propellermanager
+propelleride.depends =  zipper \
+                        memorymap/src \
+                        propterm \
+                        projectview/src \
+                        propellermanager \

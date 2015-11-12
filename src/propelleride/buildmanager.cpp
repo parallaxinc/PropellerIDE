@@ -175,7 +175,7 @@ int BuildManager::loadProgram(PropellerManager * manager,
 
     PropellerImage image = PropellerImage(file.readAll(),filename);
 
-    if (loader.upload(image, write))
+    if (!loader.upload(image, write))
     {
         console->setText(tr("Download failed!"));
     }

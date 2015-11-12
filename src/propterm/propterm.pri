@@ -1,15 +1,14 @@
-QT += widgets serialport
+QT += gui widgets serialport
+CONFIG -= app_bundle debug_and_release
 
-VPATH += $$PWD/ $$PWD/..
-INCLUDEPATH += $$PWD/ $$PWD/..
-INCLUDEPATH += ../../propellermanager/src/lib/
-LIBS += -L../../propellermanager/src/lib/  -lpropellermanager
+INCLUDEPATH += ../../propellermanager/include/
+LIBS += -L../../propellermanager/lib/  -lpropellermanager
 
 win32-msvc* {
-	PRE_TARGETDEPS += ../../propellermanager/src/lib/propellermanager.lib
+	PRE_TARGETDEPS += ../../propellermanager/lib/propellermanager.lib
 } else {
-	PRE_TARGETDEPS += ../../propellermanager/src/lib/libpropellermanager.a
+	PRE_TARGETDEPS += ../../propellermanager/lib/libpropellermanager.a
 }
 
 RESOURCES += \
-    icons/propterm/propterm.qrc \
+    ../icons/propterm/propterm.qrc \

@@ -1,12 +1,13 @@
-CONFIG -= app_bundle debug_and_release
+include("../propterm.pri")
 
 TARGET = propterm
 TEMPLATE = app
+DESTDIR = ../bin/
 
 SOURCES += \
     main.cpp
 
-INCLUDEPATH += ../lib/
+INCLUDEPATH += ../include/
 LIBS += -L../lib/  -lpropterm
 
 win32-msvc* {
@@ -15,4 +16,3 @@ win32-msvc* {
 	PRE_TARGETDEPS += ../lib/libpropterm.a
 }
 
-include("../propterm.pri")

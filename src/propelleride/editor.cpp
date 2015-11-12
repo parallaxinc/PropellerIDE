@@ -8,9 +8,9 @@
 #include <QLinearGradient>
 #include <QPlainTextEdit>
 
-#include "mainwindow.h"
+#include <ProjectParser>
 
-#include "projectparser.h"
+#include "mainwindow.h"
 
 Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 {

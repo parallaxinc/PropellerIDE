@@ -18,8 +18,10 @@
 #include <QFileInfo>
 #include <QTimer>
 
+#include <PropellerLoader>
+
 #include "buildstatus.h"
-#include "propellerloader.h"
+
 
 class BuildManager : public QWidget
 {

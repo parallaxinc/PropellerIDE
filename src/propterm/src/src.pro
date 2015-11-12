@@ -1,10 +1,10 @@
 include("../propterm.pri")
 
-CONFIG -= app_bundle debug_and_release
 CONFIG += staticlib
 
 TARGET = propterm
 TEMPLATE = lib
+DESTDIR = ../lib/
 
 SOURCES += \
     propterm.cpp \
@@ -16,4 +16,3 @@ HEADERS += \
 
 FORMS += \
     propterm.ui \
-

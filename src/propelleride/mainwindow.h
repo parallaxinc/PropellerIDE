@@ -8,17 +8,18 @@
 #include <QDesktopServices> 
 #include <QDirIterator> 
 
+#include <PropellerManager>
+#include <ProjectParser>
+#include <ProjectView>
+
 #include "ui_mainwindow.h"
 
 #include "preferences.h"
 #include "editor.h"
 #include "zipper.h"
 #include "filemanager.h"
-#include "propellermanager.h"
 #include "buildmanager.h"
 #include "finder.h"
-#include "projectparser.h"
-#include "projectview.h"
 
 class MainWindow : public QMainWindow
 {
@@ -30,7 +31,7 @@ private:
 public:
     MainWindow(QWidget *parent = 0);
 
-    PropellerManager propellerManager;
+    PropellerManager manager;
     Zipper          zipper;
 
     BuildManager    builder;

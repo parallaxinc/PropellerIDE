@@ -1,5 +1,5 @@
 TEMPLATE = lib
-TARGET = spinzip
+TARGET = zipper 
 target.path = $${PREFIX}/bin
 
 CONFIG += staticlib

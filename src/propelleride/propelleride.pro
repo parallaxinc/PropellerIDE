@@ -11,34 +11,32 @@ QT += gui widgets serialport
 
 CONFIG -= debug_and_release app_bundle
 
-INCLUDEPATH += ../spinzip/
-INCLUDEPATH += ../projectview/
-INCLUDEPATH += ../propellermanager/src/lib/
+INCLUDEPATH += ../zipper/
+INCLUDEPATH += ../projectview/include/
+INCLUDEPATH += ../propellermanager/include/
 INCLUDEPATH += ../propterm/lib/
-INCLUDEPATH += ../memorymap/memorymap/
-INCLUDEPATH += ../memorymap/
+INCLUDEPATH += ../memorymap/include/
 
-LIBS += -L../spinzip/ -lspinzip
-LIBS += -L../projectview/  -lprojectview
-LIBS += -L../propellermanager/src/lib/  -lpropellermanager
+LIBS += -L../zipper/ -lzipper
+LIBS += -L../projectview/lib/  -lprojectview
+LIBS += -L../propellermanager/lib/  -lpropellermanager
 LIBS += -L../propterm/lib/  -lpropterm
-LIBS += -L../memorymap/memorymap/  -lmemorymap
-LIBS += -L../memorymap/QHexEdit/ -lQHexEdit
+LIBS += -L../memorymap/lib/ -lmemorymap -lQHexEdit
 
 win32-msvc* {
-	PRE_TARGETDEPS += ../spinzip/spinzip.lib
-	PRE_TARGETDEPS += ../projectview/projectview.lib
-	PRE_TARGETDEPS += ../propellermanager/src/lib/propellermanager.lib
+	PRE_TARGETDEPS += ../zipper/zipper.lib
+	PRE_TARGETDEPS += ../projectview/lib/projectview.lib
+	PRE_TARGETDEPS += ../propellermanager/lib/propellermanager.lib
 	PRE_TARGETDEPS += ../propterm/lib/propterm.lib
-	PRE_TARGETDEPS += ../memorymap/QHexEdit/QHexEdit.lib
-	PRE_TARGETDEPS += ../memorymap/memorymap/memorymap.lib
+	PRE_TARGETDEPS += ../memorymap/lib/QHexEdit.lib
+	PRE_TARGETDEPS += ../memorymap/lib/memorymap.lib
 } else {
-	PRE_TARGETDEPS += ../spinzip/libspinzip.a
-	PRE_TARGETDEPS += ../projectview/libprojectview.a
-	PRE_TARGETDEPS += ../propellermanager/src/lib/libpropellermanager.a
+	PRE_TARGETDEPS += ../zipper/libzipper.a
+	PRE_TARGETDEPS += ../projectview/lib/libprojectview.a
+	PRE_TARGETDEPS += ../propellermanager/lib/libpropellermanager.a
 	PRE_TARGETDEPS += ../propterm/lib/libpropterm.a
-	PRE_TARGETDEPS += ../memorymap/QHexEdit/libQHexEdit.a
-	PRE_TARGETDEPS += ../memorymap/memorymap/libmemorymap.a
+	PRE_TARGETDEPS += ../memorymap/lib/libQHexEdit.a
+	PRE_TARGETDEPS += ../memorymap/lib/libmemorymap.a
 }
 
 SOURCES += \

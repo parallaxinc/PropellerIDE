@@ -146,6 +146,7 @@
     <addaction name="actionBuild"/>
     <addaction name="actionRun"/>
     <addaction name="actionWrite"/>
+    <addaction name="separator"/>
     <addaction name="actionMemory_Map"/>
     <addaction name="actionTerminal"/>
    </widget>
@@ -787,7 +788,7 @@
   <customwidget>
    <class>ProjectView</class>
    <extends>QWidget</extends>
-   <header>../projectview/projectview.h</header>
+   <header>ProjectView</header>
    <container>1</container>
   </customwidget>
   <customwidget>

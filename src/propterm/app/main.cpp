@@ -1,6 +1,6 @@
 #include <QApplication>
 
-#include "propterm.h"
+#include <PropTerm>
 
 int main(int argc, char *argv[])
 {

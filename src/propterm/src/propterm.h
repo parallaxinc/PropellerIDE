@@ -4,7 +4,7 @@
 #include <QTimer>
 #include <QLoggingCategory>
 
-#include "propellersession.h"
+#include <PropellerSession>
 #include "ui_propterm.h"
 
 Q_DECLARE_LOGGING_CATEGORY(terminal)
