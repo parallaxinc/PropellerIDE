@@ -14,7 +14,7 @@ CONFIG -= debug_and_release app_bundle
 INCLUDEPATH += ../zipper/
 INCLUDEPATH += ../projectview/include/
 INCLUDEPATH += ../propellermanager/include/
-INCLUDEPATH += ../propterm/lib/
+INCLUDEPATH += ../propterm/include/
 INCLUDEPATH += ../memorymap/include/
 
 LIBS += -L../zipper/ -lzipper
