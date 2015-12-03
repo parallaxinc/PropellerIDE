@@ -11,33 +11,12 @@ QT += gui widgets serialport
 
 CONFIG -= debug_and_release app_bundle
 
-INCLUDEPATH += ../zipper/
-INCLUDEPATH += ../projectview/include/
-INCLUDEPATH += ../propellermanager/include/
-INCLUDEPATH += ../propterm/include/
-INCLUDEPATH += ../memorymap/include/
+include("../propterm/include.pri")
+include("../projectview/include.pri")
+include("../memorymap/include.pri")
+include("../zipper/include.pri")
 
-LIBS += -L../zipper/ -lzipper
-LIBS += -L../projectview/lib/  -lprojectview
-LIBS += -L../propellermanager/lib/  -lpropellermanager
-LIBS += -L../propterm/lib/  -lpropterm
-LIBS += -L../memorymap/lib/ -lmemorymap -lQHexEdit
-
-win32-msvc* {
-	PRE_TARGETDEPS += ../zipper/zipper.lib
-	PRE_TARGETDEPS += ../projectview/lib/projectview.lib
-	PRE_TARGETDEPS += ../propellermanager/lib/propellermanager.lib
-	PRE_TARGETDEPS += ../propterm/lib/propterm.lib
-	PRE_TARGETDEPS += ../memorymap/lib/QHexEdit.lib
-	PRE_TARGETDEPS += ../memorymap/lib/memorymap.lib
-} else {
-	PRE_TARGETDEPS += ../zipper/libzipper.a
-	PRE_TARGETDEPS += ../projectview/lib/libprojectview.a
-	PRE_TARGETDEPS += ../propellermanager/lib/libpropellermanager.a
-	PRE_TARGETDEPS += ../propterm/lib/libpropterm.a
-	PRE_TARGETDEPS += ../memorymap/lib/libQHexEdit.a
-	PRE_TARGETDEPS += ../memorymap/lib/libmemorymap.a
-}
+include("../propellermanager/include.pri")
 
 SOURCES += \
     buildmanager.cpp \
@@ -85,8 +64,6 @@ RESOURCES += \
     icons/icons.qrc \
     languages/languages.qrc \
     themes/themes.qrc \
-    ../projectview/icons/projectview/projectview.qrc \
-    ../propterm/icons/propterm/propterm.qrc \
 
 CODECFORTR = UTF-8
 

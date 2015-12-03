@@ -1,11 +1,10 @@
+QT += gui widgets
+
 TEMPLATE = lib
 TARGET = zipper 
-target.path = $${PREFIX}/bin
 
 CONFIG += staticlib
 CONFIG -= debug_and_release app_bundle
-
-QT += gui widgets
 
 SOURCES += \
     zip.cpp \
