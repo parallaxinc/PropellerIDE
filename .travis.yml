@@ -1,6 +1,5 @@
 sudo: required
-services: 
-    - docker
+dist: trusty
 cache: apt
 language: cpp
 addons:
@@ -13,6 +12,8 @@ addons:
       - debhelper
       - libudev-dev
       - imagemagick
+      - qt5-default
+      - libqt5serialport5-dev
 matrix:
   include:
 
@@ -43,9 +44,9 @@ matrix:
         PLATFORM=rpi
         MNT=/home/travis/mnt
 
-install: "./scripts/travis/install.sh"
-script:  "./scripts/travis/script.sh"
-after_script: "./scripts/travis/after_script.sh"
+install: "./.travis/install.sh"
+script:  "./.travis/script.sh"
+after_script: "./.travis/after_script.sh"
 deploy:
   provider: releases
   api_key:
