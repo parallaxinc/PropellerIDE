@@ -15,7 +15,6 @@ include("../propterm/include.pri")
 include("../projectview/include.pri")
 include("../memorymap/include.pri")
 include("../zipper/include.pri")
-
 include("../propellermanager/include.pri")
 
 SOURCES += \
