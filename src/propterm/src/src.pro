@@ -1,4 +1,4 @@
-include("../propterm.pri")
+include(../common.pri)
 
 CONFIG += staticlib
 
