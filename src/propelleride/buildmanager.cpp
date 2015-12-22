@@ -44,29 +44,33 @@ void BuildManager::setParameters(
     compilerStr = comp;
     includesStr = incl;
     projectFile = projFile;
-    qDebug() << "Setting build: "
-	    << compilerStr 
-	    << includesStr 
-	    << projectFile;
 }
 
 void BuildManager::compilerError(QProcess::ProcessError error)
 {
-    qDebug() << error;
     if(error != QProcess::Crashed) return;
 }
 
 void BuildManager::compilerFinished(int exitCode, QProcess::ExitStatus status)
 {
+    Q_UNUSED(exitCode);
+    Q_UNUSED(status);
+
     if(procDone == true)
         return;
 
     procMutex.lock();
     procDone = true;
     procMutex.unlock();
-
-    qDebug() << exitCode << status;
 }
+
+void BuildManager::setTextColor(QColor color)
+{
+    QTextCharFormat tf = consoleEdit->currentCharFormat();
+    tf.setForeground(color);
+    consoleEdit->setCurrentCharFormat(tf);
+}
+
 
 void BuildManager::procReadyRead()
 {
@@ -78,19 +82,15 @@ void BuildManager::procReadyRead()
     compileResult = QString(bytes);
     QStringList lines = QString(bytes).split("\n",QString::SkipEmptyParts);
 
-    QTextCharFormat tf = consoleEdit->currentCharFormat();
-
     foreach (QString line, lines)
     {
         if (line.contains("Program size is") || line.contains("Bit fe") || line.contains("DOWNLOAD COMPLETE"))
         {
-            tf.setForeground(Qt::darkGreen);
-            consoleEdit->setCurrentCharFormat(tf);
+            setTextColor(Qt::darkGreen);
         }
         else if (line.contains("error", Qt::CaseInsensitive))
         {
-            tf.setForeground(Qt::red);
-            consoleEdit->setCurrentCharFormat(tf);
+            setTextColor(Qt::red);
         }
 
         consoleEdit->appendPlainText(line);
@@ -108,10 +108,9 @@ int BuildManager::runProcess(const QString & programName, const QStringList & pr
     {
         args.append(QDir::toNativeSeparators(programArgs.at(i)));
     }
-    qDebug() << program << args;
+    qCDebug(ideBuildManager) << "run(\"" << qPrintable(program) << qPrintable(args.join(" ")) << "\")";
 
     proc = new QProcess;
-
     proc->setProcessChannelMode(QProcess::MergedChannels);
 
     procDone = false;
@@ -121,9 +120,7 @@ int BuildManager::runProcess(const QString & programName, const QStringList & pr
 
     proc->start(QDir::toNativeSeparators(program),args);
 
-    QTextCharFormat tf = consoleEdit->currentCharFormat();
-    tf.setForeground(Qt::black);
-    consoleEdit->setCurrentCharFormat(tf);
+    setTextColor(Qt::black);
 
     if(!proc->waitForStarted())
     {
@@ -161,10 +158,17 @@ int BuildManager::loadProgram(PropellerManager * manager,
                               const QString & port,
                               bool write)
 {
+
+    setTextColor(Qt::black);
     console->setStage(2);
-    console->setText(tr("Downloading %1...").arg(QFileInfo(projectFile).fileName()));
 
     PropellerLoader loader(manager, port);
+
+    connect(&loader, SIGNAL(statusChanged(const QString &)),
+            console, SLOT(setText(const QString &)));
+
+    connect(&loader,    SIGNAL(statusChanged(const QString &)),
+            consoleEdit,SLOT(appendPlainText(const QString &)));
 
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly))
@@ -174,18 +178,15 @@ int BuildManager::loadProgram(PropellerManager * manager,
     }
 
     PropellerImage image = PropellerImage(file.readAll(),filename);
-
-    if (!loader.upload(image, write))
-    {
-        console->setText(tr("Download failed!"));
-    }
-    else
-    {
-        console->setStage(3);
-        console->setText(tr("Download complete!"));
-    }
+    loader.upload(image, write,true,true);
 
     waitClose();
+    disconnect(&loader, SIGNAL(statusChanged(const QString &)),
+               console, SLOT(setText(const QString &)));
+
+    disconnect(&loader,    SIGNAL(statusChanged(const QString &)),
+               consoleEdit,SLOT(appendPlainText(const QString &)));
+
     return 0;
 }
 
@@ -211,10 +212,12 @@ int BuildManager::runCompiler(QString options)
 
     if (rc)
     {
+        console->setText(tr("Build failed!"));
         console->showDetails();
         getCompilerOutput();
         return 1;
     }
+    console->setText(tr("Build succeeded!"));
     return 0;
 }
 
@@ -254,8 +257,6 @@ void BuildManager::getCompilerOutput()
             break;
         }
     }
-
-    qDebug() << "Error line: " << line;
     if(ok)
         emit compilerErrorInfo(file, line);
 }

@@ -31,7 +31,7 @@ SOURCES += \
     pathselector.cpp \
     preferences.cpp \
     buildstatus.cpp \
-    logging_ide.cpp \
+    logging.cpp \
 
 HEADERS  += \
     buildmanager.h \
@@ -48,7 +48,7 @@ HEADERS  += \
     preferences.h \
     buildstatus.h \
     templates/Singleton.h \
-    logging_ide.h \
+    logging.h \
 
 OTHER_FILES +=
 

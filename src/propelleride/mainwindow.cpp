@@ -15,9 +15,6 @@
 
 #include "ui_about.h"
 
-#include "logging_ide.h"
-
-
 MainWindow::MainWindow(QWidget *parent)
 : QMainWindow(parent)
 {
@@ -179,7 +176,6 @@ void MainWindow::openFiles(const QStringList & files)
 {
     for (int i = 0; i < files.size(); i++)
     {
-        qDebug() << files.at(i);
         ui.editorTabs->openFile(files.at(i));
     }
 }
@@ -191,7 +187,6 @@ void MainWindow::getApplicationSettings()
 
     spinCompiler = settings.value("Compiler").toString();
     spinIncludes = settings.value("Library").toString();
-    spinTerminal = settings.value("Terminal").toString();
 
     settings.endGroup();
 }
@@ -448,6 +443,8 @@ void MainWindow::recolorProjectView()
 
 void MainWindow::spawnMemoryMap()
 {
+    qCDebug(ideMainwindow) << "spawnMemoryMap()";
+
     MemoryMap * map = new MemoryMap();
     map->setAttribute(Qt::WA_DeleteOnClose, true);
 
@@ -456,7 +453,7 @@ void MainWindow::spawnMemoryMap()
     connect(map,SIGNAL(getRecolor(QWidget *)),this,SLOT(recolorInfo(QWidget *)));
 
     connect(map,SIGNAL(run(QByteArray)), this, SLOT(programRun()));
-    connect(map,SIGNAL(write(QByteArray)), this, SLOT(programBurnEE()));
+    connect(map,SIGNAL(write(QByteArray)), this, SLOT(programWrite()));
 
     recolorInfo(map);
 
@@ -579,7 +576,6 @@ void MainWindow::setEnableBuild(bool enabled)
     cbPort->setEnabled(enabled);
     ui.actionRun->setEnabled(enabled);
     ui.actionWrite->setEnabled(enabled);
-    ui.actionMemory_Map->setEnabled(enabled);
     ui.actionTerminal->setEnabled(enabled);
 }
 
@@ -607,6 +603,8 @@ void MainWindow::updatePorts()
 
 void MainWindow::spawnTerminal()
 {
+    qCDebug(ideMainwindow) << "spawnTerminal()";
+
     PropTerm * term = new PropTerm(&manager);
     term->setAttribute(Qt::WA_DeleteOnClose);
     ColorScheme * theme = &Singleton<ColorScheme>::Instance();
@@ -682,7 +680,7 @@ void MainWindow::openFileResource(QString const & resource)
     if (QFileInfo(path).exists() && QFileInfo(path).isFile())
         QDesktopServices::openUrl(QUrl::fromLocalFile(path));
     else
-        qCDebug(mainwindow) << "File not found:" << path;
+        qCDebug(ideMainwindow) << "File not found:" << path;
 }
 
 void MainWindow::propellerManual()

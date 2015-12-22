@@ -21,6 +21,7 @@
 #include <PropellerLoader>
 
 #include "buildstatus.h"
+#include "logging.h"
 
 
 class BuildManager : public QWidget
@@ -33,6 +34,7 @@ public:
     void hide();
     void waitClose();
     void setFont(const QFont & font);
+    void setTextColor(QColor color);
 
     void setParameters(
             QString comp,

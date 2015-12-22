@@ -15,14 +15,15 @@ public:
     BuildStatus(QWidget *parent = 0);
     void keyPressEvent(QKeyEvent * event);
     QPlainTextEdit * getOutput();
-    void setText(const QString & text);
-    void setStage(int stage);
 
 public slots:
     void toggleDetails();
     void showDetails();
     void hideDetails();
     void updateColors();
+
+    void setStage(int stage);
+    void setText(const QString & text);
 
 private:
     Ui::statusDialog ui;

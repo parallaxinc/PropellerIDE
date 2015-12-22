@@ -5,6 +5,7 @@
 #include <QStatusBar>
 
 #include "editor.h"
+#include "logging.h"
 
 class FileManager : public QTabWidget
 {

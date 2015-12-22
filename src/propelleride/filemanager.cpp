@@ -110,7 +110,7 @@ QString FileManager::reformatText(QString text)
 
 int FileManager::openFile(const QString & fileName)
 {
-    qDebug() << "FileManager::openFile(" << fileName << ")";
+    qCDebug(ideFileManager) << "openFile(" << fileName << ")";
 
     if (fileName.isEmpty())
         return 1;
@@ -200,7 +200,8 @@ void FileManager::saveAll()
 
 void FileManager::saveFile(const QString & fileName, int index)
 {
-    qDebug() << "FileManager::saveFile(" << fileName << ")";
+    qCDebug(ideFileManager) << "saveFile(" << fileName << ")";
+
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {

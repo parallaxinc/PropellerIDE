@@ -20,6 +20,7 @@
 #include "filemanager.h"
 #include "buildmanager.h"
 #include "finder.h"
+#include "logging.h"
 
 class MainWindow : public QMainWindow
 {
@@ -42,8 +43,6 @@ public:
 
     QString         spinCompiler;
     QString         spinIncludes;
-    QString         spinTerminal;
-    QString         spinLoader;
     QString         projectFile;
 
     QList<QAction *>    recentFiles;
