@@ -50,6 +50,7 @@ repos:
     library:
         url: https://github.com/parallaxinc/spin-standard-library.git
         builder: dir
+        root: library
 
     doc:
         url: https://github.com/parallaxinc/spin-docs.git
