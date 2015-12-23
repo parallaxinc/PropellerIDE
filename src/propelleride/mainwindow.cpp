@@ -421,7 +421,7 @@ void MainWindow::spawnMemoryMap()
 {
     qCDebug(ideMainwindow) << "spawnMemoryMap()";
 
-    MemoryMap * map = new MemoryMap();
+    MemoryMap * map = new MemoryMap(&manager);
     map->setAttribute(Qt::WA_DeleteOnClose, true);
 
     connect(propDialog,SIGNAL(updateColors()),map,SLOT(updateColors()));
@@ -448,8 +448,7 @@ void MainWindow::spawnMemoryMap()
     binaryname = fi.dir().filePath(binaryname);
     qDebug() << binaryname;
 
-    map->loadFile(binaryname);
-
+    map->openFile(binaryname);
     map->show();
 }
 
@@ -461,7 +460,7 @@ void MainWindow::recolorInfo(QWidget * widget)
             theme->getColor(ColorScheme::PubBG),
             theme->getColor(ColorScheme::DatBG),
             theme->getColor(ColorScheme::SyntaxFunctions),
-            theme->getColor(ColorScheme::SyntaxFunctions),
+            theme->getColor(ColorScheme::SyntaxKeywords),
             theme->getColor(ColorScheme::ConBG),
             theme->getColor(ColorScheme::SyntaxComments),
             theme->getColor(ColorScheme::SyntaxText)
