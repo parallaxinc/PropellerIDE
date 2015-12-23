@@ -220,6 +220,9 @@
    <property name="text">
     <string>&amp;New</string>
    </property>
+   <property name="toolTip">
+    <string>New (Ctrl+T)</string>
+   </property>
    <property name="statusTip">
     <string>Create new file</string>
    </property>
@@ -234,6 +237,9 @@
    </property>
    <property name="text">
     <string>&amp;Open</string>
+   </property>
+   <property name="toolTip">
+    <string>Open (Ctrl+O)</string>
    </property>
    <property name="statusTip">
     <string>Open existing file(s)</string>
@@ -253,6 +259,9 @@
    <property name="text">
     <string>&amp;Save</string>
    </property>
+   <property name="toolTip">
+    <string>Save (Ctrl+S)</string>
+   </property>
    <property name="statusTip">
     <string>Save current file</string>
    </property>
@@ -267,6 +276,9 @@
    </property>
    <property name="text">
     <string>Save &amp;As</string>
+   </property>
+   <property name="toolTip">
+    <string>Save As (Ctrl+Shift+S)</string>
    </property>
    <property name="statusTip">
     <string>Save current file as name</string>
@@ -389,6 +401,9 @@
    <property name="text">
     <string>&amp;Close</string>
    </property>
+   <property name="toolTip">
+    <string>Close (Ctrl+W)</string>
+   </property>
    <property name="statusTip">
     <string>Close current file</string>
    </property>
@@ -411,6 +426,9 @@
    </property>
    <property name="text">
     <string>&amp;Quit</string>
+   </property>
+   <property name="toolTip">
+    <string>Quit (Ctrl+Q)</string>
    </property>
    <property name="statusTip">
     <string>Close the application</string>
@@ -650,6 +668,9 @@
    <property name="text">
     <string>Memory &amp;Map</string>
    </property>
+   <property name="toolTip">
+    <string>Memory Map (F8)</string>
+   </property>
    <property name="statusTip">
     <string>View memory layout of current file</string>
    </property>
@@ -664,6 +685,9 @@
    </property>
    <property name="text">
     <string>&amp;Build</string>
+   </property>
+   <property name="toolTip">
+    <string>Build (F9)</string>
    </property>
    <property name="statusTip">
     <string>Compile program but don't run</string>
@@ -680,6 +704,9 @@
    <property name="text">
     <string>&amp;Run</string>
    </property>
+   <property name="toolTip">
+    <string>Run (F10)</string>
+   </property>
    <property name="statusTip">
     <string>Compile and run current program</string>
    </property>
@@ -695,6 +722,9 @@
    <property name="text">
     <string>&amp;Write</string>
    </property>
+   <property name="toolTip">
+    <string>Write (F11)</string>
+   </property>
    <property name="statusTip">
     <string>Compile program and download to EEPROM</string>
    </property>
@@ -709,6 +739,9 @@
    </property>
    <property name="text">
     <string>&amp;Terminal</string>
+   </property>
+   <property name="toolTip">
+    <string>Terminal (F12)</string>
    </property>
    <property name="statusTip">
     <string>Open a new serial terminal</string>

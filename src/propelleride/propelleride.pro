@@ -30,7 +30,6 @@ SOURCES += \
     mainwindow.cpp \
     pathselector.cpp \
     preferences.cpp \
-    buildstatus.cpp \
     logging.cpp \
 
 HEADERS  += \
@@ -46,7 +45,6 @@ HEADERS  += \
     mainwindow.h \
     pathselector.h \
     preferences.h \
-    buildstatus.h \
     templates/Singleton.h \
     logging.h \
 
@@ -56,7 +54,7 @@ FORMS += \
     forms/about.ui \
     forms/mainwindow.ui \
     forms/finder.ui \
-    forms/buildstatus.ui \
+    forms/buildmanager.ui \
 
 RESOURCES += \
     fonts/fonts.qrc \

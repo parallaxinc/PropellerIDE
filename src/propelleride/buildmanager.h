@@ -1,78 +1,98 @@
 #pragma once
 
-#include <QObject>
 #include <QString>
-#include <QLabel>
-#include <QComboBox>
 #include <QProcess>
-#include <QMutex>
-#include <QDebug>
-#include <QPlainTextEdit>
-#include <QDialog>
-#include <QHBoxLayout>
-#include <QDir>
-#include <QMessageBox>
-#include <QApplication>
-#include <QThread>
-#include <QScrollBar>
-#include <QFileInfo>
 #include <QTimer>
+#include <QKeyEvent>
+#include <Qt>
 
 #include <PropellerLoader>
 
-#include "buildstatus.h"
 #include "logging.h"
+#include "colorscheme.h"
+
+#include "ui_buildmanager.h"
 
 
-class BuildManager : public QWidget
+class BuildManager : public QFrame
 {
     Q_OBJECT
+
+    Ui::buildManager ui;
+
+    bool failure;
+
 public:
     explicit BuildManager(QWidget *parent = 0);
     ~BuildManager();
-    void show();
-    void hide();
     void waitClose();
     void setFont(const QFont & font);
     void setTextColor(QColor color);
 
-    void setParameters(
-            QString comp,
-            QString incl,
-            QString projFile);
+    typedef struct ConfigurationType
+    {
+        QString compiler;
+        QStringList includes;
+        QString file;
+        QString binary;
+        QString port;
+
+        bool load;
+        bool write;
+
+        PropellerManager * manager;
+    } Configuration;
+    
+    Configuration config;
+
+    void setConfiguration(BuildManager::Configuration config);
 
 signals:
     void compilerErrorInfo(QString file, int line);
     void terminalReceived(QString text);
 
 public slots:
-    virtual void compilerError(QProcess::ProcessError error);
-    virtual void compilerFinished(int exitCode, QProcess::ExitStatus status);
-    virtual void procReadyRead();
-    int runProcess(const QString & programName, const QStringList & programArgs);
+    void loadSuccess();
+    void loadFailure();
+    void compilerFinished(int exitCode, QProcess::ExitStatus status);
+    void procReadyRead();
+    void runProcess(const QString & programName, const QStringList & programArgs);
+
+    void showStatus();
+    void hideStatus();
+    void print(const QString & text, QColor color = Qt::black);
 
 public:
+
     QString compilerStr;
     QString includesStr;
     QString projectFile;
     QString compileResult;
 
-    int loadProgram(PropellerManager * manager,
-                    const QString & filename,
-                    const QString & port,
-                    bool write);
-
-    int runCompiler(QString options = QString());
+    int load();
+    void build();
     void getCompilerOutput();
 
 private:
-    QProcess * proc;
-
-    QMutex      procMutex;
-    bool        procDone;
-
-    BuildStatus * console;
-    QPlainTextEdit * consoleEdit;
-
     QTimer timer;
+
+public:
+    void keyPressEvent(QKeyEvent * event);
+
+public slots:
+    void toggleDetails();
+    void showDetails();
+    void hideDetails();
+    void updateColors();
+
+    void setStage(int stage);
+    void setText(const QString & text);
+    void handleCompilerError(QProcess::ProcessError e);
+
+private:
+    void setRun(bool active);
+    void setBuild(bool active);
+    void setDownload(bool active);
+
+    ColorScheme * currentTheme;
 };

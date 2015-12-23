@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>statusDialog</class>
- <widget class="QFrame" name="statusDialog">
+ <class>buildManager</class>
+ <widget class="QFrame" name="buildManager">
   <property name="windowModality">
    <enum>Qt::NonModal</enum>
   </property>
@@ -26,7 +26,10 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Build Status</string>
+   <string>Build Manager</string>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Raised</enum>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

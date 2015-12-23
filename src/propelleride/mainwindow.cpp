@@ -334,7 +334,6 @@ void MainWindow::checkAndSaveFiles()
 
 void MainWindow::highlightFileLine(QString filename, int line)
 {
-    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     QFileInfo fi(filename);
     if (!fi.exists(filename) || !fi.isFile())
         return;
@@ -350,76 +349,53 @@ void MainWindow::highlightFileLine(QString filename, int line)
         cur.clearSelection();
         editor->setTextCursor(cur);
     }
-    QApplication::restoreOverrideCursor();
 }
 
 
-int MainWindow::runCompiler()
+int MainWindow::runCompiler(bool load, bool write)
 {
-    builder.show();
-
-    int index;
-    QString fileName;
-
     if(!ui.editorTabs->count())
         return 1;
 
-    index = ui.editorTabs->currentIndex();
-    fileName = ui.editorTabs->tabToolTip(index);
+    int index = ui.editorTabs->currentIndex();
+    QString filename = ui.editorTabs->tabToolTip(index);
 
     getApplicationSettings();
 
     checkAndSaveFiles();
 
-    builder.setParameters(spinCompiler, spinIncludes, fileName);
-    int rc = builder.runCompiler();
+    BuildManager::Configuration config;
 
-    return rc;
-}
+    config.compiler = spinCompiler;
+    config.includes << spinIncludes;
+    config.file     = filename;
+    config.binary   = filename.replace(".spin",".binary");
+    config.port     = cbPort->currentText();
 
-int MainWindow::loadProgram(bool write)
-{
-    QString port = cbPort->currentText();
+    config.load     = load;
+    config.write    = write;
 
-    int index;
-    QString fileName;
+    config.manager  = &manager;
 
-    if(!ui.editorTabs->count())
-        return 1;
-
-    index = ui.editorTabs->currentIndex();
-    QString filename = ui.editorTabs->tabToolTip(index);
-    builder.loadProgram(&manager,
-                        filename.replace(".spin",".binary"),
-                        port,
-                        write);
+    builder.setConfiguration(config);
+    builder.build();
 
     return 0;
 }
 
 void MainWindow::programBuild()
 {
-    if(runCompiler())
-        return;
-
-    builder.waitClose();
+    runCompiler();
 }
-
 
 void MainWindow::programRun()
 {
-    if(runCompiler())
-        return;
-
-    loadProgram(false);
+    runCompiler(true);
 }
 
 void MainWindow::programWrite()
 {
-    if(runCompiler())
-        return;
-
-    loadProgram(true);
+    runCompiler(true, true);
 }
 
 void MainWindow::recolorBuildManager()

@@ -1,28 +1,47 @@
 #include "buildmanager.h"
 
-BuildManager::BuildManager(QWidget *parent) : QWidget(parent)
+#include <QDebug>
+#include <QDir>
+#include <QFileInfo>
+#include <QMessageBox>
+#include <QScrollBar>
+#include <QThread>
+
+BuildManager::BuildManager(QWidget *parent)
+    : QFrame(parent)
 {
-    console = new BuildStatus(this);
-    consoleEdit = console->getOutput();
-    connect(&timer,SIGNAL(timeout()),console,SLOT(hide()));
+    ui.setupUi(this);
+    setWindowFlags(Qt::Dialog);
+
+    hideDetails();
+
+    ui.activeText->setText(" ");
+    setStage(0);
+
+    connect(&timer,SIGNAL(timeout()),this,SLOT(hideStatus()));
+
+    currentTheme = &Singleton<ColorScheme>::Instance();
+    updateColors();
+
+    connect(ui.label, SIGNAL(clicked()), this, SLOT(toggleDetails()));
 }
 
 BuildManager::~BuildManager()
 {
-    delete console;
 }
 
-void BuildManager::show()
+void BuildManager::showStatus()
 {
+    setStage(0);
+    show();
+    raise();
     timer.stop();
-    console->setStage(0);
-    consoleEdit->clear();
-    console->show();
+    ui.plainTextEdit->clear();
 }
 
-void BuildManager::hide()
+void BuildManager::hideStatus()
 {
-    console->hide();
+    hide();
 }
 
 void BuildManager::waitClose()
@@ -33,47 +52,85 @@ void BuildManager::waitClose()
 
 void BuildManager::setFont(const QFont & font)
 {
-    consoleEdit->setFont(font);
+    ui.plainTextEdit->setFont(font);
 }
 
-void BuildManager::setParameters(
-        QString comp,
-        QString incl,
-        QString projFile)
+void BuildManager::setConfiguration(BuildManager::Configuration config)
 {
-    compilerStr = comp;
-    includesStr = incl;
-    projectFile = projFile;
+    this->config = config;
 }
 
-void BuildManager::compilerError(QProcess::ProcessError error)
+void BuildManager::handleCompilerError(QProcess::ProcessError e)
 {
-    if(error != QProcess::Crashed) return;
+    failure = true;
+    timer.stop();
+    hideStatus();
+    QString errorstring;
+    switch (e)
+    {
+        case QProcess::FailedToStart:
+            errorstring = tr("Could not start \"%1.\"\n"
+                             "Please check Preferences.").arg(config.compiler);
+            break;
+        case QProcess::Crashed:
+        case QProcess::Timedout:
+        case QProcess::WriteError:
+        case QProcess::ReadError:
+        case QProcess::UnknownError:
+            errorstring = ((QProcess *) sender())->errorString();
+            break;
+    }
+
+    print("ERROR: "+errorstring,Qt::red);
+    setText(tr("Build failed!"));
+    QMessageBox::critical((QWidget *) parent(),
+            tr("Build Failed"),
+            tr("%1").arg(errorstring));
 }
 
 void BuildManager::compilerFinished(int exitCode, QProcess::ExitStatus status)
 {
-    Q_UNUSED(exitCode);
-    Q_UNUSED(status);
+    if (exitCode != 0 || status != QProcess::NormalExit)
+    {
+        failure = true;
+        setText(tr("Build failed!"));
+        showDetails();
+    }
+    else
+    {
+        setText(tr("Build successful!"));
 
-    if(procDone == true)
-        return;
-
-    procMutex.lock();
-    procDone = true;
-    procMutex.unlock();
+        if (config.load)
+            load();
+    }
 }
 
 void BuildManager::setTextColor(QColor color)
 {
-    QTextCharFormat tf = consoleEdit->currentCharFormat();
+    QTextCharFormat tf = ui.plainTextEdit->currentCharFormat();
     tf.setForeground(color);
-    consoleEdit->setCurrentCharFormat(tf);
+    ui.plainTextEdit->setCurrentCharFormat(tf);
+}
+
+void BuildManager::print(const QString & text, QColor color)
+{
+    QTextCharFormat tf = ui.plainTextEdit->currentCharFormat();
+    QBrush oldcolor = tf.foreground();
+
+    tf.setForeground(color);
+    ui.plainTextEdit->setCurrentCharFormat(tf);
+
+    ui.plainTextEdit->appendPlainText(text);
+
+    tf.setForeground(oldcolor);
+    ui.plainTextEdit->setCurrentCharFormat(tf);
 }
 
 
 void BuildManager::procReadyRead()
 {
+    QProcess * proc = (QProcess *) sender();
+
     QByteArray bytes = proc->readAllStandardOutput();
     if(bytes.length() == 0)
         return;
@@ -93,132 +150,101 @@ void BuildManager::procReadyRead()
             setTextColor(Qt::red);
         }
 
-        consoleEdit->appendPlainText(line);
+        ui.plainTextEdit->appendPlainText(line);
     }
 
-    QScrollBar *sb = consoleEdit->verticalScrollBar();
+    QScrollBar *sb = ui.plainTextEdit->verticalScrollBar();
     sb->setValue(sb->maximum());
 }
 
-int BuildManager::runProcess(const QString & programName, const QStringList & programArgs)
+void BuildManager::runProcess(const QString & programName, const QStringList & programArgs)
 {
+    setTextColor(Qt::black);
+
     QStringList args;
     QString program = QDir::toNativeSeparators(programName);
     for (int i = 0; i < programArgs.size(); ++i)
     {
         args.append(QDir::toNativeSeparators(programArgs.at(i)));
     }
-    qCDebug(ideBuildManager) << "run(\"" << qPrintable(program) << qPrintable(args.join(" ")) << "\")";
+    qCDebug(ideBuildManager) << qPrintable(program) << qPrintable(args.join(" "));
 
-    proc = new QProcess;
+    QProcess * proc = new QProcess;
     proc->setProcessChannelMode(QProcess::MergedChannels);
 
-    procDone = false;
+    connect(proc,   SIGNAL(readyReadStandardOutput()),          this,   SLOT(procReadyRead()));
+    connect(proc,   SIGNAL(finished(int,QProcess::ExitStatus)), this,   SLOT(compilerFinished(int,QProcess::ExitStatus)));
+    connect(proc,   SIGNAL(error(QProcess::ProcessError)),      this,   SLOT(handleCompilerError(QProcess::ProcessError)));
+    connect(proc,   SIGNAL(finished(int)),                      proc,   SLOT(deleteLater()));
 
-    connect(proc, SIGNAL(readyReadStandardOutput()),this,SLOT(procReadyRead()));
-    connect(proc, SIGNAL(finished(int,QProcess::ExitStatus)),this,SLOT(compilerFinished(int,QProcess::ExitStatus)));
-
-    proc->start(QDir::toNativeSeparators(program),args);
-
-    setTextColor(Qt::black);
-
-    if(!proc->waitForStarted())
-    {
-        QMessageBox::critical(this, tr("Error"),
-                             tr("Could not start \"%1.\"\nPlease check Preferences.")
-                             .arg(program));
-        return 1;
-    }
-
-    while(!procDone)
-    {
-        QApplication::processEvents();
-        QThread::msleep(5);
-    }
-
-    if(proc->exitStatus() == QProcess::CrashExit)
-    {
-        QMessageBox::critical(this, tr("Error"),
-                             tr("%1 crashed.")
-                             .arg(program));
-        return 1;
-    }
-
-    if(proc->exitCode())
-        return 1;
-
-    disconnect(proc);
-    delete proc;
-    return 0;
+    proc->start(program,args);
 }
 
 
-int BuildManager::loadProgram(PropellerManager * manager,
-                              const QString & filename,
-                              const QString & port,
-                              bool write)
+int BuildManager::load()
 {
+    setStage(2);
+    setTextColor(Qt::darkYellow);
 
-    setTextColor(Qt::black);
-    console->setStage(2);
+    PropellerLoader loader(config.manager, config.port);
 
-    PropellerLoader loader(manager, port);
+    connect(&loader,    SIGNAL(success()), this, SLOT(loadSuccess()));
+    connect(&loader,    SIGNAL(failure()), this, SLOT(loadFailure()));
 
-    connect(&loader, SIGNAL(statusChanged(const QString &)),
-            console, SLOT(setText(const QString &)));
+    connect(&loader,            SIGNAL(statusChanged(const QString &)),
+            this,               SLOT(setText(const QString &)));
 
-    connect(&loader,    SIGNAL(statusChanged(const QString &)),
-            consoleEdit,SLOT(appendPlainText(const QString &)));
+    connect(&loader,            SIGNAL(statusChanged(const QString &)),
+            ui.plainTextEdit,   SLOT(appendPlainText(const QString &)));
 
-    QFile file(filename);
+    QFile file(config.binary);
     if (!file.open(QIODevice::ReadOnly))
     {
         qDebug() << "Couldn't open file";
         return 1;
     }
 
-    PropellerImage image = PropellerImage(file.readAll(),filename);
-    loader.upload(image, write,true,true);
+    PropellerImage image = PropellerImage(file.readAll(), config.binary);
+    loader.upload(image, config.write, true, true);
 
     waitClose();
-    disconnect(&loader, SIGNAL(statusChanged(const QString &)),
-               console, SLOT(setText(const QString &)));
-
-    disconnect(&loader,    SIGNAL(statusChanged(const QString &)),
-               consoleEdit,SLOT(appendPlainText(const QString &)));
-
     return 0;
 }
 
-int BuildManager::runCompiler(QString options)
+void BuildManager::loadSuccess()
 {
-    console->raise();
+    setStage(3);
+    setTextColor(Qt::darkGreen);
+}
+
+void BuildManager::loadFailure()
+{
+    setTextColor(Qt::red);
+}
+
+void BuildManager::build()
+{
+    failure = false;
+
+    showStatus();
+
     QStringList args;
 
-    if(includesStr.length()) {
-        args.append(("-L"));
-        args.append(includesStr);
-    }
-
-    console->setStage(1);
-    console->setText(tr("Building %1...").arg(QFileInfo(projectFile).fileName()));
-
-    args.append(projectFile);
-
-    if (!options.isNull())
-        args.append(options);
-
-    int rc = runProcess(compilerStr,args);
-
-    if (rc)
+    foreach (QString include, config.includes)
     {
-        console->setText(tr("Build failed!"));
-        console->showDetails();
-        getCompilerOutput();
-        return 1;
+        if (include.size() > 0)
+        {
+            args.append(("-L"));
+            args.append(include);
+        }
     }
-    console->setText(tr("Build succeeded!"));
-    return 0;
+
+    setStage(1);
+    setText(tr("Building %1...").arg(QFileInfo(config.file).fileName()));
+
+    args.append(config.file);
+
+    runProcess(config.compiler, args);
 }
 
 void BuildManager::getCompilerOutput()
@@ -260,3 +286,79 @@ void BuildManager::getCompilerOutput()
     if(ok)
         emit compilerErrorInfo(file, line);
 }
+
+void BuildManager::updateColors()
+{
+    ui.plainTextEdit->setFont(currentTheme->getFont());
+}
+
+void BuildManager::setText(const QString & text)
+{
+    ui.activeText->setText(text);
+}
+
+void BuildManager::keyPressEvent(QKeyEvent * event)
+{
+    if(event->key() == Qt::Key_Escape)
+    {
+        event->ignore();
+    }
+}
+
+void BuildManager::showDetails()
+{
+    ui.label->setText("Details -");
+    ui.plainTextEdit->show();
+    adjustSize();
+}
+
+void BuildManager::hideDetails()
+{
+    ui.label->setText("Details +");
+    ui.plainTextEdit->hide();
+    adjustSize();
+}
+
+void BuildManager::toggleDetails()
+{
+    if (ui.plainTextEdit->isVisible())
+        hideDetails();
+    else
+        showDetails();
+}
+
+void BuildManager::setBuild(bool active)
+{
+    ui.iconBuild->setEnabled(active);
+}
+
+void BuildManager::setDownload(bool active)
+{
+    ui.arrow1->setEnabled(active);
+    ui.iconDownload->setEnabled(active);
+}
+
+void BuildManager::setRun(bool active)
+{
+    ui.arrow2->setEnabled(active);
+    ui.iconRun->setEnabled(active);
+}
+
+void BuildManager::setStage(int stage)
+{
+    if (stage > 0)
+        setBuild(true);
+    else
+        setBuild(false);
+
+    if (stage > 1)
+        setDownload(true);
+    else
+        setDownload(false);
+
+    if (stage > 2)
+        setRun(true);
+    else
+        setRun(false);
+}
+

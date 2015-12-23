@@ -104,7 +104,6 @@ private:
 
     bool eventFilter(QObject *target, QEvent *event);
 
-    int  loadProgram(bool write);
-    int  runCompiler();
+    int  runCompiler(bool load = false, bool write = false);
 
 };
