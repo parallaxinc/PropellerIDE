@@ -13,7 +13,6 @@ private:
     bool case_sensitive;
     bool enable_blocks;
     QString escape_char;
-    
 
     QStringList keywords;
     QStringList operators;

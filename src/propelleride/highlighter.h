@@ -4,7 +4,9 @@
 #include <QTextCharFormat>
 #include <QString>
 #include <QStringList>
-#include <QRegExp>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QRegularExpressionMatchIterator>
 #include <QVector>
 #include <QFont>
 #include <Qt>
@@ -24,29 +26,40 @@ private:
 public:
     Highlighter(QTextDocument *parent);
 
-    void addRules(QStringList rules,
-            QTextCharFormat format);
+    void addOnePartRules(QStringList rules,
+                         QTextCharFormat format);
+
+    void addTwoPartRules(QStringList rules,
+                         QTextCharFormat format);
 
     void highlight();
 
 protected:
     void highlightBlock(const QString &text);
 
-    struct HighlightingRule
+    struct OnePartRule
     {
-        QRegExp pattern;
+        QRegularExpression pattern;
         QTextCharFormat format;
     };
-    QVector<HighlightingRule> highlightingRules;
 
-    QRegExp commentStartExpression;
-    QRegExp commentEndExpression;
+    struct TwoPartRule
+    {
+        QRegularExpression start;
+        QRegularExpression end;
+        QTextCharFormat format;
+        bool newline;
+    };
+
+    QVector<OnePartRule> onepartrules;
+    QVector<TwoPartRule> twopartrules;
+
+    QRegularExpression re_tokens;
 
     QTextCharFormat keywordFormat;
     QTextCharFormat preprocessorFormat;
     QTextCharFormat classFormat;
-    QTextCharFormat singleLineCommentFormat;
-    QTextCharFormat multiLineCommentFormat;
+    QTextCharFormat commentFormat;
     QTextCharFormat quotationFormat;
     QTextCharFormat functionFormat;
     QTextCharFormat numberFormat;

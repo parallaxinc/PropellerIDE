@@ -45,7 +45,11 @@ QStringList Language::buildWordList(QJsonArray keyarray)
 
 QStringList Language::mergeList(QStringList list)
 {
-    return list.join(" ").split(QRegExp("\\s"));
+    return list.join(" ")       // apply fixes to operators
+        .replace("*","\\*")
+        .replace("+","\\+")
+        .replace("?","\\?")
+        .split(QRegExp("\\s"));
 }
 
 void Language::buildParser(QJsonArray projectparser)
@@ -101,14 +105,16 @@ void Language::loadLanguage(QString filename)
     case_sensitive = false;
     enable_blocks = false;
 
-    numbers = buildWordList(syntax["number"].toArray());
-    functions = buildWordList(syntax["function"].toArray());
-    comments = buildWordList(syntax["comment"].toArray());
-    strings = buildWordList(syntax["string"].toArray());
+    numbers     = buildWordList(syntax["number"].toArray());
+    functions   = buildWordList(syntax["function"].toArray());
+    comments    = buildWordList(syntax["comment"].toArray());
+    comments    = mergeList(comments);
+    strings     = buildWordList(syntax["string"].toArray());
+    strings     = mergeList(strings);
 
-    enable_blocks = syntax["enable_blocks"].toArray().first().toBool();
-    case_sensitive = syntax["case_sensitive"].toBool();
-    escape_char = syntax["escape"].toString();
+    enable_blocks   = syntax["enable_blocks"].toArray().first().toBool();
+    case_sensitive  = syntax["case_sensitive"].toBool();
+    escape_char     = syntax["escape"].toString();
 
     foreach(QJsonValue m, syntax["mode"].toObject())
     {
