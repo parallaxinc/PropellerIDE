@@ -35,7 +35,7 @@ public:
         /* Syntax Colors */
         SyntaxText,
         SyntaxNumbers,
-        SyntaxFunctions,
+        SyntaxOperators,
         SyntaxKeywords,
 //        SyntaxPreprocessor,
         SyntaxQuotes,

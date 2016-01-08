@@ -45,11 +45,16 @@ QStringList Language::buildWordList(QJsonArray keyarray)
 
 QStringList Language::mergeList(QStringList list)
 {
-    return list.join(" ")       // apply fixes to operators
-        .replace("*","\\*")
-        .replace("+","\\+")
-        .replace("?","\\?")
-        .split(QRegExp("\\s"));
+    list.removeDuplicates();
+    QString specialchars = "* + ? [ ] ( ) | .";
+    QString mergedlist = list.join(" ");
+
+    foreach (QString s, specialchars.split(" "))
+    {
+        mergedlist = mergedlist.replace(s, "\\"+s);
+    }
+
+    return mergedlist.split(QRegExp("\\s+"));
 }
 
 void Language::buildParser(QJsonArray projectparser)

@@ -23,7 +23,7 @@ void ColorScheme::defaults()
     // Syntax Highlighting
     colors[SyntaxText]          = (struct colorcontainer) { QColor("#eeeeee") , "Syntax_Text"          };
     colors[SyntaxNumbers]       = (struct colorcontainer) { QColor("#ff7fff") , "Syntax_Numbers"       };
-    colors[SyntaxFunctions]     = (struct colorcontainer) { QColor("#6565ff") , "Syntax_Functions"     };
+    colors[SyntaxOperators]     = (struct colorcontainer) { QColor("#6565ff") , "Syntax_Operators"     };
     colors[SyntaxKeywords]      = (struct colorcontainer) { QColor("#ffffff") , "Syntax_Keywords"      };
     colors[SyntaxQuotes]        = (struct colorcontainer) { QColor("#a2b2ff") , "Syntax_Quotes"        };
     colors[SyntaxComments]      = (struct colorcontainer) { QColor("#cccccc") , "Syntax_Comments"      };

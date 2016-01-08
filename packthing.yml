@@ -35,6 +35,7 @@ repos:
             propelleride:
                 name: PropellerIDE
                 icon: icons/icon-new.png
+        branch: master
 
     openspin:
         url: https://github.com/bweir/OpenSpin.git

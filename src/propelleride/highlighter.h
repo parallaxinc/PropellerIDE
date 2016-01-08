@@ -7,7 +7,7 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QRegularExpressionMatchIterator>
-#include <QVector>
+#include <QList>
 #include <QFont>
 #include <Qt>
 
@@ -51,16 +51,8 @@ protected:
         bool newline;
     };
 
-    QVector<OnePartRule> onepartrules;
-    QVector<TwoPartRule> twopartrules;
+    QList<OnePartRule> onepartrules;
+    QList<TwoPartRule> twopartrules;
 
     QRegularExpression re_tokens;
-
-    QTextCharFormat keywordFormat;
-    QTextCharFormat preprocessorFormat;
-    QTextCharFormat classFormat;
-    QTextCharFormat commentFormat;
-    QTextCharFormat quotationFormat;
-    QTextCharFormat functionFormat;
-    QTextCharFormat numberFormat;
 };

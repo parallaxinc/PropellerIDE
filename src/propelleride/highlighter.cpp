@@ -13,12 +13,19 @@ void Highlighter::addOnePartRules(QStringList rules,
     OnePartRule rule;
     rule.format = format;
 
-    foreach(QString r, rules)
+    QStringList tokens;
+    QString tokenstring;
+    foreach (QString r, rules)
     {
-        rule.pattern = QRegularExpression(r,
-                QRegularExpression::CaseInsensitiveOption);
-        onepartrules.append(rule);
+        tokens.append(r);
     }
+    tokenstring = tokens.join("|");
+    tokenstring = "("+tokenstring+")";
+
+    rule.pattern = QRegularExpression(tokenstring, 
+            QRegularExpression::CaseInsensitiveOption); // this needs to pull from language.cpp
+
+    onepartrules.append(rule);
 }
 
 void Highlighter::addTwoPartRules(QStringList rules,
@@ -43,28 +50,23 @@ void Highlighter::addTwoPartRules(QStringList rules,
 
 void Highlighter::highlightBlock(const QString &text)
 {
-    int rules = 0;
+    if (onepartrules.size() == 0)
+        return;
 
     foreach (OnePartRule rule, onepartrules)
     {
-        rules++;
-
-        QRegularExpression re = rule.pattern;
-        QRegularExpressionMatchIterator i = re.globalMatch(text);
+        QRegularExpressionMatchIterator i = rule.pattern.globalMatch(text);
 
         while (i.hasNext())
         {
             QRegularExpressionMatch match = i.next();
             int length = match.capturedLength();
             if (length == 0)
-                break;
+                continue;
             int start = match.capturedStart();
             setFormat(start, length, rule.format);
         }
     }
-    if(rules == 0)
-        return;
-
 
     int state = 0;
     setCurrentBlockState(0);
@@ -127,30 +129,32 @@ void Highlighter::highlightBlock(const QString &text)
 
 void Highlighter::highlight()
 {
-    // numbers
-    numberFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxNumbers));
-    numberFormat.setFontWeight(QFont::Normal);
-    addOnePartRules(lang.listNumbers(), numberFormat);
+    QTextCharFormat format;
 
-    // functions 
-    functionFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxFunctions));
-    functionFormat.setFontWeight(QFont::Normal);
-    addOnePartRules(lang.listOperators(), functionFormat);
+    // numbers
+    format.setForeground(currentTheme->getColor(ColorScheme::SyntaxNumbers));
+    format.setFontWeight(QFont::Normal);
+    addOnePartRules(lang.listNumbers(), format);
+
+    // operators 
+    format.setForeground(currentTheme->getColor(ColorScheme::SyntaxOperators));
+    format.setFontWeight(QFont::Normal);
+    addOnePartRules(lang.listOperators(), format);
 
     // keywords
-    keywordFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxKeywords));
-    keywordFormat.setFontWeight(QFont::Bold);
-    addOnePartRules(lang.listKeywords(), keywordFormat);
+    format.setForeground(currentTheme->getColor(ColorScheme::SyntaxKeywords));
+    format.setFontWeight(QFont::Bold);
+    addOnePartRules(lang.listKeywords(), format);
 
     // comments
-    commentFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxComments));
-    commentFormat.setFontWeight(QFont::Normal);
-    addTwoPartRules(lang.listComments(), commentFormat);
+    format.setForeground(currentTheme->getColor(ColorScheme::SyntaxComments));
+    format.setFontWeight(QFont::Normal);
+    addTwoPartRules(lang.listComments(), format);
 
     // quoted strings
-    quotationFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxQuotes));
-    quotationFormat.setFontWeight(QFont::Normal);
-    addTwoPartRules(lang.listStrings(), quotationFormat);
+    format.setForeground(currentTheme->getColor(ColorScheme::SyntaxQuotes));
+    format.setFontWeight(QFont::Normal);
+    addTwoPartRules(lang.listStrings(), format);
 
     QStringList tokens;
     QString tokenstring;
