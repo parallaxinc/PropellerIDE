@@ -78,7 +78,7 @@ public slots:
     void spawnMemoryMap();
     void spawnTerminal();
 
-    void recolorInfo(QWidget * widget);
+    void recolorMemoryMap(QWidget * widget);
     void recolorProjectView();
     void recolorBuildManager();
     void closeEvent(QCloseEvent *event);

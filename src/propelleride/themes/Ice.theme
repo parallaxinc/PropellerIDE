@@ -1,16 +1,16 @@
 [Colors]
-Block_CON=#ffffff
-Block_DAT=#dcf5e2
-Block_OBJ=#e8ecff
-Block_PRI=#d2e1ef
-Block_PUB=#e3ebf3
-Block_VAR=#d9dbf8
-Syntax_Comments=#028e04
-Syntax_Functions=#0000ff
+Block_CON=#f8f8f8
+Block_DAT=#e6f5e9
+Block_OBJ=#edf0ff
+Block_PRI=#d6e5ee
+Block_PUB=#dde3f3
+Block_VAR=#e6e7fd
+Syntax_Comments=#999999
+Syntax_Functions=#2f7cc9
 Syntax_Keywords=#003c79
-Syntax_Numbers=#ff00ff
-Syntax_Quotes=#ad0c00
-Syntax_Text=#000000
+Syntax_Numbers=#d954d9
+Syntax_Quotes=#991e15
+Syntax_Text=#404040
 
 [Font]
 Family=

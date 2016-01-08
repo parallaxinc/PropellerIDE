@@ -135,13 +135,12 @@ void Highlighter::highlight()
     // functions 
     functionFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxFunctions));
     functionFormat.setFontWeight(QFont::Normal);
-    addOnePartRules(lang.listFunctions(), functionFormat);
+    addOnePartRules(lang.listOperators(), functionFormat);
 
     // keywords
     keywordFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxKeywords));
     keywordFormat.setFontWeight(QFont::Bold);
     addOnePartRules(lang.listKeywords(), keywordFormat);
-    addOnePartRules(lang.listOperators(), keywordFormat);
 
     // comments
     commentFormat.setForeground(currentTheme->getColor(ColorScheme::SyntaxComments));

@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/themes">
+    <file>Bash.theme</file>
     <file>Classic.theme</file>
     <file>Dusk_Ocean.theme</file>
     <file>Ice.theme</file>

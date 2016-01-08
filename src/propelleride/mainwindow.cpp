@@ -408,8 +408,8 @@ void MainWindow::recolorProjectView()
 {
     ColorScheme * theme = &Singleton<ColorScheme>::Instance();
     ui.projectview->updateColors(theme->getColor(ColorScheme::PubBG));
-    parser->styleRule("public",QIcon(),theme->getColor(ColorScheme::SyntaxFunctions));
-    parser->styleRule("private",QIcon(),theme->getColor(ColorScheme::SyntaxFunctions));
+    parser->styleRule("public",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
+    parser->styleRule("private",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
     parser->styleRule("constants",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
     parser->styleRule("_includes_",QIcon(),theme->getColor(ColorScheme::SyntaxText));
     parser->setFont(theme->getFont());
@@ -426,12 +426,12 @@ void MainWindow::spawnMemoryMap()
 
     connect(propDialog,SIGNAL(updateColors()),map,SLOT(updateColors()));
     connect(propDialog,SIGNAL(updateFonts(const QFont &)),map,SLOT(updateColors()));
-    connect(map,SIGNAL(getRecolor(QWidget *)),this,SLOT(recolorInfo(QWidget *)));
+    connect(map,SIGNAL(getRecolor(QWidget *)),this,SLOT(recolorMemoryMap(QWidget *)));
 
     connect(map,SIGNAL(run(QByteArray)), this, SLOT(programRun()));
     connect(map,SIGNAL(write(QByteArray)), this, SLOT(programWrite()));
 
-    recolorInfo(map);
+    recolorMemoryMap(map);
 
     int index = ui.editorTabs->currentIndex();
     QString filename = ui.editorTabs->tabToolTip(index);
@@ -452,14 +452,14 @@ void MainWindow::spawnMemoryMap()
     map->show();
 }
 
-void MainWindow::recolorInfo(QWidget * widget)
+void MainWindow::recolorMemoryMap(QWidget * widget)
 {
     ColorScheme * theme = &Singleton<ColorScheme>::Instance();
     MemoryMap * map = (MemoryMap *) widget;
     map->recolor(
             theme->getColor(ColorScheme::PubBG),
             theme->getColor(ColorScheme::DatBG),
-            theme->getColor(ColorScheme::SyntaxFunctions),
+            theme->getColor(ColorScheme::SyntaxText),
             theme->getColor(ColorScheme::SyntaxKeywords),
             theme->getColor(ColorScheme::ConBG),
             theme->getColor(ColorScheme::SyntaxComments),
