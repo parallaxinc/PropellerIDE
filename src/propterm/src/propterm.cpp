@@ -22,25 +22,26 @@ PropTerm::PropTerm(PropellerManager * manager,
     toggleRxLight(false);
     toggleTxLight(false);
 
-    connect(&rxTimeout,   SIGNAL(timeout()),   this, SLOT(turnOffRxLight()));
-    connect(&txTimeout,   SIGNAL(timeout()),   this, SLOT(turnOffTxLight()));
-    connect(&busyTimeout, SIGNAL(timeout()), this, SLOT(handleBusy()));
+    connect(&rxTimeout,     SIGNAL(timeout()),      this, SLOT(turnOffRxLight()));
+    connect(&txTimeout,     SIGNAL(timeout()),      this, SLOT(turnOffTxLight()));
+    connect(&busyTimeout,   SIGNAL(timeout()),      this, SLOT(handleBusy()));
 
-    connect(manager, SIGNAL(portListChanged()), this, SLOT(updatePorts()));
-    connect(session, SIGNAL(deviceFree()), this, SLOT(free()));
-    connect(session, SIGNAL(deviceBusy()), this, SLOT(busy()));
-    connect(session, SIGNAL(sendError(const QString &)), this, SLOT(handleError()));
-    connect(ui.console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
+    connect(manager,        SIGNAL(portListChanged()),          this, SLOT(updatePorts()));
+    connect(session,        SIGNAL(deviceFree()),               this, SLOT(free()));
+    connect(session,        SIGNAL(deviceBusy()),               this, SLOT(busy()));
+    connect(session,        SIGNAL(sendError(const QString &)), this, SLOT(handleError()));
+    connect(ui.console,     SIGNAL(getData(QByteArray)),        this, SLOT(writeData(QByteArray)));
+    connect(ui.echo,        SIGNAL(toggled(bool)),              ui.console, SLOT(setEcho(bool)));
 
-    connect(ui.sendLineEdit, SIGNAL(returnPressed()), this, SLOT(sendDataLine()));
-    connect(ui.sendButton, SIGNAL(pressed()), this, SLOT(sendDataLine()));
+    connect(ui.sendLineEdit,SIGNAL(returnPressed()),this, SLOT(sendDataLine()));
+    connect(ui.sendButton,  SIGNAL(pressed()),      this, SLOT(sendDataLine()));
 
-    connect(ui.port, SIGNAL(currentIndexChanged(const QString &)), this, SLOT(portChanged()));
-    connect(ui.baudRate, SIGNAL(currentIndexChanged(const QString &)), this, SLOT(baudRateChanged(const QString &)));
+    connect(ui.port,        SIGNAL(currentIndexChanged(const QString &)), this, SLOT(portChanged()));
+    connect(ui.baudRate,    SIGNAL(currentIndexChanged(const QString &)), this, SLOT(baudRateChanged(const QString &)));
 
-    connect(ui.clear, SIGNAL(clicked()), ui.console, SLOT(clear()));
-    connect(ui.reset, SIGNAL(clicked()), this, SLOT(reset()));
-    connect(ui.activeButton, SIGNAL(toggled(bool)), this, SLOT(handleEnable(bool)));
+    connect(ui.clear,       SIGNAL(clicked()),      ui.console, SLOT(clear()));
+    connect(ui.reset,       SIGNAL(clicked()),      this, SLOT(reset()));
+    connect(ui.activeButton,SIGNAL(toggled(bool)),  this, SLOT(handleEnable(bool)));
 
     title = tr("Terminal");
 
@@ -189,6 +190,7 @@ void PropTerm::writeData(const QByteArray &data)
     toggleTxLight(true);
 
     session->write(data);
+
     if (ui.echo->isChecked())
         ui.console->putData(data);
 }

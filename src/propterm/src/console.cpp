@@ -167,6 +167,9 @@ void Console::putData(const QByteArray &data)
                 case  6:
                             cursor = moveDown(cursor);
                             break;
+                case  8:
+                            cursor.deletePreviousChar();
+                            break;
                 default:
                     insertPlainText(QString(c));
                 }
@@ -215,6 +218,11 @@ void Console::setPstMode(bool enable)
     pstMode = enable;
 }
 
+void Console::setEcho(bool enable)
+{
+    echoMode = enable;
+}
+
 void Console::keyPressEvent(QKeyEvent *e)
 {
     paused = true;
@@ -242,6 +250,8 @@ void Console::keyPressEvent(QKeyEvent *e)
             case Qt::Key_Right:
             case Qt::Key_Up:
             case Qt::Key_Down:
+                if (!echoMode)
+                    emit getData(e->text().toLocal8Bit());
                 break;
             default:
                 emit getData(e->text().toLocal8Bit());

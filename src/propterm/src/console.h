@@ -22,6 +22,7 @@ public:
 
 public slots:
     void setPstMode(bool enable);
+    void setEcho(bool enable);
     void enable(bool set);
 
 protected:
@@ -30,6 +31,7 @@ protected:
 
 private:
     bool pstMode;
+    bool echoMode;
 
     int cursorX(QTextCursor cursor);
     int cursorY(QTextCursor cursor);
