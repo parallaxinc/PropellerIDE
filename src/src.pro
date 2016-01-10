@@ -10,7 +10,7 @@ SUBDIRS = \
 
 propterm.depends = propellermanager
 memorymap/src.depends = propellermanager
-memorymap/src.depends = projectview 
+memorymap/src.depends = projectview/src
 
 propelleride.depends =  zipper \
                         memorymap/src \
