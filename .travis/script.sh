@@ -6,7 +6,7 @@ case "$PLATFORM" in
     qmake -v
     packthing -h
 
-    packthing -j4 dmg
+    packthing -j4 --version $TRAVIS_TAG dmg
     mv build/staging/propelleride-*.dmg .
     ;;
 "linux")
@@ -16,7 +16,7 @@ case "$PLATFORM" in
     packthing -j4 run
     mv build/staging/propelleride-*.run .
 
-    fakeroot packthing -j4 deb
+    fakeroot packthing -j4 --version $TRAVIS_TAG deb
     mv build/staging/propelleride-*.deb .
     ;;
 "rpi")
@@ -27,7 +27,7 @@ case "$PLATFORM" in
     sudo packthing --checkout
 
     sudo chroot $MNT bash -c "cd /home/travis/build/parallaxinc/PropellerIDE/ && \
-                                        packthing -j4 deb --arch armhf && \
+                                        packthing -j4 deb --version $TRAVIS_TAG --arch armhf && \
                                         mv build/staging/propelleride-*.deb ."
 
     sudo chown `whoami`:`groups | sed -r 's/ .*//g'` propelleride-*.deb

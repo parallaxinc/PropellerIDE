@@ -26,7 +26,7 @@ install:
 - choco install -y InnoSetup
 
 build_script:
-- packthing inno
+    - packthing --version %APPVEYOR_REPO_TAG_NAME% inno
 
 artifacts:
   - path: build\staging\propelleride-*.exe
