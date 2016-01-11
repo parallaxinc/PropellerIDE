@@ -2,7 +2,7 @@
 set -e
 
 BUILD_VERSION="$TRAVIS_BRANCH"
-if [[ -v $TRAVIS_TAG ]]
+if [[ -n "$TRAVIS_TAG" ]]
 then
     BUILD_VERSION="$TRAVIS_TAG"
 fi
