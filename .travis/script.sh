@@ -1,12 +1,18 @@
 #!/bin/bash
 set -e
 
+BUILD_VERSION="$TRAVIS_BRANCH"
+if [[ -v $TRAVIS_TAG ]]
+then
+    BUILD_VERSION="$TRAVIS_TAG"
+fi
+
 case "$PLATFORM" in
 "osx")
     qmake -v
     packthing -h
 
-    packthing -j4 --version $TRAVIS_TAG dmg
+    packthing -j4 --version $BUILD_VERSION dmg
     mv build/staging/propelleride-*.dmg .
     ;;
 "linux")
@@ -16,7 +22,7 @@ case "$PLATFORM" in
     packthing -j4 run
     mv build/staging/propelleride-*.run .
 
-    fakeroot packthing -j4 --version $TRAVIS_TAG deb
+    fakeroot packthing -j4 --version $BUILD_VERSION deb
     mv build/staging/propelleride-*.deb .
     ;;
 "rpi")
@@ -27,7 +33,7 @@ case "$PLATFORM" in
     sudo packthing --checkout
 
     sudo chroot $MNT bash -c "cd /home/travis/build/parallaxinc/PropellerIDE/ && \
-                                        packthing -j4 deb --version $TRAVIS_TAG --arch armhf && \
+                                        packthing -j4 deb --version $BUILD_VERSION --arch armhf && \
                                         mv build/staging/propelleride-*.deb ."
 
     sudo chown `whoami`:`groups | sed -r 's/ .*//g'` propelleride-*.deb

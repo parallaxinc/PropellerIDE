@@ -14,6 +14,8 @@ install:
 - set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin;C:\Qt\Tools\QtCreator\bin;
 - set PATH=%PATH%;%PYTHON%;%PYTHON%\Scripts;
 - set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5";
+- if defined APPVEYOR_REPO_TAG_NAME set BUILD_VERSION=%APPVEYOR_REPO_TAG_NAME%
+- if not defined APPVEYOR_REPO_TAG_NAME set BUILD_VERSION=%APPVEYOR_REPO_BRANCH%
 - python --version
 - qmake -v
 - pip install Pillow
@@ -26,7 +28,7 @@ install:
 - choco install -y InnoSetup
 
 build_script:
-    - packthing --version %APPVEYOR_REPO_TAG_NAME% inno
+    - packthing --version %BUILD_VERSION% inno
 
 artifacts:
   - path: build\staging\propelleride-*.exe
