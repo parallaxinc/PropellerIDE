@@ -2,18 +2,21 @@ TEMPLATE  = subdirs
 
 SUBDIRS = \
     zipper \
-    memorymap/src \
-    propterm \
-    projectview/src \
     propellermanager \
+    projectview \
+    memorymap \
+    propterm \
     propelleride
 
 propterm.depends = propellermanager
-memorymap/src.depends = propellermanager
-memorymap/src.depends = projectview/src
+memorymap.depends = propellermanager projectview
 
 propelleride.depends =  zipper \
-                        memorymap/src \
+                        memorymap \
                         propterm \
-                        projectview/src \
-                        propellermanager \
+                        projectview \
+                        propellermanager
+
+memorymap.subdir = memorymap/src
+projectview.subdir = projectview/src
+

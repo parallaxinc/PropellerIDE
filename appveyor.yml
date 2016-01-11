@@ -15,7 +15,7 @@ install:
 - set PATH=%PATH%;%PYTHON%;%PYTHON%\Scripts;
 - set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5";
 - if defined APPVEYOR_REPO_TAG_NAME set BUILD_VERSION=%APPVEYOR_REPO_TAG_NAME%
-- if not defined APPVEYOR_REPO_TAG_NAME set BUILD_VERSION=%APPVEYOR_REPO_BRANCH%
+- if not defined APPVEYOR_REPO_TAG_NAME set BUILD_VERSION="0.0.0"
 - python --version
 - qmake -v
 - pip install Pillow
