@@ -15,6 +15,6 @@ PropellerIDE rocks your socks with tons of awesome features:
 
 So what are you waiting for?
 
-- **[Download PropellerIDE](http://developer.parallax.com/projects/propelleride/)**
+- **[Download PropellerIDE](http://developer.parallax.com/propelleride/)**
 - **[Read the docs](https://lamestation.atlassian.net/wiki/display/IDE)**
 - **[Track some bugs](https://lamestation.atlassian.net/projects/IDE/issues)**
