@@ -53,7 +53,6 @@ public slots:
     void showMessage(const QString & message);
 
     // file menu
-    void printFile();
     void zipFiles();
     void openFiles(const QStringList & files);
 

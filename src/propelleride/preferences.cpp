@@ -72,13 +72,9 @@ void Preferences::setupOptions()
 
     QSettings settings;
     QVariant enac = settings.value(enableAutoComplete,true);
-    QVariant enss = settings.value(enableSpinSuggest,true);
 
     autoCompleteEnable.setChecked(enac.toBool());
     edlayout->addRow(new QLabel(tr("Enable AutoComplete")), &autoCompleteEnable);
-
-    spinSuggestEnable.setChecked(enss.toBool());
-    edlayout->addRow(new QLabel(tr("Enable Code Suggestion")), &spinSuggestEnable);
 
     QVariant tabsv = settings.value("tabSpaces","4");
     if(tabsv.canConvert(QVariant::String)) {
@@ -125,11 +121,6 @@ int Preferences::getTabSpaces()
 bool Preferences::getAutoCompleteEnable()
 {
     return autoCompleteEnable.isChecked();;
-}
-
-bool Preferences::getSpinSuggestEnable()
-{
-    return spinSuggestEnable.isChecked();
 }
 
 QLineEdit *Preferences::getTabSpaceLedit()
@@ -311,7 +302,6 @@ void Preferences::accept()
     settings.setValue("tabSpaces",tabspaceLedit.text());
 
     settings.setValue(enableAutoComplete,autoCompleteEnable.isChecked());
-    settings.setValue(enableSpinSuggest,spinSuggestEnable.isChecked());
     settings.setValue("Theme",themeEdit.itemData(themeEdit.currentIndex()));
 
     currentTheme->save();
@@ -329,7 +319,6 @@ void Preferences::reject()
     tabspaceLedit.setText(tabSpacesStr);
 
     autoCompleteEnable.setChecked(autoCompleteEnableSaved);
-    spinSuggestEnable.setChecked(spinSuggestEnableSaved);
 
     themeEdit.setCurrentIndex(
             themeEdit.findData(QSettings().value("Theme").toString())
@@ -348,7 +337,6 @@ void Preferences::showPreferences()
     tabSpacesStr = tabspaceLedit.text();
 
     autoCompleteEnableSaved = autoCompleteEnable.isChecked();
-    spinSuggestEnableSaved = spinSuggestEnable.isChecked();
 
     this->show();
 }

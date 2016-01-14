@@ -275,10 +275,6 @@ void MainWindow::openRecentFile()
         ui.editorTabs->openFile(action->data().toString());
 }
 
-void MainWindow::printFile()
-{
-}
-
 void MainWindow::setProject()
 {
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -350,7 +346,6 @@ void MainWindow::highlightFileLine(QString filename, int line)
         editor->setTextCursor(cur);
     }
 }
-
 
 int MainWindow::runCompiler(bool load, bool write)
 {
@@ -468,66 +463,6 @@ void MainWindow::recolorMemoryMap(QWidget * widget)
     map->setFont(theme->getFont());
 }
 
-void MainWindow::findMultilineComment(QPoint point)
-{
-    Editor *editor = ui.editorTabs->getEditor(ui.editorTabs->currentIndex());
-    QTextCursor cur = editor->cursorForPosition(point);
-    findMultilineComment(cur);
-}
-
-void MainWindow::findMultilineComment(QTextCursor cur)
-{
-    QRegExp commentStartExpression = QRegExp("{*",Qt::CaseInsensitive,QRegExp::Wildcard);
-    QRegExp commentEndExpression = QRegExp("}*",Qt::CaseInsensitive,QRegExp::Wildcard);
-
-    Editor *editor = ui.editorTabs->getEditor(ui.editorTabs->currentIndex());
-    if(editor)
-    {
-        QString text = cur.selectedText();
-
-        if(text.length() == 0) {
-            cur.select(QTextCursor::WordUnderCursor);
-            text = cur.selectedText();
-        }
-
-        int selectedWordLength = text.length();
-
-        if(text.length() > 0 && (commentStartExpression.indexIn(text, 0)!= -1 ))
-        {
-            int startPos = cur.position();
-            cur.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-            editor->setTextCursor(cur);
-            text = cur.selectedText();
-
-            int endIndex;
-            if ((endIndex = commentEndExpression.indexIn(text, 0)) != -1 )
-            {
-                cur.setPosition(startPos - selectedWordLength);
-                cur.setPosition(endIndex + startPos, QTextCursor::KeepAnchor);
-                editor->setTextCursor(cur);
-                editor->setFocus();
-            }
-        }
-        else if(text.length() > 0 && (commentEndExpression.indexIn(text, 0)!= -1 ))
-        {
-            int endPos = cur.position();
-            cur.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
-            editor->setTextCursor(cur);
-            text = cur.selectedText();
-
-            int startIndex;
-            if ((startIndex = commentStartExpression.lastIndexIn(text, -1)) != -1)
-            {
-                cur.setPosition(endPos);
-                cur.setPosition(startIndex - selectedWordLength + 1, QTextCursor::KeepAnchor);
-                editor->setTextCursor(cur);
-                editor->setFocus();
-            }
-        }
-    }
-    return;
-}
-
 void MainWindow::zipFiles()
 {
     int n = this->ui.editorTabs->currentIndex();
@@ -617,7 +552,22 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
                 ui.editorTabs->nextTab();
                 return true;
             }
-        } else {
+        }
+        else if (e->modifiers() & Qt::ShiftModifier)
+        {
+            if (QApplication::focusWidget()->parent() == ui.finder)
+            {
+                switch (e->key())
+                {
+                    case (Qt::Key_Enter):
+                    case (Qt::Key_Return):
+                        ui.finder->findPrevious();
+                        return true;
+                }
+            }
+        }
+        else
+        {
             if (QApplication::focusWidget()->parent() == ui.finder)
             {
                 switch (e->key())

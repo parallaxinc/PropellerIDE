@@ -562,7 +562,7 @@
     <string>Find next instance</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+G</string>
+    <string>F3</string>
    </property>
   </action>
   <action name="actionFind_Previous">
@@ -577,7 +577,7 @@
     <string>Find previous instance</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+G</string>
+    <string>Shift+F3</string>
    </property>
   </action>
   <action name="actionPreferences">

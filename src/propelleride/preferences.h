@@ -17,7 +17,6 @@
 #include "pathselector.h"
 
 #define enableAutoComplete          "enableAutoComplete"
-#define enableSpinSuggest           "enableSpinSuggest"
 
 #if defined(Q_OS_WIN) || defined(CYGWIN)
   #define APP_EXTENSION            ".exe"
@@ -45,7 +44,6 @@ public:
 
     int  getTabSpaces();
     bool getAutoCompleteEnable();
-    bool getSpinSuggestEnable();
     QLineEdit *getTabSpaceLedit();
 
     void adjustFontSize(float ratio);
@@ -84,7 +82,6 @@ private:
 
     QString     tabSpacesStr;
     QCheckBox   autoCompleteEnable;
-    QCheckBox   spinSuggestEnable;
     QLineEdit   tabspaceLedit;
     QPushButton clearSettingsButton;
     QPushButton fontButton;
@@ -92,5 +89,4 @@ private:
     QComboBox   themeEdit;
 
     bool        autoCompleteEnableSaved;
-    bool        spinSuggestEnableSaved;
 };
