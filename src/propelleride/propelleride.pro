@@ -53,6 +53,7 @@ OTHER_FILES +=
 FORMS += \
     forms/about.ui \
     forms/mainwindow.ui \
+    forms/preferences.ui \
     forms/finder.ui \
     forms/buildmanager.ui \
 

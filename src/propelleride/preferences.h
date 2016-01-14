@@ -16,6 +16,8 @@
 #include "colorscheme.h"
 #include "pathselector.h"
 
+#include "ui_preferences.h"
+
 #define enableAutoComplete          "enableAutoComplete"
 
 #if defined(Q_OS_WIN) || defined(CYGWIN)
@@ -39,19 +41,21 @@
 class Preferences : public QDialog
 {
     Q_OBJECT
+
+    Ui::Preferences ui;
+
 public:
     explicit Preferences(QWidget *parent = 0);
 
     int  getTabSpaces();
     bool getAutoCompleteEnable();
-    QLineEdit *getTabSpaceLedit();
 
     void adjustFontSize(float ratio);
-
 
 signals:
     void updateColors();
     void updateFonts(const QFont &);
+    void tabSpacesChanged();
 
 public slots:
 
@@ -81,10 +85,7 @@ private:
     PathSelector * librarypath;
 
     QString     tabSpacesStr;
-    QCheckBox   autoCompleteEnable;
     QLineEdit   tabspaceLedit;
-    QPushButton clearSettingsButton;
-    QPushButton fontButton;
 
     QComboBox   themeEdit;
 

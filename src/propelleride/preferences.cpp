@@ -23,77 +23,55 @@
 Preferences::Preferences(QWidget *parent) : QDialog(parent)
 {
     setWindowTitle(tr("Preferences"));
+    ui.setupUi(this);
 
     currentTheme = &Singleton<ColorScheme>::Instance();
 
-    setupFolders();
-    setupOptions();
-    setupHighlight();
+    QSettings settings;
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    QVariant tabsv = settings.value("tabSpaces","4");
+    if(tabsv.canConvert(QVariant::String)) {
+        ui.tabSpaces->setText(tabsv.toString());
+    }
+
+    connect(ui.restoreDefaults, SIGNAL(clicked()),              this,   SLOT(cleanSettings()));
+    connect(ui.setEditorFont,   SIGNAL(clicked()),              this,   SLOT(fontDialog()));
+    connect(ui.tabSpaces,       SIGNAL(textChanged(QString)),   this,   SLOT(tabSpacesChanged()));
+
+
+    QDirIterator it(":/themes", QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        QString filename = it.next();
+        QString prettyname = QFileInfo(filename).baseName().replace("_"," ");
+        themeEdit.addItem(prettyname, filename);
+    }
+
+    // this routine is repeated often and needs to be abstracted
+    int themeindex = themeEdit.findData(settings.value("Theme", ":/themes/Ice.theme").toString());
+    themeEdit.setCurrentIndex(themeindex);
+    loadTheme(themeindex);
+    settings.setValue("Theme",themeEdit.itemData(themeEdit.currentIndex()));
+
+
+
+
+//    setupFolders();
+//    setupOptions();
+//    setupHighlight();
+
+//    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+//    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+//    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
     connect(&themeEdit, SIGNAL(currentIndexChanged(int)), this, SLOT(loadTheme(int)));
 
-    QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(&tabWidget);
-    layout->addWidget(buttonBox);
-    layout->setSizeConstraint(QLayout::SetFixedSize);
-    setLayout(layout);
-
     setWindowFlags(Qt::Tool);
-    resize(500,260);
 }
 
 void Preferences::cleanSettings()
 {
     QSettings().clear();
-}
-
-void Preferences::setupOptions()
-{
-    QFrame *frame = new QFrame(this);
-    QHBoxLayout *hlayout = new QHBoxLayout();
-
-    QFormLayout *edlayout = new QFormLayout(this);
-    QGroupBox *editor = new QGroupBox(tr("Editor Settings"));
-    editor->setLayout(edlayout);
-
-    QFormLayout *otlayout = new QFormLayout(this);
-    QGroupBox *other  = new QGroupBox(tr("Other Settings"));
-    other->setLayout(otlayout);
-
-    hlayout->addWidget(editor);
-    hlayout->addWidget(other);
-
-    frame->setLayout(hlayout);
-    tabWidget.addTab(frame,tr("General"));
-
-    QSettings settings;
-    QVariant enac = settings.value(enableAutoComplete,true);
-
-    autoCompleteEnable.setChecked(enac.toBool());
-    edlayout->addRow(new QLabel(tr("Enable AutoComplete")), &autoCompleteEnable);
-
-    QVariant tabsv = settings.value("tabSpaces","4");
-    if(tabsv.canConvert(QVariant::String)) {
-        tabspaceLedit.setText(tabsv.toString());
-    }
-    else 
-    {
-        tabspaceLedit.setText("4");
-    }
-    edlayout->addRow(new QLabel(tr("Editor Tab Space Count")), &tabspaceLedit);
-
-    clearSettingsButton.setText(tr("Clear Settings"));
-    clearSettingsButton.setToolTip(tr("Clear Settings on Exit"));
-    connect(&clearSettingsButton,SIGNAL(clicked()), this, SLOT(cleanSettings()));
-    otlayout->addRow(new QLabel(tr("Clear Settings on Exit")), &clearSettingsButton);
-
-    fontButton.setText(tr("Set Editor Font"));
-    connect(&fontButton,SIGNAL(clicked()),this,SLOT(fontDialog()));
-    edlayout->addRow(new QLabel(tr("Set Editor Font")), &fontButton);
 }
 
 void Preferences::fontDialog()
@@ -113,56 +91,42 @@ void Preferences::fontDialog()
 int Preferences::getTabSpaces()
 {
     bool ok;
-    int count = tabspaceLedit.text().toInt(&ok);
+    int count = ui.tabSpaces->text().toInt(&ok);
     if(ok) return count;
     return 4;
 }
 
 bool Preferences::getAutoCompleteEnable()
 {
-    return autoCompleteEnable.isChecked();;
+    return ui.enableCodeCompletion->isChecked();
 }
 
-QLineEdit *Preferences::getTabSpaceLedit()
-{
-    return &tabspaceLedit;
-}
-
-void Preferences::setupFolders()
-{
-    QVBoxLayout * vlayout = new QVBoxLayout(this);
-    QFrame *box = new QFrame();
-    box->setLayout(vlayout);
-    tabWidget.addTab(box,tr("System"));
-
-    QFormLayout * pathlayout = new QFormLayout(this);
-    QGroupBox *paths= new QGroupBox(tr("System Paths"));
-    paths->setLayout(pathlayout);
-
-    compilerpath = new PathSelector(
-            tr("Compiler"),
-            QApplication::applicationDirPath() +
-                    QString(DEFAULT_COMPILER),
-            tr("Must add a compiler."),
-            SLOT(browseCompiler()),
-            this
-            );
-
-    librarypath = new PathSelector(
-            tr("Library"),
-            QApplication::applicationDirPath() +
-                    QString(APP_RESOURCES_PATH) +
-                    QString("/library"),
-            tr("Must add a library path."),
-            SLOT(browseLibrary()),
-            this
-            );
-
-    pathlayout->addWidget(compilerpath);
-    pathlayout->addWidget(librarypath);
-    vlayout->addWidget(paths);
-
-}
+//void Preferences::setupFolders()
+//{
+//    compilerpath = new PathSelector(
+//            tr("Compiler"),
+//            QApplication::applicationDirPath() +
+//                    QString(DEFAULT_COMPILER),
+//            tr("Must add a compiler."),
+//            SLOT(browseCompiler()),
+//            this
+//            );
+//
+//    librarypath = new PathSelector(
+//            tr("Library"),
+//            QApplication::applicationDirPath() +
+//                    QString(APP_RESOURCES_PATH) +
+//                    QString("/library"),
+//            tr("Must add a library path."),
+//            SLOT(browseLibrary()),
+//            this
+//            );
+//
+//    pathlayout->addWidget(compilerpath);
+//    pathlayout->addWidget(librarypath);
+//    vlayout->addWidget(paths);
+//
+//}
 
 void Preferences::updateColor(int key, const QColor & color)
 {
@@ -182,97 +146,40 @@ void Preferences::loadTheme(int index)
 }
 
 
-void Preferences::setupHighlight()
-{
-    QFrame * box = new QFrame();
-    QVBoxLayout *vlayout = new QVBoxLayout();
-    box->setLayout(vlayout);
-
-    tabWidget.addTab(box,tr("Appearance"));
-
-    // row 1
-    QHBoxLayout * themelayout = new QHBoxLayout(this);
-    QGroupBox * themebox = new QGroupBox(tr("Themes"));
-    themebox->setLayout(themelayout);
-
-//    QPushButton * themesave = new QPushButton(tr("Save"),this);
-//    QPushButton * themeload = new QPushButton(tr("Load"),this);
-
-    themeEdit.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
-//    themesave->setSizePolicy(QSizePolicy::Minimum,   QSizePolicy::Minimum);
-//    themeload->setSizePolicy(QSizePolicy::Minimum,   QSizePolicy::Minimum);
-
-    QDirIterator it(":/themes", QDirIterator::Subdirectories);
-    while (it.hasNext())
-    {
-        QString filename = it.next();
-        QString prettyname = QFileInfo(filename).baseName().replace("_"," ");
-        themeEdit.addItem(prettyname, filename);
-    }
-
-    QSettings settings;
-
-    // this routine is repeated often and needs to be abstracted
-    int themeindex = themeEdit.findData(settings.value("Theme", ":/themes/Midnight_Grace.theme").toString());
-    themeEdit.setCurrentIndex(themeindex);
-    loadTheme(themeindex);
-    settings.setValue("Theme",themeEdit.itemData(themeEdit.currentIndex()));
-    qDebug() << "Setting theme:" << themeEdit.currentText();
-
-
-    themelayout->addWidget(&themeEdit);
-//    themelayout->addWidget(themesave);
-//    themelayout->addWidget(themeload);
-
-    vlayout->addWidget(themebox);
-
-    // row 2
-    QFormLayout *synlayout = new QFormLayout(this);
-    QGroupBox *synbox = new QGroupBox(tr("Syntax Colors"));
-    synbox->setLayout(synlayout);
-
-    QFormLayout *blocklayout = new QFormLayout(this);
-    QGroupBox *blockbox = new QGroupBox(tr("Block Colors"));
-    blockbox->setLayout(blocklayout);
-
-
-    QHBoxLayout *h2layout = new QHBoxLayout();
-    h2layout->addWidget(synbox);
-    h2layout->addWidget(blockbox);
-
-    vlayout->addLayout(h2layout);
-
-    box->setLayout(vlayout);
-
-    QMap<ColorScheme::Color, ColorScheme::colorcontainer> colors = 
-        currentTheme->getColorList();
-
-    QMap<ColorScheme::Color, ColorScheme::colorcontainer>::const_iterator i;
-    for (i = colors.constBegin(); i != colors.constEnd(); ++i)
-    {
-        QString prettyname = QString(i.value().key);
-        ColorChooser * colorPicker = new ColorChooser(i.key(), i.value().color.name(), this);
-
-        if (i.value().key.startsWith("Syntax_"))
-        {
-            prettyname.remove("Syntax_").replace("_"," ");
-            synlayout->addRow(new QLabel(prettyname), colorPicker);
-        }
-        else if (i.value().key.startsWith("Block_"))
-        {
-            prettyname.remove("Block_").replace("_"," ");
-            blocklayout->addRow(new QLabel(prettyname), colorPicker);
-        }
-    
-        colorPicker->setStatusTip(prettyname);
-        colorPicker->setToolTip(prettyname);
-    
-        connect(colorPicker,SIGNAL(sendColor(int, const QColor &)), 
-                this,       SLOT(updateColor(int, const QColor &)) );
-        connect(this,       SIGNAL(updateColors()), 
-                colorPicker,SLOT(updateColor()) );
-    }
-}
+//void Preferences::setupHighlight()
+//{
+//    QList<QLabel *> colors = findChildren<QLabel *>(QRegularExpression("color_"));
+//
+//
+//    QMap<ColorScheme::Color, ColorScheme::colorcontainer> colors = 
+//        currentTheme->getColorList();
+//
+//    QMap<ColorScheme::Color, ColorScheme::colorcontainer>::const_iterator i;
+//    for (i = colors.constBegin(); i != colors.constEnd(); ++i)
+//    {
+//        QString prettyname = QString(i.value().key);
+//        ColorChooser * colorPicker = new ColorChooser(i.key(), i.value().color.name(), this);
+//
+//        if (i.value().key.startsWith("Syntax_"))
+//        {
+//            prettyname.remove("Syntax_").replace("_"," ");
+//            synlayout->addRow(new QLabel(prettyname), colorPicker);
+//        }
+//        else if (i.value().key.startsWith("Block_"))
+//        {
+//            prettyname.remove("Block_").replace("_"," ");
+//            blocklayout->addRow(new QLabel(prettyname), colorPicker);
+//        }
+//    
+//        colorPicker->setStatusTip(prettyname);
+//        colorPicker->setToolTip(prettyname);
+//    
+//        connect(colorPicker,SIGNAL(sendColor(int, const QColor &)), 
+//                this,       SLOT(updateColor(int, const QColor &)) );
+//        connect(this,       SIGNAL(updateColors()), 
+//                colorPicker,SLOT(updateColor()) );
+//    }
+//}
 
 void Preferences::browseCompiler()
 {
@@ -299,9 +206,9 @@ void Preferences::accept()
 
     QSettings settings;
 
-    settings.setValue("tabSpaces",tabspaceLedit.text());
+    settings.setValue("tabSpaces",ui.tabSpaces->text());
 
-    settings.setValue(enableAutoComplete,autoCompleteEnable.isChecked());
+    settings.setValue(enableAutoComplete,ui.enableCodeCompletion->isChecked());
     settings.setValue("Theme",themeEdit.itemData(themeEdit.currentIndex()));
 
     currentTheme->save();
@@ -316,9 +223,9 @@ void Preferences::reject()
     compilerpath->restore();
     librarypath->restore();
 
-    tabspaceLedit.setText(tabSpacesStr);
+    ui.tabSpaces->setText(tabSpacesStr);
 
-    autoCompleteEnable.setChecked(autoCompleteEnableSaved);
+    ui.enableCodeCompletion->setChecked(autoCompleteEnableSaved);
 
     themeEdit.setCurrentIndex(
             themeEdit.findData(QSettings().value("Theme").toString())
@@ -334,9 +241,9 @@ void Preferences::reject()
 
 void Preferences::showPreferences()
 {
-    tabSpacesStr = tabspaceLedit.text();
+    tabSpacesStr = ui.tabSpaces->text();
 
-    autoCompleteEnableSaved = autoCompleteEnable.isChecked();
+    autoCompleteEnableSaved = ui.enableCodeCompletion->isChecked();
 
     this->show();
 }
