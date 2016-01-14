@@ -67,8 +67,6 @@ public slots:
     void propellerQuickReference();
     void about();
 
-    void findMultilineComment(QPoint point);
-    void findMultilineComment(QTextCursor cur);
     void setProject();
 
     void programBuild();
