@@ -54,6 +54,7 @@ FORMS += \
     forms/about.ui \
     forms/mainwindow.ui \
     forms/preferences.ui \
+    forms/language.ui \
     forms/finder.ui \
     forms/buildmanager.ui \
 

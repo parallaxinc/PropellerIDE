@@ -12,3 +12,5 @@ Q_LOGGING_CATEGORY(ideBuildManager,     "build.manager")
 Q_LOGGING_CATEGORY(ideLanguageManager,  "language.manager")
 Q_LOGGING_CATEGORY(ideLanguage,         "language")
 Q_LOGGING_CATEGORY(ideHighlighter,      "language.highlighter")
+
+Q_LOGGING_CATEGORY(ideTheme,            "theme")

@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QFontDatabase>
 
+#include "logging.h"
+
 ColorScheme::ColorScheme(QObject * parent) :
     QObject(parent)
 {
@@ -44,6 +46,8 @@ void ColorScheme::save(const QString & filename)
 
 void ColorScheme::save(QSettings * settings)
 {
+    qCDebug(ideTheme) << "saving" << settings->fileName();
+
     settings->beginGroup("Colors");
 
     QMap<ColorScheme::Color, colorcontainer>::iterator i;
@@ -77,6 +81,8 @@ void ColorScheme::load(const QString & filename)
 
 void ColorScheme::load(QSettings * settings)
 {
+    qCDebug(ideTheme) << "loading" << settings->fileName();
+
     settings->beginGroup("Colors");
 
     QMap<ColorScheme::Color, colorcontainer>::iterator i;
@@ -100,8 +106,6 @@ void ColorScheme::load(QSettings * settings)
 
     if (!settings->contains("Family") || settings->value("Family").toString().isEmpty())
     {
-        qDebug() << "Font NOT FOUND!";
-
         font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
         font.setPointSize(12);
         font.setStyleHint(QFont::TypeWriter);
@@ -109,8 +113,6 @@ void ColorScheme::load(QSettings * settings)
     }
     else
     {
-        qDebug() << "Font FOUND!";
-
         font.setFamily(
             settings->value("Family", font.family()).toString()
             );
@@ -124,8 +126,6 @@ void ColorScheme::load(QSettings * settings)
             );
 
     settings->endGroup();
-
-    qDebug() << "Setting font:" << font.family();
 }
 
 void ColorScheme::setColor(ColorScheme::Color key, const QColor & color)

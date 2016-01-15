@@ -39,7 +39,7 @@ class Preferences : public QDialog
     void setupFonts();
     void setupColors();
 
-//    void setupFolders();
+    void setupLanguages();
 
 //    PathSelector * compilerpath;
 //    PathSelector * librarypath;

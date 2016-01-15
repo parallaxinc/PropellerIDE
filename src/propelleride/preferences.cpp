@@ -46,10 +46,9 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
     currentTheme->load();
     settings.setValue("theme", ui.themeEdit->itemData(ui.themeEdit->currentIndex()));
 
-    //    setupFolders();
-    
     setupFonts();
     setupColors();
+    setupLanguages();
 
     connect(ui.themeEdit,   SIGNAL(currentIndexChanged(int)),   this,   SLOT(loadTheme(int)));
 }
@@ -115,8 +114,13 @@ bool Preferences::getAutoCompleteEnable()
     return ui.enableCodeCompletion->isChecked();
 }
 
-//void Preferences::setupFolders()
-//{
+void Preferences::setupLanguages()
+{
+    PathSelector * spin = new PathSelector();
+    ui.languageLayout->addWidget(spin);
+
+
+
 //    compilerpath = new PathSelector(
 //            tr("Compiler"),
 //            QApplication::applicationDirPath() +
@@ -140,7 +144,7 @@ bool Preferences::getAutoCompleteEnable()
 //    pathlayout->addWidget(librarypath);
 //    vlayout->addWidget(paths);
 //
-//}
+}
 
 void Preferences::updateColor(int key, const QColor & color)
 {
@@ -173,7 +177,6 @@ void Preferences::loadTheme(QString filename)
 
 void Preferences::loadTheme(int index)
 {
-    qDebug() << ui.themeEdit->itemData(index).toString();
     currentTheme->load(ui.themeEdit->itemData(index).toString());
 
     updateAll();

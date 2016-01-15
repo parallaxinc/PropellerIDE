@@ -420,6 +420,7 @@ void MainWindow::spawnMemoryMap()
 
     MemoryMap * map = new MemoryMap(&manager);
     map->setAttribute(Qt::WA_DeleteOnClose, true);
+    map->setWindowIcon(QIcon(":/icons/project-info3.png"));
 
     connect(&preferences,SIGNAL(updateColors()),map,SLOT(updateColors()));
     connect(&preferences,SIGNAL(updateFonts(const QFont &)),map,SLOT(updateColors()));
@@ -517,11 +518,15 @@ void MainWindow::spawnTerminal()
 {
     qCDebug(ideMainwindow) << "spawnTerminal()";
 
-    PropTerm * term = new PropTerm(&manager);
-    term->setAttribute(Qt::WA_DeleteOnClose);
     ColorScheme * theme = &Singleton<ColorScheme>::Instance();
+    PropTerm * term = new PropTerm(&manager);
+
+    term->setAttribute(Qt::WA_DeleteOnClose);
+    term->setWindowIcon(QIcon(":/icons/project-terminal.png"));
     term->setFont(theme->getFont());
+
     connect(&preferences,SIGNAL(updateFonts(const QFont &)),term,SLOT(setFont(const QFont &)));
+
     term->show();
 }
 
