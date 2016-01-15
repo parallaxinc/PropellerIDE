@@ -14,7 +14,7 @@
 
 Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 {
-    propDialog = ((MainWindow *) parent)->propDialog;
+    propDialog = &((MainWindow *) parent)->preferences;
 
     ctrlPressed = false;
     isSpin = false;

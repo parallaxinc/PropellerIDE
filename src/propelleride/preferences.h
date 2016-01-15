@@ -1,17 +1,7 @@
 #pragma once
 
-#include <Qt>
-#include <QWidget>
 #include <QString>
-#include <QLineEdit>
-#include <QTabWidget>
-#include <QCheckBox>
 #include <QComboBox>
-#include <QPushButton>
-#include <QFontDialog>
-#include <QVector>
-#include <QToolButton>
-#include <QHBoxLayout>
 
 #include "colorscheme.h"
 #include "pathselector.h"
@@ -46,6 +36,7 @@ class Preferences : public QDialog
 
 public:
     explicit Preferences(QWidget *parent = 0);
+    ~Preferences();
 
     int  getTabSpaces();
     bool getAutoCompleteEnable();
@@ -59,10 +50,10 @@ signals:
 
 public slots:
 
-    void cleanSettings();
     void fontDialog();
-    void browseCompiler();
-    void browseLibrary();
+//    void browseCompiler();
+//    void browseLibrary();
+    void restore();
     void accept();
     void reject();
     void updateColor(int key, const QColor & color);
@@ -70,6 +61,7 @@ public slots:
 
 private slots:
     void loadTheme(int index);
+    void buttonBoxClicked(QAbstractButton * button);
 
 private:
 
@@ -79,15 +71,11 @@ private:
 
     ColorScheme * currentTheme;
 
-    QTabWidget  tabWidget;
-
-    PathSelector * compilerpath;
-    PathSelector * librarypath;
+//    PathSelector * compilerpath;
+//    PathSelector * librarypath;
 
     QString     tabSpacesStr;
     QLineEdit   tabspaceLedit;
-
-    QComboBox   themeEdit;
 
     bool        autoCompleteEnableSaved;
 };

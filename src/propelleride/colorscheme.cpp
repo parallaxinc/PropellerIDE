@@ -25,7 +25,7 @@ void ColorScheme::defaults()
     colors[SyntaxNumbers]       = (struct colorcontainer) { QColor("#ff7fff") , "Syntax_Numbers"       };
     colors[SyntaxOperators]     = (struct colorcontainer) { QColor("#6565ff") , "Syntax_Operators"     };
     colors[SyntaxKeywords]      = (struct colorcontainer) { QColor("#ffffff") , "Syntax_Keywords"      };
-    colors[SyntaxQuotes]        = (struct colorcontainer) { QColor("#a2b2ff") , "Syntax_Quotes"        };
+    colors[SyntaxQuotes]        = (struct colorcontainer) { QColor("#a2b2ff") , "Syntax_Strings"       };
     colors[SyntaxComments]      = (struct colorcontainer) { QColor("#cccccc") , "Syntax_Comments"      };
 
 }

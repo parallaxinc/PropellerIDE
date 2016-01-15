@@ -5,15 +5,10 @@
 #include <QFileInfo>
 #include <QFileDialog>
 #include <QDialogButtonBox>
-#include <QFrame>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
+#include <QFontDialog>
 #include <QSettings>
 #include <QVariant>
-#include <QDateTime>
 #include <QStringList>
-#include <QFormLayout>
-#include <QGroupBox>
 #include <QLabel>
 #include <QDebug>
 #include <QDirIterator>
@@ -22,7 +17,6 @@
 
 Preferences::Preferences(QWidget *parent) : QDialog(parent)
 {
-    setWindowTitle(tr("Preferences"));
     ui.setupUi(this);
 
     currentTheme = &Singleton<ColorScheme>::Instance();
@@ -34,9 +28,9 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
         ui.tabSpaces->setText(tabsv.toString());
     }
 
-    connect(ui.restoreDefaults, SIGNAL(clicked()),              this,   SLOT(cleanSettings()));
-    connect(ui.setEditorFont,   SIGNAL(clicked()),              this,   SLOT(fontDialog()));
-    connect(ui.tabSpaces,       SIGNAL(textChanged(QString)),   this,   SLOT(tabSpacesChanged()));
+    connect(ui.buttonBox,       SIGNAL(clicked(QAbstractButton *)), this,   SLOT(buttonBoxClicked(QAbstractButton *)));
+    connect(ui.setEditorFont,   SIGNAL(clicked()),                  this,   SLOT(fontDialog()));
+    connect(ui.tabSpaces,       SIGNAL(textChanged(QString)),       this,   SIGNAL(tabSpacesChanged()));
 
 
     QDirIterator it(":/themes", QDirIterator::Subdirectories);
@@ -44,34 +38,27 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
     {
         QString filename = it.next();
         QString prettyname = QFileInfo(filename).baseName().replace("_"," ");
-        themeEdit.addItem(prettyname, filename);
+        ui.themeEdit->addItem(prettyname, filename);
     }
 
     // this routine is repeated often and needs to be abstracted
-    int themeindex = themeEdit.findData(settings.value("Theme", ":/themes/Ice.theme").toString());
-    themeEdit.setCurrentIndex(themeindex);
+    int themeindex = ui.themeEdit->findData(settings.value("Theme", ":/themes/Ice.theme").toString());
+    ui.themeEdit->setCurrentIndex(themeindex);
     loadTheme(themeindex);
-    settings.setValue("Theme",themeEdit.itemData(themeEdit.currentIndex()));
+    settings.setValue("Theme", ui.themeEdit->itemData(ui.themeEdit->currentIndex()));
 
 
 
 
-//    setupFolders();
-//    setupOptions();
-//    setupHighlight();
+    //    setupFolders();
+    //    setupOptions();
+    setupHighlight();
 
-//    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-//    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-//    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-
-    connect(&themeEdit, SIGNAL(currentIndexChanged(int)), this, SLOT(loadTheme(int)));
-
-    setWindowFlags(Qt::Tool);
+    connect(ui.themeEdit, SIGNAL(currentIndexChanged(int)), this, SLOT(loadTheme(int)));
 }
 
-void Preferences::cleanSettings()
+Preferences::~Preferences()
 {
-    QSettings().clear();
 }
 
 void Preferences::fontDialog()
@@ -139,77 +126,80 @@ void Preferences::updateColor(int key, const QColor & color)
 
 void Preferences::loadTheme(int index)
 {
-    currentTheme->load(themeEdit.itemData(index).toString());
+    currentTheme->load(ui.themeEdit->itemData(index).toString());
 
     emit updateColors();
     emit updateFonts(currentTheme->getFont());
 }
 
 
-//void Preferences::setupHighlight()
-//{
-//    QList<QLabel *> colors = findChildren<QLabel *>(QRegularExpression("color_"));
-//
-//
-//    QMap<ColorScheme::Color, ColorScheme::colorcontainer> colors = 
-//        currentTheme->getColorList();
-//
-//    QMap<ColorScheme::Color, ColorScheme::colorcontainer>::const_iterator i;
-//    for (i = colors.constBegin(); i != colors.constEnd(); ++i)
-//    {
-//        QString prettyname = QString(i.value().key);
-//        ColorChooser * colorPicker = new ColorChooser(i.key(), i.value().color.name(), this);
-//
-//        if (i.value().key.startsWith("Syntax_"))
-//        {
-//            prettyname.remove("Syntax_").replace("_"," ");
-//            synlayout->addRow(new QLabel(prettyname), colorPicker);
-//        }
-//        else if (i.value().key.startsWith("Block_"))
-//        {
-//            prettyname.remove("Block_").replace("_"," ");
-//            blocklayout->addRow(new QLabel(prettyname), colorPicker);
-//        }
-//    
-//        colorPicker->setStatusTip(prettyname);
-//        colorPicker->setToolTip(prettyname);
-//    
-//        connect(colorPicker,SIGNAL(sendColor(int, const QColor &)), 
-//                this,       SLOT(updateColor(int, const QColor &)) );
-//        connect(this,       SIGNAL(updateColors()), 
-//                colorPicker,SLOT(updateColor()) );
-//    }
-//}
-
-void Preferences::browseCompiler()
+void Preferences::setupHighlight()
 {
-    compilerpath->browsePath(
-            tr("Select Compiler"),
-            "OpenSpin (openspin*);;BST Compiler (bstc*)",
-            false
-        );
+    QMap<ColorScheme::Color, ColorScheme::colorcontainer> colors = 
+        currentTheme->getColorList();
+
+    QList<ColorChooser *> colorchoosers = findChildren<ColorChooser *>(QRegularExpression("color_.*"));
+
+    foreach (ColorChooser * chooser, colorchoosers)
+    {
+        QString name = chooser->objectName().remove("color_");
+        QString prettyname = name;
+        prettyname.replace("_"," ");
+
+        QMap<ColorScheme::Color, ColorScheme::colorcontainer>::const_iterator i;
+        for (i = colors.constBegin(); i != colors.constEnd(); ++i)
+        {
+            qDebug() << "testing" << i.value().key << name;
+            if (name == QString(i.value().key))
+            {
+                qDebug() << "ITS A MATCH" << name;
+                chooser->setKey(i.key());
+                chooser->setColor(i.value().color);
+
+            } 
+        }
+
+        connect(chooser,    SIGNAL(sendColor(int, const QColor &)), 
+                this,       SLOT(updateColor(int, const QColor &)) );
+        connect(this,       SIGNAL(updateColors()), 
+                chooser,    SLOT(updateColor()) );
+    }
 }
 
-void Preferences::browseLibrary()
+//void Preferences::browseCompiler()
+//{
+//    compilerpath->browsePath(
+//            tr("Select Compiler"),
+//            "OpenSpin (openspin*);;BST Compiler (bstc*)",
+//            false
+//            );
+//}
+//
+//void Preferences::browseLibrary()
+//{
+//    librarypath->browsePath(
+//            tr("Select Spin Library Path"),
+//            NULL,
+//            true
+//            );
+//}
+
+void Preferences::restore()
 {
-    librarypath->browsePath(
-            tr("Select Spin Library Path"),
-            NULL,
-            true
-        );
+    QSettings().clear();
 }
 
 void Preferences::accept()
 {
-    compilerpath->save();
-    librarypath->save();
+//    compilerpath->save();
+//    librarypath->save();
 
     QSettings settings;
 
     settings.setValue("tabSpaces",ui.tabSpaces->text());
 
-    settings.setValue(enableAutoComplete,ui.enableCodeCompletion->isChecked());
-    settings.setValue("Theme",themeEdit.itemData(themeEdit.currentIndex()));
+    settings.setValue(enableAutoComplete, ui.enableCodeCompletion->isChecked());
+    settings.setValue("Theme", ui.themeEdit->itemData(ui.themeEdit->currentIndex()));
 
     currentTheme->save();
     emit updateColors();
@@ -220,17 +210,16 @@ void Preferences::accept()
 
 void Preferences::reject()
 {
-    compilerpath->restore();
-    librarypath->restore();
+//    compilerpath->restore();
+//    librarypath->restore();
 
     ui.tabSpaces->setText(tabSpacesStr);
 
     ui.enableCodeCompletion->setChecked(autoCompleteEnableSaved);
 
-    themeEdit.setCurrentIndex(
-            themeEdit.findData(QSettings().value("Theme").toString())
+    ui.themeEdit->setCurrentIndex(
+            ui.themeEdit->findData(QSettings().value("Theme").toString())
             );
-
 
     currentTheme->load();
     emit updateColors();
@@ -257,7 +246,7 @@ void Preferences::adjustFontSize(float ratio)
     size = (int) ((float) size*ratio);
 
     if ((ratio < 1.0 && size > 3) ||
-        (ratio > 1.0 && size < 90))
+            (ratio > 1.0 && size < 90))
         font.setPointSize(size);
 
     currentTheme->setFont(font);
@@ -265,3 +254,25 @@ void Preferences::adjustFontSize(float ratio)
 
     emit updateFonts(font);
 }
+
+
+void Preferences::buttonBoxClicked(QAbstractButton * button)
+{
+    QDialogButtonBox::StandardButton standardbutton = ui.buttonBox->standardButton(button);
+
+    switch(standardbutton)
+    {
+        case QDialogButtonBox::Ok: 
+            accept();
+            break;
+        case QDialogButtonBox::Cancel: 
+            reject();
+            break;
+        case QDialogButtonBox::RestoreDefaults: 
+            restore();
+            break;
+        default:
+            break;
+    }
+} 
+

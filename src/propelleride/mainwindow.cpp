@@ -22,16 +22,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui.setupUi(this);
 
     // setup preferences dialog
-    propDialog = new Preferences(this);
-    connect(propDialog,SIGNAL(accepted()),this,SLOT(getApplicationSettings()));
+    connect(&preferences,SIGNAL(accepted()),this,SLOT(getApplicationSettings()));
 
     connect(&builder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
 
     parser = language.getParser();
-    connect(propDialog,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
-    connect(propDialog,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorProjectView()));
+    connect(&preferences,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
+    connect(&preferences,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorProjectView()));
 
-    connect(propDialog,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorBuildManager()));
+    connect(&preferences,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorBuildManager()));
 
     recolorProjectView();
     recolorBuildManager();
@@ -44,6 +43,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui.editorTabs, SIGNAL(tabCloseRequested(int)), ui.editorTabs,         SLOT(closeFile(int)));
     connect(ui.editorTabs, SIGNAL(currentChanged(int)),    ui.editorTabs,         SLOT(changeTab(int)));
+
+
+    // connect editor to 
 
     // File Menu
     connect(ui.action_New,SIGNAL(triggered()),ui.editorTabs,SLOT(newFile()));
@@ -82,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.actionFind_Next,    SIGNAL(triggered()), ui.finder, SLOT(findNext()));
     connect(ui.actionFind_Previous,SIGNAL(triggered()), ui.finder, SLOT(findPrevious()));
 
-    connect(ui.actionPreferences,  SIGNAL(triggered()), propDialog, SLOT(showPreferences()));
+    connect(ui.actionPreferences,  SIGNAL(triggered()), &preferences, SLOT(showPreferences()));
 
     connect(ui.editorTabs, SIGNAL(undoAvailable(bool)), ui.action_Undo,SLOT(setEnabled(bool)));
     connect(ui.editorTabs, SIGNAL(redoAvailable(bool)), ui.action_Redo,SLOT(setEnabled(bool)));
@@ -193,12 +195,12 @@ void MainWindow::getApplicationSettings()
 
 void MainWindow::fontBigger()
 {
-    propDialog->adjustFontSize(1.25);
+    preferences.adjustFontSize(1.25);
 }
 
 void MainWindow::fontSmaller()
 {
-    propDialog->adjustFontSize(0.8);
+    preferences.adjustFontSize(0.8);
 }
 
 
@@ -419,8 +421,8 @@ void MainWindow::spawnMemoryMap()
     MemoryMap * map = new MemoryMap(&manager);
     map->setAttribute(Qt::WA_DeleteOnClose, true);
 
-    connect(propDialog,SIGNAL(updateColors()),map,SLOT(updateColors()));
-    connect(propDialog,SIGNAL(updateFonts(const QFont &)),map,SLOT(updateColors()));
+    connect(&preferences,SIGNAL(updateColors()),map,SLOT(updateColors()));
+    connect(&preferences,SIGNAL(updateFonts(const QFont &)),map,SLOT(updateColors()));
     connect(map,SIGNAL(getRecolor(QWidget *)),this,SLOT(recolorMemoryMap(QWidget *)));
 
     connect(map,SIGNAL(run(QByteArray)), this, SLOT(programRun()));
@@ -519,7 +521,7 @@ void MainWindow::spawnTerminal()
     term->setAttribute(Qt::WA_DeleteOnClose);
     ColorScheme * theme = &Singleton<ColorScheme>::Instance();
     term->setFont(theme->getFont());
-    connect(propDialog,SIGNAL(updateFonts(const QFont &)),term,SLOT(setFont(const QFont &)));
+    connect(&preferences,SIGNAL(updateFonts(const QFont &)),term,SLOT(setFont(const QFont &)));
     term->show();
 }
 

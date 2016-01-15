@@ -11,7 +11,6 @@ BuildManager::BuildManager(QWidget *parent)
     : QFrame(parent)
 {
     ui.setupUi(this);
-    setWindowFlags(Qt::Dialog);
 
     hideDetails();
 

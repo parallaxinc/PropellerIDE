@@ -1,5 +1,6 @@
 #include "filemanager.h"
 
+#include <QFileDialog>
 #include <QRegularExpression>
 
 FileManager::FileManager(QWidget *parent) :

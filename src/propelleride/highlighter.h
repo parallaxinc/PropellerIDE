@@ -12,7 +12,6 @@
 #include <Qt>
 
 #include "language.h"
-#include "preferences.h"
 #include "colorscheme.h"
 
 class Highlighter : public QSyntaxHighlighter

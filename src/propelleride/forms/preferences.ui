@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>531</width>
-    <height>412</height>
+    <width>449</width>
+    <height>432</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabLanguages">
       <attribute name="title">
@@ -95,17 +95,17 @@
       <attribute name="title">
        <string>Editor</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QGroupBox" name="groupBox_4">
          <property name="title">
-          <string>Editor Settings</string>
+          <string>Features</string>
          </property>
-         <layout class="QFormLayout" name="formLayout">
+         <layout class="QFormLayout" name="formLayout_2">
           <item row="0" column="0">
            <widget class="QCheckBox" name="enableCodeCompletion">
             <property name="text">
-             <string>Enable code completion</string>
+             <string>Code completion</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -113,9 +113,12 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QCheckBox" name="enableIndentGuides">
+           <widget class="QCheckBox" name="enableBlockColoring">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
-             <string>Enable indent guides</string>
+             <string>Block coloring</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -123,9 +126,9 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QCheckBox" name="enableBlockColoring">
+           <widget class="QCheckBox" name="enableIndentGuides">
             <property name="text">
-             <string>Enable block coloring</string>
+             <string>Indent guides</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -133,44 +136,45 @@
            </widget>
           </item>
           <item row="3" column="0">
+           <widget class="QCheckBox" name="checkBox">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Smart indent</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Settings</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout">
+          <item row="0" column="0">
            <widget class="QLabel" name="label_2">
             <property name="text">
              <string>Spaces Per Indent</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="0" column="1">
            <widget class="QLineEdit" name="tabSpaces">
             <property name="text">
              <string>4</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Editor Font</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
+          <item row="1" column="1">
            <widget class="QPushButton" name="setEditorFont">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="text">
              <string>Set Editor Font</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QPushButton" name="restoreDefaults">
-            <property name="text">
-             <string>Restore Defaults</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>Restore default editor settings</string>
             </property>
            </widget>
           </item>
@@ -185,38 +189,90 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QGroupBox" name="groupBox_Themes">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="title">
-            <string>Themes</string>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item>
-             <widget class="QComboBox" name="comboBox"/>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
-          <widget class="QGroupBox" name="groupBox_Font">
-           <property name="title">
-            <string>Font</string>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QFontComboBox" name="fontComboBox"/>
-            </item>
-           </layout>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QGroupBox" name="groupBox_Themes">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title">
+          <string>Themes</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QComboBox" name="themeEdit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="loadTheme">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Load</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="saveTheme">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Save</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_Font">
+         <property name="title">
+          <string>Font</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QFontComboBox" name="fontEdit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="editable">
+             <bool>false</bool>
+            </property>
+            <property name="fontFilters">
+             <set>QFontComboBox::MonospacedFonts</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBox">
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="minimum">
+             <number>6</number>
+            </property>
+            <property name="maximum">
+             <number>72</number>
+            </property>
+            <property name="value">
+             <number>12</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
@@ -237,7 +293,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLabel" name="color_Syntax_Text">
+             <widget class="ColorChooser" name="color_Syntax_Text">
               <property name="palette">
                <palette>
                 <active>
@@ -304,6 +360,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
              </widget>
             </item>
@@ -315,7 +377,7 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLabel" name="color_Syntax_Numbers">
+             <widget class="ColorChooser" name="color_Syntax_Numbers">
               <property name="palette">
                <palette>
                 <active>
@@ -382,6 +444,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="margin">
                <number>0</number>
@@ -396,7 +464,7 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLabel" name="color_Syntax_Operators">
+             <widget class="ColorChooser" name="color_Syntax_Operators">
               <property name="palette">
                <palette>
                 <active>
@@ -463,6 +531,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="margin">
                <number>0</number>
@@ -477,7 +551,7 @@
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QLabel" name="color_Syntax_Keywords">
+             <widget class="ColorChooser" name="color_Syntax_Keywords">
               <property name="palette">
                <palette>
                 <active>
@@ -544,6 +618,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="margin">
                <number>0</number>
@@ -558,7 +638,7 @@
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QLabel" name="color_Syntax_Strings">
+             <widget class="ColorChooser" name="color_Syntax_Strings">
               <property name="palette">
                <palette>
                 <active>
@@ -625,6 +705,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="margin">
                <number>0</number>
@@ -639,7 +725,7 @@
              </widget>
             </item>
             <item row="5" column="1">
-             <widget class="QLabel" name="color_Syntax_Comments">
+             <widget class="ColorChooser" name="color_Syntax_Comments">
               <property name="palette">
                <palette>
                 <active>
@@ -706,6 +792,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="margin">
                <number>0</number>
@@ -738,7 +830,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLabel" name="color_Block_CON">
+             <widget class="ColorChooser" name="color_Block_CON">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -811,6 +903,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="margin">
                <number>0</number>
@@ -831,7 +929,7 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLabel" name="color_Block_VAR">
+             <widget class="ColorChooser" name="color_Block_VAR">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -904,6 +1002,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="margin">
                <number>0</number>
@@ -924,7 +1028,7 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLabel" name="color_Block_OBJ">
+             <widget class="ColorChooser" name="color_Block_OBJ">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -997,6 +1101,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="margin">
                <number>0</number>
@@ -1017,7 +1127,7 @@
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QLabel" name="color_Block_PUB">
+             <widget class="ColorChooser" name="color_Block_PUB">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -1090,6 +1200,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="margin">
                <number>0</number>
@@ -1110,7 +1226,7 @@
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QLabel" name="color_Block_PRI">
+             <widget class="ColorChooser" name="color_Block_PRI">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -1183,6 +1299,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="margin">
                <number>0</number>
@@ -1203,7 +1325,7 @@
              </widget>
             </item>
             <item row="5" column="1">
-             <widget class="QLabel" name="color_Block_DAT">
+             <widget class="ColorChooser" name="color_Block_DAT">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -1276,6 +1398,12 @@
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="margin">
                <number>0</number>
@@ -1322,47 +1450,21 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ColorChooser</class>
+   <extends>QLabel</extends>
+   <header>colorchooser.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../icons/icons.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>Preferences</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>Preferences</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

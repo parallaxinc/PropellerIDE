@@ -9,7 +9,7 @@ Syntax_Comments=#4d5761
 Syntax_Operators=#7cb4e3
 Syntax_Keywords=#4f7fa6
 Syntax_Numbers=#809cb3
-Syntax_Quotes=#8098ae
+Syntax_Strings=#8098ae
 Syntax_Text=#306797
 
 [Font]
