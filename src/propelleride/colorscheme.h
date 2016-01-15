@@ -52,13 +52,16 @@ private:
 public slots:
 
     void save();
+    void save(const QString & filename);
+    void save(QSettings * settings);
+
     void load();
     void load(const QString & filename);
+    void load(QSettings * settings);
+
     void defaults();
 
 public:
-    void load(QSettings * settings);
-
     QColor getColor(ColorScheme::Color key);
     void setColor(ColorScheme::Color key, const QColor & newcolor);
 

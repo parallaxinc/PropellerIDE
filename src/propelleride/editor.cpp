@@ -42,7 +42,7 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     connect(this,SIGNAL(cursorPositionChanged()),this,SLOT(updateBackgroundColors()));
     connect(propDialog,SIGNAL(updateColors()),this,SLOT(updateColors()));
     connect(propDialog,SIGNAL(updateFonts(const QFont &)),this,SLOT(updateFonts()));
-    connect(propDialog,SIGNAL(tabSpacesChanged()), this, SLOT(tabSpacesChanged()));
+    connect(propDialog,SIGNAL(tabStopChanged()), this, SLOT(tabStopChanged()));
 
     connect(this,SIGNAL(undoAvailable(bool)), this, SLOT(setUndo(bool)));
     connect(this,SIGNAL(redoAvailable(bool)), this, SLOT(setRedo(bool)));
@@ -389,8 +389,8 @@ void Editor::cbAutoSelected(int index)
 int Editor::tabBlockShift()
 {
     /* make tabs based on user preference - set by mainwindow */
-    int tabSpaces = propDialog->getTabSpaces();
-    QString tab(tabSpaces, ' ');
+    int tabStop = propDialog->getTabSpaces();
+    QString tab(tabStop, ' ');
 
     QTextCursor cur = this->textCursor();
 
@@ -429,7 +429,7 @@ int Editor::tabBlockShift()
             if (size == 0 && n == mylist.length()) break;
 
             if (!shiftTab) s.insert(0, tab);                        // increase line indent
-            else if (s.startsWith(tab)) s.remove(0, tabSpaces);     // decrease line indent
+            else if (s.startsWith(tab)) s.remove(0, tabStop);     // decrease line indent
             else s.replace(QRegExp("^ *"), "");                     // remove leading spaces
 
             size -= s.length();                                     // size is now delta
@@ -458,7 +458,7 @@ int Editor::tabBlockShift()
 
     } else if (!shiftTab) {
         int column = cur.columnNumber() + (cur.selectionStart() - cur.position());
-        cur.insertText(QString(tabSpaces - column % tabSpaces, ' '));
+        cur.insertText(QString(tabStop - column % tabStop, ' '));
     } else {
         /* determine current selection */
         int curbeg = cur.selectionStart();
@@ -473,7 +473,7 @@ int Editor::tabBlockShift()
         QString line = cur.selectedText();
         int size = line.length();
 
-        if (line.startsWith(tab)) line.remove(0, tabSpaces);        // decrease line indent
+        if (line.startsWith(tab)) line.remove(0, tabStop);        // decrease line indent
         else line.replace(QRegExp("^ *"), "");                      // remove leading spaces
 
         /* adjust selection */
@@ -745,7 +745,7 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
 }
 
 
-void Editor::tabSpacesChanged()
+void Editor::tabStopChanged()
 {
     this->setTabStopWidth(
             propDialog->getTabSpaces() *

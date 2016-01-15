@@ -8,8 +8,6 @@
 
 #include "ui_preferences.h"
 
-#define enableAutoComplete          "enableAutoComplete"
-
 #if defined(Q_OS_WIN) || defined(CYGWIN)
   #define APP_EXTENSION            ".exe"
   #define APP_RESOURCES_PATH        "/"
@@ -34,48 +32,51 @@ class Preferences : public QDialog
 
     Ui::Preferences ui;
 
+    QString defaultTheme;
+
+    ColorScheme * currentTheme;
+
+    void setupFonts();
+    void setupColors();
+
+//    void setupFolders();
+
+//    PathSelector * compilerpath;
+//    PathSelector * librarypath;
+
+    void updateAll();
+
+    QString     tabStopStr;
+
+    bool        autoCompleteEnableSaved;
+
 public:
     explicit Preferences(QWidget *parent = 0);
     ~Preferences();
 
     int  getTabSpaces();
     bool getAutoCompleteEnable();
-
     void adjustFontSize(float ratio);
 
 signals:
     void updateColors();
     void updateFonts(const QFont &);
-    void tabSpacesChanged();
+    void tabStopChanged();
 
 public slots:
-
-    void fontDialog();
 //    void browseCompiler();
 //    void browseLibrary();
-    void restore();
-    void accept();
-    void reject();
     void updateColor(int key, const QColor & color);
+    void updateFont(const QFont & font);
     void showPreferences();
+    void setFontSize(int size);
 
 private slots:
     void loadTheme(int index);
+    void loadTheme(QString filename);
+
     void buttonBoxClicked(QAbstractButton * button);
-
-private:
-
-    void setupFolders();
-    void setupOptions();
-    void setupHighlight();
-
-    ColorScheme * currentTheme;
-
-//    PathSelector * compilerpath;
-//    PathSelector * librarypath;
-
-    QString     tabSpacesStr;
-    QLineEdit   tabspaceLedit;
-
-    bool        autoCompleteEnableSaved;
+    void restore();
+    void accept();
+    void reject();
 };

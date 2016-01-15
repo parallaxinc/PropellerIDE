@@ -30,27 +30,36 @@ void ColorScheme::defaults()
 
 }
 
-
 void ColorScheme::save()
 {
     QSettings settings;
+    save(&settings);
+}
 
-    settings.beginGroup("Colors");
+void ColorScheme::save(const QString & filename)
+{
+    QSettings settings(filename, QSettings::IniFormat);
+    save(&settings);
+}
+
+void ColorScheme::save(QSettings * settings)
+{
+    settings->beginGroup("Colors");
 
     QMap<ColorScheme::Color, colorcontainer>::iterator i;
     for (i = colors.begin(); i != colors.end(); ++i)
     {
-        settings.setValue(i.value().key,i.value().color.name());
+        settings->setValue(i.value().key,i.value().color.name());
     }
 
-    settings.endGroup();
+    settings->endGroup();
 
-    settings.beginGroup("Font");
+    settings->beginGroup("Font");
 
-    settings.setValue("Family", font.family());
-    settings.setValue("Size", font.pointSize());
+    settings->setValue("Family", font.family());
+    settings->setValue("Size", font.pointSize());
 
-    settings.endGroup();
+    settings->endGroup();
 
 }
 
@@ -88,8 +97,11 @@ void ColorScheme::load(QSettings * settings)
 
     settings->beginGroup("Font");
 
+
     if (!settings->contains("Family") || settings->value("Family").toString().isEmpty())
     {
+        qDebug() << "Font NOT FOUND!";
+
         font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
         font.setPointSize(12);
         font.setStyleHint(QFont::TypeWriter);
@@ -97,6 +109,8 @@ void ColorScheme::load(QSettings * settings)
     }
     else
     {
+        qDebug() << "Font FOUND!";
+
         font.setFamily(
             settings->value("Family", font.family()).toString()
             );

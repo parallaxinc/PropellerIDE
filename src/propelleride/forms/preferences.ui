@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>449</width>
-    <height>432</height>
+    <width>491</width>
+    <height>447</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -156,13 +156,19 @@
          <layout class="QFormLayout" name="formLayout">
           <item row="0" column="0">
            <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
-             <string>Spaces Per Indent</string>
+             <string>Tab stop</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="tabSpaces">
+           <widget class="QLineEdit" name="tabStop">
             <property name="text">
              <string>4</string>
             </property>
@@ -210,26 +216,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QPushButton" name="loadTheme">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Load</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="saveTheme">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Save</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>
@@ -240,7 +226,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QFontComboBox" name="fontEdit">
+           <widget class="QFontComboBox" name="fontFamily">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>1</horstretch>
@@ -250,13 +236,16 @@
             <property name="editable">
              <bool>false</bool>
             </property>
+            <property name="currentText">
+             <string>Andale Mono</string>
+            </property>
             <property name="fontFilters">
              <set>QFontComboBox::MonospacedFonts</set>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinBox">
+           <widget class="QSpinBox" name="fontSize">
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
             </property>
@@ -264,7 +253,7 @@
              <number>6</number>
             </property>
             <property name="maximum">
-             <number>72</number>
+             <number>96</number>
             </property>
             <property name="value">
              <number>12</number>
