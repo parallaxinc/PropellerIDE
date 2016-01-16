@@ -107,6 +107,9 @@ void Editor::keyPressEvent (QKeyEvent *e)
         case Qt::Key_Backtab:
             tabBlockShift();
             break;
+        case Qt::Key_Backspace:
+            dedent();
+            break;
         default:
             QPlainTextEdit::keyPressEvent(e);
     }
@@ -163,19 +166,18 @@ int Editor::autoIndent()
     QString text = cur.selectedText();
     cur.clearSelection();
 
-    int stop = -1;
     int indent = -1;
     int slcm = text.indexOf("'");
 
     if(slcm > -1) {
-        stop = slcm;
+        indent = slcm;
     }
 
     cur.beginEditBlock();
 
     cur.insertBlock();
 
-    for(int n = 0; n <= stop || isspace(text[n].toLatin1()); n++) {
+    for(int n = 0; n <= indent || isspace(text[n].toLatin1()); n++) {
         if(n == slcm) {
             if(text.indexOf("''") > -1)
                 cur.insertText("''");
@@ -183,12 +185,6 @@ int Editor::autoIndent()
                 cur.insertText("'");
         }
         else {
-            cur.insertText(" ");
-        }
-    }
-
-    if(indent > 0) {
-        for(int n = 0; n < indent; n++) {
             cur.insertText(" ");
         }
     }
@@ -386,7 +382,38 @@ void Editor::cbAutoSelected(int index)
     cbAuto->hide();
 }
 
-int Editor::tabBlockShift()
+void Editor::dedent()
+{
+    QTextCursor cursor = textCursor();
+    int tabStop = propDialog->getTabSpaces();
+    int column = cursor.columnNumber() - (cursor.selectionStart() - cursor.position());
+    int spaces = tabStop - column % tabStop;
+
+    cursor.beginEditBlock();
+
+    for (int n = 0; n < spaces; n++)
+    {
+        if (!cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor)) break;
+
+        QString c = cursor.selectedText();
+
+        if (c == " ")
+        {
+            cursor.deleteChar();
+        }
+        else
+        {
+            if (n > 0)
+                break;
+            else
+                cursor.deleteChar();
+        }
+    }
+
+    cursor.endEditBlock();
+}
+
+void Editor::tabBlockShift()
 {
     /* make tabs based on user preference - set by mainwindow */
     int tabStop = propDialog->getTabSpaces();
@@ -398,7 +425,8 @@ int Editor::tabBlockShift()
     bool shiftTab = QApplication::keyboardModifiers() & Qt::SHIFT;
 
     /* block is selected */
-    if (cur.hasSelection() && cur.selectedText().contains(QChar::ParagraphSeparator)) {
+    if (cur.hasSelection() && cur.selectedText().contains(QChar::ParagraphSeparator))
+    {
         /* determine current selection */
         int curbeg = cur.selectionStart();
         int curend = cur.selectionEnd();
@@ -410,7 +438,9 @@ int Editor::tabBlockShift()
 
         /* don't inflate last line selection if cursor is at start */
         if (!cur.selectedText().endsWith(QChar::ParagraphSeparator))
+        {
             cur.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+        }
 
         /* get a list of lines in the selected block. keep empty lines */
         QStringList mylist = cur.selectedText().split(QChar::ParagraphSeparator);
@@ -421,22 +451,34 @@ int Editor::tabBlockShift()
         /* indent list */
         QString text;
 
-        for(int n = 1; n <= mylist.length(); n++) {
+        for (int n = 1; n <= mylist.length(); n++)
+        {
             QString s = mylist[n-1];
             int size = s.length();
 
             /* ignore empty last line */
             if (size == 0 && n == mylist.length()) break;
 
-            if (!shiftTab) s.insert(0, tab);                        // increase line indent
-            else if (s.startsWith(tab)) s.remove(0, tabStop);     // decrease line indent
-            else s.replace(QRegExp("^ *"), "");                     // remove leading spaces
+            if (!shiftTab)
+            {
+                s.insert(0, tab);                        // increase line indent
+            }
+            else if (s.startsWith(tab)) 
+            {
+                s.remove(0, tabStop);     // decrease line indent
+            }
+            else
+            {
+                s.replace(QRegExp("^ *"), "");                     // remove leading spaces
+            }
 
             size -= s.length();                                     // size is now delta
+
             // inc/dec indent -ve/+ve
             /* rebuild block */
             text += s;
-            if (n < mylist.length()) {
+            if (n < mylist.length())
+            {
                 text   += QChar::ParagraphSeparator;
                 climit -= size;                                     // update limiter
             }
@@ -456,10 +498,17 @@ int Editor::tabBlockShift()
         cur.setPosition(curbeg, QTextCursor::MoveAnchor);
         cur.setPosition(curend, QTextCursor::KeepAnchor);
 
-    } else if (!shiftTab) {
+    }
+    else if (!shiftTab)
+    {
+        qDebug() << "INDENT";
         int column = cur.columnNumber() + (cur.selectionStart() - cur.position());
         cur.insertText(QString(tabStop - column % tabStop, ' '));
-    } else {
+    }
+    else
+    {
+        qDebug() << "DEDENT";
+
         /* determine current selection */
         int curbeg = cur.selectionStart();
         int curend = cur.selectionEnd();
@@ -473,8 +522,14 @@ int Editor::tabBlockShift()
         QString line = cur.selectedText();
         int size = line.length();
 
-        if (line.startsWith(tab)) line.remove(0, tabStop);        // decrease line indent
-        else line.replace(QRegExp("^ *"), "");                      // remove leading spaces
+        if (line.startsWith(tab))
+        {
+            line.remove(0, tabStop);        // decrease line indent
+        }
+        else 
+        {
+            line.replace(QRegExp("^ *"), "");                      // remove leading spaces
+        }
 
         /* adjust selection */
         curbeg = std::max(curbeg - size + line.length(), cur.selectionStart());
@@ -488,10 +543,11 @@ int Editor::tabBlockShift()
         cur.setPosition(curbeg, QTextCursor::MoveAnchor);
         cur.setPosition(curend, QTextCursor::KeepAnchor);
     }
-    this->setTextCursor(cur);
 
-    return 1;
+    setTextCursor(cur);
 }
+
+
 
 int Editor::lineNumberAreaWidth()
 {

@@ -49,12 +49,14 @@ private:
     bool canCopy;
 
     int  autoIndent();
-    int addAutoItem(QString type, QString s);
+    int  addAutoItem(QString type, QString s);
     void spinAutoShow(int width);
     int  spinAutoComplete();
-    int  tabBlockShift();
+    void tabBlockShift();
+    void dedent();
+
     QString selectAutoComplete();
-    QPoint keyPopPoint(QTextCursor cursor);
+    QPoint  keyPopPoint(QTextCursor cursor);
 
     ColorScheme * currentTheme;
     QMap<ColorScheme::Color, ColorScheme::colorcontainer> colors;
