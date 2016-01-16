@@ -573,16 +573,14 @@ void Editor::updateColors()
         i.value().color = i.value().color.lighter(105+((int)10.0*colordiff ));
     }
 
-    highlighter->highlight();
+    highlighter->rehighlight();
 
     QPalette p = this->palette();
     p.setColor(QPalette::Text, colors[ColorScheme::SyntaxText].color);
     p.setColor(QPalette::Base, colors[ColorScheme::ConBG].color);
     this->setPalette(p);
 
-
     updateBackgroundColors();
-
 }
 
 void Editor::updateFonts()

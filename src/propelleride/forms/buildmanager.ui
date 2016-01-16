@@ -28,6 +28,10 @@
   <property name="windowTitle">
    <string>Build Manager</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../icons/icons.qrc">
+    <normaloff>:/icons/project-build.png</normaloff>:/icons/project-build.png</iconset>
+  </property>
   <property name="frameShadow">
    <enum>QFrame::Raised</enum>
   </property>

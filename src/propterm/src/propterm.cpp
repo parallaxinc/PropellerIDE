@@ -160,7 +160,14 @@ void PropTerm::portChanged()
 {
     qCDebug(terminal) << "port" << ui.port->currentText();
     session->setPortName(ui.port->currentText());
-    setWindowTitle(tr("%1 - %2").arg(session->portName()).arg(title));
+    if (session->portName().isEmpty())
+    {
+        setWindowTitle(tr("%1").arg(title));
+    }
+    else
+    {
+        setWindowTitle(tr("%1 - %2").arg(session->portName()).arg(title));
+    }
 }
 
 void PropTerm::baudRateChanged(const QString & text)
