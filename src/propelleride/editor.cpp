@@ -24,12 +24,12 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     tabOn = false;
 
     lineNumberArea = new LineNumberArea(this);
+
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth()));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     updateLineNumberAreaWidth();
 
-    highlighter = 0;
-    setHighlights();
+    highlighter = new Highlighter(this->document());
     setMouseTracking(true);
     setCenterOnScroll(true);
     setWordWrapMode(QTextOption::NoWrap);
@@ -59,15 +59,6 @@ Editor::~Editor()
     delete cbAuto;
     delete highlighter;
     delete lineNumberArea;
-}
-
-void Editor::setHighlights()
-{
-    if(highlighter) {
-        delete highlighter;
-        highlighter = 0;
-    }
-    highlighter = new Highlighter(this->document());
 }
 
 void Editor::saveContent()
@@ -582,7 +573,7 @@ void Editor::updateColors()
         i.value().color = i.value().color.lighter(105+((int)10.0*colordiff ));
     }
 
-    setHighlights();
+    highlighter->highlight();
 
     QPalette p = this->palette();
     p.setColor(QPalette::Text, colors[ColorScheme::SyntaxText].color);

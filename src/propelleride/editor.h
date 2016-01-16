@@ -23,8 +23,6 @@ public:
 
     bool tabOn;
 
-    void setHighlights();
-
     void clearCtrlPressed();
 
     void saveContent();

@@ -130,6 +130,8 @@ void Highlighter::highlightBlock(const QString &text)
 void Highlighter::highlight()
 {
     QTextCharFormat format;
+    onepartrules.clear();
+    twopartrules.clear();
 
     // numbers
     format.setForeground(currentTheme->getColor(ColorScheme::SyntaxNumbers));

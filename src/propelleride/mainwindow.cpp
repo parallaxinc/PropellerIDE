@@ -41,11 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     QSplitterHandle *hndl = ui.splitter->handle(1);
     hndl->setEnabled(false);
 
-    connect(ui.editorTabs, SIGNAL(tabCloseRequested(int)), ui.editorTabs,         SLOT(closeFile(int)));
-    connect(ui.editorTabs, SIGNAL(currentChanged(int)),    ui.editorTabs,         SLOT(changeTab(int)));
-
-
-    // connect editor to 
+    connect(ui.editorTabs, SIGNAL(fileUpdated(int)),    this,   SLOT(setProject()));
 
     // File Menu
     connect(ui.action_New,SIGNAL(triggered()),ui.editorTabs,SLOT(newFile()));
@@ -123,9 +119,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     updateRecentFileActions();
 
-    connect(ui.editorTabs, SIGNAL(fileUpdated(int)),               this,SLOT(setProject()));
-    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),           this,SLOT(setProject()));
-
     connect(ui.editorTabs, SIGNAL(sendMessage(const QString &)),   this,SLOT(showMessage(const QString &)));
     connect(ui.finder,     SIGNAL(sendMessage(const QString &)),   this,SLOT(showMessage(const QString &)));
 
@@ -139,7 +132,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui.editorTabs->newFile();
     loadSession();
+
+
     installEventFilter(this);
+
+    statusBar();
 }
 
 void MainWindow::loadSession()

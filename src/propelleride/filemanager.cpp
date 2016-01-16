@@ -10,6 +10,9 @@ FileManager::FileManager(QWidget *parent) :
     setMovable(true);
 
     createBackgroundImage();
+
+    connect(this,   SIGNAL(tabCloseRequested(int)), this,   SLOT(closeFile(int)));
+    connect(this,   SIGNAL(currentChanged(int)),    this,   SLOT(changeTab(int)));
 }
 
 int FileManager::newFile()
@@ -24,7 +27,6 @@ int FileManager::newFile()
 
     int index = addTab(editor,tr("Untitled"));
 
-    changeTab(index);
     setTabToolTip(index,"");
 
     connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
@@ -33,6 +35,7 @@ int FileManager::newFile()
     connect(editor,SIGNAL(copyAvailable(bool)),this,SLOT(setCopy(bool)));
 
     emit closeAvailable(true);
+    setCurrentIndex(index);
 
     return index;
 }
@@ -84,7 +87,7 @@ int FileManager::isFileOpen(const QString & fileName)
     {
         if (fileName == tabToolTip(i))
         {
-            changeTab(i);
+            setCurrentIndex(i);
             emit sendMessage(tr("File already open: %1").arg(fileName));
             return 1;
         }
@@ -150,7 +153,6 @@ int FileManager::openFile(const QString & fileName)
 
     return 0;
 }
-
 
 void FileManager::save()
 {
@@ -291,7 +293,6 @@ void FileManager::closeFile(int index)
         getEditor(index)->disconnect();
         getEditor(index)->close();
         removeTab(index);
-        emit fileUpdated(index);
     }
 
     if (count() == 0)
@@ -299,6 +300,8 @@ void FileManager::closeFile(int index)
         createBackgroundImage();
         emit closeAvailable(false);
     }
+
+    emit fileUpdated(index);
 }
 
 void FileManager::createBackgroundImage()
@@ -314,7 +317,7 @@ void FileManager::nextTab()
     n++;
     if (n > count()-1)
         n = 0;
-    changeTab(n);
+    setCurrentIndex(n);
 }
 
 void FileManager::previousTab()
@@ -323,15 +326,12 @@ void FileManager::previousTab()
     n--;
     if (n < 0)
         n = count()-1;
-    changeTab(n);
-
-
+    setCurrentIndex(n);
 }
 
 // this function is needed to set focus after changing the index
 void FileManager::changeTab(int index)
 {
-    setCurrentIndex(index);
     if(index < 0) return;
 
     Editor * editor = getEditor(currentIndex());
