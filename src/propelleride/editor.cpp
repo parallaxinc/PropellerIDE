@@ -17,11 +17,11 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     propDialog = &((MainWindow *) parent)->preferences;
 
     ctrlPressed = false;
-    isSpin = false;
     expectAutoComplete = false;
     canUndo = false;
     canRedo = false;
     canCopy = false;
+    tabOn = false;
 
     lineNumberArea = new LineNumberArea(this);
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth()));
@@ -68,7 +68,6 @@ void Editor::setHighlights()
         highlighter = 0;
     }
     highlighter = new Highlighter(this->document());
-    isSpin = true;
 }
 
 void Editor::saveContent()
@@ -83,35 +82,56 @@ int Editor::contentChanged()
 
 void Editor::keyPressEvent (QKeyEvent *e)
 {
-    switch (e->key())
+    if (e->modifiers() & Qt::ControlModifier)
     {
-        case Qt::Key_Enter:
-        case Qt::Key_Return:
-            if(autoIndent() == 0)
-                QPlainTextEdit::keyPressEvent(e);
-            break;
-        case Qt::Key_Period:
-            if(isSpin) {
+        QPlainTextEdit::keyPressEvent(e);
+    }
+    else
+    {
+        switch (e->key())
+        {
+            case Qt::Key_Enter:
+            case Qt::Key_Return:
+                if(autoIndent() == 0)
+                {
+                    QPlainTextEdit::keyPressEvent(e);
+                }
+                break;
+            case Qt::Key_Period:
                 if (propDialog->getAutoCompleteEnable())
                 {
                     if(!spinAutoComplete())
                         QPlainTextEdit::keyPressEvent(e);
                 }
                 else
+                {
                     QPlainTextEdit::keyPressEvent(e);
-            } else {
+                }
+                break;
+            case Qt::Key_Tab:
+                tabOn = true;
+                if (textCursor().hasSelection())
+                    tabBlockShift();
+                else
+                    indent();
+                break;
+            case Qt::Key_Backtab:
+                tabOn = true;
+                tabBlockShift();
+                break;
+            case Qt::Key_Backspace:
+                if (tabOn)
+                    dedent();
+                else
+                    QPlainTextEdit::keyPressEvent(e);
+                break;
+            case Qt::Key_Space:
+                tabOn = false;
                 QPlainTextEdit::keyPressEvent(e);
-            }
-            break;
-        case Qt::Key_Tab:
-        case Qt::Key_Backtab:
-            tabBlockShift();
-            break;
-        case Qt::Key_Backspace:
-            dedent();
-            break;
-        default:
-            QPlainTextEdit::keyPressEvent(e);
+                break;
+            default:
+                QPlainTextEdit::keyPressEvent(e);
+        }
     }
 }
 
@@ -393,7 +413,9 @@ void Editor::dedent()
 
     for (int n = 0; n < spaces; n++)
     {
-        if (!cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor)) break;
+        if (!cursor.movePosition(QTextCursor::PreviousCharacter, 
+                                 QTextCursor::KeepAnchor))
+            break;
 
         QString c = cursor.selectedText();
 
@@ -413,136 +435,92 @@ void Editor::dedent()
     cursor.endEditBlock();
 }
 
+void Editor::indent()
+{
+    QTextCursor cursor = textCursor();
+    int tabStop = propDialog->getTabSpaces();
+    int column = cursor.columnNumber() + (cursor.selectionStart() - cursor.position());
+    int spaces = tabStop - column % tabStop;
+
+    cursor.beginEditBlock();
+
+    cursor.insertText(QString(spaces, ' '));
+
+    cursor.endEditBlock();
+}
+
 void Editor::tabBlockShift()
 {
-    /* make tabs based on user preference - set by mainwindow */
+    QTextCursor cur = textCursor();
     int tabStop = propDialog->getTabSpaces();
     QString tab(tabStop, ' ');
-
-    QTextCursor cur = this->textCursor();
-
-    /* do we have shift ? */
     bool shiftTab = QApplication::keyboardModifiers() & Qt::SHIFT;
 
-    /* block is selected */
-    if (cur.hasSelection() && cur.selectedText().contains(QChar::ParagraphSeparator))
+    int curbeg = cur.selectionStart();
+    int curend = cur.selectionEnd();
+
+    cur.setPosition(curbeg, QTextCursor::MoveAnchor);
+    cur.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
+    cur.setPosition(curend, QTextCursor::KeepAnchor);
+
+    if (!cur.selectedText().endsWith(QChar::ParagraphSeparator))
     {
-        /* determine current selection */
-        int curbeg = cur.selectionStart();
-        int curend = cur.selectionEnd();
-
-        /* create workable selection */
-        cur.setPosition(curbeg, QTextCursor::MoveAnchor);
-        cur.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
-        cur.setPosition(curend, QTextCursor::KeepAnchor);
-
-        /* don't inflate last line selection if cursor is at start */
-        if (!cur.selectedText().endsWith(QChar::ParagraphSeparator))
-        {
-            cur.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
-        }
-
-        /* get a list of lines in the selected block. keep empty lines */
-        QStringList mylist = cur.selectedText().split(QChar::ParagraphSeparator);
-
-        /* initialise curend limiter */
-        int climit = cur.selectionEnd() - mylist.last().length();
-
-        /* indent list */
-        QString text;
-
-        for (int n = 1; n <= mylist.length(); n++)
-        {
-            QString s = mylist[n-1];
-            int size = s.length();
-
-            /* ignore empty last line */
-            if (size == 0 && n == mylist.length()) break;
-
-            if (!shiftTab)
-            {
-                s.insert(0, tab);                        // increase line indent
-            }
-            else if (s.startsWith(tab)) 
-            {
-                s.remove(0, tabStop);     // decrease line indent
-            }
-            else
-            {
-                s.replace(QRegExp("^ *"), "");                     // remove leading spaces
-            }
-
-            size -= s.length();                                     // size is now delta
-
-            // inc/dec indent -ve/+ve
-            /* rebuild block */
-            text += s;
-            if (n < mylist.length())
-            {
-                text   += QChar::ParagraphSeparator;
-                climit -= size;                                     // update limiter
-            }
-
-            /* adjust selection */
-            if (n == 1) {
-                curbeg -= size;                                     // only first line
-                curbeg  = std::max(curbeg, cur.selectionStart());   // avoid underflow
-            }
-            curend = std::max(curend - size, climit);               // all but an empty last line
-        }
-        /* insert new block */
-        if (cur.selectedText().length() != text.length())           // avoid empty undo actions
-            cur.insertText(text);
-
-        /* update selection */
-        cur.setPosition(curbeg, QTextCursor::MoveAnchor);
-        cur.setPosition(curend, QTextCursor::KeepAnchor);
-
+        cur.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
     }
-    else if (!shiftTab)
+
+    QStringList selectionblocks = cur.selectedText().split(QChar::ParagraphSeparator);
+
+    int climit = cur.selectionEnd() - selectionblocks.last().length();
+
+    QString text;
+
+    for (int n = 1; n <= selectionblocks.length(); n++)
     {
-        qDebug() << "INDENT";
-        int column = cur.columnNumber() + (cur.selectionStart() - cur.position());
-        cur.insertText(QString(tabStop - column % tabStop, ' '));
-    }
-    else
-    {
-        qDebug() << "DEDENT";
+        QString s = selectionblocks[n-1];
+        int size = s.length();
 
-        /* determine current selection */
-        int curbeg = cur.selectionStart();
-        int curend = cur.selectionEnd();
+        /* ignore empty last line */
+        if (size == 0 && n == selectionblocks.length())
+            break;
 
-        /* create workable selection */
-        cur.setPosition(curbeg, QTextCursor::MoveAnchor);
-        cur.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
-        cur.movePosition(QTextCursor::EndOfLine,   QTextCursor::KeepAnchor);
-
-        /* indent line */
-        QString line = cur.selectedText();
-        int size = line.length();
-
-        if (line.startsWith(tab))
+        if (!shiftTab)
         {
-            line.remove(0, tabStop);        // decrease line indent
+            s.insert(0, tab);                        // increase line indent
         }
-        else 
+        else if (s.startsWith(tab)) 
         {
-            line.replace(QRegExp("^ *"), "");                      // remove leading spaces
+            s.remove(0, tabStop);     // decrease line indent
+        }
+        else
+        {
+            s.replace(QRegExp("^ *"), "");                     // remove leading spaces
+        }
+
+        size -= s.length();                                     // size is now delta
+
+        // inc/dec indent -ve/+ve
+        /* rebuild block */
+        text += s;
+        if (n < selectionblocks.length())
+        {
+            text   += QChar::ParagraphSeparator;
+            climit -= size;                                     // update limiter
         }
 
         /* adjust selection */
-        curbeg = std::max(curbeg - size + line.length(), cur.selectionStart());
-        curend = std::max(curend - size + line.length(), cur.selectionStart());
-
-        /* insert new line */
-        if (cur.selectedText().length() != line.length())           // avoid empty undo actions
-            cur.insertText(line);
-
-        /* update selection */
-        cur.setPosition(curbeg, QTextCursor::MoveAnchor);
-        cur.setPosition(curend, QTextCursor::KeepAnchor);
+        if (n == 1)
+        {
+            curbeg -= size;                                     // only first line
+            curbeg  = std::max(curbeg, cur.selectionStart());   // avoid underflow
+        }
+        curend = std::max(curend - size, climit);               // all but an empty last line
     }
+
+    if (cur.selectedText().length() != text.length())           // avoid empty undo actions
+        cur.insertText(text);
+
+    cur.setPosition(curbeg, QTextCursor::MoveAnchor);
+    cur.setPosition(curend, QTextCursor::KeepAnchor);
 
     setTextCursor(cur);
 }

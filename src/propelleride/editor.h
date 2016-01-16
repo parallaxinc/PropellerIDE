@@ -4,9 +4,6 @@
 #include <QTabWidget>
 #include <QPlainTextEdit>
 #include <QString>
-#include <QKeyEvent>
-#include <QResizeEvent>
-#include <QPaintEvent>
 #include <QTextCursor>
 
 #include "highlighter.h"
@@ -14,15 +11,17 @@
 
 class LineNumberArea;
 
-
 class Editor : public QPlainTextEdit
 {
     Q_OBJECT
+
 public:
     Editor(QWidget *parent);
     virtual ~Editor();
     
     Language lang;
+
+    bool tabOn;
 
     void setHighlights();
 
@@ -54,6 +53,7 @@ private:
     int  spinAutoComplete();
     void tabBlockShift();
     void dedent();
+    void indent();
 
     QString selectAutoComplete();
     QPoint  keyPopPoint(QTextCursor cursor);
@@ -72,7 +72,6 @@ private:
     QTextCursor lastCursor;
     QPoint  mousepos;
     bool    ctrlPressed;
-    bool    isSpin;
     Highlighter *highlighter;
 
     QComboBox *cbAuto;

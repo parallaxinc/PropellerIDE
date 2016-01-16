@@ -123,6 +123,15 @@
           <verstretch>1</verstretch>
          </sizepolicy>
         </property>
+        <property name="dragEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::InternalMove</enum>
+        </property>
+        <property name="defaultDropAction">
+         <enum>Qt::MoveAction</enum>
+        </property>
         <property name="sortingEnabled">
          <bool>false</bool>
         </property>
@@ -155,18 +164,6 @@
     </widget>
    </item>
   </layout>
-  <zorder>addPath</zorder>
-  <zorder>label_2</zorder>
-  <zorder>lineEdit</zorder>
-  <zorder>lineEdit_2</zorder>
-  <zorder>label_3</zorder>
-  <zorder>label_4</zorder>
-  <zorder>addPath</zorder>
-  <zorder>verticalSpacer</zorder>
-  <zorder>verticalSpacer_2</zorder>
-  <zorder>verticalSpacer_3</zorder>
-  <zorder>name</zorder>
-  <zorder>frame</zorder>
  </widget>
  <resources/>
  <connections/>
