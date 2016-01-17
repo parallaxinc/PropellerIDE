@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>503</width>
+    <width>549</width>
     <height>182</height>
    </rect>
   </property>
@@ -78,7 +78,7 @@
        </layout>
       </item>
       <item row="0" column="2">
-       <widget class="QPushButton" name="addCompiler">
+       <widget class="QPushButton" name="browse">
         <property name="text">
          <string>Browse</string>
         </property>
@@ -89,7 +89,7 @@
         <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Libraries</string>
+           <string>Includes</string>
           </property>
          </widget>
         </item>

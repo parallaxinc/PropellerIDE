@@ -1,84 +1,166 @@
 #include "pathselector.h"
 
-PathSelector::PathSelector(QWidget *parent)
+PathSelector::PathSelector(QString language,
+        QString compiler,
+        QStringList includes,
+        QWidget *parent)
 : QWidget(parent)
 {
     ui.setupUi(this);
 
-//    connect(browseButton, SIGNAL(clicked()), parent, slot);
-//
-//    lineEdit->setText(defaultpath);
-//
-//    QSettings settings;
-//    settings.beginGroup("Paths");
-//    if ( settings.contains(key) )
-//    {
-//        load();
-//    }
-//    else
-//    {
-//        save();
-//    }
-//    settings.endGroup();
-//
-//    oldvalue = lineEdit->text();
+    this->language = language;
+
+    setDefaultCompiler(compiler);
+    setDefaultIncludes(includes);
+    restore();
+
+    load();
+
+    connect(ui.deletePath,  SIGNAL(clicked()),  this,   SLOT(deletePath()));
+    connect(ui.addPath,     SIGNAL(clicked()),  this,   SLOT(addPath()));
+    connect(ui.browse,      SIGNAL(clicked()),  this,   SLOT(browse()));
 }
 
 PathSelector::~PathSelector()
 {
 }
 
-//void PathSelector::browsePath(
-//        QString const & pathlabel, 
-//        QString const & pathregex,  
-//        bool isfolder
-//        )
-//{
-//    QString folder = lineEdit->text();
-//    QString s;
-//
-//    if (isfolder) 
-//        s = QFileDialog::getExistingDirectory(this,
-//                pathlabel, folder, QFileDialog::ShowDirsOnly);
-//    else
-//        s = QFileDialog::getOpenFileName(this,
-//                pathlabel, folder, pathregex);
-//
-//    qDebug() << "browsePath(" << pathlabel << "): " << s;
-//
-//    if(s.length() == 0)
-//    {
-//        return;
-//    }
-//    lineEdit->setText(s);
-//}
-//
-//void PathSelector::restore()
-//{
-//    lineEdit->setText(oldvalue);
-//}
-//
-//void PathSelector::save()
-//{
-//    QSettings settings;
-//    settings.beginGroup("Paths");
-//    settings.setValue(key,lineEdit->text());
-//    settings.endGroup();
-//}
-//
-//void PathSelector::load()
-//{
-//    QSettings settings;
-//    settings.beginGroup("Paths");
-//    QString s = settings.value(key, defaultpath).toString();
-//    settings.endGroup();
-//
-//    if(!s.isEmpty())
-//    {
-//        lineEdit->setText(s);
-//    }
-//    else
-//    {
-//        lineEdit->setText(defaultpath);
-//    }
-//}
+void PathSelector::setCompiler(const QString & path)
+{
+    compiler = path;
+    ui.compiler->setText(path);
+}
+
+void PathSelector::setIncludes(const QStringList & paths)
+{
+    QStringList p = paths;
+    includes.clear();
+    ui.includes->clear();
+    foreach (QString i, p)
+    {
+        includes.append(i);
+
+        QListWidgetItem * item = new QListWidgetItem(i);
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
+        ui.includes->addItem(item);
+    }
+}
+
+void PathSelector::setDefaultCompiler(QString path)
+{
+    defaultcompiler = path;
+}
+
+void PathSelector::setDefaultIncludes(QStringList paths)
+{
+    defaultincludes = paths;
+}
+
+void PathSelector::browse()
+{
+    QString path = QFileDialog::getOpenFileName(this,
+                tr("Browse For Compiler"), "");
+
+    if(path.isEmpty()) return;
+
+    setCompiler(path);
+}
+
+void PathSelector::addPath()
+{
+    int i = ui.includes->currentRow();
+
+    QString path = QFileDialog::getExistingDirectory(this,
+        tr("Add Includes"), "", QFileDialog::ShowDirsOnly);
+
+    if(path.isEmpty()) return;
+
+    QListWidgetItem * item = new QListWidgetItem(path);
+    item->setFlags(item->flags() | Qt::ItemIsEditable);
+
+    if (i+1 >= ui.includes->count())
+        ui.includes->addItem(item);
+    else
+        ui.includes->insertItem(i+1, item);
+}
+
+void PathSelector::deletePath()
+{
+    int i = ui.includes->currentRow();
+
+    QListWidgetItem * item;
+    item = ui.includes->takeItem(i);
+    delete item;
+}
+
+void PathSelector::restore()
+{
+    setCompiler(defaultcompiler);
+    setIncludes(defaultincludes);
+}
+
+void PathSelector::reject()
+{
+    setCompiler(compiler);
+    setIncludes(includes);
+}
+
+void PathSelector::accept()
+{
+    compiler = ui.compiler->text();
+
+    includes.clear();
+    for (int i = 0; i < ui.includes->count(); i++)
+    {
+        includes.append(ui.includes->item(i)->text());
+    }
+
+    save();
+}
+
+void PathSelector::save()
+{
+    QSettings settings;
+    settings.beginGroup("Paths");
+    settings.beginGroup(language);
+
+    settings.setValue("compiler",ui.compiler->text());
+    settings.beginWriteArray("includes");
+    for (int i = 0; i < includes.size(); i++)
+    {
+        settings.setArrayIndex(i);
+        settings.setValue("path", includes[i]);
+    }
+    settings.endArray();
+
+    settings.endGroup();
+    settings.endGroup();
+}
+
+void PathSelector::load()
+{
+    QSettings settings;
+    settings.beginGroup("Paths");
+    settings.beginGroup(language);
+
+    QString cmp = settings.value("compiler").toString();
+    if (!cmp.isEmpty())
+        setCompiler(cmp);
+
+    QStringList inc;
+    int size = settings.beginReadArray("includes");
+    if (size > 0)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            settings.setArrayIndex(i);
+            inc.append(settings.value("path").toString());
+        }
+        settings.endArray();
+        setIncludes(inc);
+    }
+
+    settings.endGroup();
+    settings.endGroup();
+}
+

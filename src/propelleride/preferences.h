@@ -36,13 +36,10 @@ class Preferences : public QDialog
 
     ColorScheme * currentTheme;
 
+    void setupThemes();
     void setupFonts();
     void setupColors();
-
     void setupLanguages();
-
-//    PathSelector * compilerpath;
-//    PathSelector * librarypath;
 
     void updateAll();
 
@@ -63,9 +60,11 @@ signals:
     void updateFonts(const QFont &);
     void tabStopChanged();
 
+    void accepted();
+    void rejected();
+    void restored();
+
 public slots:
-//    void browseCompiler();
-//    void browseLibrary();
     void updateColor(int key, const QColor & color);
     void updateFont(const QFont & font);
     void showPreferences();

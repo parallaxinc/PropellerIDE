@@ -18,9 +18,12 @@
 Preferences::Preferences(QWidget *parent) : QDialog(parent)
 {
     ui.setupUi(this);
-
-    defaultTheme = ":/themes/Ice.theme";
     currentTheme = &Singleton<ColorScheme>::Instance();
+
+    setupThemes();
+    setupFonts();
+    setupColors();
+    setupLanguages();
 
     QSettings settings;
 
@@ -31,7 +34,13 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
 
     connect(ui.buttonBox,   SIGNAL(clicked(QAbstractButton *)), this,   SLOT(buttonBoxClicked(QAbstractButton *)));
     connect(ui.tabStop,     SIGNAL(textChanged(QString)),       this,   SIGNAL(tabStopChanged()));
+    connect(ui.themeEdit,   SIGNAL(currentIndexChanged(int)),   this,   SLOT(loadTheme(int)));
 
+}
+
+void Preferences::setupThemes()
+{
+    defaultTheme = ":/themes/Ice.theme";
 
     QDirIterator it(":/themes", QDirIterator::Subdirectories);
     while (it.hasNext())
@@ -41,18 +50,11 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
         ui.themeEdit->addItem(prettyname, filename);
     }
 
-    // this routine is repeated often and needs to be abstracted
+    QSettings settings;
     loadTheme(settings.value("theme", defaultTheme).toString());
     currentTheme->load();
     settings.setValue("theme", ui.themeEdit->itemData(ui.themeEdit->currentIndex()));
-
-    setupFonts();
-    setupColors();
-    setupLanguages();
-
-    connect(ui.themeEdit,   SIGNAL(currentIndexChanged(int)),   this,   SLOT(loadTheme(int)));
 }
-
 
 void Preferences::setupFonts()
 {
@@ -116,42 +118,24 @@ bool Preferences::getAutoCompleteEnable()
 
 void Preferences::setupLanguages()
 {
-    PathSelector * spin = new PathSelector();
+    PathSelector * spin;
+    QString app = QApplication::applicationDirPath();
+    spin = new PathSelector("spin",
+            app + QString(DEFAULT_COMPILER),
+            QStringList() << app + 
+                    QString(APP_RESOURCES_PATH) +
+                    QString("/library/library"));
     ui.languageLayout->addWidget(spin);
 
-
-
-//    compilerpath = new PathSelector(
-//            tr("Compiler"),
-//            QApplication::applicationDirPath() +
-//                    QString(DEFAULT_COMPILER),
-//            tr("Must add a compiler."),
-//            SLOT(browseCompiler()),
-//            this
-//            );
-//
-//    librarypath = new PathSelector(
-//            tr("Library"),
-//            QApplication::applicationDirPath() +
-//                    QString(APP_RESOURCES_PATH) +
-//                    QString("/library"),
-//            tr("Must add a library path."),
-//            SLOT(browseLibrary()),
-//            this
-//            );
-//
-//    pathlayout->addWidget(compilerpath);
-//    pathlayout->addWidget(librarypath);
-//    vlayout->addWidget(paths);
-//
+    connect(this, SIGNAL(accepted()), spin, SLOT(accept()));
+    connect(this, SIGNAL(rejected()), spin, SLOT(reject()));
+    connect(this, SIGNAL(restored()), spin, SLOT(restore()));
 }
 
 void Preferences::updateColor(int key, const QColor & color)
 {
     qDebug() << "Preferences::updateColor(" << key << "," << color.name() << ")";
-    currentTheme->setColor(
-            static_cast<ColorScheme::Color>(key), 
-            color);
+    currentTheme->setColor((ColorScheme::Color) key, color);
     emit updateColors();
 }
 
@@ -181,24 +165,6 @@ void Preferences::loadTheme(int index)
 
     updateAll();
 }
-
-//void Preferences::browseCompiler()
-//{
-//    compilerpath->browsePath(
-//            tr("Select Compiler"),
-//            "OpenSpin (openspin*);;BST Compiler (bstc*)",
-//            false
-//            );
-//}
-//
-//void Preferences::browseLibrary()
-//{
-//    librarypath->browsePath(
-//            tr("Select Spin Library Path"),
-//            NULL,
-//            true
-//            );
-//}
 
 void Preferences::showPreferences()
 {
@@ -244,12 +210,15 @@ void Preferences::buttonBoxClicked(QAbstractButton * button)
     {
         case QDialogButtonBox::Ok: 
             accept();
+            emit accepted();
             break;
         case QDialogButtonBox::Cancel: 
             reject();
+            emit rejected();
             break;
         case QDialogButtonBox::RestoreDefaults: 
             restore();
+            emit restored();
             break;
         default:
             break;
@@ -264,9 +233,6 @@ void Preferences::restore()
 
 void Preferences::accept()
 {
-//    compilerpath->save();
-//    librarypath->save();
-
     QSettings settings;
 
     settings.setValue("tabStop",ui.tabStop->text());
@@ -281,9 +247,6 @@ void Preferences::accept()
 
 void Preferences::reject()
 {
-//    compilerpath->restore();
-//    librarypath->restore();
-
     ui.tabStop->setText(tabStopStr);
 
     ui.enableCodeCompletion->setChecked(autoCompleteEnableSaved);

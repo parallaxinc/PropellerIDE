@@ -18,7 +18,36 @@ class PathSelector : public QWidget
 
     Ui::Language ui;
 
+    QString defaultcompiler;
+    QStringList defaultincludes;
+
+    QString language;
+    QString compiler;
+    QStringList includes;
+
+private slots:
+    void setCompiler(const QString & path);
+    void setIncludes(const QStringList & paths);
+
+    void addPath();
+    void deletePath();
+    void browse();
+
 public:
-    explicit PathSelector(QWidget *parent = 0);
+    explicit PathSelector(QString language,
+            QString compiler = QString(),
+            QStringList includes = QStringList(),
+            QWidget *parent = 0);
     ~PathSelector();
+
+    void setDefaultCompiler(QString path);
+    void setDefaultIncludes(QStringList paths);
+
+public slots:
+    void restore();
+    void accept();
+    void reject();
+    void save();
+    void load();
+
 };

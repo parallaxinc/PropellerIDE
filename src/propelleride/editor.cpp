@@ -80,7 +80,19 @@ void Editor::keyPressEvent (QKeyEvent *e)
 
     if (e->modifiers() & Qt::ControlModifier)
     {
-        QPlainTextEdit::keyPressEvent(e);
+        switch (e->key())
+        {
+            case Qt::Key_Home:
+                cursor.movePosition(QTextCursor::Start);
+                setTextCursor(cursor);
+                break;
+            case Qt::Key_End:
+                cursor.movePosition(QTextCursor::End);
+                setTextCursor(cursor);
+                break;
+            default:
+                QPlainTextEdit::keyPressEvent(e);
+        }
     }
     else
     {
@@ -124,14 +136,6 @@ void Editor::keyPressEvent (QKeyEvent *e)
             case Qt::Key_Space:
                 tabOn = false;
                 QPlainTextEdit::keyPressEvent(e);
-                break;
-            case Qt::Key_Home:
-                cursor.movePosition(QTextCursor::Start);
-                setTextCursor(cursor);
-                break;
-            case Qt::Key_End:
-                cursor.movePosition(QTextCursor::End);
-                setTextCursor(cursor);
                 break;
             default:
                 QPlainTextEdit::keyPressEvent(e);
@@ -716,7 +720,10 @@ void Editor::paintEvent(QPaintEvent * e)
                     break;
                 
                 if (i % propDialog->getTabSpaces() == 0)
-                    p.drawLine(wd*i, y1, wd*i, y2);
+                {
+                    int x = wd*i;
+                    p.drawLine(x, y1, x, y2);
+                }
             }
 
         block = block.next();
