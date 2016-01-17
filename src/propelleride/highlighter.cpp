@@ -16,19 +16,7 @@ Highlighter::Highlighter(QTextDocument *parent)
 void Highlighter::addOnePartRules(QString name, QStringList rules)
 {
     OnePartRule rule;
-
-    QStringList tokens;
-    QString tokenstring;
-    foreach (QString r, rules)
-    {
-        tokens.append(r);
-    }
-    tokenstring = tokens.join("|");
-    tokenstring = "("+tokenstring+")";
-
-    rule.pattern = QRegularExpression(tokenstring, 
-            QRegularExpression::CaseInsensitiveOption); // this needs to pull from language.cpp
-
+    rule.pattern = lang.buildTokenizer(rules);
     onepartrules[name] = rule;
 }
 
@@ -159,14 +147,11 @@ void Highlighter::rehighlight()
     addTwoPartRules(lang.listStrings(), format);
 
     QStringList tokens;
-    QString tokenstring;
     foreach (TwoPartRule r, twopartrules)
     {
         tokens.append(r.start.pattern());
     }
-    tokenstring = tokens.join("|");
-    tokenstring = "("+tokenstring+")";
-    re_tokens = QRegularExpression(tokenstring, QRegularExpression::MultilineOption);
+    re_tokens = lang.buildTokenizer(tokens);
 
     QSyntaxHighlighter::rehighlight();
 }

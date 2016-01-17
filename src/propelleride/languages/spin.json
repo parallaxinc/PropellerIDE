@@ -18,7 +18,12 @@
         [
             true,
             [
-                "con var obj pub pri dat"
+                "^con\\b",
+                "^var\\b",
+                "^obj\\b",
+                "^pub\\b",
+                "^pri\\b",
+                "^dat\\b"
             ]
         ],
         "escape": "\\\\[\\s\\S]",

@@ -3,6 +3,7 @@
 #include <QRect>
 #include <QColor>
 #include <QPainter>
+#include <QScrollBar>
 #include <QApplication>
 
 #include <QLinearGradient>
@@ -15,6 +16,9 @@
 Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 {
     propDialog = &((MainWindow *) parent)->preferences;
+
+    blocks = lang.listBlocks();
+    re_blocks = lang.buildTokenizer(blocks);
 
     ctrlPressed = false;
     expectAutoComplete = false;
@@ -39,7 +43,6 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     updateFonts();
     saveContent();
 
-    connect(this,SIGNAL(cursorPositionChanged()),this,SLOT(updateBackgroundColors()));
     connect(propDialog,SIGNAL(updateColors()),this,SLOT(updateColors()));
     connect(propDialog,SIGNAL(updateFonts(const QFont &)),this,SLOT(updateFonts()));
     connect(propDialog,SIGNAL(tabStopChanged()), this, SLOT(tabStopChanged()));
@@ -73,6 +76,8 @@ int Editor::contentChanged()
 
 void Editor::keyPressEvent (QKeyEvent *e)
 {
+    QTextCursor cursor = textCursor();
+
     if (e->modifiers() & Qt::ControlModifier)
     {
         QPlainTextEdit::keyPressEvent(e);
@@ -119,6 +124,14 @@ void Editor::keyPressEvent (QKeyEvent *e)
             case Qt::Key_Space:
                 tabOn = false;
                 QPlainTextEdit::keyPressEvent(e);
+                break;
+            case Qt::Key_Home:
+                cursor.movePosition(QTextCursor::Start);
+                setTextCursor(cursor);
+                break;
+            case Qt::Key_End:
+                cursor.movePosition(QTextCursor::End);
+                setTextCursor(cursor);
                 break;
             default:
                 QPlainTextEdit::keyPressEvent(e);
@@ -579,8 +592,6 @@ void Editor::updateColors()
     p.setColor(QPalette::Text, colors[ColorScheme::SyntaxText].color);
     p.setColor(QPalette::Base, colors[ColorScheme::ConBG].color);
     this->setPalette(p);
-
-    updateBackgroundColors();
 }
 
 void Editor::updateFonts()
@@ -588,78 +599,59 @@ void Editor::updateFonts()
     this->setFont(currentTheme->getFont());
 }
 
-void Editor::paintEvent(QPaintEvent *event) {
-    QPlainTextEdit::paintEvent(event);
-//    const QRect rect = event->rect();
-//    qDebug() << "RECT" << rect;
-//
-//    QPainter p(viewport());
-//    p.setPen(QPen("gray"));
-//    p.drawLine(30, rect.top(), 30, rect.bottom());
-//
-//
-//    QFontMetrics font_metrics = QFontMetrics(currentTheme->getFont());
-//    int fw = font_metrics.width('X');
-//    int fh = font_metrics.height();
-//
-//    int longest_line = 20;
-//    int from_top = 0;
-//
-//    for (int i = 0; i < longest_line; i++)
-//    {
-//        int the_x = (i * 4 * fw);
-//        p.drawLine(the_x, from_top, the_x, from_top + fh);
-//    }
-}
-
-void Editor::updateBackgroundColors()
+void Editor::paintEvent(QPaintEvent * e)
 {
-    QList<QTextEdit::ExtraSelection> OurExtraSelections;
-    QTextEdit::ExtraSelection selection;
-    selection.format.setBackground(colors[ColorScheme::ConBG].color);
-    selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-    selection.cursor = textCursor();
-    selection.cursor.clearSelection();
-    selection.cursor.movePosition(QTextCursor::Start);
+    QPainter p(viewport());
 
-    int prevColor = 0;
+    int top = 0, bottom = 0, prevColor = 0;
     bool bAlt = false;
-    QTextBlock currBlock = document()->firstBlock();
-
     QColor newBlockColor = colors[ColorScheme::ConBG].color;
 
-    while (1)
+    QList<QTextEdit::ExtraSelection> selections;
+
+    QTextBlock block = document()->firstBlock();
+    while (block.isValid())
     {
         ColorScheme::Color newColor = ColorScheme::Invalid;
-        QString text = currBlock.text();
+        QString text = block.text();
 
-        if (text.contains(QRegExp("^CON\\b", Qt::CaseInsensitive)))
+        if (text.contains(QRegularExpression("^CON\\b", QRegularExpression::CaseInsensitiveOption)))
         {
             newColor = ColorScheme::ConBG;
         }
-        else if (text.contains(QRegExp("^VAR\\b", Qt::CaseInsensitive)))
+        else if (text.contains(QRegularExpression("^VAR\\b", QRegularExpression::CaseInsensitiveOption)))
         {
             newColor = ColorScheme::VarBG;
         }
-        else if (text.contains(QRegExp("^OBJ\\b", Qt::CaseInsensitive)))
+        else if (text.contains(QRegularExpression("^OBJ\\b", QRegularExpression::CaseInsensitiveOption)))
         {
             newColor = ColorScheme::ObjBG;
         }
-        else if (text.contains(QRegExp("^PUB\\b", Qt::CaseInsensitive)))
+        else if (text.contains(QRegularExpression("^PUB\\b", QRegularExpression::CaseInsensitiveOption)))
         {
             newColor = ColorScheme::PubBG;
         }
-        else if (text.contains(QRegExp("^PRI\\b", Qt::CaseInsensitive)))
+        else if (text.contains(QRegularExpression("^PRI\\b", QRegularExpression::CaseInsensitiveOption)))
         {
             newColor = ColorScheme::PriBG;
         }
-        else if (text.contains(QRegExp("^DAT\\b", Qt::CaseInsensitive)))
+        else if (text.contains(QRegularExpression("^DAT\\b", QRegularExpression::CaseInsensitiveOption)))
         {
             newColor = ColorScheme::DatBG;
         }
 
         if (newColor != ColorScheme::Invalid)
         {
+
+            bottom = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
+
+            if (block.isVisible() && bottom > top)
+            {
+                p.fillRect(0, top, viewport()->width(), bottom - top, newBlockColor);
+            }
+
+            top = bottom;
+
             newBlockColor = colors[newColor].color;
             if (newColor == prevColor)
             {
@@ -673,39 +665,74 @@ void Editor::updateBackgroundColors()
             {
                 bAlt = false;
             }
-            selection.format.setBackground(newBlockColor);
             prevColor = newColor;
         }
 
-        selection.cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
-        selection.cursor.movePosition(QTextCursor::NextBlock, QTextCursor::KeepAnchor);
-        OurExtraSelections.append(selection);
-
-        if (currBlock == textCursor().block())
+        if (block.blockNumber() == textCursor().blockNumber())
         {
+
             QTextEdit::ExtraSelection line;
             line.cursor = textCursor();
             line.cursor.clearSelection();
             line.cursor.movePosition(QTextCursor::StartOfLine);
             line.cursor.movePosition(QTextCursor::NextBlock,QTextCursor::KeepAnchor);
-            if (newBlockColor.lightness() < 128)
-                line.format.setBackground(newBlockColor.lighter(125));
-            else
-                line.format.setBackground(newBlockColor.darker(105));
+            line.format.setBackground(contrastColor(newBlockColor));
             line.format.setProperty(QTextFormat::FullWidthSelection, true);
-            OurExtraSelections.append(line);
+            selections.append(line);
         }
 
-        if (currBlock == document()->lastBlock())
+        if (block == document()->lastBlock())
         {
-            break;
+            bottom = (int) blockBoundingGeometry(block).translated(contentOffset()).bottom();
+
+            if (block.isVisible() && bottom > top)
+            {
+                p.fillRect(0, top, viewport()->width(), bottom - top, newBlockColor);
+            }
         }
 
-        currBlock = currBlock.next();
+        block = block.next();
     }
-    setExtraSelections(OurExtraSelections);
+    setExtraSelections(selections);
+
+
+    int wd = fontMetrics().width(' ');
+    int linew = font().pointSize()/6;
+
+    block = firstVisibleBlock();
+    QPen pen(contrastColor(colors[ColorScheme::ConBG].color, 30));
+    pen.setWidth(linew);
+    p.setPen(pen);
+
+    while (block.isValid() && block.isVisible())
+    {
+            int y1 = (int) blockBoundingGeometry(block).translated(contentOffset()).top()+linew;
+            int y2 = (int) blockBoundingGeometry(block).translated(contentOffset()).bottom()-linew;
+
+            QString text = block.text();
+            for (int i = 0; i < text.size(); i++)
+            {
+                if (text[i] != ' ')
+                    break;
+                
+                if (i % propDialog->getTabSpaces() == 0)
+                    p.drawLine(wd*i, y1, wd*i, y2);
+            }
+
+        block = block.next();
+    }
+
+    QPlainTextEdit::paintEvent(e);
 }
 
+
+QColor Editor::contrastColor(QColor color, int amount)
+{
+    if (color.lightness() < 128)
+        return QColor(255,255,255, amount);
+    else
+        return QColor(0,0,0, amount);
+}
 
 void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {

@@ -20,6 +20,9 @@ public:
     virtual ~Editor();
     
     Language lang;
+ 
+    QStringList blocks;
+    QRegularExpression re_blocks;
 
     bool tabOn;
 
@@ -37,7 +40,7 @@ public slots:
     void setCopy(bool available);
 
 protected:
-    void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent * e);
 
 
 private:
@@ -61,6 +64,7 @@ private:
     QMap<ColorScheme::Color, ColorScheme::colorcontainer> colorsAlt;
 
     QString oldcontents;
+    QColor contrastColor(QColor color, int amount = 20);
 
 protected:
     void keyPressEvent(QKeyEvent* e);
@@ -95,7 +99,6 @@ protected:
 
 private slots:
     void updateLineNumberAreaWidth();
-    void updateBackgroundColors();
     void updateLineNumberArea(const QRect &, int);
 
 private:
