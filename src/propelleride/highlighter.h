@@ -12,30 +12,16 @@
 #include <Qt>
 
 #include "language.h"
-#include "preferences.h"
 #include "colorscheme.h"
 
 class Highlighter : public QSyntaxHighlighter
 {
     Q_OBJECT
 
-private:
     ColorScheme * currentTheme;
     Language lang;
 
-public:
-    Highlighter(QTextDocument *parent);
-
-    void addOnePartRules(QStringList rules,
-                         QTextCharFormat format);
-
-    void addTwoPartRules(QStringList rules,
-                         QTextCharFormat format);
-
-    void highlight();
-
-protected:
-    void highlightBlock(const QString &text);
+    QRegularExpression re_tokens;
 
     struct OnePartRule
     {
@@ -51,8 +37,20 @@ protected:
         bool newline;
     };
 
-    QList<OnePartRule> onepartrules;
+    QHash<QString, OnePartRule> onepartrules;
     QList<TwoPartRule> twopartrules;
 
-    QRegularExpression re_tokens;
+public:
+    Highlighter(QTextDocument *parent);
+
+    void addOnePartRules(QString name, QStringList rules);
+    void addTwoPartRules(QStringList rules,
+                         QTextCharFormat format);
+
+public slots:
+    void rehighlight();
+
+protected:
+    void highlightBlock(const QString &text);
+
 };

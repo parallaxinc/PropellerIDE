@@ -10,38 +10,44 @@
 #include <QFileDialog>
 #include <QSettings>
 
+#include "ui_language.h"
+
 class PathSelector : public QWidget
 {
     Q_OBJECT
 
-public:
-    explicit PathSelector(
-        QString const & labelname,
-        QString const & defaultpath,
-        QString const & errormessage,
-        const char * slot, 
-        QWidget *parent = 0);
+    Ui::Language ui;
 
+    QString defaultcompiler;
+    QStringList defaultincludes;
+
+    QString language;
+    QString compiler;
+    QStringList includes;
+
+private slots:
+    void setCompiler(const QString & path);
+    void setIncludes(const QStringList & paths);
+
+    void addPath();
+    void deletePath();
+    void browse();
+
+public:
+    explicit PathSelector(QString language,
+            QString compiler = QString(),
+            QStringList includes = QStringList(),
+            QWidget *parent = 0);
     ~PathSelector();
 
-    void browsePath(
-        QString const & pathlabel, 
-        QString const & pathregex,  
-        bool isfolder
-        );
+    void setDefaultCompiler(QString path);
+    void setDefaultIncludes(QStringList paths);
 
+public slots:
+    void restore();
+    void accept();
+    void reject();
     void save();
     void load();
-    void restore();
-    QString const & get();
-    
-private:
-    QHBoxLayout * layout;
-    QLabel      * label;
-    QLineEdit   * lineEdit;
-    QPushButton * browseButton;
-    QString     defaultpath;
-    QString     key;
-    QString     oldvalue;
 
 };

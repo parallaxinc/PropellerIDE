@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QFontDatabase>
 
+#include "logging.h"
+
 ColorScheme::ColorScheme(QObject * parent) :
     QObject(parent)
 {
@@ -25,32 +27,43 @@ void ColorScheme::defaults()
     colors[SyntaxNumbers]       = (struct colorcontainer) { QColor("#ff7fff") , "Syntax_Numbers"       };
     colors[SyntaxOperators]     = (struct colorcontainer) { QColor("#6565ff") , "Syntax_Operators"     };
     colors[SyntaxKeywords]      = (struct colorcontainer) { QColor("#ffffff") , "Syntax_Keywords"      };
-    colors[SyntaxQuotes]        = (struct colorcontainer) { QColor("#a2b2ff") , "Syntax_Quotes"        };
+    colors[SyntaxQuotes]        = (struct colorcontainer) { QColor("#a2b2ff") , "Syntax_Strings"       };
     colors[SyntaxComments]      = (struct colorcontainer) { QColor("#cccccc") , "Syntax_Comments"      };
 
 }
 
-
 void ColorScheme::save()
 {
     QSettings settings;
+    save(&settings);
+}
 
-    settings.beginGroup("Colors");
+void ColorScheme::save(const QString & filename)
+{
+    QSettings settings(filename, QSettings::IniFormat);
+    save(&settings);
+}
+
+void ColorScheme::save(QSettings * settings)
+{
+    qCDebug(ideTheme) << "saving" << settings->fileName();
+
+    settings->beginGroup("Colors");
 
     QMap<ColorScheme::Color, colorcontainer>::iterator i;
     for (i = colors.begin(); i != colors.end(); ++i)
     {
-        settings.setValue(i.value().key,i.value().color.name());
+        settings->setValue(i.value().key,i.value().color.name());
     }
 
-    settings.endGroup();
+    settings->endGroup();
 
-    settings.beginGroup("Font");
+    settings->beginGroup("Font");
 
-    settings.setValue("Family", font.family());
-    settings.setValue("Size", font.pointSize());
+    settings->setValue("Family", font.family());
+    settings->setValue("Size", font.pointSize());
 
-    settings.endGroup();
+    settings->endGroup();
 
 }
 
@@ -68,6 +81,8 @@ void ColorScheme::load(const QString & filename)
 
 void ColorScheme::load(QSettings * settings)
 {
+    qCDebug(ideTheme) << "loading" << settings->fileName();
+
     settings->beginGroup("Colors");
 
     QMap<ColorScheme::Color, colorcontainer>::iterator i;
@@ -87,6 +102,7 @@ void ColorScheme::load(QSettings * settings)
     settings->endGroup();
 
     settings->beginGroup("Font");
+
 
     if (!settings->contains("Family") || settings->value("Family").toString().isEmpty())
     {
@@ -110,8 +126,6 @@ void ColorScheme::load(QSettings * settings)
             );
 
     settings->endGroup();
-
-    qDebug() << "Setting font:" << font.family();
 }
 
 void ColorScheme::setColor(ColorScheme::Color key, const QColor & color)

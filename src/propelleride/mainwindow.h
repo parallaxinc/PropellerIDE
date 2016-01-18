@@ -35,14 +35,14 @@ public:
     PropellerManager manager;
     Zipper          zipper;
 
+    Preferences     preferences;
     BuildManager    builder;
     Language        language;
 
     ProjectParser   *parser;
-    Preferences     *propDialog;
 
     QString         spinCompiler;
-    QString         spinIncludes;
+    QStringList     spinIncludes;
     QString         projectFile;
 
     QList<QAction *>    recentFiles;

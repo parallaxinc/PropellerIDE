@@ -1,22 +1,12 @@
 #pragma once
 
-#include <Qt>
-#include <QWidget>
 #include <QString>
-#include <QLineEdit>
-#include <QTabWidget>
-#include <QCheckBox>
 #include <QComboBox>
-#include <QPushButton>
-#include <QFontDialog>
-#include <QVector>
-#include <QToolButton>
-#include <QHBoxLayout>
 
 #include "colorscheme.h"
 #include "pathselector.h"
 
-#define enableAutoComplete          "enableAutoComplete"
+#include "ui_preferences.h"
 
 #if defined(Q_OS_WIN) || defined(CYGWIN)
   #define APP_EXTENSION            ".exe"
@@ -39,54 +29,49 @@
 class Preferences : public QDialog
 {
     Q_OBJECT
-public:
-    explicit Preferences(QWidget *parent = 0);
 
-    int  getTabSpaces();
-    bool getAutoCompleteEnable();
-    QLineEdit *getTabSpaceLedit();
+    Ui::Preferences ui;
 
-    void adjustFontSize(float ratio);
-
-
-signals:
-    void updateColors();
-    void updateFonts(const QFont &);
-
-public slots:
-
-    void cleanSettings();
-    void fontDialog();
-    void browseCompiler();
-    void browseLibrary();
-    void accept();
-    void reject();
-    void updateColor(int key, const QColor & color);
-    void showPreferences();
-
-private slots:
-    void loadTheme(int index);
-
-private:
-
-    void setupFolders();
-    void setupOptions();
-    void setupHighlight();
+    QString defaultTheme;
 
     ColorScheme * currentTheme;
 
-    QTabWidget  tabWidget;
+    void setupThemes();
+    void setupFonts();
+    void setupColors();
+    void setupLanguages();
 
-    PathSelector * compilerpath;
-    PathSelector * librarypath;
+    void updateAll();
 
-    QString     tabSpacesStr;
-    QCheckBox   autoCompleteEnable;
-    QLineEdit   tabspaceLedit;
-    QPushButton clearSettingsButton;
-    QPushButton fontButton;
+public:
+    explicit Preferences(QWidget *parent = 0);
+    ~Preferences();
 
-    QComboBox   themeEdit;
+    void    adjustFontSize(float ratio);
 
-    bool        autoCompleteEnableSaved;
+signals:    
+    void    updateColors();
+    void    updateFonts(const QFont &);
+
+    void    accepted();
+    void    rejected();
+    void    restored();
+
+public slots:
+    void updateColor(int key, const QColor & color);
+    void updateFont(const QFont & font);
+    void showPreferences();
+    void setFontSize(int size);
+
+private slots:
+    void loadTheme(int index);
+    void loadTheme(QString filename);
+
+    void buttonBoxClicked(QAbstractButton * button);
+
+    void restore();
+    void accept();
+    void reject();
+    void load();
+    void save();
 };

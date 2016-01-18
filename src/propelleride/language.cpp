@@ -18,6 +18,18 @@ Language::Language()
     loadLanguage(":/languages/spin.json");
 }
 
+QRegularExpression Language::buildTokenizer(QStringList tokens)
+{
+    QString tokenstring = tokens.join("|");
+    tokenstring = "("+tokenstring+")";
+
+    if (case_sensitive)
+        return QRegularExpression(tokenstring);
+    else
+        return QRegularExpression(tokenstring, 
+                QRegularExpression::CaseInsensitiveOption);
+}
+
 QStringList Language::matchWholeWord(QStringList list)
 {
     QStringList newlist;
@@ -118,6 +130,12 @@ void Language::loadLanguage(QString filename)
     strings     = mergeList(strings);
 
     enable_blocks   = syntax["enable_blocks"].toArray().first().toBool();
+    if (enable_blocks)
+    {
+        blocks          = buildWordList(syntax["enable_blocks"].toArray().last().toArray());
+        blocks          = mergeList(blocks);
+    }
+
     case_sensitive  = syntax["case_sensitive"].toBool();
     escape_char     = syntax["escape"].toString();
 
@@ -169,6 +187,16 @@ QStringList Language::listComments()
 QStringList Language::listFunctions()
 {
     return functions;
+}
+
+QStringList Language::listBlocks()
+{
+    return blocks;
+}
+
+bool Language::isCaseSensitive()
+{
+    return case_sensitive;
 }
 
 ProjectParser * Language::getParser(QString language)

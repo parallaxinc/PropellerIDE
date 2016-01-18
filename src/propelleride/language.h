@@ -2,6 +2,7 @@
 
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QRegularExpression>
 #include <QStringList>
 #include <QString>
 
@@ -20,6 +21,7 @@ private:
     QStringList strings;
     QStringList functions;
     QStringList comments;
+    QStringList blocks;
 
     QStringList matchWholeWord(QStringList list);
     QStringList buildWordList(QJsonArray keyarray);
@@ -36,6 +38,11 @@ public:
     QStringList listStrings();
     QStringList listComments();
     QStringList listFunctions();
+    QStringList listBlocks();
+
+    bool isCaseSensitive();
+    QRegularExpression buildTokenizer(QStringList rules);
+
     Language();
     ProjectParser * getParser(QString language = QString("spin"));
 };

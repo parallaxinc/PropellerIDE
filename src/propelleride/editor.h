@@ -4,9 +4,6 @@
 #include <QTabWidget>
 #include <QPlainTextEdit>
 #include <QString>
-#include <QKeyEvent>
-#include <QResizeEvent>
-#include <QPaintEvent>
 #include <QTextCursor>
 
 #include "highlighter.h"
@@ -14,22 +11,30 @@
 
 class LineNumberArea;
 
-
 class Editor : public QPlainTextEdit
 {
     Q_OBJECT
+
 public:
     Editor(QWidget *parent);
     virtual ~Editor();
-    
-    Language lang;
-
-    void setHighlights();
-
-    void clearCtrlPressed();
 
     void saveContent();
     int contentChanged();
+
+private:
+    Language lang;
+ 
+    QStringList blocks;
+    QRegularExpression re_blocks;
+
+    bool tabOn;
+
+    int  tabStop;
+    bool smartIndent;
+    bool indentGuides;
+    bool autoComplete;
+    bool highlightLine;
 
 public slots:
     bool getUndo();
@@ -39,8 +44,10 @@ public slots:
     void setRedo(bool available);
     void setCopy(bool available);
 
+    void loadPreferences();
+
 protected:
-    void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent * e);
 
 
 private:
@@ -49,18 +56,22 @@ private:
     bool canCopy;
 
     int  autoIndent();
-    int addAutoItem(QString type, QString s);
+    int  addAutoItem(QString type, QString s);
     void spinAutoShow(int width);
     int  spinAutoComplete();
-    int  tabBlockShift();
+    void tabBlockShift();
+    void dedent();
+    void indent();
+
     QString selectAutoComplete();
-    QPoint keyPopPoint(QTextCursor cursor);
+    QPoint  keyPopPoint(QTextCursor cursor);
 
     ColorScheme * currentTheme;
     QMap<ColorScheme::Color, ColorScheme::colorcontainer> colors;
     QMap<ColorScheme::Color, ColorScheme::colorcontainer> colorsAlt;
 
     QString oldcontents;
+    QColor contrastColor(QColor color, int amount = 20);
 
 protected:
     void keyPressEvent(QKeyEvent* e);
@@ -70,7 +81,6 @@ private:
     QTextCursor lastCursor;
     QPoint  mousepos;
     bool    ctrlPressed;
-    bool    isSpin;
     Highlighter *highlighter;
 
     QComboBox *cbAuto;
@@ -84,7 +94,6 @@ private slots:
     void cbAutoSelected0insert(int index);
     void updateColors();
     void updateFonts();
-    void tabSpacesChanged();
 
 /* lineNumberArea support below this line: see Nokia Copyright below */
 public:
@@ -96,7 +105,6 @@ protected:
 
 private slots:
     void updateLineNumberAreaWidth();
-    void updateBackgroundColors();
     void updateLineNumberArea(const QRect &, int);
 
 private:

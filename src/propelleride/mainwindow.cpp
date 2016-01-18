@@ -22,16 +22,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui.setupUi(this);
 
     // setup preferences dialog
-    propDialog = new Preferences(this);
-    connect(propDialog,SIGNAL(accepted()),this,SLOT(getApplicationSettings()));
+    connect(&preferences,SIGNAL(accepted()),this,SLOT(getApplicationSettings()));
 
     connect(&builder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
 
     parser = language.getParser();
-    connect(propDialog,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
-    connect(propDialog,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorProjectView()));
+    connect(&preferences,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
+    connect(&preferences,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorProjectView()));
 
-    connect(propDialog,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorBuildManager()));
+    connect(&preferences,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorBuildManager()));
 
     recolorProjectView();
     recolorBuildManager();
@@ -42,8 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     QSplitterHandle *hndl = ui.splitter->handle(1);
     hndl->setEnabled(false);
 
-    connect(ui.editorTabs, SIGNAL(tabCloseRequested(int)), ui.editorTabs,         SLOT(closeFile(int)));
-    connect(ui.editorTabs, SIGNAL(currentChanged(int)),    ui.editorTabs,         SLOT(changeTab(int)));
+    connect(ui.editorTabs, SIGNAL(fileUpdated(int)),    this,   SLOT(setProject()));
 
     // File Menu
     connect(ui.action_New,SIGNAL(triggered()),ui.editorTabs,SLOT(newFile()));
@@ -82,7 +80,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.actionFind_Next,    SIGNAL(triggered()), ui.finder, SLOT(findNext()));
     connect(ui.actionFind_Previous,SIGNAL(triggered()), ui.finder, SLOT(findPrevious()));
 
-    connect(ui.actionPreferences,  SIGNAL(triggered()), propDialog, SLOT(showPreferences()));
+    connect(ui.actionPreferences,  SIGNAL(triggered()), &preferences, SLOT(showPreferences()));
 
     connect(ui.editorTabs, SIGNAL(undoAvailable(bool)), ui.action_Undo,SLOT(setEnabled(bool)));
     connect(ui.editorTabs, SIGNAL(redoAvailable(bool)), ui.action_Redo,SLOT(setEnabled(bool)));
@@ -121,9 +119,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     updateRecentFileActions();
 
-    connect(ui.editorTabs, SIGNAL(fileUpdated(int)),               this,SLOT(setProject()));
-    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),           this,SLOT(setProject()));
-
     connect(ui.editorTabs, SIGNAL(sendMessage(const QString &)),   this,SLOT(showMessage(const QString &)));
     connect(ui.finder,     SIGNAL(sendMessage(const QString &)),   this,SLOT(showMessage(const QString &)));
 
@@ -137,13 +132,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui.editorTabs->newFile();
     loadSession();
+
+
     installEventFilter(this);
+
+    statusBar();
 }
 
 void MainWindow::loadSession()
 {
     QSettings settings;
-    int size = settings.beginReadArray("session");
+    int size = settings.beginReadArray("Session");
     for (int i = 0; i < size; ++i) {
         settings.setArrayIndex(i);
         ui.editorTabs->openFile(settings.value("file").toString());
@@ -154,7 +153,7 @@ void MainWindow::loadSession()
 void MainWindow::clearSession()
 {
     QSettings settings;
-    settings.beginGroup("session");
+    settings.beginGroup("Session");
     settings.remove("");
     settings.endGroup();
 }
@@ -164,7 +163,7 @@ void MainWindow::saveSession()
     clearSession();
 
     QSettings settings;
-    settings.beginWriteArray("session");
+    settings.beginWriteArray("Session");
     for (int i = 0; i < ui.editorTabs->count(); i++) {
         settings.setArrayIndex(i);
         settings.setValue("file",ui.editorTabs->tabToolTip(i));
@@ -184,21 +183,23 @@ void MainWindow::getApplicationSettings()
 {
     QSettings settings;
     settings.beginGroup("Paths");
+    settings.beginGroup("spin");
 
-    spinCompiler = settings.value("Compiler").toString();
-    spinIncludes = settings.value("Library").toString();
+    spinCompiler = settings.value("compiler").toString();
+    spinIncludes = settings.value("includes").toStringList();
 
+    settings.endGroup();
     settings.endGroup();
 }
 
 void MainWindow::fontBigger()
 {
-    propDialog->adjustFontSize(1.25);
+    preferences.adjustFontSize(1.25);
 }
 
 void MainWindow::fontSmaller()
 {
-    propDialog->adjustFontSize(0.8);
+    preferences.adjustFontSize(0.8);
 }
 
 
@@ -299,7 +300,8 @@ void MainWindow::setProject()
 
     addRecentFile(filename);
     parser->setFile(filename);
-    parser->setLibraryPaths(QStringList() << spinIncludes);
+    parser->setLibraryPaths(spinIncludes);
+    qDebug() << spinIncludes;
 
     recolorProjectView();
     QApplication::restoreOverrideCursor();
@@ -358,11 +360,12 @@ int MainWindow::runCompiler(bool load, bool write)
     getApplicationSettings();
 
     checkAndSaveFiles();
+    setProject();
 
     BuildManager::Configuration config;
 
     config.compiler = spinCompiler;
-    config.includes << spinIncludes;
+    config.includes = spinIncludes;
     config.file     = filename;
     config.binary   = filename.replace(".spin",".binary");
     config.port     = cbPort->currentText();
@@ -418,9 +421,10 @@ void MainWindow::spawnMemoryMap()
 
     MemoryMap * map = new MemoryMap(&manager);
     map->setAttribute(Qt::WA_DeleteOnClose, true);
+    map->setWindowIcon(QIcon(":/icons/project-info3.png"));
 
-    connect(propDialog,SIGNAL(updateColors()),map,SLOT(updateColors()));
-    connect(propDialog,SIGNAL(updateFonts(const QFont &)),map,SLOT(updateColors()));
+    connect(&preferences,SIGNAL(updateColors()),map,SLOT(updateColors()));
+    connect(&preferences,SIGNAL(updateFonts(const QFont &)),map,SLOT(updateColors()));
     connect(map,SIGNAL(getRecolor(QWidget *)),this,SLOT(recolorMemoryMap(QWidget *)));
 
     connect(map,SIGNAL(run(QByteArray)), this, SLOT(programRun()));
@@ -515,11 +519,15 @@ void MainWindow::spawnTerminal()
 {
     qCDebug(ideMainwindow) << "spawnTerminal()";
 
-    PropTerm * term = new PropTerm(&manager);
-    term->setAttribute(Qt::WA_DeleteOnClose);
     ColorScheme * theme = &Singleton<ColorScheme>::Instance();
+    PropTerm * term = new PropTerm(&manager);
+
+    term->setAttribute(Qt::WA_DeleteOnClose);
+    term->setWindowIcon(QIcon(":/icons/project-terminal.png"));
     term->setFont(theme->getFont());
-    connect(propDialog,SIGNAL(updateFonts(const QFont &)),term,SLOT(setFont(const QFont &)));
+
+    connect(&preferences,SIGNAL(updateFonts(const QFont &)),term,SLOT(setFont(const QFont &)));
+
     term->show();
 }
 
