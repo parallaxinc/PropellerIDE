@@ -10,6 +10,8 @@ PathSelector::PathSelector(QString language,
 
     this->language = language;
 
+    ui.name->setText(language);
+
     setDefaultCompiler(compiler);
     setDefaultIncludes(includes);
     restore();
@@ -125,13 +127,7 @@ void PathSelector::save()
     settings.beginGroup(language);
 
     settings.setValue("compiler",ui.compiler->text());
-    settings.beginWriteArray("includes");
-    for (int i = 0; i < includes.size(); i++)
-    {
-        settings.setArrayIndex(i);
-        settings.setValue("path", includes[i]);
-    }
-    settings.endArray();
+    settings.setValue("includes",includes);
 
     settings.endGroup();
     settings.endGroup();
@@ -143,22 +139,11 @@ void PathSelector::load()
     settings.beginGroup("Paths");
     settings.beginGroup(language);
 
-    QString cmp = settings.value("compiler").toString();
-    if (!cmp.isEmpty())
-        setCompiler(cmp);
+    QString cmp = settings.value("compiler", defaultcompiler).toString();
+    setCompiler(cmp);
 
-    QStringList inc;
-    int size = settings.beginReadArray("includes");
-    if (size > 0)
-    {
-        for (int i = 0; i < size; i++)
-        {
-            settings.setArrayIndex(i);
-            inc.append(settings.value("path").toString());
-        }
-        settings.endArray();
-        setIncludes(inc);
-    }
+    QStringList inc = settings.value("includes", defaultincludes).toStringList();
+    setIncludes(inc);
 
     settings.endGroup();
     settings.endGroup();

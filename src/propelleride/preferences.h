@@ -43,26 +43,19 @@ class Preferences : public QDialog
 
     void updateAll();
 
-    QString     tabStopStr;
-
-    bool        autoCompleteEnableSaved;
-
 public:
     explicit Preferences(QWidget *parent = 0);
     ~Preferences();
 
-    int  getTabSpaces();
-    bool getAutoCompleteEnable();
-    void adjustFontSize(float ratio);
+    void    adjustFontSize(float ratio);
 
-signals:
-    void updateColors();
-    void updateFonts(const QFont &);
-    void tabStopChanged();
+signals:    
+    void    updateColors();
+    void    updateFonts(const QFont &);
 
-    void accepted();
-    void rejected();
-    void restored();
+    void    accepted();
+    void    rejected();
+    void    restored();
 
 public slots:
     void updateColor(int key, const QColor & color);
@@ -75,7 +68,10 @@ private slots:
     void loadTheme(QString filename);
 
     void buttonBoxClicked(QAbstractButton * button);
+
     void restore();
     void accept();
     void reject();
+    void load();
+    void save();
 };

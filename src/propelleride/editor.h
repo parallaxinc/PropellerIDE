@@ -18,7 +18,11 @@ class Editor : public QPlainTextEdit
 public:
     Editor(QWidget *parent);
     virtual ~Editor();
-    
+
+    void saveContent();
+    int contentChanged();
+
+private:
     Language lang;
  
     QStringList blocks;
@@ -26,10 +30,11 @@ public:
 
     bool tabOn;
 
-    void clearCtrlPressed();
-
-    void saveContent();
-    int contentChanged();
+    int  tabStop;
+    bool smartIndent;
+    bool indentGuides;
+    bool autoComplete;
+    bool highlightLine;
 
 public slots:
     bool getUndo();
@@ -38,6 +43,8 @@ public slots:
     void setUndo(bool available);
     void setRedo(bool available);
     void setCopy(bool available);
+
+    void loadPreferences();
 
 protected:
     void paintEvent(QPaintEvent * e);
@@ -87,7 +94,6 @@ private slots:
     void cbAutoSelected0insert(int index);
     void updateColors();
     void updateFonts();
-    void tabStopChanged();
 
 /* lineNumberArea support below this line: see Nokia Copyright below */
 public:

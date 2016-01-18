@@ -142,7 +142,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::loadSession()
 {
     QSettings settings;
-    int size = settings.beginReadArray("session");
+    int size = settings.beginReadArray("Session");
     for (int i = 0; i < size; ++i) {
         settings.setArrayIndex(i);
         ui.editorTabs->openFile(settings.value("file").toString());
@@ -153,7 +153,7 @@ void MainWindow::loadSession()
 void MainWindow::clearSession()
 {
     QSettings settings;
-    settings.beginGroup("session");
+    settings.beginGroup("Session");
     settings.remove("");
     settings.endGroup();
 }
@@ -163,7 +163,7 @@ void MainWindow::saveSession()
     clearSession();
 
     QSettings settings;
-    settings.beginWriteArray("session");
+    settings.beginWriteArray("Session");
     for (int i = 0; i < ui.editorTabs->count(); i++) {
         settings.setArrayIndex(i);
         settings.setValue("file",ui.editorTabs->tabToolTip(i));
@@ -183,10 +183,12 @@ void MainWindow::getApplicationSettings()
 {
     QSettings settings;
     settings.beginGroup("Paths");
+    settings.beginGroup("spin");
 
-    spinCompiler = settings.value("Compiler").toString();
-    spinIncludes = settings.value("Library").toString();
+    spinCompiler = settings.value("compiler").toString();
+    spinIncludes = settings.value("includes").toStringList();
 
+    settings.endGroup();
     settings.endGroup();
 }
 
@@ -298,7 +300,8 @@ void MainWindow::setProject()
 
     addRecentFile(filename);
     parser->setFile(filename);
-    parser->setLibraryPaths(QStringList() << spinIncludes);
+    parser->setLibraryPaths(spinIncludes);
+    qDebug() << spinIncludes;
 
     recolorProjectView();
     QApplication::restoreOverrideCursor();
@@ -357,11 +360,12 @@ int MainWindow::runCompiler(bool load, bool write)
     getApplicationSettings();
 
     checkAndSaveFiles();
+    setProject();
 
     BuildManager::Configuration config;
 
     config.compiler = spinCompiler;
-    config.includes << spinIncludes;
+    config.includes = spinIncludes;
     config.file     = filename;
     config.binary   = filename.replace(".spin",".binary");
     config.port     = cbPort->currentText();

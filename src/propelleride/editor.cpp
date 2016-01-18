@@ -27,6 +27,9 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     canCopy = false;
     tabOn = false;
 
+    currentTheme = &Singleton<ColorScheme>::Instance();
+    loadPreferences();
+
     lineNumberArea = new LineNumberArea(this);
 
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth()));
@@ -38,18 +41,17 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     setCenterOnScroll(true);
     setWordWrapMode(QTextOption::NoWrap);
 
-    currentTheme = &Singleton<ColorScheme>::Instance();
     updateColors();
     updateFonts();
     saveContent();
 
-    connect(propDialog,SIGNAL(updateColors()),this,SLOT(updateColors()));
-    connect(propDialog,SIGNAL(updateFonts(const QFont &)),this,SLOT(updateFonts()));
-    connect(propDialog,SIGNAL(tabStopChanged()), this, SLOT(tabStopChanged()));
+    connect(propDialog, SIGNAL(accepted()),                 this,   SLOT(loadPreferences()));
+    connect(propDialog, SIGNAL(updateColors()),             this,   SLOT(updateColors()));
+    connect(propDialog, SIGNAL(updateFonts(const QFont &)), this,   SLOT(updateFonts()));
 
-    connect(this,SIGNAL(undoAvailable(bool)), this, SLOT(setUndo(bool)));
-    connect(this,SIGNAL(redoAvailable(bool)), this, SLOT(setRedo(bool)));
-    connect(this,SIGNAL(copyAvailable(bool)), this, SLOT(setCopy(bool)));
+    connect(this,   SIGNAL(undoAvailable(bool)), this, SLOT(setUndo(bool)));
+    connect(this,   SIGNAL(redoAvailable(bool)), this, SLOT(setRedo(bool)));
+    connect(this,   SIGNAL(copyAvailable(bool)), this, SLOT(setCopy(bool)));
 
     // this must be a pointer otherwise we can't control the position.
     cbAuto = new QComboBox(this);
@@ -62,6 +64,21 @@ Editor::~Editor()
     delete cbAuto;
     delete highlighter;
     delete lineNumberArea;
+}
+
+void Editor::loadPreferences()
+{
+    QSettings settings;
+
+    settings.beginGroup("Features");
+    tabStop       = settings.value("tabStop", 4).toInt();
+    autoComplete  = settings.value("autoComplete", true).toBool();
+    smartIndent   = settings.value("smartIndent", true).toBool();
+    indentGuides  = settings.value("indentGuides", true).toBool();
+    highlightLine = settings.value("highlightLine", true).toBool();
+    settings.endGroup();
+
+    setTabStopWidth(tabStop * QFontMetrics(currentTheme->getFont()).width(' '));
 }
 
 void Editor::saveContent()
@@ -100,13 +117,19 @@ void Editor::keyPressEvent (QKeyEvent *e)
         {
             case Qt::Key_Enter:
             case Qt::Key_Return:
-                if(autoIndent() == 0)
+                if (smartIndent)
                 {
-                    QPlainTextEdit::keyPressEvent(e);
+                    if(autoIndent() == 0)
+                    {
+                        QPlainTextEdit::keyPressEvent(e);
+                    }
                 }
+                else
+                    QPlainTextEdit::keyPressEvent(e);
+
                 break;
             case Qt::Key_Period:
-                if (propDialog->getAutoCompleteEnable())
+                if (autoComplete)
                 {
                     if(!spinAutoComplete())
                         QPlainTextEdit::keyPressEvent(e);
@@ -173,11 +196,6 @@ void Editor::keyReleaseEvent (QKeyEvent *e)
 #endif
         expectAutoComplete = false;
     }
-}
-
-void Editor::clearCtrlPressed()
-{
-    ctrlPressed = false;
 }
 
 int Editor::autoIndent()
@@ -413,7 +431,6 @@ void Editor::cbAutoSelected(int index)
 void Editor::dedent()
 {
     QTextCursor cursor = textCursor();
-    int tabStop = propDialog->getTabSpaces();
     int column = cursor.columnNumber() - (cursor.selectionStart() - cursor.position());
     int spaces = tabStop - column % tabStop;
 
@@ -433,10 +450,9 @@ void Editor::dedent()
         }
         else
         {
-            if (n > 0)
-                break;
-            else
+            if (n == 0)
                 cursor.deleteChar();
+            break;
         }
     }
 
@@ -446,7 +462,6 @@ void Editor::dedent()
 void Editor::indent()
 {
     QTextCursor cursor = textCursor();
-    int tabStop = propDialog->getTabSpaces();
     int column = cursor.columnNumber() + (cursor.selectionStart() - cursor.position());
     int spaces = tabStop - column % tabStop;
 
@@ -460,7 +475,6 @@ void Editor::indent()
 void Editor::tabBlockShift()
 {
     QTextCursor cur = textCursor();
-    int tabStop = propDialog->getTabSpaces();
     QString tab(tabStop, ' ');
     bool shiftTab = QApplication::keyboardModifiers() & Qt::SHIFT;
 
@@ -672,17 +686,20 @@ void Editor::paintEvent(QPaintEvent * e)
             prevColor = newColor;
         }
 
-        if (block.blockNumber() == textCursor().blockNumber())
+        if (highlightLine)
         {
+            if (block.blockNumber() == textCursor().blockNumber())
+            {
 
-            QTextEdit::ExtraSelection line;
-            line.cursor = textCursor();
-            line.cursor.clearSelection();
-            line.cursor.movePosition(QTextCursor::StartOfLine);
-            line.cursor.movePosition(QTextCursor::NextBlock,QTextCursor::KeepAnchor);
-            line.format.setBackground(contrastColor(newBlockColor));
-            line.format.setProperty(QTextFormat::FullWidthSelection, true);
-            selections.append(line);
+                QTextEdit::ExtraSelection line;
+                line.cursor = textCursor();
+                line.cursor.clearSelection();
+                line.cursor.movePosition(QTextCursor::StartOfLine);
+                line.cursor.movePosition(QTextCursor::NextBlock,QTextCursor::KeepAnchor);
+                line.format.setBackground(contrastColor(newBlockColor));
+                line.format.setProperty(QTextFormat::FullWidthSelection, true);
+                selections.append(line);
+            }
         }
 
         if (block == document()->lastBlock())
@@ -699,34 +716,36 @@ void Editor::paintEvent(QPaintEvent * e)
     }
     setExtraSelections(selections);
 
-
-    int wd = fontMetrics().width(' ');
-    int linew = font().pointSize()/6;
-
-    block = firstVisibleBlock();
-    QPen pen(contrastColor(colors[ColorScheme::ConBG].color, 30));
-    pen.setWidth(linew);
-    p.setPen(pen);
-
-    while (block.isValid() && block.isVisible())
+    if (indentGuides)
     {
-            int y1 = (int) blockBoundingGeometry(block).translated(contentOffset()).top()+linew;
-            int y2 = (int) blockBoundingGeometry(block).translated(contentOffset()).bottom()-linew;
+        int wd = fontMetrics().width(' ');
+        int linew = font().pointSize()/6;
 
-            QString text = block.text();
-            for (int i = 0; i < text.size(); i++)
-            {
-                if (text[i] != ' ')
-                    break;
-                
-                if (i % propDialog->getTabSpaces() == 0)
+        block = firstVisibleBlock();
+        QPen pen(contrastColor(colors[ColorScheme::ConBG].color, 30));
+        pen.setWidth(linew);
+        p.setPen(pen);
+
+        while (block.isValid() && block.isVisible())
+        {
+                int y1 = (int) blockBoundingGeometry(block).translated(contentOffset()).top()+linew;
+                int y2 = (int) blockBoundingGeometry(block).translated(contentOffset()).bottom()-linew;
+
+                QString text = block.text();
+                for (int i = 0; i < text.size(); i++)
                 {
-                    int x = wd*i;
-                    p.drawLine(x, y1, x, y2);
+                    if (text[i] != ' ')
+                        break;
+                    
+                    if (i % tabStop == 0)
+                    {
+                        int x = wd*i;
+                        p.drawLine(x, y1, x, y2);
+                    }
                 }
-            }
 
-        block = block.next();
+            block = block.next();
+        }
     }
 
     QPlainTextEdit::paintEvent(e);
@@ -801,24 +820,15 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
     }
 }
 
-
-void Editor::tabStopChanged()
-{
-    this->setTabStopWidth(
-            propDialog->getTabSpaces() *
-            QFontMetrics(currentTheme->getFont()).width(' ')
-            );
-}
-
 void Editor::setUndo(bool available)
 {
     canUndo = available;
 }
+
 bool Editor::getUndo()
 {
     return canUndo;
 }
-
 
 void Editor::setRedo(bool available)
 {
@@ -828,7 +838,6 @@ bool Editor::getRedo()
 {
     return canRedo;
 }
-
 
 void Editor::setCopy(bool available)
 {

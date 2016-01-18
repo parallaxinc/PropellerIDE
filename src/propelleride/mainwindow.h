@@ -42,7 +42,7 @@ public:
     ProjectParser   *parser;
 
     QString         spinCompiler;
-    QString         spinIncludes;
+    QStringList     spinIncludes;
     QString         projectFile;
 
     QList<QAction *>    recentFiles;

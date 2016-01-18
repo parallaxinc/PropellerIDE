@@ -83,9 +83,9 @@
          </property>
          <layout class="QFormLayout" name="formLayout_2">
           <item row="0" column="0">
-           <widget class="QCheckBox" name="enableCodeCompletion">
+           <widget class="QCheckBox" name="autoComplete">
             <property name="text">
-             <string>Code completion</string>
+             <string>Auto completion</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -93,22 +93,9 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QCheckBox" name="enableBlockColoring">
+           <widget class="QCheckBox" name="indentGuides">
             <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Block coloring</string>
-            </property>
-            <property name="checked">
              <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="enableIndentGuides">
-            <property name="enabled">
-             <bool>false</bool>
             </property>
             <property name="text">
              <string>Indent guides</string>
@@ -118,13 +105,26 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QCheckBox" name="checkBox">
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="smartIndent">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string>Smart indent</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="highlightLine">
+            <property name="text">
+             <string>Highlight line</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

@@ -5,19 +5,19 @@
 #include <QFileInfo>
 #include <QFileDialog>
 #include <QDialogButtonBox>
-#include <QFontDialog>
 #include <QSettings>
-#include <QVariant>
 #include <QStringList>
-#include <QLabel>
 #include <QDebug>
 #include <QDirIterator>
+#include <QIntValidator>
 
 #include "colorchooser.h"
 
 Preferences::Preferences(QWidget *parent) : QDialog(parent)
 {
     ui.setupUi(this);
+    ui.tabStop->setValidator(new QIntValidator(0, 24, this));
+
     currentTheme = &Singleton<ColorScheme>::Instance();
 
     setupThemes();
@@ -25,17 +25,8 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
     setupColors();
     setupLanguages();
 
-    QSettings settings;
-
-    QVariant tabsv = settings.value("tabStop","4");
-    if(tabsv.canConvert(QVariant::String)) {
-        ui.tabStop->setText(tabsv.toString());
-    }
-
     connect(ui.buttonBox,   SIGNAL(clicked(QAbstractButton *)), this,   SLOT(buttonBoxClicked(QAbstractButton *)));
-    connect(ui.tabStop,     SIGNAL(textChanged(QString)),       this,   SIGNAL(tabStopChanged()));
     connect(ui.themeEdit,   SIGNAL(currentIndexChanged(int)),   this,   SLOT(loadTheme(int)));
-
 }
 
 void Preferences::setupThemes()
@@ -53,7 +44,7 @@ void Preferences::setupThemes()
     QSettings settings;
     loadTheme(settings.value("theme", defaultTheme).toString());
     currentTheme->load();
-    settings.setValue("theme", ui.themeEdit->itemData(ui.themeEdit->currentIndex()));
+    currentTheme->save();
 }
 
 void Preferences::setupFonts()
@@ -103,19 +94,6 @@ Preferences::~Preferences()
 {
 }
 
-int Preferences::getTabSpaces()
-{
-    bool ok;
-    int count = ui.tabStop->text().toInt(&ok);
-    if(ok) return count;
-    return 4;
-}
-
-bool Preferences::getAutoCompleteEnable()
-{
-    return ui.enableCodeCompletion->isChecked();
-}
-
 void Preferences::setupLanguages()
 {
     PathSelector * spin;
@@ -162,17 +140,14 @@ void Preferences::loadTheme(QString filename)
 void Preferences::loadTheme(int index)
 {
     currentTheme->load(ui.themeEdit->itemData(index).toString());
-
+    QSettings().setValue("theme", ui.themeEdit->itemData(index));
     updateAll();
 }
 
 void Preferences::showPreferences()
 {
-    tabStopStr = ui.tabStop->text();
-
-    autoCompleteEnableSaved = ui.enableCodeCompletion->isChecked();
-
-    this->show();
+    load();
+    show();
 }
 
 void Preferences::setFontSize(int size)
@@ -228,18 +203,12 @@ void Preferences::buttonBoxClicked(QAbstractButton * button)
 void Preferences::restore()
 {
     QSettings().clear();
-    loadTheme(QSettings().value(defaultTheme).toString());
+    loadTheme(defaultTheme);
 }
 
 void Preferences::accept()
 {
-    QSettings settings;
-
-    settings.setValue("tabStop",ui.tabStop->text());
-    settings.setValue("codeCompletion", ui.enableCodeCompletion->isChecked());
-    settings.setValue("theme", ui.themeEdit->itemData(ui.themeEdit->currentIndex()));
-
-    currentTheme->save();
+    save();
     updateAll();
 
     done(QDialog::Accepted);
@@ -247,17 +216,44 @@ void Preferences::accept()
 
 void Preferences::reject()
 {
-    ui.tabStop->setText(tabStopStr);
+    load();
+    updateAll();
 
-    ui.enableCodeCompletion->setChecked(autoCompleteEnableSaved);
+    done(QDialog::Rejected);
+}
+
+void Preferences::save()
+{
+    QSettings settings;
+
+    settings.beginGroup("Features");
+    settings.setValue("tabStop",        ui.tabStop->text().toInt());
+    settings.setValue("autoComplete",   ui.autoComplete->isChecked());
+    settings.setValue("smartIndent",    ui.smartIndent->isChecked());
+    settings.setValue("indentGuides",   ui.indentGuides->isChecked());
+    settings.setValue("highlightLine",  ui.highlightLine->isChecked());
+    settings.endGroup();
+
+    settings.setValue("theme",          ui.themeEdit->itemData(ui.themeEdit->currentIndex()));
+
+    currentTheme->save();
+}
+
+void Preferences::load()
+{
+    QSettings settings;
+
+    settings.beginGroup("Features");
+    ui.tabStop->setText(            settings.value("tabStop", 4).toString());
+    ui.autoComplete->setChecked(    settings.value("autoComplete", true).toBool());
+    ui.smartIndent->setChecked(     settings.value("smartIndent", true).toBool());
+    ui.indentGuides->setChecked(    settings.value("indentGuides", true).toBool());
+    ui.highlightLine->setChecked(   settings.value("highlightLine", true).toBool());
+    settings.endGroup();
 
     ui.themeEdit->setCurrentIndex(
             ui.themeEdit->findData(QSettings().value("theme").toString())
             );
 
     currentTheme->load();
-    updateAll();
-
-    done(QDialog::Rejected);
 }
-
