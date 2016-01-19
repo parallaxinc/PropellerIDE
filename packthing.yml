@@ -39,7 +39,7 @@ repos:
 
     openspin:
         url: https://github.com/bweir/OpenSpin.git
-        tag: 0.2.3
+        tag: 0.3.0
         builder: qmake
         root: qmake
 
