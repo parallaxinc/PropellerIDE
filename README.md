@@ -1,20 +1,45 @@
 ![logo](https://github.com/parallaxinc/PropellerIDE/raw/master/icons/logo.png)
 [![Travis CI Build Status](https://travis-ci.org/parallaxinc/PropellerIDE.svg?branch=master)](https://travis-ci.org/parallaxinc/PropellerIDE) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/2gj0hjoqjau9is4b?svg=true)](https://ci.appveyor.com/project/bweir/propelleride)
 
-PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller microcontroller.
+PropellerIDE is a fun, easy, beautiful editor for the Propeller microcontroller.
 
-![](https://raw.githubusercontent.com/parallaxinc/PropellerIDE/master/screenshots/dusk.png)
+![](screenshots/main.png)
 
-PropellerIDE rocks your socks with tons of awesome features:
+## Features
 
-* Cross-platform, running on Windows, Mac, Linux, even Raspberry Pi!
-* Deeply integrated Propeller tools are your best friend
-* Clean, uncluttered user interface with redesigned searchable project view
-* Modular components can be used in new applications
-* Have it your way with extensive theming
+* Code the way you like with a colorful, customizable editor.
+* Dig deeper into your applications with the built-in memory map.
+* Speak your Propeller's language with the integrated serial terminal.
+* Find what you need fast with searchable project view and auto-complete.
+* Start coding right away with the included Spin Standard Library.
+* Runs great on Windows, Mac, Linux, and Raspberry Pi!
 
-So what are you waiting for?
+## Screenshots
 
-- **[Download PropellerIDE](http://developer.parallax.com/propelleride/)**
-- **[Read the docs](https://lamestation.atlassian.net/wiki/display/IDE)**
-- **[Track some bugs](https://lamestation.atlassian.net/projects/IDE/issues)**
+#### Memory Map
+
+![](screenshots/memorymap.png)
+
+#### Terminal
+
+![](screenshots/terminal.png)
+
+#### Project View
+
+![](screenshots/projectview.png)
+
+#### Indent Guides
+
+![](screenshots/indentguide.png)
+
+#### Theming
+
+![](screenshots/theming.png)
+
+## License
+
+PropellerIDE is free software from end to end, licensed under the GPLv3.
+
+## Feedback?
+
+Contact the developers at `contact@lamestation.com`.
