@@ -66,6 +66,7 @@ public slots:
     void propellerDatasheet();
     void propellerQuickReference();
     void about();
+    void newFromTemplate();
 
     void setProject();
 

@@ -28,6 +28,8 @@ SOURCES += \
     language.cpp \
     main.cpp \
     mainwindow.cpp \
+    newfromtemplate.cpp \
+    templateicon.cpp \
     pathselector.cpp \
     preferences.cpp \
     logging.cpp \
@@ -43,6 +45,8 @@ HEADERS  += \
     highlighter.h \
     language.h \
     mainwindow.h \
+    newfromtemplate.h \
+    templateicon.h \
     pathselector.h \
     preferences.h \
     templates/Singleton.h \
@@ -57,6 +61,8 @@ FORMS += \
     forms/language.ui \
     forms/finder.ui \
     forms/buildmanager.ui \
+    forms/newfromtemplate.ui \
+    forms/templateicon.ui \
 
 RESOURCES += \
     fonts/fonts.qrc \

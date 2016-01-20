@@ -89,6 +89,8 @@
      <string>&amp;File</string>
     </property>
     <addaction name="action_New"/>
+    <addaction name="actionNew_From_Template"/>
+    <addaction name="separator"/>
     <addaction name="action_Open"/>
     <addaction name="separator"/>
     <addaction name="action_Save"/>
@@ -814,6 +816,17 @@
    </property>
    <property name="statusTip">
     <string>View the Propeller quick reference chart</string>
+   </property>
+  </action>
+  <action name="actionNew_From_Template">
+   <property name="text">
+    <string>New From &amp;Template</string>
+   </property>
+   <property name="statusTip">
+    <string>Create a new file from a template</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+T</string>
    </property>
   </action>
  </widget>

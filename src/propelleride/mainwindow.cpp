@@ -13,6 +13,8 @@
 #include <MemoryMap>
 #include <PropTerm>
 
+#include "newfromtemplate.h"
+
 #include "ui_about.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -45,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // File Menu
     connect(ui.action_New,SIGNAL(triggered()),ui.editorTabs,SLOT(newFile()));
+    connect(ui.actionNew_From_Template,SIGNAL(triggered()),this,SLOT(newFromTemplate()));
     connect(ui.action_Open,SIGNAL(triggered()),ui.editorTabs,SLOT(open()));
 
     connect(ui.action_Save,SIGNAL(triggered()),ui.editorTabs,SLOT(save()));
@@ -638,6 +641,14 @@ void MainWindow::about()
     ui.setupUi(about);
     ui.label_4->setText(tr("Version %1").arg(qApp->applicationVersion()));
     about->show();
+}
+
+void MainWindow::newFromTemplate()
+{
+    getApplicationSettings();
+
+    NewFromTemplate * newfromtemplate = new NewFromTemplate(spinIncludes);
+    newfromtemplate->exec();
 }
 
 void MainWindow::showMessage(const QString & message)
