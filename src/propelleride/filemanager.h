@@ -23,6 +23,8 @@ public:
 
 public slots:
     int  newFile();
+    void newFromFile();
+    int  newFromFile(const QString & fileName);
     void open();
     int  openFile(const QString & fileName);
     void fileChanged();
