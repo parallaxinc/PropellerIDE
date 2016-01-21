@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>717</width>
-    <height>443</height>
+    <width>916</width>
+    <height>609</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -80,7 +80,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>717</width>
+     <width>916</width>
      <height>28</height>
     </rect>
    </property>
@@ -90,6 +90,7 @@
     </property>
     <addaction name="action_New"/>
     <addaction name="actionNew_From_Template"/>
+    <addaction name="actionNew_From_File"/>
     <addaction name="separator"/>
     <addaction name="action_Open"/>
     <addaction name="separator"/>
@@ -823,10 +824,18 @@
     <string>New From &amp;Template</string>
    </property>
    <property name="statusTip">
-    <string>Create a new file from a template</string>
+    <string>Create a new file from a pre-defined template</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+T</string>
+   </property>
+  </action>
+  <action name="actionNew_From_File">
+   <property name="text">
+    <string>New From &amp;File</string>
+   </property>
+   <property name="statusTip">
+    <string>Create a new file from an existing one</string>
    </property>
   </action>
  </widget>

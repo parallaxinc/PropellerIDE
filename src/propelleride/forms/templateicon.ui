@@ -6,20 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>128</width>
-    <height>72</height>
+    <width>100</width>
+    <height>94</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>128</width>
+    <width>100</width>
     <height>72</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>128</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="palette">
@@ -89,6 +95,9 @@
   <property name="mouseTracking">
    <bool>true</bool>
   </property>
+  <property name="windowTitle">
+   <string>Template</string>
+  </property>
   <property name="autoFillBackground">
    <bool>true</bool>
   </property>
@@ -136,13 +145,19 @@
    <item>
     <widget class="QLabel" name="filename">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
      <property name="text">
-      <string>Supre Long Tiosjdf</string>
+      <string>Template</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignHCenter|Qt::AlignTop</set>

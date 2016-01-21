@@ -46,9 +46,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.editorTabs, SIGNAL(fileUpdated(int)),    this,   SLOT(setProject()));
 
     // File Menu
-    connect(ui.action_New,SIGNAL(triggered()),ui.editorTabs,SLOT(newFile()));
-    connect(ui.actionNew_From_Template,SIGNAL(triggered()),this,SLOT(newFromTemplate()));
-    connect(ui.action_Open,SIGNAL(triggered()),ui.editorTabs,SLOT(open()));
+    connect(ui.action_New,              SIGNAL(triggered()),    ui.editorTabs,  SLOT(newFile()));
+    connect(ui.actionNew_From_File,     SIGNAL(triggered()),    ui.editorTabs,  SLOT(newFromFile()));
+    connect(ui.actionNew_From_Template, SIGNAL(triggered()),    this,           SLOT(newFromTemplate()));
+    connect(ui.action_Open,             SIGNAL(triggered()),    ui.editorTabs,  SLOT(open()));
 
     connect(ui.action_Save,SIGNAL(triggered()),ui.editorTabs,SLOT(save()));
     connect(ui.actionSave_As,SIGNAL(triggered()),ui.editorTabs,SLOT(saveAs()));
@@ -61,9 +62,9 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i = 0; i < recentFiles.size(); i++)
         connect(recentFiles.at(i), SIGNAL(triggered()),this, SLOT(openRecentFile()));
     
-    connect(ui.action_Close,       SIGNAL(triggered()), ui.editorTabs, SLOT(closeFile()));
-    connect(ui.actionClose_All,    SIGNAL(triggered()), ui.editorTabs, SLOT(closeAll()));
-    connect(ui.action_Quit,        SIGNAL(triggered()), this,          SLOT(quitProgram()));
+    connect(ui.action_Close,            SIGNAL(triggered()),    ui.editorTabs, SLOT(closeFile()));
+    connect(ui.actionClose_All,         SIGNAL(triggered()),    ui.editorTabs, SLOT(closeAll()));
+    connect(ui.action_Quit,             SIGNAL(triggered()),    this,          SLOT(quitProgram()));
 
     connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    ui.action_Save,     SLOT(setEnabled(bool)));
     connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    ui.actionSave_All,  SLOT(setEnabled(bool)));
@@ -304,7 +305,7 @@ void MainWindow::setProject()
     addRecentFile(filename);
     parser->setFile(filename);
     parser->setLibraryPaths(spinIncludes);
-    qDebug() << spinIncludes;
+//    qDebug() << spinIncludes;
 
     recolorProjectView();
     QApplication::restoreOverrideCursor();
@@ -649,6 +650,12 @@ void MainWindow::newFromTemplate()
 
     NewFromTemplate * newfromtemplate = new NewFromTemplate(spinIncludes);
     newfromtemplate->exec();
+    
+    QString selected = newfromtemplate->selectedTemplate();
+    if (!selected.isEmpty())
+        ui.editorTabs->newFromFile(selected);
+
+    delete newfromtemplate;
 }
 
 void MainWindow::showMessage(const QString & message)

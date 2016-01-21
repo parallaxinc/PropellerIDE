@@ -154,6 +154,58 @@ int FileManager::openFile(const QString & fileName)
     return 0;
 }
 
+
+void FileManager::newFromFile()
+{
+    QSettings settings;
+    settings.beginGroup("Paths");
+
+    QString lastDir = settings.value("lastDirectory",
+                QDir(tabToolTip(currentIndex())).path()).toString();
+
+    QString fileName = QFileDialog::getOpenFileName(this,
+                tr("New From File..."), lastDir, "Spin Files (*.spin);;All Files (*)");
+
+    if (!fileName.isEmpty())
+        newFromFile(fileName);
+
+    settings.endGroup();
+}
+
+
+int FileManager::newFromFile(const QString & fileName)
+{
+    qCDebug(ideFileManager) << "newFromFile(" << fileName << ")";
+
+    if (fileName.isEmpty())
+        return 1;
+
+    QFile file(fileName);
+    if (!file.open(QFile::ReadOnly))
+    {
+        QMessageBox::warning(this, tr("Warning"),
+                             tr("Cannot read file %1:\n%2.")
+                             .arg(fileName)
+                             .arg(file.errorString()));
+        return 1;
+    }
+
+    int index = newFile();
+
+    QTextStream in(&file);
+    in.setAutoDetectUnicode(true);
+    in.setCodec("UTF-8");
+    getEditor(index)->setPlainText(reformatText(in.readAll()));
+
+    getEditor(index)->saveContent();
+    fileChanged();
+
+    emit fileUpdated(index);
+
+    return 0;
+}
+
+
 void FileManager::save()
 {
     save(currentIndex());

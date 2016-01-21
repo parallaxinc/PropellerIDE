@@ -1,6 +1,7 @@
 #include "newfromtemplate.h"
 
 #include <QDebug>
+#include <QDirIterator>
 #include <QGridLayout>
 
 NewFromTemplate::NewFromTemplate(
@@ -9,20 +10,26 @@ NewFromTemplate::NewFromTemplate(
 : QDialog(parent)
 {
     ui.setupUi(this);
+
     layout = NULL;
 
     QStringList temps;
-    temps << "Basic_Terminal.spin" << "More_Files.spin"
-        << "Serial_Terminal.spin"
-        << "Serial_Terminal2.spin"
-        << "Serial_Terminal3.spin";
 
-    addTemplates("spin",temps);
+    foreach (QString path, paths)
+    {
+        QDirIterator it(path + "/templates", QStringList() << "*.spin");
+        while (it.hasNext())
+        {
+            temps.append(it.next());
+        }
+    }
+
+    temps.sort();
+
+    addTemplates("Spin",temps);
 
     rebuildLayout(_templates[_category]);
-
 }
-
 
 NewFromTemplate::~NewFromTemplate()
 {
@@ -58,7 +65,6 @@ void NewFromTemplate::rebuildLayout(QList<TemplateIcon *> templates)
 void NewFromTemplate::resizeEvent(QResizeEvent * e)
 {
     Q_UNUSED(e);
-    qDebug() << "RESIZE";
     rebuildLayout(_templates[_category]);
 }
 
@@ -84,7 +90,6 @@ void NewFromTemplate::addWidget(QWidget * widget)
         }
     }
 
-    qDebug() << "ADD" << row << col << width + newwidth << ui.scrollArea->width();
     layout->addWidget(widget, row, col);
 }
 
@@ -97,8 +102,23 @@ void NewFromTemplate::addTemplates(QString category, QStringList templates)
 
     foreach (QString t, templates)
     {
-        newtemplates.append(new TemplateIcon(t));
+        TemplateIcon * tmp = new TemplateIcon(t);
+        connect(tmp,    SIGNAL(templateSelected(const QString &)),
+                this,   SLOT(templateSelected(const QString &)));
+        newtemplates.append(tmp);
     }
 
     _templates[category] = newtemplates;
+}
+
+
+QString NewFromTemplate::selectedTemplate()
+{
+    return _selected;
+}
+
+void NewFromTemplate::templateSelected(const QString & filename)
+{
+    _selected = filename;
+    close();
 }

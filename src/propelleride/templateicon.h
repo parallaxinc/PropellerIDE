@@ -9,13 +9,12 @@ class TemplateIcon : public QWidget
     Ui::TemplateIcon ui;
 
     QString _filename;
-    QIcon _icon;
     QColor _color;
 
 private slots:
 
 public:
-    explicit TemplateIcon(QString filename = QString(), QIcon icon = QIcon(), QWidget * parent = 0);
+    explicit TemplateIcon(QString filename = QString(), QWidget * parent = 0);
     ~TemplateIcon();
 
 public slots:
@@ -27,4 +26,7 @@ protected:
     virtual void mousePressEvent(QMouseEvent * e);
     virtual void mouseReleaseEvent(QMouseEvent * e);
     virtual void mouseDoubleClickEvent(QMouseEvent * e);
+
+signals:
+    void templateSelected(const QString & filename);
 };

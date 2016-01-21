@@ -1,17 +1,30 @@
 #include "templateicon.h"
 
 #include <QDebug>
+#include <QFileInfo>
 
 TemplateIcon::TemplateIcon(QString filename,
-        QIcon icon,
         QWidget * parent)
 : QWidget(parent)
 {
     ui.setupUi(this);
 
     _filename = filename;
-    ui.filename->setText(filename.replace("_"," ").remove(".spin"));
-    _icon = icon;
+
+    QFileInfo fi(filename);
+
+    ui.filename->setText(fi.fileName().replace("_"," ").remove(".spin"));
+
+    QString imagename = fi.absolutePath() + "/" + fi.completeBaseName() + ".png";
+
+    if (QFileInfo(imagename).exists())
+    {
+        QImage image(imagename);
+        image = image.scaled(64, 64, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        ui.icon->setPixmap(QPixmap::fromImage(image));
+    }
+    else
+        ui.icon->setPixmap(QPixmap(":/icons/edit-selectall.png"));
 }
 
 TemplateIcon::~TemplateIcon()
@@ -30,7 +43,6 @@ void TemplateIcon::leaveEvent(QEvent * e)
     setColor(QColor("#FFFFFF"));
 }
 
-
 void TemplateIcon::mousePressEvent(QMouseEvent * e)
 {
     Q_UNUSED(e);
@@ -40,14 +52,14 @@ void TemplateIcon::mousePressEvent(QMouseEvent * e)
 void TemplateIcon::mouseReleaseEvent(QMouseEvent * e)
 {
     Q_UNUSED(e);
-
+    setColor(QColor("#97C9FD"));
 }
 
 void TemplateIcon::mouseDoubleClickEvent(QMouseEvent * e)
 {
     Q_UNUSED(e);
-    qDebug() << "DOUBLE CLICK" << _filename;
-
+    setColor(QColor("#2D83DE"));
+    emit templateSelected(_filename);
 }
 
 void TemplateIcon::setColor(QColor color)

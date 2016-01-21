@@ -17,11 +17,12 @@ class NewFromTemplate : public QDialog
     QHash<QString, QList<TemplateIcon *> > _templates;
     QGridLayout * layout;
 
-
+    QString _selected;
 
     Ui::NewFromTemplate ui;
 
 private slots:
+    void templateSelected(const QString & filename);
 
 public:
     explicit NewFromTemplate(
@@ -29,6 +30,7 @@ public:
             QWidget * parent = 0);
     ~NewFromTemplate();
     void addTemplates(QString category, QStringList templates);
+    QString selectedTemplate();
 
 public slots:
 
