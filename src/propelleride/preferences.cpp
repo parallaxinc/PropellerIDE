@@ -112,7 +112,7 @@ void Preferences::setupLanguages()
 
 void Preferences::updateColor(int key, const QColor & color)
 {
-    qDebug() << "Preferences::updateColor(" << key << "," << color.name() << ")";
+//    qDebug() << "Preferences::updateColor(" << key << "," << color.name() << ")";
     currentTheme->setColor((ColorScheme::Color) key, color);
     emit updateColors();
 }

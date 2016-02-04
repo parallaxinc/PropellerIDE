@@ -22,7 +22,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../icons/propterm/propterm.qrc">:/icons/propterm/led-green.png</pixmap>
+        <pixmap>:/icons/propterm/led-green.png</pixmap>
        </property>
       </widget>
      </item>
@@ -216,7 +216,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../icons/propterm/propterm.qrc">:/icons/propterm/led-red.png</pixmap>
+        <pixmap>:/icons/propterm/led-red.png</pixmap>
        </property>
       </widget>
      </item>
@@ -232,7 +232,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../icons/propterm/propterm.qrc">:/icons/propterm/led-blue.png</pixmap>
+        <pixmap>:/icons/propterm/led-blue.png</pixmap>
        </property>
       </widget>
      </item>
@@ -670,6 +670,12 @@
      </property>
      <property name="verticalScrollBarPolicy">
       <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="undoRedoEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="lineWrapMode">
+      <enum>QPlainTextEdit::NoWrap</enum>
      </property>
      <property name="plainText">
       <string>Hi there and welcome to PropTerm!</string>

@@ -8,7 +8,8 @@
 Console::Console(QWidget *parent)
     : QPlainTextEdit(parent)
 {
-    document()->setMaximumBlockCount(100);
+    setMaximumBlockCount(100);
+
     enable(true);
 
     paused = false;
@@ -101,7 +102,7 @@ QTextCursor Console::positionY(QTextCursor cursor, int y)
 }
 
 
-void Console::putData(const QByteArray &data)
+void Console::putData(QByteArray data)
 {
     paused = true;
     setTextCursor(lastCursor);
@@ -179,6 +180,14 @@ void Console::putData(const QByteArray &data)
         else
         {
             insertPlainText(QString(c));
+        }
+
+        if (textCursor().columnNumber() % columns == 0 
+                && textCursor().positionInBlock() > 0
+                && c != 10 
+                && c != 13)
+        {
+            insertPlainText("\n");
         }
 
         lastChar2 = lastChar;
@@ -267,4 +276,21 @@ void Console::mousePressEvent(QMouseEvent *e)
     {
         QPlainTextEdit::mousePressEvent(e);
     }
+}
+
+void Console::updateColumns()
+{
+    columns = width() / QFontMetrics(font()).width(' ') + 1;
+}
+
+void Console::resizeEvent(QResizeEvent *e)
+{
+    QPlainTextEdit::resizeEvent(e);
+    updateColumns();
+}
+
+void Console::setFont(const QFont & font)
+{
+    QPlainTextEdit::setFont(font);
+    updateColumns();
 }

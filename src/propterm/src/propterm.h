@@ -28,10 +28,14 @@ private:
     QTimer txTimeout;
     QTimer busyTimeout;
     bool busytoggle;
+    bool _open;
 
 public:
-    explicit PropTerm(PropellerManager * manager, QWidget *parent = 0);
+    explicit PropTerm(PropellerManager * manager,
+                      const QString & portname = QString(),
+                      QWidget *parent = 0);
     ~PropTerm();
+    bool isOpen();
 
 public slots:
     void setFont(const QFont & font);
@@ -42,7 +46,7 @@ private slots:
     void free();
     void busy();
     void reset();
-    void writeData(const QByteArray &data);
+    void writeData(const QByteArray & data);
     void readData();
 
     void handleError();
@@ -50,7 +54,8 @@ private slots:
     void handleBusy();
 
     void portChanged();
-    void baudRateChanged(const QString & text);
+    void setDeviceBaudRate(const QString & text);
+    void setWidgetBaudRate(qint32 baudrate);
 
     void sendDataLine();
 

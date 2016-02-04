@@ -1,16 +1,17 @@
 #include "logging.h"
 
-Q_LOGGING_CATEGORY(ideMain,             "")
-Q_LOGGING_CATEGORY(ideMainwindow,       "")
-Q_LOGGING_CATEGORY(ideEditor,           "editor")
+Q_LOGGING_CATEGORY(logmain,             "main")
+Q_LOGGING_CATEGORY(logmainwindow,       "mainwindow")
 
-Q_LOGGING_CATEGORY(ideFileManager,      "file.manager")
-Q_LOGGING_CATEGORY(ideFile,             "file")
+Q_LOGGING_CATEGORY(logeditor,           "editor")
 
-Q_LOGGING_CATEGORY(ideBuildManager,     "build.manager")
+Q_LOGGING_CATEGORY(logfilemanager,      "file.manager")
+Q_LOGGING_CATEGORY(logfile,             "file")
 
-Q_LOGGING_CATEGORY(ideLanguageManager,  "language.manager")
-Q_LOGGING_CATEGORY(ideLanguage,         "language")
-Q_LOGGING_CATEGORY(ideHighlighter,      "language.highlighter")
+Q_LOGGING_CATEGORY(logbuildmanager,     "build.manager")
 
-Q_LOGGING_CATEGORY(ideTheme,            "theme")
+Q_LOGGING_CATEGORY(loglanguagemanager,  "language.manager")
+Q_LOGGING_CATEGORY(loglanguage,         "language")
+Q_LOGGING_CATEGORY(loghighlighter,      "language.highlighter")
+
+Q_LOGGING_CATEGORY(logcolorscheme,      "color.scheme")

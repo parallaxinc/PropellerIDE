@@ -50,6 +50,8 @@ public:
 signals:
     void compilerErrorInfo(QString file, int line);
     void terminalReceived(QString text);
+    void statusChanged(const QString & text);
+    void finished();
 
 public slots:
     void loadSuccess();
@@ -62,6 +64,8 @@ public slots:
     void hideStatus();
     void print(const QString & text, QColor color = Qt::black);
 
+    bool load(const QByteArray & binary = QByteArray());
+
 public:
 
     QString compilerStr;
@@ -69,7 +73,6 @@ public:
     QString projectFile;
     QString compileResult;
 
-    int load();
     void build();
     void getCompilerOutput();
 

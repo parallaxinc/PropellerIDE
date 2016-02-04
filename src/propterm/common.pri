@@ -1,4 +1,4 @@
-QT += gui widgets serialport
+QT += gui widgets
 
 CONFIG -= app_bundle debug_and_release
 

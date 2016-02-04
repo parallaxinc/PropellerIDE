@@ -94,6 +94,7 @@ void BuildManager::compilerFinished(int exitCode, QProcess::ExitStatus status)
         failure = true;
         setText(tr("Build failed!"));
         showDetails();
+        emit finished();
     }
     else
     {
@@ -101,6 +102,8 @@ void BuildManager::compilerFinished(int exitCode, QProcess::ExitStatus status)
 
         if (config.load)
             load();
+        else
+            emit finished();
     }
 }
 
@@ -124,7 +127,6 @@ void BuildManager::print(const QString & text, QColor color)
     tf.setForeground(oldcolor);
     ui.plainTextEdit->setCurrentCharFormat(tf);
 }
-
 
 void BuildManager::procReadyRead()
 {
@@ -166,7 +168,13 @@ void BuildManager::runProcess(const QString & programName, const QStringList & p
     {
         args.append(QDir::toNativeSeparators(programArgs.at(i)));
     }
-    qCDebug(ideBuildManager) << qPrintable(program) << qPrintable(args.join(" "));
+
+    qCDebug(logbuildmanager) << qPrintable(program);
+    foreach (QString a, args)
+    {
+        qCDebug(logbuildmanager) << "    " << qPrintable(a);
+
+    }
 
     QProcess * proc = new QProcess;
     proc->setProcessChannelMode(QProcess::MergedChannels);
@@ -180,7 +188,7 @@ void BuildManager::runProcess(const QString & programName, const QStringList & p
 }
 
 
-int BuildManager::load()
+bool BuildManager::load(const QByteArray & binary)
 {
     setStage(2);
     setTextColor(Qt::darkYellow);
@@ -189,25 +197,39 @@ int BuildManager::load()
 
     connect(&loader,    SIGNAL(success()), this, SLOT(loadSuccess()));
     connect(&loader,    SIGNAL(failure()), this, SLOT(loadFailure()));
+    connect(&loader,    SIGNAL(finished()), this, SIGNAL(finished()));
 
     connect(&loader,            SIGNAL(statusChanged(const QString &)),
             this,               SLOT(setText(const QString &)));
 
     connect(&loader,            SIGNAL(statusChanged(const QString &)),
+            this,               SIGNAL(statusChanged(const QString &)));
+
+    connect(&loader,            SIGNAL(statusChanged(const QString &)),
             ui.plainTextEdit,   SLOT(appendPlainText(const QString &)));
 
-    QFile file(config.binary);
-    if (!file.open(QIODevice::ReadOnly))
+    PropellerImage image;
+
+    if (!binary.isEmpty())
     {
-        qDebug() << "Couldn't open file";
-        return 1;
+        image = PropellerImage(binary);
+    }
+    else
+    {
+        QFile file(config.binary);
+        if (!file.open(QIODevice::ReadOnly))
+        {
+            qCCritical(logbuildmanager) << "Couldn't open file:" << config.binary;
+            return false;
+        }
+
+        image = PropellerImage(file.readAll(), config.binary);
     }
 
-    PropellerImage image = PropellerImage(file.readAll(), config.binary);
     loader.upload(image, config.write, true, true);
 
     waitClose();
-    return 0;
+    return true;
 }
 
 void BuildManager::loadSuccess()
@@ -232,10 +254,7 @@ void BuildManager::build()
     foreach (QString include, config.includes)
     {
         if (include.size() > 0)
-        {
-            args.append(("-L"));
-            args.append(include);
-        }
+            args.append("-L" + include);
     }
 
     setStage(1);

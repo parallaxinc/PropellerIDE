@@ -332,7 +332,7 @@ QString Editor::selectAutoComplete()
 int Editor::spinAutoComplete()
 {
     QString text = selectAutoComplete();
-    qDebug() << "keyPressEvent object dot pressed" << text;
+//    qDebug() << "keyPressEvent object dot pressed" << text;
 
     QSettings settings;
     settings.beginGroup("Paths");
@@ -401,7 +401,7 @@ void Editor::cbAutoSelected0insert(int index)
         cur.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, left);
         cur.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, left-1);
         s = cur.selectedText();
-        qDebug() << s;
+//        qDebug() << s;
     }
 
     this->setTextCursor(cur);
@@ -421,7 +421,7 @@ void Editor::cbAutoSelected(int index)
         cur.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, left);
         cur.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, left-1);
         s = cur.selectedText();
-        qDebug() << s;
+//        qDebug() << s;
     }
 
     this->setTextCursor(cur);
@@ -592,7 +592,7 @@ void Editor::resizeEvent(QResizeEvent *e)
 
 void Editor::updateColors()
 {
-    qDebug() << Q_FUNC_INFO;
+//    qDebug() << Q_FUNC_INFO;
     colors = currentTheme->getColorList();
     colorsAlt = colors;
 

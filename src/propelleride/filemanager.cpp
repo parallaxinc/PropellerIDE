@@ -114,7 +114,7 @@ QString FileManager::reformatText(QString text)
 
 int FileManager::openFile(const QString & fileName)
 {
-    qCDebug(ideFileManager) << "openFile(" << fileName << ")";
+    qCDebug(logfilemanager) << "opening" << fileName;
 
     if (fileName.isEmpty())
         return 1;
@@ -175,7 +175,7 @@ void FileManager::newFromFile()
 
 int FileManager::newFromFile(const QString & fileName)
 {
-    qCDebug(ideFileManager) << "newFromFile(" << fileName << ")";
+    qCDebug(logfilemanager) << "creating file from" << fileName;
 
     if (fileName.isEmpty())
         return 1;
@@ -255,7 +255,7 @@ void FileManager::saveAll()
 
 void FileManager::saveFile(const QString & fileName, int index)
 {
-    qCDebug(ideFileManager) << "saveFile(" << fileName << ")";
+    qCDebug(logfilemanager) << "saving" << fileName;
 
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text))
@@ -352,8 +352,6 @@ void FileManager::closeFile(int index)
         createBackgroundImage();
         emit closeAvailable(false);
     }
-
-    emit fileUpdated(index);
 }
 
 void FileManager::createBackgroundImage()

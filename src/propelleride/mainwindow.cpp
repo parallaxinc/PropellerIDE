@@ -6,10 +6,6 @@
 #include <QFileDialog> 
 #include <QMenu> 
 
-#include <PropellerLoader>
-#include <PropellerImage>
-#include <PropellerDevice>
-
 #include <MemoryMap>
 #include <PropTerm>
 
@@ -24,9 +20,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui.setupUi(this);
 
     // setup preferences dialog
-    connect(&preferences,SIGNAL(accepted()),this,SLOT(getApplicationSettings()));
+    connect(&preferences,   SIGNAL(accepted()),                     this,   SLOT(getApplicationSettings()));
 
-    connect(&builder,SIGNAL(compilerErrorInfo(QString,int)), this, SLOT(highlightFileLine(QString,int)));
+    connect(&builder,       SIGNAL(compilerErrorInfo(QString,int)), this,   SLOT(highlightFileLine(QString,int)));
+    connect(&builder,       SIGNAL(finished()),                     this,   SLOT(enableBuildControls()));
 
     parser = language.getParser();
     connect(&preferences,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
@@ -305,7 +302,6 @@ void MainWindow::setProject()
     addRecentFile(filename);
     parser->setFile(filename);
     parser->setLibraryPaths(spinIncludes);
-//    qDebug() << spinIncludes;
 
     recolorProjectView();
     QApplication::restoreOverrideCursor();
@@ -353,13 +349,31 @@ void MainWindow::highlightFileLine(QString filename, int line)
     }
 }
 
-int MainWindow::runCompiler(bool load, bool write)
+void MainWindow::enableBuildControls()
+{
+    setBuildControls(true);
+}
+
+void MainWindow::setBuildControls(bool enabled)
+{
+    ui.actionBuild->setEnabled(enabled);
+    ui.actionRun->setEnabled(enabled);
+    ui.actionWrite->setEnabled(enabled);
+}
+
+bool MainWindow::runCompiler(bool load, bool write, const QString & name)
 {
     if(!ui.editorTabs->count())
-        return 1;
+        return false;
 
-    int index = ui.editorTabs->currentIndex();
-    QString filename = ui.editorTabs->tabToolTip(index);
+    setBuildControls(false);
+
+    QString filename = name;
+    if (name.isEmpty())
+    { 
+        int index = ui.editorTabs->currentIndex();
+        filename = ui.editorTabs->tabToolTip(index);
+    }
 
     getApplicationSettings();
 
@@ -382,7 +396,7 @@ int MainWindow::runCompiler(bool load, bool write)
     builder.setConfiguration(config);
     builder.build();
 
-    return 0;
+    return true;
 }
 
 void MainWindow::programBuild()
@@ -419,28 +433,33 @@ void MainWindow::recolorProjectView()
     ui.projectview->setModel(parser->treeModel());
 }
 
-void MainWindow::spawnMemoryMap()
+void MainWindow::spawnMemoryMap(const QString & name)
 {
-    qCDebug(ideMainwindow) << "spawnMemoryMap()";
+    qCDebug(logmainwindow) << "spawnMemoryMap()";
+
+    QString filename = name;
+    if (name.isEmpty())
+    {
+        int index = ui.editorTabs->currentIndex();
+        filename = ui.editorTabs->tabToolTip(index);
+    }
+
+    if (!runCompiler(false, false, filename))
+        return;
 
     MemoryMap * map = new MemoryMap(&manager);
     map->setAttribute(Qt::WA_DeleteOnClose, true);
     map->setWindowIcon(QIcon(":/icons/project-info3.png"));
 
-    connect(&preferences,SIGNAL(updateColors()),map,SLOT(updateColors()));
-    connect(&preferences,SIGNAL(updateFonts(const QFont &)),map,SLOT(updateColors()));
-    connect(map,SIGNAL(getRecolor(QWidget *)),this,SLOT(recolorMemoryMap(QWidget *)));
+    connect(&preferences,   SIGNAL(updateColors()),             map,        SLOT(updateColors()));
+    connect(&preferences,   SIGNAL(updateFonts(const QFont &)), map,        SLOT(updateColors()));
+    connect(map,            SIGNAL(getRecolor(QWidget *)),      this,       SLOT(recolorMemoryMap(QWidget *)));
 
-    connect(map,SIGNAL(run(QByteArray)), this, SLOT(programRun()));
-    connect(map,SIGNAL(write(QByteArray)), this, SLOT(programWrite()));
+    connect(map,            SIGNAL(run(const QByteArray &)),    &builder,   SLOT(load(const QByteArray &)));
+    connect(map,            SIGNAL(write(QByteArray)),          this,       SLOT(programWrite()));
+
 
     recolorMemoryMap(map);
-
-    int index = ui.editorTabs->currentIndex();
-    QString filename = ui.editorTabs->tabToolTip(index);
-
-    if(runCompiler())
-        return;
 
     builder.hide();
     QFileInfo fi(filename);
@@ -449,9 +468,9 @@ void MainWindow::spawnMemoryMap()
     map->setWindowTitle(binaryname + " - " + tr("Memory Map"));
 
     binaryname = fi.dir().filePath(binaryname);
-    qDebug() << binaryname;
 
     map->openFile(binaryname);
+//    map->setModel(parser->treeModel());
     map->show();
 }
 
@@ -481,7 +500,8 @@ void MainWindow::zipFiles()
 
     QString spinLibPath  = QSettings().value("Library").toString();
     QStringList files = parser->getFileList();
-    qDebug() << files;
+
+    qCDebug(logmainwindow) << "zipping files:" << files;
 
     if(files.count() > 0)
     {
@@ -516,21 +536,24 @@ void MainWindow::updatePorts()
     {
         setEnableBuild(false);
     }
-    qDebug() << manager.listPorts();
 }
 
-void MainWindow::spawnTerminal()
+void MainWindow::spawnTerminal(const QString & portname)
 {
-    qCDebug(ideMainwindow) << "spawnTerminal()";
+    qCDebug(logmainwindow) << "creating terminal";
+
+    QString port = portname;
+    if (port.isEmpty())
+        port = cbPort->currentText();
 
     ColorScheme * theme = &Singleton<ColorScheme>::Instance();
-    PropTerm * term = new PropTerm(&manager);
+    PropTerm * term = new PropTerm(&manager, port);
 
     term->setAttribute(Qt::WA_DeleteOnClose);
     term->setWindowIcon(QIcon(":/icons/project-terminal.png"));
     term->setFont(theme->getFont());
 
-    connect(&preferences,SIGNAL(updateFonts(const QFont &)),term,SLOT(setFont(const QFont &)));
+    connect(&preferences,   SIGNAL(updateFonts(const QFont &)),     term,   SLOT(setFont(const QFont &)));
 
     term->show();
 }
@@ -617,7 +640,7 @@ void MainWindow::openFileResource(QString const & resource)
     if (QFileInfo(path).exists() && QFileInfo(path).isFile())
         QDesktopServices::openUrl(QUrl::fromLocalFile(path));
     else
-        qCDebug(ideMainwindow) << "File not found:" << path;
+        qCDebug(logmainwindow) << "File not found:" << path;
 }
 
 void MainWindow::propellerManual()

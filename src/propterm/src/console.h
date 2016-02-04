@@ -7,6 +7,7 @@ class Console : public QPlainTextEdit
 {
     Q_OBJECT
 
+    int columns;
     bool paused;
     char lastChar;
     char lastChar2;
@@ -18,7 +19,8 @@ signals:
 public:
     explicit Console(QWidget *parent = 0);
 
-    void putData(const QByteArray &data);
+    void putData(QByteArray data);
+    void setFont(const QFont & font);
 
 public slots:
     void setPstMode(bool enable);
@@ -28,6 +30,7 @@ public slots:
 protected:
     virtual void keyPressEvent(QKeyEvent *e);
     virtual void mousePressEvent(QMouseEvent *e);
+    virtual void resizeEvent(QResizeEvent *e);
 
 private:
     bool pstMode;
@@ -42,4 +45,6 @@ private:
 
     QTextCursor positionX(QTextCursor cursor, int x);
     QTextCursor positionY(QTextCursor cursor, int y);
+
+    void updateColumns();
 };

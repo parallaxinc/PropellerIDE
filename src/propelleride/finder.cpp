@@ -38,7 +38,6 @@ void Finder::showFinder()
         show();
         ui.findEdit->setFocus();
         findPosition = editor->textCursor().position();
-        qDebug() << findPosition;
     }
 }
     

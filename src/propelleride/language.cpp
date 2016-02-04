@@ -95,8 +95,6 @@ void Language::buildParser(QJsonArray projectparser)
                 }
             }
 
-//            qDebug() << p.regex;
-//            qDebug() << p.capture;
             patterns.append(p);
         }
 

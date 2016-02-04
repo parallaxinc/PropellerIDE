@@ -9,8 +9,35 @@
 #include <Qt>
 #include <QString>
 #include <QtGlobal>
+#include <QDateTime>
+
+#include "logging.h"
 
 #include "mainwindow.h"
+
+void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    QByteArray localMsg = msg.toLocal8Bit();
+    switch (type) {
+        case QtDebugMsg:
+            fprintf(stderr, "[\033[1;32mDEBUG\033[0m] \033[0;34m%s\033[0m: %s\n", context.category, localMsg.constData());
+            break;
+#ifdef QtInfoMsg
+        case QtInfoMsg:
+            fprintf(stderr, "[\033[1;32mINFO \033[0m] \033[0;34m%s\033[0m: %s\n", context.category, localMsg.constData());
+            break;
+#endif
+        case QtWarningMsg:
+            fprintf(stderr, "[\033[1;33mWARN \033[0m] \033[0;34m%s\033[0m: %s\n", context.category, localMsg.constData());
+            break;
+        case QtCriticalMsg:
+            fprintf(stderr, "[\033[1;31mERROR\033[0m] \033[0;34m%s\033[0m: %s\n", context.category, localMsg.constData());
+            break;
+        case QtFatalMsg:
+            fprintf(stderr, "[\033[1;31mFATAL\033[0m] \033[0;34m%s\033[0m: %s\n", context.category, localMsg.constData());
+            abort();
+    }
+}
 
 void updateSplash(QSplashScreen * splash, const QString & text)
 {
@@ -23,31 +50,37 @@ void updateSplash(QSplashScreen * splash, const QString & text)
 
 int main(int argc, char *argv[])
 {
+
+#ifndef Q_OS_WIN32
+    qInstallMessageHandler(messageHandler);
+#endif
+
     QApplication app(argc, argv);
 
     QCoreApplication::setOrganizationName("Parallax");
     QCoreApplication::setOrganizationDomain("www.parallax.com");
+    QCoreApplication::setApplicationName("PropellerIDE");
+
 #ifdef VERSION
     QCoreApplication::setApplicationVersion(VERSION);
 #else
-    QCoreApplication::setApplicationVersion("DEV");
+    QCoreApplication::setApplicationVersion("0.0.0");
 #endif
-    QCoreApplication::setApplicationName("PropellerIDE");
+
+    QString description = QObject::tr("An easy-to-use, cross-platform IDE for the Parallax Propeller");
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QCoreApplication::applicationName());
     parser.addHelpOption();
     parser.addVersionOption();
     parser.addPositionalArgument("Source files", QObject::tr("Source files to open."), "OBJECTS...");
-    parser.setApplicationDescription(
-            "\n"+qApp->applicationName()
-+ QObject::tr(" is an easy-to-use, cross-platform development tool for the\n\
-Parallax Propeller microcontroller.\n\n\
-Write code, download programs to your Propeller board, and\n\
-debug your applications with the built-in serial terminal.")
-           );
+    parser.setApplicationDescription("\n" + description);
     parser.process(app);
 
+    qCDebug(logmain) << qPrintable(QCoreApplication::applicationName())
+                     << qPrintable(QString("v"+QCoreApplication::applicationVersion()))
+                     << "-"
+                     << qPrintable(description);
 
     QPixmap pixmap(":/icons/splash.png");
     QSplashScreen splash(pixmap);
@@ -66,12 +99,11 @@ debug your applications with the built-in serial terminal.")
     // init styles
 #if defined(Q_OS_WIN32)
     QStringList styles = QStyleFactory::keys();
-    qDebug() << "Available window styles" << styles;
+//    qDebug() << "Available window styles" << styles;
     if(styles.contains("WindowsVista")) {
         QApplication::setStyle("WindowsVista");
     }
 #endif
-
     updateSplash(&splash, QObject::tr("Loading fonts..."));
 
     // init fonts

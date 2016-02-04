@@ -2,17 +2,21 @@
 #include "console.h"
 
 #include <QDebug>
+#include <QIntValidator>
 
 Q_LOGGING_CATEGORY(terminal, "ide.terminal")
 
 PropTerm::PropTerm(PropellerManager * manager,
+                   const QString & portname,
                    QWidget *parent)
 : QWidget(parent)
 {
     ui.setupUi(this);
 
     this->manager = manager;
-    session = new PropellerSession(manager);
+    session = new PropellerSession(manager, portname);
+
+    ui.baudRate->setValidator(new QIntValidator(0, 1000000, this));
 
     timeout = 100;
 
@@ -22,14 +26,16 @@ PropTerm::PropTerm(PropellerManager * manager,
     toggleRxLight(false);
     toggleTxLight(false);
 
+    updatePorts();
+    ui.console->clear();
+
     connect(&rxTimeout,     SIGNAL(timeout()),      this, SLOT(turnOffRxLight()));
     connect(&txTimeout,     SIGNAL(timeout()),      this, SLOT(turnOffTxLight()));
     connect(&busyTimeout,   SIGNAL(timeout()),      this, SLOT(handleBusy()));
 
     connect(manager,        SIGNAL(portListChanged()),          this, SLOT(updatePorts()));
-    connect(session,        SIGNAL(deviceFree()),               this, SLOT(free()));
-    connect(session,        SIGNAL(deviceBusy()),               this, SLOT(busy()));
     connect(session,        SIGNAL(sendError(const QString &)), this, SLOT(handleError()));
+    connect(session,        SIGNAL(baudRateChanged(qint32)),    this, SLOT(setWidgetBaudRate(qint32)));
     connect(ui.console,     SIGNAL(getData(QByteArray)),        this, SLOT(writeData(QByteArray)));
     connect(ui.echo,        SIGNAL(toggled(bool)),              ui.console, SLOT(setEcho(bool)));
 
@@ -37,7 +43,7 @@ PropTerm::PropTerm(PropellerManager * manager,
     connect(ui.sendButton,  SIGNAL(pressed()),      this, SLOT(sendDataLine()));
 
     connect(ui.port,        SIGNAL(currentIndexChanged(const QString &)), this, SLOT(portChanged()));
-    connect(ui.baudRate,    SIGNAL(currentIndexChanged(const QString &)), this, SLOT(baudRateChanged(const QString &)));
+    connect(ui.baudRate,    SIGNAL(currentIndexChanged(const QString &)), this, SLOT(setDeviceBaudRate(const QString &)));
 
     connect(ui.clear,       SIGNAL(clicked()),      ui.console, SLOT(clear()));
     connect(ui.reset,       SIGNAL(clicked()),      this, SLOT(reset()));
@@ -45,8 +51,6 @@ PropTerm::PropTerm(PropellerManager * manager,
 
     title = tr("Terminal");
 
-    updatePorts();
-    ui.console->clear();
     open();
 }
 
@@ -118,8 +122,8 @@ void PropTerm::open()
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-green.png"));
 
     portChanged();
-    session->unpause();
-    baudRateChanged(ui.baudRate->currentText());
+    session->setPaused(false);
+    setDeviceBaudRate(ui.baudRate->currentText());
 
     connect(session, SIGNAL(readyRead()), this, SLOT(readData()));
 }
@@ -132,7 +136,7 @@ void PropTerm::closed()
     ui.sendLineEdit->setEnabled(false);
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-off.png"));
 
-    session->pause();
+    session->setPaused(true);
 
     disconnect(session, SIGNAL(readyRead()), this, SLOT(readData()));
 }
@@ -158,8 +162,9 @@ void PropTerm::reset()
 
 void PropTerm::portChanged()
 {
-    qCDebug(terminal) << "port" << ui.port->currentText();
+    qCDebug(terminal) << "switch to port" << ui.port->currentText();
     session->setPortName(ui.port->currentText());
+    setWidgetBaudRate(session->baudRate());
     if (session->portName().isEmpty())
     {
         setWindowTitle(tr("%1").arg(title));
@@ -170,10 +175,10 @@ void PropTerm::portChanged()
     }
 }
 
-void PropTerm::baudRateChanged(const QString & text)
+void PropTerm::setDeviceBaudRate(const QString & text)
 {
     bool ok;
-    int baud = text.toInt(&ok);
+    qint32 baud = text.toInt(&ok);
     if (!ok)
     {
         qCCritical(terminal) << "Baud rate invalid:" << baud;
@@ -181,7 +186,11 @@ void PropTerm::baudRateChanged(const QString & text)
     }
 
     session->setBaudRate(baud);
-    qCDebug(terminal) << "new baud rate:" << baud;
+}
+
+void PropTerm::setWidgetBaudRate(qint32 baudrate)
+{
+    ui.baudRate->setCurrentIndex(ui.baudRate->findText(QString::number(baudrate)));
 }
 
 void PropTerm::sendDataLine()
@@ -192,7 +201,7 @@ void PropTerm::sendDataLine()
     ui.sendLineEdit->clear();
 }
 
-void PropTerm::writeData(const QByteArray &data)
+void PropTerm::writeData(const QByteArray & data)
 {
     toggleTxLight(true);
 
@@ -212,7 +221,7 @@ void PropTerm::readData()
 
 void PropTerm::handleError()
 {
-    qCDebug(terminal) << "THERE WAS AN ERROR";
+//    qCDebug(terminal) << "THERE WAS AN ERROR";
     closed();
 }
 

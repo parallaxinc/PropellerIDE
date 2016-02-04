@@ -9,7 +9,7 @@ ColorScheme::ColorScheme(QObject * parent) :
     QObject(parent)
 {
     defaults();
-    load();
+//    load();
 }
 
 void ColorScheme::defaults()
@@ -46,7 +46,7 @@ void ColorScheme::save(const QString & filename)
 
 void ColorScheme::save(QSettings * settings)
 {
-    qCDebug(ideTheme) << "saving" << settings->fileName();
+    qCDebug(logcolorscheme) << "saving" << settings->fileName();
 
     settings->beginGroup("Colors");
 
@@ -81,7 +81,7 @@ void ColorScheme::load(const QString & filename)
 
 void ColorScheme::load(QSettings * settings)
 {
-    qCDebug(ideTheme) << "loading" << settings->fileName();
+    qCDebug(logcolorscheme) << "loading" << settings->fileName();
 
     settings->beginGroup("Colors");
 

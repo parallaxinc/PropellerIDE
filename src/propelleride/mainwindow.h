@@ -26,28 +26,27 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-private:
-    Ui::MainWindow ui;
+    Ui::MainWindow      ui;
+
+    PropellerManager    manager;
+    Zipper              zipper;
+
+    BuildManager        builder;
+    Language            language;
+
+    ProjectParser *     parser;
+
+    QString             spinCompiler;
+    QStringList         spinIncludes;
+    QString             projectFile;
+
+    QList<QAction *>    recentFiles;
+    QComboBox *         cbPort;
 
 public:
     MainWindow(QWidget *parent = 0);
 
-    PropellerManager manager;
-    Zipper          zipper;
-
-    Preferences     preferences;
-    BuildManager    builder;
-    Language        language;
-
-    ProjectParser   *parser;
-
-    QString         spinCompiler;
-    QStringList     spinIncludes;
-    QString         projectFile;
-
-    QList<QAction *>    recentFiles;
-    QComboBox   * cbPort;
-
+    Preferences         preferences;
 
 public slots:
     void showMessage(const QString & message);
@@ -69,12 +68,15 @@ public slots:
     void newFromTemplate();
 
     void setProject();
+    void enableBuildControls();
+    void setBuildControls(bool enabled);
 
+    bool runCompiler(bool load = false, bool write = false, const QString & name = QString());
     void programBuild();
     void programRun();
     void programWrite();
-    void spawnMemoryMap();
-    void spawnTerminal();
+    void spawnMemoryMap(const QString & name = QString());
+    void spawnTerminal(const QString & portname = QString());
 
     void recolorMemoryMap(QWidget * widget);
     void recolorProjectView();
@@ -102,6 +104,5 @@ private:
 
     bool eventFilter(QObject *target, QEvent *event);
 
-    int  runCompiler(bool load = false, bool write = false);
 
 };
