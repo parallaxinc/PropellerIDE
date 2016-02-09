@@ -46,7 +46,7 @@ void BuildManager::hideStatus()
 void BuildManager::waitClose()
 {
     timer.setSingleShot(true);
-    timer.start(1000);
+    timer.start(100);
 }
 
 void BuildManager::setFont(const QFont & font)
@@ -101,9 +101,14 @@ void BuildManager::compilerFinished(int exitCode, QProcess::ExitStatus status)
         setText(tr("Build successful!"));
 
         if (config.load)
-            load();
+        {
+            if (!load())
+                emit finished();
+        }
         else
+        {
             emit finished();
+        }
     }
 }
 
@@ -227,6 +232,7 @@ bool BuildManager::load(const QByteArray & binary)
     }
 
     loader.upload(image, config.write, true, true);
+    emit finished();
 
     waitClose();
     return true;

@@ -29,25 +29,29 @@ PropTerm::PropTerm(PropellerManager * manager,
     updatePorts();
     ui.console->clear();
 
-    connect(&rxTimeout,     SIGNAL(timeout()),      this, SLOT(turnOffRxLight()));
-    connect(&txTimeout,     SIGNAL(timeout()),      this, SLOT(turnOffTxLight()));
-    connect(&busyTimeout,   SIGNAL(timeout()),      this, SLOT(handleBusy()));
+    connect(&rxTimeout,     SIGNAL(timeout()),                              this,       SLOT(turnOffRxLight()));
+    connect(&txTimeout,     SIGNAL(timeout()),                              this,       SLOT(turnOffTxLight()));
+    connect(&busyTimeout,   SIGNAL(timeout()),                              this,       SLOT(handleBusy()));
 
-    connect(manager,        SIGNAL(portListChanged()),          this, SLOT(updatePorts()));
-    connect(session,        SIGNAL(sendError(const QString &)), this, SLOT(handleError()));
-    connect(session,        SIGNAL(baudRateChanged(qint32)),    this, SLOT(setWidgetBaudRate(qint32)));
-    connect(ui.console,     SIGNAL(getData(QByteArray)),        this, SLOT(writeData(QByteArray)));
-    connect(ui.echo,        SIGNAL(toggled(bool)),              ui.console, SLOT(setEcho(bool)));
+    connect(manager,        SIGNAL(portListChanged()),                      this,       SLOT(updatePorts()));
+    connect(session,        SIGNAL(sendError(const QString &)),             this,       SLOT(handleError()));
+    connect(session,        SIGNAL(baudRateChanged(qint32)),                this,       SLOT(setWidgetBaudRate(qint32)));
 
-    connect(ui.sendLineEdit,SIGNAL(returnPressed()),this, SLOT(sendDataLine()));
-    connect(ui.sendButton,  SIGNAL(pressed()),      this, SLOT(sendDataLine()));
+    connect(session,        SIGNAL(deviceStateChanged(bool)),               this,       SLOT(handleDeviceStateChanged(bool)));
+    connect(session,        SIGNAL(deviceAvailableChanged(bool)),           this,       SLOT(handleAvailable(bool)));
 
-    connect(ui.port,        SIGNAL(currentIndexChanged(const QString &)), this, SLOT(portChanged()));
-    connect(ui.baudRate,    SIGNAL(currentIndexChanged(const QString &)), this, SLOT(setDeviceBaudRate(const QString &)));
+    connect(ui.console,     SIGNAL(getData(QByteArray)),                    this,       SLOT(writeData(QByteArray)));
+    connect(ui.echo,        SIGNAL(toggled(bool)),                          ui.console, SLOT(setEcho(bool)));
 
-    connect(ui.clear,       SIGNAL(clicked()),      ui.console, SLOT(clear()));
-    connect(ui.reset,       SIGNAL(clicked()),      this, SLOT(reset()));
-    connect(ui.activeButton,SIGNAL(toggled(bool)),  this, SLOT(handleEnable(bool)));
+    connect(ui.sendLineEdit,SIGNAL(returnPressed()),                        this,       SLOT(sendDataLine()));
+    connect(ui.sendButton,  SIGNAL(pressed()),                              this,       SLOT(sendDataLine()));
+
+    connect(ui.port,        SIGNAL(currentIndexChanged(const QString &)),   this,       SLOT(portChanged()));
+    connect(ui.baudRate,    SIGNAL(currentIndexChanged(const QString &)),   this,       SLOT(setDeviceBaudRate(const QString &)));
+
+    connect(ui.clear,       SIGNAL(clicked()),                              ui.console, SLOT(clear()));
+    connect(ui.reset,       SIGNAL(clicked()),                              this,       SLOT(reset()));
+    connect(ui.activeButton,SIGNAL(toggled(bool)),                          this,       SLOT(handleDevicePower(bool)));
 
     title = tr("Terminal");
 
@@ -113,16 +117,30 @@ void PropTerm::toggleTxLight(bool enabled)
     }
 }
 
+
+void PropTerm::setEnabled(bool enabled)
+{
+    ui.console->enable(enabled);
+    ui.console->setEnabled(enabled);
+    ui.sendButton->setEnabled(enabled);
+    ui.sendLineEdit->setEnabled(enabled);
+    ui.baudRate->setEnabled(enabled);
+    ui.reset->setEnabled(enabled);
+    ui.clear->setEnabled(enabled);
+
+    disconnect(ui.activeButton,SIGNAL(toggled(bool)),  this, SLOT(handleDevicePower(bool)));
+    ui.activeButton->setChecked(enabled);
+    connect(ui.activeButton,SIGNAL(toggled(bool)),  this, SLOT(handleDevicePower(bool)));
+
+    session->setPaused(!enabled);
+}
+
 void PropTerm::open()
 {
-    ui.console->enable(true);
-    ui.console->setEnabled(true);
-    ui.sendButton->setEnabled(true);
-    ui.sendLineEdit->setEnabled(true);
+    setEnabled(true);
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-green.png"));
 
     portChanged();
-    session->setPaused(false);
     setDeviceBaudRate(ui.baudRate->currentText());
 
     connect(session, SIGNAL(readyRead()), this, SLOT(readData()));
@@ -130,22 +148,25 @@ void PropTerm::open()
 
 void PropTerm::closed()
 {
-    ui.console->enable(false);
-    ui.console->setEnabled(false);
-    ui.sendButton->setEnabled(false);
-    ui.sendLineEdit->setEnabled(false);
+    setEnabled(false);
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-off.png"));
 
-    session->setPaused(true);
-
     disconnect(session, SIGNAL(readyRead()), this, SLOT(readData()));
+}
+
+void PropTerm::handleAvailable(bool available)
+{
+    if (available)
+        free();
+    else
+        busy();
 }
 
 void PropTerm::busy()
 {
     closed();
     ui.activeLight->setPixmap(QPixmap(":/icons/propterm/led-yellow.png"));
-    busyTimeout.start(125);
+    busyTimeout.start(75);
 }
 
 void PropTerm::free()
@@ -162,16 +183,19 @@ void PropTerm::reset()
 
 void PropTerm::portChanged()
 {
-    qCDebug(terminal) << "switch to port" << ui.port->currentText();
-    session->setPortName(ui.port->currentText());
-    setWidgetBaudRate(session->baudRate());
-    if (session->portName().isEmpty())
+    if (ui.port->currentText() != session->portName())
     {
-        setWindowTitle(tr("%1").arg(title));
-    }
-    else
-    {
-        setWindowTitle(tr("%1 - %2").arg(session->portName()).arg(title));
+        qCDebug(terminal) << "switch to port" << ui.port->currentText();
+        session->setPortName(ui.port->currentText());
+        setWidgetBaudRate(session->baudRate());
+        if (session->portName().isEmpty())
+        {
+            setWindowTitle(tr("%1").arg(title));
+        }
+        else
+        {
+            setWindowTitle(tr("%1 - %2").arg(session->portName()).arg(title));
+        }
     }
 }
 
@@ -225,9 +249,17 @@ void PropTerm::handleError()
     closed();
 }
 
-void PropTerm::handleEnable(bool checked)
+void PropTerm::handleDevicePower(bool enabled)
 {
-    if (checked)
+    if (enabled)
+        manager->openPort(session->portName());
+    else
+        manager->closePort(session->portName());
+}
+
+void PropTerm::handleDeviceStateChanged(bool enabled)
+{
+    if (enabled)
         open();
     else
         closed();
@@ -246,3 +278,4 @@ void PropTerm::handleBusy()
         busytoggle = true;
     }
 }
+

@@ -39,10 +39,12 @@ public:
 
 public slots:
     void setFont(const QFont & font);
+    void setEnabled(bool enabled);
 
 private slots:
     void open();
     void closed();
+    void handleAvailable(bool available);
     void free();
     void busy();
     void reset();
@@ -50,7 +52,8 @@ private slots:
     void readData();
 
     void handleError();
-    void handleEnable(bool checked);
+    void handleDeviceStateChanged(bool enabled);
+    void handleDevicePower(bool enabled);
     void handleBusy();
 
     void portChanged();

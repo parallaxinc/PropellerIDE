@@ -531,6 +531,11 @@ void MainWindow::updatePorts()
     if(cbPort->count())
     {
         setEnableBuild(true);
+        QStringList latest = manager.latestPorts();
+        if (!latest.isEmpty())
+        {
+            cbPort->setCurrentIndex(cbPort->findText(latest.last()));
+        }
     }
     else
     {
