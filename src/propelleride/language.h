@@ -10,7 +10,8 @@
 
 class Language
 {
-private:
+    ProjectParser parser;
+
     bool case_sensitive;
     bool enable_blocks;
     QString escape_char;
@@ -28,7 +29,6 @@ private:
     QStringList mergeList(QStringList list);
 
 public:
-    ProjectParser parser;
 
     void buildParser(QJsonArray projectparser);
     void loadLanguage(QString filename);

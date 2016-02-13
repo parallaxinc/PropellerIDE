@@ -19,6 +19,10 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(QCoreApplication::applicationName());
     ui.setupUi(this);
 
+    // ===== HACK ZONE =====
+    ui.editorTabs->setLanguage(&language);  
+    // ===== END HACK ZONE =====
+
     // setup preferences dialog
     connect(&preferences,   SIGNAL(accepted()),                     this,   SLOT(getApplicationSettings()));
 

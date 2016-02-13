@@ -9,32 +9,35 @@
 #include "highlighter.h"
 #include "preferences.h"
 
+#include "language.h"
+
 class LineNumberArea;
 
 class Editor : public QPlainTextEdit
 {
     Q_OBJECT
 
-public:
-    Editor(QWidget *parent);
-    virtual ~Editor();
+    Language * language;
+    ProjectParser * parser;
 
-    void saveContent();
-    int contentChanged();
-
-private:
-    Language lang;
- 
     QStringList blocks;
     QRegularExpression re_blocks;
 
     bool tabOn;
-
     int  tabStop;
+
     bool smartIndent;
     bool indentGuides;
     bool autoComplete;
     bool highlightLine;
+
+public:
+    Editor(Language * language,
+            QWidget * parent);
+    virtual ~Editor();
+
+    void saveContent();
+    int contentChanged();
 
 public slots:
     bool getUndo();

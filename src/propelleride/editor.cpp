@@ -13,12 +13,17 @@
 
 #include "mainwindow.h"
 
-Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
+#include "logging.h"
+
+Editor::Editor(Language * language, QWidget *parent) : QPlainTextEdit(parent)
 {
+    this->language = language;
+    this->parser = language->getParser();
+    
     propDialog = &((MainWindow *) parent)->preferences;
 
-    blocks = lang.listBlocks();
-    re_blocks = lang.buildTokenizer(blocks);
+    blocks = language->listBlocks();
+    re_blocks = language->buildTokenizer(blocks);
 
     ctrlPressed = false;
     expectAutoComplete = false;
@@ -332,12 +337,6 @@ QString Editor::selectAutoComplete()
 int Editor::spinAutoComplete()
 {
     QString text = selectAutoComplete();
-//    qDebug() << "keyPressEvent object dot pressed" << text;
-
-    QSettings settings;
-    settings.beginGroup("Paths");
-    lang.parser.setLibraryPaths(QStringList() << settings.value("Library").toString());
-    settings.endGroup();
 
     cbAuto->clear();
     cbAuto->addItem(".");
@@ -345,25 +344,25 @@ int Editor::spinAutoComplete()
     QList<ProjectParser::Match> matches;
     if(text.length() > 0)
     {
-        matches = lang.parser.matchRule("_includes_",toPlainText());
+        matches = parser->matchRule("_includes_",toPlainText());
 
         QStringList filenames;
         foreach(ProjectParser::Match m, matches)
         {
             if (m.exact.contains(text))
-                filenames << lang.parser.findFileName(m.pretty);
+                filenames << parser->findFileName(m.pretty);
         }
 
         if (!(filenames.count() > 0))
             return 0;
 
-        lang.parser.setFile(filenames[0]);
+        parser->setFile(filenames[0]);
 
-        matches = lang.parser.matchRuleFromFile("public",filenames[0]);
+        matches = parser->matchRuleFromFile("public",filenames[0]);
     }
     else
     {
-        matches = lang.parser.matchRule("public",toPlainText());
+        matches = parser->matchRule("public",toPlainText());
 
         if (!(matches.count() > 0))
             return 0;

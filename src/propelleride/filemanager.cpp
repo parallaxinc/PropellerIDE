@@ -15,12 +15,18 @@ FileManager::FileManager(QWidget *parent) :
     connect(this,   SIGNAL(currentChanged(int)),    this,   SLOT(changeTab(int)));
 }
 
+// THIS IS A HACK OMG SUCH A HACK
+void FileManager::setLanguage(Language * language)
+{
+    this->language = language;
+}
+
 int FileManager::newFile()
 {
     // removes the background image (need to move this elsewhere)
     setStyleSheet("");
 
-    Editor *editor = new Editor(QWidget::window());
+    Editor * editor = new Editor(language, QWidget::window());
     editor->setAttribute(Qt::WA_DeleteOnClose);
     editor->installEventFilter(QWidget::window());
     editor->saveContent();
