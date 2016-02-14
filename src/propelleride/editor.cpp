@@ -365,7 +365,7 @@ void Editor::finishAutoComplete(int index)
     disconnect(cbAuto,SIGNAL(activated(int)),this,SLOT(finishAutoComplete(int)));
 
     QString text = selectAutoComplete();
-    qDebug() << "finish autocomplete:" << text;
+//    qDebug() << "finish autocomplete:" << text;
 
     QString s = cbAuto->itemText(index);
     QTextCursor cur = this->textCursor();
