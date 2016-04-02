@@ -31,8 +31,8 @@ build_script:
     - packthing --version %BUILD_VERSION% inno
 
 artifacts:
-  - path: build\staging\propelleride-*.exe
-    name: propelleride
+  - path: build\staging\*.exe
+    name: package
 
 deploy:
   provider: GitHub
