@@ -13,17 +13,17 @@ case "$PLATFORM" in
     packthing -h
 
     packthing -j4 --version $BUILD_VERSION dmg
-    mv build/staging/propelleride-*.dmg .
+    mv build/staging/*.dmg .
     ;;
 "linux")
     qmake -v
     packthing -h
 
     packthing -j4 run
-    mv build/staging/propelleride-*.run .
+    mv build/staging/*.run .
 
     fakeroot packthing -j4 --version $BUILD_VERSION deb
-    mv build/staging/propelleride-*.deb .
+    mv build/staging/*.deb .
     ;;
 "rpi")
     sudo chroot $MNT uname -a
@@ -32,11 +32,11 @@ case "$PLATFORM" in
 
     sudo packthing --checkout
 
-    sudo chroot $MNT bash -c "cd /home/travis/build/parallaxinc/PropellerIDE/ && \
+    sudo chroot $MNT bash -c "cd /home/travis/build/$TRAVIS_REPO_SLUG/ && \
                                         packthing -j4 deb --version $BUILD_VERSION --arch armhf && \
-                                        mv build/staging/propelleride-*.deb ."
+                                        mv build/staging/*.deb ."
 
-    sudo chown `whoami`:`groups | sed -r 's/ .*//g'` propelleride-*.deb
+    sudo chown `whoami`:`groups | sed -r 's/ .*//g'` *.deb
     ;;
 *)
     echo "Invalid PLATFORM"
