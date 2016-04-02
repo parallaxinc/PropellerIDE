@@ -46,11 +46,11 @@ matrix:
         PLATFORM=rpi
         MNT=/home/travis/mnt
 
-before_install: "[ -f ./.travis/before_install.sh   ] || ./.travis/before_install.sh"
-install:        "[ -f ./.travis/install.sh          ] || ./.travis/install.sh"
-before_script:  "[ -f ./.travis/before_script.sh    ] || ./.travis/before_script.sh"
-script:         "[ -f ./.travis/script.sh           ] || ./.travis/script.sh"
-after_script:   "[ -f ./.travis/after_script.sh     ] || ./.travis/after_script.sh"
+before_install: "[ -f ./.travis/before_install.sh   ] && ./.travis/before_install.sh"
+install:        "[ -f ./.travis/install.sh          ] && ./.travis/install.sh"
+before_script:  "[ -f ./.travis/before_script.sh    ] && ./.travis/before_script.sh"
+script:         "[ -f ./.travis/script.sh           ] && ./.travis/script.sh"
+after_script:   "[ -f ./.travis/after_script.sh     ] && ./.travis/after_script.sh"
 
 deploy:
   provider: releases
