@@ -12,17 +12,13 @@ BuildManager::BuildManager(QWidget *parent)
 {
     ui.setupUi(this);
 
-    hideDetails();
-
     ui.activeText->setText(" ");
     setStage(0);
 
-    connect(&timer,SIGNAL(timeout()),this,SLOT(hideStatus()));
+    connect(&timer, SIGNAL(timeout()),  this,   SLOT(hideStatus()));
 
     currentTheme = &Singleton<ColorScheme>::Instance();
     updateColors();
-
-    connect(ui.label, SIGNAL(clicked()), this, SLOT(toggleDetails()));
 }
 
 BuildManager::~BuildManager()
@@ -61,15 +57,15 @@ void BuildManager::setConfiguration(BuildManager::Configuration config)
 
 void BuildManager::handleCompilerError(QProcess::ProcessError e)
 {
+    qCritical() << "Build failure" << config.compiler;
     failure = true;
     timer.stop();
-    hideStatus();
+
     QString errorstring;
     switch (e)
     {
         case QProcess::FailedToStart:
-            errorstring = tr("Could not start \"%1.\"\n"
-                             "Please check Preferences.").arg(config.compiler);
+            errorstring = tr("Failed to start compiler: '%1'; check Preferences").arg(config.compiler);
             break;
         case QProcess::Crashed:
         case QProcess::Timedout:
@@ -85,6 +81,9 @@ void BuildManager::handleCompilerError(QProcess::ProcessError e)
     QMessageBox::critical((QWidget *) parent(),
             tr("Build Failed"),
             tr("%1").arg(errorstring));
+
+    emit buildError();
+    emit finished();
 }
 
 void BuildManager::compilerFinished(int exitCode, QProcess::ExitStatus status)
@@ -93,7 +92,6 @@ void BuildManager::compilerFinished(int exitCode, QProcess::ExitStatus status)
     {
         failure = true;
         setText(tr("Build failed!"));
-        showDetails();
         emit finished();
     }
     else
@@ -263,8 +261,12 @@ void BuildManager::build()
             args.append("-L" + include);
     }
 
+    QString actionstring = tr("Building '%1'...")
+        .arg(QFileInfo(config.file).fileName());
+
     setStage(1);
-    setText(tr("Building %1...").arg(QFileInfo(config.file).fileName()));
+    print(actionstring, Qt::darkYellow);
+    setText(actionstring);
 
     args.append(config.file);
 
@@ -327,28 +329,6 @@ void BuildManager::keyPressEvent(QKeyEvent * event)
     {
         event->ignore();
     }
-}
-
-void BuildManager::showDetails()
-{
-    ui.label->setText("Details -");
-    ui.plainTextEdit->show();
-    adjustSize();
-}
-
-void BuildManager::hideDetails()
-{
-    ui.label->setText("Details +");
-    ui.plainTextEdit->hide();
-    adjustSize();
-}
-
-void BuildManager::toggleDetails()
-{
-    if (ui.plainTextEdit->isVisible())
-        hideDetails();
-    else
-        showDetails();
 }
 
 void BuildManager::setBuild(bool active)

@@ -284,13 +284,6 @@
     </layout>
    </item>
    <item>
-    <widget class="ClickableLabel" name="label">
-     <property name="text">
-      <string>Details +</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QPlainTextEdit" name="plainTextEdit">
      <property name="enabled">
       <bool>true</bool>
@@ -317,13 +310,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>ClickableLabel</class>
-   <extends>QLabel</extends>
-   <header>clickable.h</header>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../icons/icons.qrc"/>
  </resources>

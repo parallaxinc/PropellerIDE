@@ -26,8 +26,9 @@ MainWindow::MainWindow(QWidget *parent)
     // setup preferences dialog
     connect(&preferences,   SIGNAL(accepted()),                     this,   SLOT(getApplicationSettings()));
 
-    connect(&builder,       SIGNAL(compilerErrorInfo(QString,int)), this,   SLOT(highlightFileLine(QString,int)));
-    connect(&builder,       SIGNAL(finished()),                     this,   SLOT(enableBuildControls()));
+    connect(&builder,   SIGNAL(compilerErrorInfo(QString,int)), this,   SLOT(highlightFileLine(QString,int)));
+    connect(&builder,   SIGNAL(finished()),                     this,   SLOT(enableBuildControls()));
+    connect(&builder,   SIGNAL(buildError()),                   &preferences, SLOT(showPreferences()));
 
     parser = language.getParser();
     connect(&preferences,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
@@ -283,8 +284,6 @@ void MainWindow::openRecentFile()
 
 void MainWindow::setProject()
 {
-    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
     int index = ui.editorTabs->currentIndex();
     QString shortname, filename;
     if (index > -1)
@@ -308,7 +307,6 @@ void MainWindow::setProject()
     parser->setLibraryPaths(spinIncludes);
 
     recolorProjectView();
-    QApplication::restoreOverrideCursor();
 }
 
 void MainWindow::showBrowser()
@@ -433,6 +431,8 @@ void MainWindow::recolorProjectView()
     parser->styleRule("constants",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
     parser->styleRule("_includes_",QIcon(),theme->getColor(ColorScheme::SyntaxText));
     parser->setFont(theme->getFont());
+
+    qCDebug(logmainwindow) << "updating project view";
     parser->buildModel();
     ui.projectview->setModel(parser->treeModel());
 }

@@ -42,8 +42,8 @@ public slots:
 
     void closeAll();
     void closeFile();
-    void closeFile(int index);
-    int  saveAndClose();
+    bool closeFile(int index);
+    bool saveAndClose(int index);
 
     void nextTab();
     void previousTab();

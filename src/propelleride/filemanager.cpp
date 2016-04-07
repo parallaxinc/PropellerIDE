@@ -291,15 +291,7 @@ void FileManager::saveFile(const QString & fileName, int index)
 
 void FileManager::closeFile()
 {
-    int index = currentIndex();
-
-    if (count() > 0)
-    {
-        if (getEditor(index)->contentChanged())
-            saveAndClose();
-        else
-            closeFile(index);
-    }
+    closeFile(currentIndex());
 }
 
 void FileManager::closeAll()
@@ -307,19 +299,12 @@ void FileManager::closeAll()
     setCurrentIndex(0);
     while (count() > 0)
     {
-        if (getEditor(0)->contentChanged())
-        {
-            if (saveAndClose())
-                return;
-        }
-        else
-        {
-            closeFile(0);
-        }
+        if (!closeFile(0))
+            return;
     }
 }
 
-int FileManager::saveAndClose()
+bool FileManager::saveAndClose(int index)
 {
     QMessageBox dialog;
     dialog.setText(tr("Your code has been modified."));
@@ -330,22 +315,29 @@ int FileManager::saveAndClose()
     switch (dialog.exec())
     {
         case QMessageBox::Save:
-            save();
-            closeFile(currentIndex());
+            save(index);
+            return true;
             break;
         case QMessageBox::Discard:
-            closeFile(currentIndex());
+            return true;
             break;
         case QMessageBox::Cancel:
-            return 1;
         default:
             break;
     }
-    return 0;
+    return false;
 }
 
-void FileManager::closeFile(int index)
+bool FileManager::closeFile(int index)
 {
+    if (getEditor(index)->contentChanged())
+    {
+        if (!saveAndClose(index))
+        {
+            return false;
+        }
+    }
+
     if (count() > 0 && index >= 0 && index < count())
     {
         getEditor(index)->disconnect();
@@ -358,6 +350,8 @@ void FileManager::closeFile(int index)
         createBackgroundImage();
         emit closeAvailable(false);
     }
+
+    return true;
 }
 
 void FileManager::createBackgroundImage()

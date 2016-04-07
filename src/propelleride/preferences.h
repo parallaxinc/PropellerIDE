@@ -24,7 +24,7 @@
   #error "We don't support that OS yet..."
 #endif
 
-#define DEFAULT_COMPILER            "/openspin"  APP_EXTENSION 
+#define DEFAULT_COMPILER            "openspin"  APP_EXTENSION 
 
 class Preferences : public QDialog
 {

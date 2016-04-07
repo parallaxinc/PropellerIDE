@@ -17,6 +17,7 @@ PathSelector::PathSelector(QString language,
     restore();
 
     load();
+    save();
 
     connect(ui.deletePath,  SIGNAL(clicked()),  this,   SLOT(deletePath()));
     connect(ui.addPath,     SIGNAL(clicked()),  this,   SLOT(addPath()));

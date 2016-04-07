@@ -52,6 +52,7 @@ signals:
     void terminalReceived(QString text);
     void statusChanged(const QString & text);
     void finished();
+    void buildError();
 
 public slots:
     void loadSuccess();
@@ -83,9 +84,6 @@ public:
     void keyPressEvent(QKeyEvent * event);
 
 public slots:
-    void toggleDetails();
-    void showDetails();
-    void hideDetails();
     void updateColors();
 
     void setStage(int stage);

@@ -99,7 +99,11 @@ void Preferences::setupLanguages()
     PathSelector * spin;
     QString app = QApplication::applicationDirPath();
     spin = new PathSelector("spin",
-            app + QString(DEFAULT_COMPILER),
+#if defined(Q_OS_MAC)
+            app + "/" + QString(DEFAULT_COMPILER),
+#else
+            QString(DEFAULT_COMPILER),
+#endif
             QStringList() << app + 
                     QString(APP_RESOURCES_PATH) +
                     QString("/library/library"));
