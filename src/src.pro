@@ -17,6 +17,5 @@ propelleride.depends =  zipper \
                         projectview \
                         propellermanager
 
-memorymap.subdir = memorymap/src
 projectview.subdir = projectview/src
 
