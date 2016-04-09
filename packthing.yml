@@ -37,9 +37,15 @@ repos:
                 icon: icons/icon-new.png
                 mimetypes:
                     - type: "text/x-spin"
-                      glob: "*.spin"
+                      extension: "spin"
                       description: Propeller Spin object
                       icon: icons/scalable/text-x-spin.svg
+            memorymap:
+                mimetypes:
+                    - type: "application/x-binary"
+                      extension: "binary"
+                      description: Propeller binary
+                      icon: icons/scalable/application-x-binary.svg
         branch: master
 
     openspin:
