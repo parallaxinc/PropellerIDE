@@ -30,23 +30,23 @@ target:
 repos: 
     propelleride:
         url: https://github.com/parallaxinc/PropellerIDE.git
+        branch: master
         builder: qmake
+
         files:
             propelleride:
                 name: PropellerIDE
                 icon: icons/icon-new.png
                 mimetypes:
-                    - type: "text/x-spin"
-                      extension: "spin"
+                    - type: text/x-spin
+                      extension: spin
                       description: Propeller Spin object
                       icon: icons/scalable/text-x-spin.svg
-            memorymap:
-                mimetypes:
-                    - type: "application/x-binary"
-                      extension: "binary"
+
+                    - type: application/x-binary
+                      extension: binary
                       description: Propeller binary
                       icon: icons/scalable/application-x-binary.svg
-        branch: master
 
     openspin:
         url: https://github.com/bweir/OpenSpin.git
