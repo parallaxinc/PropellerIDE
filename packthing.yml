@@ -41,12 +41,12 @@ repos:
                     - type: text/x-spin
                       extension: spin
                       description: Propeller Spin object
-                      icon: icons/128/text-x-spin.png
+                      icon: icons/text-x-spin.png
 
                     - type: application/x-binary
                       extension: binary
                       description: Propeller binary
-                      icon: icons/128/application-x-binary.png
+                      icon: icons/application-x-binary.png
 
     openspin:
         url: https://github.com/bweir/OpenSpin.git
