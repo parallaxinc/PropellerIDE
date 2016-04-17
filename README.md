@@ -18,8 +18,8 @@ PropellerIDE is a fun, easy, beautiful editor for the Propeller microcontroller.
 
 The PropellerIDE manual is available online and print formats:
 
-- Online: [HTML](https://bweir.gitbooks.io/propelleride/content/)
-- Printable formats: [PDF](https://www.gitbook.com/download/pdf/book/bweir/propelleride) | [ePub](https://www.gitbook.com/download/epub/book/bweir/propelleride) | [Mobi](https://www.gitbook.com/download/mobi/book/bweir/propelleride)
+- Online: [HTML](https://bweir.gitbooks.io/PropellerIDE-docs/content/)
+- Printable formats: [PDF](https://www.gitbook.com/download/pdf/book/bweir/PropellerIDE-docs) | [ePub](https://www.gitbook.com/download/epub/book/bweir/PropellerIDE-docs) | [Mobi](https://www.gitbook.com/download/mobi/book/bweir/PropellerIDE-docs)
 
 ## License
 
