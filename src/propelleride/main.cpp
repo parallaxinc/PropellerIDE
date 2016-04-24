@@ -1,4 +1,11 @@
+#include <QtGlobal>
+
+#ifdef Q_OS_MAC
+#include "application.h"
+#else
 #include <QApplication>
+#endif
+
 #include <QDebug>
 #include <QMessageBox>
 #include <QStyleFactory>
@@ -55,7 +62,11 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(messageHandler);
 #endif
 
+#ifdef Q_OS_MAC
+    Application app(argc, argv);
+#else
     QApplication app(argc, argv);
+#endif
 
     QCoreApplication::setOrganizationName("Parallax");
     QCoreApplication::setOrganizationDomain("www.parallax.com");

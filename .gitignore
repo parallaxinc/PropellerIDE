@@ -38,3 +38,5 @@ Makefile*
 src/propelleride/propelleride
 src/terminal/propterm
 build/
+
+.DS_Store
