@@ -34,7 +34,7 @@ SOURCES += \
     preferences.cpp \
     logging.cpp \
 
-HEADERS += \
+HEADERS  += \
     buildmanager.h \
     clickable.h \
     colorchooser.h \
@@ -51,11 +51,6 @@ HEADERS += \
     preferences.h \
     templates/Singleton.h \
     logging.h \
-
-macx {
-    SOURCES += application.cpp
-    HEADERS += application.h
-}
 
 OTHER_FILES +=
 

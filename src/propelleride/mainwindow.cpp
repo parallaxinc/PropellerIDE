@@ -45,11 +45,6 @@ MainWindow::MainWindow(QWidget *parent)
     QSplitterHandle *hndl = ui.splitter->handle(1);
     hndl->setEnabled(false);
 
-
-#ifdef Q_OS_MAC
-    connect(qApp, SIGNAL(fileOpened(const QString &)), ui.editorTabs, SLOT(openFile(const QString &)));
-#endif
-
     connect(ui.editorTabs, SIGNAL(fileUpdated(int)),    this,   SLOT(setProject()));
 
     // File Menu
