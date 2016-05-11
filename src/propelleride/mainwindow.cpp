@@ -136,6 +136,18 @@ MainWindow::MainWindow(QWidget *parent)
     manager.enablePortMonitor(true);
     updatePorts();
 
+    
+    QSettings settings;
+    QString lastport = settings.value("lastPort", QString()).toString();
+    if (!lastport.isEmpty())
+    {
+        int index = cbPort->findText(lastport);
+        if (index != -1)
+            cbPort->setCurrentIndex(index);
+    }
+
+
+
     ui.editorTabs->newFile();
     loadSession();
 
@@ -144,6 +156,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     statusBar();
 }
+
 
 void MainWindow::loadSession()
 {
@@ -226,7 +239,9 @@ void MainWindow::closeEvent(QCloseEvent *e)
         return;
     }
 
-    QSettings().setValue("windowSize",saveGeometry());
+    QSettings settings;
+    settings.setValue("lastPort",   cbPort->currentText());
+    settings.setValue("windowSize", saveGeometry());
 
     if(e) e->accept();
     qApp->exit(0);
