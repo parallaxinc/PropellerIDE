@@ -2,6 +2,7 @@
 
 #include <QFileDialog>
 #include <QRegularExpression>
+#include <QStandardPaths>
 
 FileManager::FileManager(QWidget *parent) :
     QTabWidget(parent)
@@ -13,7 +14,52 @@ FileManager::FileManager(QWidget *parent) :
 
     connect(this,   SIGNAL(tabCloseRequested(int)), this,   SLOT(closeFile(int)));
     connect(this,   SIGNAL(currentChanged(int)),    this,   SLOT(changeTab(int)));
+
+    createHome();
 }
+
+bool FileManager::createHome()
+{
+    QSettings settings;
+    settings.beginGroup("Paths");
+
+    QDir projects(QDir::homePath() + "/" + tr("PropellerIDE Projects"));
+
+    if (!projects.exists())
+    {
+        if (!QDir().mkdir(projects.path()))
+        {
+            qCWarning(logfilemanager) << "failed to create projects folder:" << projects.path();
+            return false;
+        }
+    }
+
+    settings.setValue("homeDirectory", projects.path());
+
+    if (settings.value("lastDirectory").toString().isEmpty())
+        settings.setValue("lastDirectory", projects.path());
+
+    settings.endGroup();
+
+    return true;
+}
+
+QString FileManager::getDirectory()
+{
+    QSettings settings;
+    settings.beginGroup("Paths");
+
+    return settings.value("lastDirectory", 
+                settings.value("homeDirectory", QDir::homePath()).toString()).toString();
+}
+
+void FileManager::setDirectory(QString dir)
+{
+    QSettings settings;
+    settings.beginGroup("Paths");
+    settings.setValue("lastDirectory", dir);
+}
+
 
 // THIS IS A HACK OMG SUCH A HACK
 void FileManager::setLanguage(Language * language)
@@ -66,23 +112,15 @@ void FileManager::setCopy(bool available)
 
 void FileManager::open()
 {
-    QSettings settings;
-    settings.beginGroup("Paths");
-
-    QString lastDir = settings.value("lastDirectory",
-                QDir(tabToolTip(currentIndex())).path()).toString();
-
     QStringList fileNames = QFileDialog::getOpenFileNames(this,
-                tr("Open File"), lastDir, "Spin Files (*.spin);;All Files (*)");
+                tr("Open File"), getDirectory(), "Spin Files (*.spin);;All Files (*)");
 
-    if (fileNames.size())
-        settings.setValue("lastDirectory",QDir(fileNames[0]).path());
+    setDirectory(QDir(fileNames[0]).path());
 
     for (int i = 0; i < fileNames.size(); i++)
         if (!fileNames.at(i).isEmpty())
             openFile(fileNames.at(i));
 
-    settings.endGroup();
 }
 
 
@@ -163,19 +201,11 @@ int FileManager::openFile(const QString & fileName)
 
 void FileManager::newFromFile()
 {
-    QSettings settings;
-    settings.beginGroup("Paths");
-
-    QString lastDir = settings.value("lastDirectory",
-                QDir(tabToolTip(currentIndex())).path()).toString();
-
     QString fileName = QFileDialog::getOpenFileName(this,
-                tr("New From File..."), lastDir, "Spin Files (*.spin);;All Files (*)");
+                tr("New From File..."), getDirectory(), "Spin Files (*.spin);;All Files (*)");
 
     if (!fileName.isEmpty())
         newFromFile(fileName);
-
-    settings.endGroup();
 }
 
 
@@ -236,12 +266,16 @@ void FileManager::saveAs(int index)
 {
     QString fileName = tabToolTip(index);
 
+    QString lastDir = QDir(fileName).path();
     if (fileName.isEmpty())
+    {
         fileName = tr("Untitled.spin");
+        lastDir = getDirectory();
+    }
 
     fileName = QFileDialog::getSaveFileName(this,
             tr("Save File As..."), 
-            QDir(fileName).path(), 
+            lastDir,
             tr("Spin Files (*.spin)"));
 
     if (fileName.isEmpty())

@@ -186,7 +186,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Click the language, then double-click to select a template.</string>
+        <string>Click the language, then click to select a template.</string>
        </property>
       </widget>
      </item>

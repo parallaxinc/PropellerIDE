@@ -336,13 +336,16 @@ void MainWindow::showBrowser()
     }
 }
 
-void MainWindow::checkAndSaveFiles()
+void MainWindow::checkAndSaveFiles(QStringList files)
 {
     for (int i = 0; i < ui.editorTabs->count(); i++)
     {
-        if (ui.editorTabs->getEditor(i)->contentChanged())
+        if (files == QStringList() || files.contains(ui.editorTabs->tabToolTip(i)))
         {
-            ui.editorTabs->save(i);
+            if (ui.editorTabs->getEditor(i)->contentChanged())
+            {
+                ui.editorTabs->save(i);
+            }
         }
     }
 }
@@ -383,8 +386,6 @@ bool MainWindow::runCompiler(bool load, bool write, const QString & name)
     if(!ui.editorTabs->count())
         return false;
 
-    setBuildControls(false);
-
     QString filename = name;
     if (name.isEmpty())
     { 
@@ -394,8 +395,20 @@ bool MainWindow::runCompiler(bool load, bool write, const QString & name)
 
     getApplicationSettings();
 
-    checkAndSaveFiles();
+    checkAndSaveFiles(parser->getFileList());
     setProject();
+
+    if (parser->status() == ProjectParser::CircularDependencyError)
+    {
+        QMessageBox::critical(0, 
+                QObject::tr("Circular dependency!"), 
+                QObject::tr("<p>Your project has a circular dependency. "
+                    "That means one of your objects is including <i>itself</i>.</p>"
+                    "<p>Revise your code to build your project.</p>"));
+        return false;
+    }
+
+    setBuildControls(false);
 
     BuildManager::Configuration config;
 

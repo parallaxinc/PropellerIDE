@@ -100,7 +100,7 @@ private:
     void saveSession();
     void clearSession();
 
-    void checkAndSaveFiles();
+    void checkAndSaveFiles(QStringList files = QStringList());
 
     bool eventFilter(QObject *target, QEvent *event);
 

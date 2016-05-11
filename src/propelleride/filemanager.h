@@ -25,6 +25,10 @@ public:
     int isFileEmpty(int index);
     void setLanguage(Language * language);
 
+    bool createHome();
+    QString getDirectory();
+    void setDirectory(QString dir);
+
 public slots:
     int  newFile();
     void newFromFile();

@@ -10,6 +10,7 @@
 #include <QString>
 #include <QtGlobal>
 #include <QDateTime>
+#include <QSettings>
 
 #include "logging.h"
 
@@ -66,6 +67,14 @@ int main(int argc, char *argv[])
 #else
     QCoreApplication::setApplicationVersion("0.0.0");
 #endif
+
+    QSettings settings;
+    if (settings.status() == QSettings::AccessError)
+    {
+        QMessageBox::critical(0, QObject::tr("Can't open application settings!"), QObject::tr("Unable to open the PropellerIDE settings stored at:\n\n%1\n\nTry deleting the file and restarting PropellerIDE.").arg(settings.fileName()));
+        qCCritical(logmain) << "can't access:" << settings.fileName() << ". Is it writable?";
+        return 1;
+    }
 
     QString description = QObject::tr("An easy-to-use, cross-platform IDE for the Parallax Propeller");
 

@@ -47,18 +47,6 @@ void TemplateIcon::mousePressEvent(QMouseEvent * e)
 {
     Q_UNUSED(e);
     setColor(QColor("#2D83DE"));
-}
-
-void TemplateIcon::mouseReleaseEvent(QMouseEvent * e)
-{
-    Q_UNUSED(e);
-    setColor(QColor("#97C9FD"));
-}
-
-void TemplateIcon::mouseDoubleClickEvent(QMouseEvent * e)
-{
-    Q_UNUSED(e);
-    setColor(QColor("#2D83DE"));
     emit templateSelected(_filename);
 }
 
