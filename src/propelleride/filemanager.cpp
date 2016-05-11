@@ -203,7 +203,6 @@ int FileManager::newFromFile(const QString & fileName)
     in.setCodec("UTF-8");
     getEditor(index)->setPlainText(reformatText(in.readAll()));
 
-    getEditor(index)->saveContent();
     fileChanged();
 
     emit fileUpdated(index);
