@@ -115,12 +115,12 @@ void FileManager::open()
     QStringList fileNames = QFileDialog::getOpenFileNames(this,
                 tr("Open File"), getDirectory(), "Spin Files (*.spin);;All Files (*)");
 
-    setDirectory(QDir(fileNames[0]).path());
-
     for (int i = 0; i < fileNames.size(); i++)
         if (!fileNames.at(i).isEmpty())
+        {
+            setDirectory(QDir(fileNames.at(i)).path());
             openFile(fileNames.at(i));
-
+        }
 }
 
 
