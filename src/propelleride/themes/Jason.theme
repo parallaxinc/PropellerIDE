@@ -1,0 +1,16 @@
+[Colors]
+Block_CON=#000000
+Block_DAT=#000000
+Block_OBJ=#000000
+Block_PRI=#000000
+Block_PUB=#000000
+Block_VAR=#000000
+Syntax_Comments=#ffff00
+Syntax_Keywords=#ff0000
+Syntax_Numbers=#5500ff
+Syntax_Operators=#ff00ff
+Syntax_Strings=#00b300
+Syntax_Text=#00ff00
+
+[Font]
+Family=LCD Solid

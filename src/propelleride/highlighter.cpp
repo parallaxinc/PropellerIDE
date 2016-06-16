@@ -140,6 +140,7 @@ void Highlighter::rehighlight()
 
     format.setForeground(currentTheme->getColor(ColorScheme::SyntaxComments));
     format.setFontWeight(QFont::Normal);
+    format.setFontItalic(true);
     addTwoPartRules(lang.listComments(), format);
 
     format.setForeground(currentTheme->getColor(ColorScheme::SyntaxQuotes));
