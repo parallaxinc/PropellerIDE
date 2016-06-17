@@ -81,40 +81,9 @@
      <x>0</x>
      <y>0</y>
      <width>916</width>
-     <height>28</height>
+     <height>27</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>&amp;File</string>
-    </property>
-    <addaction name="action_New"/>
-    <addaction name="actionNew_From_Template"/>
-    <addaction name="actionNew_From_File"/>
-    <addaction name="separator"/>
-    <addaction name="action_Open"/>
-    <addaction name="separator"/>
-    <addaction name="action_Save"/>
-    <addaction name="actionSave_As"/>
-    <addaction name="actionSave_All"/>
-    <addaction name="separator"/>
-    <addaction name="action_Zip"/>
-    <addaction name="separator"/>
-    <addaction name="action_1_File"/>
-    <addaction name="action_2_File"/>
-    <addaction name="action_3_File"/>
-    <addaction name="action_4_File"/>
-    <addaction name="action_5_File"/>
-    <addaction name="action_6_File"/>
-    <addaction name="action_7_File"/>
-    <addaction name="action_8_File"/>
-    <addaction name="action_9_File"/>
-    <addaction name="action_10_File"/>
-    <addaction name="separator"/>
-    <addaction name="action_Close"/>
-    <addaction name="actionClose_All"/>
-    <addaction name="action_Quit"/>
-   </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
      <string>&amp;Edit</string>
@@ -164,6 +133,38 @@
     <addaction name="actionPropeller_Quick_Reference"/>
     <addaction name="separator"/>
     <addaction name="action_About"/>
+   </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="action_New"/>
+    <addaction name="actionNew_From_Template"/>
+    <addaction name="actionNew_From_File"/>
+    <addaction name="separator"/>
+    <addaction name="action_Open"/>
+    <addaction name="separator"/>
+    <addaction name="action_Save"/>
+    <addaction name="actionSave_As"/>
+    <addaction name="actionSave_All"/>
+    <addaction name="separator"/>
+    <addaction name="actionPrint"/>
+    <addaction name="action_Zip"/>
+    <addaction name="separator"/>
+    <addaction name="action_1_File"/>
+    <addaction name="action_2_File"/>
+    <addaction name="action_3_File"/>
+    <addaction name="action_4_File"/>
+    <addaction name="action_5_File"/>
+    <addaction name="action_6_File"/>
+    <addaction name="action_7_File"/>
+    <addaction name="action_8_File"/>
+    <addaction name="action_9_File"/>
+    <addaction name="action_10_File"/>
+    <addaction name="separator"/>
+    <addaction name="action_Close"/>
+    <addaction name="actionClose_All"/>
+    <addaction name="action_Quit"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -836,6 +837,27 @@
    </property>
    <property name="statusTip">
     <string>Create a new file from an existing one</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/file-print.png</normaloff>:/icons/file-print.png</iconset>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+   <property name="toolTip">
+    <string>Print (Ctrl+P)</string>
+   </property>
+   <property name="statusTip">
+    <string>Print current file</string>
+   </property>
+   <property name="whatsThis">
+    <string>Print current file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
  </widget>

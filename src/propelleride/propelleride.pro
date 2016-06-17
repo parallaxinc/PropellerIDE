@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = propelleride
-QT += gui widgets serialport
+QT += gui widgets serialport printsupport
 
 !greaterThan(QT_MAJOR_VERSION, 4): {
     error("PropellerIDE requires Qt5.2 or greater")

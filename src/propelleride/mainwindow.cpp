@@ -6,6 +6,9 @@
 #include <QFileDialog> 
 #include <QMenu> 
 
+#include <QPrinter>
+#include <QPrintDialog>
+
 #include <MemoryMap>
 #include <PropTerm>
 
@@ -56,6 +59,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.action_Save,SIGNAL(triggered()),ui.editorTabs,SLOT(save()));
     connect(ui.actionSave_As,SIGNAL(triggered()),ui.editorTabs,SLOT(saveAs()));
     connect(ui.actionSave_All,SIGNAL(triggered()),ui.editorTabs,SLOT(saveAll()));
+
+    ui.actionPrint->setEnabled(true);
+    connect(ui.actionPrint,SIGNAL(triggered()),this,SLOT(printFile()));
 
     ui.action_Zip->setEnabled(true);
     connect(ui.action_Zip,SIGNAL(triggered()),this,SLOT(zipFiles()));
@@ -520,6 +526,31 @@ void MainWindow::recolorMemoryMap(QWidget * widget)
             theme->getColor(ColorScheme::SyntaxText)
            );
     map->setFont(theme->getFont());
+}
+
+void MainWindow::printFile()
+{
+    int n = this->ui.editorTabs->currentIndex();
+    QString fileName = ui.editorTabs->tabToolTip(n);
+
+    if (fileName.isEmpty())
+        return;
+
+    qCDebug(logmainwindow) << "printing file:" << fileName;
+
+    Editor * editor = ui.editorTabs->getEditor(n);
+
+    QPrinter printer;
+
+    QPrintDialog *dialog = new QPrintDialog(&printer, this);
+    dialog->setWindowTitle(tr("Print %1").arg(fileName));
+
+    if (editor->textCursor().hasSelection())
+        dialog->addEnabledOption(QAbstractPrintDialog::PrintSelection);
+    if (dialog->exec() != QDialog::Accepted)
+        return;
+
+    editor->print(&printer);
 }
 
 void MainWindow::zipFiles()
