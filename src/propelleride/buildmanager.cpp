@@ -159,6 +159,8 @@ void BuildManager::procReadyRead()
 
     QScrollBar *sb = ui.plainTextEdit->verticalScrollBar();
     sb->setValue(sb->maximum());
+
+    getCompilerOutput();
 }
 
 void BuildManager::runProcess(const QString & programName, const QStringList & programArgs)

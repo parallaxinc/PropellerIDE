@@ -19,13 +19,27 @@ class BuildManager : public QFrame
     Q_OBJECT
 
     Ui::buildManager ui;
+    ColorScheme * currentTheme;
 
     bool failure;
+
+    QString compileResult;
+
+    QTimer timer;
+
+    void waitClose();
+    void getCompilerOutput();
+    void setRun(bool active);
+    void setBuild(bool active);
+    void setDownload(bool active);
+    void setStage(int stage);
+    void setText(const QString & text);
+
+    void print(const QString & text, QColor color = Qt::black);
 
 public:
     explicit BuildManager(QWidget *parent = 0);
     ~BuildManager();
-    void waitClose();
     void setFont(const QFont & font);
     void setTextColor(QColor color);
 
@@ -46,6 +60,8 @@ public:
     Configuration config;
 
     void setConfiguration(BuildManager::Configuration config);
+    void build();
+    bool load(const QByteArray & binary = QByteArray());
 
 signals:
     void compilerErrorInfo(QString file, int line);
@@ -54,46 +70,20 @@ signals:
     void finished();
     void buildError();
 
-public slots:
+private slots:
     void loadSuccess();
     void loadFailure();
     void compilerFinished(int exitCode, QProcess::ExitStatus status);
     void procReadyRead();
     void runProcess(const QString & programName, const QStringList & programArgs);
+    void handleCompilerError(QProcess::ProcessError e);
 
-    void showStatus();
-    void hideStatus();
-    void print(const QString & text, QColor color = Qt::black);
-
-    bool load(const QByteArray & binary = QByteArray());
-
-public:
-
-    QString compilerStr;
-    QString includesStr;
-    QString projectFile;
-    QString compileResult;
-
-    void build();
-    void getCompilerOutput();
-
-private:
-    QTimer timer;
-
-public:
+protected:
     void keyPressEvent(QKeyEvent * event);
 
 public slots:
     void updateColors();
+    void showStatus();
+    void hideStatus();
 
-    void setStage(int stage);
-    void setText(const QString & text);
-    void handleCompilerError(QProcess::ProcessError e);
-
-private:
-    void setRun(bool active);
-    void setBuild(bool active);
-    void setDownload(bool active);
-
-    ColorScheme * currentTheme;
 };
