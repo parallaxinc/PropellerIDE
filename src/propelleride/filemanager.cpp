@@ -161,7 +161,7 @@ int FileManager::openFile(const QString & fileName)
     qCDebug(logfilemanager) << "opening" << fileName;
 
     if (fileName.isEmpty())
-        return 1;
+        return -1;
 
     QFile file(fileName);
     if (!file.open(QFile::ReadOnly))
@@ -170,11 +170,11 @@ int FileManager::openFile(const QString & fileName)
                              tr("Cannot read file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
-        return 1;
+        return -1;
     }
 
     if (isFileOpen(fileName))
-        return 1;
+        return -1;
 
     int index;
     if (isFileEmpty(currentIndex()))
@@ -195,7 +195,7 @@ int FileManager::openFile(const QString & fileName)
     emit fileUpdated(index);
     emit sendMessage(tr("File opened successfully: %1").arg(fileName));
 
-    return 0;
+    return index;
 }
 
 
@@ -340,45 +340,45 @@ void FileManager::closeAll()
 bool FileManager::saveAndClose(int index)
 {
     QMessageBox dialog;
+    dialog.setIcon(QMessageBox::Warning);
     dialog.setText(tr("Your code has been modified."));
     dialog.setInformativeText(tr("Do you want to save your changes?"));
     dialog.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-    dialog.setDefaultButton(QMessageBox::Cancel);
+    dialog.setDefaultButton(QMessageBox::Save);
 
     switch (dialog.exec())
     {
         case QMessageBox::Save:
             save(index);
             return true;
-            break;
         case QMessageBox::Discard:
             return true;
-            break;
         case QMessageBox::Cancel:
         default:
-            break;
+            return false;
     }
-    return false;
 }
 
 bool FileManager::closeFile(int index)
 {
-    if (getEditor(index)->contentChanged())
+    if (count() <= 0)
+        return false;
+
+    if (index < 0 || index > count()-1)
     {
-        if (!saveAndClose(index))
-        {
-            return false;
-        }
+        qCWarning(logfilemanager) << "attempted to close index:" << index 
+            << "(count: " << count() << ")";
+        return false;
     }
 
-    if (count() > 0 && index >= 0 && index < count())
-    {
-        getEditor(index)->disconnect();
-        getEditor(index)->close();
-        removeTab(index);
-    }
+    if (getEditor(index)->contentChanged() && !saveAndClose(index))
+        return false;
 
-    if (count() == 0)
+    getEditor(index)->disconnect();
+    getEditor(index)->close();
+    removeTab(index);
+    
+    if (count() <= 0)
     {
         createBackgroundImage();
         emit closeAvailable(false);
