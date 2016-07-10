@@ -2,6 +2,11 @@ TEMPLATE = app
 TARGET = propelleride
 QT += gui widgets serialport printsupport
 
+UI_DIR = .ui/
+MOC_DIR = .moc/
+OBJECTS_DIR = .obj/
+RCC_DIR = .qrc/
+
 !greaterThan(QT_MAJOR_VERSION, 4): {
     error("PropellerIDE requires Qt5.2 or greater")
 }
@@ -73,14 +78,14 @@ RESOURCES += \
 CODECFORTR = UTF-8
 
 unix {
-    LIBS            += -lz
+    LIBS += -lz
 }
 macx {
-    LIBS            += -framework IOKit -framework CoreFoundation
+    LIBS += -framework IOKit -framework CoreFoundation
 }
 win32 {
-    LIBS            += -L$$PWD -lz
-    RC_FILE         = propelleride.rc
+    LIBS += -L$$PWD -lz
+    RC_FILE = propelleride.rc
 }
 
 TRANSLATIONS += \
