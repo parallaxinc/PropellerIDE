@@ -2,739 +2,718 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN" sourcelanguage="en_US">
 <context>
-    <name>BuildManager</name>
+    <name>About</name>
     <message>
-        <location filename="../BuildManager.cpp" line="117"/>
-        <location filename="../BuildManager.cpp" line="131"/>
-        <source>Error</source>
+        <location filename="../forms/about.ui" line="14"/>
+        <source>About PropellerIDE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../BuildManager.cpp" line="118"/>
-        <source>Could not start &quot;%1.&quot;
-Please check Preferences.</source>
+        <location filename="../forms/about.ui" line="37"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:xx-large; font-weight:600;&quot;&gt;About PropellerIDE&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../BuildManager.cpp" line="132"/>
-        <source>%1 crashed.</source>
+        <location filename="../forms/about.ui" line="52"/>
+        <source>v0.0.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../BuildManager.cpp" line="157"/>
-        <source>Downloading %1...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../BuildManager.cpp" line="167"/>
-        <source>Download complete!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../BuildManager.cpp" line="182"/>
-        <source>Building %1...</source>
+        <location filename="../forms/about.ui" line="84"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;PropellerIDE is an easy-to-use, cross-platform development tool for the Parallax Propeller.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Write Spin code, download to the Propeller, and debug your applications from the same editor on Windows, Mac, Linux, and Raspberry Pi.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Copyright © 2014-2015 by Parallax, Inc. &lt;br/&gt;PropellerIDE is released under the GPLv3 license.&lt;br/&gt;Developed by LameStation LLC; originally developed by Steve Denson.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>Dialog</name>
+    <name>BuildManager</name>
     <message>
-        <location filename="../forms/finder.ui" line="32"/>
-        <source>Find &amp; Replace</source>
+        <location filename="../buildmanager.cpp" line="68"/>
+        <source>Failed to start compiler: &apos;%1&apos;; check Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Replace:</source>
-        <translation type="obsolete">替换：</translation>
-    </message>
-    <message>
-        <location filename="../forms/finder.ui" line="82"/>
-        <source>Match Case</source>
+        <location filename="../buildmanager.cpp" line="80"/>
+        <location filename="../buildmanager.cpp" line="94"/>
+        <source>Build failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/finder.ui" line="75"/>
-        <source>Whole Word</source>
+        <location filename="../buildmanager.cpp" line="82"/>
+        <source>Build Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/finder.ui" line="44"/>
-        <source>Find</source>
-        <translation type="unfinished">发现</translation>
+        <location filename="../buildmanager.cpp" line="83"/>
+        <source>%1</source>
+        <translation type="unfinished">＆％ 1％2 {1?}</translation>
     </message>
     <message>
-        <location filename="../forms/finder.ui" line="64"/>
-        <source>Replace</source>
-        <translation type="unfinished">更换</translation>
+        <location filename="../buildmanager.cpp" line="99"/>
+        <source>Build successful!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/finder.ui" line="112"/>
-        <source>Done</source>
-        <translation type="unfinished">Replace Previous</translation>
+        <location filename="../buildmanager.cpp" line="266"/>
+        <source>Building &apos;%1&apos;...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FileManager</name>
     <message>
-        <location filename="../FileManager.cpp" line="22"/>
-        <location filename="../FileManager.cpp" line="338"/>
+        <location filename="../filemanager.cpp" line="26"/>
+        <source>PropellerIDE Projects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager.cpp" line="80"/>
+        <location filename="../filemanager.cpp" line="442"/>
         <source>Untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="61"/>
+        <location filename="../filemanager.cpp" line="116"/>
         <source>Open File</source>
         <translation type="unfinished">打开文件</translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="77"/>
+        <location filename="../filemanager.cpp" line="135"/>
         <source>File already open: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="104"/>
+        <location filename="../filemanager.cpp" line="169"/>
+        <location filename="../filemanager.cpp" line="222"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="105"/>
+        <location filename="../filemanager.cpp" line="170"/>
+        <location filename="../filemanager.cpp" line="223"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="133"/>
+        <location filename="../filemanager.cpp" line="196"/>
         <source>File opened successfully: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="163"/>
+        <location filename="../filemanager.cpp" line="205"/>
+        <source>New From File...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager.cpp" line="272"/>
         <source>Untitled.spin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="166"/>
+        <location filename="../filemanager.cpp" line="277"/>
         <source>Save File As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="168"/>
+        <location filename="../filemanager.cpp" line="279"/>
         <source>Spin Files (*.spin)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="190"/>
+        <location filename="../filemanager.cpp" line="302"/>
         <source>Recent Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="191"/>
+        <location filename="../filemanager.cpp" line="303"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="207"/>
+        <location filename="../filemanager.cpp" line="321"/>
         <source>File saved successfully: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="244"/>
+        <location filename="../filemanager.cpp" line="344"/>
         <source>Your code has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../FileManager.cpp" line="245"/>
+        <location filename="../filemanager.cpp" line="345"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
+    <name>Finder</name>
+    <message>
+        <location filename="../forms/finder.ui" line="20"/>
+        <source>Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="41"/>
+        <location filename="../forms/finder.ui" line="44"/>
+        <source>Find</source>
+        <translation type="unfinished">发现</translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="50"/>
+        <source>Find...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="74"/>
+        <location filename="../forms/finder.ui" line="77"/>
+        <source>Find Previous</source>
+        <translation type="unfinished">查找上一个</translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="109"/>
+        <location filename="../forms/finder.ui" line="112"/>
+        <source>Find Next</source>
+        <translation type="unfinished">查找下一个</translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="140"/>
+        <location filename="../forms/finder.ui" line="143"/>
+        <source>Replace With</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="149"/>
+        <source>Replace with...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="173"/>
+        <location filename="../forms/finder.ui" line="176"/>
+        <source>Replace Previous</source>
+        <translation type="unfinished">更换上一页</translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="202"/>
+        <location filename="../forms/finder.ui" line="205"/>
+        <source>Replace Next</source>
+        <translation type="unfinished">替换下一个</translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="227"/>
+        <location filename="../forms/finder.ui" line="230"/>
+        <location filename="../forms/finder.ui" line="233"/>
+        <source>Replace All</source>
+        <translation type="unfinished">全部替换</translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="250"/>
+        <location filename="../forms/finder.ui" line="253"/>
+        <location filename="../forms/finder.ui" line="256"/>
+        <source>Match Case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="271"/>
+        <location filename="../forms/finder.ui" line="274"/>
+        <location filename="../forms/finder.ui" line="277"/>
+        <source>Whole Word</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/finder.ui" line="301"/>
+        <source>Done</source>
+        <translation type="unfinished">Replace Previous</translation>
+    </message>
+    <message>
+        <location filename="../finder.cpp" line="99"/>
+        <source>Find reached beginning of file; starting from end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../finder.cpp" line="104"/>
+        <source>Find reached end of file; starting from beginning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../finder.cpp" line="211"/>
+        <source>Replace Done</source>
+        <translation type="unfinished">做完替换</translation>
+    </message>
+    <message>
+        <location filename="../finder.cpp" line="212"/>
+        <source>Replaced %1 instances of &quot;%2&quot;.</source>
+        <translation type="unfinished">更换％的“％2” 1实例。</translation>
+    </message>
+</context>
+<context>
+    <name>Language</name>
+    <message>
+        <location filename="../forms/language.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/language.ui" line="33"/>
+        <source>Spin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/language.ui" line="54"/>
+        <source>Add Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/language.ui" line="61"/>
+        <source>Delete Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/language.ui" line="83"/>
+        <source>Browse</source>
+        <translation type="unfinished">浏览</translation>
+    </message>
+    <message>
+        <location filename="../forms/language.ui" line="92"/>
+        <source>Includes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/language.ui" line="114"/>
+        <source>openspin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/language.ui" line="140"/>
+        <source>/usr/share/LameStation/library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/language.ui" line="145"/>
+        <source>/usr/share/PropellerIDE/library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/language.ui" line="159"/>
+        <source>Compiler</source>
+        <translation type="unfinished">编译</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
-        <location filename="../forms/mainwindow.ui" line="652"/>
-        <source>Terminal</source>
-        <translation>终奌站</translation>
-    </message>
-    <message>
-        <source>Welcome to PropellerIDE</source>
-        <translation type="vanished">欢迎来到PropellerIDE</translation>
-    </message>
-    <message>
-        <source>The Welcome.spin file must be saved to a user folder where you can change it.</source>
-        <translation type="vanished">该Welcome.spin文件必须保存在那里你可以改变它的用户文件夹。</translation>
-    </message>
-    <message>
-        <source>The installed package location is not writable by most users.</source>
-        <translation type="vanished">安装包的位置是不可写的大多数用户。</translation>
-    </message>
-    <message>
-        <source>Please note that opening a library file from the installed package will also require saving to a user folder for compiling or modifications.</source>
-        <translation type="vanished">请注意，从所安装的软件包打开一个库文件也将需要保存到用户文件夹，用于编译或修改。</translation>
-    </message>
-    <message>
-        <source>Don&apos;t worry, you will be reminded if necessary.</source>
-        <translation type="vanished">不要担心，您将在必要时提醒。</translation>
-    </message>
-    <message>
-        <source>The Save As dialog will now open to let you choose a working folder.</source>
-        <translation type="vanished">另存为对话框现在将开放，让你选择一个工作文件夹。</translation>
-    </message>
-    <message>
-        <source>Save File: </source>
-        <translation type="vanished">保存文件：</translation>
-    </message>
-    <message>
-        <source> ?</source>
-        <translation type="vanished">?</translation>
-    </message>
-    <message>
-        <source>Open File</source>
-        <translation type="vanished">打开文件</translation>
-    </message>
-    <message>
-        <source>Can&apos;t Save File</source>
-        <translation type="vanished">不能保存文件</translation>
-    </message>
-    <message>
-        <source>Can&apos;t save file </source>
-        <translation type="vanished">无法保存文件</translation>
-    </message>
-    <message>
-        <source>Save As File</source>
-        <translation type="vanished">另存为文件</translation>
-    </message>
-    <message>
-        <source> *</source>
-        <translation type="vanished">.*</translation>
-    </message>
-    <message>
-        <source>%1 %2</source>
-        <translation type="vanished">＆％ 1％2</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="281"/>
+        <location filename="../mainwindow.cpp" line="279"/>
         <source>&amp;%1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Build Problem</source>
-        <translation type="vanished">构建问题</translation>
-    </message>
-    <message>
-        <source>Problem building:</source>
-        <translation type="vanished">问题的建设：</translation>
-    </message>
-    <message>
-        <source>Can&apos;t write the file or folder.</source>
-        <translation type="vanished">不能写入文件或文件夹。</translation>
-    </message>
-    <message>
-        <source>This can happen when compiling a packaged file.</source>
-        <translation type="vanished">编译打包的文件时，就会出现这种情况。</translation>
-    </message>
-    <message>
-        <source>The code must be saved to a folder with write permissions.</source>
-        <translation type="vanished">该代码必须保存到具有写权限的文件夹。</translation>
-    </message>
-    <message>
-        <source>A good location would be the user&apos;s Documents folder or a folder with other sources.</source>
-        <translation type="vanished">一个好的位置是用户的文档文件夹或其他来源的文件夹。</translation>
-    </message>
-    <message>
-        <source>Please save to a different file and/or folder when prompted.</source>
-        <translation type="vanished">请保存到不同的文件和/或文件夹提示时。</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="469"/>
-        <source>No Serial Port</source>
-        <translation>没有串口</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="470"/>
-        <source>Serial port not available.</source>
-        <translation>串行端口不可用。</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="470"/>
-        <source>Connect a USB Propeller board, turn it on, and try again.</source>
-        <translation>连接USB螺旋桨板，打开它，然后再试一次。</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="495"/>
-        <source>Can&apos;t compile unknown file type</source>
-        <translation>不能编译未知文件类型</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="495"/>
-        <source>Files must be of type &apos;.spin&apos;</source>
-        <translation>文件类型必须为“ .spin ”</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="520"/>
-        <source>Propeller Load</source>
-        <translation>螺旋桨负载</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="520"/>
-        <source>Port not available. Please connect Propeller board.</source>
-        <translation>端口不可用。请连接螺旋桨板。</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="1079"/>
-        <source>File %1 not found...</source>
+        <location filename="../mainwindow.cpp" line="317"/>
+        <source>Untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Propeller Load Failed</source>
-        <translation type="vanished">螺旋桨负载失败</translation>
+        <location filename="../mainwindow.cpp" line="506"/>
+        <source>Memory Map</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to load Propeller on port</source>
-        <translation type="vanished">无法加载螺旋桨端口</translation>
+        <location filename="../mainwindow.cpp" line="546"/>
+        <source>Print %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Propeller found</source>
-        <translation type="vanished">螺旋桨发现</translation>
+        <location filename="../mainwindow.cpp" line="734"/>
+        <source>Version %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="988"/>
-        <source>Current Project</source>
-        <translation>当前项目</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="994"/>
-        <source>Project References</source>
-        <translation>工程案例</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="162"/>
-        <source>     Find:</source>
-        <translation>查找：</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="163"/>
-        <source>Replace:</source>
-        <translation>替换：</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="166"/>
-        <source>Done</source>
-        <translation>Replace Previous</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="167"/>
-        <source>Replace Previous</source>
-        <translation>更换上一页</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="168"/>
-        <source>Replace Next</source>
-        <translation>替换下一个</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="169"/>
-        <source>Replace All</source>
-        <translation>全部替换</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="172"/>
-        <source>Enter search text here</source>
-        <translation>在此处输入搜索文本</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="173"/>
-        <source>Backward search</source>
-        <translation>向后搜索</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="174"/>
-        <source>Forward search</source>
-        <translation>向前搜索</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="175"/>
-        <source>Whole word search</source>
-        <translation>整词搜索</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="176"/>
-        <source>Case sensitive search</source>
-        <translation>区分大小写的搜索</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="177"/>
-        <source>Exit Search</source>
-        <translation>退出搜索</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="178"/>
-        <source>Enter replacement text here</source>
-        <translation>在这里输入替换文本</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="179"/>
-        <source>Search backward and replace text</source>
-        <translation>反向搜索和替换文本</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="180"/>
-        <source>Search forward and replace text</source>
-        <translation>向前搜索和替换文本</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="181"/>
-        <source>Search and replace all occurrences of text</source>
-        <translation>搜索和替换文本的所有匹配</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="270"/>
-        <location filename="../find.cpp" line="301"/>
-        <source>Find</source>
-        <translation>发现</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="392"/>
-        <source>Replace</source>
-        <translation>更换</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="399"/>
-        <source>Replace Done</source>
-        <translation>做完替换</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="400"/>
-        <source>Replaced %1 instances of &quot;%2&quot;.</source>
-        <translation>更换％的“％2” 1实例。</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="425"/>
-        <source> from beginning?</source>
-        <translation>从开始的？</translation>
-    </message>
-    <message>
-        <location filename="../find.cpp" line="430"/>
-        <source> from end?</source>
-        <translation>从结束了吗？</translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="32"/>
+        <location filename="../forms/mainwindow.ui" line="139"/>
         <source>&amp;File</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="159"/>
+        <location filename="../forms/mainwindow.ui" line="225"/>
         <source>&amp;New</source>
         <translation>新</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="174"/>
+        <location filename="../forms/mainwindow.ui" line="243"/>
         <source>&amp;Open</source>
         <translation>开放</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="192"/>
+        <location filename="../forms/mainwindow.ui" line="264"/>
         <source>&amp;Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="207"/>
+        <location filename="../forms/mainwindow.ui" line="282"/>
         <source>Save &amp;As</source>
         <translation>另存为</translation>
     </message>
     <message>
-        <source>Zip Project</source>
-        <translation type="vanished">邮编项目</translation>
-    </message>
-    <message>
-        <source>E&amp;xit</source>
-        <translation type="vanished">出口</translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="60"/>
+        <location filename="../forms/mainwindow.ui" line="89"/>
         <source>&amp;Edit</source>
         <translation>编辑</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="121"/>
+        <location filename="../forms/mainwindow.ui" line="184"/>
         <source>toolBar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="162"/>
+        <location filename="../forms/mainwindow.ui" line="228"/>
+        <source>New (Ctrl+T)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="231"/>
         <source>Create new file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="165"/>
+        <location filename="../forms/mainwindow.ui" line="234"/>
         <source>Ctrl+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="177"/>
-        <source>Open existing file(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="180"/>
-        <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="195"/>
-        <source>Save current file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="198"/>
-        <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="210"/>
-        <source>Save current file as name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="213"/>
-        <source>Ctrl+Shift+S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="218"/>
-        <source>Save All</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="221"/>
-        <source>Save all open files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="233"/>
-        <source>&amp;Zip Project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="236"/>
-        <source>Create zip archive from current file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="241"/>
-        <source>&amp;1 File</source>
+        <location filename="../forms/mainwindow.ui" line="246"/>
+        <source>Open (Ctrl+O)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="249"/>
-        <source>&amp;2 File</source>
+        <source>Open existing file(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="257"/>
-        <source>&amp;3 File</source>
+        <location filename="../forms/mainwindow.ui" line="252"/>
+        <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="265"/>
-        <source>&amp;4 File</source>
+        <location filename="../forms/mainwindow.ui" line="267"/>
+        <source>Save (Ctrl+S)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="270"/>
+        <source>Save current file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="273"/>
-        <source>&amp;5 File</source>
+        <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="281"/>
-        <source>&amp;6 File</source>
+        <location filename="../forms/mainwindow.ui" line="285"/>
+        <source>Save As (Ctrl+Shift+S)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="289"/>
-        <source>&amp;7 File</source>
+        <location filename="../forms/mainwindow.ui" line="288"/>
+        <source>Save current file as name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="297"/>
-        <source>&amp;8 File</source>
+        <location filename="../forms/mainwindow.ui" line="291"/>
+        <source>Ctrl+Shift+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="305"/>
-        <source>&amp;9 File</source>
+        <location filename="../forms/mainwindow.ui" line="296"/>
+        <source>Save All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="313"/>
-        <source>&amp;10 File</source>
+        <location filename="../forms/mainwindow.ui" line="299"/>
+        <source>Save all open files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="328"/>
-        <source>&amp;Close</source>
+        <location filename="../forms/mainwindow.ui" line="311"/>
+        <source>&amp;Zip Project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="331"/>
-        <source>Close current file</source>
+        <location filename="../forms/mainwindow.ui" line="314"/>
+        <source>Create zip archive from current file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="334"/>
-        <source>Ctrl+W</source>
+        <location filename="../forms/mainwindow.ui" line="319"/>
+        <source>&amp;1 File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="339"/>
-        <source>Close All</source>
+        <location filename="../forms/mainwindow.ui" line="327"/>
+        <source>&amp;2 File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="342"/>
-        <source>Close all open files</source>
+        <location filename="../forms/mainwindow.ui" line="335"/>
+        <source>&amp;3 File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="343"/>
+        <source>&amp;4 File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="351"/>
-        <source>&amp;Quit</source>
+        <source>&amp;5 File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="354"/>
-        <source>Close the application</source>
+        <location filename="../forms/mainwindow.ui" line="359"/>
+        <source>&amp;6 File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="357"/>
-        <source>Ctrl+Q</source>
+        <location filename="../forms/mainwindow.ui" line="367"/>
+        <source>&amp;7 File</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="369"/>
-        <source>&amp;Undo</source>
-        <translation>复原</translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="375"/>
-        <source>Ctrl+Z</source>
+        <source>&amp;8 File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="387"/>
-        <source>&amp;Redo</source>
-        <translation>重做</translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="393"/>
-        <source>Ctrl+Shift+Z</source>
+        <location filename="../forms/mainwindow.ui" line="383"/>
+        <source>&amp;9 File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="405"/>
-        <source>&amp;Cut</source>
-        <translation>&amp;切</translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="408"/>
-        <source>Remove text and add to clipboard</source>
+        <location filename="../forms/mainwindow.ui" line="391"/>
+        <source>&amp;10 File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="411"/>
-        <source>Ctrl+X</source>
+        <location filename="../forms/mainwindow.ui" line="406"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="409"/>
+        <source>Close (Ctrl+W)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="412"/>
+        <source>Close current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="415"/>
+        <source>Ctrl+W</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="420"/>
+        <source>Close All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="423"/>
-        <source>&amp;Copy</source>
-        <translation>&amp;复制</translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="426"/>
-        <source>Copy text to clipboard</source>
+        <source>Close all open files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="429"/>
-        <source>Ctrl+C</source>
+        <location filename="../forms/mainwindow.ui" line="432"/>
+        <source>&amp;Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="435"/>
+        <source>Quit (Ctrl+Q)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="438"/>
+        <source>Close the application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="441"/>
+        <source>Ctrl+Q</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="453"/>
+        <source>&amp;Undo</source>
+        <translation>复原</translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="459"/>
+        <source>Ctrl+Z</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="471"/>
+        <source>&amp;Redo</source>
+        <translation>重做</translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="477"/>
+        <source>Ctrl+Shift+Z</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="489"/>
+        <source>&amp;Cut</source>
+        <translation>&amp;切</translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="492"/>
+        <source>Remove text and add to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="495"/>
+        <source>Ctrl+X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="507"/>
+        <source>&amp;Copy</source>
+        <translation>&amp;复制</translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="510"/>
+        <source>Copy text to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="513"/>
+        <source>Ctrl+C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="522"/>
         <source>&amp;Paste</source>
         <translation>＆粘贴</translation>
     </message>
     <message>
-        <source>&amp;Select All</source>
-        <translation type="vanished">&amp;与全选</translation>
+        <location filename="../forms/mainwindow.ui" line="673"/>
+        <source>Memory &amp;Map</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="479"/>
+        <location filename="../forms/mainwindow.ui" line="676"/>
+        <source>Memory Map (F8)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="817"/>
+        <source>Propeller &amp;Quick Reference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="820"/>
+        <source>View the Propeller quick reference chart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="825"/>
+        <source>New From &amp;Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="828"/>
+        <source>Create a new file from a pre-defined template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="831"/>
+        <source>Ctrl+Shift+T</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="836"/>
+        <source>New From &amp;File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="839"/>
+        <source>Create a new file from an existing one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="848"/>
+        <source>Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="851"/>
+        <source>Print (Ctrl+P)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="854"/>
+        <location filename="../forms/mainwindow.ui" line="857"/>
+        <source>Print current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="860"/>
+        <source>Ctrl+P</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="563"/>
         <source>Find Next</source>
         <translation>查找下一个</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="494"/>
+        <location filename="../forms/mainwindow.ui" line="569"/>
+        <source>F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="578"/>
         <source>Find Previous</source>
         <translation>查找上一个</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="509"/>
+        <location filename="../forms/mainwindow.ui" line="584"/>
+        <source>Shift+F3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="593"/>
         <source>Preferences</source>
         <translation>首</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="78"/>
+        <location filename="../forms/mainwindow.ui" line="107"/>
         <source>&amp;View</source>
         <translation>视图</translation>
     </message>
     <message>
-        <source>&amp;Show Browser</source>
-        <translation type="vanished">显示浏览器</translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="556"/>
+        <location filename="../forms/mainwindow.ui" line="640"/>
         <source>Smaller Font</source>
         <translation>小字体</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="541"/>
+        <location filename="../forms/mainwindow.ui" line="625"/>
         <source>Bigger Font</source>
         <translation>更大的字体</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="87"/>
+        <location filename="../forms/mainwindow.ui" line="116"/>
         <source>&amp;Project</source>
         <translation>工程</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="571"/>
+        <location filename="../forms/mainwindow.ui" line="655"/>
         <source>Identify Hardware</source>
         <translation>识别硬件</translation>
     </message>
     <message>
-        <source>Debug</source>
-        <translation type="vanished">调试</translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="604"/>
-        <source>Build</source>
-        <translation>建</translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="619"/>
-        <source>Run</source>
-        <translation>运行</translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="634"/>
-        <source>Burn</source>
-        <translation>烧伤</translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="97"/>
+        <location filename="../forms/mainwindow.ui" line="127"/>
         <source>&amp;Help</source>
         <translation>&amp;救命</translation>
     </message>
@@ -744,758 +723,508 @@ Please check Preferences.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="441"/>
+        <location filename="../forms/mainwindow.ui" line="525"/>
         <source>Paste text from clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="444"/>
+        <location filename="../forms/mainwindow.ui" line="528"/>
         <source>Ctrl+V</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="449"/>
+        <location filename="../forms/mainwindow.ui" line="533"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="452"/>
+        <location filename="../forms/mainwindow.ui" line="536"/>
         <source>Select all text in the current file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="455"/>
+        <location filename="../forms/mainwindow.ui" line="539"/>
         <source>Ctrl+A</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="464"/>
+        <location filename="../forms/mainwindow.ui" line="548"/>
         <source>&amp;Find</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="467"/>
+        <location filename="../forms/mainwindow.ui" line="551"/>
         <source>Find text in the file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="470"/>
+        <location filename="../forms/mainwindow.ui" line="554"/>
         <source>Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="482"/>
+        <location filename="../forms/mainwindow.ui" line="566"/>
         <source>Find next instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="485"/>
-        <source>Ctrl+G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="497"/>
+        <location filename="../forms/mainwindow.ui" line="581"/>
         <source>Find previous instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="500"/>
-        <source>Ctrl+Shift+G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="512"/>
+        <location filename="../forms/mainwindow.ui" line="596"/>
         <source>View application preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="515"/>
+        <location filename="../forms/mainwindow.ui" line="599"/>
         <source>F5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="526"/>
+        <location filename="../forms/mainwindow.ui" line="610"/>
         <source>Show &amp;Browser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="529"/>
+        <location filename="../forms/mainwindow.ui" line="613"/>
         <source>Show project sidebar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="532"/>
+        <location filename="../forms/mainwindow.ui" line="616"/>
         <source>Ctrl+B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="544"/>
+        <location filename="../forms/mainwindow.ui" line="628"/>
         <source>Increase font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="547"/>
+        <location filename="../forms/mainwindow.ui" line="631"/>
         <source>Ctrl+=, Ctrl++</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="559"/>
+        <location filename="../forms/mainwindow.ui" line="643"/>
         <source>Decrease font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="562"/>
+        <location filename="../forms/mainwindow.ui" line="646"/>
         <source>Ctrl+-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="574"/>
+        <location filename="../forms/mainwindow.ui" line="658"/>
         <source>Detect attached Propeller hardware</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="577"/>
+        <location filename="../forms/mainwindow.ui" line="661"/>
         <source>F7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="589"/>
-        <source>View Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="592"/>
+        <location filename="../forms/mainwindow.ui" line="679"/>
         <source>View memory layout of current file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="595"/>
+        <location filename="../forms/mainwindow.ui" line="682"/>
         <source>F8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="607"/>
-        <source>Compile program but don&apos;t run</source>
+        <location filename="../forms/mainwindow.ui" line="691"/>
+        <source>&amp;Build</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="610"/>
-        <source>F9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="622"/>
-        <source>Compile and run current program</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="625"/>
-        <source>F10</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="637"/>
-        <source>Compile program and download to EEPROM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="640"/>
-        <source>F11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="655"/>
-        <source>Open a new serial terminal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="658"/>
-        <source>F12</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="670"/>
-        <source>&amp;Help Contents</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="673"/>
-        <source>Get help for your program</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="676"/>
-        <source>F1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="685"/>
-        <source>Propeller &amp;Datasheet</source>
-        <translation>螺旋桨和数据表</translation>
-    </message>
-    <message>
-        <location filename="../forms/mainwindow.ui" line="688"/>
-        <source>View the Propeller datasheet PDF</source>
+        <location filename="../forms/mainwindow.ui" line="694"/>
+        <source>Build (F9)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="697"/>
-        <source>Propeller &amp;Manual</source>
-        <translation>螺旋桨和手册</translation>
+        <source>Compile program but don&apos;t run</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="700"/>
-        <source>View the Propeller manual PDF</source>
+        <source>F9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="709"/>
+        <source>&amp;Run</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="712"/>
+        <source>Run (F10)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="715"/>
+        <source>Compile and run current program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="718"/>
+        <source>F10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="727"/>
+        <source>&amp;Write</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="730"/>
+        <source>Write (F11)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="733"/>
+        <source>Compile program and download to EEPROM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="736"/>
+        <source>F11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="745"/>
+        <source>&amp;Terminal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="748"/>
+        <source>Terminal (F12)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="751"/>
+        <source>Open a new serial terminal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="754"/>
+        <source>F12</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="766"/>
+        <source>&amp;Help Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="769"/>
+        <source>Get help for your program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="772"/>
+        <source>F1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="781"/>
+        <source>Propeller &amp;Datasheet</source>
+        <translation>螺旋桨和数据表</translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="784"/>
+        <source>View the Propeller datasheet PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="793"/>
+        <source>Propeller &amp;Manual</source>
+        <translation>螺旋桨和手册</translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="796"/>
+        <source>View the Propeller manual PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="805"/>
         <source>&amp;About</source>
         <translation>&amp;大约</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="712"/>
+        <location filename="../forms/mainwindow.ui" line="808"/>
         <source>View information about this program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1097"/>
-        <source>About</source>
-        <translation>大约</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="vanished">文件</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="vanished">新</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="vanished">开放</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">保存</translation>
-    </message>
-    <message>
-        <source>Save As</source>
-        <translation type="vanished">另存为</translation>
-    </message>
-    <message>
-        <source>Tools</source>
-        <translation type="vanished">工具</translation>
-    </message>
-    <message>
-        <source>Burn EEPROM</source>
-        <translation type="vanished">烧EEPROM</translation>
-    </message>
-    <message>
-        <source>Detect Attached Propellers</source>
-        <translation type="vanished">检测连接螺旋桨</translation>
-    </message>
-    <message>
-        <source>Control</source>
-        <translation type="vanished">控制</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="99"/>
+        <location filename="../mainwindow.cpp" line="126"/>
         <source>Select Serial Port</source>
         <translation>选择串口</translation>
     </message>
+</context>
+<context>
+    <name>NewFromTemplate</name>
     <message>
-        <source>View Serial Terminal</source>
-        <translation type="vanished">查看串行终端</translation>
+        <location filename="../forms/newfromtemplate.ui" line="14"/>
+        <source>New From Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/newfromtemplate.ui" line="189"/>
+        <source>Click the language, then click to select a template.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PathSelector</name>
     <message>
-        <location filename="../PathSelector.cpp" line="24"/>
-        <source>Browse</source>
-        <translation type="unfinished">浏览</translation>
+        <location filename="../pathselector.cpp" line="65"/>
+        <source>Browse For Compiler</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pathselector.cpp" line="77"/>
+        <source>Add Includes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Preferences</name>
     <message>
-        <location filename="../Preferences.cpp" line="25"/>
+        <location filename="../forms/preferences.ui" line="14"/>
         <source>Preferences</source>
         <translation type="unfinished">首</translation>
     </message>
     <message>
-        <location filename="../Preferences.cpp" line="60"/>
-        <source>Editor Settings</source>
-        <translation type="unfinished">编辑器设置</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="64"/>
-        <source>Other Settings</source>
-        <translation type="unfinished">其他设置</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="71"/>
-        <source>General</source>
-        <translation type="unfinished">一般</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="78"/>
-        <source>Enable AutoComplete</source>
-        <translation type="unfinished">启用自动完成</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="81"/>
-        <source>Enable Code Suggestion</source>
-        <translation type="unfinished">启用代码建议</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="91"/>
-        <source>Editor Tab Space Count</source>
-        <translation type="unfinished">编辑选项卡空格数</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="93"/>
-        <source>Clear Settings</source>
-        <translation type="unfinished">清除设置</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="94"/>
-        <location filename="../Preferences.cpp" line="96"/>
-        <source>Clear Settings on Exit</source>
-        <translation type="unfinished">退出时清除设置</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="98"/>
-        <location filename="../Preferences.cpp" line="100"/>
-        <source>Set Editor Font</source>
-        <translation type="unfinished">设置编辑器字体</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="145"/>
-        <source>System</source>
-        <translation type="unfinished">系统</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="148"/>
-        <source>System Paths</source>
-        <translation type="unfinished">系统路径</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="152"/>
-        <source>Compiler</source>
-        <translation type="unfinished">编译</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="155"/>
-        <source>Must add a compiler.</source>
-        <translation type="unfinished">必须添加一个编译器。</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="161"/>
-        <source>Loader</source>
-        <translation type="unfinished">装载机</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="164"/>
-        <source>Must add a loader program.</source>
-        <translation type="unfinished">必须添加一个loader程序。</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="170"/>
-        <source>Library</source>
+        <location filename="../forms/preferences.ui" line="28"/>
+        <source>Languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Preferences.cpp" line="210"/>
+        <location filename="../forms/preferences.ui" line="76"/>
+        <source>Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="82"/>
+        <source>Features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="88"/>
+        <source>Auto completion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="101"/>
+        <source>Indent guides</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="114"/>
+        <source>Smart indent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="124"/>
+        <source>Highlight line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="137"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="149"/>
+        <source>Tab stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="156"/>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="167"/>
         <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Preferences.cpp" line="214"/>
+        <location filename="../forms/preferences.ui" line="179"/>
         <source>Themes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Library Path</source>
-        <translation type="obsolete">库路径</translation>
+        <location filename="../forms/preferences.ui" line="198"/>
+        <source>Font</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Preferences.cpp" line="174"/>
-        <source>Must add a library path.</source>
-        <translation type="unfinished">必须添加库路径。</translation>
+        <location filename="../forms/preferences.ui" line="213"/>
+        <source>Andale Mono</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Highlighting</source>
-        <translation type="obsolete">突出</translation>
+        <location filename="../forms/preferences.ui" line="790"/>
+        <source>CON</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Preferences.cpp" line="250"/>
+        <location filename="../forms/preferences.ui" line="889"/>
+        <source>VAR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="988"/>
+        <source>OBJ</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="1087"/>
+        <source>PUB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="1186"/>
+        <source>PRI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="1285"/>
+        <source>DAT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="244"/>
         <source>Syntax Colors</source>
         <translation type="unfinished">语法颜色</translation>
     </message>
     <message>
-        <location filename="../Preferences.cpp" line="254"/>
+        <location filename="../forms/preferences.ui" line="253"/>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="337"/>
+        <source>Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="424"/>
+        <source>Operators</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="511"/>
+        <source>Keywords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="598"/>
+        <source>Strings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="685"/>
+        <source>Comments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/preferences.ui" line="775"/>
         <source>Block Colors</source>
         <translation type="unfinished">块颜色</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="299"/>
-        <source>Select Compiler</source>
-        <translation type="unfinished">选择编译器</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="308"/>
-        <source>Select Loader</source>
-        <translation type="unfinished">选择装载机</translation>
-    </message>
-    <message>
-        <location filename="../Preferences.cpp" line="317"/>
-        <source>Select Spin Library Path</source>
-        <translation type="unfinished">选择旋库路径</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="52"/>
-        <source> is an easy-to-use, cross-platform development tool for the
-Parallax Propeller microcontroller.
+        <location filename="../main.cpp" line="45"/>
+        <source>Version %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="74"/>
+        <source>Can&apos;t open application settings!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="74"/>
+        <source>Unable to open the PropellerIDE settings stored at:
 
-Write code, download programs to your Propeller board, and
-debug your applications with the built-in serial terminal.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SpinBuilder</name>
-    <message>
-        <source>Build Error</source>
-        <translation type="obsolete">生成错误</translation>
-    </message>
-    <message>
-        <source>Please specify compiler application in Preferences.</source>
-        <translation type="obsolete">请注明偏好编译器应用程序。</translation>
-    </message>
-    <message>
-        <source>Could not start loader. Please check Preferences.</source>
-        <translation type="obsolete">无法启动加载器。请检查首选项。</translation>
-    </message>
-    <message>
-        <source>Loader Crashed</source>
-        <translation type="obsolete">装载机坠毁</translation>
-    </message>
-    <message>
-        <source>Loader Error</source>
-        <translation type="obsolete">装载机错误</translation>
-    </message>
-    <message>
-        <source>Could not start compiler. Please check Preferences.</source>
-        <translation type="obsolete">无法启动编译器。请检查首选项。</translation>
-    </message>
-    <message>
-        <source>Compiler Crashed</source>
-        <translation type="obsolete">编译器坠毁</translation>
-    </message>
-    <message>
-        <source>Compile Error</source>
-        <translation type="obsolete">编译错误</translation>
-    </message>
-    <message>
-        <source> bytes loaded</source>
-        <translation type="obsolete">加载字节</translation>
-    </message>
-</context>
-<context>
-    <name>TermPrefs</name>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="14"/>
-        <source>Simple Terminal Options</source>
+%1
+
+Try deleting the file and restarting PropellerIDE.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/TermPrefs.ui" line="46"/>
-        <source>Appearance</source>
+        <location filename="../main.cpp" line="79"/>
+        <source>An easy-to-use, cross-platform IDE for the Parallax Propeller</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/TermPrefs.ui" line="58"/>
-        <source>Foreground Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="71"/>
-        <source>Background Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="84"/>
-        <source>Wrap Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="98"/>
-        <source>Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="103"/>
-        <source>Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="137"/>
-        <source>Set Font </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="150"/>
-        <source>Page Wrap Length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="185"/>
-        <source>Max Buffer Lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="199"/>
-        <source>256</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="204"/>
-        <source>512</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="209"/>
-        <source>1024</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="214"/>
-        <source>2048</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="219"/>
-        <source>Infinite</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="233"/>
-        <source>Tab Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="268"/>
-        <source>Font Family (size)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="281"/>
-        <source>Show Hexadecimal Input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="294"/>
-        <source>ASCII-Hex Dump</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="303"/>
-        <source>Function</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="315"/>
-        <source>(10)  New Line NL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="331"/>
-        <source>(4) Move Cursor Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="347"/>
-        <source>(11) Clear to End of Line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="363"/>
-        <source>(1) Home Cursor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="379"/>
-        <source>(0) Clear Screen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="395"/>
-        <source>(6) Move Cursor Down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="411"/>
-        <source>(13) Carriage Return CR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="427"/>
-        <source>(12) Clear Lines Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="443"/>
-        <source>(14) Position Cursor (x)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="459"/>
-        <source>(8) Backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="475"/>
-        <source>(9) Tab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="491"/>
-        <source>Swap Receive CR/NL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="504"/>
-        <source>(7) Beep Speaker</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="520"/>
-        <source>(2) Position Cursor X,Y</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="536"/>
-        <source>(15) Position Cursor (y)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="552"/>
-        <source>(5) Move Cursor Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="568"/>
-        <source>(3) Move Cursor Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="584"/>
-        <source>Enter is NL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="600"/>
-        <source>(16) Clear Screen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="618"/>
-        <source>Reset Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="623"/>
-        <source>termPrefsOk</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/TermPrefs.ui" line="628"/>
-        <source>termPrefsCancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Terminal</name>
-    <message>
-        <location filename="../Terminal.cpp" line="22"/>
-        <source>Terminal</source>
-        <translation type="unfinished">终奌站</translation>
-    </message>
-    <message>
-        <location filename="../Terminal.cpp" line="36"/>
-        <source>Copy</source>
-        <translation type="unfinished">&amp;复制</translation>
-    </message>
-    <message>
-        <location filename="../Terminal.cpp" line="39"/>
-        <source>Paste</source>
-        <translation type="unfinished">＆粘贴</translation>
-    </message>
-    <message>
-        <location filename="../Terminal.cpp" line="47"/>
-        <source>Clear</source>
-        <translation type="unfinished">明确</translation>
-    </message>
-    <message>
-        <location filename="../Terminal.cpp" line="75"/>
-        <source>Echo On</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Terminal.cpp" line="80"/>
-        <source>Options</source>
-        <translation type="unfinished">选项</translation>
-    </message>
-    <message>
-        <location filename="../Terminal.cpp" line="86"/>
-        <source>Disable</source>
-        <translation type="unfinished">关闭</translation>
-    </message>
-</context>
-<context>
-    <name>main</name>
-    <message>
-        <location filename="../main.cpp" line="49"/>
+        <location filename="../main.cpp" line="85"/>
         <source>Source files to open.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../main.cpp" line="99"/>
+        <source>Loading translations...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="106"/>
+        <source>Loading styles...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="116"/>
+        <source>Loading fonts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="125"/>
+        <source>Loading editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="129"/>
+        <source>Loading previous session...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="410"/>
+        <source>Circular dependency!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="411"/>
+        <source>&lt;p&gt;Your project has a circular dependency. That means one of your objects is including &lt;i&gt;itself&lt;/i&gt;.&lt;/p&gt;&lt;p&gt;Revise your code to build your project.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>statusDialog</name>
+    <name>TemplateIcon</name>
     <message>
-        <location filename="../forms/status.ui" line="23"/>
-        <source>Build Status</source>
+        <location filename="../forms/templateicon.ui" line="99"/>
+        <location filename="../forms/templateicon.ui" line="160"/>
+        <source>Template</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>buildManager</name>
     <message>
-        <location filename="../forms/status.ui" line="128"/>
-        <source>Build</source>
-        <translation type="unfinished">建</translation>
-    </message>
-    <message>
-        <location filename="../forms/status.ui" line="291"/>
-        <source>Load</source>
+        <location filename="../forms/buildmanager.ui" line="29"/>
+        <source>Build Manager</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/status.ui" line="451"/>
-        <source>Run</source>
-        <translation type="unfinished">运行</translation>
-    </message>
-    <message>
-        <location filename="../forms/status.ui" line="544"/>
-        <source>Details +</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/status.ui" line="602"/>
-        <source>Done</source>
-        <translation type="unfinished">Replace Previous</translation>
     </message>
 </context>
 </TS>
