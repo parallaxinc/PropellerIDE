@@ -11,8 +11,11 @@ Q_DECLARE_LOGGING_CATEGORY(logfile)
 
 Q_DECLARE_LOGGING_CATEGORY(logbuildmanager)
 
-Q_DECLARE_LOGGING_CATEGORY(loglanguagemanager)
 Q_DECLARE_LOGGING_CATEGORY(loglanguage)
 Q_DECLARE_LOGGING_CATEGORY(loghighlighter)
 
 Q_DECLARE_LOGGING_CATEGORY(logcolorscheme)
+
+void messageHandler(QtMsgType type,
+        const QMessageLogContext &context,
+        const QString &msg);

@@ -16,30 +16,6 @@
 
 #include "mainwindow.h"
 
-void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    QByteArray localMsg = msg.toLocal8Bit();
-    switch (type) {
-        case QtDebugMsg:
-            fprintf(stderr, "[\033[1;32mDEBUG\033[0m] \033[0;34m%s\033[0m: %s\n", context.category, localMsg.constData());
-            break;
-#ifdef QtInfoMsg
-        case QtInfoMsg:
-            fprintf(stderr, "[\033[1;32mINFO \033[0m] \033[0;34m%s\033[0m: %s\n", context.category, localMsg.constData());
-            break;
-#endif
-        case QtWarningMsg:
-            fprintf(stderr, "[\033[1;33mWARN \033[0m] \033[0;34m%s\033[0m: %s\n", context.category, localMsg.constData());
-            break;
-        case QtCriticalMsg:
-            fprintf(stderr, "[\033[1;31mERROR\033[0m] \033[0;34m%s\033[0m: %s\n", context.category, localMsg.constData());
-            break;
-        case QtFatalMsg:
-            fprintf(stderr, "[\033[1;31mFATAL\033[0m] \033[0;34m%s\033[0m: %s\n", context.category, localMsg.constData());
-            abort();
-    }
-}
-
 void updateSplash(QSplashScreen * splash, const QString & text)
 {
     QString t = QObject::tr("Version %1\n").arg(qApp->applicationVersion());
