@@ -13,15 +13,13 @@
 
 #include "logging.h"
 
-Editor::Editor(Language * language, QWidget *parent) : QPlainTextEdit(parent)
+Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 {
-    this->language = language;
-    this->parser = language->getParser();
+    parser = language.parser();
+    blocks = language.listBlocks();
+    re_blocks = language.buildTokenizer(blocks);
     
     propDialog = &((MainWindow *) parent)->preferences;
-
-    blocks = language->listBlocks();
-    re_blocks = language->buildTokenizer(blocks);
 
     canUndo = false;
     canRedo = false;
@@ -58,10 +56,6 @@ Editor::Editor(Language * language, QWidget *parent) : QPlainTextEdit(parent)
     cbAuto = new QComboBox(this);
     cbAuto->setMaxVisibleItems(10);
     cbAuto->hide();
-
-//    QCompleter *completer = new QCompleter(wordList, this);
-//    completer->setCaseSensitivity(Qt::CaseInsensitive);
-//    setCompleter(completer);
 }
 
 Editor::~Editor()

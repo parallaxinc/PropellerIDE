@@ -22,10 +22,6 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(QCoreApplication::applicationName());
     ui.setupUi(this);
 
-    // ===== HACK ZONE =====
-    ui.editorTabs->setLanguage(&language);  
-    // ===== END HACK ZONE =====
-
     // setup preferences dialog
     connect(&preferences,   SIGNAL(accepted()),                     this,   SLOT(getApplicationSettings()));
 
@@ -33,7 +29,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&builder,   SIGNAL(finished()),                     this,   SLOT(enableBuildControls()));
     connect(&builder,   SIGNAL(buildError()),                   &preferences, SLOT(showPreferences()));
 
-    parser = language.getParser();
+//    language.load(":/languages/c.json");
+//    language.load(":/languages/propbasic.json");
+    language.load(":/languages/spin.json");
+
+    parser = language.parser();
     connect(&preferences,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
     connect(&preferences,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorProjectView()));
 

@@ -19,7 +19,7 @@ class Editor : public QPlainTextEdit
     Q_OBJECT
 
     ColorScheme *   currentTheme;
-    Language *      language;
+    Language        language;
     ProjectParser * parser;
 
     Highlighter *   highlighter;
@@ -58,9 +58,8 @@ class Editor : public QPlainTextEdit
     QColor  contrastColor(QColor color, int amount = 20);
 
 public:
-    Editor(Language * language,
-            QWidget * parent);
-    virtual ~Editor();
+    Editor(QWidget * parent);
+    ~Editor();
 
     void    saveContent();
     int     contentChanged();

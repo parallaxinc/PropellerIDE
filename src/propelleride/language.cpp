@@ -8,14 +8,22 @@
 #include <QVariantList>
 #include <QStringList>
 #include <QFile>
+#include <QFileInfo>
 #include <QString>
 #include <QRegExp>
 #include <QColor>
 #include <QIcon>
 
+QHash<QString, LanguageData> Language::_data = QHash<QString, LanguageData>();
+
 Language::Language() 
 {
-    loadLanguage(":/languages/spin.json");
+    load("");
+    _language = "spin";
+}
+
+Language::~Language()
+{
 }
 
 QRegularExpression Language::buildTokenizer(QStringList tokens)
@@ -23,7 +31,7 @@ QRegularExpression Language::buildTokenizer(QStringList tokens)
     QString tokenstring = tokens.join("|");
     tokenstring = "("+tokenstring+")";
 
-    if (case_sensitive)
+    if (language().case_sensitive)
         return QRegularExpression(tokenstring);
     else
         return QRegularExpression(tokenstring, 
@@ -69,10 +77,10 @@ QStringList Language::mergeList(QStringList list)
     return mergedlist.split(QRegExp("\\s+"));
 }
 
-void Language::buildParser(QJsonArray projectparser)
+ProjectParser * Language::buildParser(QJsonArray projectparser)
 {
-    parser.clearRules();
-    parser.setCaseInsensitive(true);
+    ProjectParser * parser = new ProjectParser();
+    parser->setCaseInsensitive(true);
 
     foreach (QJsonValue r, projectparser)
     {
@@ -98,106 +106,121 @@ void Language::buildParser(QJsonArray projectparser)
             patterns.append(p);
         }
 
-        parser.addRule(r.toObject()["name"].toString(), patterns,
+        parser->addRule(r.toObject()["name"].toString(), patterns,
             QIcon(r.toObject()["icon"].toString()),
             QColor(r.toObject()["color"].toString()));
     }
+
+    return parser;
 }
 
-void Language::loadLanguage(QString filename)
+void Language::load(QString filename)
 { 
-    QString val;
+    LanguageData data;
+
     QFile file;
     file.setFileName(filename);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
-    val = file.readAll();
+    QString text = file.readAll();
     file.close();
 
-    QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
+    QFileInfo fi(filename);
+    _language = fi.baseName();
+
+    QJsonDocument d = QJsonDocument::fromJson(text.toUtf8());
     QJsonObject lang = d.object();
     QJsonObject syntax = lang["syntax"].toObject();
 
-    case_sensitive = false;
-    enable_blocks = false;
+    data.case_sensitive = false;
+    data.enable_blocks = false;
 
-    numbers     = buildWordList(syntax["number"].toArray());
-    functions   = buildWordList(syntax["function"].toArray());
-    comments    = buildWordList(syntax["comment"].toArray());
-    comments    = mergeList(comments);
-    strings     = buildWordList(syntax["string"].toArray());
-    strings     = mergeList(strings);
+    data.numbers     = buildWordList(syntax["number"].toArray());
+    data.functions   = buildWordList(syntax["function"].toArray());
+    data.comments    = mergeList(buildWordList(syntax["comment"].toArray()));
+    data.strings     = mergeList(buildWordList(syntax["string"].toArray()));
 
-    enable_blocks   = syntax["enable_blocks"].toArray().first().toBool();
-    if (enable_blocks)
+    data.enable_blocks   = syntax["enable_blocks"].toArray().first().toBool();
+
+    if (data.enable_blocks)
     {
-        blocks          = buildWordList(syntax["enable_blocks"].toArray().last().toArray());
-        blocks          = mergeList(blocks);
+        data.blocks = mergeList(buildWordList(syntax["enable_blocks"].toArray().last().toArray()));
     }
 
-    case_sensitive  = syntax["case_sensitive"].toBool();
-    escape_char     = syntax["escape"].toString();
+    data.case_sensitive  = syntax["case_sensitive"].toBool();
 
     foreach(QJsonValue m, syntax["mode"].toObject())
     {
-        QStringList slist = buildWordList(
-                m.toObject()["keywords"].toArray());
+        QStringList slist = buildWordList(m.toObject()["keywords"].toArray());
         slist = mergeList(slist);
-
         slist = matchWholeWord(slist);
 
-        keywords.append(slist);
+        data.keywords.append(slist);
 
-        slist = buildWordList(
-                m.toObject()["operators"].toArray());
+        slist = buildWordList(m.toObject()["operators"].toArray());
         slist = mergeList(slist);
 
-        operators.append(slist);
+        data.operators.append(slist);
     }
 
-    buildParser(lang["project"].toArray());
+    data.parser = buildParser(lang["project"].toArray());
+
+    _data[_language] = data;
+}
+
+QStringList Language::languages()
+{
+    return _data.keys();
+}
+
+LanguageData Language::language()
+{
+    if (_data.contains(_language))
+        return _data[_language];
+    else
+        return _data[""];
 }
 
 QStringList Language::listKeywords()
 {
-    return keywords;
+    return language().keywords;
 }
 
 QStringList Language::listOperators()
 {
-    return operators;
+    return language().operators;
 }
 
 QStringList Language::listNumbers()
 {
-    return numbers;
+    return language().numbers;
 }
 
 QStringList Language::listStrings()
 {
-    return strings;
+    return language().strings;
 }
 
 QStringList Language::listComments()
 {
-    return comments;
+    return language().comments;
 }
 
 QStringList Language::listFunctions()
 {
-    return functions;
+    return language().functions;
 }
 
 QStringList Language::listBlocks()
 {
-    return blocks;
+    return language().blocks;
 }
 
 bool Language::isCaseSensitive()
 {
-    return case_sensitive;
+    return language().case_sensitive;
 }
 
-ProjectParser * Language::getParser(QString language)
+ProjectParser * Language::parser()
 {
-    return &parser;
+    return language().parser;
 }

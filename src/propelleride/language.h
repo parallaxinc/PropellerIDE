@@ -8,13 +8,12 @@
 
 #include <ProjectParser>
 
-class Language
+struct LanguageData
 {
-    ProjectParser parser;
+    ProjectParser * parser;
 
     bool case_sensitive;
     bool enable_blocks;
-    QString escape_char;
 
     QStringList keywords;
     QStringList operators;
@@ -23,15 +22,27 @@ class Language
     QStringList functions;
     QStringList comments;
     QStringList blocks;
+};
+
+class Language
+{
+    static QHash<QString, LanguageData> _data;
+    QString _language;
 
     QStringList matchWholeWord(QStringList list);
     QStringList buildWordList(QJsonArray keyarray);
     QStringList mergeList(QStringList list);
+    ProjectParser * buildParser(QJsonArray projectparser);
+    LanguageData language();
 
 public:
 
-    void buildParser(QJsonArray projectparser);
-    void loadLanguage(QString filename);
+    ~Language();
+    Language();
+    void load(QString filename);
+    QStringList languages();
+    ProjectParser * parser();
+
     QStringList listKeywords();
     QStringList listOperators();
     QStringList listNumbers();
@@ -43,6 +54,4 @@ public:
     bool isCaseSensitive();
     QRegularExpression buildTokenizer(QStringList rules);
 
-    Language();
-    ProjectParser * getParser(QString language = QString("spin"));
 };

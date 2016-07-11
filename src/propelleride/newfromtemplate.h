@@ -5,13 +5,10 @@
 #include "ui_newfromtemplate.h"
 
 #include "templateicon.h"
-#include "language.h"
 
 class NewFromTemplate : public QDialog 
 {
     Q_OBJECT
-
-    Language        language;
 
     QString _category;
     QHash<QString, QList<TemplateIcon *> > _templates;

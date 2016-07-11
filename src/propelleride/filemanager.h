@@ -4,15 +4,12 @@
 #include <QMessageBox>
 #include <QStatusBar>
 
-#include "language.h"
 #include "editor.h"
 #include "logging.h"
 
 class FileManager : public QTabWidget
 {
     Q_OBJECT
-
-    Language * language;
 
     void createBackgroundImage();
     QString reformatText(QString text);
@@ -23,7 +20,6 @@ public:
     Editor * getEditor(int num);
     int isFileOpen(const QString & fileName);
     int isFileEmpty(int index);
-    void setLanguage(Language * language);
 
     bool createHome();
     QString getDirectory();
