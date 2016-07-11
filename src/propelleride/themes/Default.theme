@@ -1,0 +1,16 @@
+[Colors]
+Block_CON=#fff8c0
+Block_DAT=#bfffc8
+Block_OBJ=#ffbfbf
+Block_PRI=#bff8ff
+Block_PUB=#bfdfff
+Block_VAR=#ffdfbf
+Syntax_Comments=#8F8F8F
+Syntax_Operators=#3333FE
+Syntax_Keywords=#000080
+Syntax_Numbers=#ff00ff
+Syntax_Strings=#ff0000
+Syntax_Text=#000000
+
+[Font]
+Family=

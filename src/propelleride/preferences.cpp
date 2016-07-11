@@ -31,14 +31,20 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
 
 void Preferences::setupThemes()
 {
-    defaultTheme = ":/themes/Ice.theme";
+    defaultTheme = ":/themes/Default.theme";
 
     QDirIterator it(":/themes", QDirIterator::Subdirectories);
+    QStringList themes;
+
     while (it.hasNext())
+        themes.append(it.next());
+
+    themes.sort();
+
+    foreach (QString t, themes)
     {
-        QString filename = it.next();
-        QString prettyname = QFileInfo(filename).baseName().replace("_"," ");
-        ui.themeEdit->addItem(prettyname, filename);
+        QString prettyname = QFileInfo(t).baseName().replace("_"," ");
+        ui.themeEdit->addItem(prettyname, t);
     }
 
     QSettings settings;

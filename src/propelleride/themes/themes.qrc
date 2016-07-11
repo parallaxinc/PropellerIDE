@@ -2,6 +2,7 @@
 <qresource prefix="/themes">
     <file>Bash.theme</file>
     <file>Classic.theme</file>
+    <file>Default.theme</file>
     <file>Dusk_Ocean.theme</file>
     <file>Ice.theme</file>
     <file>IIe.theme</file>

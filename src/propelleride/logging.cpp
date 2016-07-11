@@ -64,7 +64,11 @@ static const QHash<AnsiColor, QString> ansiColors = initAnsiColors();
 
 QString wrapColor(AnsiColor color, QString text)
 {
+#ifdef Q_OS_WIN
+    return text;
+#else
     return "\033[" + ansiColors[color] + "m" + text + "\033[0m";
+#endif
 }
 
 void message(AnsiColor color,
@@ -72,10 +76,19 @@ void message(AnsiColor color,
         const QMessageLogContext &context,
         const QString &msg)
 {
-    fprintf(stderr, "[%s] %s: %s\n",
+#ifdef QT_MESSAGELOGCONTEXT
+    fprintf(stderr, "[%s] %s(%i): %s\n",
             qPrintable(wrapColor(color, text)),
-            qPrintable(wrapColor(AnsiWhite, context.category)),
+            qPrintable(wrapColor(AnsiLightBlue, context.file)),
+            context.line,
             qPrintable(msg));
+#else
+    Q_UNUSED(context);
+
+    fprintf(stderr, "[%s] %s\n",
+            qPrintable(wrapColor(color, text)),
+            qPrintable(msg));
+#endif
 }
 
 void messageHandler(QtMsgType type,
