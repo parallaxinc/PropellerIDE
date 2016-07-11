@@ -52,5 +52,7 @@ public slots:
 
 protected:
     void highlightBlock(const QString &text);
+    void highlightOnePartRules(const QString &text);
+    void highlightTwoPartRules(const QString &text);
 
 };

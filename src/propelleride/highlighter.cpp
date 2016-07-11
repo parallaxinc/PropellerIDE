@@ -40,11 +40,8 @@ void Highlighter::addTwoPartRules(QStringList rules,
     }
 }
 
-void Highlighter::highlightBlock(const QString &text)
+void Highlighter::highlightOnePartRules(const QString &text)
 {
-    if (onepartrules.size() == 0)
-        return;
-
     foreach (OnePartRule rule, onepartrules)
     {
         QRegularExpressionMatchIterator i = rule.pattern.globalMatch(text);
@@ -59,7 +56,10 @@ void Highlighter::highlightBlock(const QString &text)
             setFormat(start, length, rule.format);
         }
     }
+}
 
+void Highlighter::highlightTwoPartRules(const QString &text)
+{
     int state = 0;
     setCurrentBlockState(0);
 
@@ -116,6 +116,19 @@ void Highlighter::highlightBlock(const QString &text)
                 break;
         }
         if (state >= twopartrules.size()) state = -1;
+    }
+}
+
+void Highlighter::highlightBlock(const QString &text)
+{
+    if (onepartrules.size() > 0)
+    {
+        highlightOnePartRules(text);
+    }
+
+    if (twopartrules.size() > 0)
+    {
+        highlightTwoPartRules(text);
     }
 }
 
