@@ -19,6 +19,9 @@ public:
         enable_blocks = false;
     }
 
+    QString name;
+    QStringList extensions;
+
     ProjectParser * parser;
 
     bool case_sensitive;
@@ -54,6 +57,8 @@ public:
     void load(QString name, QString filename);
     QStringList languages();
     QStringList extensions();
+
+    QString name();
     ProjectParser * parser();
 
     QStringList listKeywords();

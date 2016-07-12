@@ -11,6 +11,7 @@
 #include <QtGlobal>
 #include <QDateTime>
 #include <QSettings>
+#include <QSysInfo>
 
 #include "logging.h"
 
@@ -25,12 +26,14 @@ void updateSplash(QSplashScreen * splash, const QString & text)
     qApp->processEvents();
 }
 
+void printDebugInfo();
 bool initLanguages();
 bool initTranslations();
 bool initStyles();
 bool initFonts();
 
 QSplashScreen * splash;
+QCommandLineParser parser;
 
 int main(int argc, char *argv[])
 {
@@ -45,7 +48,7 @@ int main(int argc, char *argv[])
 #ifdef VERSION
     QCoreApplication::setApplicationVersion(VERSION);
 #else
-    QCoreApplication::setApplicationVersion("0.0.0");
+    QCoreApplication::setApplicationVersion("0.0.0 (dev)");
 #endif
 
     QSettings settings;
@@ -58,7 +61,6 @@ int main(int argc, char *argv[])
 
     QString description = QObject::tr("An easy-to-use, cross-platform IDE for the Parallax Propeller");
 
-    QCommandLineParser parser;
     parser.setApplicationDescription(QCoreApplication::applicationName());
     parser.addHelpOption();
     parser.addVersionOption();
@@ -66,11 +68,7 @@ int main(int argc, char *argv[])
     parser.setApplicationDescription("\n" + description);
     parser.process(app);
 
-    qCDebug(logmain) << qPrintable(QCoreApplication::applicationName())
-                     << qPrintable(QString("v"+QCoreApplication::applicationVersion()))
-                     << "-"
-                     << qPrintable(description);
-
+    printDebugInfo();
 
     QPixmap pixmap(":/icons/splash.png");
     splash = new QSplashScreen(pixmap);
@@ -101,6 +99,31 @@ int main(int argc, char *argv[])
 }
 
 
+void printDebugInfo()
+{
+    qDebug() << qPrintable(QCoreApplication::applicationName())
+             << "-"
+             << qPrintable(parser.applicationDescription().remove("\n"));
+
+    qDebug() << "Version:"
+             << qPrintable(QCoreApplication::applicationVersion());
+
+    qDebug() << "Arch:" 
+             << qPrintable(QSysInfo::buildAbi());
+
+    qDebug() << "OS:"
+#if defined(Q_OS_WIN)
+             << "Windows,"
+#elif defined(Q_OS_MAC)
+             << "Mac,"
+#elif defined(Q_OS_LINUX)
+             << "Linux,"
+#else
+#error "Unsupported platform"
+#endif
+             << qPrintable(QSysInfo::prettyProductName());
+}
+
 bool initLanguages()
 {
     updateSplash(splash, QObject::tr("Loading languages..."));
@@ -113,8 +136,6 @@ bool initLanguages()
         QString name = QFileInfo(filename).baseName();
         language.load(name, filename);
     }
-    qDebug() << "Languages:" << language.languages();
-    qDebug() << "Extensions:" << language.extensions();
 
     return true;
 }

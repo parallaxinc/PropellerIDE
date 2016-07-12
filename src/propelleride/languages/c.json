@@ -1,10 +1,13 @@
 {
     "name": "Propeller C",
-    "extension": [ "cpp", "hpp", "c", "h" ],
+    "extension": [ "c", "h", "cpp", "hpp" ],
+    "build": {
+        [ "propbasic", "%1" ],
+        [ "openspin","-L","%1","%2" ]
+    },
     "syntax": {
         "case_sensitive": true,
         "enable_blocks": [ false ],
-        "escape": "\\\\[\\s\\S]",
         "string": [
             "\" \"",
             "' '",

@@ -123,10 +123,6 @@ void Language::load()
 void Language::load(QString ext)
 {
     ext = ext.toLower();
-    qDebug()
-        << ext 
-        << (_lookup.contains(ext))
-        << extensions();
     if (_lookup.contains(ext))
     {
         _language = _lookup[ext];
@@ -150,7 +146,7 @@ void Language::load(QString name, QString filename)
     }
     else if (!file.open(QIODevice::ReadOnly))
     {
-        qWarning() << "Unsupported language:" << _language;
+        qCritical() << "Unable to open language definition file:" << filename;
         _data[_language] = LanguageData();
         return;
     }
@@ -163,6 +159,20 @@ void Language::load(QString name, QString filename)
     QJsonDocument d = QJsonDocument::fromJson(text.toUtf8());
     QJsonObject lang = d.object();
     QJsonObject syntax = lang["syntax"].toObject();
+
+    data.name = lang["name"].toString();
+
+    foreach (QVariant extvar, lang["extension"].toArray().toVariantList())
+    {
+        QString ext = extvar.toString().toLower();
+        data.extensions.append(ext);
+        _lookup[ext] = name;
+    }
+
+
+    qDebug()    << "Loading language definition:"
+                << qPrintable(data.name)
+                << data.extensions;
 
     data.numbers   = buildWordList(syntax["number"].toArray());
     data.functions = buildWordList(syntax["function"].toArray());
@@ -177,11 +187,6 @@ void Language::load(QString name, QString filename)
     }
 
     data.case_sensitive  = syntax["case_sensitive"].toBool();
-
-    foreach (QVariant ext, lang["extension"].toArray().toVariantList())
-    {
-        _lookup[ext.toString().toLower()] = name;
-    }
 
     foreach(QJsonValue m, syntax["mode"].toObject())
     {
@@ -225,6 +230,16 @@ LanguageData Language::language()
         return _data[""];
 }
 
+QString Language::name()
+{
+    return language().name;
+}
+
+ProjectParser * Language::parser()
+{
+    return language().parser;
+}
+
 QStringList Language::listKeywords()
 {
     return language().keywords;
@@ -265,7 +280,3 @@ bool Language::isCaseSensitive()
     return language().case_sensitive;
 }
 
-ProjectParser * Language::parser()
-{
-    return language().parser;
-}

@@ -1,21 +1,14 @@
 {
     "name": "Propeller Spin",
     "extension": [ "spin" ],
-    "template": [ "Quickstart.spin" ],
     "build": {
-        "cmd":
-        [
-            ["openspin","-L","%1","%2"]
-        ],
-        "call":
-        [
-            ["openspin","compile"]
+        "cmd": [
+            [ "openspin", "%1", "-L", "%2" ]
         ]
     },
     "syntax": {
         "case_sensitive": false,
-        "enable_blocks": 
-        [
+        "enable_blocks": [
             true,
             [
                 "^con\\b",
@@ -26,7 +19,6 @@
                 "^dat\\b"
             ]
         ],
-        "escape": "\\\\[\\s\\S]",
         "string": [
             "\" \""
         ],

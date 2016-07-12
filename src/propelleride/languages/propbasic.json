@@ -1,24 +1,10 @@
 {
     "name": "PropBASIC",
-    "extension": [
-        "pbas"
-    ],
-    "template": [
-        "Quickstart.pbas"
-    ],
+    "extension": [ "pbas" ],
     "build": {
         "cmd": [
-            [
-                "propbasic","%1"
-            ],
-            [
-                "openspin","-L","%1","%2"
-            ]
-        ],
-        "call": [
-            [
-                "propbasic","compile"
-            ]
+            [ "propbasic", "%1" ],
+            [ "openspin", "%1", "-L", "%2" ]
         ]
     },
     "syntax": {
@@ -26,10 +12,14 @@
         "enable_blocks": [
             true,
             [
-                "sub func task data wdata ldata"
+                "^sub\\b",
+                "^func\\b",
+                "^task\\b",
+                "^data\\b",
+                "^wdata\\b",
+                "^ldata\\b"
             ]
         ],
-        "escape": "\\\\[\\s\\S]",
         "string": [
             "\" \""
         ],

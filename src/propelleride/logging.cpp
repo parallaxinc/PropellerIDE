@@ -77,7 +77,7 @@ void message(AnsiColor color,
         const QString &msg)
 {
 #ifdef QT_MESSAGELOGCONTEXT
-    fprintf(stderr, "[%s] %s(%i): %s\n",
+    fprintf(stderr, "[%s] %s (%i): %s\n",
             qPrintable(wrapColor(color, text)),
             qPrintable(wrapColor(AnsiLightBlue, context.file)),
             context.line,
