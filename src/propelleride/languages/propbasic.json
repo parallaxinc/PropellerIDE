@@ -1,6 +1,6 @@
 {
     "name": "PropBASIC",
-    "ext": [
+    "extension": [
         "pbas"
     ],
     "template": [

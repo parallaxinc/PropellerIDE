@@ -1,6 +1,6 @@
 {
     "name": "Propeller Spin",
-    "ext": [ "spin" ],
+    "extension": [ "spin" ],
     "template": [ "Quickstart.spin" ],
     "build": {
         "cmd":

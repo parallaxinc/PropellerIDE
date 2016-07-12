@@ -15,11 +15,12 @@
 #include <QIcon>
 
 QHash<QString, LanguageData> Language::_data = QHash<QString, LanguageData>();
+QHash<QString, QString> Language::_lookup = QHash<QString, QString>();
 
 Language::Language() 
 {
-    load("");
-    _language = "spin";
+    _language = "";
+    load();
 }
 
 Language::~Language()
@@ -79,7 +80,7 @@ QStringList Language::mergeList(QStringList list)
 
 ProjectParser * Language::buildParser(QJsonArray projectparser)
 {
-    ProjectParser * parser = new ProjectParser();
+    ProjectParser * parser = language().parser;
     parser->setCaseInsensitive(true);
 
     foreach (QJsonValue r, projectparser)
@@ -114,30 +115,59 @@ ProjectParser * Language::buildParser(QJsonArray projectparser)
     return parser;
 }
 
-void Language::load(QString filename)
-{ 
-    LanguageData data;
+void Language::load()
+{
+    load("","");
+}
 
-    QFile file;
-    file.setFileName(filename);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
+void Language::load(QString ext)
+{
+    ext = ext.toLower();
+    qDebug()
+        << ext 
+        << (_lookup.contains(ext))
+        << extensions();
+    if (_lookup.contains(ext))
+    {
+        _language = _lookup[ext];
+    }
+    else
+    {
+        load();
+    }
+}
+
+void Language::load(QString name, QString filename)
+{ 
+    QFile file(filename);
+    name = name.toLower();
+    _language = name;
+
+    if (filename.isEmpty())
+    {
+        _data[_language] = LanguageData();
+        return;
+    }
+    else if (!file.open(QIODevice::ReadOnly))
+    {
+        qWarning() << "Unsupported language:" << _language;
+        _data[_language] = LanguageData();
+        return;
+    }
+
     QString text = file.readAll();
     file.close();
 
-    QFileInfo fi(filename);
-    _language = fi.baseName();
+    LanguageData data;
 
     QJsonDocument d = QJsonDocument::fromJson(text.toUtf8());
     QJsonObject lang = d.object();
     QJsonObject syntax = lang["syntax"].toObject();
 
-    data.case_sensitive = false;
-    data.enable_blocks = false;
-
-    data.numbers     = buildWordList(syntax["number"].toArray());
-    data.functions   = buildWordList(syntax["function"].toArray());
-    data.comments    = mergeList(buildWordList(syntax["comment"].toArray()));
-    data.strings     = mergeList(buildWordList(syntax["string"].toArray()));
+    data.numbers   = buildWordList(syntax["number"].toArray());
+    data.functions = buildWordList(syntax["function"].toArray());
+    data.comments  = mergeList(buildWordList(syntax["comment"].toArray()));
+    data.strings   = mergeList(buildWordList(syntax["string"].toArray()));
 
     data.enable_blocks   = syntax["enable_blocks"].toArray().first().toBool();
 
@@ -147,6 +177,11 @@ void Language::load(QString filename)
     }
 
     data.case_sensitive  = syntax["case_sensitive"].toBool();
+
+    foreach (QVariant ext, lang["extension"].toArray().toVariantList())
+    {
+        _lookup[ext.toString().toLower()] = name;
+    }
 
     foreach(QJsonValue m, syntax["mode"].toObject())
     {
@@ -169,8 +204,18 @@ void Language::load(QString filename)
 
 QStringList Language::languages()
 {
-    return _data.keys();
+    QStringList langs = _data.keys();
+    langs.removeAll("");
+    return langs;
 }
+
+QStringList Language::extensions()
+{
+    QStringList exts = _lookup.keys();
+    exts.removeAll("");
+    return exts;
+}
+
 
 LanguageData Language::language()
 {

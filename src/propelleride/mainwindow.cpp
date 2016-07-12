@@ -29,10 +29,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&builder,   SIGNAL(finished()),                     this,   SLOT(enableBuildControls()));
     connect(&builder,   SIGNAL(buildError()),                   &preferences, SLOT(showPreferences()));
 
-//    language.load(":/languages/c.json");
-//    language.load(":/languages/propbasic.json");
-    language.load(":/languages/spin.json");
-
     parser = language.parser();
     connect(&preferences,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
     connect(&preferences,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorProjectView()));

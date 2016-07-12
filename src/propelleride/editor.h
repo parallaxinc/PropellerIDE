@@ -60,6 +60,7 @@ class Editor : public QPlainTextEdit
 public:
     Editor(QWidget * parent);
     ~Editor();
+    void    setExtension(QString ext);
 
     void    saveContent();
     int     contentChanged();

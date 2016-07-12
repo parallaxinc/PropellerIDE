@@ -180,8 +180,12 @@ int FileManager::openFile(const QString & fileName)
     in.setCodec("UTF-8");
     getEditor(index)->setPlainText(reformatText(in.readAll()));
 
-    setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
-    setTabText(index,QFileInfo(fileName).fileName());
+    QFileInfo fi(fileName);
+
+    getEditor(index)->setExtension(fi.suffix());
+
+    setTabToolTip(index,fi.canonicalFilePath());
+    setTabText(index,fi.fileName());
     getEditor(index)->saveContent();
     fileChanged();
 
@@ -306,8 +310,12 @@ void FileManager::saveFile(const QString & fileName, int index)
     os.flush();
     QApplication::restoreOverrideCursor();
 
-    setTabToolTip(index,QFileInfo(fileName).canonicalFilePath());
-    setTabText(index,QFileInfo(fileName).fileName());
+    QFileInfo fi(fileName);
+
+    getEditor(index)->setExtension(fi.suffix());
+    setTabToolTip(index,fi.canonicalFilePath());
+    setTabText(index,fi.fileName());
+
     getEditor(index)->saveContent();
     fileChanged();
     emit fileUpdated(index);
@@ -429,7 +437,8 @@ void FileManager::fileChanged()
 {
     int index = currentIndex();
     QString file = tabToolTip(index);
-    QString name = QFileInfo(file).fileName();
+    QFileInfo fi(file);
+    QString name = fi.fileName();
 
     if (file.isEmpty())
         name = tr("Untitled");

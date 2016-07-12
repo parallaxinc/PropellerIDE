@@ -15,10 +15,8 @@
 
 Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 {
-    parser = language.parser();
-    blocks = language.listBlocks();
-    re_blocks = language.buildTokenizer(blocks);
-    
+    highlighter = 0;
+    setExtension("spin");
     propDialog = &((MainWindow *) parent)->preferences;
 
     canUndo = false;
@@ -35,7 +33,6 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     updateLineNumberAreaWidth();
 
-    highlighter = new Highlighter(this->document());
     setMouseTracking(true);
     setCenterOnScroll(true);
     setWordWrapMode(QTextOption::NoWrap);
@@ -62,7 +59,8 @@ Editor::~Editor()
 {
     cbAuto->clear();
     delete cbAuto;
-    delete highlighter;
+    if (highlighter)
+        delete highlighter;
     delete lineNumberArea;
 }
 
@@ -79,6 +77,19 @@ void Editor::loadPreferences()
     settings.endGroup();
 
     setTabStopWidth(tabStop * QFontMetrics(currentTheme->getFont()).width(' '));
+}
+
+void Editor::setExtension(QString ext)
+{
+    language.load(ext);
+    parser = language.parser();
+    blocks = language.listBlocks();
+    re_blocks = language.buildTokenizer(blocks);
+
+    if (highlighter)
+        delete highlighter;
+
+    highlighter = new Highlighter(ext, document());
 }
 
 void Editor::saveContent()
@@ -99,14 +110,6 @@ void Editor::keyPressEvent (QKeyEvent *e)
     {
         switch (e->key())
         {
-            case Qt::Key_Home:
-                cursor.movePosition(QTextCursor::Start);
-                setTextCursor(cursor);
-                break;
-            case Qt::Key_End:
-                cursor.movePosition(QTextCursor::End);
-                setTextCursor(cursor);
-                break;
             default:
                 QPlainTextEdit::keyPressEvent(e);
         }
@@ -157,6 +160,16 @@ void Editor::keyPressEvent (QKeyEvent *e)
                 tabOn = false;
                 QPlainTextEdit::keyPressEvent(e);
                 break;
+
+            case Qt::Key_Home:
+                cursor.movePosition(QTextCursor::Start);
+                setTextCursor(cursor);
+                break;
+            case Qt::Key_End:
+                cursor.movePosition(QTextCursor::End);
+                setTextCursor(cursor);
+                break;
+
             default:
                 QPlainTextEdit::keyPressEvent(e);
         }

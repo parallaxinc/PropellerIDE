@@ -1,6 +1,6 @@
 {
     "name": "Propeller C",
-    "ext": [ "c", "h" ],
+    "extension": [ "cpp", "hpp", "c", "h" ],
     "syntax": {
         "case_sensitive": true,
         "enable_blocks": [ false ],

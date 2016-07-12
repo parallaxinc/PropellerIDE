@@ -19,7 +19,7 @@ class Highlighter : public QSyntaxHighlighter
     Q_OBJECT
 
     ColorScheme * currentTheme;
-    Language lang;
+    Language language;
 
     QRegularExpression re_tokens;
 
@@ -41,7 +41,7 @@ class Highlighter : public QSyntaxHighlighter
     QList<TwoPartRule> twopartrules;
 
 public:
-    Highlighter(QTextDocument *parent);
+    Highlighter(QString ext, QTextDocument *parent);
 
     void addOnePartRules(QString name, QStringList rules);
     void addTwoPartRules(QStringList rules,

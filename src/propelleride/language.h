@@ -8,8 +8,17 @@
 
 #include <ProjectParser>
 
-struct LanguageData
+class LanguageData
 {
+public:
+    LanguageData()
+    {
+        parser = new ProjectParser();
+
+        case_sensitive = false;
+        enable_blocks = false;
+    }
+
     ProjectParser * parser;
 
     bool case_sensitive;
@@ -26,6 +35,7 @@ struct LanguageData
 
 class Language
 {
+    static QHash<QString, QString> _lookup;
     static QHash<QString, LanguageData> _data;
     QString _language;
 
@@ -39,8 +49,11 @@ public:
 
     ~Language();
     Language();
-    void load(QString filename);
+    void load();
+    void load(QString name);
+    void load(QString name, QString filename);
     QStringList languages();
+    QStringList extensions();
     ProjectParser * parser();
 
     QStringList listKeywords();

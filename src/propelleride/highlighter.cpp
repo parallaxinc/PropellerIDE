@@ -1,14 +1,14 @@
 #include "highlighter.h"
 
-Highlighter::Highlighter(QTextDocument *parent)
+Highlighter::Highlighter(QString ext, QTextDocument *parent)
     : QSyntaxHighlighter(parent)
 {
+    language.load(ext);
     currentTheme = &Singleton<ColorScheme>::Instance();
 
-    addOnePartRules("numbers", lang.listNumbers());
-    addOnePartRules("operators", lang.listOperators());
-    addOnePartRules("keywords", lang.listKeywords());
-
+    addOnePartRules("numbers", language.listNumbers());
+    addOnePartRules("operators", language.listOperators());
+    addOnePartRules("keywords", language.listKeywords());
 
     rehighlight();
 }
@@ -16,7 +16,7 @@ Highlighter::Highlighter(QTextDocument *parent)
 void Highlighter::addOnePartRules(QString name, QStringList rules)
 {
     OnePartRule rule;
-    rule.pattern = lang.buildTokenizer(rules);
+    rule.pattern = language.buildTokenizer(rules);
     onepartrules[name] = rule;
 }
 
@@ -153,18 +153,18 @@ void Highlighter::rehighlight()
 
     format.setForeground(currentTheme->getColor(ColorScheme::SyntaxComments));
     format.setFontWeight(QFont::Normal);
-    addTwoPartRules(lang.listComments(), format);
+    addTwoPartRules(language.listComments(), format);
 
     format.setForeground(currentTheme->getColor(ColorScheme::SyntaxQuotes));
     format.setFontWeight(QFont::Normal);
-    addTwoPartRules(lang.listStrings(), format);
+    addTwoPartRules(language.listStrings(), format);
 
     QStringList tokens;
     foreach (TwoPartRule r, twopartrules)
     {
         tokens.append(r.start.pattern());
     }
-    re_tokens = lang.buildTokenizer(tokens);
+    re_tokens = language.buildTokenizer(tokens);
 
     QSyntaxHighlighter::rehighlight();
 }

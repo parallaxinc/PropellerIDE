@@ -25,12 +25,16 @@ void updateSplash(QSplashScreen * splash, const QString & text)
     qApp->processEvents();
 }
 
+bool initLanguages();
+bool initTranslations();
+bool initStyles();
+bool initFonts();
+
+QSplashScreen * splash;
+
 int main(int argc, char *argv[])
 {
-
-#ifndef Q_OS_WIN32
     qInstallMessageHandler(messageHandler);
-#endif
 
     QApplication app(argc, argv);
 
@@ -67,46 +71,91 @@ int main(int argc, char *argv[])
                      << "-"
                      << qPrintable(description);
 
+
     QPixmap pixmap(":/icons/splash.png");
-    QSplashScreen splash(pixmap);
-    splash.show();
+    splash = new QSplashScreen(pixmap);
+
+    splash->show();
     app.processEvents();
 
-    updateSplash(&splash, QObject::tr("Loading translations..."));
+    initLanguages();
+    initTranslations();
+    initStyles();
+    initFonts();
 
-    // init translations
+    updateSplash(splash, QObject::tr("Loading editor..."));
+
+    MainWindow w;
+
+    updateSplash(splash, QObject::tr("Loading previous session..."));
+
+    w.openFiles(parser.positionalArguments());
+
+    w.show();
+
+    splash->finish(&w);
+    delete splash;
+    splash = NULL;
+
+    return app.exec();
+}
+
+
+bool initLanguages()
+{
+    updateSplash(splash, QObject::tr("Loading languages..."));
+
+    Language language;
+    QDirIterator it(":/languages", QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        QString filename = it.next();
+        QString name = QFileInfo(filename).baseName();
+        language.load(name, filename);
+    }
+    qDebug() << "Languages:" << language.languages();
+    qDebug() << "Extensions:" << language.extensions();
+
+    return true;
+}
+
+bool initTranslations()
+{
+    updateSplash(splash, QObject::tr("Loading translations..."));
+
 //    QTranslator translator;
 //    translator.load("translations/propelleride_fake");
 //    app.installTranslator(&translator);
 
-    updateSplash(&splash, QObject::tr("Loading styles..."));
+    return true;
+}
 
-    // init styles
+bool initStyles()
+{
+    updateSplash(splash, QObject::tr("Loading styles..."));
+
 #if defined(Q_OS_WIN32)
     QStringList styles = QStyleFactory::keys();
-//    qDebug() << "Available window styles" << styles;
     if(styles.contains("WindowsVista")) {
         QApplication::setStyle("WindowsVista");
     }
-#endif
-    updateSplash(&splash, QObject::tr("Loading fonts..."));
 
-    // init fonts
+    qDebug() << "Window styles" << styles;
+#endif
+
+    return true;
+}
+
+
+bool initFonts()
+{
+    updateSplash(splash, QObject::tr("Loading fonts..."));
+
     QDirIterator it(":/fonts", QDirIterator::Subdirectories);
     while (it.hasNext())
     {
         QFontDatabase::addApplicationFont(it.next());
     }
 
-    updateSplash(&splash, QObject::tr("Loading editor..."));
-
-    MainWindow w;
-
-    updateSplash(&splash, QObject::tr("Loading previous session..."));
-
-    w.openFiles(parser.positionalArguments());
-
-    w.show();
-    splash.finish(&w);
-    return app.exec();
+    return true;
 }
