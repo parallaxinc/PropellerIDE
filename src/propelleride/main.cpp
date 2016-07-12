@@ -11,7 +11,10 @@
 #include <QtGlobal>
 #include <QDateTime>
 #include <QSettings>
+
+#if QT_VERSION >= 0x050400
 #include <QSysInfo>
+#endif
 
 #include "logging.h"
 
@@ -108,6 +111,7 @@ void printDebugInfo()
     qDebug() << "Version:"
              << qPrintable(QCoreApplication::applicationVersion());
 
+#if QT_VERSION >= 0x050400
     qDebug() << "Arch:" 
              << qPrintable(QSysInfo::buildAbi());
 
@@ -122,6 +126,7 @@ void printDebugInfo()
 #error "Unsupported platform"
 #endif
              << qPrintable(QSysInfo::prettyProductName());
+#endif
 }
 
 bool initLanguages()
