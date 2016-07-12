@@ -12,6 +12,7 @@
 #include <QIntValidator>
 
 #include "colorchooser.h"
+#include "language.h"
 
 Preferences::Preferences(QWidget *parent) : QDialog(parent)
 {
@@ -102,22 +103,28 @@ Preferences::~Preferences()
 
 void Preferences::setupLanguages()
 {
-    PathSelector * spin;
     QString app = QApplication::applicationDirPath();
-    spin = new PathSelector("spin",
-#if defined(Q_OS_MAC)
-            app + "/" + QString(DEFAULT_COMPILER),
-#else
-            QString(DEFAULT_COMPILER),
-#endif
-            QStringList() << app + 
-                    QString(APP_RESOURCES_PATH) +
-                    QString("/library/library"));
-    ui.languageLayout->addWidget(spin);
 
-    connect(this, SIGNAL(accepted()), spin, SLOT(accept()));
-    connect(this, SIGNAL(rejected()), spin, SLOT(reject()));
-    connect(this, SIGNAL(restored()), spin, SLOT(restore()));
+    QStringList languages = Language::languages();
+    languages.sort();
+
+    foreach (QString key, languages)
+    {
+        PathSelector * selector = new PathSelector(key,
+#if defined(Q_OS_MAC)
+                app + "/" + QString(DEFAULT_COMPILER),
+#else
+                QString(DEFAULT_COMPILER),
+#endif
+                QStringList() << app + 
+                        QString(APP_RESOURCES_PATH) +
+                        QString("/library/library"));
+        ui.languageLayout->addWidget(selector);
+    
+        connect(this, SIGNAL(accepted()), selector, SLOT(accept()));
+        connect(this, SIGNAL(rejected()), selector, SLOT(reject()));
+        connect(this, SIGNAL(restored()), selector, SLOT(restore()));
+    }
 }
 
 void Preferences::updateColor(int key, const QColor & color)

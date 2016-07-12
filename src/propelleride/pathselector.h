@@ -10,6 +10,8 @@
 #include <QFileDialog>
 #include <QSettings>
 
+#include "language.h"
+
 #include "ui_language.h"
 
 class PathSelector : public QWidget
@@ -21,7 +23,7 @@ class PathSelector : public QWidget
     QString defaultcompiler;
     QStringList defaultincludes;
 
-    QString language;
+    Language language;
     QString compiler;
     QStringList includes;
 
@@ -34,7 +36,7 @@ private slots:
     void browse();
 
 public:
-    explicit PathSelector(QString language,
+    explicit PathSelector(QString languagekey,
             QString compiler = QString(),
             QStringList includes = QStringList(),
             QWidget *parent = 0);

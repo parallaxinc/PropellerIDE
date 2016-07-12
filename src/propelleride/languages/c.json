@@ -1,5 +1,5 @@
 {
-    "name": "Propeller C",
+    "name": "C",
     "extension": [ "c", "h", "cpp", "hpp" ],
     "build": {
         "cmd": [

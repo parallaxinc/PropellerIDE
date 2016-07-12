@@ -3,7 +3,7 @@
 Highlighter::Highlighter(QString ext, QTextDocument *parent)
     : QSyntaxHighlighter(parent)
 {
-    language.load(ext);
+    language.loadExtension(ext);
     currentTheme = &Singleton<ColorScheme>::Instance();
 
     addOnePartRules("numbers", language.listNumbers());

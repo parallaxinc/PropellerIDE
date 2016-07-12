@@ -1,5 +1,5 @@
 {
-    "name": "Propeller Spin",
+    "name": "Spin",
     "extension": [ "spin" ],
     "build": {
         "cmd": [

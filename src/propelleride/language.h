@@ -53,11 +53,13 @@ public:
     ~Language();
     Language();
     void load();
-    void load(QString name);
+    void loadKey(QString name);
+    void loadExtension(QString ext);
     void load(QString name, QString filename);
-    QStringList languages();
-    QStringList extensions();
+    static QStringList languages();
+    static QStringList extensions();
 
+    QString key();
     QString name();
     ProjectParser * parser();
 

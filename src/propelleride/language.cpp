@@ -120,7 +120,21 @@ void Language::load()
     load("","");
 }
 
-void Language::load(QString ext)
+void Language::loadKey(QString key)
+{
+    key = key.toLower();
+    if (_data.contains(key))
+    {
+        _language = key;
+    }
+    else
+    {
+        load();
+    }
+
+}
+
+void Language::loadExtension(QString ext)
 {
     ext = ext.toLower();
     if (_lookup.contains(ext))
@@ -224,13 +238,17 @@ QStringList Language::extensions()
     return exts;
 }
 
-
 LanguageData Language::language()
 {
     if (_data.contains(_language))
         return _data[_language];
     else
         return _data[""];
+}
+
+QString Language::key()
+{
+    return _language;
 }
 
 QString Language::name()

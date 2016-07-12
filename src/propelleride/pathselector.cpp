@@ -1,6 +1,6 @@
 #include "pathselector.h"
 
-PathSelector::PathSelector(QString language,
+PathSelector::PathSelector(QString languagekey,
         QString compiler,
         QStringList includes,
         QWidget *parent)
@@ -8,9 +8,9 @@ PathSelector::PathSelector(QString language,
 {
     ui.setupUi(this);
 
-    this->language = language;
+    language.loadKey(languagekey);
 
-    ui.name->setText(language);
+    ui.name->setText(language.name());
 
     setDefaultCompiler(compiler);
     setDefaultIncludes(includes);
@@ -125,7 +125,7 @@ void PathSelector::save()
 {
     QSettings settings;
     settings.beginGroup("Paths");
-    settings.beginGroup(language);
+    settings.beginGroup(language.key());
 
     settings.setValue("compiler",ui.compiler->text());
     settings.setValue("includes",includes);
@@ -138,7 +138,7 @@ void PathSelector::load()
 {
     QSettings settings;
     settings.beginGroup("Paths");
-    settings.beginGroup(language);
+    settings.beginGroup(language.key());
 
     QString cmp = settings.value("compiler", defaultcompiler).toString();
     setCompiler(cmp);

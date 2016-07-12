@@ -317,7 +317,7 @@ void MainWindow::setProject()
 
     addRecentFile(filename);
 
-    language.load(QFileInfo(filename).suffix());
+    language.loadExtension(QFileInfo(filename).suffix());
     parser = language.parser();
     parser->setFile(filename);
     parser->setLibraryPaths(spinIncludes);

@@ -81,7 +81,7 @@ void Editor::loadPreferences()
 
 void Editor::setExtension(QString ext)
 {
-    language.load(ext);
+    language.loadExtension(ext);
     parser = language.parser();
     blocks = language.listBlocks();
     re_blocks = language.buildTokenizer(blocks);
