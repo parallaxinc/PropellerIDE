@@ -148,14 +148,10 @@ MainWindow::MainWindow(QWidget *parent)
             cbPort->setCurrentIndex(index);
     }
 
-
-
     ui.editorTabs->newFile();
     loadSession();
 
-
     installEventFilter(this);
-
     statusBar();
 }
 
@@ -320,6 +316,9 @@ void MainWindow::setProject()
         setWindowTitle(QCoreApplication::applicationName());
 
     addRecentFile(filename);
+
+    language.load(QFileInfo(filename).suffix());
+    parser = language.parser();
     parser->setFile(filename);
     parser->setLibraryPaths(spinIncludes);
 
@@ -458,7 +457,11 @@ void MainWindow::recolorProjectView()
     ui.projectview->updateColors(theme->getColor(ColorScheme::PubBG));
     parser->styleRule("public",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
     parser->styleRule("private",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
+    parser->styleRule("functions",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
+    parser->styleRule("subroutines",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
     parser->styleRule("constants",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
+    parser->styleRule("variables",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
+    parser->styleRule("pins",QIcon(),theme->getColor(ColorScheme::SyntaxKeywords));
     parser->styleRule("_includes_",QIcon(),theme->getColor(ColorScheme::SyntaxText));
     parser->setFont(theme->getFont());
 

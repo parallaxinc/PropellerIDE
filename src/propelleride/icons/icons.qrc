@@ -62,5 +62,10 @@
     <file>icon.png</file>
     <file>icon-big.png</file>
     <file>splash.png</file>
+    <file>pb-con.png</file>
+    <file>pb-var.png</file>
+    <file>pb-pin.png</file>
+    <file>pb-func.png</file>
+    <file>pb-sub.png</file>
 </qresource>
 </RCC>

@@ -80,7 +80,7 @@ QStringList Language::mergeList(QStringList list)
 
 ProjectParser * Language::buildParser(QJsonArray projectparser)
 {
-    ProjectParser * parser = language().parser;
+    ProjectParser * parser = new ProjectParser();
     parser->setCaseInsensitive(true);
 
     foreach (QJsonValue r, projectparser)
@@ -201,6 +201,9 @@ void Language::load(QString name, QString filename)
 
         data.operators.append(slist);
     }
+
+    if (data.parser)
+        delete data.parser;
 
     data.parser = buildParser(lang["project"].toArray());
 

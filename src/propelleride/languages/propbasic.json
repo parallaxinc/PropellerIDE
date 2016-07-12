@@ -9,17 +9,7 @@
     },
     "syntax": {
         "case_sensitive": false,
-        "enable_blocks": [
-            true,
-            [
-                "^sub\\b",
-                "^func\\b",
-                "^task\\b",
-                "^data\\b",
-                "^wdata\\b",
-                "^ldata\\b"
-            ]
-        ],
+        "enable_blocks": [ false ],
         "string": [
             "\" \""
         ],
@@ -47,6 +37,7 @@
                     "i2cstart i2cstop i2cwrite i2cread i2cspeed",
                     "owreset owread owwrite",
                     "exit on nop",
+                    "byte word long",
                     "rdlong rdword rdbyte rdsbyte rdsword wrlong wrword wrbyte",
                     "waitcnt waitvid waitpeq waitpne countera counterb",
                     "locknew lockret lockset lockclr",
@@ -100,5 +91,72 @@
                 ]
             }
         }
-    }
+    },
+    "project":
+    [
+        {
+            "name": "_includes_",
+            "pattern": [
+                {
+                    "regex": "^[ \t]*LOAD[ \t]+\"([^\"]*)\"([ \t]*|[ \t]*'.*)$",
+                    "capture": [ 1 ]
+                }
+            ]
+        },
+        {
+            "name": "functions",
+            "pattern": [
+                {
+                    "regex": "^[ \t]*FUNC[ \t]+([a-zA-Z_][a-zA-Z0-9_]*)([ \t]*|[ \t]*'.*)$",
+                    "capture": [ 1 ]
+                }
+            ],
+            "icon": ":/icons/pb-func.png",
+            "color": "#555555"
+        },
+        {
+            "name": "subroutines",
+            "pattern": [
+                {
+                    "regex": "^[ \t]*SUB[ \t]+([a-zA-Z_][a-zA-Z0-9_]*)([ \t]*|[ \t]*'.*)$",
+                    "capture": [ 1 ]
+                }
+            ],
+            "icon": ":/icons/pb-sub.png",
+            "color": "#555555"
+        },
+        {
+            "name": "pins",
+            "pattern": [
+                {
+                    "regex": "^[ \t]*([a-zA-Z_][a-zA-Z0-9_]*)[ \t]+PIN[ \t]+([0-9][0-9_]*)[ \t]+(INPUT|OUTPUT|HIGH|LOW)([ \t]*|[ \t]*'.*)$",
+                    "capture": [ 1 ]
+                }
+            ],
+            "icon": ":/icons/pb-pin.png",
+            "color": "#555555"
+        },
+        {
+            "name": "variables",
+            "pattern": [
+                {
+                    "regex": "^[ \t]*([a-zA-Z_][a-zA-Z0-9_]*)[ \t]+VAR[ \t]+(BYTE|WORD|LONG)([ \t]*|[ \t]*'.*)$",
+                    "capture": [ 1 ]
+                }
+            ],
+            "icon": ":/icons/pb-var.png",
+            "color": "#555555"
+        },
+        {
+            "name": "constants",
+            "pattern": [
+                {
+                    "regex": "^[ \t]*([a-zA-Z_][a-zA-Z0-9_]*)[ \t]+CON[ \t]+([0-9][0-9_]*|\\$[0-9a-f][0-9a-f_]*|%[0-1][0-1_]*|%%[0-3][0-3_]*|\"[^\"]*\")([ \t]*|[ \t]*'.*)$",
+                    "capture": [ 1 ]
+                }
+            ],
+            "icon": ":/icons/pb-con.png",
+            "color": "#555555"
+        }
+    ]
 }
