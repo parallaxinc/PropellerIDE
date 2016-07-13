@@ -54,6 +54,12 @@ repos:
         builder: qmake
         root: qmake
 
+    propbasic:
+        url: https://github.com/parallaxinc/PropBasic.git
+        tag: 1.44.2
+        builder: fpc
+        root: src
+
     ide-prebuilts:
         url: https://github.com/bweir/ide-prebuilts.git
         branch: master

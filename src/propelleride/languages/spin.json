@@ -1,9 +1,13 @@
 {
     "name": "Spin",
     "extension": [ "spin" ],
+    "build": [
+        {
+            "cmd": [ "bstc -b -Oucrg", "%1.spin", "-L%1" ]
+        }
+    ],
     "build": {
         "cmd": [
-            [ "openspin", "%1", "-L", "%2" ]
         ]
     },
     "syntax": {
