@@ -134,15 +134,20 @@ void ExternalCompiler::readOutput()
 
         if (m_error.hasMatch())
         {
+            if (!output.endsWith("\n"))
+                print("\n");
+
             qCritical() << qPrintable(QString("%1 (%2, %3): %4")
                             .arg(m_error.captured(1))
-                            .arg(m_error.captured(2))
-                            .arg(m_error.captured(3))
+                            .arg(m_error.captured(2).toInt())
+                            .arg(m_error.captured(3).toInt())
                             .arg(m_error.captured(4)));
             emit highlightLine(m_error.captured(1)+".spin",
                                m_error.captured(2).toInt()-1,
                                m_error.captured(3).toInt()-1,
                                m_error.captured(4));
+
+            emit finished(false);
             return;
         }
         else if (m_success.hasMatch())
@@ -190,7 +195,15 @@ void ExternalCompiler::handleError(QProcess::ProcessError e)
 void ExternalCompiler::cleanup()
 {
     if (proc)
+    {
+        disconnect(proc,   SIGNAL(readyReadStandardOutput()),          this,   SLOT(readOutput()));
+        disconnect(proc,   SIGNAL(error(QProcess::ProcessError)),      this,   SLOT(handleError(QProcess::ProcessError)));
+        disconnect(proc,   SIGNAL(finished(int,QProcess::ExitStatus)), this,   SLOT(finish(int,QProcess::ExitStatus)));
+        disconnect(this,   SIGNAL(finished(bool)),                     this,   SLOT(cleanup()));
+
+        proc->close();
         delete proc;
+    }
     proc = NULL;
 }
 

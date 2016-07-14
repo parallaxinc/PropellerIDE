@@ -5,7 +5,7 @@ git submodule update --init --recursive
 
 case "$PLATFORM" in
 "osx")
-    brew install tree
+    brew install tree fpc
     wget -4 http://lamestation.net/downloads/travis/qt5.5.0-mac-clang.tgz
     tar xzf qt5.5.0-mac-clang.tgz
     mv local/ /Users/travis/local/
@@ -16,6 +16,8 @@ case "$PLATFORM" in
 #    mv local/ /home/travis/local/
 
 #    sudo -E apt-get -yq --no-install-suggests --no-install-recommends --force-yes install qt5-default libqt5serialport5-dev
+    sudo apt-get update
+    sudo -E apt-get -yq --no-install-suggests --no-install-recommends --force-yes install fpc
     ;;
 "rpi")
     sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ vivid universe"

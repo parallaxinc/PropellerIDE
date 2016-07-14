@@ -6,6 +6,7 @@ PATTERN_RET=.spin
 ARG_FLAGS=
 ARG_LIBRARY=
 ARG_OUTPUT=
-RE_ERROR=
-RE_SUCCESS=
+RE_ERROR="\\s+(ERROR)\\s+(\\d+)()\\s+(.*)"
+RE_SUCCESS=.+?(0\\s+Errors)\\..*
+
 
