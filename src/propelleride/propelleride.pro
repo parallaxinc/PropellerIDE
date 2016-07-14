@@ -58,6 +58,15 @@ HEADERS  += \
     templates/Singleton.h \
     logging.h \
 
+INCLUDEPATH += compilers/
+
+SOURCES += \
+    compilers/externalcompiler.cpp \
+
+HEADERS += \
+    compilers/compiler.h \
+    compilers/externalcompiler.h \
+
 OTHER_FILES +=
 
 FORMS += \

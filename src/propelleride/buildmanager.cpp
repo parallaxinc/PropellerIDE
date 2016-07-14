@@ -10,6 +10,8 @@
 BuildManager::BuildManager(QWidget *parent)
     : QFrame(parent)
 {
+    compiler = NULL;
+
     ui.setupUi(this);
 
     ui.activeText->setText(" ");
@@ -23,6 +25,11 @@ BuildManager::BuildManager(QWidget *parent)
 
 BuildManager::~BuildManager()
 {
+    if (compiler)
+    {
+        delete compiler;
+        compiler = NULL;
+    }
 }
 
 void BuildManager::showStatus()
@@ -55,42 +62,21 @@ void BuildManager::setConfiguration(BuildManager::Configuration config)
     this->config = config;
 }
 
-void BuildManager::handleCompilerError(QProcess::ProcessError e)
+void BuildManager::compilerFinished(bool success)
 {
-    qCritical() << "Build failure" << config.compiler;
-    failure = true;
-    timer.stop();
+    disconnect(compiler,   SIGNAL(highlightLine(const QString &, int, int, const QString &)),
+               this,       SIGNAL(highlightLine(const QString &, int, int, const QString &)));
+    disconnect(compiler,   SIGNAL(finished(bool)),
+               this,       SLOT(compilerFinished(bool)));
 
-    QString errorstring;
-    switch (e)
+    if (compiler)
     {
-        case QProcess::FailedToStart:
-            errorstring = tr("Failed to start compiler: '%1'; check Preferences").arg(config.compiler);
-            break;
-        case QProcess::Crashed:
-        case QProcess::Timedout:
-        case QProcess::WriteError:
-        case QProcess::ReadError:
-        case QProcess::UnknownError:
-            errorstring = ((QProcess *) sender())->errorString();
-            break;
+        delete compiler;
+        compiler = NULL;
     }
 
-    print("ERROR: "+errorstring,Qt::red);
-    setText(tr("Build failed!"));
-    QMessageBox::critical((QWidget *) parent(),
-            tr("Build Failed"),
-            tr("%1").arg(errorstring));
-
-    emit buildError();
-    emit finished();
-}
-
-void BuildManager::compilerFinished(int exitCode, QProcess::ExitStatus status)
-{
-    if (exitCode != 0 || status != QProcess::NormalExit)
+    if (!success)
     {
-        failure = true;
         setText(tr("Build failed!"));
         emit finished();
     }
@@ -131,66 +117,30 @@ void BuildManager::print(const QString & text, QColor color)
     ui.plainTextEdit->setCurrentCharFormat(tf);
 }
 
-void BuildManager::procReadyRead()
-{
-    QProcess * proc = (QProcess *) sender();
-
-    QByteArray bytes = proc->readAllStandardOutput();
-    if(bytes.length() == 0)
-        return;
-
-    bytes = bytes.replace("\r\n","\n");
-    compileResult = QString(bytes);
-    QStringList lines = QString(bytes).split("\n",QString::SkipEmptyParts);
-
-    foreach (QString line, lines)
-    {
-        if (line.contains("Program size is") || line.contains("Bit fe") || line.contains("DOWNLOAD COMPLETE"))
-        {
-            setTextColor(Qt::darkGreen);
-        }
-        else if (line.contains("error", Qt::CaseInsensitive))
-        {
-            setTextColor(Qt::red);
-        }
-
-        ui.plainTextEdit->appendPlainText(line);
-    }
-
-    QScrollBar *sb = ui.plainTextEdit->verticalScrollBar();
-    sb->setValue(sb->maximum());
-
-    getCompilerOutput();
-}
-
-void BuildManager::runProcess(const QString & programName, const QStringList & programArgs)
-{
-    setTextColor(Qt::black);
-
-    QStringList args;
-    QString program = QDir::toNativeSeparators(programName);
-    for (int i = 0; i < programArgs.size(); ++i)
-    {
-        args.append(QDir::toNativeSeparators(programArgs.at(i)));
-    }
-
-    qCDebug(logbuildmanager) << qPrintable(program);
-    foreach (QString a, args)
-    {
-        qCDebug(logbuildmanager) << "    " << qPrintable(a);
-
-    }
-
-    QProcess * proc = new QProcess;
-    proc->setProcessChannelMode(QProcess::MergedChannels);
-
-    connect(proc,   SIGNAL(readyReadStandardOutput()),          this,   SLOT(procReadyRead()));
-    connect(proc,   SIGNAL(finished(int,QProcess::ExitStatus)), this,   SLOT(compilerFinished(int,QProcess::ExitStatus)));
-    connect(proc,   SIGNAL(error(QProcess::ProcessError)),      this,   SLOT(handleCompilerError(QProcess::ProcessError)));
-    connect(proc,   SIGNAL(finished(int)),                      proc,   SLOT(deleteLater()));
-
-    proc->start(program,args);
-}
+//void BuildManager::procReadyRead()
+//{
+//    foreach (QString line, lines)
+//    {
+//        if (line.contains("Program size is") || line.contains("Bit fe") || line.contains("DOWNLOAD COMPLETE"))
+//        {
+//            setTextColor(Qt::darkGreen);
+//        }
+//        else if (line.contains("error", Qt::CaseInsensitive))
+//        {
+//            setTextColor(Qt::red);
+//        }
+//
+//        ui.plainTextEdit->appendPlainText(line);
+//    }
+//
+//    QScrollBar *sb = ui.plainTextEdit->verticalScrollBar();
+//    sb->setValue(sb->maximum());
+//}
+//
+//void BuildManager::runProcess(const QString & programName, const QStringList & programArgs)
+//{
+//    setTextColor(Qt::black);
+//}
 
 
 bool BuildManager::load(const QByteArray & binary)
@@ -251,68 +201,38 @@ void BuildManager::loadFailure()
 
 void BuildManager::build()
 {
-    failure = false;
+    if (compiler)
+        return;
 
-    showStatus();
+    compiler = new ExternalCompiler();
 
-    QStringList args;
+    connect(compiler,   SIGNAL(finished(bool)),
+            this,       SLOT(compilerFinished(bool)));
+    connect(compiler,   SIGNAL(highlightLine(const QString &, int, int, const QString &)),
+            this,       SIGNAL(highlightLine(const QString &, int, int, const QString &)));
 
-    foreach (QString include, config.includes)
-    {
-        if (include.size() > 0)
-            args.append("-L" + include);
-    }
+    compiler->build(config.file);
 
-    QString actionstring = tr("Building '%1'...")
-        .arg(QFileInfo(config.file).fileName());
-
-    setStage(1);
-    print(actionstring, Qt::darkYellow);
-    setText(actionstring);
-
-    args.append(config.file);
-
-    runProcess(config.compiler, args);
-}
-
-void BuildManager::getCompilerOutput()
-{
-    QChar c;
-    // filter non-chars for the moment
-    for(int n = compileResult.length()-1; n > -1; n--) {
-        c = compileResult.at(n);
-        if(!c.toLatin1())
-            compileResult.remove(n,1);
-    }
-    /*
-     * Error example:
-     * \nC:/Propeller/EEPROM/eeloader.spin(57:3) : error : Expected an instruction or variable\nLine:\n  boo.start(BOOTADDR, size, eeSetup, eeClkLow, eeClkHigh)\nOffending Item: boo\n
-     */
-    QStringList list = compileResult.split(QRegExp("\r|\n|\r\n|\n\r"));
-    QString file;
-    int line = 0;
-    QRegExp err("error");
-    err.setCaseSensitivity(Qt::CaseInsensitive);
-    bool ok = false;
-    foreach(QString s, list)
-    {
-        int pos = s.indexOf(err);
-        if(pos > -1)
-        {
-            s = s.mid(0,s.indexOf(err));
-            if(s.indexOf("(") > -1)
-            {
-                file = s.left(s.indexOf("("));
-                s = s.mid(s.indexOf("(")+1);
-                s = s.left(s.indexOf(":"));
-                line = s.toInt(&ok);
-                line--; // line number is 1 based. highlight is 0 based.
-            }
-            break;
-        }
-    }
-    if(ok)
-        emit compilerErrorInfo(file, line);
+//    showStatus();
+//
+//    QStringList args;
+//
+//    foreach (QString include, config.includes)
+//    {
+//        if (include.size() > 0)
+//            args.append("-L" + include);
+//    }
+//
+//    QString actionstring = tr("Building '%1'...")
+//        .arg(QFileInfo(config.file).fileName());
+//
+//    setStage(1);
+//    print(actionstring, Qt::darkYellow);
+//    setText(actionstring);
+//
+//    args.append(config.file);
+//
+//    runProcess(config.compiler, args);
 }
 
 void BuildManager::updateColors()

@@ -8,11 +8,12 @@
 
 #include <PropellerLoader>
 
+#include "compiler.h"
 #include "logging.h"
 #include "colorscheme.h"
+#include "externalcompiler.h"
 
 #include "ui_buildmanager.h"
-
 
 class BuildManager : public QFrame
 {
@@ -20,6 +21,7 @@ class BuildManager : public QFrame
 
     Ui::buildManager ui;
     ColorScheme * currentTheme;
+    Compiler * compiler;
 
     bool failure;
 
@@ -28,7 +30,6 @@ class BuildManager : public QFrame
     QTimer timer;
 
     void waitClose();
-    void getCompilerOutput();
     void setRun(bool active);
     void setBuild(bool active);
     void setDownload(bool active);
@@ -64,8 +65,10 @@ public:
     bool load(const QByteArray & binary = QByteArray());
 
 signals:
-    void compilerErrorInfo(QString file, int line);
-    void terminalReceived(QString text);
+    void highlightLine(const QString & file,
+            int line,
+            int col,
+            const QString & text);
     void statusChanged(const QString & text);
     void finished();
     void buildError();
@@ -73,10 +76,9 @@ signals:
 private slots:
     void loadSuccess();
     void loadFailure();
-    void compilerFinished(int exitCode, QProcess::ExitStatus status);
-    void procReadyRead();
-    void runProcess(const QString & programName, const QStringList & programArgs);
-    void handleCompilerError(QProcess::ProcessError e);
+    void compilerFinished(bool success);
+//    void procReadyRead();
+//    void runProcess(const QString & programName, const QStringList & programArgs);
 
 protected:
     void keyPressEvent(QKeyEvent * event);

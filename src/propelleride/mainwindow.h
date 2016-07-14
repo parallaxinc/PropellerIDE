@@ -92,7 +92,12 @@ public slots:
     void updateRecentFileActions();
     void openRecentFile();
 
-    void highlightFileLine(QString file, int line);
+    QString resolveFileName(QString filename);
+    void highlightFileLine(QString file,
+            int line);
+    void highlightFileLine(QString file,
+            int line,
+            int col);
     void getApplicationSettings();
     void setEnableBuild(bool enabled);
 

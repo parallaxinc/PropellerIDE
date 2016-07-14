@@ -25,7 +25,15 @@ MainWindow::MainWindow(QWidget *parent)
     // setup preferences dialog
     connect(&preferences,   SIGNAL(accepted()),                     this,   SLOT(getApplicationSettings()));
 
-    connect(&builder,   SIGNAL(compilerErrorInfo(QString,int)), this,   SLOT(highlightFileLine(QString,int)));
+    connect(&builder,   SIGNAL(highlightLine(const QString &,
+                                             int,
+                                             int,
+                                             const QString &)),
+
+            this,       SLOT(highlightFileLine(const QString &,
+                                               int,
+                                               int)));
+
     connect(&builder,   SIGNAL(finished()),                     this,   SLOT(enableBuildControls()));
     connect(&builder,   SIGNAL(buildError()),                   &preferences, SLOT(showPreferences()));
 
@@ -123,7 +131,8 @@ MainWindow::MainWindow(QWidget *parent)
     cbPort->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     ui.toolBar->addWidget(cbPort);
 
-    connect(ui.projectview,SIGNAL(showFileLine(QString, int)),this,SLOT(highlightFileLine(QString, int)));
+    connect(ui.projectview, SIGNAL(showFileLine(QString, int)),
+            this,           SLOT(highlightFileLine(QString, int)));
 
     updateRecentFileActions();
 
@@ -351,10 +360,26 @@ void MainWindow::checkAndSaveFiles(QStringList files)
     }
 }
 
+QString MainWindow::resolveFileName(QString filename)
+{
+    foreach (QString s, parser->getFileList())
+    {
+        if (QFileInfo(s).fileName() == filename)
+            return s;
+    }
+    return QString();
+}
+
 void MainWindow::highlightFileLine(QString filename, int line)
 {
-    QFileInfo fi(filename);
-    if (!fi.exists(filename) || !fi.isFile())
+    highlightFileLine(filename, line, 0);
+}
+
+void MainWindow::highlightFileLine(QString filename, int line, int col)
+{
+    filename = resolveFileName(filename);
+
+    if (filename.isEmpty())
         return;
 
     ui.editorTabs->openFile(filename);
@@ -364,7 +389,8 @@ void MainWindow::highlightFileLine(QString filename, int line)
     {
         QTextCursor cur = editor->textCursor();
         cur.movePosition(QTextCursor::Start);
-        cur.movePosition(QTextCursor::Down,QTextCursor::MoveAnchor,line);
+        cur.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, line);
+        cur.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor, col);
         cur.clearSelection();
         editor->setTextCursor(cur);
     }
