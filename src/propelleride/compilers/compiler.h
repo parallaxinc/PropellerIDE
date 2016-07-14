@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QStringList>
 
 class Compiler : public QObject
 {
@@ -12,7 +13,8 @@ public:
 
     virtual ~Compiler() {};
 
-    virtual void build(QString filename) = 0;
+    virtual QString build(QString filename,
+                          QStringList libraries = QStringList()) = 0;
 
 signals:
     void finished(bool success);
@@ -20,5 +22,6 @@ signals:
             int line,
             int col,
             const QString & text);
+    void print(const QString & text);
 };
 

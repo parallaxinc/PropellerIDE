@@ -442,7 +442,6 @@ bool MainWindow::runCompiler(bool load, bool write, const QString & name)
     config.compiler = spinCompiler;
     config.includes = spinIncludes;
     config.file     = filename;
-    config.binary   = filename.replace(".spin",".binary");
     config.port     = cbPort->currentText();
 
     config.load     = load;

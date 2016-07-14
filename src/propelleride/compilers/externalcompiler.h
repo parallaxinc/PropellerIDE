@@ -2,7 +2,6 @@
 
 #include "compiler.h"
 
-#include <QObject>
 #include <QProcess>
 #include <QRegularExpression>
 
@@ -12,14 +11,28 @@ class ExternalCompiler : public Compiler
 
     QProcess * proc;
 
+    QString arg_exe;
+    QString arg_flags;
+    QString arg_library;
+    QString arg_output;
+
+    QString pattern_in;
+    QString pattern_out;
+    QString pattern_ret;
+
     QRegularExpression re_success;
     QRegularExpression re_error;
 
 public:
-    explicit ExternalCompiler(QObject * parent = 0) Q_DECL_OVERRIDE;
+    explicit ExternalCompiler(QString name,
+                              QObject * parent = 0) Q_DECL_OVERRIDE;
     virtual ~ExternalCompiler() Q_DECL_OVERRIDE;
 
-    void build(QString filename) Q_DECL_OVERRIDE;
+    QString build(QString filename,
+                  QStringList libraries = QStringList()) Q_DECL_OVERRIDE;
+
+    void load(QString filename);
+    void save(QString filename);
 
 signals:
     void finished(bool success);

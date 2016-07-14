@@ -1,14 +1,7 @@
 {
     "name": "PropBASIC",
     "extension": [ "pbas" ],
-    "build": [
-        {
-            "cmd": [ "propbasic", "%1.pbas" ]
-        },
-        {
-            "cmd": [ "bstc -b -Oucrg", "%1.spin", "-L%1" ]
-        }
-    ],
+    "buildsteps": [ "propbasic", "bstc" ],
     "syntax": {
         "case_sensitive": false,
         "enable_blocks": [ false ],

@@ -21,6 +21,7 @@ public:
 
     QString name;
     QStringList extensions;
+    QStringList buildsteps;
 
     ProjectParser * parser;
 
@@ -63,6 +64,7 @@ public:
     QString name();
     ProjectParser * parser();
 
+    QStringList listBuildSteps();
     QStringList listKeywords();
     QStringList listOperators();
     QStringList listNumbers();

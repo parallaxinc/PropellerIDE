@@ -89,6 +89,7 @@ void message(AnsiColor color,
             qPrintable(wrapColor(color, text)),
             qPrintable(msg));
 #endif
+    fflush(stderr);
 }
 
 void messageHandler(QtMsgType type,

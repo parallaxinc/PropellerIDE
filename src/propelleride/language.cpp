@@ -183,10 +183,15 @@ void Language::load(QString name, QString filename)
         _lookup[ext] = name;
     }
 
+    foreach (QVariant stepvar, lang["buildsteps"].toArray().toVariantList())
+    {
+        data.buildsteps << stepvar.toString();
+    }
 
     qDebug()    << "Loading language definition:"
                 << qPrintable(data.name)
-                << data.extensions;
+                << data.extensions
+                << data.buildsteps;
 
     data.numbers   = buildWordList(syntax["number"].toArray());
     data.functions = buildWordList(syntax["function"].toArray());
@@ -259,6 +264,11 @@ QString Language::name()
 ProjectParser * Language::parser()
 {
     return language().parser;
+}
+
+QStringList Language::listBuildSteps()
+{
+    return language().buildsteps;
 }
 
 QStringList Language::listKeywords()

@@ -1,0 +1,10 @@
+[General]
+LANGUAGE=spin
+PATTERN_IN=.spin
+PATTERN_OUT=
+PATTERN_RET=.binary
+ARG_FLAGS=-b -Oucrg
+ARG_LIBRARY=-L%
+ARG_OUTPUT=-o%
+RE_ERROR="(.*?)\\s*\\(\\s*([0-9]+)\\s*,\\s*([0-9]+)\\s*\\)\\s*error\\s*:\\s*(.*)"
+RE_SUCCESS=(Program size is)

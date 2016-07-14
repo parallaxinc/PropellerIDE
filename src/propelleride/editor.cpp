@@ -110,6 +110,15 @@ void Editor::keyPressEvent (QKeyEvent *e)
     {
         switch (e->key())
         {
+            case Qt::Key_Home:
+                cursor.movePosition(QTextCursor::Start);
+                setTextCursor(cursor);
+                break;
+            case Qt::Key_End:
+                cursor.movePosition(QTextCursor::End);
+                setTextCursor(cursor);
+                break;
+
             default:
                 QPlainTextEdit::keyPressEvent(e);
         }
@@ -159,15 +168,6 @@ void Editor::keyPressEvent (QKeyEvent *e)
             case Qt::Key_Space:
                 tabOn = false;
                 QPlainTextEdit::keyPressEvent(e);
-                break;
-
-            case Qt::Key_Home:
-                cursor.movePosition(QTextCursor::Start);
-                setTextCursor(cursor);
-                break;
-            case Qt::Key_End:
-                cursor.movePosition(QTextCursor::End);
-                setTextCursor(cursor);
                 break;
 
             default:

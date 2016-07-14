@@ -1,12 +1,7 @@
 {
     "name": "C",
     "extension": [ "c", "h", "cpp", "hpp" ],
-    "build": {
-        "cmd": [
-            [ "propbasic", "%1" ],
-            [ "openspin","-L", "%2","%1" ]
-        ]
-    },
+    "buildsteps": [ ],
     "syntax": {
         "case_sensitive": true,
         "enable_blocks": [ false ],

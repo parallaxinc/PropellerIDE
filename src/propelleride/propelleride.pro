@@ -84,6 +84,7 @@ RESOURCES += \
     icons/icons.qrc \
     languages/languages.qrc \
     themes/themes.qrc \
+    config/config.qrc \
 
 CODECFORTR = UTF-8
 

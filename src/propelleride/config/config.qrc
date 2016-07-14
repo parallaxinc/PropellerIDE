@@ -1,0 +1,8 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/config">
+    <file>compiler.bstc</file>
+    <file>compiler.openspin</file>
+    <file>compiler.propbasic</file>
+</qresource>
+</RCC>
+

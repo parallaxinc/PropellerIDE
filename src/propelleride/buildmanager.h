@@ -12,6 +12,7 @@
 #include "logging.h"
 #include "colorscheme.h"
 #include "externalcompiler.h"
+#include "language.h"
 
 #include "ui_buildmanager.h"
 
@@ -21,12 +22,6 @@ class BuildManager : public QFrame
 
     Ui::buildManager ui;
     ColorScheme * currentTheme;
-    Compiler * compiler;
-
-    bool failure;
-
-    QString compileResult;
-
     QTimer timer;
 
     void waitClose();
@@ -36,7 +31,13 @@ class BuildManager : public QFrame
     void setStage(int stage);
     void setText(const QString & text);
 
-    void print(const QString & text, QColor color = Qt::black);
+    Language language;
+    Compiler * compiler;
+    QStringList compilersteps;
+
+    void runCompilerStep();
+    void runCompiler(QString name);
+    void cleanupCompiler();
 
 public:
     explicit BuildManager(QWidget *parent = 0);
@@ -49,7 +50,6 @@ public:
         QString compiler;
         QStringList includes;
         QString file;
-        QString binary;
         QString port;
 
         bool load;
@@ -88,4 +88,6 @@ public slots:
     void showStatus();
     void hideStatus();
 
+    void print(const QString & text);
+    void print(const QString & text, QColor color);
 };

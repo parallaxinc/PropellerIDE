@@ -25,11 +25,7 @@ BuildManager::BuildManager(QWidget *parent)
 
 BuildManager::~BuildManager()
 {
-    if (compiler)
-    {
-        delete compiler;
-        compiler = NULL;
-    }
+    cleanupCompiler();
 }
 
 void BuildManager::showStatus()
@@ -62,40 +58,6 @@ void BuildManager::setConfiguration(BuildManager::Configuration config)
     this->config = config;
 }
 
-void BuildManager::compilerFinished(bool success)
-{
-    disconnect(compiler,   SIGNAL(highlightLine(const QString &, int, int, const QString &)),
-               this,       SIGNAL(highlightLine(const QString &, int, int, const QString &)));
-    disconnect(compiler,   SIGNAL(finished(bool)),
-               this,       SLOT(compilerFinished(bool)));
-
-    if (compiler)
-    {
-        delete compiler;
-        compiler = NULL;
-    }
-
-    if (!success)
-    {
-        setText(tr("Build failed!"));
-        emit finished();
-    }
-    else
-    {
-        setText(tr("Build successful!"));
-
-        if (config.load)
-        {
-            if (!load())
-                emit finished();
-        }
-        else
-        {
-            emit finished();
-        }
-    }
-}
-
 void BuildManager::setTextColor(QColor color)
 {
     QTextCharFormat tf = ui.plainTextEdit->currentCharFormat();
@@ -103,18 +65,17 @@ void BuildManager::setTextColor(QColor color)
     ui.plainTextEdit->setCurrentCharFormat(tf);
 }
 
+void BuildManager::print(const QString & text)
+{
+    ui.plainTextEdit->appendPlainText(text);
+    fprintf(stdout, "%s", qPrintable(text));
+    fflush(stdout);
+}
+
 void BuildManager::print(const QString & text, QColor color)
 {
-    QTextCharFormat tf = ui.plainTextEdit->currentCharFormat();
-    QBrush oldcolor = tf.foreground();
-
-    tf.setForeground(color);
-    ui.plainTextEdit->setCurrentCharFormat(tf);
-
-    ui.plainTextEdit->appendPlainText(text);
-
-    tf.setForeground(oldcolor);
-    ui.plainTextEdit->setCurrentCharFormat(tf);
+    setTextColor(color);
+    print(text);
 }
 
 //void BuildManager::procReadyRead()
@@ -171,14 +132,14 @@ bool BuildManager::load(const QByteArray & binary)
     }
     else
     {
-        QFile file(config.binary);
+        QFile file(config.file);
         if (!file.open(QIODevice::ReadOnly))
         {
-            qCCritical(logbuildmanager) << "Couldn't open file:" << config.binary;
+            qCCritical(logbuildmanager) << "Couldn't open file:" << config.file;
             return false;
         }
 
-        image = PropellerImage(file.readAll(), config.binary);
+        image = PropellerImage(file.readAll(), config.file);
     }
 
     loader.upload(image, config.write, true, true);
@@ -201,38 +162,84 @@ void BuildManager::loadFailure()
 
 void BuildManager::build()
 {
+    language.loadExtension(QFileInfo(config.file).suffix());
+    compilersteps = language.listBuildSteps();
+
+    runCompilerStep();
+}
+
+void BuildManager::runCompilerStep()
+{
+    if (compilersteps.isEmpty())
+        return;
+
+    QString step = compilersteps.takeFirst();
+    runCompiler(step);
+}
+
+void BuildManager::runCompiler(QString name)
+{
     if (compiler)
         return;
 
-    compiler = new ExternalCompiler();
+    compiler = new ExternalCompiler(name);
 
     connect(compiler,   SIGNAL(finished(bool)),
             this,       SLOT(compilerFinished(bool)));
     connect(compiler,   SIGNAL(highlightLine(const QString &, int, int, const QString &)),
             this,       SIGNAL(highlightLine(const QString &, int, int, const QString &)));
+    connect(compiler,   SIGNAL(print(const QString &)),
+            this,       SLOT(print(const QString &)));
 
-    compiler->build(config.file);
+    config.file = compiler->build(config.file,
+                                  config.includes);
+}
 
-//    showStatus();
-//
-//    QStringList args;
-//
-//    foreach (QString include, config.includes)
-//    {
-//        if (include.size() > 0)
-//            args.append("-L" + include);
-//    }
-//
-//    QString actionstring = tr("Building '%1'...")
-//        .arg(QFileInfo(config.file).fileName());
-//
-//    setStage(1);
-//    print(actionstring, Qt::darkYellow);
-//    setText(actionstring);
-//
-//    args.append(config.file);
-//
-//    runProcess(config.compiler, args);
+void BuildManager::cleanupCompiler()
+{
+    if (compiler)
+    {
+        disconnect(compiler,   SIGNAL(print(const QString &)),
+                   this,       SLOT(print(const QString &)));
+        disconnect(compiler,   SIGNAL(highlightLine(const QString &, int, int, const QString &)),
+                   this,       SIGNAL(highlightLine(const QString &, int, int, const QString &)));
+        disconnect(compiler,   SIGNAL(finished(bool)),
+                   this,       SLOT(compilerFinished(bool)));
+
+        delete compiler;
+        compiler = NULL;
+    }
+}
+
+void BuildManager::compilerFinished(bool success)
+{
+    cleanupCompiler();
+
+    if (!success)
+    {
+        setText(tr("Build failed!"));
+        emit finished();
+    }
+    else
+    {
+        setText(tr("Build successful!"));
+
+        if (!compilersteps.isEmpty())
+        {
+            runCompilerStep();
+            return;
+        }
+
+        if (config.load)
+        {
+            if (!load())
+                emit finished();
+        }
+        else
+        {
+            emit finished();
+        }
+    }
 }
 
 void BuildManager::updateColors()
