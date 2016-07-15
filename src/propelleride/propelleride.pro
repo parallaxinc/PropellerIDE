@@ -74,7 +74,7 @@ FORMS += \
     forms/about.ui \
     forms/mainwindow.ui \
     forms/preferences.ui \
-    forms/language.ui \
+    forms/pathselector.ui \
     forms/finder.ui \
     forms/buildmanager.ui \
     forms/newfromtemplate.ui \

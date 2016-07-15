@@ -8,6 +8,9 @@ PathSelector::PathSelector(QString languagekey,
 
     language.loadKey(languagekey);
 
+    if (!language.hasIncludes())
+        ui.includeRow->hide();
+
     ui.name->setText(language.name());
     ui.compiler->clear();
     ui.compiler->addItem(language.listBuildSteps().join(" > "));

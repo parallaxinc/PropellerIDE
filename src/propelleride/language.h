@@ -17,6 +17,7 @@ public:
 
         case_sensitive = false;
         enable_blocks = false;
+        includes = false;
     }
 
     QString name;
@@ -25,6 +26,7 @@ public:
 
     ProjectParser * parser;
 
+    bool includes;
     bool case_sensitive;
     bool enable_blocks;
 
@@ -75,6 +77,8 @@ public:
     QStringList listBlocks();
 
     bool isCaseSensitive();
+    bool hasIncludes();
+
     QRegularExpression buildTokenizer(QStringList rules);
 
 };

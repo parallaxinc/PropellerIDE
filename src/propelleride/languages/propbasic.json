@@ -2,6 +2,7 @@
     "name": "PropBASIC",
     "extension": [ "pbas" ],
     "buildsteps": [ "propbasic", "bstc" ],
+    "includes": false,
     "syntax": {
         "case_sensitive": false,
         "enable_blocks": [ false ],

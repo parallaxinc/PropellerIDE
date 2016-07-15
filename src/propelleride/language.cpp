@@ -193,6 +193,8 @@ void Language::load(QString name, QString filename)
                 << data.extensions;
 //                << data.buildsteps;
 
+    data.includes  = lang["includes"].toBool();
+
     data.numbers   = buildWordList(syntax["number"].toArray());
     data.functions = buildWordList(syntax["function"].toArray());
     data.comments  = mergeList(buildWordList(syntax["comment"].toArray()));
@@ -314,5 +316,10 @@ QStringList Language::listBlocks()
 bool Language::isCaseSensitive()
 {
     return language().case_sensitive;
+}
+
+bool Language::hasIncludes()
+{
+    return language().includes;
 }
 

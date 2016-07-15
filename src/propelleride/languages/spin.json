@@ -2,6 +2,7 @@
     "name": "Spin",
     "extension": [ "spin" ],
     "buildsteps": [ "bstc" ],
+    "includes": true,
     "syntax": {
         "case_sensitive": false,
         "enable_blocks": [

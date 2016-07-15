@@ -2,6 +2,7 @@
     "name": "C",
     "extension": [ "c", "h", "cpp", "hpp" ],
     "buildsteps": [ ],
+    "includes": true,
     "syntax": {
         "case_sensitive": true,
         "enable_blocks": [ false ],

@@ -12,13 +12,13 @@
 
 #include "language.h"
 
-#include "ui_language.h"
+#include "ui_pathselector.h"
 
 class PathSelector : public QWidget
 {
     Q_OBJECT
 
-    Ui::Language ui;
+    Ui::PathSelector ui;
 
     QStringList defaultincludes;
 
