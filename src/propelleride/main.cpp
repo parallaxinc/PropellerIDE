@@ -31,6 +31,7 @@ void updateSplash(QSplashScreen * splash, const QString & text)
 
 void printDebugInfo();
 bool initLanguages();
+bool initCompilers();
 bool initTranslations();
 bool initStyles();
 bool initFonts();
@@ -80,6 +81,7 @@ int main(int argc, char *argv[])
     app.processEvents();
 
     initLanguages();
+    initCompilers();
     initTranslations();
     initStyles();
     initFonts();
@@ -144,6 +146,28 @@ bool initLanguages()
 
     return true;
 }
+
+bool initCompilers()
+{
+    updateSplash(splash, QObject::tr("Loading compilers..."));
+
+    Language language;
+    QDirIterator it(":/config", QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        QString file = it.next();
+        QString filename = QFileInfo(file).fileName();
+
+        if (!filename.startsWith("compiler."))
+            continue;
+
+        filename.remove("compiler.");
+        ExternalCompiler::add(filename, file);
+    }
+
+    return true;
+}
+
 
 bool initTranslations()
 {

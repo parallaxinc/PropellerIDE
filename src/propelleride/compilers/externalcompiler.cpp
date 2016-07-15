@@ -7,18 +7,23 @@
 #include <QSettings>
 #include <QFileInfo>
 
+QHash<QString, QString> ExternalCompiler::_lookup = QHash<QString, QString>();
+
 ExternalCompiler::ExternalCompiler(QString name, QObject * parent)
     : Compiler(parent)
 {
     proc = NULL;
-
-//    save("compiler.bstc");
-//    load(":/config/compiler.bstc");
-
     arg_exe = name;
-    QString filename = ":/config/compiler."+arg_exe;
 
-    load(filename);
+    if (!_lookup.contains(name))
+    {
+        qWarning() << "Compiler"
+                   << name
+                   << "has no configuration!";
+        return;
+    }
+
+    load(_lookup[name]);
 }
 
 ExternalCompiler::~ExternalCompiler()
@@ -42,17 +47,10 @@ QString ExternalCompiler::build(QString filename,
     QString basefile = infile;
     basefile.chop(pattern_in.size());
 
-    qDebug() << "BASE" << basefile;
-
     QString outfile = basefile.append(pattern_out);
     QString retfile = basefile.append(pattern_ret);
 
-    qDebug() << "IN" << infile;
-    qDebug() << "OUT" << outfile;
-    qDebug() << "RET" << retfile;
-
     QStringList arglist;
-
     arglist << arg_exe << infile;
 
     if (!arg_output.isEmpty())
@@ -205,6 +203,12 @@ void ExternalCompiler::cleanup()
         delete proc;
     }
     proc = NULL;
+}
+
+void ExternalCompiler::add(QString name, QString filename)
+{
+    qDebug() << "Loading compiler config:" << name;
+    _lookup[name] = filename;
 }
 
 void ExternalCompiler::load(QString filename)

@@ -4,10 +4,13 @@
 
 #include <QProcess>
 #include <QRegularExpression>
+#include <QHash>
 
 class ExternalCompiler : public Compiler
 {
     Q_OBJECT
+
+    static QHash<QString, QString> _lookup;
 
     QProcess * proc;
 
@@ -31,6 +34,7 @@ public:
     QString build(QString filename,
                   QStringList libraries = QStringList()) Q_DECL_OVERRIDE;
 
+    static void add(QString name, QString filename);
     void load(QString filename);
     void save(QString filename);
 
