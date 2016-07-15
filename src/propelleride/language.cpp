@@ -190,8 +190,8 @@ void Language::load(QString name, QString filename)
 
     qDebug()    << "Loading language definition:"
                 << qPrintable(data.name)
-                << data.extensions
-                << data.buildsteps;
+                << data.extensions;
+//                << data.buildsteps;
 
     data.numbers   = buildWordList(syntax["number"].toArray());
     data.functions = buildWordList(syntax["function"].toArray());
@@ -236,7 +236,7 @@ QStringList Language::languages()
     return langs;
 }
 
-QStringList Language::extensions()
+QStringList Language::allExtensions()
 {
     QStringList exts = _lookup.keys();
     exts.removeAll("");
@@ -259,6 +259,11 @@ QString Language::key()
 QString Language::name()
 {
     return language().name;
+}
+
+QStringList Language::extensions()
+{
+    return language().extensions;
 }
 
 ProjectParser * Language::parser()

@@ -106,7 +106,9 @@ void FileManager::setCopy(bool available)
 void FileManager::open()
 {
     QStringList fileNames = QFileDialog::getOpenFileNames(this,
-                tr("Open File"), getDirectory(), "Spin Files (*.spin);;All Files (*)");
+                tr("Open File"),
+                getDirectory(),
+                getExtensionString(true, true));
 
     for (int i = 0; i < fileNames.size(); i++)
         if (!fileNames.at(i).isEmpty())
@@ -149,9 +151,40 @@ QString FileManager::reformatText(QString text)
     return text;
 }
 
+QString FileManager::getExtensionString(bool supportedoption, bool alloption)
+{
+    QStringList extensionlist; 
+
+    if (supportedoption)
+    {
+        QStringList allext = language.allExtensions();
+        QStringList newext;
+
+        foreach (QString s, allext)
+            newext.append("*."+s);
+
+        extensionlist.append(tr("Supported filetypes (%1)")
+                .arg(newext.join(", ")));
+    }
+
+    foreach (QString l, language.languages())
+    {
+        language.loadKey(l);
+        extensionlist.append(tr("%1 files (*.%2)")
+            .arg(language.name())
+            .arg(language.extensions().first()));
+    }
+
+    if (alloption)
+        extensionlist.append(tr("All files (*)"));
+
+    return extensionlist.join(";;");
+}
+
+
 int FileManager::openFile(const QString & fileName)
 {
-    qCDebug(logfilemanager) << "opening" << fileName;
+    qDebug() << "opening" << fileName;
 
     if (fileName.isEmpty())
         return -1;
@@ -199,7 +232,9 @@ int FileManager::openFile(const QString & fileName)
 void FileManager::newFromFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
-                tr("New From File..."), getDirectory(), "Spin Files (*.spin);;All Files (*)");
+                tr("New From File..."),
+                getDirectory(),
+                getExtensionString(true, true));
 
     if (!fileName.isEmpty())
         newFromFile(fileName);
@@ -208,7 +243,7 @@ void FileManager::newFromFile()
 
 int FileManager::newFromFile(const QString & fileName)
 {
-    qCDebug(logfilemanager) << "creating file from" << fileName;
+    qDebug() << "creating file from" << fileName;
 
     if (fileName.isEmpty())
         return 1;
@@ -273,7 +308,7 @@ void FileManager::saveAs(int index)
     fileName = QFileDialog::getSaveFileName(this,
             tr("Save File As..."), 
             lastDir,
-            tr("Spin Files (*.spin)"));
+            getExtensionString());
 
     if (fileName.isEmpty())
         return;
@@ -291,7 +326,7 @@ void FileManager::saveAll()
 
 void FileManager::saveFile(const QString & fileName, int index)
 {
-    qCDebug(logfilemanager) << "saving" << fileName;
+    qDebug() << "saving" << fileName;
 
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text))

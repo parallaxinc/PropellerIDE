@@ -15,6 +15,7 @@
 #include "newfromtemplate.h"
 
 #include "ui_about.h"
+#include "setup.h"
 
 MainWindow::MainWindow(QWidget *parent)
 : QMainWindow(parent)

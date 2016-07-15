@@ -6,13 +6,18 @@
 
 #include "editor.h"
 #include "logging.h"
+#include "language.h"
 
 class FileManager : public QTabWidget
 {
     Q_OBJECT
 
+    Language language;
+
     void createBackgroundImage();
     QString reformatText(QString text);
+    QString getExtensionString(bool supportedoption = false,
+                               bool alloption = false);
 
 public:
     explicit FileManager(QWidget *parent = 0);

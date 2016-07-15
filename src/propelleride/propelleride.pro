@@ -41,6 +41,7 @@ SOURCES += \
     logging.cpp \
 
 HEADERS  += \
+    setup.h \
     buildmanager.h \
     clickable.h \
     colorchooser.h \

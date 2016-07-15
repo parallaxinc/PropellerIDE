@@ -58,10 +58,11 @@ public:
     void loadExtension(QString ext);
     void load(QString name, QString filename);
     static QStringList languages();
-    static QStringList extensions();
+    static QStringList allExtensions();
 
     QString key();
     QString name();
+    QStringList extensions();
     ProjectParser * parser();
 
     QStringList listBuildSteps();

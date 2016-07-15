@@ -82,7 +82,11 @@ QString ExternalCompiler::build(QString filename,
         return QString();
     }
 
-    QString program = QDir::toNativeSeparators(arglist.takeFirst());
+    QString program = arglist.takeFirst();
+#if defined(Q_OS_MAC)
+    program = QCoreApplication::applicationDirPath() + "/" + program;
+#endif
+    program = QDir::toNativeSeparators(program);
 
     QStringList args;
     for (int i = 0; i < arglist.size(); ++i)

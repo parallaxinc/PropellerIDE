@@ -1,9 +1,7 @@
 #include "pathselector.h"
 
 PathSelector::PathSelector(QString languagekey,
-        QString compiler,
-        QStringList includes,
-        QWidget *parent)
+        QWidget * parent)
 : QWidget(parent)
 {
     ui.setupUi(this);
@@ -11,9 +9,9 @@ PathSelector::PathSelector(QString languagekey,
     language.loadKey(languagekey);
 
     ui.name->setText(language.name());
+    ui.compiler->clear();
+    ui.compiler->addItem(language.listBuildSteps().join(" > "));
 
-    setDefaultCompiler(compiler);
-    setDefaultIncludes(includes);
     restore();
 
     load();
@@ -21,17 +19,10 @@ PathSelector::PathSelector(QString languagekey,
 
     connect(ui.deletePath,  SIGNAL(clicked()),  this,   SLOT(deletePath()));
     connect(ui.addPath,     SIGNAL(clicked()),  this,   SLOT(addPath()));
-    connect(ui.browse,      SIGNAL(clicked()),  this,   SLOT(browse()));
 }
 
 PathSelector::~PathSelector()
 {
-}
-
-void PathSelector::setCompiler(const QString & path)
-{
-    compiler = path;
-    ui.compiler->setText(path);
 }
 
 void PathSelector::setIncludes(const QStringList & paths)
@@ -49,24 +40,9 @@ void PathSelector::setIncludes(const QStringList & paths)
     }
 }
 
-void PathSelector::setDefaultCompiler(QString path)
-{
-    defaultcompiler = path;
-}
-
 void PathSelector::setDefaultIncludes(QStringList paths)
 {
     defaultincludes = paths;
-}
-
-void PathSelector::browse()
-{
-    QString path = QFileDialog::getOpenFileName(this,
-                tr("Browse For Compiler"), "");
-
-    if(path.isEmpty()) return;
-
-    setCompiler(path);
 }
 
 void PathSelector::addPath()
@@ -98,20 +74,16 @@ void PathSelector::deletePath()
 
 void PathSelector::restore()
 {
-    setCompiler(defaultcompiler);
     setIncludes(defaultincludes);
 }
 
 void PathSelector::reject()
 {
-    setCompiler(compiler);
     setIncludes(includes);
 }
 
 void PathSelector::accept()
 {
-    compiler = ui.compiler->text();
-
     includes.clear();
     for (int i = 0; i < ui.includes->count(); i++)
     {
@@ -127,7 +99,6 @@ void PathSelector::save()
     settings.beginGroup("Paths");
     settings.beginGroup(language.key());
 
-    settings.setValue("compiler",ui.compiler->text());
     settings.setValue("includes",includes);
 
     settings.endGroup();
@@ -139,9 +110,6 @@ void PathSelector::load()
     QSettings settings;
     settings.beginGroup("Paths");
     settings.beginGroup(language.key());
-
-    QString cmp = settings.value("compiler", defaultcompiler).toString();
-    setCompiler(cmp);
 
     QStringList inc = settings.value("includes", defaultincludes).toStringList();
     setIncludes(inc);

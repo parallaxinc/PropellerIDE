@@ -110,15 +110,7 @@ void Preferences::setupLanguages()
 
     foreach (QString key, languages)
     {
-        PathSelector * selector = new PathSelector(key,
-#if defined(Q_OS_MAC)
-                app + "/" + QString(DEFAULT_COMPILER),
-#else
-                QString(DEFAULT_COMPILER),
-#endif
-                QStringList() << app + 
-                        QString(APP_RESOURCES_PATH) +
-                        QString("/library/library"));
+        PathSelector * selector = new PathSelector(key);
         ui.languageLayout->addWidget(selector);
     
         connect(this, SIGNAL(accepted()), selector, SLOT(accept()));
