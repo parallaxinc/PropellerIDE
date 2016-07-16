@@ -29,7 +29,6 @@ class BuildManager : public QFrame
     void setBuild(bool active);
     void setDownload(bool active);
     void setStage(int stage);
-    void setText(const QString & text);
 
     Language language;
     Compiler * compiler;
@@ -77,8 +76,6 @@ private slots:
     void loadSuccess();
     void loadFailure();
     void compilerFinished(bool success);
-//    void procReadyRead();
-//    void runProcess(const QString & programName, const QStringList & programArgs);
 
 protected:
     void keyPressEvent(QKeyEvent * event);
@@ -89,5 +86,5 @@ public slots:
     void hideStatus();
 
     void print(const QString & text);
-    void print(const QString & text, QColor color);
+    void setText(const QString & text);
 };

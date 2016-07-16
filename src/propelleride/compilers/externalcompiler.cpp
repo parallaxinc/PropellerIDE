@@ -68,7 +68,7 @@ QString ExternalCompiler::build(QString filename,
     if (!infile.endsWith(pattern_in, Qt::CaseInsensitive))
     {
         qCritical() << "Input file extension does not equal" << pattern_in;
-        emit finished(false);
+        handleError(QProcess::UnknownError);
         return QString();
     }
 
@@ -83,8 +83,7 @@ QString ExternalCompiler::build(QString filename,
 
     if (exepath.isEmpty())
     {
-        qCritical() << "Executable not found!" << exepath;
-        emit finished(false);
+        handleError(QProcess::FailedToStart);
         return QString();
     }
 

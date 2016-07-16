@@ -31,10 +31,10 @@ BuildManager::~BuildManager()
 void BuildManager::showStatus()
 {
     setStage(0);
+    setTextColor(Qt::black);
     show();
     raise();
     timer.stop();
-    ui.plainTextEdit->clear();
 }
 
 void BuildManager::hideStatus()
@@ -71,38 +71,6 @@ void BuildManager::print(const QString & text)
     fprintf(stdout, "%s", qPrintable(text));
     fflush(stdout);
 }
-
-void BuildManager::print(const QString & text, QColor color)
-{
-    setTextColor(color);
-    print(text);
-}
-
-//void BuildManager::procReadyRead()
-//{
-//    foreach (QString line, lines)
-//    {
-//        if (line.contains("Program size is") || line.contains("Bit fe") || line.contains("DOWNLOAD COMPLETE"))
-//        {
-//            setTextColor(Qt::darkGreen);
-//        }
-//        else if (line.contains("error", Qt::CaseInsensitive))
-//        {
-//            setTextColor(Qt::red);
-//        }
-//
-//        ui.plainTextEdit->appendPlainText(line);
-//    }
-//
-//    QScrollBar *sb = ui.plainTextEdit->verticalScrollBar();
-//    sb->setValue(sb->maximum());
-//}
-//
-//void BuildManager::runProcess(const QString & programName, const QStringList & programArgs)
-//{
-//    setTextColor(Qt::black);
-//}
-
 
 bool BuildManager::load(const QByteArray & binary)
 {
@@ -162,6 +130,8 @@ void BuildManager::loadFailure()
 
 void BuildManager::build()
 {
+    ui.plainTextEdit->clear();
+
     language.loadExtension(QFileInfo(config.file).suffix());
     compilersteps = language.listBuildSteps();
 
@@ -193,6 +163,11 @@ void BuildManager::runCompiler(QString name)
 
     config.file = compiler->build(config.file,
                                   config.includes);
+
+    if (config.file.isEmpty())
+        return;
+
+    showStatus();
 }
 
 void BuildManager::cleanupCompiler()
@@ -237,6 +212,8 @@ void BuildManager::compilerFinished(bool success)
         }
         else
         {
+            setStage(1);
+//            hideStatus();
             emit finished();
         }
     }
