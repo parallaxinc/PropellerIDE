@@ -10,6 +10,7 @@
 #include <QMessageBox>
 
 QHash<QString, QString> ExternalCompiler::_lookup = QHash<QString, QString>();
+QList<QString> ExternalCompiler::_paths = QList<QString>();
 
 ExternalCompiler::ExternalCompiler(QString name, QObject * parent)
     : Compiler(parent)
@@ -33,6 +34,30 @@ ExternalCompiler::~ExternalCompiler()
     cleanup();
 }
 
+QString ExternalCompiler::getExecutablePath()
+{
+    foreach (QString path, _paths)
+    {
+        QDir dir(path);
+
+        QString glob = dir.filePath(arg_exe)+"*";
+        QStringList entries = dir.entryList(QStringList() << arg_exe+"*",
+                                            QDir::Files
+                                            | QDir::Executable 
+                                            | QDir::CaseSensitive);
+
+        foreach (QString e, entries)
+        {
+            QString file = dir.filePath(e);
+
+            if (QDir::match(glob, file))
+                return file;
+        }
+    }
+
+    return QString();
+}
+
 QString ExternalCompiler::build(QString filename,
                                 QStringList libraries)
 {
@@ -43,6 +68,7 @@ QString ExternalCompiler::build(QString filename,
     if (!infile.endsWith(pattern_in, Qt::CaseInsensitive))
     {
         qCritical() << "Input file extension does not equal" << pattern_in;
+        emit finished(false);
         return QString();
     }
 
@@ -52,8 +78,18 @@ QString ExternalCompiler::build(QString filename,
     QString outfile = basefile.append(pattern_out);
     QString retfile = basefile.append(pattern_ret);
 
+
+    QString exepath = getExecutablePath();
+
+    if (exepath.isEmpty())
+    {
+        qCritical() << "Executable not found!" << exepath;
+        emit finished(false);
+        return QString();
+    }
+
     QStringList arglist;
-    arglist << arg_exe << infile;
+    arglist << exepath << infile;
 
     if (!arg_output.isEmpty())
     {
@@ -84,11 +120,7 @@ QString ExternalCompiler::build(QString filename,
         return QString();
     }
 
-    QString program = arglist.takeFirst();
-#if defined(Q_OS_MAC)
-    program = QCoreApplication::applicationDirPath() + "/" + program;
-#endif
-    program = QDir::toNativeSeparators(program);
+    QString program = QDir::toNativeSeparators(arglist.takeFirst());
 
     QStringList args;
     for (int i = 0; i < arglist.size(); ++i)
@@ -217,6 +249,13 @@ void ExternalCompiler::add(QString name, QString filename)
     qDebug() << "Loading compiler config:" << name;
     _lookup[name] = filename;
 }
+
+void ExternalCompiler::addPath(QString path)
+{
+    qDebug() << "Adding compiler path:" << path;
+    _paths << path;
+}
+
 
 void ExternalCompiler::load(QString filename)
 {

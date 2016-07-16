@@ -44,7 +44,7 @@ QCommandLineOption optLogFile(QStringList() << "f" << "file",
                               "FILE");
 
 QCommandLineOption optPath(QStringList() << "p" << "path",
-                           QObject::tr("Add PATH to list of search paths for external resources"),
+                           QObject::tr("Add PATH to list of search paths for external programs"),
                            "PATH");
 
 int main(int argc, char *argv[])
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     parser.addHelpOption();
     parser.addVersionOption();
     parser.addOption(optLogFile);
-//    parser.addOption(optPath);
+    parser.addOption(optPath);
     parser.addPositionalArgument("Source files", QObject::tr("Source files to open."), "OBJECTS...");
     parser.setApplicationDescription("\n" + description);
     parser.process(app);
@@ -182,6 +182,21 @@ bool initCompilers()
         filename.remove("compiler.");
         ExternalCompiler::add(filename, file);
     }
+
+    foreach (QString path, parser.values(optPath))
+    {
+        if (QDir(path).exists())
+        {
+            ExternalCompiler::addPath(path);
+        }
+        else
+        {
+            qWarning() << "Path provided with '-p' does not exist:"
+                        << path;
+        }
+    }
+
+    ExternalCompiler::addPath(QCoreApplication::applicationDirPath());
 
     return true;
 }

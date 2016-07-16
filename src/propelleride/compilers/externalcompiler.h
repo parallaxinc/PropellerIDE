@@ -11,6 +11,7 @@ class ExternalCompiler : public Compiler
     Q_OBJECT
 
     static QHash<QString, QString> _lookup;
+    static QList<QString> _paths;
 
     QProcess * proc;
 
@@ -26,6 +27,8 @@ class ExternalCompiler : public Compiler
     QRegularExpression re_success;
     QRegularExpression re_error;
 
+    QString getExecutablePath();
+
 public:
     explicit ExternalCompiler(QString name,
                               QObject * parent = 0) Q_DECL_OVERRIDE;
@@ -35,6 +38,7 @@ public:
                   QStringList libraries = QStringList()) Q_DECL_OVERRIDE;
 
     static void add(QString name, QString filename);
+    static void addPath(QString path);
     void load(QString filename);
     void save(QString filename);
 
