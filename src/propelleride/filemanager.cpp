@@ -164,7 +164,7 @@ QString FileManager::getExtensionString(bool supportedoption, bool alloption)
             newext.append("*."+s);
 
         extensionlist.append(tr("Supported filetypes (%1)")
-                .arg(newext.join(", ")));
+                .arg(newext.join(" ")));
     }
 
     foreach (QString l, language.languages())

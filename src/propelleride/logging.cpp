@@ -3,7 +3,7 @@
 #include <QFile>
 #include <QDateTime>
 
-QString logfilename;
+QFile logfile;
 
 enum AnsiColor
 {
@@ -86,10 +86,8 @@ void message(AnsiColor color,
     fprintf(stderr, "%s", qPrintable(output));
     fflush(stderr);
 
-    if (logfilename.isEmpty())
+    if (logfile.fileName().isEmpty())
         return;
-
-    QFile logfile(logfilename);
 
     if (!logfile.isOpen() && !logfile.open(QIODevice::WriteOnly | QIODevice::Append))
         return;
@@ -127,6 +125,7 @@ void messageHandler(QtMsgType type,
 
 void setLogFileName(const QString & filename)
 {
-    logfilename = filename;
-    QFile(logfilename).remove();
+    logfile.close();
+    logfile.setFileName(filename);
+    logfile.remove();
 }

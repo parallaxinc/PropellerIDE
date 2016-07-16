@@ -365,7 +365,7 @@ QString MainWindow::resolveFileName(QString filename)
 {
     foreach (QString s, parser->getFileList())
     {
-        if (QFileInfo(s).fileName() == filename)
+        if (s == filename || QFileInfo(s).fileName() == filename)
             return s;
     }
     return QString();

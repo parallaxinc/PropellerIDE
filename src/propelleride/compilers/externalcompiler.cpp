@@ -7,6 +7,7 @@
 #include <QSettings>
 #include <QFileInfo>
 #include <QCoreApplication>
+#include <QMessageBox>
 
 QHash<QString, QString> ExternalCompiler::_lookup = QHash<QString, QString>();
 
@@ -175,22 +176,23 @@ void ExternalCompiler::handleError(QProcess::ProcessError e)
     switch (e)
     {
         case QProcess::FailedToStart:
-            errorstring = tr("Failed to start compiler: '%1'; check Preferences").arg("compiler");
+            qCritical() << QString("Failed to start '%1'").arg(arg_exe);
+            QMessageBox::critical((QWidget *) parent(),
+                    tr("Failed To Start Build"),
+                    tr("The external program '%1' has failed to start.\n\n"
+                       "Verify the executable is in the system path and try again.").arg(arg_exe));
             break;
         case QProcess::Crashed:
         case QProcess::Timedout:
         case QProcess::WriteError:
         case QProcess::ReadError:
         case QProcess::UnknownError:
-            errorstring = proc->errorString();
+            qCritical() << qPrintable(proc->errorString());
+            QMessageBox::critical((QWidget *) parent(),
+                    tr("Build Failed"),
+                    tr("%1").arg(proc->errorString()));
             break;
     }
-
-    qCritical() << errorstring;
-//    print("ERROR: "+errorstring,Qt::red);
-//    QMessageBox::critical((QWidget *) parent(),
-//            tr("Build Failed"),
-//            tr("%1").arg(errorstring));
 
     emit finished(false);
 }
@@ -205,9 +207,9 @@ void ExternalCompiler::cleanup()
         disconnect(this,   SIGNAL(finished(bool)),                     this,   SLOT(cleanup()));
 
         proc->close();
-        delete proc;
+        proc->deleteLater();
+        proc = NULL;
     }
-    proc = NULL;
 }
 
 void ExternalCompiler::add(QString name, QString filename)
