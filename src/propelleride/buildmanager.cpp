@@ -135,7 +135,7 @@ bool BuildManager::load(const QByteArray & binary)
         QFile file(config.file);
         if (!file.open(QIODevice::ReadOnly))
         {
-            qCCritical(logbuildmanager) << "Couldn't open file:" << config.file;
+            qCritical() << "Couldn't open file:" << config.file;
             return false;
         }
 

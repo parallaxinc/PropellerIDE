@@ -46,7 +46,7 @@ void ColorScheme::save(const QString & filename)
 
 void ColorScheme::save(QSettings * settings)
 {
-    qCDebug(logcolorscheme) << "saving" << settings->fileName();
+    qDebug() << "saving" << settings->fileName();
 
     settings->beginGroup("Colors");
 
@@ -81,7 +81,7 @@ void ColorScheme::load(const QString & filename)
 
 void ColorScheme::load(QSettings * settings)
 {
-    qCDebug(logcolorscheme) << "loading" << settings->fileName();
+    qDebug() << "loading" << settings->fileName();
 
     settings->beginGroup("Colors");
 

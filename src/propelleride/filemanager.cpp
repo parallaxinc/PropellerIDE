@@ -29,7 +29,7 @@ bool FileManager::createHome()
     {
         if (!QDir().mkdir(projects.path()))
         {
-            qCWarning(logfilemanager) << "failed to create projects folder:" << projects.path();
+            qWarning() << "failed to create projects folder:" << projects.path();
             return false;
         }
     }
@@ -402,7 +402,7 @@ bool FileManager::closeFile(int index)
 
     if (index < 0 || index > count()-1)
     {
-        qCWarning(logfilemanager) << "attempted to close index:" << index 
+        qWarning() << "attempted to close index:" << index 
             << "(count: " << count() << ")";
         return false;
     }

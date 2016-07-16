@@ -491,14 +491,14 @@ void MainWindow::recolorProjectView()
     parser->styleRule("_includes_",QIcon(),theme->getColor(ColorScheme::SyntaxText));
     parser->setFont(theme->getFont());
 
-    qCDebug(logmainwindow) << "updating project view";
+    qDebug() << "updating project view";
     parser->buildModel();
     ui.projectview->setModel(parser->treeModel());
 }
 
 void MainWindow::spawnMemoryMap(const QString & name)
 {
-    qCDebug(logmainwindow) << "spawnMemoryMap()";
+    qDebug() << "spawnMemoryMap()";
 
     QString filename = name;
     if (name.isEmpty())
@@ -561,7 +561,7 @@ void MainWindow::printFile()
     if (fileName.isEmpty())
         return;
 
-    qCDebug(logmainwindow) << "printing file:" << fileName;
+    qDebug() << "printing file:" << fileName;
 
     Editor * editor = ui.editorTabs->getEditor(n);
 
@@ -589,7 +589,7 @@ void MainWindow::zipFiles()
     QString spinLibPath  = QSettings().value("Library").toString();
     QStringList files = parser->getFileList();
 
-    qCDebug(logmainwindow) << "zipping files:" << files;
+    qDebug() << "zipping files:" << files;
 
     if(files.count() > 0)
     {
@@ -633,7 +633,7 @@ void MainWindow::updatePorts()
 
 void MainWindow::spawnTerminal(const QString & portname)
 {
-    qCDebug(logmainwindow) << "creating terminal";
+    qDebug() << "creating terminal";
 
     QString port = portname;
     if (port.isEmpty())
@@ -733,7 +733,7 @@ void MainWindow::openFileResource(QString const & resource)
     if (QFileInfo(path).exists() && QFileInfo(path).isFile())
         QDesktopServices::openUrl(QUrl::fromLocalFile(path));
     else
-        qCDebug(logmainwindow) << "File not found:" << path;
+        qDebug() << "File not found:" << path;
 }
 
 void MainWindow::propellerManual()

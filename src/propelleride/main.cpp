@@ -9,7 +9,6 @@
 #include <Qt>
 #include <QString>
 #include <QtGlobal>
-#include <QDateTime>
 #include <QSettings>
 
 #if QT_VERSION >= 0x050400
@@ -37,40 +36,59 @@ bool initStyles();
 bool initFonts();
 
 QSplashScreen * splash;
+
 QCommandLineParser parser;
+
+QCommandLineOption optLogFile(QStringList() << "f" << "file",
+                              QObject::tr("Log debug messages to FILE"),
+                              "FILE");
+
+QCommandLineOption optPath(QStringList() << "p" << "path",
+                           QObject::tr("Add PATH to list of search paths for external resources"),
+                           "PATH");
 
 int main(int argc, char *argv[])
 {
-    qInstallMessageHandler(messageHandler);
-
     QApplication app(argc, argv);
 
-    QCoreApplication::setOrganizationName("Parallax");
-    QCoreApplication::setOrganizationDomain("www.parallax.com");
-    QCoreApplication::setApplicationName("PropellerIDE");
+    qInstallMessageHandler(messageHandler);
+
+    qApp->setOrganizationName("Parallax");
+    qApp->setOrganizationDomain("www.parallax.com");
+    qApp->setApplicationName("PropellerIDE");
 
 #ifdef VERSION
-    QCoreApplication::setApplicationVersion(VERSION);
+    qApp->setApplicationVersion(VERSION);
 #else
-    QCoreApplication::setApplicationVersion("0.0.0 (dev)");
+    qApp->setApplicationVersion("0.0.0 (dev)");
 #endif
+
+    QString description = QObject::tr("An easy-to-use, cross-platform IDE for the Parallax Propeller");
+
+    parser.setApplicationDescription(qApp->applicationName());
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.addOption(optLogFile);
+//    parser.addOption(optPath);
+    parser.addPositionalArgument("Source files", QObject::tr("Source files to open."), "OBJECTS...");
+    parser.setApplicationDescription("\n" + description);
+    parser.process(app);
+
+    if (!parser.value(optLogFile).isEmpty())
+    {
+        QString logfile = parser.value(optLogFile);
+        setLogFileName(logfile);
+    }
 
     QSettings settings;
     if (settings.status() == QSettings::AccessError)
     {
-        QMessageBox::critical(0, QObject::tr("Can't open application settings!"), QObject::tr("Unable to open the PropellerIDE settings stored at:\n\n%1\n\nTry deleting the file and restarting PropellerIDE.").arg(settings.fileName()));
-        qCCritical(logmain) << "can't access:" << settings.fileName() << ". Is it writable?";
+        QMessageBox::critical(0,
+                              QObject::tr("Can't open application settings!"),
+                              QObject::tr("Unable to open the PropellerIDE settings stored at:\n\n%1\n\nTry deleting the file and restarting PropellerIDE.").arg(settings.fileName()));
+        qCritical() << "can't access:" << settings.fileName() << ". Is it writable?";
         return 1;
     }
-
-    QString description = QObject::tr("An easy-to-use, cross-platform IDE for the Parallax Propeller");
-
-    parser.setApplicationDescription(QCoreApplication::applicationName());
-    parser.addHelpOption();
-    parser.addVersionOption();
-    parser.addPositionalArgument("Source files", QObject::tr("Source files to open."), "OBJECTS...");
-    parser.setApplicationDescription("\n" + description);
-    parser.process(app);
 
     printDebugInfo();
 
@@ -106,12 +124,12 @@ int main(int argc, char *argv[])
 
 void printDebugInfo()
 {
-    qDebug() << qPrintable(QCoreApplication::applicationName())
+    qDebug() << qPrintable(qApp->applicationName())
              << "-"
              << qPrintable(parser.applicationDescription().remove("\n"));
 
     qDebug() << "Version:"
-             << qPrintable(QCoreApplication::applicationVersion());
+             << qPrintable(qApp->applicationVersion());
 
 #if QT_VERSION >= 0x050400
     qDebug() << "Arch:" 

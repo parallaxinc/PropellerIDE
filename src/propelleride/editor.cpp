@@ -311,7 +311,7 @@ int Editor::handleAutoComplete(QChar c)
     if (!autoComplete) return 0;
 
     QString text = selectAutoComplete();
-    qCDebug(logeditor) << "autocomplete" << text;
+    qDebug() << "autocomplete" << text;
 
     cbAuto->clear();
     cbAuto->addItem(c);

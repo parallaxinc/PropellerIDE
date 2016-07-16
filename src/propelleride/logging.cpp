@@ -1,20 +1,9 @@
 #include "logging.h"
 
+#include <QFile>
+#include <QDateTime>
 
-
-Q_LOGGING_CATEGORY(logmain,             "main")
-Q_LOGGING_CATEGORY(logmainwindow,       "mainwindow")
-Q_LOGGING_CATEGORY(logeditor,           "editor")
-
-Q_LOGGING_CATEGORY(logfilemanager,      "filemanager")
-Q_LOGGING_CATEGORY(logfile,             "file")
-
-Q_LOGGING_CATEGORY(logbuildmanager,     "buildmanager")
-
-Q_LOGGING_CATEGORY(loglanguage,         "language")
-Q_LOGGING_CATEGORY(loghighlighter,      "highlighter")
-
-Q_LOGGING_CATEGORY(logcolorscheme,      "colorscheme")
+QString logfilename;
 
 enum AnsiColor
 {
@@ -76,20 +65,42 @@ void message(AnsiColor color,
         const QMessageLogContext &context,
         const QString &msg)
 {
+    QString timestamp = QDateTime(QDateTime::currentDateTime()).toString();
+    QString output;
+
 #ifdef QT_MESSAGELOGCONTEXT
-    fprintf(stderr, "[%s] %s (%i): %s\n",
-            qPrintable(wrapColor(color, text)),
-            qPrintable(wrapColor(AnsiLightBlue, context.file)),
-            context.line,
-            qPrintable(msg));
+    output = QString("%1 [%2] %3 (%4): %5\n")
+        .arg(timestamp)
+        .arg(wrapColor(color, text))
+        .arg(wrapColor(AnsiLightBlue, context.file))
+        .arg(context.line)
+        .arg(msg);
 #else
     Q_UNUSED(context);
 
-    fprintf(stderr, "[%s] %s\n",
-            qPrintable(wrapColor(color, text)),
-            qPrintable(msg));
+    output = QString("%1 [%2] %3\n")
+        .arg(timestamp)
+        .arg(wrapColor(color, text))
+        .arg(msg);
 #endif
+    fprintf(stderr, "%s", qPrintable(output));
     fflush(stderr);
+
+    if (logfilename.isEmpty())
+        return;
+
+    QFile logfile(logfilename);
+
+    if (!logfile.isOpen() && !logfile.open(QIODevice::WriteOnly | QIODevice::Append))
+        return;
+
+    output = QString("%1 [%2] %3\n")
+            .arg(timestamp)
+            .arg(text)
+            .arg(msg);
+
+    logfile.write(qPrintable(output));
+    logfile.flush();
 }
 
 void messageHandler(QtMsgType type,
@@ -114,3 +125,8 @@ void messageHandler(QtMsgType type,
     }
 }
 
+void setLogFileName(const QString & filename)
+{
+    logfilename = filename;
+    QFile(logfilename).remove();
+}
