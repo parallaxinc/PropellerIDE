@@ -6,6 +6,7 @@
 #include <QRegularExpression>
 #include <QSettings>
 #include <QFileInfo>
+#include <QCoreApplication>
 
 QHash<QString, QString> ExternalCompiler::_lookup = QHash<QString, QString>();
 
