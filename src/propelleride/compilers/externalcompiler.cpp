@@ -40,7 +40,7 @@ QString ExternalCompiler::getExecutablePath()
     {
         QDir dir(path);
 
-        QString glob = dir.filePath(arg_exe)+"*";
+        QString glob = dir.filePath(arg_exe);
         QStringList entries = dir.entryList(QStringList() << arg_exe+"*",
                                             QDir::Files
                                             | QDir::Executable 
@@ -50,7 +50,7 @@ QString ExternalCompiler::getExecutablePath()
         {
             QString file = dir.filePath(e);
 
-            if (QDir::match(glob, file))
+            if (file.startsWith(glob))
                 return file;
         }
     }
@@ -83,6 +83,7 @@ QString ExternalCompiler::build(QString filename,
 
     if (exepath.isEmpty())
     {
+        qCritical() << "Exe path is empty";
         handleError(QProcess::FailedToStart);
         return QString();
     }
