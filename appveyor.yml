@@ -4,6 +4,8 @@ environment:
     QTDIR: C:\Qt\5.4\mingw491_32
     MINGW: C:\Qt\Tools\mingw491_32
     PYTHON: "C:\\Python27"
+    INNODIR="C:\Program Files (x86)\Inno Setup 5"
+    FPCDIR="C:\FPC\3.0.0\bin\i386-win32"
     PYTHON_VERSION: "2.7.x" # currently 2.7.9
     PYTHON_ARCH: "32"
 
@@ -12,16 +14,14 @@ configuration: Release
 install:
 - git submodule update --init --recursive
 - set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin;C:\Qt\Tools\QtCreator\bin;
-
 - set PATH=%PATH%;%PYTHON%;%PYTHON%\Scripts;
-
-- set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5";
+- set PATH=%PATH%;%INNODIR%;
+- set PATH=%PATH%;%FPCDIR%;
 
 - choco install -y 7zip
 - set PATH=%PATH%;"C:\Program Files\7-Zip"
 - curl -o "C:\FPC.zip" "http://lamestation.net/downloads/appveyor/FPC.zip"
 - 7z x "C:\FPC.zip" -o"C:\"
-- set PATH=%PATH%;"C:\FPC\3.0.0\bin\i386-win32"
 
 - if defined APPVEYOR_REPO_TAG_NAME set BUILD_VERSION=%APPVEYOR_REPO_TAG_NAME%
 - if not defined APPVEYOR_REPO_TAG_NAME set BUILD_VERSION="0.0.0"

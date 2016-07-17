@@ -33,7 +33,8 @@ Makefile*
 
 /propterm
 
-*.swp
+.*.swp
+*~
 
 src/propelleride/propelleride
 src/terminal/propterm
