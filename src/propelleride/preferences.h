@@ -35,8 +35,6 @@ signals:
     void    updateColors();
     void    updateFonts(const QFont &);
 
-    void    accepted();
-    void    rejected();
     void    restored();
 
 public slots:

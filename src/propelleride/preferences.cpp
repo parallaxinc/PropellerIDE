@@ -14,7 +14,8 @@
 #include "colorchooser.h"
 #include "language.h"
 
-Preferences::Preferences(QWidget *parent) : QDialog(parent)
+Preferences::Preferences(QWidget *parent)
+    : QDialog(parent)
 {
     ui.setupUi(this);
     ui.tabStop->setValidator(new QIntValidator(0, 24, this));

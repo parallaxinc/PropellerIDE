@@ -15,7 +15,6 @@ RCC_DIR = .qrc/
 }
 
 CONFIG -= debug_and_release app_bundle
-CONFIG += debug
 
 include("../propterm/include.pri")
 include("../projectview/include.pri")

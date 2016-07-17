@@ -492,6 +492,7 @@ void MainWindow::recolorProjectView()
     parser->setFont(theme->getFont());
 
     qDebug() << "updating project view";
+
     parser->buildModel();
     ui.projectview->setModel(parser->treeModel());
 }

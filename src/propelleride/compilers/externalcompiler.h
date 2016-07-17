@@ -42,15 +42,7 @@ public:
     void load(QString filename);
     void save(QString filename);
 
-signals:
-    void finished(bool success);
-    void highlightLine(const QString & file,
-            int line,
-            int col,
-            const QString & text);
-
 private slots:
-
     void cleanup();
     void finish(int exitCode, QProcess::ExitStatus status);
     void readOutput();
