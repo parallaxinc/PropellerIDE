@@ -3,9 +3,9 @@ clone_depth: 200
 environment:
     QTDIR: C:\Qt\5.4\mingw491_32
     MINGW: C:\Qt\Tools\mingw491_32
-    PYTHON: "C:\\Python27"
-    INNODIR: "C:\Program Files (x86)\Inno Setup 5"
-    FPCDIR: "C:\FPC\3.0.0\bin\i386-win32"
+    PYTHON: C:\Python27
+    INNODIR: C:\Program Files (x86)\Inno Setup 5
+    FPCDIR: C:\FPC\3.0.0\bin\i386-win32
     PYTHON_VERSION: "2.7.x" # currently 2.7.9
     PYTHON_ARCH: "32"
 
