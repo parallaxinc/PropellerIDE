@@ -353,7 +353,7 @@ void MainWindow::checkAndSaveFiles(QStringList files)
     {
         if (files == QStringList() || files.contains(ui.editorTabs->tabToolTip(i)))
         {
-            if (ui.editorTabs->getEditor(i)->contentChanged())
+            if (ui.editorTabs->getView(i)->contentChanged())
             {
                 ui.editorTabs->save(i);
             }
@@ -385,7 +385,7 @@ void MainWindow::highlightFileLine(QString filename, int line, int col)
 
     ui.editorTabs->openFile(filename);
 
-    Editor * editor = ui.editorTabs->getEditor(ui.editorTabs->currentIndex());
+    EditorView * editor = ui.editorTabs->getView(ui.editorTabs->currentIndex());
     if(editor)
     {
         QTextCursor cur = editor->textCursor();
@@ -564,7 +564,7 @@ void MainWindow::printFile()
 
     qDebug() << "printing file:" << fileName;
 
-    Editor * editor = ui.editorTabs->getEditor(n);
+    EditorView * editor = ui.editorTabs->getView(n);
 
     QPrinter printer;
 

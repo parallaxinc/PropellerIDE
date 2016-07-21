@@ -1008,7 +1008,7 @@
     </message>
     <message>
         <location filename="../forms/preferences.ui" line="76"/>
-        <source>Editor</source>
+        <source>EditorView</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

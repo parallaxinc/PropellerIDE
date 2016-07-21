@@ -1,19 +1,38 @@
-#include "editor.h"
+#include "editorview.h"
 
-#include <QRect>
-#include <QColor>
-#include <QPainter>
 #include <QApplication>
-
+#include <QColor>
 #include <QLinearGradient>
+#include <QPainter>
+#include <QRect>
 
 #include <ProjectParser>
 
 #include "mainwindow.h"
-
 #include "logging.h"
 
-Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
+class LineNumberArea : public QWidget
+{
+public:
+    LineNumberArea(EditorView *editor) : QWidget(editor) {
+        codeEditor = editor;
+    }
+
+    QSize sizeHint() const {
+        return QSize(codeEditor->lineNumberAreaWidth(), 0);
+    }
+
+protected:
+    void paintEvent(QPaintEvent *event) {
+        codeEditor->lineNumberAreaPaintEvent(event);
+    }
+
+private:
+    EditorView * codeEditor;
+};
+
+
+EditorView::EditorView(QWidget *parent) : QPlainTextEdit(parent)
 {
     highlighter = 0;
     setExtension("spin");
@@ -55,7 +74,7 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
     cbAuto->hide();
 }
 
-Editor::~Editor()
+EditorView::~EditorView()
 {
     cbAuto->clear();
     delete cbAuto;
@@ -64,7 +83,7 @@ Editor::~Editor()
     delete lineNumberArea;
 }
 
-void Editor::loadPreferences()
+void EditorView::loadPreferences()
 {
     QSettings settings;
 
@@ -79,7 +98,7 @@ void Editor::loadPreferences()
     setTabStopWidth(tabStop * QFontMetrics(currentTheme->getFont()).width(' '));
 }
 
-void Editor::setExtension(QString ext)
+void EditorView::setExtension(QString ext)
 {
     language.loadExtension(ext);
     parser = language.parser();
@@ -92,17 +111,17 @@ void Editor::setExtension(QString ext)
     highlighter = new Highlighter(ext, document());
 }
 
-void Editor::saveContent()
+void EditorView::saveContent()
 {
     oldcontents = toPlainText();
 }
 
-int Editor::contentChanged()
+int EditorView::contentChanged()
 {
     return oldcontents.compare(toPlainText());
 }
 
-void Editor::keyPressEvent (QKeyEvent *e)
+void EditorView::keyPressEvent(QKeyEvent * e)
 {
     QTextCursor cursor = textCursor();
 
@@ -176,7 +195,7 @@ void Editor::keyPressEvent (QKeyEvent *e)
     }
 }
 
-QPoint Editor::keyPopPoint(QTextCursor cursor)
+QPoint EditorView::keyPopPoint(QTextCursor cursor)
 {
     int ht = fontMetrics().height();
     int wd = fontMetrics().width(' ');
@@ -190,7 +209,7 @@ QPoint Editor::keyPopPoint(QTextCursor cursor)
     return pt;
 }
 
-int Editor::autoIndent()
+int EditorView::autoIndent()
 {
     QTextCursor cur = this->textCursor();
     if(cur.selectedText().length() > 0) {
@@ -233,7 +252,7 @@ int Editor::autoIndent()
     return 1;
 }
 
-int Editor::addAutoCompleteItem(QString type, QString s)
+int EditorView::addAutoCompleteItem(QString type, QString s)
 {
     int width = 0;
 
@@ -287,7 +306,7 @@ int Editor::addAutoCompleteItem(QString type, QString s)
     return width;
 }
 
-QString Editor::selectAutoComplete()
+QString EditorView::selectAutoComplete()
 {
     QTextCursor cur = this->textCursor();
     QString text = cur.selectedText();
@@ -306,7 +325,7 @@ QString Editor::selectAutoComplete()
 }
 
 
-int Editor::handleAutoComplete(QChar c)
+int EditorView::handleAutoComplete(QChar c)
 {
     if (!autoComplete) return 0;
 
@@ -367,7 +386,7 @@ int Editor::handleAutoComplete(QChar c)
     return 1;
 }
 
-void Editor::finishAutoComplete(int index)
+void EditorView::finishAutoComplete(int index)
 {
     disconnect(cbAuto,SIGNAL(activated(int)),this,SLOT(finishAutoComplete(int)));
 
@@ -395,14 +414,13 @@ void Editor::finishAutoComplete(int index)
         cur.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, left);
         cur.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, left-1);
         s = cur.selectedText();
-//        qDebug() << s;
     }
 
     this->setTextCursor(cur);
     cbAuto->hide();
 }
 
-void Editor::dedent()
+void EditorView::dedent()
 {
     QTextCursor cursor = textCursor();
     int column = cursor.columnNumber() - (cursor.selectionStart() - cursor.position());
@@ -433,7 +451,7 @@ void Editor::dedent()
     cursor.endEditBlock();
 }
 
-void Editor::indent()
+void EditorView::indent()
 {
     QTextCursor cursor = textCursor();
     int column = cursor.columnNumber() + (cursor.selectionStart() - cursor.position());
@@ -446,7 +464,7 @@ void Editor::indent()
     cursor.endEditBlock();
 }
 
-void Editor::tabBlockShift()
+void EditorView::tabBlockShift()
 {
     QTextCursor cur = textCursor();
     QString tab(tabStop, ' ');
@@ -521,9 +539,7 @@ void Editor::tabBlockShift()
     setTextCursor(cur);
 }
 
-
-
-int Editor::lineNumberAreaWidth()
+int EditorView::lineNumberAreaWidth()
 {
     int digits = 1;
     int max = qMax(1, blockCount());
@@ -537,12 +553,12 @@ int Editor::lineNumberAreaWidth()
     return space;
 }
 
-void Editor::updateLineNumberAreaWidth()
+void EditorView::updateLineNumberAreaWidth()
 {
     setViewportMargins(lineNumberAreaWidth()-6, -4, -3, 0);
 }
 
-void Editor::updateLineNumberArea(const QRect &rect, int dy)
+void EditorView::updateLineNumberArea(const QRect &rect, int dy)
 {
     if (dy)
         lineNumberArea->scroll(0, dy);
@@ -556,7 +572,7 @@ void Editor::updateLineNumberArea(const QRect &rect, int dy)
     lineNumberArea->setPalette(p);
 }
 
-void Editor::resizeEvent(QResizeEvent *e)
+void EditorView::resizeEvent(QResizeEvent *e)
 {
     QPlainTextEdit::resizeEvent(e);
 
@@ -564,9 +580,8 @@ void Editor::resizeEvent(QResizeEvent *e)
     lineNumberArea->setGeometry(QRect(cr.left()-2, cr.top()-3, lineNumberAreaWidth(), cr.height()+3));
 }
 
-void Editor::updateColors()
+void EditorView::updateColors()
 {
-//    qDebug() << Q_FUNC_INFO;
     colors = currentTheme->getColorList();
     colorsAlt = colors;
 
@@ -586,12 +601,12 @@ void Editor::updateColors()
     this->setPalette(p);
 }
 
-void Editor::updateFonts()
+void EditorView::updateFonts()
 {
     this->setFont(currentTheme->getFont());
 }
 
-void Editor::paintEvent(QPaintEvent * e)
+void EditorView::paintEvent(QPaintEvent * e)
 {
     QPainter p(viewport());
 
@@ -725,7 +740,7 @@ void Editor::paintEvent(QPaintEvent * e)
     QPlainTextEdit::paintEvent(e);
 }
 
-QColor Editor::contrastColor(QColor color, int amount)
+QColor EditorView::contrastColor(QColor color, int amount)
 {
     if (color.lightness() < 128)
         return QColor(255,255,255, amount);
@@ -733,7 +748,7 @@ QColor Editor::contrastColor(QColor color, int amount)
         return QColor(0,0,0, amount);
 }
 
-void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
+void EditorView::lineNumberAreaPaintEvent(QPaintEvent * event)
 {
     QPainter painter(lineNumberArea);
 
@@ -793,30 +808,30 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
     }
 }
 
-void Editor::setUndo(bool available)
+void EditorView::setUndo(bool available)
 {
     canUndo = available;
 }
 
-bool Editor::getUndo()
+bool EditorView::getUndo()
 {
     return canUndo;
 }
 
-void Editor::setRedo(bool available)
+void EditorView::setRedo(bool available)
 {
     canRedo = available;
 }
-bool Editor::getRedo()
+bool EditorView::getRedo()
 {
     return canRedo;
 }
 
-void Editor::setCopy(bool available)
+void EditorView::setCopy(bool available)
 {
     canCopy= available;
 }
-bool Editor::getCopy()
+bool EditorView::getCopy()
 {
     return canCopy;
 }

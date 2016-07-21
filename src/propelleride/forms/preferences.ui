@@ -73,7 +73,7 @@
      </widget>
      <widget class="QWidget" name="tabEditor">
       <attribute name="title">
-       <string>Editor</string>
+       <string>EditorView</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>

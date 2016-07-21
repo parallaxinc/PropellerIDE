@@ -15,7 +15,7 @@
 #include "ui_mainwindow.h"
 
 #include "preferences.h"
-#include "editor.h"
+#include "editorview.h"
 #include "zipper.h"
 #include "filemanager.h"
 #include "buildmanager.h"

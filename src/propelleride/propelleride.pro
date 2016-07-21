@@ -26,7 +26,6 @@ SOURCES += \
     buildmanager.cpp \
     colorscheme.cpp \
     colorchooser.cpp \
-    editor.cpp \
     filemanager.cpp \
     finder.cpp \
     highlighter.cpp \
@@ -45,7 +44,6 @@ HEADERS  += \
     clickable.h \
     colorchooser.h \
     colorscheme.h \
-    editor.h \
     filemanager.h \
     finder.h \
     highlighter.h \
@@ -66,6 +64,15 @@ SOURCES += \
 HEADERS += \
     compilers/compiler.h \
     compilers/externalcompiler.h \
+
+INCLUDEPATH += views/
+
+SOURCES += \
+    views/editorview.cpp \
+
+HEADERS += \
+    views/editorview.h \
+
 
 OTHER_FILES +=
 

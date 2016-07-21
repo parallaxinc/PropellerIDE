@@ -4,7 +4,7 @@
 #include <QMessageBox>
 #include <QStatusBar>
 
-#include "editor.h"
+#include "editorview.h"
 #include "logging.h"
 #include "language.h"
 
@@ -22,7 +22,7 @@ class FileManager : public QTabWidget
 public:
     explicit FileManager(QWidget *parent = 0);
 
-    Editor * getEditor(int num);
+    EditorView * getView(int num);
     int isFileOpen(const QString & fileName);
     int isFileEmpty(int index);
 
