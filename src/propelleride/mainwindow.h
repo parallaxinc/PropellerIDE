@@ -81,6 +81,7 @@ public slots:
     void propellerManual();
     void propellerDatasheet();
     void propellerQuickReference();
+    void propBasicManual();
     void about();
     void newFromTemplate();
 

@@ -124,6 +124,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.actionPropeller_Quick_Reference, SIGNAL(triggered()), this, SLOT(propellerQuickReference()));
     connect(ui.actionPropeller_Datasheet,       SIGNAL(triggered()), this, SLOT(propellerDatasheet()));
     connect(ui.actionPropeller_Manual,          SIGNAL(triggered()), this, SLOT(propellerManual()));
+    connect(ui.actionPropBASIC_Manual,          SIGNAL(triggered()), this, SLOT(propBasicManual()));
     connect(ui.action_About,                    SIGNAL(triggered()), this, SLOT(about()));
 
     // Toolbar Extras
@@ -804,7 +805,7 @@ void MainWindow::openFileResource(QString const & resource)
     if (QFileInfo(path).exists() && QFileInfo(path).isFile())
         QDesktopServices::openUrl(QUrl::fromLocalFile(path));
     else
-        qDebug() << "File not found:" << path;
+        qCritical() << "File not found:" << path;
 }
 
 void MainWindow::propellerManual()
@@ -820,6 +821,11 @@ void MainWindow::propellerDatasheet()
 void MainWindow::propellerQuickReference()
 {
     openFileResource("/doc/pdf/QuickReference-v15.pdf");
+}
+
+void MainWindow::propBasicManual()
+{
+    openFileResource("/doc/pdf/PropBASIC.pdf");
 }
 
 void MainWindow::about()
