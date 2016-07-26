@@ -17,6 +17,7 @@ class FileManager : public QTabWidget
     void createBackgroundImage();
     QString reformatText(QString text);
     QString getExtensionString();
+    QString getExtensionPattern(QStringList extensions);
     QStringList getExtensionList();
 
 public:

@@ -156,30 +156,34 @@ QString FileManager::getExtensionString()
     return getExtensionList().join(";;");
 }
 
-QStringList FileManager::getExtensionList()
+QString FileManager::getExtensionPattern(QStringList extensions)
 {
-    QStringList extensionlist; 
-
-    QStringList allext = language.allExtensions();
     QStringList newext;
 
-    foreach (QString s, allext)
+    foreach (QString s, extensions)
         newext.append("*."+s);
 
     newext.sort();
 
+    return newext.join(" ");
+}
+
+QStringList FileManager::getExtensionList()
+{
+    QStringList extensionlist; 
+
     foreach (QString l, language.languages())
     {
         language.loadKey(l);
-        extensionlist.append(tr("%1 files (*.%2)")
+        extensionlist.append(tr("%1 files (%2)")
             .arg(language.name())
-            .arg(language.extensions().first()));
+            .arg(getExtensionPattern(language.extensions())));
     }
 
     extensionlist.sort();
 
     extensionlist.prepend(tr("Supported filetypes (%1)")
-            .arg(newext.join(" ")));
+            .arg(getExtensionPattern(language.allExtensions())));
 
     extensionlist.append(tr("All files (*)"));
 
