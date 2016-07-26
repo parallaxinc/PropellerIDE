@@ -13,13 +13,16 @@ PathSelector::PathSelector(QString languagekey,
 
     ui.name->setText(language.name());
     ui.compiler->clear();
-    ui.compiler->addItem(language.listBuildSteps().join(" > "));
+
+    foreach (QStringList buildsteps, language.listAllBuildSteps())
+        ui.compiler->addItem(buildsteps.join(" > "));
 
     restore();
 
     load();
     save();
 
+    connect(ui.compiler,    SIGNAL(currentIndexChanged(int)),  this,   SLOT(setBuildSteps(int)));
     connect(ui.deletePath,  SIGNAL(clicked()),  this,   SLOT(deletePath()));
     connect(ui.addPath,     SIGNAL(clicked()),  this,   SLOT(addPath()));
 }
@@ -46,6 +49,12 @@ void PathSelector::setIncludes(const QStringList & paths)
 void PathSelector::setDefaultIncludes(QStringList paths)
 {
     defaultincludes = paths;
+}
+
+void PathSelector::setBuildSteps(int index)
+{
+    language.setBuilder(index);
+    qDebug() << "COMPILER" << language.listBuildSteps();
 }
 
 void PathSelector::addPath()
@@ -102,6 +111,7 @@ void PathSelector::save()
     settings.beginGroup("Paths");
     settings.beginGroup(language.key());
 
+    settings.setValue("builder",ui.compiler->currentIndex());
     settings.setValue("includes",includes);
 
     settings.endGroup();
@@ -113,6 +123,13 @@ void PathSelector::load()
     QSettings settings;
     settings.beginGroup("Paths");
     settings.beginGroup(language.key());
+
+    int builder = -1;
+    if (language.builders())
+        builder = settings.value("builder", 0).toInt();
+
+    ui.compiler->setCurrentIndex(builder);
+    language.setBuilder(builder);
 
     QStringList inc = settings.value("includes", defaultincludes).toStringList();
     setIncludes(inc);

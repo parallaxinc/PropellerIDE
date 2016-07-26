@@ -1,7 +1,10 @@
 {
     "name": "Spin",
     "extension": [ "spin" ],
-    "buildsteps": [ "bstc" ],
+    "buildsteps": [
+        [ "bstc" ],
+        [ "openspin" ]
+    ],
     "includes": true,
     "syntax": {
         "case_sensitive": false,
