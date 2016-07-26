@@ -1,6 +1,6 @@
 {
     "name": "PropBASIC",
-    "extension": [ "pbas" ],
+    "extension": [ "pbas", "plib" ],
     "buildsteps": [ "propbasic", "bstc" ],
     "includes": false,
     "syntax": {
