@@ -135,6 +135,13 @@ void BuildManager::build()
     language.loadExtension(QFileInfo(config.file).suffix());
     compilersteps = language.listBuildSteps();
 
+    if (compilersteps.isEmpty())
+    {
+        qWarning() << "No compiler steps defined for language:" << language.name();
+        compilerFinished(false);
+        return;
+    }
+
     runCompilerStep();
 }
 

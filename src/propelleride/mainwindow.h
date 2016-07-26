@@ -26,22 +26,31 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-    Ui::MainWindow      ui;
+    Ui::MainWindow ui;
 
-    PropellerManager    manager;
-    Zipper              zipper;
+    PropellerManager manager;
+    Zipper zipper;
 
-    BuildManager        builder;
-    Language            language;
+    BuildManager builder;
+    Language language;
 
-    ProjectParser *     parser;
+    ProjectParser * parser;
 
-    QString             spinCompiler;
-    QStringList         spinIncludes;
-    QString             projectFile;
+    QString spinCompiler;
+    QStringList spinIncludes;
+    QString projectFile;
 
-    QList<QAction *>    recentFiles;
-    QComboBox *         cbPort;
+    QList<QAction *> recentFiles;
+    QComboBox * cbPort;
+
+    bool _save_available;
+    bool _close_available;
+    bool _build_available;
+
+    void setSaveEnabled(bool enabled);
+    void setCloseEnabled(bool enabled);
+    void setBuildEnabled(bool enabled);
+    void setLoadEnabled(bool enabled);
 
 public:
     MainWindow(QWidget *parent = 0);
@@ -56,6 +65,13 @@ public slots:
     void zipFiles();
     void openFiles(const QStringList & files);
 
+    // action states
+    void updateActionStates();
+    void setSaveAvailable(bool enabled);
+    void setCloseAvailable(bool enabled);
+    void setBuildAvailable(bool enabled);
+    void setBuildAvailable();
+
     // view
     void fontBigger();
     void fontSmaller();
@@ -69,8 +85,6 @@ public slots:
     void newFromTemplate();
 
     void setProject();
-    void enableBuildControls();
-    void setBuildControls(bool enabled);
 
     bool runCompiler(bool load = false, bool write = false, const QString & name = QString());
     void programBuild();

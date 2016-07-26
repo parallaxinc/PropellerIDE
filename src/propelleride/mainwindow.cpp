@@ -35,8 +35,8 @@ MainWindow::MainWindow(QWidget *parent)
                                                int,
                                                int)));
 
-    connect(&builder,   SIGNAL(finished()),                     this,   SLOT(enableBuildControls()));
-    connect(&builder,   SIGNAL(buildError()),                   &preferences, SLOT(showPreferences()));
+    connect(&builder,   SIGNAL(finished()),     this,           SLOT(setBuildAvailable()));
+    connect(&builder,   SIGNAL(buildError()),   &preferences,   SLOT(showPreferences()));
 
     parser = language.parser();
     connect(&preferences,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
@@ -75,14 +75,15 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i = 0; i < recentFiles.size(); i++)
         connect(recentFiles.at(i), SIGNAL(triggered()),this, SLOT(openRecentFile()));
     
-    connect(ui.action_Close,            SIGNAL(triggered()),    ui.editorTabs, SLOT(closeFile()));
-    connect(ui.actionClose_All,         SIGNAL(triggered()),    ui.editorTabs, SLOT(closeAll()));
-    connect(ui.action_Quit,             SIGNAL(triggered()),    this,          SLOT(quitProgram()));
+    connect(ui.action_Close,       SIGNAL(triggered()),    ui.editorTabs, SLOT(closeFile()));
+    connect(ui.actionClose_All,    SIGNAL(triggered()),    ui.editorTabs, SLOT(closeAll()));
+    connect(ui.action_Quit,        SIGNAL(triggered()),    this,          SLOT(quitProgram()));
 
-    connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    ui.action_Save,     SLOT(setEnabled(bool)));
-    connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    ui.actionSave_All,  SLOT(setEnabled(bool)));
-    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),   ui.action_Close,    SLOT(setEnabled(bool)));
-    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),   ui.actionClose_All, SLOT(setEnabled(bool)));
+    connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    this,          SLOT(setSaveAvailable(bool)));
+    connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    this,          SLOT(setSaveAvailable(bool)));
+    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),   this,          SLOT(setCloseAvailable(bool)));
+    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),   this,          SLOT(setCloseAvailable(bool)));
+    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),   this,          SLOT(setBuildAvailable(bool)));
 
     // Edit Menu
     connect(ui.action_Undo,        SIGNAL(triggered()), ui.editorTabs, SLOT(undo()));
@@ -165,6 +166,94 @@ MainWindow::MainWindow(QWidget *parent)
     statusBar();
 }
 
+void MainWindow::setSaveAvailable(bool enabled)
+{
+    _save_available = enabled;
+    updateActionStates();
+}
+
+void MainWindow::setCloseAvailable(bool enabled)
+{
+    _close_available = enabled;
+    updateActionStates();
+}
+
+void MainWindow::setBuildAvailable(bool enabled)
+{
+    _build_available = enabled;
+    updateActionStates();
+}
+
+void MainWindow::setBuildAvailable()
+{
+    _build_available = true;
+    updateActionStates();
+}
+
+
+void MainWindow::setSaveEnabled(bool enabled)
+{
+    ui.action_Save->setEnabled(enabled);
+    ui.actionSave_All->setEnabled(enabled);
+}
+
+void MainWindow::setCloseEnabled(bool enabled)
+{
+    ui.action_Close->setEnabled(enabled);
+    ui.actionClose_All->setEnabled(enabled);
+}
+
+void MainWindow::setBuildEnabled(bool enabled)
+{
+    ui.actionBuild->setEnabled(enabled);
+//    ui.actionMemory_Map->setEnabled(enabled);
+}
+
+void MainWindow::setLoadEnabled(bool enabled)
+{
+    ui.actionRun->setEnabled(enabled);
+    ui.actionWrite->setEnabled(enabled);
+}
+
+void MainWindow::updateActionStates()
+{
+    if (!_close_available)
+    {
+        setSaveEnabled(false);
+        setCloseEnabled(false);
+        setBuildEnabled(false);
+        setLoadEnabled(false);
+        return;
+    }
+
+    setCloseEnabled(true);
+    setSaveEnabled(_save_available);
+
+    int index = ui.editorTabs->currentIndex();
+    if (index < 0)
+    {
+        setBuildEnabled(false);
+        setLoadEnabled(false);
+    }
+    else
+    {
+        QString filename = ui.editorTabs->tabText(index);
+        language.loadExtension(QFileInfo(filename).suffix());
+        if (!language.name().isEmpty())
+        {
+            setBuildEnabled(_build_available);
+            if (_build_available && cbPort->count())
+                setLoadEnabled(true);
+            else
+                setLoadEnabled(false);
+        }
+        else
+        {
+            setBuildEnabled(false);
+            setLoadEnabled(false);
+        }
+    }
+}
 
 void MainWindow::loadSession()
 {
@@ -394,18 +483,6 @@ void MainWindow::highlightFileLine(QString filename, int line, int col)
     }
 }
 
-void MainWindow::enableBuildControls()
-{
-    setBuildControls(true);
-}
-
-void MainWindow::setBuildControls(bool enabled)
-{
-    ui.actionBuild->setEnabled(enabled);
-    ui.actionRun->setEnabled(enabled);
-    ui.actionWrite->setEnabled(enabled);
-}
-
 bool MainWindow::runCompiler(bool load, bool write, const QString & name)
 {
     if(!ui.editorTabs->count())
@@ -433,7 +510,7 @@ bool MainWindow::runCompiler(bool load, bool write, const QString & name)
         return false;
     }
 
-    setBuildControls(false);
+    setBuildAvailable(false);
 
     BuildManager::Configuration config;
 

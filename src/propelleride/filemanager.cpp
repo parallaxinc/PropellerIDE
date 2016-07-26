@@ -403,7 +403,7 @@ bool FileManager::closeFile(int index)
     if (index < 0 || index > count()-1)
     {
         qWarning() << "attempted to close index:" << index 
-            << "(count: " << count() << ")";
+                   << "(count: " << count() << ")";
         return false;
     }
 
