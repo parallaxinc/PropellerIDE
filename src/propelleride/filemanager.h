@@ -75,4 +75,7 @@ signals:
     void closeAvailable(bool available);
     void sendMessage(const QString & message);
 
+    void accepted();
+    void updateColors();
+    void updateFonts(const QFont &);
 };

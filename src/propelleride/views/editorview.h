@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QComboBox>
 #include <QCompleter>
 #include <QPlainTextEdit>
 #include <QString>
@@ -9,8 +10,6 @@
 
 #include "highlighter.h"
 #include "language.h"
-#include "preferences.h"
-
 
 class EditorView : public QPlainTextEdit
 {
@@ -22,7 +21,6 @@ class EditorView : public QPlainTextEdit
 
     Highlighter *   highlighter;
     QComboBox *     cbAuto;
-    Preferences *   propDialog;
 
     QStringList blocks;
     QRegularExpression re_blocks;

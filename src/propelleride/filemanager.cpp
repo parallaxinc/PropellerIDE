@@ -1,5 +1,6 @@
 #include "filemanager.h"
 
+#include <QDebug>
 #include <QFileDialog>
 #include <QRegularExpression>
 #include <QStandardPaths>
@@ -74,10 +75,14 @@ int FileManager::newFile()
 
     setTabToolTip(index,"");
 
-    connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
-    connect(editor,SIGNAL(undoAvailable(bool)),this,SLOT(setUndo(bool)));
-    connect(editor,SIGNAL(redoAvailable(bool)),this,SLOT(setRedo(bool)));
-    connect(editor,SIGNAL(copyAvailable(bool)),this,SLOT(setCopy(bool)));
+    connect(editor, SIGNAL(textChanged()),          this,   SLOT(fileChanged()));
+    connect(editor, SIGNAL(undoAvailable(bool)),    this,   SLOT(setUndo(bool)));
+    connect(editor, SIGNAL(redoAvailable(bool)),    this,   SLOT(setRedo(bool)));
+    connect(editor, SIGNAL(copyAvailable(bool)),    this,   SLOT(setCopy(bool)));
+
+    connect(this,   SIGNAL(accepted()),                 editor,   SLOT(loadPreferences()));
+    connect(this,   SIGNAL(updateColors()),             editor,   SLOT(updateColors()));
+    connect(this,   SIGNAL(updateFonts(const QFont &)), editor,   SLOT(updateFonts()));
 
     emit closeAvailable(true);
     setCurrentIndex(index);

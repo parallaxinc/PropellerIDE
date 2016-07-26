@@ -39,14 +39,18 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&builder,   SIGNAL(buildError()),   &preferences,   SLOT(showPreferences()));
 
     parser = language.parser();
-    connect(&preferences,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
-    connect(&preferences,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorProjectView()));
 
-    connect(&preferences,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorBuildManager()));
+    connect(&preferences, SIGNAL(updateColors()),               this,   SLOT(recolorProjectView()));
+    connect(&preferences, SIGNAL(updateFonts(const QFont &)),   this,   SLOT(recolorProjectView()));
+
+    connect(&preferences, SIGNAL(updateFonts(const QFont &)),   this,   SLOT(recolorBuildManager()));
+
+    connect(&preferences, SIGNAL(accepted()),                   ui.editorTabs,   SIGNAL(accepted()));
+    connect(&preferences, SIGNAL(updateColors()),               ui.editorTabs,   SIGNAL(updateColors()));
+    connect(&preferences, SIGNAL(updateFonts(const QFont &)),   ui.editorTabs,   SIGNAL(updateFonts(const QFont &)));
 
     recolorProjectView();
     recolorBuildManager();
-
 
     // project editor tabs
     ui.finder->connectFileManager(ui.editorTabs);

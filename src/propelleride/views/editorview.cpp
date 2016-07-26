@@ -36,7 +36,6 @@ EditorView::EditorView(QWidget *parent) : QPlainTextEdit(parent)
 {
     highlighter = 0;
     setExtension("spin");
-    propDialog = &((MainWindow *) parent)->preferences;
 
     canUndo = false;
     canRedo = false;
@@ -59,10 +58,6 @@ EditorView::EditorView(QWidget *parent) : QPlainTextEdit(parent)
     updateColors();
     updateFonts();
     saveContent();
-
-    connect(propDialog, SIGNAL(accepted()),                 this,   SLOT(loadPreferences()));
-    connect(propDialog, SIGNAL(updateColors()),             this,   SLOT(updateColors()));
-    connect(propDialog, SIGNAL(updateFonts(const QFont &)), this,   SLOT(updateFonts()));
 
     connect(this,   SIGNAL(undoAvailable(bool)), this, SLOT(setUndo(bool)));
     connect(this,   SIGNAL(redoAvailable(bool)), this, SLOT(setRedo(bool)));

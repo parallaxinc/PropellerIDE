@@ -31,6 +31,8 @@ class MainWindow : public QMainWindow
     PropellerManager manager;
     Zipper zipper;
 
+    Preferences preferences;
+
     BuildManager builder;
     Language language;
 
@@ -54,8 +56,6 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget * parent = 0);
-
-    Preferences preferences;
 
 public slots:
     void showMessage(const QString & message);
