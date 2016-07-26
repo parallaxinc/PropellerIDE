@@ -237,21 +237,11 @@ void MainWindow::updateActionStates()
     }
     else
     {
-        QString filename = ui.editorTabs->tabText(index);
-        language.loadExtension(QFileInfo(filename).suffix());
-        if (!language.name().isEmpty())
-        {
-            setBuildEnabled(_build_available);
-            if (_build_available && cbPort->count())
-                setLoadEnabled(true);
-            else
-                setLoadEnabled(false);
-        }
+        setBuildEnabled(_build_available);
+        if (_build_available && cbPort->count())
+            setLoadEnabled(true);
         else
-        {
-            setBuildEnabled(false);
             setLoadEnabled(false);
-        }
     }
 }
 
@@ -493,6 +483,12 @@ bool MainWindow::runCompiler(bool load, bool write, const QString & name)
     { 
         int index = ui.editorTabs->currentIndex();
         filename = ui.editorTabs->tabToolTip(index);
+    }
+
+    if (filename.isEmpty())
+    {
+        if (!ui.editorTabs->save())
+            return false;
     }
 
     getApplicationSettings();

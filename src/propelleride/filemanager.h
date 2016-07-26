@@ -16,8 +16,8 @@ class FileManager : public QTabWidget
 
     void createBackgroundImage();
     QString reformatText(QString text);
-    QString getExtensionString(bool supportedoption = false,
-                               bool alloption = false);
+    QString getExtensionString();
+    QStringList getExtensionList();
 
 public:
     explicit FileManager(QWidget *parent = 0);
@@ -38,11 +38,11 @@ public slots:
     int  openFile(const QString & fileName);
     void fileChanged();
 
-    void save();
-    void save(int index);
-    void saveAs();
-    void saveAs(int index);
-    void saveFile(const QString & fileName, int index);
+    bool save();
+    bool save(int index);
+    bool saveAs();
+    bool saveAs(int index);
+    bool saveFile(const QString & fileName, int index);
     void saveAll();
 
     void closeAll();

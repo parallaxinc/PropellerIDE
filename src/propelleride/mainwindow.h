@@ -53,9 +53,9 @@ class MainWindow : public QMainWindow
     void setLoadEnabled(bool enabled);
 
 public:
-    MainWindow(QWidget *parent = 0);
+    MainWindow(QWidget * parent = 0);
 
-    Preferences         preferences;
+    Preferences preferences;
 
 public slots:
     void showMessage(const QString & message);

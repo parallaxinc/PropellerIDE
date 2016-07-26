@@ -108,7 +108,7 @@ void FileManager::open()
     QStringList fileNames = QFileDialog::getOpenFileNames(this,
                 tr("Open File"),
                 getDirectory(),
-                getExtensionString(true, true));
+                getExtensionString());
 
     for (int i = 0; i < fileNames.size(); i++)
         if (!fileNames.at(i).isEmpty())
@@ -151,21 +151,22 @@ QString FileManager::reformatText(QString text)
     return text;
 }
 
-QString FileManager::getExtensionString(bool supportedoption, bool alloption)
+QString FileManager::getExtensionString()
+{
+    return getExtensionList().join(";;");
+}
+
+QStringList FileManager::getExtensionList()
 {
     QStringList extensionlist; 
 
-    if (supportedoption)
-    {
-        QStringList allext = language.allExtensions();
-        QStringList newext;
+    QStringList allext = language.allExtensions();
+    QStringList newext;
 
-        foreach (QString s, allext)
-            newext.append("*."+s);
+    foreach (QString s, allext)
+        newext.append("*."+s);
 
-        extensionlist.append(tr("Supported filetypes (%1)")
-                .arg(newext.join(" ")));
-    }
+    newext.sort();
 
     foreach (QString l, language.languages())
     {
@@ -175,10 +176,14 @@ QString FileManager::getExtensionString(bool supportedoption, bool alloption)
             .arg(language.extensions().first()));
     }
 
-    if (alloption)
-        extensionlist.append(tr("All files (*)"));
+    extensionlist.sort();
 
-    return extensionlist.join(";;");
+    extensionlist.prepend(tr("Supported filetypes (%1)")
+            .arg(newext.join(" ")));
+
+    extensionlist.append(tr("All files (*)"));
+
+    return extensionlist;
 }
 
 
@@ -234,7 +239,7 @@ void FileManager::newFromFile()
     QString fileName = QFileDialog::getOpenFileName(this,
                 tr("New From File..."),
                 getDirectory(),
-                getExtensionString(true, true));
+                getExtensionString());
 
     if (!fileName.isEmpty())
         newFromFile(fileName);
@@ -273,47 +278,70 @@ int FileManager::newFromFile(const QString & fileName)
 }
 
 
-void FileManager::save()
+bool FileManager::save()
 {
-    save(currentIndex());
+    return save(currentIndex());
 }
 
-void FileManager::save(int index)
+bool FileManager::save(int index)
 {
     QString fileName = tabToolTip(index);
 
     if (fileName.isEmpty())
-        saveAs(index);
+        return saveAs(index);
     else
-        saveFile(fileName, index);
+        return saveFile(fileName, index);
 }
 
-void FileManager::saveAs()
+bool FileManager::saveAs()
 {
-    saveAs(currentIndex());
+    return saveAs(currentIndex());
 }
 
 
-void FileManager::saveAs(int index)
+bool FileManager::saveAs(int index)
 {
-    QString fileName = tabToolTip(index);
+    QFileDialog dialog(this);
+    dialog.setFileMode(QFileDialog::AnyFile);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
 
-    QString lastDir = QDir(fileName).path();
-    if (fileName.isEmpty())
+    QStringList filters = getExtensionList();
+    dialog.setNameFilters(filters);
+
+    QString filename = tabToolTip(index);
+    QString lastdir = QDir(filename).path();
+
+    if (filename.isEmpty())
     {
-        fileName = tr("Untitled.spin");
-        lastDir = getDirectory();
+        filename = tr("Untitled.spin");
+        lastdir = getDirectory();
+
+        if (!filters.isEmpty())
+            dialog.selectNameFilter(filters[0]);
+    }
+    else
+    {
+        foreach (QString f, filters)
+        {
+            QFileInfo fi(filename);
+            if (f.contains(fi.suffix())) 
+            {
+                dialog.selectNameFilter(f);
+                break;
+            }
+        }
     }
 
-    fileName = QFileDialog::getSaveFileName(this,
-            tr("Save File As..."), 
-            lastDir,
-            getExtensionString());
+    dialog.setDirectory(lastdir);
+    dialog.selectFile(filename);
 
-    if (fileName.isEmpty())
-        return;
+    if (!dialog.exec() || dialog.selectedFiles().isEmpty())
+        return false;
 
-    saveFile(fileName, index);
+    filename = dialog.selectedFiles()[0];
+
+    setDirectory(QFileInfo(filename).path());
+    return saveFile(filename, index);
 }
 
 
@@ -324,7 +352,7 @@ void FileManager::saveAll()
 }
 
 
-void FileManager::saveFile(const QString & fileName, int index)
+bool FileManager::saveFile(const QString & fileName, int index)
 {
     qDebug() << "saving" << fileName;
 
@@ -335,7 +363,7 @@ void FileManager::saveFile(const QString & fileName, int index)
                     tr("Cannot write file %1:\n%2.")
                     .arg(fileName)
                     .arg(file.errorString()));
-        return;
+        return false;
     }
 
     QTextStream os(&file);
@@ -355,6 +383,8 @@ void FileManager::saveFile(const QString & fileName, int index)
     fileChanged();
     emit fileUpdated(index);
     emit sendMessage(tr("File saved successfully: %1").arg(fileName));
+
+    return true;
 }
 
 
