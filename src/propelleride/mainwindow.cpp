@@ -307,16 +307,13 @@ void MainWindow::openRecentFile()
 
 void MainWindow::setProject()
 {
-    int index = ui.editorTabs->currentIndex();
     QString shortname, filename;
+
+    int index = ui.editorTabs->currentIndex();
     if (index > -1)
     {
         shortname = ui.editorTabs->tabText(index);
         filename =  ui.editorTabs->tabToolTip(index);
-    }
-    else
-    {
-        shortname = tr("Untitled");
     }
 
     if (ui.editorTabs->count() > 0)

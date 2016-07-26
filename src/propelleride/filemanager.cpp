@@ -420,6 +420,8 @@ bool FileManager::closeFile(int index)
         emit closeAvailable(false);
     }
 
+    emit fileUpdated(-1);
+
     return true;
 }
 
