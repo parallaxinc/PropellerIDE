@@ -806,10 +806,22 @@ void MainWindow::openFileResource(QString const & resource)
     QString path = QApplication::applicationDirPath()
             + QString(APP_RESOURCES_PATH)
             + resource;
-    if (QFileInfo(path).exists() && QFileInfo(path).isFile())
-        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
-    else
-        qCritical() << "File not found:" << path;
+
+    QFileInfo fi(path);
+    if (!fi.exists() || !fi.isFile())
+    {
+        qCritical() << tr("File '%1' not found in '%2'").arg(fi.fileName()).arg(fi.path());
+        QMessageBox::critical(this,
+                tr("File Not Found"),
+                tr("<p>Unable to find '<code>%1</code>' at:</p>"
+                    "<pre>%2</pre>"
+                    "<p>Verify that the file exists and try again.</p>")
+                .arg(fi.fileName())
+                .arg(fi.path()));
+        return;
+    }
+
+    QDesktopServices::openUrl(QUrl::fromLocalFile(path));
 }
 
 void MainWindow::propellerManual()
