@@ -108,7 +108,7 @@ void messageHandler(QtMsgType type,
     switch (type) {
         case QtDebugMsg:    message(AnsiLightGreen, "DEBUG", context, msg);
                             break;
-#ifdef QtInfoMsg
+#if QT_VERSION >= 0x050500
         case QtInfoMsg:     message(AnsiWhite,      "INFO ", context, msg);
                             break;
 #endif
