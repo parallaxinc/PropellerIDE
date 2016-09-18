@@ -132,6 +132,8 @@
     <addaction name="actionPropeller_Datasheet"/>
     <addaction name="actionPropeller_Quick_Reference"/>
     <addaction name="separator"/>
+    <addaction name="actionPropBASIC_Manual"/>
+    <addaction name="separator"/>
     <addaction name="action_About"/>
    </widget>
    <widget class="QMenu" name="menuFile">
@@ -858,6 +860,15 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionPropBASIC_Manual">
+   <property name="icon">
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/help-manual.png</normaloff>:/icons/help-manual.png</iconset>
+   </property>
+   <property name="text">
+    <string>Prop&amp;BASIC Manual</string>
    </property>
   </action>
  </widget>

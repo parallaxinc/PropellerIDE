@@ -18,11 +18,14 @@ public:
         case_sensitive = false;
         enable_blocks = false;
         includes = false;
+        builder = -1;
     }
 
     QString name;
     QStringList extensions;
-    QStringList buildsteps;
+
+    int builder;
+    QList<QStringList> buildsteps;
 
     ProjectParser * parser;
 
@@ -67,7 +70,12 @@ public:
     QStringList extensions();
     ProjectParser * parser();
 
+    int builder();
+    void setBuilder(int index);
+    int builders();
     QStringList listBuildSteps();
+    QList<QStringList> listAllBuildSteps();
+
     QStringList listKeywords();
     QStringList listOperators();
     QStringList listNumbers();

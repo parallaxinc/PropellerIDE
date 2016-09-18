@@ -1,5 +1,6 @@
 #include "filemanager.h"
 
+#include <QDebug>
 #include <QFileDialog>
 #include <QRegularExpression>
 #include <QStandardPaths>
@@ -65,7 +66,7 @@ int FileManager::newFile()
     // removes the background image (need to move this elsewhere)
     setStyleSheet("");
 
-    Editor * editor = new Editor(QWidget::window());
+    EditorView * editor = new EditorView(QWidget::window());
     editor->setAttribute(Qt::WA_DeleteOnClose);
     editor->installEventFilter(QWidget::window());
     editor->saveContent();
@@ -74,10 +75,14 @@ int FileManager::newFile()
 
     setTabToolTip(index,"");
 
-    connect(editor,SIGNAL(textChanged()),this,SLOT(fileChanged()));
-    connect(editor,SIGNAL(undoAvailable(bool)),this,SLOT(setUndo(bool)));
-    connect(editor,SIGNAL(redoAvailable(bool)),this,SLOT(setRedo(bool)));
-    connect(editor,SIGNAL(copyAvailable(bool)),this,SLOT(setCopy(bool)));
+    connect(editor, SIGNAL(textChanged()),          this,   SLOT(fileChanged()));
+    connect(editor, SIGNAL(undoAvailable(bool)),    this,   SLOT(setUndo(bool)));
+    connect(editor, SIGNAL(redoAvailable(bool)),    this,   SLOT(setRedo(bool)));
+    connect(editor, SIGNAL(copyAvailable(bool)),    this,   SLOT(setCopy(bool)));
+
+    connect(this,   SIGNAL(accepted()),                 editor,   SLOT(loadPreferences()));
+    connect(this,   SIGNAL(updateColors()),             editor,   SLOT(updateColors()));
+    connect(this,   SIGNAL(updateFonts(const QFont &)), editor,   SLOT(updateFonts()));
 
     emit closeAvailable(true);
     setCurrentIndex(index);
@@ -108,7 +113,7 @@ void FileManager::open()
     QStringList fileNames = QFileDialog::getOpenFileNames(this,
                 tr("Open File"),
                 getDirectory(),
-                getExtensionString(true, true));
+                getExtensionString());
 
     for (int i = 0; i < fileNames.size(); i++)
         if (!fileNames.at(i).isEmpty())
@@ -137,8 +142,8 @@ int FileManager::isFileOpen(const QString & fileName)
 int FileManager::isFileEmpty(int index)
 {
     if (count() && (tabToolTip(index).isEmpty()
-                    && getEditor(index)->toPlainText().isEmpty()
-                    && !getEditor(index)->contentChanged()) )
+                    && getView(index)->toPlainText().isEmpty()
+                    && !getView(index)->contentChanged()) )
         return 1;
     else
         return 0;
@@ -151,34 +156,43 @@ QString FileManager::reformatText(QString text)
     return text;
 }
 
-QString FileManager::getExtensionString(bool supportedoption, bool alloption)
+QString FileManager::getExtensionString()
+{
+    return getExtensionList().join(";;");
+}
+
+QString FileManager::getExtensionPattern(QStringList extensions)
+{
+    QStringList newext;
+
+    foreach (QString s, extensions)
+        newext.append("*."+s);
+
+    newext.sort();
+
+    return newext.join(" ");
+}
+
+QStringList FileManager::getExtensionList()
 {
     QStringList extensionlist; 
-
-    if (supportedoption)
-    {
-        QStringList allext = language.allExtensions();
-        QStringList newext;
-
-        foreach (QString s, allext)
-            newext.append("*."+s);
-
-        extensionlist.append(tr("Supported filetypes (%1)")
-                .arg(newext.join(" ")));
-    }
 
     foreach (QString l, language.languages())
     {
         language.loadKey(l);
-        extensionlist.append(tr("%1 files (*.%2)")
+        extensionlist.append(tr("%1 files (%2)")
             .arg(language.name())
-            .arg(language.extensions().first()));
+            .arg(getExtensionPattern(language.extensions())));
     }
 
-    if (alloption)
-        extensionlist.append(tr("All files (*)"));
+    extensionlist.sort();
 
-    return extensionlist.join(";;");
+    extensionlist.prepend(tr("Supported filetypes (%1)")
+            .arg(getExtensionPattern(language.allExtensions())));
+
+    extensionlist.append(tr("All files (*)"));
+
+    return extensionlist;
 }
 
 
@@ -211,15 +225,15 @@ int FileManager::openFile(const QString & fileName)
     QTextStream in(&file);
     in.setAutoDetectUnicode(true);
     in.setCodec("UTF-8");
-    getEditor(index)->setPlainText(reformatText(in.readAll()));
+    getView(index)->setPlainText(reformatText(in.readAll()));
 
     QFileInfo fi(fileName);
 
-    getEditor(index)->setExtension(fi.suffix());
+    getView(index)->setExtension(fi.suffix());
 
     setTabToolTip(index,fi.canonicalFilePath());
     setTabText(index,fi.fileName());
-    getEditor(index)->saveContent();
+    getView(index)->saveContent();
     fileChanged();
 
     emit fileUpdated(index);
@@ -234,7 +248,7 @@ void FileManager::newFromFile()
     QString fileName = QFileDialog::getOpenFileName(this,
                 tr("New From File..."),
                 getDirectory(),
-                getExtensionString(true, true));
+                getExtensionString());
 
     if (!fileName.isEmpty())
         newFromFile(fileName);
@@ -263,7 +277,7 @@ int FileManager::newFromFile(const QString & fileName)
     QTextStream in(&file);
     in.setAutoDetectUnicode(true);
     in.setCodec("UTF-8");
-    getEditor(index)->setPlainText(reformatText(in.readAll()));
+    getView(index)->setPlainText(reformatText(in.readAll()));
 
     fileChanged();
 
@@ -273,47 +287,70 @@ int FileManager::newFromFile(const QString & fileName)
 }
 
 
-void FileManager::save()
+bool FileManager::save()
 {
-    save(currentIndex());
+    return save(currentIndex());
 }
 
-void FileManager::save(int index)
+bool FileManager::save(int index)
 {
     QString fileName = tabToolTip(index);
 
     if (fileName.isEmpty())
-        saveAs(index);
+        return saveAs(index);
     else
-        saveFile(fileName, index);
+        return saveFile(fileName, index);
 }
 
-void FileManager::saveAs()
+bool FileManager::saveAs()
 {
-    saveAs(currentIndex());
+    return saveAs(currentIndex());
 }
 
 
-void FileManager::saveAs(int index)
+bool FileManager::saveAs(int index)
 {
-    QString fileName = tabToolTip(index);
+    QFileDialog dialog(this);
+    dialog.setFileMode(QFileDialog::AnyFile);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
 
-    QString lastDir = QDir(fileName).path();
-    if (fileName.isEmpty())
+    QStringList filters = getExtensionList();
+    dialog.setNameFilters(filters);
+
+    QString filename = tabToolTip(index);
+    QString lastdir = QDir(filename).path();
+
+    if (filename.isEmpty())
     {
-        fileName = tr("Untitled.spin");
-        lastDir = getDirectory();
+        filename = tr("Untitled.spin");
+        lastdir = getDirectory();
+
+        if (!filters.isEmpty())
+            dialog.selectNameFilter(filters[0]);
+    }
+    else
+    {
+        foreach (QString f, filters)
+        {
+            QFileInfo fi(filename);
+            if (f.contains(fi.suffix())) 
+            {
+                dialog.selectNameFilter(f);
+                break;
+            }
+        }
     }
 
-    fileName = QFileDialog::getSaveFileName(this,
-            tr("Save File As..."), 
-            lastDir,
-            getExtensionString());
+    dialog.setDirectory(lastdir);
+    dialog.selectFile(filename);
 
-    if (fileName.isEmpty())
-        return;
+    if (!dialog.exec() || dialog.selectedFiles().isEmpty())
+        return false;
 
-    saveFile(fileName, index);
+    filename = dialog.selectedFiles()[0];
+
+    setDirectory(QFileInfo(filename).path());
+    return saveFile(filename, index);
 }
 
 
@@ -324,7 +361,7 @@ void FileManager::saveAll()
 }
 
 
-void FileManager::saveFile(const QString & fileName, int index)
+bool FileManager::saveFile(const QString & fileName, int index)
 {
     qDebug() << "saving" << fileName;
 
@@ -335,26 +372,28 @@ void FileManager::saveFile(const QString & fileName, int index)
                     tr("Cannot write file %1:\n%2.")
                     .arg(fileName)
                     .arg(file.errorString()));
-        return;
+        return false;
     }
 
     QTextStream os(&file);
     QApplication::setOverrideCursor(Qt::WaitCursor);
     os.setCodec("UTF-8");
-    os << getEditor(index)->toPlainText();
+    os << getView(index)->toPlainText();
     os.flush();
     QApplication::restoreOverrideCursor();
 
     QFileInfo fi(fileName);
 
-    getEditor(index)->setExtension(fi.suffix());
+    getView(index)->setExtension(fi.suffix());
     setTabToolTip(index,fi.canonicalFilePath());
     setTabText(index,fi.fileName());
 
-    getEditor(index)->saveContent();
+    getView(index)->saveContent();
     fileChanged();
     emit fileUpdated(index);
     emit sendMessage(tr("File saved successfully: %1").arg(fileName));
+
+    return true;
 }
 
 
@@ -403,15 +442,15 @@ bool FileManager::closeFile(int index)
     if (index < 0 || index > count()-1)
     {
         qWarning() << "attempted to close index:" << index 
-            << "(count: " << count() << ")";
+                   << "(count: " << count() << ")";
         return false;
     }
 
-    if (getEditor(index)->contentChanged() && !saveAndClose(index))
+    if (getView(index)->contentChanged() && !saveAndClose(index))
         return false;
 
-    getEditor(index)->disconnect();
-    getEditor(index)->close();
+    getView(index)->disconnect();
+    getView(index)->close();
     removeTab(index);
     
     if (count() <= 0)
@@ -419,6 +458,8 @@ bool FileManager::closeFile(int index)
         createBackgroundImage();
         emit closeAvailable(false);
     }
+
+    emit fileUpdated(-1);
 
     return true;
 }
@@ -453,7 +494,7 @@ void FileManager::changeTab(int index)
 {
     if(index < 0) return;
 
-    Editor * editor = getEditor(currentIndex());
+    EditorView * editor = getView(currentIndex());
     editor->setFocus();
     
     emit undoAvailable(editor->getUndo());
@@ -462,9 +503,9 @@ void FileManager::changeTab(int index)
     emit fileUpdated(index);
 }
 
-Editor * FileManager::getEditor(int num)
+EditorView * FileManager::getView(int num)
 {
-    return (Editor *)widget(num);
+    return (EditorView *)widget(num);
 }
 
 // this needs some rethinking a lot
@@ -478,7 +519,7 @@ void FileManager::fileChanged()
     if (file.isEmpty())
         name = tr("Untitled");
 
-    if (getEditor(index)->contentChanged())
+    if (getView(index)->contentChanged())
     {
         name += '*';
         emit saveAvailable(true);
@@ -498,36 +539,36 @@ void FileManager::fileChanged()
 void FileManager::cut()
 {
     if (count() > 0)
-        getEditor(currentIndex())->cut();
+        getView(currentIndex())->cut();
 }
 
 void FileManager::copy()
 {
     if (count() > 0)
-        getEditor(currentIndex())->copy();
+        getView(currentIndex())->copy();
 }
 
 void FileManager::paste()
 {
     if (count() > 0)
-        getEditor(currentIndex())->paste();
+        getView(currentIndex())->paste();
 }
 
 void FileManager::undo()
 {
     if (count() > 0)
-        getEditor(currentIndex())->undo();
+        getView(currentIndex())->undo();
 }
 
 void FileManager::redo()
 {
     if (count() > 0)
-        getEditor(currentIndex())->redo();
+        getView(currentIndex())->redo();
 }
 
 void FileManager::selectAll()
 {
     if (count() > 0)
-        getEditor(currentIndex())->selectAll();
+        getView(currentIndex())->selectAll();
 }
 // -------------------------------------------

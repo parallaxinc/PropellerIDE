@@ -35,18 +35,22 @@ MainWindow::MainWindow(QWidget *parent)
                                                int,
                                                int)));
 
-    connect(&builder,   SIGNAL(finished()),                     this,   SLOT(enableBuildControls()));
-    connect(&builder,   SIGNAL(buildError()),                   &preferences, SLOT(showPreferences()));
+    connect(&builder,   SIGNAL(finished()),     this,           SLOT(setBuildAvailable()));
+    connect(&builder,   SIGNAL(buildError()),   &preferences,   SLOT(showPreferences()));
 
     parser = language.parser();
-    connect(&preferences,SIGNAL(updateColors()),this,SLOT(recolorProjectView()));
-    connect(&preferences,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorProjectView()));
 
-    connect(&preferences,SIGNAL(updateFonts(const QFont &)),this,SLOT(recolorBuildManager()));
+    connect(&preferences, SIGNAL(updateColors()),               this,   SLOT(recolorProjectView()));
+    connect(&preferences, SIGNAL(updateFonts(const QFont &)),   this,   SLOT(recolorProjectView()));
+
+    connect(&preferences, SIGNAL(updateFonts(const QFont &)),   this,   SLOT(recolorBuildManager()));
+
+    connect(&preferences, SIGNAL(accepted()),                   ui.editorTabs,   SIGNAL(accepted()));
+    connect(&preferences, SIGNAL(updateColors()),               ui.editorTabs,   SIGNAL(updateColors()));
+    connect(&preferences, SIGNAL(updateFonts(const QFont &)),   ui.editorTabs,   SIGNAL(updateFonts(const QFont &)));
 
     recolorProjectView();
     recolorBuildManager();
-
 
     // project editor tabs
     ui.finder->connectFileManager(ui.editorTabs);
@@ -75,14 +79,15 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i = 0; i < recentFiles.size(); i++)
         connect(recentFiles.at(i), SIGNAL(triggered()),this, SLOT(openRecentFile()));
     
-    connect(ui.action_Close,            SIGNAL(triggered()),    ui.editorTabs, SLOT(closeFile()));
-    connect(ui.actionClose_All,         SIGNAL(triggered()),    ui.editorTabs, SLOT(closeAll()));
-    connect(ui.action_Quit,             SIGNAL(triggered()),    this,          SLOT(quitProgram()));
+    connect(ui.action_Close,       SIGNAL(triggered()),    ui.editorTabs, SLOT(closeFile()));
+    connect(ui.actionClose_All,    SIGNAL(triggered()),    ui.editorTabs, SLOT(closeAll()));
+    connect(ui.action_Quit,        SIGNAL(triggered()),    this,          SLOT(quitProgram()));
 
-    connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    ui.action_Save,     SLOT(setEnabled(bool)));
-    connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    ui.actionSave_All,  SLOT(setEnabled(bool)));
-    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),   ui.action_Close,    SLOT(setEnabled(bool)));
-    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),   ui.actionClose_All, SLOT(setEnabled(bool)));
+    connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    this,          SLOT(setSaveAvailable(bool)));
+    connect(ui.editorTabs, SIGNAL(saveAvailable(bool)),    this,          SLOT(setSaveAvailable(bool)));
+    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),   this,          SLOT(setCloseAvailable(bool)));
+    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),   this,          SLOT(setCloseAvailable(bool)));
+    connect(ui.editorTabs, SIGNAL(closeAvailable(bool)),   this,          SLOT(setBuildAvailable(bool)));
 
     // Edit Menu
     connect(ui.action_Undo,        SIGNAL(triggered()), ui.editorTabs, SLOT(undo()));
@@ -123,6 +128,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.actionPropeller_Quick_Reference, SIGNAL(triggered()), this, SLOT(propellerQuickReference()));
     connect(ui.actionPropeller_Datasheet,       SIGNAL(triggered()), this, SLOT(propellerDatasheet()));
     connect(ui.actionPropeller_Manual,          SIGNAL(triggered()), this, SLOT(propellerManual()));
+    connect(ui.actionPropBASIC_Manual,          SIGNAL(triggered()), this, SLOT(propBasicManual()));
     connect(ui.action_About,                    SIGNAL(triggered()), this, SLOT(about()));
 
     // Toolbar Extras
@@ -165,6 +171,84 @@ MainWindow::MainWindow(QWidget *parent)
     statusBar();
 }
 
+void MainWindow::setSaveAvailable(bool enabled)
+{
+    _save_available = enabled;
+    updateActionStates();
+}
+
+void MainWindow::setCloseAvailable(bool enabled)
+{
+    _close_available = enabled;
+    updateActionStates();
+}
+
+void MainWindow::setBuildAvailable(bool enabled)
+{
+    _build_available = enabled;
+    updateActionStates();
+}
+
+void MainWindow::setBuildAvailable()
+{
+    _build_available = true;
+    updateActionStates();
+}
+
+
+void MainWindow::setSaveEnabled(bool enabled)
+{
+    ui.action_Save->setEnabled(enabled);
+    ui.actionSave_All->setEnabled(enabled);
+}
+
+void MainWindow::setCloseEnabled(bool enabled)
+{
+    ui.action_Close->setEnabled(enabled);
+    ui.actionClose_All->setEnabled(enabled);
+}
+
+void MainWindow::setBuildEnabled(bool enabled)
+{
+    ui.actionBuild->setEnabled(enabled);
+//    ui.actionMemory_Map->setEnabled(enabled);
+}
+
+void MainWindow::setLoadEnabled(bool enabled)
+{
+    ui.actionRun->setEnabled(enabled);
+    ui.actionWrite->setEnabled(enabled);
+}
+
+void MainWindow::updateActionStates()
+{
+    if (!_close_available)
+    {
+        setSaveEnabled(false);
+        setCloseEnabled(false);
+        setBuildEnabled(false);
+        setLoadEnabled(false);
+        return;
+    }
+
+    setCloseEnabled(true);
+    setSaveEnabled(_save_available);
+
+    int index = ui.editorTabs->currentIndex();
+    if (index < 0)
+    {
+        setBuildEnabled(false);
+        setLoadEnabled(false);
+    }
+    else
+    {
+        setBuildEnabled(_build_available);
+        if (_build_available && cbPort->count())
+            setLoadEnabled(true);
+        else
+            setLoadEnabled(false);
+    }
+}
 
 void MainWindow::loadSession()
 {
@@ -307,16 +391,13 @@ void MainWindow::openRecentFile()
 
 void MainWindow::setProject()
 {
-    int index = ui.editorTabs->currentIndex();
     QString shortname, filename;
+
+    int index = ui.editorTabs->currentIndex();
     if (index > -1)
     {
         shortname = ui.editorTabs->tabText(index);
         filename =  ui.editorTabs->tabToolTip(index);
-    }
-    else
-    {
-        shortname = tr("Untitled");
     }
 
     if (ui.editorTabs->count() > 0)
@@ -353,7 +434,7 @@ void MainWindow::checkAndSaveFiles(QStringList files)
     {
         if (files == QStringList() || files.contains(ui.editorTabs->tabToolTip(i)))
         {
-            if (ui.editorTabs->getEditor(i)->contentChanged())
+            if (ui.editorTabs->getView(i)->contentChanged())
             {
                 ui.editorTabs->save(i);
             }
@@ -385,7 +466,7 @@ void MainWindow::highlightFileLine(QString filename, int line, int col)
 
     ui.editorTabs->openFile(filename);
 
-    Editor * editor = ui.editorTabs->getEditor(ui.editorTabs->currentIndex());
+    EditorView * editor = ui.editorTabs->getView(ui.editorTabs->currentIndex());
     if(editor)
     {
         QTextCursor cur = editor->textCursor();
@@ -395,18 +476,6 @@ void MainWindow::highlightFileLine(QString filename, int line, int col)
         cur.clearSelection();
         editor->setTextCursor(cur);
     }
-}
-
-void MainWindow::enableBuildControls()
-{
-    setBuildControls(true);
-}
-
-void MainWindow::setBuildControls(bool enabled)
-{
-    ui.actionBuild->setEnabled(enabled);
-    ui.actionRun->setEnabled(enabled);
-    ui.actionWrite->setEnabled(enabled);
 }
 
 bool MainWindow::runCompiler(bool load, bool write, const QString & name)
@@ -419,6 +488,12 @@ bool MainWindow::runCompiler(bool load, bool write, const QString & name)
     { 
         int index = ui.editorTabs->currentIndex();
         filename = ui.editorTabs->tabToolTip(index);
+    }
+
+    if (filename.isEmpty())
+    {
+        if (!ui.editorTabs->save())
+            return false;
     }
 
     getApplicationSettings();
@@ -436,7 +511,7 @@ bool MainWindow::runCompiler(bool load, bool write, const QString & name)
         return false;
     }
 
-    setBuildControls(false);
+    setBuildAvailable(false);
 
     BuildManager::Configuration config;
 
@@ -564,7 +639,7 @@ void MainWindow::printFile()
 
     qDebug() << "printing file:" << fileName;
 
-    Editor * editor = ui.editorTabs->getEditor(n);
+    EditorView * editor = ui.editorTabs->getView(n);
 
     QPrinter printer;
 
@@ -731,10 +806,22 @@ void MainWindow::openFileResource(QString const & resource)
     QString path = QApplication::applicationDirPath()
             + QString(APP_RESOURCES_PATH)
             + resource;
-    if (QFileInfo(path).exists() && QFileInfo(path).isFile())
-        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
-    else
-        qDebug() << "File not found:" << path;
+
+    QFileInfo fi(path);
+    if (!fi.exists() || !fi.isFile())
+    {
+        qCritical() << tr("File '%1' not found in '%2'").arg(fi.fileName()).arg(fi.path());
+        QMessageBox::critical(this,
+                tr("File Not Found"),
+                tr("<p>Unable to find '<code>%1</code>' at:</p>"
+                    "<pre>%2</pre>"
+                    "<p>Verify that the file exists and try again.</p>")
+                .arg(fi.fileName())
+                .arg(fi.path()));
+        return;
+    }
+
+    QDesktopServices::openUrl(QUrl::fromLocalFile(path));
 }
 
 void MainWindow::propellerManual()
@@ -750,6 +837,11 @@ void MainWindow::propellerDatasheet()
 void MainWindow::propellerQuickReference()
 {
     openFileResource("/doc/pdf/QuickReference-v15.pdf");
+}
+
+void MainWindow::propBasicManual()
+{
+    openFileResource("/doc/pdf/PropBASIC.pdf");
 }
 
 void MainWindow::about()

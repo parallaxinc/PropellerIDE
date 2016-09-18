@@ -4,7 +4,7 @@
 #include <QMessageBox>
 #include <QStatusBar>
 
-#include "editor.h"
+#include "editorview.h"
 #include "logging.h"
 #include "language.h"
 
@@ -16,13 +16,14 @@ class FileManager : public QTabWidget
 
     void createBackgroundImage();
     QString reformatText(QString text);
-    QString getExtensionString(bool supportedoption = false,
-                               bool alloption = false);
+    QString getExtensionString();
+    QString getExtensionPattern(QStringList extensions);
+    QStringList getExtensionList();
 
 public:
     explicit FileManager(QWidget *parent = 0);
 
-    Editor * getEditor(int num);
+    EditorView * getView(int num);
     int isFileOpen(const QString & fileName);
     int isFileEmpty(int index);
 
@@ -38,11 +39,11 @@ public slots:
     int  openFile(const QString & fileName);
     void fileChanged();
 
-    void save();
-    void save(int index);
-    void saveAs();
-    void saveAs(int index);
-    void saveFile(const QString & fileName, int index);
+    bool save();
+    bool save(int index);
+    bool saveAs();
+    bool saveAs(int index);
+    bool saveFile(const QString & fileName, int index);
     void saveAll();
 
     void closeAll();
@@ -74,4 +75,7 @@ signals:
     void closeAvailable(bool available);
     void sendMessage(const QString & message);
 
+    void accepted();
+    void updateColors();
+    void updateFonts(const QFont &);
 };

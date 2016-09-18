@@ -27,7 +27,7 @@ void Finder::showFinder()
 
     if (fileManager->count() > 0)
     {
-        Editor *editor = fileManager->getEditor(fileManager->currentIndex());
+        EditorView *editor = fileManager->getView(fileManager->currentIndex());
         if(editor->textCursor().selectedText().length() > 0) {
             ui.findEdit->setText(editor->textCursor().selectedText());
         }
@@ -58,7 +58,7 @@ void Finder::findChanged(QString text)
 {
     if (!fileManager)
         return; 
-    Editor *editor = fileManager->getEditor(fileManager->currentIndex());
+    EditorView *editor = fileManager->getView(fileManager->currentIndex());
     if(editor == NULL)
         return;
 
@@ -79,7 +79,7 @@ void Finder::find(int prev)
 {
     if (!fileManager)
         return; 
-    Editor *editor = fileManager->getEditor(fileManager->currentIndex());
+    EditorView *editor = fileManager->getView(fileManager->currentIndex());
     if(editor == NULL)
         return;
 
@@ -132,7 +132,7 @@ void Finder::replaceNext()
     if (!fileManager)
         return; 
 
-    Editor *editor = fileManager->getEditor(fileManager->currentIndex());
+    EditorView *editor = fileManager->getView(fileManager->currentIndex());
     if(editor == NULL)
         return;
 
@@ -152,7 +152,7 @@ void Finder::replacePrevious()
     if (!fileManager)
         return; 
 
-    Editor *editor = fileManager->getEditor(fileManager->currentIndex());
+    EditorView *editor = fileManager->getView(fileManager->currentIndex());
     if(editor == NULL)
         return;
 
@@ -176,7 +176,7 @@ void Finder::replaceAll()
     QString text = ui.findEdit->text();
     if (!fileManager)
         return; 
-    Editor *editor = fileManager->getEditor(fileManager->currentIndex());
+    EditorView *editor = fileManager->getView(fileManager->currentIndex());
     if(editor == NULL)
         return;
 

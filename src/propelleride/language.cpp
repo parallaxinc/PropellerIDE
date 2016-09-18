@@ -183,15 +183,26 @@ void Language::load(QString name, QString filename)
         _lookup[ext] = name;
     }
 
-    foreach (QVariant stepvar, lang["buildsteps"].toArray().toVariantList())
+    data.builder = 0;
+
+    foreach (QVariant steplistvar, lang["buildsteps"].toArray().toVariantList())
     {
-        data.buildsteps << stepvar.toString();
+        QStringList steplist = steplistvar.toStringList();
+        QStringList buildsteps;
+
+        foreach (QString s, steplist)
+        {
+            buildsteps << s;
+        }
+
+        data.buildsteps << buildsteps;
     }
 
-    qDebug()    << "Loading language definition:"
-                << qPrintable(data.name)
-                << data.extensions;
-//                << data.buildsteps;
+    qDebug()    << "Loading language definition:" << qPrintable(data.name);
+    qDebug()    << "    Extensions: " << data.extensions;
+    qDebug()    << "    Build steps:";
+    foreach (QStringList sl, data.buildsteps)
+        qDebug() << "      " << sl;
 
     data.includes  = lang["includes"].toBool();
 
@@ -273,7 +284,39 @@ ProjectParser * Language::parser()
     return language().parser;
 }
 
+
+int Language::builder()
+{
+    return language().builder;
+}
+
+void Language::setBuilder(int index)
+{
+    if (!_data.contains(_language))
+        return;
+
+    if (!builders())
+        _data[_language].builder = -1;
+
+    if (index < 0)
+        _data[_language].builder = 0;
+    else if (index > builders()-1)
+        _data[_language].builder = builders()-1;
+    else
+        _data[_language].builder = index;
+}
+
+int Language::builders()
+{
+    return language().buildsteps.size();
+}
+
 QStringList Language::listBuildSteps()
+{
+    return language().buildsteps[language().builder];
+}
+
+QList<QStringList> Language::listAllBuildSteps()
 {
     return language().buildsteps;
 }

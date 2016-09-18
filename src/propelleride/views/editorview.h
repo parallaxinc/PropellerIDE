@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QComboBox>
 #include <QCompleter>
 #include <QPlainTextEdit>
 #include <QString>
@@ -9,12 +10,8 @@
 
 #include "highlighter.h"
 #include "language.h"
-#include "preferences.h"
 
-
-class LineNumberArea;
-
-class Editor : public QPlainTextEdit
+class EditorView : public QPlainTextEdit
 {
     Q_OBJECT
 
@@ -24,7 +21,6 @@ class Editor : public QPlainTextEdit
 
     Highlighter *   highlighter;
     QComboBox *     cbAuto;
-    Preferences *   propDialog;
 
     QStringList blocks;
     QRegularExpression re_blocks;
@@ -58,8 +54,8 @@ class Editor : public QPlainTextEdit
     QColor  contrastColor(QColor color, int amount = 20);
 
 public:
-    Editor(QWidget * parent);
-    ~Editor();
+    EditorView(QWidget * parent);
+    ~EditorView();
     void    setExtension(QString ext);
 
     void    saveContent();
@@ -84,10 +80,9 @@ public slots:
 
     void    loadPreferences();
 
-
     // lineNumberArea stuff
 public:
-    void lineNumberAreaPaintEvent(QPaintEvent *event);
+    void lineNumberAreaPaintEvent(QPaintEvent * event);
     int lineNumberAreaWidth();
 
 protected:
@@ -99,25 +94,4 @@ private slots:
 
 private:
     QWidget *lineNumberArea;
-};
-
-
-class LineNumberArea : public QWidget
-{
-public:
-    LineNumberArea(Editor *editor) : QWidget(editor) {
-        codeEditor = editor;
-    }
-
-    QSize sizeHint() const {
-        return QSize(codeEditor->lineNumberAreaWidth(), 0);
-    }
-
-protected:
-    void paintEvent(QPaintEvent *event) {
-        codeEditor->lineNumberAreaPaintEvent(event);
-    }
-
-private:
-    Editor *codeEditor;
 };

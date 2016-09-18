@@ -28,6 +28,7 @@ class PathSelector : public QWidget
 private slots:
     void setIncludes(const QStringList & paths);
 
+    void setBuildSteps(int index);
     void addPath();
     void deletePath();
 
@@ -36,7 +37,6 @@ public:
                           QWidget * parent = 0);
     ~PathSelector();
 
-    void setDefaultCompiler(QString path);
     void setDefaultIncludes(QStringList paths);
 
 public slots:

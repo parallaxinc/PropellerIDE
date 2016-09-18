@@ -15,7 +15,7 @@
 #include "ui_mainwindow.h"
 
 #include "preferences.h"
-#include "editor.h"
+#include "editorview.h"
 #include "zipper.h"
 #include "filemanager.h"
 #include "buildmanager.h"
@@ -26,27 +26,36 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-    Ui::MainWindow      ui;
+    Ui::MainWindow ui;
 
-    PropellerManager    manager;
-    Zipper              zipper;
+    PropellerManager manager;
+    Zipper zipper;
 
-    BuildManager        builder;
-    Language            language;
+    Preferences preferences;
 
-    ProjectParser *     parser;
+    BuildManager builder;
+    Language language;
 
-    QString             spinCompiler;
-    QStringList         spinIncludes;
-    QString             projectFile;
+    ProjectParser * parser;
 
-    QList<QAction *>    recentFiles;
-    QComboBox *         cbPort;
+    QString spinCompiler;
+    QStringList spinIncludes;
+    QString projectFile;
+
+    QList<QAction *> recentFiles;
+    QComboBox * cbPort;
+
+    bool _save_available;
+    bool _close_available;
+    bool _build_available;
+
+    void setSaveEnabled(bool enabled);
+    void setCloseEnabled(bool enabled);
+    void setBuildEnabled(bool enabled);
+    void setLoadEnabled(bool enabled);
 
 public:
-    MainWindow(QWidget *parent = 0);
-
-    Preferences         preferences;
+    MainWindow(QWidget * parent = 0);
 
 public slots:
     void showMessage(const QString & message);
@@ -55,6 +64,13 @@ public slots:
     void printFile();
     void zipFiles();
     void openFiles(const QStringList & files);
+
+    // action states
+    void updateActionStates();
+    void setSaveAvailable(bool enabled);
+    void setCloseAvailable(bool enabled);
+    void setBuildAvailable(bool enabled);
+    void setBuildAvailable();
 
     // view
     void fontBigger();
@@ -65,12 +81,11 @@ public slots:
     void propellerManual();
     void propellerDatasheet();
     void propellerQuickReference();
+    void propBasicManual();
     void about();
     void newFromTemplate();
 
     void setProject();
-    void enableBuildControls();
-    void setBuildControls(bool enabled);
 
     bool runCompiler(bool load = false, bool write = false, const QString & name = QString());
     void programBuild();
