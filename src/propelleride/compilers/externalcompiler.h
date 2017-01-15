@@ -31,7 +31,7 @@ class ExternalCompiler : public Compiler
 
 public:
     explicit ExternalCompiler(QString name,
-                              QObject * parent = 0) Q_DECL_OVERRIDE;
+                              QObject * parent = 0);
     virtual ~ExternalCompiler() Q_DECL_OVERRIDE;
 
     QString build(QString filename,
