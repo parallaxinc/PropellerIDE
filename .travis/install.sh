@@ -5,7 +5,7 @@ git submodule update --init --recursive
 
 case "$PLATFORM" in
 "osx")
-    brew install tree fpc python qt@5.8
+    brew install tree fpc qt@5.8
     ;;
 "linux")
 #    wget -4 http://lamestation.net/downloads/travis/qt5.5.0-linux-g++.tgz
