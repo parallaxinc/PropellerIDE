@@ -35,6 +35,10 @@ case "$PLATFORM" in
 #    sudo chroot $MNT apt-get update
 #    sudo chroot $MNT apt-get install qt5-default libqt5serialport5-dev
     ;;
+"linux")
+    ;;
+"osx")
+    ;;
 *)
     echo "Invalid PLATFORM"
     exit 1
