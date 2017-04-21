@@ -35,10 +35,6 @@ case "$PLATFORM" in
 #    sudo chroot $MNT apt-get update
 #    sudo chroot $MNT apt-get install qt5-default libqt5serialport5-dev
     ;;
-"linux")
-    ;;
-"osx")
-    ;;
 *)
     echo "Invalid PLATFORM"
     exit 1
@@ -60,6 +56,10 @@ case "$PLATFORM" in
     sudo chroot $MNT bash -c "cd /home/travis/packthing && \
                                 pip install -r requirements.txt && \
                                 python setup.py install"
+    ;;
+"linux")
+    ;;
+"osx")
     ;;
 *)
     echo "Invalid PLATFORM"
