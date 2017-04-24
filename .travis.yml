@@ -14,6 +14,7 @@ addons:
       - imagemagick
       - qt5-default
       - libqt5serialport5-dev
+      - fpc
 matrix:
   fast_finish: true
 
@@ -23,21 +24,18 @@ matrix:
     env:
         PLATFORM=osx
         PATH=/Users/travis/local/bin:/usr/local/opt/qt/bin:$PATH
-        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages 
 
   - os: linux
     compiler: g++
     env:
         PLATFORM=linux
         PATH=/home/travis/local/bin:$PATH
-        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
 
   - os: linux
     compiler: clang
     env:
         PLATFORM=linux
         PATH=/home/travis/local/bin:$PATH
-        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
         QMAKESPEC=linux-clang
 
   allow_failures:
