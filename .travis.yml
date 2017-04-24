@@ -22,7 +22,7 @@ matrix:
     compiler: clang
     env:
         PLATFORM=osx
-        PATH=/Users/travis/local/bin:$PATH
+        PATH=/Users/travis/local/bin:/usr/local/opt/qt/bin:$PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages 
 
   - os: linux
