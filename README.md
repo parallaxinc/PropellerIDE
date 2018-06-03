@@ -1,5 +1,3 @@
-NOTE: This is a fork of Parallax, Inc.'s PropellerIDE, intended to test fixes for outstanding issues that will potentially be submitted for inclusion back into Parallax, Inc.'s source tree. It has NOT been deemed an official fork or branch by Parallax, Inc.
-
 ![logo](https://github.com/parallaxinc/PropellerIDE/raw/master/icons/logo.png)
 [![Travis CI Build Status](https://travis-ci.org/parallaxinc/PropellerIDE.svg?branch=master)](https://travis-ci.org/parallaxinc/PropellerIDE) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/2gj0hjoqjau9is4b?svg=true)](https://ci.appveyor.com/project/bweir/propelleride)
 
