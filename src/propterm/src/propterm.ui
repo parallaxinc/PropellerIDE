@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>673</width>
-    <height>485</height>
+    <width>637</width>
+    <height>570</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -156,27 +156,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="echo">
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="toolTip">
-        <string>Enable terminal input echo</string>
-       </property>
-       <property name="statusTip">
-        <string>Enable terminal input echo</string>
-       </property>
-       <property name="text">
-        <string>Echo</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -235,6 +214,107 @@
         <pixmap>:/icons/propterm/led-blue.png</pixmap>
        </property>
       </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_1">
+     <item>
+      <widget class="QCheckBox" name="pst">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>Enable Parallax Serial Terminal mode</string>
+       </property>
+       <property name="statusTip">
+        <string>Enable PST mode</string>
+       </property>
+       <property name="text">
+        <string>Enable PST mode</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="echo">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>Enable terminal input echo</string>
+       </property>
+       <property name="statusTip">
+        <string>Enable terminal input echo</string>
+       </property>
+       <property name="text">
+        <string>Local Echo</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="linefeed">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>Sends LF after CR if enabled</string>
+       </property>
+       <property name="statusTip">
+        <string>Sends LF after CR if enabled</string>
+       </property>
+       <property name="text">
+        <string>Append LF to CR</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="cursor">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>Send local cursor key commands</string>
+       </property>
+       <property name="statusTip">
+        <string>Transmit cursor commands</string>
+       </property>
+       <property name="text">
+        <string>Enable Cursor Keys</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>
