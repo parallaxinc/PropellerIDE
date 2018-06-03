@@ -31,6 +31,74 @@ private:
     EditorView * codeEditor;
 };
 
+// Attempt to filter and support useful characters within code completion dialog
+class MyFilter : public QObject
+{
+public:
+    MyFilter(QComboBox *p, int *key) :QObject()
+    {
+        parent = p;
+        lastkey = key;
+    }
+    
+protected:
+    bool eventFilter(QObject *obj, QEvent *event)
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            // add special key handling here
+            //qDebug() << "key event" ;
+            QKeyEvent *ke = static_cast<QKeyEvent *>(event);
+            int index = parent->view()->currentIndex().row();
+            //qDebug() << "key index = " << *lastkey;
+            *lastkey = 0;
+            Qt::Key key = (Qt::Key)ke->key();
+            if ((key >= Qt::Key_0 && key <= Qt::Key_9) || 
+                key == Qt::Key_Dollar || key == Qt::Key_Percent || key == Qt::Key_Ampersand ||
+                key == Qt::Key_Greater || key == Qt::Key_Less || key == Qt::Key_At || key == Qt::Key_ParenLeft)
+            {
+                *lastkey = (int)key;
+                emit parent->activated(0);
+                return true;
+            }
+            if (key == Qt::Key_Period || key == Qt::Key_NumberSign)
+            {
+                emit parent->activated(0);
+                return true;
+            }
+            if (key == Qt::Key_Space || key == Qt::Key_Return || key == Qt::Key_Tab)
+            {
+                if (index < 0) // protect ourselves in case of empty list?
+                    index = 0;
+                emit parent->activated(index);
+                return true;
+            }
+        }
+        return QObject::eventFilter(obj, event);
+    }
+private:
+        QComboBox *parent;
+        int *lastkey;
+};
+
+class MyComboBox : public QComboBox
+{
+public: 
+    MyComboBox(EditorView *editor) : QComboBox(editor) 
+    {   
+        codeEditor = editor; 
+        filt = new MyFilter(this, &lastkey);
+        view()->installEventFilter(filt);
+    }
+    ~MyComboBox() {delete filt;}
+
+    virtual int getLastKey() { return lastkey;}
+private:
+    EditorView *codeEditor;
+    MyFilter *filt;
+    int lastkey;
+};
+    
 
 EditorView::EditorView(QWidget *parent) : QPlainTextEdit(parent)
 {
@@ -64,7 +132,7 @@ EditorView::EditorView(QWidget *parent) : QPlainTextEdit(parent)
     connect(this,   SIGNAL(copyAvailable(bool)), this, SLOT(setCopy(bool)));
 
     // this must be a pointer otherwise we can't control the position.
-    cbAuto = new QComboBox(this);
+    cbAuto = new MyComboBox(this);
     cbAuto->setMaxVisibleItems(10);
     cbAuto->hide();
 }
@@ -195,7 +263,7 @@ QPoint EditorView::keyPopPoint(QTextCursor cursor)
     int ht = fontMetrics().height();
     int wd = fontMetrics().width(' ');
     int col = cursor.columnNumber();
-    int row = cursor.blockNumber() + 1; // show just below line
+    int row = cursor.blockNumber() + 2; // show just below line
 
     QTextBlock block = firstVisibleBlock();
     int top = block.firstLineNumber();
@@ -385,7 +453,9 @@ void EditorView::finishAutoComplete(int index)
 {
     disconnect(cbAuto,SIGNAL(activated(int)),this,SLOT(finishAutoComplete(int)));
 
+    qDebug() << "finishAutocomplete " << index;
     QString text = selectAutoComplete();
+    qDebug() << "finishAutocomplete text is:" << text;
 
     QString s = cbAuto->itemText(index);
     QTextCursor cur = this->textCursor();
@@ -393,14 +463,17 @@ void EditorView::finishAutoComplete(int index)
     // we depend on index item 0 to be the auto-start key
     if(index != 0)
     {
-        if (text.length() > 0)
+        //if (text.length() > 0)
             cur.insertText(cbAuto->itemText(0)+s.trimmed());
-        else
-            cur.insertText(s.trimmed());
+        //else
+            //cur.insertText(s.trimmed());
     }
     else
     {
-        cur.insertText(cbAuto->itemText(0));
+        if (((MyComboBox *)cbAuto)->getLastKey())
+            cur.insertText(cbAuto->itemText(0) + (char)(((MyComboBox *)cbAuto)->getLastKey()));
+        else
+            cur.insertText(cbAuto->itemText(0));
     }
 
     if(s.indexOf("(") > 0)
@@ -412,7 +485,7 @@ void EditorView::finishAutoComplete(int index)
     }
 
     this->setTextCursor(cur);
-    cbAuto->hide();
+    cbAuto->hidePopup();// modified
 }
 
 void EditorView::dedent()
