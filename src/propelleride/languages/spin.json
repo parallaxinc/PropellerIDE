@@ -3,7 +3,8 @@
     "extension": [ "spin" ],
     "buildsteps": [
         [ "bstc" ],
-        [ "openspin" ]
+        [ "openspin" ],
+        [ "fastspin" ]
     ],
     "includes": true,
     "syntax": {
