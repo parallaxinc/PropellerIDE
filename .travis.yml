@@ -5,6 +5,7 @@ language: cpp
 addons:
   apt:
     packages:
+      - fakeroot
       - help2man
       - lintian
       - cppcheck
