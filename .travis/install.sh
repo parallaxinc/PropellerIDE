@@ -5,8 +5,8 @@ git submodule update --init --recursive
 
 case "$PLATFORM" in
 "osx")
-    brew install tree fpc python@2
-    python -m pip install --upgrade pip
+    brew install tree fpc
+    easy_install pip
     wget -4 http://lamestation.net/downloads/travis/qt5.5.0-mac-clang.tgz
     tar xzf qt5.5.0-mac-clang.tgz
     mv local/ /Users/travis/local/
@@ -73,8 +73,8 @@ case "$PLATFORM" in
     pushd $HOME
     git clone https://github.com/lamestation/packthing
     pushd packthing
-    sudo pip install -r requirements.txt
-    sudo python setup.py install
+    pip install -r requirements.txt
+    python setup.py install
     popd
     popd
     ;;
