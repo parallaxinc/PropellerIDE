@@ -23,7 +23,7 @@ The PropellerIDE manual is available online and print formats:
 
 ## License
 
-Copyright 2014-2016 by Parallax Inc. PropellerIDE is free software, licensed under the GPLv3. See [LICENSE](LICENSE) for more information.
+Copyright 2014-2017 by Parallax Inc. PropellerIDE is free software, licensed under the GPLv3. See [LICENSE](LICENSE) for more information.
 
 ## Feedback
 
