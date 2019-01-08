@@ -146,6 +146,7 @@ void Console::putData(QByteArray data)
             if (lastChar == 14 || lastChar == 2)
             {
                 cursor = positionX(cursor, c);
+		c = 0;
             }
             else if (lastChar == 15 || lastChar2 == 2)
             {
