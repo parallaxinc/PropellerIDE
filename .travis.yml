@@ -49,7 +49,7 @@ matrix:
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-    /usr/bin/xcodebuild -license
+    /usr/bin/xcodebuild -license;
     fi
   - if [ -f ./.travis/before_install.sh   ] ; then ./.travis/before_install.sh ; fi
 
