@@ -5,6 +5,8 @@ git submodule update --init --recursive
 
 case "$PLATFORM" in
 "osx")
+    travis_wait brew upgrade --cleanup
+    travis_wait brew install modules
     brew install tree fpc
     wget -4 http://lamestation.net/downloads/travis/qt5.5.0-mac-clang.tgz
     tar xzf qt5.5.0-mac-clang.tgz
