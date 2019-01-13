@@ -48,7 +48,16 @@ matrix:
         MNT=/home/travis/mnt
 
 before_install: "if [ -f ./.travis/before_install.sh   ] ; then ./.travis/before_install.sh ; fi"
-install:        "if [ -f ./.travis/install.sh          ] ; then ./.travis/install.sh        ; fi"
+install:
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+      travis_wait brew upgrade --cleanup;
+      travis_wait brew upgrade --cleanup &&
+      travis_wait brew install modules &&
+      brew info modules &&
+      source /usr/local/opt/modules/init/bash &&
+      export TRAVIS_PYTHON_VERSION=2.7.15;
+    fi
+  - if [ -f ./.travis/install.sh          ] ; then ./.travis/install.sh        ; fi
 before_script:  "if [ -f ./.travis/before_script.sh    ] ; then ./.travis/before_script.sh  ; fi"
 script:         "if [ -f ./.travis/script.sh           ] ; then ./.travis/script.sh         ; fi"
 after_script:   "if [ -f ./.travis/after_script.sh     ] ; then ./.travis/after_script.sh   ; fi"
