@@ -47,7 +47,12 @@ matrix:
         PLATFORM=rpi
         MNT=/home/travis/mnt
 
-before_install: "if [ -f ./.travis/before_install.sh   ] ; then ./.travis/before_install.sh ; fi"
+before_install:
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+    /usr/bin/xcodebuild -license
+    fi
+  - if [ -f ./.travis/before_install.sh   ] ; then ./.travis/before_install.sh ; fi
+
 install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       travis_wait brew upgrade --cleanup;
