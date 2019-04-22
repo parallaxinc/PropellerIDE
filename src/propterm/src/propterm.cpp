@@ -42,6 +42,9 @@ PropTerm::PropTerm(PropellerManager * manager,
 
     connect(ui.console,     SIGNAL(getData(QByteArray)),                    this,       SLOT(writeData(QByteArray)));
     connect(ui.echo,        SIGNAL(toggled(bool)),                          ui.console, SLOT(setEcho(bool)));
+    connect(ui.pst,         SIGNAL(toggled(bool)),                          ui.console, SLOT(setPstMode(bool)));
+    connect(ui.linefeed,    SIGNAL(toggled(bool)),                          ui.console, SLOT(setAddLinefeed(bool)));
+    connect(ui.cursor,      SIGNAL(toggled(bool)),                          ui.console, SLOT(setSendCursor(bool)));
 
     connect(ui.sendLineEdit,SIGNAL(returnPressed()),                        this,       SLOT(sendDataLine()));
     connect(ui.sendButton,  SIGNAL(pressed()),                              this,       SLOT(sendDataLine()));
@@ -142,6 +145,7 @@ void PropTerm::open()
 
     portChanged();
     setDeviceBaudRate(ui.baudRate->currentText());
+    ui.console->setFocus();
 
     connect(session, SIGNAL(readyRead()), this, SLOT(readData()));
 }
@@ -210,17 +214,21 @@ void PropTerm::setDeviceBaudRate(const QString & text)
     }
 
     session->setBaudRate(baud);
+    ui.console->setFocus();
 }
 
 void PropTerm::setWidgetBaudRate(qint32 baudrate)
 {
     ui.baudRate->setCurrentIndex(ui.baudRate->findText(QString::number(baudrate)));
+    ui.console->setFocus();
 }
 
 void PropTerm::sendDataLine()
 {
     QByteArray data = ui.sendLineEdit->text().toLocal8Bit();
     data.append(13);
+    if (ui.linefeed->isChecked())
+        data.append(10);
     writeData(data);
     ui.sendLineEdit->clear();
 }
