@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 #ifdef VERSION
     qApp->setApplicationVersion(VERSION);
 #else
-    qApp->setApplicationVersion("0.0.0 (dev)");
+    qApp->setApplicationVersion("0.0.0 (git)");
 #endif
 
     QString description = QObject::tr("An easy-to-use, cross-platform IDE for the Parallax Propeller");
