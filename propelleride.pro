@@ -2,7 +2,7 @@ TEMPLATE  = subdirs
 
 SUBDIRS = src
 
-assets.path = /usr/local/share
+assets.path = $$PREFIX/share
 assets.files = assets/*
 
 INSTALLS += assets
