@@ -36,7 +36,7 @@ repos:
     files:
       propelleride:
         name: PropellerIDE
-        icon: assets/icons/hicolor/scalable/apps/com.parallax.PropellerIDE.svg
+        icon: icons/icon-new.png
         mimetypes:
           - type: text/x-spin
             extension: spin
