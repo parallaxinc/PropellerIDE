@@ -90,6 +90,8 @@ jobs:
 
       - name: Build DMG image
         run: |
+          export PATH="/usr/local/Cellar/qt/5.15.1/bin/:$PATH"
+          export PATH="/usr/local/opt/qt/bin:$PATH"
           packthing -j4 --override-version "0.0.0-$(basename "$GITHUB_REF")" dmg
           mv build/staging/*.dmg .
 
