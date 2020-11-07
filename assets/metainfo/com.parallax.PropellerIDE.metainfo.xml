@@ -11,4 +11,11 @@
     <url type="homepage">https://developer.parallax.com/propelleride/</url>
     <url type="help">https://bweir.gitbooks.io/propelleride-docs/content/</url>
     <description><p>An easy-to-use, cross-platform IDE for the Parallax Propeller</p></description>
+    <content_rating type="oars-1.1" />
+    <screenshots>
+        <screenshot><image type="default">https://raw.githubusercontent.com/parallaxinc/PropellerIDE/master/screenshots/main.png</image></screenshot>
+    </screenshots>
+    <releases>
+        <release version="0.38.6" date="2020-11-07" />
+    </releases>
 </component>
