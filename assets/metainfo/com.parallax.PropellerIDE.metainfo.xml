@@ -6,7 +6,7 @@
     <name>PropellerIDE</name>
     <developer_name>Parallax</developer_name>
     <summary>Develop, compile, and upload code for the Parallax Propeller platform.</summary>
-    <metadata_license>GPL-3</metadata_license>
+    <metadata_license>CC-BY-SA-3.0</metadata_license>
     <project_license>GPL-3</project_license>
     <url type="homepage">https://developer.parallax.com/propelleride/</url>
     <url type="help">https://bweir.gitbooks.io/propelleride-docs/content/</url>
