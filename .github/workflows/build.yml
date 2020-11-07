@@ -135,11 +135,10 @@ jobs:
           python -m pip install git+https://github.com/lamestation/packthing.git
           packthing --version
 
-      - name: Set up environment
-        run: |
-          echo "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
       - name: Build InnoSetup installer
+        env:
+          CC: clang
+          CXX: clang++
         run: |
           packthing -j4 --override-version "0.0.0-$(basename "$GITHUB_REF")" inno
           mv build/staging/*.exe .
