@@ -39,7 +39,7 @@ jobs:
       - name: Install packthing
         run: |
           sudo python3 -m pip install git+https://github.com/lamestation/packthing.git
-          packthing -h
+          packthing --version
 
       - name: Build self-extracting archive
         run: |
