@@ -25,9 +25,9 @@ jobs:
       - name: Install packthing
         run: |
           sudo python3 -m pip install git+https://github.com/lamestation/packthing.git
-          packthing -h
+          packthing --version
 
       - name: Build DMG image
         run: |
-          packthing -j4 --version "$(basename "$GITHUB_REF")" dmg
+          packthing -j4 "$(basename "$GITHUB_REF")" dmg
           mv build/staging/*.dmg .
