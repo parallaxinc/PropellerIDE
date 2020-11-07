@@ -74,11 +74,14 @@ jobs:
         with:
           submodules: true
 
+      - name: Set up environment
+        run: |
+          echo "/usr/local/Cellar/qt/5.15.1/bin" >> "$GITHUB_PATH"
+          echo "/usr/local/opt/qt/bin" >> "$GITHUB_PATH"
+
       - name: Install system dependencies
         run: |
           brew install fpc tree qt5
-          export PATH="/usr/local/Cellar/qt/5.15.1/bin/:$PATH"
-          export PATH="/usr/local/opt/qt/bin:$PATH"
           qmake -v
           make --version
           clang --version
@@ -90,8 +93,6 @@ jobs:
 
       - name: Build DMG image
         run: |
-          export PATH="/usr/local/Cellar/qt/5.15.1/bin/:$PATH"
-          export PATH="/usr/local/opt/qt/bin:$PATH"
           packthing -j4 --override-version "0.0.0-$(basename "$GITHUB_REF")" dmg
           mv build/staging/*.dmg .
 
@@ -113,6 +114,10 @@ jobs:
         with:
           submodules: true
 
+      - name: Set up environment
+        run: |
+          echo "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
@@ -122,7 +127,6 @@ jobs:
         run: |
           choco install -y InnoSetup
           pip install Pillow
-          echo "::add-path::C:\msys64\mingw64\bin"
 
       - name: Test system dependencies
         run: |
