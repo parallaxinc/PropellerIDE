@@ -46,7 +46,19 @@ jobs:
           packthing -j4 run
           mv build/staging/*.run .
 
+      - name: Save self-extracting archive
+        uses: actions/upload-artifact@v2
+        with:
+          name: run
+          path: "*.run"
+
       - name: Build Debian package
         run: |
           fakeroot packthing -j4 --override-version "0.0.0-$(basename "$GITHUB_REF")" deb
           mv build/staging/*.deb .
+
+      - name: Save debian package
+        uses: actions/upload-artifact@v2
+        with:
+          name: deb
+          path: "*.deb"

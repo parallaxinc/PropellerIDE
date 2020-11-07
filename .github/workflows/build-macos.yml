@@ -34,3 +34,9 @@ jobs:
         run: |
           packthing -j4 --override-version "0.0.0-$(basename "$GITHUB_REF")" dmg
           mv build/staging/*.dmg .
+
+      - name: Save DMG image
+        uses: actions/upload-artifact@v2
+        with:
+          name: dmg
+          path: "*.dmg"

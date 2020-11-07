@@ -25,6 +25,7 @@ jobs:
         run: |
           choco install -y InnoSetup
           pip install Pillow
+          echo "::add-path::C:\msys64\mingw64\bin"
 
       - name: Test system dependencies
         run: |
@@ -40,3 +41,9 @@ jobs:
         run: |
           packthing -j4 --override-version "0.0.0-$(basename "$GITHUB_REF")" inno
           mv build/staging/*.exe .
+
+      - name: Save InnoSetup installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: inno
+          path: "*.exe"
