@@ -1,7 +1,7 @@
 ![logo](https://github.com/parallaxinc/PropellerIDE/raw/master/icons/logo.png)
 
-[![Build status](https://img.shields.io/github/workflow/status/parallaxinc/PropellerIDE/build)](https://github.com/parallaxinc/PropellerIDE/actions)
-:alt: Build status
+[![Linux build](https://github.com/parallaxinc/PropellerIDE/workflows/Linux/badge.svg)](https://github.com/parallaxinc/PropellerIDE/actions)
+[![OS X build](https://github.com/parallaxinc/PropellerIDE/workflows/MacOS/badge.svg)](https://github.com/parallaxinc/PropellerIDE/actions)
 [![Travis CI Build Status](https://travis-ci.org/parallaxinc/PropellerIDE.svg?branch=master)](https://travis-ci.org/parallaxinc/PropellerIDE)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/2gj0hjoqjau9is4b?svg=true)](https://ci.appveyor.com/project/bweir/propelleride)
 

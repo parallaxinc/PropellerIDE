@@ -1,5 +1,5 @@
 ---
-name: Build for OS X
+name: MacOS
 
 on: [push]
 
