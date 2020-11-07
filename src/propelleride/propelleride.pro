@@ -112,3 +112,5 @@ TRANSLATIONS += \
     translations/propelleride_zn.ts \
     translations/propelleride_fake.ts \
 
+target.path = $$PREFIX/bin
+INSTALLS += target
