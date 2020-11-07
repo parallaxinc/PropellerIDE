@@ -19,39 +19,35 @@ matrix:
   fast_finish: true
 
   include:
-  - os: osx
-    compiler: clang
-    env:
-        PLATFORM=osx
+    - os: osx
+      compiler: clang
+      env: PLATFORM=osx
         PATH=/Users/travis/local/bin:$PATH
-        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages 
+        PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
 
-  - os: linux
-    compiler: g++
-    env:
-        PLATFORM=linux
+    - os: linux
+      compiler: g++
+      env: PLATFORM=linux
         PATH=/home/travis/local/bin:$PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
 
-  - os: linux
-    compiler: clang
-    env:
-        PLATFORM=linux
+    - os: linux
+      compiler: clang
+      env: PLATFORM=linux
         PATH=/home/travis/local/bin:$PATH
         PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python2.7/site-packages
         QMAKESPEC=linux-clang
 
   allow_failures:
-  - os: linux
-    env:
-        PLATFORM=rpi
+    - os: linux
+      env: PLATFORM=rpi
         MNT=/home/travis/mnt
 
 before_install: "if [ -f ./.travis/before_install.sh   ] ; then ./.travis/before_install.sh ; fi"
-install:        "if [ -f ./.travis/install.sh          ] ; then ./.travis/install.sh        ; fi"
-before_script:  "if [ -f ./.travis/before_script.sh    ] ; then ./.travis/before_script.sh  ; fi"
-script:         "if [ -f ./.travis/script.sh           ] ; then ./.travis/script.sh         ; fi"
-after_script:   "if [ -f ./.travis/after_script.sh     ] ; then ./.travis/after_script.sh   ; fi"
+install: "if [ -f ./.travis/install.sh          ] ; then ./.travis/install.sh        ; fi"
+before_script: "if [ -f ./.travis/before_script.sh    ] ; then ./.travis/before_script.sh  ; fi"
+script: "if [ -f ./.travis/script.sh           ] ; then ./.travis/script.sh         ; fi"
+after_script: "if [ -f ./.travis/after_script.sh     ] ; then ./.travis/after_script.sh   ; fi"
 
 deploy:
   provider: releases

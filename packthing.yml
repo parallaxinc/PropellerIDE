@@ -10,66 +10,66 @@ tagline: The fun Spin editor
 description: An easy-to-use cross-platform development tool for the Parallax Propeller microcontroller.
 master: propelleride
 
-target: 
-    deb: 
-        depends: libftdi1
-        categories: Development;IDE
-        section: Applications/Editors
-        help2man:
-            - propelleride
-            - propman
-            - openspin
-    dmg: 
-        category: public.app-category.developer-tools
-        background: icons/mac-dmg.png
-        bundle: propelleride
-    inno:
-        banner: icons/win-banner.bmp
-        run: propelleride
+target:
+  deb:
+    depends: libftdi1
+    categories: Development;IDE
+    section: Applications/Editors
+    help2man:
+      - propelleride
+      - propman
+      - openspin
+  dmg:
+    category: public.app-category.developer-tools
+    background: icons/mac-dmg.png
+    bundle: propelleride
+  inno:
+    banner: icons/win-banner.bmp
+    run: propelleride
 
-repos: 
-    propelleride:
-        url: https://github.com/parallaxinc/PropellerIDE.git
-        branch: master
-        builder: qmake
+repos:
+  propelleride:
+    url: https://github.com/parallaxinc/PropellerIDE.git
+    branch: master
+    builder: qmake
 
-        files:
-            propelleride:
-                name: PropellerIDE
-                icon: icons/icon-new.png
-                mimetypes:
-                    - type: text/x-spin
-                      extension: spin
-                      description: Propeller Spin object
-                      icon: icons/text-x-spin.png
+    files:
+      propelleride:
+        name: PropellerIDE
+        icon: assets/icons/hicolor/scalable/apps/com.parallax.PropellerIDE.svg
+        mimetypes:
+          - type: text/x-spin
+            extension: spin
+            description: Propeller Spin object
+            icon: icons/text-x-spin.png
 
-                    - type: application/x-binary
-                      extension: binary
-                      description: Propeller binary
-                      icon: icons/application-x-binary.png
+          - type: application/x-binary
+            extension: binary
+            description: Propeller binary
+            icon: icons/application-x-binary.png
 
-    openspin:
-        url: https://github.com/bweir/OpenSpin.git
-        tag: 0.3.0
-        builder: qmake
-        root: qmake
+  openspin:
+    url: https://github.com/bweir/OpenSpin.git
+    tag: 0.3.0
+    builder: qmake
+    root: qmake
 
-    propbasic:
-        url: https://github.com/parallaxinc/PropBasic.git
-        tag: 1.44.2
-        builder: fpc
-        root: src
+  propbasic:
+    url: https://github.com/parallaxinc/PropBasic.git
+    tag: 1.44.2
+    builder: fpc
+    root: src
 
-    ide-prebuilts:
-        url: https://github.com/bweir/ide-prebuilts.git
-        branch: master
-        builder: prebuilt
+  ide-prebuilts:
+    url: https://github.com/bweir/ide-prebuilts.git
+    branch: master
+    builder: prebuilt
 
-    library:
-        url: https://github.com/parallaxinc/spin-standard-library.git
-        builder: dir
-        root: library
+  library:
+    url: https://github.com/parallaxinc/spin-standard-library.git
+    builder: dir
+    root: library
 
-    doc:
-        url: https://github.com/parallaxinc/spin-docs.git
-        builder: dir
+  doc:
+    url: https://github.com/parallaxinc/spin-docs.git
+    builder: dir
