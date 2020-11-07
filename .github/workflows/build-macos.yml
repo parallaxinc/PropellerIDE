@@ -8,11 +8,13 @@ jobs:
     runs-on: "${{matrix.os}}"
     strategy:
       matrix:
-        os: [macos-10.15, macos-11.0]
+        os: [macos-latest]
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - name: Install system dependencies
         run: |
@@ -29,5 +31,5 @@ jobs:
 
       - name: Build DMG image
         run: |
-          packthing -j4 "$(basename "$GITHUB_REF")" dmg
+          packthing -j4 --override-version "$(basename "$GITHUB_REF")" dmg
           mv build/staging/*.dmg .

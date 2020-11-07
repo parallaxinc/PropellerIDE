@@ -12,7 +12,9 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - name: Install system dependencies
         run: |
@@ -46,5 +48,5 @@ jobs:
 
       - name: Build Debian package
         run: |
-          fakeroot packthing -j4 --version "$(basename "$GITHUB_REF")" deb
+          fakeroot packthing -j4 --override-version "$(basename "$GITHUB_REF")" deb
           mv build/staging/*.deb .

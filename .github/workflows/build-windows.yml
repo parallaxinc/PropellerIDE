@@ -1,0 +1,42 @@
+---
+name: Windows
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: "${{matrix.os}}"
+    strategy:
+      matrix:
+        os: [windows-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          modules: "qtserialport"
+
+      - name: Install system dependencies
+        run: |
+          choco install -y InnoSetup
+          pip install Pillow
+
+      - name: Test system dependencies
+        run: |
+          qmake -v
+          make --version
+
+      - name: Install packthing
+        run: |
+          python3 -m pip install git+https://github.com/lamestation/packthing.git
+          packthing --version
+
+      - name: Build InnoSetup installer
+        run: |
+          packthing -j4 --override-version "$(basename "$GITHUB_REF")" inno
+          mv build/staging/*.exe .
