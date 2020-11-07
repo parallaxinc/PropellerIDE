@@ -33,7 +33,7 @@ jobs:
 
       - name: Install packthing
         run: |
-          python3 -m pip install git+https://github.com/lamestation/packthing.git
+          python -m pip install git+https://github.com/lamestation/packthing.git
           packthing --version
 
       - name: Build InnoSetup installer
