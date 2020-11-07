@@ -17,7 +17,19 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y fakeroot help2man lintian python3-pip python3-setuptools cppcheck tree debhelper libudev-dev imagemagick qt5-default libqt5serialport5-dev
+          sudo apt-get install -y \
+              debhelper \
+              fakeroot \
+              fpc \
+              help2man \
+              imagemagick \
+              libqt5serialport5-dev \
+              libudev-dev \
+              lintian \
+              python3-pip \
+              python3-setuptools \
+              qt5-default \
+              tree
           qmake -v
           make --version
           gcc --version
