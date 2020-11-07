@@ -31,5 +31,5 @@ jobs:
 
       - name: Build DMG image
         run: |
-          packthing -j4 --override-version "$(basename "$GITHUB_REF")" dmg
+          packthing -j4 --override-version "0.0.0-$(basename "$GITHUB_REF")" dmg
           mv build/staging/*.dmg .

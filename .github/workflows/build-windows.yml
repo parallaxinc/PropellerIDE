@@ -38,5 +38,5 @@ jobs:
 
       - name: Build InnoSetup installer
         run: |
-          packthing -j4 --override-version "$(basename "$GITHUB_REF")" inno
+          packthing -j4 --override-version "0.0.0-$(basename "$GITHUB_REF")" inno
           mv build/staging/*.exe .
