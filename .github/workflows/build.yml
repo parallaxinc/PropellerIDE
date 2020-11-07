@@ -1,0 +1,144 @@
+---
+name: Build
+on: [push]
+
+jobs:
+  linux:
+    runs-on: "${{matrix.os}}"
+    strategy:
+      matrix:
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y \
+              debhelper \
+              fakeroot \
+              fpc \
+              help2man \
+              imagemagick \
+              libqt5serialport5-dev \
+              libudev-dev \
+              lintian \
+              python3-pip \
+              python3-setuptools \
+              qt5-default \
+              tree
+          qmake -v
+          make --version
+          gcc --version
+
+      - name: Install packthing
+        run: |
+          sudo python3 -m pip install git+https://github.com/lamestation/packthing.git
+          packthing --version
+
+      - name: Build self-extracting archive
+        run: |
+          packthing -j4 run
+          mv build/staging/*.run .
+
+      - name: Save self-extracting archive
+        uses: actions/upload-artifact@v2
+        with:
+          name: run
+          path: "*.run"
+
+      - name: Build Debian package
+        run: |
+          fakeroot packthing -j4 --override-version "0.0.0-$(basename "$GITHUB_REF")" deb
+          mv build/staging/*.deb .
+
+      - name: Save debian package
+        uses: actions/upload-artifact@v2
+        with:
+          name: deb
+          path: "*.deb"
+
+  macos:
+    runs-on: "${{matrix.os}}"
+    strategy:
+      matrix:
+        os: [macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Install system dependencies
+        run: |
+          brew install fpc tree qt5
+          export PATH="/usr/local/Cellar/qt/5.15.1/bin/:$PATH"
+          export PATH="/usr/local/opt/qt/bin:$PATH"
+          qmake -v
+          make --version
+          clang --version
+
+      - name: Install packthing
+        run: |
+          sudo python3 -m pip install git+https://github.com/lamestation/packthing.git
+          packthing --version
+
+      - name: Build DMG image
+        run: |
+          packthing -j4 --override-version "0.0.0-$(basename "$GITHUB_REF")" dmg
+          mv build/staging/*.dmg .
+
+      - name: Save DMG image
+        uses: actions/upload-artifact@v2
+        with:
+          name: dmg
+          path: "*.dmg"
+
+  windows:
+    runs-on: "${{matrix.os}}"
+    strategy:
+      matrix:
+        os: [windows-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          modules: "qtserialport"
+
+      - name: Install system dependencies
+        run: |
+          choco install -y InnoSetup
+          pip install Pillow
+          echo "::add-path::C:\msys64\mingw64\bin"
+
+      - name: Test system dependencies
+        run: |
+          qmake -v
+          make --version
+
+      - name: Install packthing
+        run: |
+          python -m pip install git+https://github.com/lamestation/packthing.git
+          packthing --version
+
+      - name: Build InnoSetup installer
+        run: |
+          packthing -j4 --override-version "0.0.0-$(basename "$GITHUB_REF")" inno
+          mv build/staging/*.exe .
+
+      - name: Save InnoSetup installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: inno
+          path: "*.exe"
