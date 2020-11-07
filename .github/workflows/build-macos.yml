@@ -17,12 +17,14 @@ jobs:
           submodules: true
 
       - name: Install system dependencies
-        run: |
-          brew install fpc tree qt5
-          export PATH="/usr/local/opt/qt/bin:$PATH"
-          qmake -v
-          make --version
-          clang --version
+        run:
+          - brew install fpc tree qt5
+          - export PATH="/usr/local/opt/qt/bin:$PATH"
+          - qmake -v
+          - make --version
+          - clang --version
+          - find / -name macdeployqt
+          - echo $PATH
 
       - name: Install packthing
         run: |
