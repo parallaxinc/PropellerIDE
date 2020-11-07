@@ -17,13 +17,14 @@ jobs:
       - name: Install system dependencies
         run: |
           brew install fpc tree qt5
+          export PATH="/usr/local/opt/qt/bin:$PATH"
           qmake -v
           make --version
           clang --version
 
       - name: Install packthing
         run: |
-          pip3 install git+https://github.com/lamestation/packthing.git
+          sudo python3 -m pip install git+https://github.com/lamestation/packthing.git
           packthing -h
 
       - name: Build DMG image

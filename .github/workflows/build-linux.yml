@@ -24,7 +24,7 @@ jobs:
 
       - name: Install packthing
         run: |
-          pip3 install git+https://github.com/lamestation/packthing.git
+          sudo python3 -m pip install git+https://github.com/lamestation/packthing.git
           packthing -h
 
       - name: Build self-extracting archive
