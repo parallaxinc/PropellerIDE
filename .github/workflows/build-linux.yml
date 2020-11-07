@@ -1,0 +1,38 @@
+---
+name: Build for Linux
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: "${{matrix.os}}"
+    strategy:
+      matrix:
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y fakeroot help2man lintian python3-pip cppcheck tree debhelper libudev-dev imagemagick qt5-default libqt5serialport5-dev
+          qmake -v
+          make --version
+          gcc --version
+
+      - name: Install packthing
+        run: |
+          pip3 install git+https://github.com/lamestation/packthing.git
+          packthing -h
+
+      - name: Build self-extracting archive
+        run: |
+          packthing -j4 run
+          mv build/staging/*.run .
+
+      - name: Build Debian package
+        run: |
+          fakeroot packthing -j4 --version "$(basename "$GITHUB_REF")" deb
+          mv build/staging/*.deb .

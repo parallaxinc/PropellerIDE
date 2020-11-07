@@ -1,0 +1,32 @@
+---
+name: Build for OS X
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: "${{matrix.os}}"
+    strategy:
+      matrix:
+        os: [macos-10.15, macos-11.0]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      - name: Install system dependencies
+        run: |
+          brew install fpc tree qt5
+          qmake -v
+          make --version
+          clang --version
+
+      - name: Install packthing
+        run: |
+          pip3 install git+https://github.com/lamestation/packthing.git
+          packthing -h
+
+      - name: Build DMG image
+        run: |
+          packthing -j4 --version "$(basename "$GITHUB_REF")" dmg
+          mv build/staging/*.dmg .
