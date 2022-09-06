@@ -75,9 +75,11 @@ QString ExternalCompiler::build(QString filename,
     QString basefile = infile;
     basefile.chop(pattern_in.size());
 
-    QString outfile = basefile.append(pattern_out);
-    QString retfile = basefile.append(pattern_ret);
+    QString outfile = basefile;
+    QString retfile = basefile;
 
+    outfile += pattern_out;
+    retfile += pattern_ret;
 
     QString exepath = getExecutablePath();
 
